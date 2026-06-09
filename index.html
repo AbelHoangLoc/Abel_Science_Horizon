@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Science Horizon | Chân trời khoa học</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Poppins Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet"
+    />
+
+    <style>
+        :root {
+            --deep-space: #06142e;
+            --navy: #0b2b63;
+            --cosmic-blue: #0ea5e9;
+            --electric-blue: #2563eb;
+            --orbit-orange: #f97316;
+            --star-white: rgba(255, 255, 255, 0.92);
+            --glass-white: rgba(255, 255, 255, 0.12);
+            --glass-border: rgba(255, 255, 255, 0.22);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            overflow-x: hidden;
+            font-family: 'Poppins', sans-serif;
+            color: white;
+            background: var(--deep-space);
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .space-bg {
+            position: fixed;
+            inset: 0;
+            z-index: -4;
+            background:
+                radial-gradient(circle at 18% 18%, rgba(14, 165, 233, 0.45) 0%, transparent 32%),
+                radial-gradient(circle at 82% 12%, rgba(249, 115, 22, 0.32) 0%, transparent 28%),
+                radial-gradient(circle at 50% 82%, rgba(37, 99, 235, 0.42) 0%, transparent 36%),
+                linear-gradient(135deg, #020617 0%, #06142e 42%, #0b2b63 100%);
+        }
+
+        .star-field,
+        .star-field::before,
+        .star-field::after {
+            position: fixed;
+            inset: 0;
+            content: "";
+            z-index: -3;
+            background-image:
+                radial-gradient(circle, rgba(255, 255, 255, 0.9) 1px, transparent 1.5px),
+                radial-gradient(circle, rgba(125, 211, 252, 0.7) 1px, transparent 1.5px);
+            background-size: 90px 90px, 140px 140px;
+            background-position: 0 0, 40px 60px;
+            opacity: 0.45;
+            animation: drift-stars 46s linear infinite;
+        }
+
+        .star-field::before {
+            opacity: 0.32;
+            background-size: 150px 150px;
+            animation-duration: 70s;
+        }
+
+        .star-field::after {
+            opacity: 0.22;
+            background-size: 220px 220px;
+            animation-duration: 95s;
+        }
+
+        .nebula-blur {
+            position: fixed;
+            inset: -20%;
+            z-index: -2;
+            pointer-events: none;
+            background:
+                radial-gradient(circle at 15% 65%, rgba(56, 189, 248, 0.22), transparent 30%),
+                radial-gradient(circle at 85% 65%, rgba(249, 115, 22, 0.2), transparent 27%),
+                radial-gradient(circle at 50% 42%, rgba(99, 102, 241, 0.24), transparent 36%);
+            filter: blur(38px);
+            transform: scale(1.1);
+        }
+
+        .glass-card {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.08));
+            backdrop-filter: blur(24px) saturate(160%);
+            -webkit-backdrop-filter: blur(24px) saturate(160%);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 30px 90px rgba(0, 0, 0, 0.28);
+            transition: transform 0.38s ease, border-color 0.38s ease, box-shadow 0.38s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(125, 211, 252, 0.7);
+            box-shadow: 0 38px 110px rgba(14, 165, 233, 0.26);
+        }
+
+        .shine::before {
+            content: "";
+            position: absolute;
+            width: 280px;
+            height: 280px;
+            right: -80px;
+            top: -90px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.16);
+            filter: blur(28px);
+        }
+
+        .logo-sh {
+            width: 86px;
+            height: 86px;
+            border-radius: 28px;
+            background: rgba(255, 255, 255, 0.94);
+            padding: 10px;
+            object-fit: contain;
+            box-shadow: 0 18px 50px rgba(14, 165, 233, 0.3);
+        }
+
+        .gradient-title {
+            background: linear-gradient(90deg, #ffffff 0%, #7dd3fc 35%, #38bdf8 62%, #fb923c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-word-blue {
+            color: #7dd3fc;
+            text-shadow: 0 0 30px rgba(125, 211, 252, 0.42);
+        }
+
+        .hero-word-orange {
+            color: #fb923c;
+            text-shadow: 0 0 30px rgba(251, 146, 60, 0.42);
+        }
+
+        .tag-bubble {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 16px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 900;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            color: rgba(255, 255, 255, 0.9);
+            white-space: nowrap;
+        }
+
+        .btn-space {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            border-radius: 999px;
+            padding: 16px 28px;
+            font-weight: 900;
+            color: white;
+            background: linear-gradient(135deg, #0ea5e9 0%, #2563eb 55%, #f97316 100%);
+            box-shadow: 0 12px 0 rgba(0, 0, 0, 0.18), 0 24px 55px rgba(14, 165, 233, 0.28);
+            transition: transform 0.18s ease, filter 0.18s ease, box-shadow 0.18s ease;
+        }
+
+        .btn-space:hover {
+            transform: translateY(-3px);
+            filter: brightness(1.08);
+        }
+
+        .btn-space:active {
+            transform: translateY(5px);
+            box-shadow: 0 4px 0 rgba(0, 0, 0, 0.16), 0 12px 30px rgba(14, 165, 233, 0.22);
+        }
+
+        .orbit-ring {
+            position: absolute;
+            width: 430px;
+            height: 160px;
+            right: -90px;
+            top: 42px;
+            border: 3px solid rgba(125, 211, 252, 0.34);
+            border-left-color: rgba(249, 115, 22, 0.7);
+            border-radius: 50%;
+            transform: rotate(-18deg);
+            pointer-events: none;
+        }
+
+        .planet {
+            position: absolute;
+            width: 90px;
+            height: 90px;
+            right: 86px;
+            top: 78px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 25%, #ffffff 0%, #38bdf8 14%, #2563eb 48%, #06142e 100%);
+            box-shadow: 0 0 65px rgba(56, 189, 248, 0.5);
+            pointer-events: none;
+        }
+
+        .category-icon {
+            font-size: 48px;
+            filter: drop-shadow(0 12px 20px rgba(0, 0, 0, 0.2));
+        }
+
+        .preview-box {
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.18), rgba(249, 115, 22, 0.16));
+            border: 1px dashed rgba(255, 255, 255, 0.28);
+        }
+
+        .footer-line {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(125, 211, 252, 0.7), rgba(249, 115, 22, 0.7), transparent);
+        }
+
+        @keyframes drift-stars {
+            from {
+                transform: translateY(0);
+            }
+            to {
+                transform: translateY(-180px);
+            }
+        }
+
+        @keyframes float-soft {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-16px) rotate(4deg);
+            }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% {
+                opacity: 0.72;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+        }
+
+        .float-soft {
+            animation: float-soft 5s ease-in-out infinite;
+        }
+
+        .pulse-glow {
+            animation: pulse-glow 3.5s ease-in-out infinite;
+        }
+
+        @media (min-width: 768px) {
+            .logo-sh {
+                width: 108px;
+                height: 108px;
+                border-radius: 34px;
+            }
+
+            .tag-bubble {
+                font-size: 13px;
+                padding: 10px 18px;
+            }
+        }
+
+        @media (max-width: 760px) {
+            .orbit-ring,
+            .planet {
+                opacity: 0.22;
+                right: -160px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="space-bg"></div>
+    <div class="star-field"></div>
+    <div class="nebula-blur" id="parallaxBg"></div>
+
+    <main class="w-full max-w-6xl mx-auto px-4 sm:px-6 py-8 md:py-12 lg:py-16 relative z-10">
+        <!-- Header -->
+        <header class="flex flex-col md:flex-row md:items-center justify-between gap-6 md:gap-8 mb-12 md:mb-16">
+            <div class="flex flex-col sm:flex-row items-center sm:items-start md:items-center gap-5 sm:gap-7 text-center sm:text-left">
+                <img
+                    src="./assets/images/logo-SH.png"
+                    class="logo-sh float-soft"
+                    alt="Science Horizon Logo"
+                />
+
+                <div>
+                    <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight gradient-title">
+                        Science Horizon
+                    </h1>
+                    <p class="text-xs sm:text-sm font-black text-white/55 uppercase tracking-[0.22em] sm:tracking-[0.34em] mt-2">
+                        Chân trời khoa học
+                    </p>
+                </div>
+            </div>
+
+            <div class="self-center bg-white/10 border border-white/20 px-6 py-3 md:px-8 md:py-4 rounded-full shadow-sm backdrop-blur-xl">
+                <span class="text-sm sm:text-base md:text-lg font-black text-sky-100 whitespace-nowrap">
+                    🌌 Code • Science • Learning
+                </span>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="glass-card shine rounded-[36px] md:rounded-[58px] p-8 sm:p-12 md:p-16 lg:p-20 mb-10 md:mb-14 relative overflow-hidden group">
+            <div class="orbit-ring pulse-glow"></div>
+            <div class="planet float-soft"></div>
+
+            <div class="relative z-10 max-w-4xl">
+                <span class="tag-bubble mb-6 md:mb-8">
+                    🚀 Abel Science Horizon Repository
+                </span>
+
+                <h2 class="text-5xl sm:text-7xl md:text-[88px] lg:text-[108px] font-black mb-6 md:mb-8 tracking-tight leading-[1.06]">
+                    Explore.<br />
+                    <span class="hero-word-blue">Learn.</span>
+                    <span class="hero-word-orange">Build.</span>
+                </h2>
+
+                <p class="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-extrabold leading-relaxed text-white/78 max-w-4xl">
+                    Nơi lưu trữ các bài code HTML về
+                    <span class="text-sky-300">Toán tối ưu</span>,
+                    <span class="text-orange-300">English</span>,
+                    <span class="text-cyan-200">Khoa học</span>,
+                    <span class="text-blue-200">Lịch sử</span>
+                    và những dự án học tập sáng tạo.
+                </p>
+            </div>
+
+            <div class="absolute bottom-8 right-8 text-5xl md:text-7xl float-soft opacity-80" style="animation-delay: 1.2s;">
+                🛰️
+            </div>
+        </section>
+
+        <!-- Project Cards -->
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10 lg:gap-12">
+            <!-- Optimization Math -->
+            <a href="./optimization/" onmousedown="playLaunchSound()" class="block">
+                <div class="glass-card rounded-[34px] md:rounded-[48px] p-8 sm:p-10 md:p-12 flex flex-col h-full">
+                    <div class="flex justify-between items-start mb-8">
+                        <span class="tag-bubble">📐 Math Lab</span>
+                        <span class="category-icon float-soft">🧮</span>
+                    </div>
+
+                    <h3 class="text-3xl sm:text-4xl md:text-5xl font-black mb-5 text-white">
+                        Toán tối ưu
+                    </h3>
+
+                    <p class="text-lg sm:text-xl md:text-2xl font-bold text-white/68 mb-9 flex-grow leading-relaxed">
+                        Các bài code mô phỏng, minh họa thuật toán, bất đẳng thức biến phân, tối ưu hóa và toán ứng dụng.
+                    </p>
+
+                    <span class="btn-space text-base sm:text-lg md:text-xl w-fit">
+                        Open Math Lab <span>➔</span>
+                    </span>
+                </div>
+            </a>
+
+            <!-- English Learning -->
+            <a href="./english/" onmousedown="playLaunchSound()" class="block">
+                <div class="glass-card rounded-[34px] md:rounded-[48px] p-8 sm:p-10 md:p-12 flex flex-col h-full">
+                    <div class="flex justify-between items-start mb-8">
+                        <span class="tag-bubble">📚 English Zone</span>
+                        <span class="category-icon float-soft" style="animation-delay: 0.8s;">🗣️</span>
+                    </div>
+
+                    <h3 class="text-3xl sm:text-4xl md:text-5xl font-black mb-5 text-white">
+                        Học English
+                    </h3>
+
+                    <p class="text-lg sm:text-xl md:text-2xl font-bold text-white/68 mb-9 flex-grow leading-relaxed">
+                        Game học tiếng Anh, bài luyện từ vựng, speaking, reading và các hoạt động tương tác cho lớp học.
+                    </p>
+
+                    <span class="btn-space text-base sm:text-lg md:text-xl w-fit">
+                        Start Learning <span>➔</span>
+                    </span>
+                </div>
+            </a>
+
+            <!-- Science -->
+            <a href="./science/" onmousedown="playLaunchSound()" class="block">
+                <div class="glass-card rounded-[34px] md:rounded-[48px] p-8 sm:p-10 md:p-12 flex flex-col h-full">
+                    <div class="flex justify-between items-start mb-8">
+                        <span class="tag-bubble">🔬 Science Hub</span>
+                        <span class="category-icon float-soft" style="animation-delay: 1.4s;">⚛️</span>
+                    </div>
+
+                    <h3 class="text-3xl sm:text-4xl md:text-5xl font-black mb-5 text-white">
+                        Khoa học
+                    </h3>
+
+                    <p class="text-lg sm:text-xl md:text-2xl font-bold text-white/68 mb-9 flex-grow leading-relaxed">
+                        Các mô phỏng nhỏ, bài học trực quan và tài nguyên khám phá thế giới tự nhiên, công nghệ và vũ trụ.
+                    </p>
+
+                    <span class="btn-space text-base sm:text-lg md:text-xl w-fit">
+                        Explore Science <span>➔</span>
+                    </span>
+                </div>
+            </a>
+
+            <!-- History -->
+            <a href="./history/" onmousedown="playLaunchSound()" class="block">
+                <div class="glass-card rounded-[34px] md:rounded-[48px] p-8 sm:p-10 md:p-12 flex flex-col h-full">
+                    <div class="flex justify-between items-start mb-8">
+                        <span class="tag-bubble">🏛️ History Archive</span>
+                        <span class="category-icon float-soft" style="animation-delay: 2s;">🌍</span>
+                    </div>
+
+                    <h3 class="text-3xl sm:text-4xl md:text-5xl font-black mb-5 text-white">
+                        Lịch sử
+                    </h3>
+
+                    <p class="text-lg sm:text-xl md:text-2xl font-bold text-white/68 mb-9 flex-grow leading-relaxed">
+                        Bài học, timeline, trò chơi câu hỏi và các tư liệu trực quan về lịch sử, xã hội và văn minh nhân loại.
+                    </p>
+
+                    <span class="btn-space text-base sm:text-lg md:text-xl w-fit">
+                        Open Archive <span>➔</span>
+                    </span>
+                </div>
+            </a>
+
+            <!-- Featured Projects -->
+            <a href="./projects/" onmousedown="playLaunchSound()" class="block lg:col-span-2">
+                <div class="glass-card rounded-[34px] md:rounded-[52px] p-8 sm:p-10 md:p-12 lg:p-14 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 md:gap-10 relative min-h-[310px]">
+                    <div class="relative z-10 max-w-2xl">
+                        <span class="tag-bubble mb-7">🌠 Featured Projects</span>
+
+                        <h3 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-5 text-white">
+                            Dự án nổi bật
+                        </h3>
+
+                        <p class="text-lg sm:text-xl md:text-2xl font-bold text-white/68 mb-9 leading-relaxed">
+                            Khu vực tổng hợp các game HTML, mô phỏng, website mini và sản phẩm học tập hoàn chỉnh của Science Horizon.
+                        </p>
+
+                        <span class="btn-space text-base sm:text-lg md:text-xl">
+                            View Projects <span>➔</span>
+                        </span>
+                    </div>
+
+                    <div class="relative z-10 hidden lg:flex items-center justify-center w-[360px] h-[230px] preview-box rounded-[42px]">
+                        <div class="absolute text-7xl float-soft">🚀</div>
+                        <div class="absolute top-5 left-8 text-4xl float-soft" style="animation-delay: 1s;">✨</div>
+                        <div class="absolute bottom-6 right-9 text-4xl float-soft" style="animation-delay: 1.8s;">🪐</div>
+                        <div class="absolute bottom-8 left-12 text-4xl float-soft" style="animation-delay: 2.4s;">💻</div>
+                    </div>
+                </div>
+            </a>
+        </section>
+
+        <!-- Footer -->
+        <footer class="mt-20 md:mt-32 py-12 md:py-20 text-center">
+            <div class="footer-line mb-8"></div>
+
+            <div class="flex justify-center gap-6 md:gap-10 mb-8 text-3xl md:text-5xl opacity-70">
+                <span class="float-soft">⚛️</span>
+                <span class="float-soft" style="animation-delay: 0.8s;">🪐</span>
+                <span class="float-soft" style="animation-delay: 1.6s;">🔭</span>
+                <span class="float-soft" style="animation-delay: 2.4s;">🌌</span>
+            </div>
+
+            <p class="text-sm md:text-lg font-black text-white/45 tracking-[0.22em] md:tracking-[0.42em] uppercase px-4">
+                Built for Science • Learning • Imagination
+            </p>
+        </footer>
+    </main>
+
+    <script>
+        let audioCtx;
+
+        function playLaunchSound() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+
+            const oscillator = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+
+            oscillator.type = 'sine';
+            oscillator.frequency.setValueAtTime(260, audioCtx.currentTime);
+            oscillator.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.16);
+
+            gainNode.gain.setValueAtTime(0.2, audioCtx.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.16);
+
+            oscillator.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+
+            oscillator.start();
+            oscillator.stop(audioCtx.currentTime + 0.16);
+        }
+
+        document.addEventListener('mousemove', function (event) {
+            if (window.innerWidth > 768) {
+                const x = (event.clientX / window.innerWidth - 0.5) * 22;
+                const y = (event.clientY / window.innerHeight - 0.5) * 22;
+                const bg = document.getElementById('parallaxBg');
+
+                if (bg) {
+                    bg.style.transform = `translate(${x}px, ${y}px) scale(1.1)`;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
