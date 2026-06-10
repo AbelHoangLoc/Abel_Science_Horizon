@@ -9,11 +9,11 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Poppins Font -->
+    <!-- Vietnamese-friendly font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap&subset=vietnamese"
         rel="stylesheet"
     />
 
@@ -41,9 +41,11 @@
             margin: 0;
             min-height: 100vh;
             overflow-x: hidden;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Be Vietnam Pro', Arial, Helvetica, sans-serif;
             color: white;
             background: var(--deep-space);
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
         }
 
         a {
@@ -349,9 +351,10 @@
                 <p class="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-extrabold leading-relaxed text-white/78 max-w-4xl">
                     Nơi lưu trữ các bài code HTML về
                     <span class="text-sky-300">Toán tối ưu</span>,
-                    <span class="text-orange-300">English</span>,
+                    <span class="text-orange-300">Tiếng Anh</span>,
                     <span class="text-cyan-200">Khoa học</span>,
-                    <span class="text-blue-200">Lịch sử</span>
+                    <span class="text-blue-200">Lịch sử</span>,
+                    <span class="text-pink-200">Văn học</span>
                     và những dự án học tập sáng tạo.
                 </p>
             </div>
@@ -394,7 +397,7 @@
                     </div>
 
                     <h3 class="text-3xl sm:text-4xl md:text-5xl font-black mb-5 text-white">
-                        Học English
+                        Học tiếng Anh
                     </h3>
 
                     <p class="text-lg sm:text-xl md:text-2xl font-bold text-white/68 mb-9 flex-grow leading-relaxed">
@@ -447,6 +450,28 @@
 
                     <span class="btn-space text-base sm:text-lg md:text-xl w-fit">
                         Open Archive <span>➔</span>
+                    </span>
+                </div>
+            </a>
+
+            <!-- Literature -->
+            <a href="./literature/" onmousedown="playLaunchSound()" class="block">
+                <div class="glass-card rounded-[34px] md:rounded-[48px] p-8 sm:p-10 md:p-12 flex flex-col h-full">
+                    <div class="flex justify-between items-start mb-8">
+                        <span class="tag-bubble">📖 Literature Room</span>
+                        <span class="category-icon float-soft" style="animation-delay: 2.6s;">✒️</span>
+                    </div>
+
+                    <h3 class="text-3xl sm:text-4xl md:text-5xl font-black mb-5 text-white">
+                        Văn học
+                    </h3>
+
+                    <p class="text-lg sm:text-xl md:text-2xl font-bold text-white/68 mb-9 flex-grow leading-relaxed">
+                        Bài đọc, trò chơi ngôn ngữ, tư liệu tác phẩm, tác giả và các hoạt động giúp học sinh yêu văn chương hơn.
+                    </p>
+
+                    <span class="btn-space text-base sm:text-lg md:text-xl w-fit">
+                        Open Literature <span>➔</span>
                     </span>
                 </div>
             </a>
