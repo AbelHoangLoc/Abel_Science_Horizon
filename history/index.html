@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lịch sử | Science Horizon</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+    <style>
+        :root {
+            --space: #06142E;
+            --deep: #081D3F;
+            --blue: #20D4FF;
+            --royal: #2E6BFF;
+            --violet: #7B5CFF;
+            --amber: #FFB84D;
+            --gold: #FFD166;
+            --rose: #FF7A90;
+            --paper: rgba(255,255,255,0.88);
+            --glass: rgba(255,255,255,0.13);
+            --border: rgba(118, 204, 255, 0.36);
+        }
+
+        * { box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            overflow-x: hidden;
+            font-family: 'Be Vietnam Pro', sans-serif;
+            color: white;
+            background:
+                radial-gradient(circle at 12% 18%, rgba(32, 212, 255, 0.24), transparent 34%),
+                radial-gradient(circle at 88% 12%, rgba(255, 184, 77, 0.18), transparent 30%),
+                radial-gradient(circle at 76% 82%, rgba(123, 92, 255, 0.24), transparent 34%),
+                linear-gradient(135deg, #06142E 0%, #0B1F4D 48%, #020817 100%);
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -2;
+            background-image:
+                radial-gradient(circle, rgba(255,255,255,0.95) 1px, transparent 1.4px),
+                radial-gradient(circle, rgba(255,209,102,0.75) 1px, transparent 1.3px),
+                radial-gradient(circle, rgba(32,212,255,0.8) 1px, transparent 1.3px);
+            background-size: 78px 78px, 132px 132px, 190px 190px;
+            background-position: 0 0, 44px 28px, 80px 110px;
+            opacity: 0.34;
+        }
+
+        .cosmic-glow {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            filter: blur(35px);
+            background:
+                radial-gradient(circle at 10% 70%, rgba(255,184,77,0.12), transparent 24%),
+                radial-gradient(circle at 90% 55%, rgba(32,212,255,0.14), transparent 28%);
+            transform: scale(1.08);
+        }
+
+        .glass-card {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(145deg, rgba(255,255,255,0.17), rgba(255,255,255,0.075));
+            border: 1px solid var(--border);
+            box-shadow:
+                0 28px 75px rgba(0,0,0,0.34),
+                inset 0 1px 0 rgba(255,255,255,0.18);
+            backdrop-filter: blur(20px) saturate(165%);
+            -webkit-backdrop-filter: blur(20px) saturate(165%);
+        }
+
+        .logo-box {
+            width: 76px;
+            height: 76px;
+            border-radius: 24px;
+            display: grid;
+            place-items: center;
+            background: rgba(255,255,255,0.92);
+            box-shadow: 0 14px 35px rgba(32,212,255,0.2), 0 12px 24px rgba(0,0,0,0.18);
+            font-size: 42px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 22px;
+            border-radius: 999px;
+            border: 1px solid rgba(255,255,255,0.22);
+            background: rgba(255,255,255,0.12);
+            color: rgba(255,255,255,0.92);
+            font-weight: 900;
+            letter-spacing: 0.03em;
+            box-shadow: inset 0 -4px 0 rgba(0,0,0,0.08);
+        }
+
+        .title-gradient {
+            background: linear-gradient(90deg, #ffffff 0%, #FFD166 32%, #20D4FF 68%, #B9A8FF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-orbit {
+            position: absolute;
+            width: 560px;
+            height: 180px;
+            right: -120px;
+            top: 52px;
+            border: 4px solid rgba(255,209,102,0.5);
+            border-left-color: rgba(32,212,255,0.5);
+            border-bottom-color: rgba(123,92,255,0.35);
+            border-radius: 50%;
+            transform: rotate(-12deg);
+            opacity: 0.58;
+        }
+
+        .hero-planet {
+            position: absolute;
+            width: 92px;
+            height: 92px;
+            right: 112px;
+            top: 80px;
+            border-radius: 999px;
+            background: radial-gradient(circle at 30% 25%, #fff9d7 0 8%, #FFD166 12%, #FF8A3D 48%, #2E6BFF 100%);
+            box-shadow: 0 0 35px rgba(255,209,102,0.32);
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 35px;
+            top: 92px;
+            bottom: 34px;
+            width: 2px;
+            background: linear-gradient(to bottom, rgba(255,209,102,0.75), rgba(32,212,255,0.2));
+            opacity: 0.7;
+        }
+
+        .history-card {
+            transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+            min-height: 300px;
+        }
+
+        .history-card:hover {
+            transform: translateY(-8px) scale(1.015);
+            border-color: rgba(255,255,255,0.56);
+            box-shadow: 0 38px 90px rgba(0,0,0,0.42), 0 0 38px rgba(255,209,102,0.16);
+        }
+
+        .history-card::before {
+            content: "";
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            right: -70px;
+            top: -70px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,209,102,0.32), transparent 68%);
+            transition: transform 0.35s ease;
+        }
+
+        .history-card:hover::before { transform: scale(1.3); }
+
+        .tag-bubble {
+            position: relative;
+            z-index: 2;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 16px;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            border: 1px solid rgba(255,255,255,0.22);
+            box-shadow: inset 0 -4px 0 rgba(0,0,0,0.08);
+        }
+
+        .tag-ancient { background: rgba(255,209,102,0.15); color: #FFE6A3; }
+        .tag-vietnam { background: rgba(32,212,255,0.15); color: #A8F0FF; }
+        .tag-world { background: rgba(123,92,255,0.18); color: #D8D0FF; }
+        .tag-ideas { background: rgba(255,122,144,0.16); color: #FFD6DE; }
+        .tag-map { background: rgba(118,255,207,0.14); color: #C7FFE9; }
+        .tag-archive { background: rgba(255,255,255,0.14); color: #F4F7FF; }
+
+        .btn-space {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px 24px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, #20D4FF 0%, #2E6BFF 55%, #FFB84D 100%);
+            color: white;
+            font-weight: 900;
+            box-shadow: 0 12px 0 rgba(0,0,0,0.18), 0 20px 40px rgba(46,107,255,0.22);
+            transition: transform 0.18s ease, filter 0.18s ease, box-shadow 0.18s ease;
+        }
+
+        .btn-space:hover { transform: translateY(-2px); filter: brightness(1.08); }
+        .btn-space:active { transform: translateY(6px); box-shadow: 0 4px 0 rgba(0,0,0,0.14); }
+
+        .btn-back {
+            background: rgba(255,255,255,0.9);
+            color: #0B1F4D;
+        }
+
+        @keyframes float-soft {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-14px) rotate(5deg); }
+        }
+
+        .float-soft { animation: float-soft 4.5s ease-in-out infinite; }
+
+        @media (max-width: 768px) {
+            .logo-box { width: 62px; height: 62px; border-radius: 20px; font-size: 34px; }
+            .hero-orbit { width: 360px; right: -165px; top: 26px; opacity: 0.35; }
+            .hero-planet { width: 62px; height: 62px; right: 20px; top: 58px; opacity: 0.82; }
+            .timeline-line { display: none; }
+        }
+    </style>
+</head>
+
+<body class="flex flex-col items-center">
+    <div class="cosmic-glow" id="parallaxBg"></div>
+
+    <main class="w-full max-w-7xl px-4 sm:px-6 py-8 md:py-12 lg:py-16 relative z-10">
+        <header class="flex flex-col md:flex-row md:items-center justify-between gap-6 md:gap-8 mb-10 md:mb-14">
+            <div class="flex flex-col sm:flex-row items-center sm:items-start md:items-center gap-4 sm:gap-6 text-center sm:text-left">
+                <div class="logo-box float-soft">📜</div>
+                <div>
+                    <h1 class="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight">Science Horizon</h1>
+                    <p class="text-xs sm:text-sm font-black text-white/55 uppercase tracking-[0.22em] sm:tracking-[0.35em] mt-2">History Observatory</p>
+                </div>
+            </div>
+
+            <div class="self-center badge text-sm sm:text-base">
+                🕰️ Cá nhân hoá • Dòng thời gian • Tư duy lịch sử
+            </div>
+        </header>
+
+        <section class="glass-card rounded-[42px] md:rounded-[64px] p-8 sm:p-12 md:p-16 lg:p-20 mb-12 md:mb-16 relative">
+            <div class="hero-orbit"></div>
+            <div class="hero-planet float-soft"></div>
+
+            <div class="relative z-10 max-w-4xl">
+                <span class="badge mb-8 text-sm sm:text-base">🚀 ABEL SCIENCE HORIZON / HISTORY</span>
+
+                <h2 class="title-gradient text-5xl sm:text-7xl md:text-[92px] lg:text-[116px] font-black leading-[1.04] tracking-tight mb-7">
+                    Lịch sử<br />như một bầu trời ký ức.
+                </h2>
+
+                <p class="text-lg sm:text-2xl md:text-3xl font-extrabold leading-relaxed text-white/82 mb-10 max-w-4xl">
+                    Nơi lưu trữ các bài học, bản đồ, timeline và trò chơi HTML giúp bạn khám phá lịch sử theo cách cá nhân hoá: từ sự kiện, con người, ý tưởng đến những chuyển động xã hội làm thay đổi thế giới.
+                </p>
+
+                <div class="flex flex-col sm:flex-row items-center gap-5 md:gap-7">
+                    <a href="../" onmousedown="playLaunchSound()" class="btn-space btn-back px-7 py-4 sm:px-9 sm:py-5 text-base sm:text-lg">
+                        ← Back Home
+                    </a>
+                    <span class="text-sm sm:text-base font-bold text-white/58">Tip: Học theo timeline riêng của bạn ✨</span>
+                </div>
+            </div>
+
+            <div class="absolute bottom-8 right-8 text-5xl md:text-7xl opacity-80 float-soft hidden sm:block" style="animation-delay: 1.1s;">🛰️</div>
+        </section>
+
+        <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 md:gap-9">
+            <a href="./ancient-world/" onmousedown="playLaunchSound()" class="block focus:outline-none">
+                <div class="history-card glass-card rounded-[36px] md:rounded-[44px] p-8 md:p-10 flex flex-col h-full">
+                    <div class="mb-8 flex justify-between items-start gap-4">
+                        <span class="tag-bubble tag-ancient">🏛️ Ancient World</span>
+                        <span class="text-5xl float-soft">🪐</span>
+                    </div>
+                    <h3 class="relative z-10 text-3xl md:text-4xl font-black mb-5 tracking-tight">Thế giới cổ đại</h3>
+                    <p class="relative z-10 text-white/72 font-bold leading-relaxed mb-10 flex-grow">
+                        Ai Cập, Hy Lạp, La Mã, Lưỡng Hà và những nền văn minh đầu tiên qua bản đồ, biểu tượng và câu chuyện ngắn dễ nhớ.
+                    </p>
+                    <span class="btn-space mt-auto self-start">Open Timeline →</span>
+                </div>
+            </a>
+
+            <a href="./vietnam-history/" onmousedown="playLaunchSound()" class="block focus:outline-none">
+                <div class="history-card glass-card rounded-[36px] md:rounded-[44px] p-8 md:p-10 flex flex-col h-full">
+                    <div class="mb-8 flex justify-between items-start gap-4">
+                        <span class="tag-bubble tag-vietnam">⭐ Vietnam History</span>
+                        <span class="text-5xl float-soft" style="animation-delay: .7s;">🌏</span>
+                    </div>
+                    <h3 class="relative z-10 text-3xl md:text-4xl font-black mb-5 tracking-tight">Lịch sử Việt Nam</h3>
+                    <p class="relative z-10 text-white/72 font-bold leading-relaxed mb-10 flex-grow">
+                        Tạo timeline cá nhân từ thời dựng nước, các triều đại, kháng chiến, đổi mới đến những câu hỏi lịch sử gần gũi với đời sống.
+                    </p>
+                    <span class="btn-space mt-auto self-start">Explore Vietnam →</span>
+                </div>
+            </a>
+
+            <a href="./world-history/" onmousedown="playLaunchSound()" class="block focus:outline-none">
+                <div class="history-card glass-card rounded-[36px] md:rounded-[44px] p-8 md:p-10 flex flex-col h-full">
+                    <div class="mb-8 flex justify-between items-start gap-4">
+                        <span class="tag-bubble tag-world">🌌 World History</span>
+                        <span class="text-5xl float-soft" style="animation-delay: 1.4s;">🧭</span>
+                    </div>
+                    <h3 class="relative z-10 text-3xl md:text-4xl font-black mb-5 tracking-tight">Lịch sử thế giới</h3>
+                    <p class="relative z-10 text-white/72 font-bold leading-relaxed mb-10 flex-grow">
+                        Các cuộc cách mạng, chiến tranh, đế quốc, thuộc địa, toàn cầu hoá và những nút giao lớn định hình thế giới hiện đại.
+                    </p>
+                    <span class="btn-space mt-auto self-start">Open Atlas →</span>
+                </div>
+            </a>
+
+            <a href="./history-of-ideas/" onmousedown="playLaunchSound()" class="block focus:outline-none">
+                <div class="history-card glass-card rounded-[36px] md:rounded-[44px] p-8 md:p-10 flex flex-col h-full">
+                    <div class="mb-8 flex justify-between items-start gap-4">
+                        <span class="tag-bubble tag-ideas">💡 Ideas</span>
+                        <span class="text-5xl float-soft" style="animation-delay: .4s;">📚</span>
+                    </div>
+                    <h3 class="relative z-10 text-3xl md:text-4xl font-black mb-5 tracking-tight">Lịch sử tư tưởng</h3>
+                    <p class="relative z-10 text-white/72 font-bold leading-relaxed mb-10 flex-grow">
+                        Theo dấu các ý tưởng lớn: khai sáng, chủ nghĩa xã hội, nữ quyền, khoa học, giáo dục, truyền thông và các tranh luận hiện đại.
+                    </p>
+                    <span class="btn-space mt-auto self-start">Trace Ideas →</span>
+                </div>
+            </a>
+
+            <a href="./map-room/" onmousedown="playLaunchSound()" class="block focus:outline-none">
+                <div class="history-card glass-card rounded-[36px] md:rounded-[44px] p-8 md:p-10 flex flex-col h-full">
+                    <div class="mb-8 flex justify-between items-start gap-4">
+                        <span class="tag-bubble tag-map">🗺️ Map Room</span>
+                        <span class="text-5xl float-soft" style="animation-delay: 1s;">🔭</span>
+                    </div>
+                    <h3 class="relative z-10 text-3xl md:text-4xl font-black mb-5 tracking-tight">Phòng bản đồ</h3>
+                    <p class="relative z-10 text-white/72 font-bold leading-relaxed mb-10 flex-grow">
+                        Học lịch sử bằng không gian: bản đồ chiến dịch, hải trình, biên giới, di cư, thương mại và những đường nối xuyên thời gian.
+                    </p>
+                    <span class="btn-space mt-auto self-start">Open Maps →</span>
+                </div>
+            </a>
+
+            <a href="./my-archive/" onmousedown="playLaunchSound()" class="block focus:outline-none">
+                <div class="history-card glass-card rounded-[36px] md:rounded-[44px] p-8 md:p-10 flex flex-col h-full">
+                    <div class="mb-8 flex justify-between items-start gap-4">
+                        <span class="tag-bubble tag-archive">🗂️ My Archive</span>
+                        <span class="text-5xl float-soft" style="animation-delay: 1.8s;">✨</span>
+                    </div>
+                    <h3 class="relative z-10 text-3xl md:text-4xl font-black mb-5 tracking-tight">Kho tư liệu cá nhân</h3>
+                    <p class="relative z-10 text-white/72 font-bold leading-relaxed mb-10 flex-grow">
+                        Nơi lưu các ghi chú, câu hỏi, trích dẫn, mini-game và bài code HTML lịch sử do bạn tự xây dựng theo lộ trình riêng.
+                    </p>
+                    <span class="btn-space mt-auto self-start">Build Archive →</span>
+                </div>
+            </a>
+        </section>
+
+        <section class="glass-card rounded-[36px] md:rounded-[52px] p-8 md:p-12 mt-12 md:mt-16 relative overflow-hidden">
+            <div class="timeline-line"></div>
+            <div class="relative z-10 md:pl-16">
+                <span class="badge mb-6">🧠 Personalized History Engine</span>
+                <h3 class="text-3xl md:text-5xl font-black tracking-tight mb-5">Học lịch sử theo câu hỏi của chính bạn.</h3>
+                <p class="text-white/74 text-lg md:text-xl font-bold leading-relaxed max-w-4xl">
+                    Mỗi folder có thể trở thành một “trạm quan sát”: một bài timeline, một trò chơi kéo-thả sự kiện, một bản đồ tương tác, hoặc một bộ flashcard nhân vật–khái niệm–bối cảnh. Bạn có thể bắt đầu từ điều mình tò mò nhất, rồi mở rộng thành một vũ trụ học tập riêng.
+                </p>
+            </div>
+        </section>
+
+        <footer class="mt-16 md:mt-24 py-12 md:py-16 text-center">
+            <div class="flex justify-center gap-7 md:gap-12 mb-8 text-4xl md:text-5xl text-white/45">
+                <span class="float-soft">📜</span>
+                <span class="float-soft" style="animation-delay: 1s;">🗺️</span>
+                <span class="float-soft" style="animation-delay: 2s;">🧭</span>
+                <span class="float-soft" style="animation-delay: 3s;">🌌</span>
+            </div>
+            <p class="text-xs md:text-sm font-black text-white/42 tracking-[0.22em] md:tracking-[0.42em] uppercase px-4 leading-relaxed">
+                © Science Horizon • History Observatory • Learn across time
+            </p>
+        </footer>
+    </main>
+
+    <script>
+        let audioCtx;
+        function playLaunchSound() {
+            if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+
+            const oscillator = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+
+            oscillator.type = 'sine';
+            oscillator.frequency.setValueAtTime(260, audioCtx.currentTime);
+            oscillator.frequency.exponentialRampToValueAtTime(900, audioCtx.currentTime + 0.13);
+
+            gainNode.gain.setValueAtTime(0.22, audioCtx.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.13);
+
+            oscillator.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            oscillator.start();
+            oscillator.stop(audioCtx.currentTime + 0.13);
+        }
+
+        document.addEventListener('mousemove', function(event) {
+            if (window.innerWidth > 768) {
+                const x = (event.clientX / window.innerWidth - 0.5) * 18;
+                const y = (event.clientY / window.innerHeight - 0.5) * 18;
+                const bg = document.getElementById('parallaxBg');
+                if (bg) bg.style.transform = `translate(${x}px, ${y}px) scale(1.08)`;
+            }
+        });
+    </script>
+</body>
+</html>
