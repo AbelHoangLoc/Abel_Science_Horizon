@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Khoa học | Science Horizon</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+    <style>
+        :root {
+            --space: #051026;
+            --deep: #0a1f4d;
+            --blue: #19b7ff;
+            --cyan: #8df3ff;
+            --violet: #8d6bff;
+            --green: #4dffb5;
+            --orange: #ff9a3d;
+            --white: rgba(255, 255, 255, 0.94);
+            --soft: rgba(255, 255, 255, 0.72);
+            --glass: rgba(255, 255, 255, 0.12);
+        }
+
+        * { box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: 'Be Vietnam Pro', sans-serif;
+            color: white;
+            background:
+                radial-gradient(circle at 15% 20%, rgba(25, 183, 255, 0.25), transparent 30%),
+                radial-gradient(circle at 80% 15%, rgba(141, 107, 255, 0.24), transparent 32%),
+                radial-gradient(circle at 75% 82%, rgba(77, 255, 181, 0.14), transparent 28%),
+                linear-gradient(135deg, #051026 0%, #0a1f4d 48%, #020713 100%);
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background-image:
+                radial-gradient(circle, rgba(255,255,255,.8) 1px, transparent 1.6px),
+                radial-gradient(circle, rgba(141,243,255,.7) 1px, transparent 1.6px);
+            background-size: 78px 78px, 132px 132px;
+            background-position: 0 0, 38px 55px;
+            opacity: .28;
+            z-index: -3;
+        }
+
+        .nebula {
+            position: fixed;
+            inset: -10%;
+            z-index: -2;
+            background:
+                radial-gradient(circle at 25% 30%, rgba(25,183,255,.22), transparent 32%),
+                radial-gradient(circle at 68% 38%, rgba(255,154,61,.16), transparent 34%),
+                radial-gradient(circle at 50% 82%, rgba(141,107,255,.18), transparent 36%);
+            filter: blur(34px);
+            transform: scale(1.05);
+        }
+
+        .orbit-line {
+            position: absolute;
+            width: 520px;
+            height: 145px;
+            border: 4px solid rgba(141, 243, 255, .22);
+            border-left-color: rgba(255, 154, 61, .72);
+            border-radius: 50%;
+            transform: rotate(-16deg);
+            pointer-events: none;
+        }
+
+        .glass-card {
+            background: linear-gradient(145deg, rgba(255,255,255,.16), rgba(255,255,255,.07));
+            border: 1px solid rgba(141, 243, 255, .34);
+            box-shadow: 0 26px 70px rgba(0,0,0,.32), inset 0 1px 0 rgba(255,255,255,.18);
+            backdrop-filter: blur(22px) saturate(160%);
+            -webkit-backdrop-filter: blur(22px) saturate(160%);
+            position: relative;
+            transition: transform .32s ease, box-shadow .32s ease, border-color .32s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255,255,255,.62);
+            box-shadow: 0 34px 86px rgba(0,0,0,.42), 0 0 42px rgba(25,183,255,.22);
+        }
+
+        .logo-shell {
+            width: 78px;
+            height: 78px;
+            border-radius: 24px;
+            background: rgba(255,255,255,.92);
+            color: #0a1f4d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 42px;
+            box-shadow: 0 18px 40px rgba(0,0,0,.26), 0 0 28px rgba(141,243,255,.28);
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 22px;
+            border-radius: 999px;
+            background: rgba(255,255,255,.12);
+            border: 1px solid rgba(255,255,255,.22);
+            color: rgba(255,255,255,.86);
+            font-weight: 900;
+            font-size: 13px;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            box-shadow: inset 0 -4px 0 rgba(0,0,0,.08);
+        }
+
+        .hero-title {
+            font-weight: 900;
+            letter-spacing: -.055em;
+            line-height: .98;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #ffffff, #8df3ff, #4dffb5, #ff9a3d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 220% auto;
+            animation: shine 8s linear infinite;
+        }
+
+        @keyframes shine { to { background-position: 220% center; } }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-14px) rotate(4deg); }
+        }
+
+        @keyframes pulse-star {
+            0%, 100% { opacity: .55; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.18); }
+        }
+
+        .float { animation: float 4.8s ease-in-out infinite; }
+        .pulse-star { animation: pulse-star 2.6s ease-in-out infinite; }
+
+        .btn-space {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 26px;
+            border-radius: 999px;
+            color: white;
+            font-weight: 900;
+            text-decoration: none;
+            background: linear-gradient(135deg, #19b7ff 0%, #316dff 48%, #ff9a3d 100%);
+            box-shadow: 0 12px 0 rgba(0,0,0,.22), 0 18px 36px rgba(25,183,255,.22);
+            transition: transform .18s ease, filter .18s ease, box-shadow .18s ease;
+        }
+
+        .btn-space:hover { filter: brightness(1.08); transform: translateY(-2px); }
+        .btn-space:active { transform: translateY(7px); box-shadow: 0 4px 0 rgba(0,0,0,.18); }
+
+        .btn-back {
+            background: rgba(255,255,255,.92);
+            color: #0a1f4d;
+            box-shadow: 0 10px 0 rgba(0,0,0,.14);
+        }
+
+        .lab-card {
+            overflow: hidden;
+            min-height: 330px;
+        }
+
+        .lab-card::before {
+            content: "";
+            position: absolute;
+            width: 230px;
+            height: 230px;
+            right: -95px;
+            top: -95px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(141,243,255,.34), transparent 68%);
+            transition: transform .34s ease;
+        }
+
+        .lab-card:hover::before { transform: scale(1.25); }
+
+        .tag {
+            position: relative;
+            z-index: 2;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 16px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 900;
+            letter-spacing: .04em;
+            text-transform: uppercase;
+            background: rgba(255,255,255,.13);
+            border: 1px solid rgba(255,255,255,.22);
+            color: rgba(255,255,255,.86);
+        }
+
+        .tag-blue { background: rgba(25,183,255,.16); color: #bdefff; border-color: rgba(25,183,255,.35); }
+        .tag-green { background: rgba(77,255,181,.14); color: #c7ffe8; border-color: rgba(77,255,181,.35); }
+        .tag-orange { background: rgba(255,154,61,.14); color: #ffd9ba; border-color: rgba(255,154,61,.35); }
+        .tag-violet { background: rgba(141,107,255,.15); color: #ded7ff; border-color: rgba(141,107,255,.38); }
+
+        .focus-ring { -webkit-tap-highlight-color: transparent; }
+
+        @media (max-width: 768px) {
+            .logo-shell { width: 64px; height: 64px; font-size: 34px; border-radius: 20px; }
+            .orbit-line { width: 330px; height: 95px; right: -115px; }
+            .glass-card:hover { transform: translateY(-4px); }
+        }
+    </style>
+</head>
+
+<body class="flex flex-col items-center">
+    <div class="nebula" id="parallaxBg"></div>
+
+    <main class="w-full max-w-7xl px-4 sm:px-6 py-8 md:py-12 lg:py-16 relative z-10">
+        <header class="flex flex-col md:flex-row md:items-center justify-between gap-6 md:gap-8 mb-10 md:mb-14">
+            <div class="flex flex-col sm:flex-row items-center sm:items-start md:items-center gap-4 sm:gap-6 text-center sm:text-left">
+                <div class="logo-shell float">🔬</div>
+                <div>
+                    <h1 class="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight">Science Horizon</h1>
+                    <p class="text-xs sm:text-sm font-black text-white/50 uppercase tracking-[0.24em] sm:tracking-[0.34em] mt-2">Khoa học cá nhân hoá</p>
+                </div>
+            </div>
+            <div class="self-center">
+                <span class="badge">🧪 Explore • Question • Discover</span>
+            </div>
+        </header>
+
+        <section class="glass-card rounded-[38px] md:rounded-[58px] p-8 sm:p-12 md:p-16 lg:p-20 mb-12 md:mb-16 relative overflow-hidden">
+            <div class="orbit-line right-[-170px] top-10 md:right-[-80px] md:top-16"></div>
+            <div class="absolute top-10 right-12 md:right-24 text-6xl md:text-8xl float opacity-90">🪐</div>
+            <div class="absolute bottom-10 right-10 md:right-28 text-5xl md:text-7xl float opacity-80" style="animation-delay:1.4s;">🛰️</div>
+            <div class="absolute top-12 left-12 text-2xl pulse-star">✦</div>
+            <div class="absolute bottom-20 left-[42%] text-xl pulse-star" style="animation-delay:1.1s;">✧</div>
+
+            <div class="relative z-10 max-w-4xl">
+                <span class="badge mb-8">🌌 Science Learning Station</span>
+                <h2 class="hero-title text-5xl sm:text-7xl md:text-[88px] lg:text-[112px] mb-8">
+                    Khám phá.<br />
+                    <span class="gradient-text">Thí nghiệm.</span><br />
+                    Hiểu thế giới.
+                </h2>
+                <p class="text-lg sm:text-2xl md:text-3xl font-extrabold leading-relaxed text-white/82 max-w-4xl mb-10">
+                    Một không gian học khoa học theo sở thích cá nhân: từ vũ trụ, vật lý, hoá học, sinh học đến các câu hỏi đời thường được giải thích bằng mô phỏng trực quan.
+                </p>
+                <div class="flex flex-col sm:flex-row items-center gap-5">
+                    <a href="../" onmousedown="playLaunchSound()" class="btn-space btn-back focus-ring">← Back Home</a>
+                    <span class="text-sm md:text-base font-bold text-white/55">Tip: chọn một trạm để bắt đầu hành trình quan sát ✨</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 md:gap-9">
+            <a href="./space-lab/" onmousedown="playLaunchSound()" class="focus-ring block">
+                <div class="glass-card lab-card rounded-[34px] md:rounded-[44px] p-8 md:p-10 flex flex-col h-full">
+                    <div class="flex justify-between items-start mb-8">
+                        <span class="tag tag-blue">🪐 Space Lab</span>
+                        <span class="text-5xl float">🌌</span>
+                    </div>
+                    <h3 class="text-3xl md:text-4xl font-black mb-4 relative z-10">Vũ trụ học</h3>
+                    <p class="text-base md:text-lg font-bold text-white/72 leading-relaxed mb-10 flex-grow relative z-10">
+                        Quỹ đạo, hành tinh, ánh sáng, lỗ đen và những mô phỏng giúp bạn nhìn vũ trụ như một phòng thí nghiệm mở.
+                    </p>
+                    <div class="flex items-center justify-between mt-auto relative z-10 gap-4">
+                        <span class="btn-space px-6 py-3 text-base">Open Lab →</span>
+                        <span class="text-[11px] font-black text-white/40 uppercase">Cosmic view</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="./physics-lab/" onmousedown="playLaunchSound()" class="focus-ring block">
+                <div class="glass-card lab-card rounded-[34px] md:rounded-[44px] p-8 md:p-10 flex flex-col h-full">
+                    <div class="flex justify-between items-start mb-8">
+                        <span class="tag tag-violet">⚛️ Physics Lab</span>
+                        <span class="text-5xl float" style="animation-delay:.7s;">🧲</span>
+                    </div>
+                    <h3 class="text-3xl md:text-4xl font-black mb-4 relative z-10">Vật lý trực quan</h3>
+                    <p class="text-base md:text-lg font-bold text-white/72 leading-relaxed mb-10 flex-grow relative z-10">
+                        Lực, chuyển động, năng lượng, sóng và điện từ học qua các mô hình dễ chỉnh, dễ nhìn và dễ hiểu.
+                    </p>
+                    <div class="flex items-center justify-between mt-auto relative z-10 gap-4">
+                        <span class="btn-space px-6 py-3 text-base">Experiment →</span>
+                        <span class="text-[11px] font-black text-white/40 uppercase">Motion & force</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="./chemistry-lab/" onmousedown="playLaunchSound()" class="focus-ring block">
+                <div class="glass-card lab-card rounded-[34px] md:rounded-[44px] p-8 md:p-10 flex flex-col h-full">
+                    <div class="flex justify-between items-start mb-8">
+                        <span class="tag tag-green">🧪 Chemistry Lab</span>
+                        <span class="text-5xl float" style="animation-delay:1.1s;">⚗️</span>
+                    </div>
+                    <h3 class="text-3xl md:text-4xl font-black mb-4 relative z-10">Hoá học sinh động</h3>
+                    <p class="text-base md:text-lg font-bold text-white/72 leading-relaxed mb-10 flex-grow relative z-10">
+                        Nguyên tử, phân tử, phản ứng, pH và màu sắc thí nghiệm được biến thành các hoạt động an toàn, sáng rõ.
+                    </p>
+                    <div class="flex items-center justify-between mt-auto relative z-10 gap-4">
+                        <span class="btn-space px-6 py-3 text-base">Mix Ideas →</span>
+                        <span class="text-[11px] font-black text-white/40 uppercase">Matter lab</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="./life-science/" onmousedown="playLaunchSound()" class="focus-ring block">
+                <div class="glass-card lab-card rounded-[34px] md:rounded-[44px] p-8 md:p-10 flex flex-col h-full">
+                    <div class="flex justify-between items-start mb-8">
+                        <span class="tag tag-green">🌱 Life Science</span>
+                        <span class="text-5xl float" style="animation-delay:1.6s;">🧬</span>
+                    </div>
+                    <h3 class="text-3xl md:text-4xl font-black mb-4 relative z-10">Sinh học & sự sống</h3>
+                    <p class="text-base md:text-lg font-bold text-white/72 leading-relaxed mb-10 flex-grow relative z-10">
+                        Tế bào, cơ thể, hệ sinh thái, tiến hoá và sức khoẻ được trình bày theo hướng gần gũi với đời sống hằng ngày.
+                    </p>
+                    <div class="flex items-center justify-between mt-auto relative z-10 gap-4">
+                        <span class="btn-space px-6 py-3 text-base">Explore Life →</span>
+                        <span class="text-[11px] font-black text-white/40 uppercase">Living systems</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="./earth-climate/" onmousedown="playLaunchSound()" class="focus-ring block">
+                <div class="glass-card lab-card rounded-[34px] md:rounded-[44px] p-8 md:p-10 flex flex-col h-full">
+                    <div class="flex justify-between items-start mb-8">
+                        <span class="tag tag-orange">🌍 Earth Lab</span>
+                        <span class="text-5xl float" style="animation-delay:2s;">⛈️</span>
+                    </div>
+                    <h3 class="text-3xl md:text-4xl font-black mb-4 relative z-10">Trái đất & khí hậu</h3>
+                    <p class="text-base md:text-lg font-bold text-white/72 leading-relaxed mb-10 flex-grow relative z-10">
+                        Thời tiết, khí hậu, địa chất, đại dương và môi trường qua các bản đồ, mô phỏng và câu hỏi thực tế.
+                    </p>
+                    <div class="flex items-center justify-between mt-auto relative z-10 gap-4">
+                        <span class="btn-space px-6 py-3 text-base">See Earth →</span>
+                        <span class="text-[11px] font-black text-white/40 uppercase">Planet care</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="./daily-science/" onmousedown="playLaunchSound()" class="focus-ring block">
+                <div class="glass-card lab-card rounded-[34px] md:rounded-[44px] p-8 md:p-10 flex flex-col h-full">
+                    <div class="flex justify-between items-start mb-8">
+                        <span class="tag tag-blue">💡 Daily Science</span>
+                        <span class="text-5xl float" style="animation-delay:2.4s;">🔎</span>
+                    </div>
+                    <h3 class="text-3xl md:text-4xl font-black mb-4 relative z-10">Khoa học đời thường</h3>
+                    <p class="text-base md:text-lg font-bold text-white/72 leading-relaxed mb-10 flex-grow relative z-10">
+                        Tại sao trời xanh? Vì sao nước sôi? Vì sao camera, wifi, pin, cơ thể và đồ vật quanh ta hoạt động như vậy?
+                    </p>
+                    <div class="flex items-center justify-between mt-auto relative z-10 gap-4">
+                        <span class="btn-space px-6 py-3 text-base">Ask Why →</span>
+                        <span class="text-[11px] font-black text-white/40 uppercase">Curiosity</span>
+                    </div>
+                </div>
+            </a>
+        </section>
+
+        <footer class="mt-20 md:mt-28 py-12 md:py-16 text-center">
+            <div class="flex justify-center gap-6 md:gap-12 mb-8 text-4xl md:text-5xl opacity-70">
+                <span class="float">🔬</span>
+                <span class="float" style="animation-delay:1s;">🧪</span>
+                <span class="float" style="animation-delay:2s;">🛰️</span>
+                <span class="float" style="animation-delay:3s;">🌌</span>
+            </div>
+            <p class="text-xs md:text-sm font-black text-white/45 tracking-[0.22em] md:tracking-[0.42em] uppercase px-4 leading-relaxed">
+                © Science Horizon • Personalised Science Learning Station
+            </p>
+        </footer>
+    </main>
+
+    <script>
+        let audioCtx;
+
+        function playLaunchSound() {
+            if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+
+            const oscillator = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+
+            oscillator.type = 'sine';
+            oscillator.frequency.setValueAtTime(240, audioCtx.currentTime);
+            oscillator.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.13);
+
+            gainNode.gain.setValueAtTime(0.22, audioCtx.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.13);
+
+            oscillator.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            oscillator.start();
+            oscillator.stop(audioCtx.currentTime + 0.13);
+        }
+
+        document.addEventListener('mousemove', (event) => {
+            if (window.innerWidth > 768) {
+                const x = (event.clientX / window.innerWidth - 0.5) * 18;
+                const y = (event.clientY / window.innerHeight - 0.5) * 18;
+                const bg = document.getElementById('parallaxBg');
+                if (bg) bg.style.transform = `translate(${x}px, ${y}px) scale(1.05)`;
+            }
+        });
+    </script>
+</body>
+</html>
