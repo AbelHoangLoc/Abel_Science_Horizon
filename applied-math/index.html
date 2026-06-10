@@ -22,17 +22,15 @@
             --violet: #7c5cff;
             --orange: #ff9b3d;
             --green: #52f5b0;
+            --pink: #ff78b7;
+            --gold: #ffd166;
             --soft-white: rgba(255, 255, 255, 0.9);
             --glass: rgba(255, 255, 255, 0.12);
         }
 
-        * {
-            box-sizing: border-box;
-        }
+        * { box-sizing: border-box; }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
         body {
             margin: 0;
@@ -50,6 +48,7 @@
         a {
             color: inherit;
             text-decoration: none;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .bg-space {
@@ -174,9 +173,7 @@
             animation: shine 6s linear infinite;
         }
 
-        @keyframes shine {
-            to { background-position: 200% center; }
-        }
+        @keyframes shine { to { background-position: 200% center; } }
 
         @keyframes float-soft {
             0%, 100% { transform: translateY(0) rotate(0deg); }
@@ -188,13 +185,8 @@
             50% { box-shadow: 0 0 36px rgba(55,213,255,0.28), 0 16px 34px rgba(0,0,0,0.22); }
         }
 
-        .icon-float {
-            animation: float-soft 4.8s ease-in-out infinite;
-        }
-
-        .pulse-glow {
-            animation: pulse-glow 4.6s ease-in-out infinite;
-        }
+        .icon-float { animation: float-soft 4.8s ease-in-out infinite; }
+        .pulse-glow { animation: pulse-glow 4.6s ease-in-out infinite; }
 
         .tag-bubble {
             position: relative;
@@ -215,7 +207,7 @@
             white-space: nowrap;
         }
 
-        .lab-card::before {
+        .level-card::before {
             content: "";
             position: absolute;
             width: 180px;
@@ -227,7 +219,7 @@
             transition: transform 0.35s ease;
         }
 
-        .lab-card::after {
+        .level-card::after {
             content: "";
             position: absolute;
             width: 158px;
@@ -241,14 +233,14 @@
             opacity: 0.55;
         }
 
-        .lab-card:hover::before {
-            transform: scale(1.28);
-        }
+        .level-card:hover::before { transform: scale(1.28); }
 
-        .card-blue:hover { box-shadow: 0 42px 90px rgba(29,140,255,0.22), 0 32px 80px rgba(0,0,0,0.44); }
+        .card-cyan:hover { box-shadow: 0 42px 90px rgba(55,213,255,0.22), 0 32px 80px rgba(0,0,0,0.44); }
         .card-green:hover { box-shadow: 0 42px 90px rgba(82,245,176,0.18), 0 32px 80px rgba(0,0,0,0.44); }
         .card-orange:hover { box-shadow: 0 42px 90px rgba(255,155,61,0.22), 0 32px 80px rgba(0,0,0,0.44); }
         .card-violet:hover { box-shadow: 0 42px 90px rgba(124,92,255,0.24), 0 32px 80px rgba(0,0,0,0.44); }
+        .card-pink:hover { box-shadow: 0 42px 90px rgba(255,120,183,0.22), 0 32px 80px rgba(0,0,0,0.44); }
+        .card-gold:hover { box-shadow: 0 42px 90px rgba(255,209,102,0.20), 0 32px 80px rgba(0,0,0,0.44); }
 
         .btn-space {
             position: relative;
@@ -264,20 +256,19 @@
             transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
         }
 
-        .btn-space:hover {
-            transform: translateY(-2px);
-            filter: brightness(1.08);
-        }
+        .btn-space:hover { transform: translateY(-2px); filter: brightness(1.08); }
 
         .btn-space:active {
             transform: translateY(7px);
             box-shadow: 0 3px 0 rgba(0,0,0,0.25), 0 10px 18px rgba(0,0,0,0.18);
         }
 
-        .btn-blue { background: linear-gradient(135deg, #18a8ff 0%, #2f62ff 58%, #ff8f3d 100%); }
+        .btn-cyan { background: linear-gradient(135deg, #18a8ff 0%, #2f62ff 58%, #ff8f3d 100%); }
         .btn-green { background: linear-gradient(135deg, #52f5b0 0%, #14b8a6 55%, #1d8cff 100%); }
         .btn-orange { background: linear-gradient(135deg, #ffbd59 0%, #ff7a3d 55%, #7c5cff 100%); }
         .btn-violet { background: linear-gradient(135deg, #b78cff 0%, #7c5cff 55%, #1d8cff 100%); }
+        .btn-pink { background: linear-gradient(135deg, #ff78b7 0%, #ff8f3d 55%, #7c5cff 100%); }
+        .btn-gold { background: linear-gradient(135deg, #ffd166 0%, #ff9b3d 55%, #37d5ff 100%); }
         .btn-back { background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.22); box-shadow: 0 8px 0 rgba(0,0,0,0.18); }
 
         .tiny-label {
@@ -288,11 +279,10 @@
             opacity: 0.55;
             text-transform: uppercase;
             letter-spacing: 0.08em;
+            white-space: nowrap;
         }
 
-        .path-line {
-            position: relative;
-        }
+        .path-line { position: relative; }
 
         .path-line::before {
             content: "";
@@ -346,12 +336,16 @@
                 <div class="logo-box pulse-glow text-4xl md:text-5xl">∑</div>
                 <div>
                     <h1 class="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight">Science Horizon</h1>
-                    <p class="text-xs sm:text-sm font-black text-white/50 uppercase tracking-[0.22em] sm:tracking-[0.32em] mt-2">Toán ứng dụng cá nhân hoá</p>
+                    <p class="text-xs sm:text-sm font-black text-white/50 uppercase tracking-[0.22em] sm:tracking-[0.32em] mt-2">
+                        Toán ứng dụng theo cấp học
+                    </p>
                 </div>
             </div>
 
             <div class="self-center bg-white/10 border border-white/20 px-6 py-3 md:px-8 md:py-4 rounded-full shadow-sm backdrop-blur-xl">
-                <span class="text-sm sm:text-base md:text-lg font-black text-[#8ee8ff] whitespace-nowrap">🚀 Learn by model • Think by data • Build by math</span>
+                <span class="text-sm sm:text-base md:text-lg font-black text-[#8ee8ff] whitespace-nowrap">
+                    🚀 Từ bài học nhỏ đến mô hình lớn
+                </span>
             </div>
         </header>
 
@@ -359,21 +353,23 @@
         <section class="glass-card hero-card rounded-[40px] md:rounded-[64px] p-8 sm:p-12 md:p-16 lg:p-20 mb-12 md:mb-16 relative overflow-hidden">
             <div class="planet icon-float"></div>
             <div class="relative z-10 max-w-4xl">
-                <span class="tag-bubble mb-8">🛰️ Applied Math Observatory</span>
+                <span class="tag-bubble mb-8">🛰️ Applied Math Learning Galaxy</span>
                 <h2 class="text-4xl sm:text-5xl md:text-[64px] lg:text-[82px] font-black mb-8 md:mb-10 tracking-[-0.025em] leading-[1.32] max-w-4xl pb-3">
-                <span class="block pb-2">Toán cho</span>
-                <span class="text-orbit block pb-4">thế giới thật.</span>
+                    <span class="block pb-2">Chọn cấp học,</span>
+                    <span class="text-orbit block pb-4">mở quỹ đạo toán.</span>
                 </h2>
 
                 <p class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-extrabold leading-relaxed text-white/82 mb-10 max-w-4xl">
-                    Một không gian học tập cá nhân hoá: từ mô hình, dữ liệu, tối ưu hoá đến mô phỏng khoa học. Học toán như cách một nhà nghiên cứu khám phá vũ trụ của riêng mình.
+                    Mỗi cấp học là một quỹ đạo riêng: từ trò chơi trực quan cho mầm non, bài toán nền tảng cho phổ thông, đến mô hình tối ưu, dữ liệu và nghiên cứu ở bậc cao hơn.
                 </p>
 
                 <div class="flex flex-col sm:flex-row items-center gap-5 md:gap-7">
                     <a href="../" onmousedown="playOrbitSound()" class="btn-space btn-back px-8 py-4 sm:px-10 sm:py-5 font-black text-base md:text-lg">
                         ← Về trang chính
                     </a>
-                    <span class="text-xs sm:text-sm md:text-base font-bold text-white/55 text-center sm:text-left">Gợi ý: chọn một trạm học phù hợp với mục tiêu của bạn ✨</span>
+                    <span class="text-xs sm:text-sm md:text-base font-bold text-white/55 text-center sm:text-left">
+                        Gợi ý: click một cấp học để vào danh sách lesson/task ✨
+                    </span>
                 </div>
             </div>
 
@@ -381,133 +377,153 @@
             <div class="absolute top-9 right-9 sm:right-24 text-[42px] md:text-[64px] icon-float opacity-70" style="animation-delay: 2s;">📈</div>
         </section>
 
-        <!-- Learning Path Cards -->
+        <!-- Level Cards -->
         <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
-            <!-- Personal Path -->
-            <a href="./personal-math-path/" onmousedown="playOrbitSound()" class="block focus-ring">
-                <div class="lab-card glass-card card-blue rounded-[40px] p-8 md:p-10 flex flex-col h-full min-h-[330px] overflow-hidden">
+            <!-- Preschool -->
+            <a href="./preschool/" onmousedown="playOrbitSound()" class="block focus-ring">
+                <div class="level-card glass-card card-cyan rounded-[40px] p-8 md:p-10 flex flex-col h-full min-h-[330px] overflow-hidden">
                     <div class="mb-7 flex justify-between items-start">
-                        <span class="tag-bubble">🧭 Trạm 01 • Cá nhân hoá</span>
-                        <span class="text-5xl icon-float">🪐</span>
+                        <span class="tag-bubble">🌱 Cấp 01 • Mầm non</span>
+                        <span class="text-5xl icon-float">🧸</span>
                     </div>
-                    <h3 class="relative z-10 text-3xl md:text-4xl font-black mb-4 leading-tight">Lộ trình toán của tôi</h3>
+                    <h3 class="relative z-10 text-3xl md:text-4xl font-black mb-4 leading-tight">Mầm non</h3>
                     <p class="relative z-10 text-base md:text-lg font-bold text-white/70 mb-10 flex-grow leading-relaxed">
-                        Chọn mục tiêu, trình độ và lĩnh vực quan tâm để xây lộ trình học toán ứng dụng theo cách riêng.
+                        Toán trực quan qua màu sắc, hình khối, đếm số, so sánh, ghép cặp và trò chơi tương tác nhẹ nhàng.
                     </p>
                     <div class="flex items-center justify-between gap-4 mt-auto">
-                        <span class="btn-space btn-blue text-sm md:text-base">Mở lộ trình <span>→</span></span>
-                        <span class="tiny-label">Personal map</span>
+                        <span class="btn-space btn-cyan text-sm md:text-base">Mở lesson <span>→</span></span>
+                        <span class="tiny-label">Play & Count</span>
                     </div>
                 </div>
             </a>
 
-            <!-- Optimization -->
-            <a href="./optimization/" onmousedown="playOrbitSound()" class="block focus-ring">
-                <div class="lab-card glass-card card-green rounded-[40px] p-8 md:p-10 flex flex-col h-full min-h-[330px] overflow-hidden">
+            <!-- Primary -->
+            <a href="./primary/" onmousedown="playOrbitSound()" class="block focus-ring">
+                <div class="level-card glass-card card-green rounded-[40px] p-8 md:p-10 flex flex-col h-full min-h-[330px] overflow-hidden">
                     <div class="mb-7 flex justify-between items-start">
-                        <span class="tag-bubble">⚙️ Trạm 02 • Tối ưu</span>
-                        <span class="text-5xl icon-float" style="animation-delay: 0.8s;">🎯</span>
+                        <span class="tag-bubble">🚀 Cấp 02 • Tiểu học</span>
+                        <span class="text-5xl icon-float" style="animation-delay: 0.8s;">🧮</span>
                     </div>
-                    <h3 class="relative z-10 text-3xl md:text-4xl font-black mb-4 leading-tight">Tối ưu hoá ứng dụng</h3>
+                    <h3 class="relative z-10 text-3xl md:text-4xl font-black mb-4 leading-tight">Tiểu học</h3>
                     <p class="relative z-10 text-base md:text-lg font-bold text-white/70 mb-10 flex-grow leading-relaxed">
-                        Quy hoạch tuyến tính, bất đẳng thức biến phân, cân bằng mạng giao thông và bài toán ra quyết định.
+                        Số học, phép tính, hình học cơ bản, bài toán có lời văn và hoạt động giúp học sinh hiểu thay vì học vẹt.
                     </p>
                     <div class="flex items-center justify-between gap-4 mt-auto">
-                        <span class="btn-space btn-green text-sm md:text-base">Vào phòng lab <span>→</span></span>
-                        <span class="tiny-label">Optimize</span>
+                        <span class="btn-space btn-green text-sm md:text-base">Vào lớp học <span>→</span></span>
+                        <span class="tiny-label">Number Sense</span>
                     </div>
                 </div>
             </a>
 
-            <!-- Data & Models -->
-            <a href="./data-models/" onmousedown="playOrbitSound()" class="block focus-ring">
-                <div class="lab-card glass-card card-orange rounded-[40px] p-8 md:p-10 flex flex-col h-full min-h-[330px] overflow-hidden">
+            <!-- Lower Secondary -->
+            <a href="./secondary/" onmousedown="playOrbitSound()" class="block focus-ring">
+                <div class="level-card glass-card card-orange rounded-[40px] p-8 md:p-10 flex flex-col h-full min-h-[330px] overflow-hidden">
                     <div class="mb-7 flex justify-between items-start">
-                        <span class="tag-bubble">📊 Trạm 03 • Dữ liệu</span>
-                        <span class="text-5xl icon-float" style="animation-delay: 1.2s;">🛰️</span>
+                        <span class="tag-bubble">🛰️ Cấp 03 • THCS</span>
+                        <span class="text-5xl icon-float" style="animation-delay: 1.2s;">📐</span>
                     </div>
-                    <h3 class="relative z-10 text-3xl md:text-4xl font-black mb-4 leading-tight">Dữ liệu & mô hình</h3>
+                    <h3 class="relative z-10 text-3xl md:text-4xl font-black mb-4 leading-tight">THCS</h3>
                     <p class="relative z-10 text-base md:text-lg font-bold text-white/70 mb-10 flex-grow leading-relaxed">
-                        Trực quan hoá dữ liệu, mô hình hoá hiện tượng, dự báo xu hướng và đọc thế giới bằng con số.
+                        Đại số, hàm số, phương trình, hình học, xác suất nhập môn và các mô phỏng giúp nhìn thấy cấu trúc toán.
                     </p>
                     <div class="flex items-center justify-between gap-4 mt-auto">
-                        <span class="btn-space btn-orange text-sm md:text-base">Khám phá mô hình <span>→</span></span>
-                        <span class="tiny-label">Model world</span>
+                        <span class="btn-space btn-orange text-sm md:text-base">Khởi động <span>→</span></span>
+                        <span class="tiny-label">Build Logic</span>
                     </div>
                 </div>
             </a>
 
-            <!-- Simulation -->
-            <a href="./simulation/" onmousedown="playOrbitSound()" class="block focus-ring">
-                <div class="lab-card glass-card card-violet rounded-[40px] p-8 md:p-10 flex flex-col h-full min-h-[330px] overflow-hidden">
+            <!-- High School -->
+            <a href="./high-school/" onmousedown="playOrbitSound()" class="block focus-ring">
+                <div class="level-card glass-card card-violet rounded-[40px] p-8 md:p-10 flex flex-col h-full min-h-[330px] overflow-hidden">
                     <div class="mb-7 flex justify-between items-start">
-                        <span class="tag-bubble">🔬 Trạm 04 • Mô phỏng</span>
-                        <span class="text-5xl icon-float" style="animation-delay: 1.6s;">🌌</span>
+                        <span class="tag-bubble">🌌 Cấp 04 • THPT</span>
+                        <span class="text-5xl icon-float" style="animation-delay: 1.6s;">📊</span>
                     </div>
-                    <h3 class="relative z-10 text-3xl md:text-4xl font-black mb-4 leading-tight">Mô phỏng khoa học</h3>
+                    <h3 class="relative z-10 text-3xl md:text-4xl font-black mb-4 leading-tight">THPT</h3>
                     <p class="relative z-10 text-base md:text-lg font-bold text-white/70 mb-10 flex-grow leading-relaxed">
-                        Từ chuyển động, tăng trưởng, lan truyền đến cân bằng: biến công thức thành trải nghiệm tương tác.
+                        Hàm số, đạo hàm, tích phân, tổ hợp, xác suất, hình học không gian và bài toán ứng dụng thực tế.
                     </p>
                     <div class="flex items-center justify-between gap-4 mt-auto">
-                        <span class="btn-space btn-violet text-sm md:text-base">Chạy mô phỏng <span>→</span></span>
-                        <span class="tiny-label">Run system</span>
+                        <span class="btn-space btn-violet text-sm md:text-base">Mở chuyên đề <span>→</span></span>
+                        <span class="tiny-label">Exam & Explore</span>
                     </div>
                 </div>
             </a>
 
-            <!-- Economics & Society -->
-            <a href="./economics-society/" onmousedown="playOrbitSound()" class="block focus-ring">
-                <div class="lab-card glass-card card-blue rounded-[40px] p-8 md:p-10 flex flex-col h-full min-h-[330px] overflow-hidden">
+            <!-- University -->
+            <a href="./university/" onmousedown="playOrbitSound()" class="block focus-ring">
+                <div class="level-card glass-card card-pink rounded-[40px] p-8 md:p-10 flex flex-col h-full min-h-[330px] overflow-hidden">
                     <div class="mb-7 flex justify-between items-start">
-                        <span class="tag-bubble">🌍 Trạm 05 • Xã hội</span>
-                        <span class="text-5xl icon-float" style="animation-delay: 2s;">🏙️</span>
+                        <span class="tag-bubble">🔬 Cấp 05 • Đại học</span>
+                        <span class="text-5xl icon-float" style="animation-delay: 2s;">∑</span>
                     </div>
-                    <h3 class="relative z-10 text-3xl md:text-4xl font-black mb-4 leading-tight">Kinh tế, đô thị & xã hội</h3>
+                    <h3 class="relative z-10 text-3xl md:text-4xl font-black mb-4 leading-tight">Đại học</h3>
                     <p class="relative z-10 text-base md:text-lg font-bold text-white/70 mb-10 flex-grow leading-relaxed">
-                        Ứng dụng toán vào thị trường, mạng lưới, di trú, giao thông, phân bổ nguồn lực và hành vi tập thể.
+                        Giải tích, đại số tuyến tính, tối ưu hoá, thống kê, mô hình hoá, Python và các case study liên ngành.
                     </p>
                     <div class="flex items-center justify-between gap-4 mt-auto">
-                        <span class="btn-space btn-blue text-sm md:text-base">Xem ứng dụng <span>→</span></span>
-                        <span class="tiny-label">Real cases</span>
+                        <span class="btn-space btn-pink text-sm md:text-base">Vào lab <span>→</span></span>
+                        <span class="tiny-label">Math Lab</span>
                     </div>
                 </div>
             </a>
 
-            <!-- Tool Kit -->
-            <a href="./toolkit/" onmousedown="playOrbitSound()" class="block focus-ring">
-                <div class="lab-card glass-card card-green rounded-[40px] p-8 md:p-10 flex flex-col h-full min-h-[330px] overflow-hidden">
+            <!-- Master -->
+            <a href="./master/" onmousedown="playOrbitSound()" class="block focus-ring">
+                <div class="level-card glass-card card-gold rounded-[40px] p-8 md:p-10 flex flex-col h-full min-h-[330px] overflow-hidden">
                     <div class="mb-7 flex justify-between items-start">
-                        <span class="tag-bubble">🧰 Trạm 06 • Công cụ</span>
-                        <span class="text-5xl icon-float" style="animation-delay: 2.4s;">💻</span>
+                        <span class="tag-bubble">🧠 Cấp 06 • Thạc sĩ</span>
+                        <span class="text-5xl icon-float" style="animation-delay: 2.4s;">λ</span>
                     </div>
-                    <h3 class="relative z-10 text-3xl md:text-4xl font-black mb-4 leading-tight">Python, GeoGebra & HTML Lab</h3>
+                    <h3 class="relative z-10 text-3xl md:text-4xl font-black mb-4 leading-tight">Thạc sĩ</h3>
                     <p class="relative z-10 text-base md:text-lg font-bold text-white/70 mb-10 flex-grow leading-relaxed">
-                        Bộ công cụ để tự xây bài học, tạo mô phỏng, viết game toán và biến ý tưởng thành sản phẩm nhỏ.
+                        Tối ưu nâng cao, bất đẳng thức biến phân, cân bằng mạng, phân tích dữ liệu và xây dựng đề tài nghiên cứu.
                     </p>
                     <div class="flex items-center justify-between gap-4 mt-auto">
-                        <span class="btn-space btn-green text-sm md:text-base">Mở toolkit <span>→</span></span>
-                        <span class="tiny-label">Build tools</span>
+                        <span class="btn-space btn-gold text-sm md:text-base">Mở research path <span>→</span></span>
+                        <span class="tiny-label">Research</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- PhD -->
+            <a href="./phd/" onmousedown="playOrbitSound()" class="block focus-ring md:col-span-2 lg:col-span-3">
+                <div class="level-card glass-card card-violet rounded-[40px] p-8 md:p-10 flex flex-col lg:flex-row lg:items-center h-full min-h-[280px] overflow-hidden gap-8">
+                    <div class="relative z-10 flex-grow max-w-3xl">
+                        <div class="mb-7">
+                            <span class="tag-bubble">🪐 Cấp 07 • Tiến sĩ</span>
+                        </div>
+                        <h3 class="text-3xl md:text-5xl font-black mb-4 leading-tight">Tiến sĩ</h3>
+                        <p class="text-base md:text-xl font-bold text-white/70 mb-8 leading-relaxed">
+                            Không gian cho bài toán mở, mô hình mới, đọc paper, seminar nhỏ, viết proposal và phát triển hướng nghiên cứu toán ứng dụng.
+                        </p>
+                        <span class="btn-space btn-violet text-sm md:text-base">Vào quỹ đạo nghiên cứu <span>→</span></span>
+                    </div>
+
+                    <div class="relative z-10 hidden lg:flex items-center justify-center min-w-[260px]">
+                        <div class="text-[120px] icon-float">🛰️</div>
                     </div>
                 </div>
             </a>
         </section>
 
-        <!-- Personalization Strip -->
+        <!-- Structure Note -->
         <section class="path-line mt-16 md:mt-20 grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-7">
             <div class="glass-card rounded-[28px] p-6 text-center">
+                <p class="text-4xl mb-3">🗂️</p>
+                <h4 class="text-xl font-black mb-2">Mục lớn</h4>
+                <p class="text-white/62 font-bold leading-relaxed">Trang chính gồm Toán ứng dụng, Học tiếng Anh, Khoa học, Lịch sử và Văn học.</p>
+            </div>
+            <div class="glass-card rounded-[28px] p-6 text-center">
                 <p class="text-4xl mb-3">🎓</p>
-                <h4 class="text-xl font-black mb-2">Học theo mục tiêu</h4>
-                <p class="text-white/62 font-bold leading-relaxed">Thi cử, nghiên cứu, đi dạy, làm dự án hoặc tự học nền tảng.</p>
+                <h4 class="text-xl font-black mb-2">Mục nhỏ</h4>
+                <p class="text-white/62 font-bold leading-relaxed">Trong Toán ứng dụng, mỗi cấp học là một nhánh học riêng theo độ tuổi và mục tiêu.</p>
             </div>
             <div class="glass-card rounded-[28px] p-6 text-center">
-                <p class="text-4xl mb-3">🧠</p>
-                <h4 class="text-xl font-black mb-2">Học theo năng lực</h4>
-                <p class="text-white/62 font-bold leading-relaxed">Từ trực quan dễ hiểu đến mô hình nâng cao và bài toán mở.</p>
-            </div>
-            <div class="glass-card rounded-[28px] p-6 text-center">
-                <p class="text-4xl mb-3">🚀</p>
-                <h4 class="text-xl font-black mb-2">Học bằng sản phẩm</h4>
-                <p class="text-white/62 font-bold leading-relaxed">Mỗi chủ đề hướng đến một mô phỏng, mini game hoặc công cụ nhỏ.</p>
+                <p class="text-4xl mb-3">📚</p>
+                <h4 class="text-xl font-black mb-2">Lesson / Task</h4>
+                <p class="text-white/62 font-bold leading-relaxed">Trong từng cấp học sẽ có Lesson 01, Lesson 02 hoặc Task 01A, 01B để mở bài tương tác.</p>
             </div>
         </section>
 
@@ -520,7 +536,7 @@
                 <span class="icon-float" style="animation-delay: 2.4s;">λ</span>
             </div>
             <p class="text-xs md:text-sm font-black text-white/45 tracking-[0.22em] md:tracking-[0.42em] uppercase px-4 leading-relaxed">
-                © Science Horizon • Applied Math for Personal Exploration
+                © Science Horizon • Applied Math Learning Galaxy
             </p>
         </footer>
     </main>
