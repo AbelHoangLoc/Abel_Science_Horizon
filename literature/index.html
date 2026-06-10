@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Văn học | Science Horizon</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+    <style>
+        :root {
+            --space: #06142E;
+            --deep: #081D3F;
+            --blue: #20D4FF;
+            --royal: #2E6BFF;
+            --violet: #7B5CFF;
+            --rose: #FF7A90;
+            --gold: #FFD166;
+            --paper: #FFF7E8;
+            --ink: #101A3A;
+            --border: rgba(118, 204, 255, 0.36);
+        }
+
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            overflow-x: hidden;
+            font-family: 'Be Vietnam Pro', sans-serif;
+            color: white;
+            background:
+                radial-gradient(circle at 12% 18%, rgba(32, 212, 255, 0.22), transparent 34%),
+                radial-gradient(circle at 84% 14%, rgba(255, 122, 144, 0.18), transparent 31%),
+                radial-gradient(circle at 72% 84%, rgba(255, 209, 102, 0.18), transparent 31%),
+                linear-gradient(135deg, #06142E 0%, #0B1F4D 48%, #020817 100%);
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -2;
+            background-image:
+                radial-gradient(circle, rgba(255,255,255,0.95) 1px, transparent 1.4px),
+                radial-gradient(circle, rgba(255,209,102,0.75) 1px, transparent 1.35px),
+                radial-gradient(circle, rgba(255,122,144,0.72) 1px, transparent 1.3px);
+            background-size: 80px 80px, 135px 135px, 205px 205px;
+            background-position: 0 0, 45px 32px, 92px 120px;
+            opacity: 0.34;
+        }
+
+        .cosmic-glow {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            filter: blur(38px);
+            background:
+                radial-gradient(circle at 12% 72%, rgba(255,209,102,0.12), transparent 26%),
+                radial-gradient(circle at 90% 56%, rgba(32,212,255,0.13), transparent 28%),
+                radial-gradient(circle at 52% 52%, rgba(123,92,255,0.12), transparent 30%);
+            transform: scale(1.08);
+        }
+
+        .glass-card {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(145deg, rgba(255,255,255,0.17), rgba(255,255,255,0.075));
+            border: 1px solid var(--border);
+            box-shadow:
+                0 28px 75px rgba(0,0,0,0.34),
+                inset 0 1px 0 rgba(255,255,255,0.18);
+            backdrop-filter: blur(20px) saturate(165%);
+            -webkit-backdrop-filter: blur(20px) saturate(165%);
+        }
+
+        .logo-box {
+            width: 76px;
+            height: 76px;
+            border-radius: 24px;
+            display: grid;
+            place-items: center;
+            background: rgba(255,255,255,0.93);
+            box-shadow: 0 14px 35px rgba(255,209,102,0.22), 0 12px 24px rgba(0,0,0,0.18);
+            font-size: 42px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 22px;
+            border-radius: 999px;
+            border: 1px solid rgba(255,255,255,0.22);
+            background: rgba(255,255,255,0.12);
+            color: rgba(255,255,255,0.92);
+            font-weight: 900;
+            letter-spacing: 0.03em;
+            box-shadow: inset 0 -4px 0 rgba(0,0,0,0.08);
+        }
+
+        .title-gradient {
+            background: linear-gradient(90deg, #ffffff 0%, #FFD166 30%, #FF7A90 58%, #20D4FF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-orbit {
+            position: absolute;
+            width: 600px;
+            height: 190px;
+            right: -135px;
+            top: 58px;
+            border: 4px solid rgba(255,209,102,0.45);
+            border-left-color: rgba(32,212,255,0.48);
+            border-bottom-color: rgba(255,122,144,0.42);
+            border-radius: 50%;
+            transform: rotate(-12deg);
+            opacity: 0.58;
+        }
+
+        .hero-planet {
+            position: absolute;
+            width: 96px;
+            height: 96px;
+            right: 112px;
+            top: 86px;
+            border-radius: 999px;
+            background: radial-gradient(circle at 30% 25%, #fff9d7 0 8%, #FFD166 13%, #FF7A90 46%, #2E6BFF 100%);
+            box-shadow: 0 0 35px rgba(255,122,144,0.34);
+        }
+
+        .quote-line {
+            position: absolute;
+            left: 35px;
+            top: 92px;
+            bottom: 34px;
+            width: 2px;
+            background: linear-gradient(to bottom, rgba(255,209,102,0.75), rgba(255,122,144,0.25), rgba(32,212,255,0.12));
+            opacity: 0.74;
+        }
+
+        .literature-card {
+            transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+            min-height: 310px;
+        }
+
+        .literature-card:hover {
+            transform: translateY(-8px) scale(1.015);
+            border-color: rgba(255,255,255,0.56);
+            box-shadow: 0 38px 90px rgba(0,0,0,0.42), 0 0 38px rgba(255,122,144,0.16);
+        }
+
+        .literature-card::before {
+            content: "";
+            position: absolute;
+            width: 185px;
+            height: 185px;
+            right: -72px;
+            top: -72px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,209,102,0.28), rgba(255,122,144,0.12), transparent 70%);
+            transition: transform 0.35s ease;
+        }
+
+        .literature-card:hover::before { transform: scale(1.32); }
+
+        .tag-bubble {
+            position: relative;
+            z-index: 2;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 16px;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            border: 1px solid rgba(255,255,255,0.22);
+            box-shadow: inset 0 -4px 0 rgba(0,0,0,0.08);
+        }
+
+        .tag-vietnam { background: rgba(255,209,102,0.15); color: #FFE6A3; }
+        .tag-world { background: rgba(32,212,255,0.15); color: #A8F0FF; }
+        .tag-poetry { background: rgba(255,122,144,0.17); color: #FFD6DE; }
+        .tag-theory { background: rgba(123,92,255,0.18); color: #D8D0FF; }
+        .tag-writing { background: rgba(118,255,207,0.14); color: #C7FFE9; }
+        .tag-library { background: rgba(255,255,255,0.14); color: #F4F7FF; }
+
+        .btn-space {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px 24px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, #20D4FF 0%, #2E6BFF 52%, #FF7A90 78%, #FFD166 100%);
+            color: white;
+            font-weight: 900;
+            box-shadow: 0 12px 0 rgba(0,0,0,0.18), 0 20px 40px rgba(255,122,144,0.18);
+            transition: transform 0.18s ease, filter 0.18s ease, box-shadow 0.18s ease;
+        }
+
+        .btn-space:hover { transform: translateY(-2px); filter: brightness(1.08); }
+        .btn-space:active { transform: translateY(6px); box-shadow: 0 4px 0 rgba(0,0,0,0.14); }
+
+        .btn-back {
+            background: rgba(255,255,255,0.9);
+            color: #0B1F4D;
+        }
+
+        .paper-note {
+            background: linear-gradient(145deg, rgba(255,247,232,0.96), rgba(255,255,255,0.84));
+            color: #0B1F4D;
+            border: 1px solid rgba(255,255,255,0.35);
+            box-shadow: 0 22px 55px rgba(0,0,0,0.22);
+        }
+
+        @keyframes float-soft {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-14px) rotate(5deg); }
+        }
+
+        .float-soft { animation: float-soft 4.5s ease-in-out infinite; }
+
+        @media (max-width: 768px) {
+            .logo-box { width: 62px; height: 62px; border-radius: 20px; font-size: 34px; }
+            .hero-orbit { width: 360px; right: -165px; top: 26px; opacity: 0.35; }
+            .hero-planet { width: 62px; height: 62px; right: 20px; top: 58px; opacity: 0.82; }
+            .quote-line { display: none; }
+        }
+    </style>
+</head>
+
+<body class="flex flex-col items-center">
+    <div class="cosmic-glow" id="parallaxBg"></div>
+
+    <main class="w-full max-w-7xl px-4 sm:px-6 py-8 md:py-12 lg:py-16 relative z-10">
+        <header class="flex flex-col md:flex-row md:items-center justify-between gap-6 md:gap-8 mb-10 md:mb-14">
+            <div class="flex flex-col sm:flex-row items-center sm:items-start md:items-center gap-4 sm:gap-6 text-center sm:text-left">
+                <div class="logo-box float-soft">📚</div>
+                <div>
+                    <h1 class="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight">Science Horizon</h1>
+                    <p class="text-xs sm:text-sm font-black text-white/55 uppercase tracking-[0.22em] sm:tracking-[0.35em] mt-2">Literature Observatory</p>
+                </div>
+            </div>
+
+            <div class="self-center badge text-sm sm:text-base">
+                ✒️ Cá nhân hoá • Đọc sâu • Viết sáng tạo
+            </div>
+        </header>
+
+        <section class="glass-card rounded-[42px] md:rounded-[64px] p-8 sm:p-12 md:p-16 lg:p-20 mb-12 md:mb-16 relative">
+            <div class="hero-orbit"></div>
+            <div class="hero-planet float-soft"></div>
+
+            <div class="relative z-10 max-w-4xl">
+                <span class="badge mb-8 text-sm sm:text-base">🚀 ABEL SCIENCE HORIZON / LITERATURE</span>
+
+                <h2 class="title-gradient text-5xl sm:text-7xl md:text-[92px] lg:text-[116px] font-black leading-[1.04] tracking-tight mb-7">
+                    Văn học<br />như một thiên hà ngôn từ.
+                </h2>
+
+                <p class="text-lg sm:text-2xl md:text-3xl font-extrabold leading-relaxed text-white/82 mb-10 max-w-4xl">
+                    Nơi lưu trữ các bài đọc, mini-game, bản đồ nhân vật, trích dẫn, bài viết và hoạt động HTML giúp bạn khám phá văn học theo cách riêng: từ cảm xúc, hình tượng, cốt truyện đến bối cảnh lịch sử và tư tưởng.
+                </p>
+
+                <div class="flex flex-col sm:flex-row items-center gap-5 md:gap-7">
+                    <a href="../" onmousedown="playLaunchSound()" class="btn-space btn-back px-7 py-4 sm:px-9 sm:py-5 text-base sm:text-lg">
+                        ← Back Home
+                    </a>
+                    <span class="text-sm sm:text-base font-bold text-white/58">Tip: Tạo thư viện đọc theo gu của bạn ✨</span>
+                </div>
+            </div>
+
+            <div class="absolute bottom-8 right-8 text-5xl md:text-7xl opacity-80 float-soft hidden sm:block" style="animation-delay: 1.1s;">🛰️</div>
+        </section>
+
+        <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 md:gap-9">
+            <a href="./vietnamese-literature/" onmousedown="playLaunchSound()" class="block focus:outline-none">
+                <div class="literature-card glass-card rounded-[36px] md:rounded-[44px] p-8 md:p-10 flex flex-col h-full">
+                    <div class="mb-8 flex justify-between items-start gap-4">
+                        <span class="tag-bubble tag-vietnam">🇻🇳 Vietnamese Lit</span>
+                        <span class="text-5xl float-soft">🌙</span>
+                    </div>
+                    <h3 class="relative z-10 text-3xl md:text-4xl font-black mb-5 tracking-tight">Văn học Việt Nam</h3>
+                    <p class="relative z-10 text-white/72 font-bold leading-relaxed mb-10 flex-grow">
+                        Tạo hành trình đọc từ ca dao, trung đại, hiện đại đến đương đại; kết nối tác phẩm với ngôn ngữ, lịch sử và trải nghiệm cá nhân.
+                    </p>
+                    <span class="btn-space mt-auto self-start">Open Shelf →</span>
+                </div>
+            </a>
+
+            <a href="./world-literature/" onmousedown="playLaunchSound()" class="block focus:outline-none">
+                <div class="literature-card glass-card rounded-[36px] md:rounded-[44px] p-8 md:p-10 flex flex-col h-full">
+                    <div class="mb-8 flex justify-between items-start gap-4">
+                        <span class="tag-bubble tag-world">🌍 World Lit</span>
+                        <span class="text-5xl float-soft" style="animation-delay: .7s;">🪐</span>
+                    </div>
+                    <h3 class="relative z-10 text-3xl md:text-4xl font-black mb-5 tracking-tight">Văn học thế giới</h3>
+                    <p class="relative z-10 text-white/72 font-bold leading-relaxed mb-10 flex-grow">
+                        Khám phá tiểu thuyết, truyện ngắn, kịch và thần thoại thế giới qua bản đồ tác giả, bối cảnh, chủ đề và dòng ảnh hưởng.
+                    </p>
+                    <span class="btn-space mt-auto self-start">Explore Worlds →</span>
+                </div>
+            </a>
+
+            <a href="./poetry-room/" onmousedown="playLaunchSound()" class="block focus:outline-none">
+                <div class="literature-card glass-card rounded-[36px] md:rounded-[44px] p-8 md:p-10 flex flex-col h-full">
+                    <div class="mb-8 flex justify-between items-start gap-4">
+                        <span class="tag-bubble tag-poetry">🎼 Poetry Room</span>
+                        <span class="text-5xl float-soft" style="animation-delay: 1.4s;">✨</span>
+                    </div>
+                    <h3 class="relative z-10 text-3xl md:text-4xl font-black mb-5 tracking-tight">Phòng thơ</h3>
+                    <p class="relative z-10 text-white/72 font-bold leading-relaxed mb-10 flex-grow">
+                        Lưu bài thơ, nhịp điệu, hình ảnh, ẩn dụ và cảm xúc; biến việc đọc thơ thành trò chơi tìm ánh sáng trong từng dòng chữ.
+                    </p>
+                    <span class="btn-space mt-auto self-start">Read Poems →</span>
+                </div>
+            </a>
+
+            <a href="./literary-theory/" onmousedown="playLaunchSound()" class="block focus:outline-none">
+                <div class="literature-card glass-card rounded-[36px] md:rounded-[44px] p-8 md:p-10 flex flex-col h-full">
+                    <div class="mb-8 flex justify-between items-start gap-4">
+                        <span class="tag-bubble tag-theory">🧠 Theory</span>
+                        <span class="text-5xl float-soft" style="animation-delay: .4s;">🔭</span>
+                    </div>
+                    <h3 class="relative z-10 text-3xl md:text-4xl font-black mb-5 tracking-tight">Lý luận văn học</h3>
+                    <p class="relative z-10 text-white/72 font-bold leading-relaxed mb-10 flex-grow">
+                        Các khái niệm về thể loại, tự sự, biểu tượng, diễn ngôn, phê bình xã hội và cách đọc một tác phẩm không chỉ bằng cảm tính.
+                    </p>
+                    <span class="btn-space mt-auto self-start">Open Theory →</span>
+                </div>
+            </a>
+
+            <a href="./creative-writing/" onmousedown="playLaunchSound()" class="block focus:outline-none">
+                <div class="literature-card glass-card rounded-[36px] md:rounded-[44px] p-8 md:p-10 flex flex-col h-full">
+                    <div class="mb-8 flex justify-between items-start gap-4">
+                        <span class="tag-bubble tag-writing">✍️ Writing Lab</span>
+                        <span class="text-5xl float-soft" style="animation-delay: 1s;">🖋️</span>
+                    </div>
+                    <h3 class="relative z-10 text-3xl md:text-4xl font-black mb-5 tracking-tight">Xưởng viết sáng tạo</h3>
+                    <p class="relative z-10 text-white/72 font-bold leading-relaxed mb-10 flex-grow">
+                        Luyện viết truyện ngắn, nhật ký đọc, phân tích nhân vật, mở bài, kết bài và những bài tập viết theo phong cách riêng.
+                    </p>
+                    <span class="btn-space mt-auto self-start">Start Writing →</span>
+                </div>
+            </a>
+
+            <a href="./my-reading-archive/" onmousedown="playLaunchSound()" class="block focus:outline-none">
+                <div class="literature-card glass-card rounded-[36px] md:rounded-[44px] p-8 md:p-10 flex flex-col h-full">
+                    <div class="mb-8 flex justify-between items-start gap-4">
+                        <span class="tag-bubble tag-library">🗂️ My Library</span>
+                        <span class="text-5xl float-soft" style="animation-delay: 1.8s;">📖</span>
+                    </div>
+                    <h3 class="relative z-10 text-3xl md:text-4xl font-black mb-5 tracking-tight">Thư viện cá nhân</h3>
+                    <p class="relative z-10 text-white/72 font-bold leading-relaxed mb-10 flex-grow">
+                        Nơi lưu quote yêu thích, note đọc sách, mini-game nhân vật, flashcard tác phẩm và danh sách đọc được cá nhân hoá cho bạn.
+                    </p>
+                    <span class="btn-space mt-auto self-start">Build Library →</span>
+                </div>
+            </a>
+        </section>
+
+        <section class="glass-card rounded-[36px] md:rounded-[52px] p-8 md:p-12 mt-12 md:mt-16 relative overflow-hidden">
+            <div class="quote-line"></div>
+            <div class="relative z-10 md:pl-16">
+                <span class="badge mb-6">🌌 Personalized Literature Engine</span>
+                <h3 class="text-3xl md:text-5xl font-black tracking-tight mb-5">Đọc văn học theo câu hỏi của chính bạn.</h3>
+                <p class="text-white/74 text-lg md:text-xl font-bold leading-relaxed max-w-4xl">
+                    Mỗi folder có thể trở thành một “trạm đọc”: một bản đồ nhân vật, một trò chơi nối quote với tác giả, một timeline tác phẩm, một bộ flashcard hình tượng, hoặc một nhật ký đọc được thiết kế đúng với gu và mục tiêu học tập của bạn.
+                </p>
+            </div>
+        </section>
+
+        <section class="paper-note rounded-[32px] md:rounded-[44px] p-7 md:p-10 mt-10 md:mt-12">
+            <p class="text-lg md:text-xl font-extrabold leading-relaxed">
+                Gợi ý cá nhân hoá: bắt đầu bằng một tác phẩm bạn thích, tạo folder riêng, rồi thêm các mục nhỏ như <span class="text-[#2E6BFF]">nhân vật</span>, <span class="text-[#FF7A90]">trích dẫn</span>, <span class="text-[#7B5CFF]">chủ đề</span>, <span class="text-[#D68A00]">bối cảnh</span> và <span class="text-[#0EA5E9]">bài tập tương tác</span>.
+            </p>
+        </section>
+
+        <footer class="mt-16 md:mt-24 py-12 md:py-16 text-center">
+            <div class="flex justify-center gap-7 md:gap-12 mb-8 text-4xl md:text-5xl text-white/45">
+                <span class="float-soft">📚</span>
+                <span class="float-soft" style="animation-delay: 1s;">✒️</span>
+                <span class="float-soft" style="animation-delay: 2s;">🌙</span>
+                <span class="float-soft" style="animation-delay: 3s;">🌌</span>
+            </div>
+            <p class="text-xs md:text-sm font-black text-white/42 tracking-[0.22em] md:tracking-[0.42em] uppercase px-4 leading-relaxed">
+                © Science Horizon • Literature Observatory • Read beyond the stars
+            </p>
+        </footer>
+    </main>
+
+    <script>
+        let audioCtx;
+        function playLaunchSound() {
+            if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+
+            const oscillator = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+
+            oscillator.type = 'sine';
+            oscillator.frequency.setValueAtTime(280, audioCtx.currentTime);
+            oscillator.frequency.exponentialRampToValueAtTime(980, audioCtx.currentTime + 0.13);
+
+            gainNode.gain.setValueAtTime(0.22, audioCtx.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.13);
+
+            oscillator.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            oscillator.start();
+            oscillator.stop(audioCtx.currentTime + 0.13);
+        }
+
+        document.addEventListener('mousemove', function(event) {
+            if (window.innerWidth > 768) {
+                const x = (event.clientX / window.innerWidth - 0.5) * 18;
+                const y = (event.clientY / window.innerHeight - 0.5) * 18;
+                const bg = document.getElementById('parallaxBg');
+                if (bg) bg.style.transform = `translate(${x}px, ${y}px) scale(1.08)`;
+            }
+        });
+    </script>
+</body>
+</html>
