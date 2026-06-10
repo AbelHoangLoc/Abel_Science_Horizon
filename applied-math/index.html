@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Toán ứng dụng | Science Horizon</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Vietnamese-friendly font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+    <style>
+        :root {
+            --space-dark: #06142e;
+            --space-mid: #0b2457;
+            --space-blue: #123c88;
+            --cyan: #37d5ff;
+            --blue: #1d8cff;
+            --violet: #7c5cff;
+            --orange: #ff9b3d;
+            --green: #52f5b0;
+            --soft-white: rgba(255, 255, 255, 0.9);
+            --glass: rgba(255, 255, 255, 0.12);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            overflow-x: hidden;
+            font-family: 'Be Vietnam Pro', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: white;
+            background:
+                radial-gradient(circle at 12% 10%, rgba(55, 213, 255, 0.25), transparent 28%),
+                radial-gradient(circle at 88% 18%, rgba(255, 155, 61, 0.17), transparent 28%),
+                radial-gradient(circle at 45% 92%, rgba(124, 92, 255, 0.25), transparent 36%),
+                linear-gradient(135deg, #031024 0%, #071b3f 42%, #020712 100%);
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .bg-space {
+            position: fixed;
+            inset: 0;
+            z-index: -3;
+            pointer-events: none;
+            background-image:
+                radial-gradient(circle, rgba(255,255,255,0.85) 1px, transparent 1.6px),
+                radial-gradient(circle, rgba(55,213,255,0.65) 1px, transparent 1.5px),
+                radial-gradient(circle, rgba(255,155,61,0.55) 1px, transparent 1.5px);
+            background-size: 72px 72px, 118px 118px, 164px 164px;
+            background-position: 0 0, 34px 58px, 90px 26px;
+            opacity: 0.34;
+            filter: blur(0.1px);
+            transform: scale(1.08);
+        }
+
+        .nebula {
+            position: fixed;
+            border-radius: 999px;
+            filter: blur(56px);
+            pointer-events: none;
+            z-index: -2;
+            opacity: 0.65;
+        }
+
+        .nebula-cyan {
+            width: 420px;
+            height: 420px;
+            left: -130px;
+            top: 160px;
+            background: rgba(55, 213, 255, 0.25);
+        }
+
+        .nebula-violet {
+            width: 520px;
+            height: 520px;
+            right: -190px;
+            bottom: 70px;
+            background: rgba(124, 92, 255, 0.24);
+        }
+
+        .glass-card {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(145deg, rgba(255,255,255,0.15), rgba(255,255,255,0.065));
+            border: 1px solid rgba(118, 214, 255, 0.32);
+            box-shadow:
+                0 26px 70px rgba(0,0,0,0.34),
+                inset 0 1px 0 rgba(255,255,255,0.24);
+            backdrop-filter: blur(22px) saturate(160%);
+            -webkit-backdrop-filter: blur(22px) saturate(160%);
+            transition: transform 0.34s ease, box-shadow 0.34s ease, border-color 0.34s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255,255,255,0.58);
+            box-shadow:
+                0 38px 90px rgba(0,0,0,0.42),
+                0 0 40px rgba(55,213,255,0.16);
+        }
+
+        .hero-card::before {
+            content: "";
+            position: absolute;
+            width: 620px;
+            height: 620px;
+            right: -180px;
+            top: -210px;
+            border-radius: 999px;
+            background: radial-gradient(circle, rgba(255,155,61,0.19), rgba(124,92,255,0.15), transparent 70%);
+        }
+
+        .hero-card::after {
+            content: "";
+            position: absolute;
+            width: 560px;
+            height: 138px;
+            right: -58px;
+            top: 112px;
+            border-radius: 50%;
+            border: 4px solid rgba(255,155,61,0.72);
+            border-left-color: rgba(55,213,255,0.72);
+            border-bottom-color: rgba(124,92,255,0.5);
+            transform: rotate(-12deg);
+            opacity: 0.64;
+        }
+
+        .planet {
+            position: absolute;
+            right: 108px;
+            top: 78px;
+            width: 105px;
+            height: 105px;
+            border-radius: 999px;
+            background:
+                radial-gradient(circle at 30% 28%, #ffffff 0%, rgba(255,255,255,0.4) 9%, transparent 18%),
+                linear-gradient(135deg, #37d5ff 0%, #1b72ff 48%, #0d2a7a 100%);
+            box-shadow: 0 18px 42px rgba(0,0,0,0.35), 0 0 40px rgba(55,213,255,0.3);
+            z-index: 1;
+        }
+
+        .logo-box {
+            width: 78px;
+            height: 78px;
+            border-radius: 24px;
+            background: rgba(255,255,255,0.94);
+            display: grid;
+            place-items: center;
+            color: #0b2457;
+            box-shadow: 0 16px 34px rgba(0,0,0,0.24), 0 0 25px rgba(55,213,255,0.22);
+            border: 1px solid rgba(255,255,255,0.88);
+        }
+
+        .text-orbit {
+            background: linear-gradient(90deg, #ffffff 0%, #8ee8ff 33%, #7c5cff 66%, #ff9b3d 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: shine 6s linear infinite;
+        }
+
+        @keyframes shine {
+            to { background-position: 200% center; }
+        }
+
+        @keyframes float-soft {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-13px) rotate(4deg); }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 0 rgba(55,213,255,0), 0 16px 34px rgba(0,0,0,0.22); }
+            50% { box-shadow: 0 0 36px rgba(55,213,255,0.28), 0 16px 34px rgba(0,0,0,0.22); }
+        }
+
+        .icon-float {
+            animation: float-soft 4.8s ease-in-out infinite;
+        }
+
+        .pulse-glow {
+            animation: pulse-glow 4.6s ease-in-out infinite;
+        }
+
+        .tag-bubble {
+            position: relative;
+            z-index: 2;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 900;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.92);
+            background: rgba(255,255,255,0.13);
+            border: 1px solid rgba(255,255,255,0.19);
+            box-shadow: inset 0 -4px 0 rgba(0,0,0,0.08);
+            white-space: nowrap;
+        }
+
+        .lab-card::before {
+            content: "";
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            right: -68px;
+            top: -64px;
+            border-radius: 999px;
+            background: radial-gradient(circle, rgba(55,213,255,0.28), transparent 70%);
+            transition: transform 0.35s ease;
+        }
+
+        .lab-card::after {
+            content: "";
+            position: absolute;
+            width: 158px;
+            height: 45px;
+            right: -24px;
+            bottom: 30px;
+            border: 3px solid rgba(255,155,61,0.58);
+            border-left-color: rgba(55,213,255,0.68);
+            border-radius: 50%;
+            transform: rotate(-17deg);
+            opacity: 0.55;
+        }
+
+        .lab-card:hover::before {
+            transform: scale(1.28);
+        }
+
+        .card-blue:hover { box-shadow: 0 42px 90px rgba(29,140,255,0.22), 0 32px 80px rgba(0,0,0,0.44); }
+        .card-green:hover { box-shadow: 0 42px 90px rgba(82,245,176,0.18), 0 32px 80px rgba(0,0,0,0.44); }
+        .card-orange:hover { box-shadow: 0 42px 90px rgba(255,155,61,0.22), 0 32px 80px rgba(0,0,0,0.44); }
+        .card-violet:hover { box-shadow: 0 42px 90px rgba(124,92,255,0.24), 0 32px 80px rgba(0,0,0,0.44); }
+
+        .btn-space {
+            position: relative;
+            z-index: 4;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            border-radius: 999px;
+            padding: 15px 26px;
+            color: white;
+            font-weight: 900;
+            box-shadow: 0 10px 0 rgba(0,0,0,0.25), 0 20px 34px rgba(0,0,0,0.24);
+            transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+        }
+
+        .btn-space:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.08);
+        }
+
+        .btn-space:active {
+            transform: translateY(7px);
+            box-shadow: 0 3px 0 rgba(0,0,0,0.25), 0 10px 18px rgba(0,0,0,0.18);
+        }
+
+        .btn-blue { background: linear-gradient(135deg, #18a8ff 0%, #2f62ff 58%, #ff8f3d 100%); }
+        .btn-green { background: linear-gradient(135deg, #52f5b0 0%, #14b8a6 55%, #1d8cff 100%); }
+        .btn-orange { background: linear-gradient(135deg, #ffbd59 0%, #ff7a3d 55%, #7c5cff 100%); }
+        .btn-violet { background: linear-gradient(135deg, #b78cff 0%, #7c5cff 55%, #1d8cff 100%); }
+        .btn-back { background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.22); box-shadow: 0 8px 0 rgba(0,0,0,0.18); }
+
+        .tiny-label {
+            position: relative;
+            z-index: 2;
+            font-size: 11px;
+            font-weight: 900;
+            opacity: 0.55;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .path-line {
+            position: relative;
+        }
+
+        .path-line::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 22px;
+            right: 22px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(55,213,255,0.3), rgba(255,155,61,0.24), transparent);
+            z-index: -1;
+        }
+
+        @media (max-width: 768px) {
+            .hero-card::after {
+                width: 320px;
+                height: 78px;
+                right: -110px;
+                top: 60px;
+            }
+
+            .planet {
+                width: 72px;
+                height: 72px;
+                right: 30px;
+                top: 32px;
+            }
+
+            .logo-box {
+                width: 66px;
+                height: 66px;
+                border-radius: 20px;
+            }
+
+            .tag-bubble {
+                font-size: 11px;
+                padding: 8px 13px;
+            }
+        }
+    </style>
+</head>
+
+<body class="flex flex-col items-center">
+    <div class="bg-space" id="parallaxBg"></div>
+    <div class="nebula nebula-cyan"></div>
+    <div class="nebula nebula-violet"></div>
+
+    <main class="w-full max-w-7xl px-4 sm:px-6 py-8 md:py-12 lg:py-16 relative z-10">
+        <!-- Header -->
+        <header class="flex flex-col md:flex-row md:items-center justify-between gap-6 md:gap-8 mb-10 md:mb-16">
+            <div class="flex flex-col sm:flex-row items-center sm:items-start md:items-center gap-4 sm:gap-6 text-center sm:text-left">
+                <div class="logo-box pulse-glow text-4xl md:text-5xl">∑</div>
+                <div>
+                    <h1 class="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight">Science Horizon</h1>
+                    <p class="text-xs sm:text-sm font-black text-white/50 uppercase tracking-[0.22em] sm:tracking-[0.32em] mt-2">Toán ứng dụng cá nhân hoá</p>
+                </div>
+            </div>
+
+            <div class="self-center bg-white/10 border border-white/20 px-6 py-3 md:px-8 md:py-4 rounded-full shadow-sm backdrop-blur-xl">
+                <span class="text-sm sm:text-base md:text-lg font-black text-[#8ee8ff] whitespace-nowrap">🚀 Learn by model • Think by data • Build by math</span>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="glass-card hero-card rounded-[40px] md:rounded-[64px] p-8 sm:p-12 md:p-16 lg:p-20 mb-12 md:mb-16 relative overflow-hidden">
+            <div class="planet icon-float"></div>
+            <div class="relative z-10 max-w-4xl">
+                <span class="tag-bubble mb-8">🛰️ Applied Math Observatory</span>
+                <h2 class="text-5xl sm:text-6xl md:text-[82px] lg:text-[108px] font-black mb-6 md:mb-8 tracking-tight leading-[1.05]">
+                    <span class="block">Toán cho</span>
+                    <span class="text-orbit block">thế giới thật.</span>
+                </h2>
+
+                <p class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-extrabold leading-relaxed text-white/82 mb-10 max-w-4xl">
+                    Một không gian học tập cá nhân hoá: từ mô hình, dữ liệu, tối ưu hoá đến mô phỏng khoa học. Học toán như cách một nhà nghiên cứu khám phá vũ trụ của riêng mình.
+                </p>
+
+                <div class="flex flex-col sm:flex-row items-center gap-5 md:gap-7">
+                    <a href="../" onmousedown="playOrbitSound()" class="btn-space btn-back px-8 py-4 sm:px-10 sm:py-5 font-black text-base md:text-lg">
+                        ← Về trang chính
+                    </a>
+                    <span class="text-xs sm:text-sm md:text-base font-bold text-white/55 text-center sm:text-left">Gợi ý: chọn một trạm học phù hợp với mục tiêu của bạn ✨</span>
+                </div>
+            </div>
+
+            <div class="absolute bottom-10 right-8 sm:right-16 text-[56px] md:text-[92px] icon-float opacity-80" style="animation-delay: 1.3s;">🧬</div>
+            <div class="absolute top-9 right-9 sm:right-24 text-[42px] md:text-[64px] icon-float opacity-70" style="animation-delay: 2s;">📈</div>
+        </section>
+
+        <!-- Learning Path Cards -->
+        <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+            <!-- Personal Path -->
+            <a href="./personal-math-path/" onmousedown="playOrbitSound()" class="block focus-ring">
+                <div class="lab-card glass-card card-blue rounded-[40px] p-8 md:p-10 flex flex-col h-full min-h-[330px] overflow-hidden">
+                    <div class="mb-7 flex justify-between items-start">
+                        <span class="tag-bubble">🧭 Trạm 01 • Cá nhân hoá</span>
+                        <span class="text-5xl icon-float">🪐</span>
+                    </div>
+                    <h3 class="relative z-10 text-3xl md:text-4xl font-black mb-4 leading-tight">Lộ trình toán của tôi</h3>
+                    <p class="relative z-10 text-base md:text-lg font-bold text-white/70 mb-10 flex-grow leading-relaxed">
+                        Chọn mục tiêu, trình độ và lĩnh vực quan tâm để xây lộ trình học toán ứng dụng theo cách riêng.
+                    </p>
+                    <div class="flex items-center justify-between gap-4 mt-auto">
+                        <span class="btn-space btn-blue text-sm md:text-base">Mở lộ trình <span>→</span></span>
+                        <span class="tiny-label">Personal map</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Optimization -->
+            <a href="./optimization/" onmousedown="playOrbitSound()" class="block focus-ring">
+                <div class="lab-card glass-card card-green rounded-[40px] p-8 md:p-10 flex flex-col h-full min-h-[330px] overflow-hidden">
+                    <div class="mb-7 flex justify-between items-start">
+                        <span class="tag-bubble">⚙️ Trạm 02 • Tối ưu</span>
+                        <span class="text-5xl icon-float" style="animation-delay: 0.8s;">🎯</span>
+                    </div>
+                    <h3 class="relative z-10 text-3xl md:text-4xl font-black mb-4 leading-tight">Tối ưu hoá ứng dụng</h3>
+                    <p class="relative z-10 text-base md:text-lg font-bold text-white/70 mb-10 flex-grow leading-relaxed">
+                        Quy hoạch tuyến tính, bất đẳng thức biến phân, cân bằng mạng giao thông và bài toán ra quyết định.
+                    </p>
+                    <div class="flex items-center justify-between gap-4 mt-auto">
+                        <span class="btn-space btn-green text-sm md:text-base">Vào phòng lab <span>→</span></span>
+                        <span class="tiny-label">Optimize</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Data & Models -->
+            <a href="./data-models/" onmousedown="playOrbitSound()" class="block focus-ring">
+                <div class="lab-card glass-card card-orange rounded-[40px] p-8 md:p-10 flex flex-col h-full min-h-[330px] overflow-hidden">
+                    <div class="mb-7 flex justify-between items-start">
+                        <span class="tag-bubble">📊 Trạm 03 • Dữ liệu</span>
+                        <span class="text-5xl icon-float" style="animation-delay: 1.2s;">🛰️</span>
+                    </div>
+                    <h3 class="relative z-10 text-3xl md:text-4xl font-black mb-4 leading-tight">Dữ liệu & mô hình</h3>
+                    <p class="relative z-10 text-base md:text-lg font-bold text-white/70 mb-10 flex-grow leading-relaxed">
+                        Trực quan hoá dữ liệu, mô hình hoá hiện tượng, dự báo xu hướng và đọc thế giới bằng con số.
+                    </p>
+                    <div class="flex items-center justify-between gap-4 mt-auto">
+                        <span class="btn-space btn-orange text-sm md:text-base">Khám phá mô hình <span>→</span></span>
+                        <span class="tiny-label">Model world</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Simulation -->
+            <a href="./simulation/" onmousedown="playOrbitSound()" class="block focus-ring">
+                <div class="lab-card glass-card card-violet rounded-[40px] p-8 md:p-10 flex flex-col h-full min-h-[330px] overflow-hidden">
+                    <div class="mb-7 flex justify-between items-start">
+                        <span class="tag-bubble">🔬 Trạm 04 • Mô phỏng</span>
+                        <span class="text-5xl icon-float" style="animation-delay: 1.6s;">🌌</span>
+                    </div>
+                    <h3 class="relative z-10 text-3xl md:text-4xl font-black mb-4 leading-tight">Mô phỏng khoa học</h3>
+                    <p class="relative z-10 text-base md:text-lg font-bold text-white/70 mb-10 flex-grow leading-relaxed">
+                        Từ chuyển động, tăng trưởng, lan truyền đến cân bằng: biến công thức thành trải nghiệm tương tác.
+                    </p>
+                    <div class="flex items-center justify-between gap-4 mt-auto">
+                        <span class="btn-space btn-violet text-sm md:text-base">Chạy mô phỏng <span>→</span></span>
+                        <span class="tiny-label">Run system</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Economics & Society -->
+            <a href="./economics-society/" onmousedown="playOrbitSound()" class="block focus-ring">
+                <div class="lab-card glass-card card-blue rounded-[40px] p-8 md:p-10 flex flex-col h-full min-h-[330px] overflow-hidden">
+                    <div class="mb-7 flex justify-between items-start">
+                        <span class="tag-bubble">🌍 Trạm 05 • Xã hội</span>
+                        <span class="text-5xl icon-float" style="animation-delay: 2s;">🏙️</span>
+                    </div>
+                    <h3 class="relative z-10 text-3xl md:text-4xl font-black mb-4 leading-tight">Kinh tế, đô thị & xã hội</h3>
+                    <p class="relative z-10 text-base md:text-lg font-bold text-white/70 mb-10 flex-grow leading-relaxed">
+                        Ứng dụng toán vào thị trường, mạng lưới, di trú, giao thông, phân bổ nguồn lực và hành vi tập thể.
+                    </p>
+                    <div class="flex items-center justify-between gap-4 mt-auto">
+                        <span class="btn-space btn-blue text-sm md:text-base">Xem ứng dụng <span>→</span></span>
+                        <span class="tiny-label">Real cases</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Tool Kit -->
+            <a href="./toolkit/" onmousedown="playOrbitSound()" class="block focus-ring">
+                <div class="lab-card glass-card card-green rounded-[40px] p-8 md:p-10 flex flex-col h-full min-h-[330px] overflow-hidden">
+                    <div class="mb-7 flex justify-between items-start">
+                        <span class="tag-bubble">🧰 Trạm 06 • Công cụ</span>
+                        <span class="text-5xl icon-float" style="animation-delay: 2.4s;">💻</span>
+                    </div>
+                    <h3 class="relative z-10 text-3xl md:text-4xl font-black mb-4 leading-tight">Python, GeoGebra & HTML Lab</h3>
+                    <p class="relative z-10 text-base md:text-lg font-bold text-white/70 mb-10 flex-grow leading-relaxed">
+                        Bộ công cụ để tự xây bài học, tạo mô phỏng, viết game toán và biến ý tưởng thành sản phẩm nhỏ.
+                    </p>
+                    <div class="flex items-center justify-between gap-4 mt-auto">
+                        <span class="btn-space btn-green text-sm md:text-base">Mở toolkit <span>→</span></span>
+                        <span class="tiny-label">Build tools</span>
+                    </div>
+                </div>
+            </a>
+        </section>
+
+        <!-- Personalization Strip -->
+        <section class="path-line mt-16 md:mt-20 grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-7">
+            <div class="glass-card rounded-[28px] p-6 text-center">
+                <p class="text-4xl mb-3">🎓</p>
+                <h4 class="text-xl font-black mb-2">Học theo mục tiêu</h4>
+                <p class="text-white/62 font-bold leading-relaxed">Thi cử, nghiên cứu, đi dạy, làm dự án hoặc tự học nền tảng.</p>
+            </div>
+            <div class="glass-card rounded-[28px] p-6 text-center">
+                <p class="text-4xl mb-3">🧠</p>
+                <h4 class="text-xl font-black mb-2">Học theo năng lực</h4>
+                <p class="text-white/62 font-bold leading-relaxed">Từ trực quan dễ hiểu đến mô hình nâng cao và bài toán mở.</p>
+            </div>
+            <div class="glass-card rounded-[28px] p-6 text-center">
+                <p class="text-4xl mb-3">🚀</p>
+                <h4 class="text-xl font-black mb-2">Học bằng sản phẩm</h4>
+                <p class="text-white/62 font-bold leading-relaxed">Mỗi chủ đề hướng đến một mô phỏng, mini game hoặc công cụ nhỏ.</p>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="mt-20 md:mt-28 py-12 md:py-16 text-center">
+            <div class="flex justify-center gap-7 md:gap-12 mb-8 text-4xl md:text-5xl opacity-70">
+                <span class="icon-float">∑</span>
+                <span class="icon-float" style="animation-delay: 0.8s;">∞</span>
+                <span class="icon-float" style="animation-delay: 1.6s;">π</span>
+                <span class="icon-float" style="animation-delay: 2.4s;">λ</span>
+            </div>
+            <p class="text-xs md:text-sm font-black text-white/45 tracking-[0.22em] md:tracking-[0.42em] uppercase px-4 leading-relaxed">
+                © Science Horizon • Applied Math for Personal Exploration
+            </p>
+        </footer>
+    </main>
+
+    <script>
+        let audioCtx;
+
+        function playOrbitSound() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+
+            const oscillator = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            oscillator.type = 'sine';
+            oscillator.frequency.setValueAtTime(260, audioCtx.currentTime);
+            oscillator.frequency.exponentialRampToValueAtTime(780, audioCtx.currentTime + 0.14);
+            gainNode.gain.setValueAtTime(0.22, audioCtx.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.14);
+            oscillator.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            oscillator.start();
+            oscillator.stop(audioCtx.currentTime + 0.14);
+        }
+
+        document.addEventListener('mousemove', function(event) {
+            if (window.innerWidth > 768) {
+                const x = (event.clientX / window.innerWidth - 0.5) * 20;
+                const y = (event.clientY / window.innerHeight - 0.5) * 20;
+                const bg = document.getElementById('parallaxBg');
+                if (bg) {
+                    bg.style.transform = `translate(${x}px, ${y}px) scale(1.08)`;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
