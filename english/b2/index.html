@@ -1,0 +1,901 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>B2 English Orbit | Science Horizon</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --space:#06142e;
+      --deep:#071b3f;
+      --cyan:#37d5ff;
+      --blue:#1d8cff;
+      --violet:#7c5cff;
+      --pink:#ff70b8;
+      --green:#52f5b0;
+      --orange:#ff9b3d;
+
+      --card: rgba(255,255,255,.90);
+      --card2: rgba(255,255,255,.96);
+      --border: rgba(148,163,184,.24);
+      --text:#0f172a;
+      --muted:#5b6b85;
+
+      --shadow: 0 18px 45px rgba(0,0,0,.22);
+      --shadow2: 0 10px 25px rgba(15, 23, 42, .08);
+      --radius: 24px;
+    }
+
+    *{ box-sizing:border-box; }
+
+    body{
+      margin:0;
+      min-height:100vh;
+      overflow:hidden;
+      color:var(--text);
+      font-family:"Be Vietnam Pro", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      background:
+        radial-gradient(900px 540px at 8% 8%, rgba(55,213,255,.22), transparent 60%),
+        radial-gradient(850px 520px at 92% 12%, rgba(124,92,255,.22), transparent 60%),
+        radial-gradient(850px 520px at 62% 95%, rgba(82,245,176,.13), transparent 60%),
+        linear-gradient(135deg, #031024 0%, #071b3f 48%, #020712 100%);
+    }
+
+    .bg-stars{
+      position: fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:0;
+      opacity:.35;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,.85) 1px, transparent 1.6px),
+        radial-gradient(circle, rgba(55,213,255,.65) 1px, transparent 1.5px),
+        radial-gradient(circle, rgba(82,245,176,.55) 1px, transparent 1.5px);
+      background-size:72px 72px,118px 118px,164px 164px;
+      background-position:0 0,34px 58px,90px 26px;
+      transform:scale(1.08);
+    }
+
+    .nebula{
+      position:fixed;
+      border-radius:999px;
+      filter:blur(62px);
+      z-index:0;
+      pointer-events:none;
+      opacity:.62;
+    }
+
+    .nebula.one{
+      width:430px;height:430px;left:-150px;top:120px;
+      background:rgba(55,213,255,.22);
+    }
+
+    .nebula.two{
+      width:560px;height:560px;right:-200px;bottom:20px;
+      background:rgba(124,92,255,.24);
+    }
+
+    .orbit{
+      position:fixed;
+      right:-320px;
+      top:140px;
+      width:920px;
+      height:230px;
+      border-radius:50%;
+      border:3px solid rgba(55,213,255,.18);
+      border-left-color:rgba(82,245,176,.42);
+      transform:rotate(-17deg);
+      z-index:0;
+      pointer-events:none;
+    }
+
+    header{
+      position:sticky;
+      top:0;
+      z-index:20;
+      padding:12px 16px;
+      background:rgba(4, 16, 36, .68);
+      backdrop-filter: blur(14px);
+      border-bottom:1px solid rgba(255,255,255,.12);
+    }
+
+    .head-inner{
+      max-width:1240px;
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      min-width:300px;
+    }
+
+    .brand img{
+      width:48px;
+      height:48px;
+      object-fit:contain;
+      border-radius:16px;
+      background:rgba(255,255,255,.94);
+      padding:5px;
+      box-shadow:0 12px 25px rgba(0,0,0,.18);
+    }
+
+    .fallback-logo{
+      width:48px;
+      height:48px;
+      border-radius:16px;
+      background:rgba(255,255,255,.94);
+      display:none;
+      place-items:center;
+      font-size:26px;
+      box-shadow:0 12px 25px rgba(0,0,0,.18);
+    }
+
+    .brand .t{
+      display:flex;
+      flex-direction:column;
+      line-height:1.15;
+    }
+
+    .brand .t b{
+      font-weight:900;
+      font-size:21px;
+      letter-spacing:.1px;
+      background:linear-gradient(90deg,#83efff,#52f5b0,#7aa7ff);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      filter:drop-shadow(0 2px 3px rgba(55,213,255,.22));
+    }
+
+    .brand .t span{
+      margin-top:3px;
+      font-size:12px;
+      color:rgba(255,255,255,.58);
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.18em;
+    }
+
+    .right-hint{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      justify-content:flex-end;
+      flex-wrap:wrap;
+    }
+
+    .chip{
+      border:1px solid rgba(255,255,255,.16);
+      background:rgba(255,255,255,.10);
+      border-radius:999px;
+      padding:8px 12px;
+      font-size:12px;
+      color:rgba(255,255,255,.84);
+      box-shadow:0 12px 24px rgba(0,0,0,.12);
+      display:flex;
+      align-items:center;
+      gap:8px;
+      user-select:none;
+      font-weight:800;
+    }
+
+    .chip .dot{
+      width:8px;height:8px;border-radius:99px;
+      background:linear-gradient(135deg,var(--cyan),var(--green));
+      box-shadow:0 6px 14px rgba(34,197,94,.25);
+    }
+
+    .wrap{
+      max-width:1240px;
+      margin:0 auto;
+      padding:16px;
+      display:grid;
+      grid-template-columns:360px 1fr;
+      gap:16px;
+      height:calc(100vh - 74px);
+      position:relative;
+      z-index:2;
+    }
+
+    .sidebar,.main{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      height:100%;
+      backdrop-filter:blur(16px);
+    }
+
+    .sidebar{
+      display:flex;
+      flex-direction:column;
+    }
+
+    .side-top{
+      padding:13px;
+      border-bottom:1px solid var(--border);
+      background:rgba(255,255,255,.62);
+    }
+
+    .search-wrap{ position:relative; }
+
+    .search{
+      width:100%;
+      border:2px solid rgba(148,163,184,.30);
+      border-radius:17px;
+      padding:12px 12px 12px 40px;
+      font-size:14px;
+      outline:none;
+      background:rgba(255,255,255,.94);
+      transition:.15s ease;
+      font-family:inherit;
+      font-weight:700;
+    }
+
+    .search:focus{
+      border-color:rgba(55,213,255,.55);
+      box-shadow:0 10px 22px rgba(55,213,255,.16);
+    }
+
+    .search-ico{
+      position:absolute;
+      left:13px; top:50%;
+      transform:translateY(-50%);
+      font-size:16px;
+      opacity:.75;
+    }
+
+    .side-meta{
+      margin-top:10px;
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+    }
+
+    .mini{
+      font-size:12px;
+      color:var(--muted);
+      font-weight:700;
+    }
+
+    .pill{
+      border:1px solid rgba(148,163,184,.25);
+      background:linear-gradient(135deg, rgba(255,255,255,.96), rgba(255,255,255,.68));
+      border-radius:999px;
+      padding:7px 10px;
+      font-size:12px;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      box-shadow:var(--shadow2);
+      user-select:none;
+      font-weight:800;
+    }
+
+    .list{
+      padding:12px;
+      flex:1;
+      overflow-y:auto;
+      scroll-behavior:smooth;
+    }
+
+    .group{
+      margin:10px 2px 6px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+
+    .group .name{
+      font-size:14px;
+      font-weight:900;
+      background:linear-gradient(135deg, #2563EB, #10B981, #7C5CFF);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      filter:drop-shadow(0 2px 2px rgba(37,99,235,.18));
+      letter-spacing:.4px;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      text-transform:uppercase;
+    }
+
+    .badge{
+      font-size:11px;
+      color:var(--muted);
+      border:1px solid rgba(148,163,184,.26);
+      padding:4px 9px;
+      border-radius:999px;
+      background:rgba(255,255,255,.78);
+      font-weight:800;
+      white-space:nowrap;
+    }
+
+    .divider{
+      height:1px;
+      background:rgba(148,163,184,.20);
+      margin:8px 0 12px;
+    }
+
+    .item{
+      width:100%;
+      text-align:left;
+      border:3px solid transparent;
+      background:rgba(255,255,255,.88);
+      border-radius:20px;
+      padding:12px;
+      cursor:pointer;
+      transition:all .15s cubic-bezier(.4,0,.2,1);
+      margin-bottom:12px;
+      box-shadow:0 6px 0 rgba(148,163,184,.15), 0 10px 22px rgba(15,23,42,.07);
+      position:relative;
+      overflow:hidden;
+      font-family:inherit;
+    }
+
+    .item::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      opacity:.75;
+      background:radial-gradient(450px 120px at 30% 0%, rgba(55,213,255,.15), transparent 60%);
+      pointer-events:none;
+    }
+
+    .item:hover{
+      transform:translateY(-3px);
+      border-color:rgba(55,213,255,.36);
+      background:rgba(255,255,255,.96);
+      box-shadow:0 9px 0 rgba(55,213,255,.18),0 15px 25px rgba(55,213,255,.13);
+    }
+
+    .item:active{
+      transform:translateY(3px);
+      box-shadow:0 3px 0 rgba(55,213,255,.28),0 5px 10px rgba(55,213,255,.10);
+    }
+
+    .item.active{
+      border-color:rgba(82,245,176,.50);
+      box-shadow:0 6px 0 rgba(82,245,176,.20),0 14px 28px rgba(82,245,176,.14);
+      background:rgba(255,255,255,.98);
+      transform:translateY(-2px);
+    }
+
+    .row{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      position:relative;
+      z-index:1;
+    }
+
+    .ico{
+      width:39px;height:39px;
+      border-radius:14px;
+      display:grid;
+      place-items:center;
+      border:1px solid rgba(148,163,184,.20);
+      box-shadow:0 12px 18px rgba(15,23,42,.10);
+      flex:0 0 39px;
+      font-size:20px;
+      background:linear-gradient(135deg, rgba(131,239,255,.28), rgba(82,245,176,.20), rgba(255,255,255,.85));
+    }
+
+    .textbox{ min-width:0; }
+
+    .item .t{
+      font-weight:900;
+      font-size:15px;
+      letter-spacing:.05px;
+      color:#27364d;
+      line-height:1.25;
+    }
+
+    .item .d{
+      color:var(--muted);
+      font-size:12px;
+      margin-top:4px;
+      font-weight:700;
+      line-height:1.35;
+    }
+
+    .side-foot{
+      border-top:1px solid var(--border);
+      padding:10px 12px;
+      background:rgba(255,255,255,.62);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+
+    .side-foot .small{
+      font-size:12px;
+      color:var(--muted);
+      font-weight:800;
+    }
+
+    .btn{
+      border:2px solid rgba(148,163,184,.22);
+      background:rgba(255,255,255,.92);
+      border-radius:999px;
+      padding:9px 12px;
+      font-size:13px;
+      font-family:inherit;
+      font-weight:900;
+      text-decoration:none;
+      color:#0f172a;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      box-shadow:0 4px 0 rgba(148,163,184,.2),0 10px 20px rgba(15,23,42,.08);
+      transition:all .15s cubic-bezier(.4,0,.2,1);
+      user-select:none;
+      white-space:nowrap;
+    }
+
+    .btn:hover{
+      transform:translateY(-2px);
+      box-shadow:0 6px 0 rgba(148,163,184,.2),0 12px 22px rgba(15,23,42,.12);
+    }
+
+    .btn:active{
+      transform:translateY(2px);
+      box-shadow:0 2px 0 rgba(148,163,184,.3),0 5px 10px rgba(15,23,42,.08);
+    }
+
+    .btn.primary{
+      border-color:rgba(55,213,255,.25);
+      background:linear-gradient(135deg, rgba(55,213,255,.18), rgba(82,245,176,.14));
+      box-shadow:0 4px 0 rgba(55,213,255,.22),0 10px 20px rgba(55,213,255,.13);
+    }
+
+    .main{
+      display:flex;
+      flex-direction:column;
+      position:relative;
+    }
+
+    .main-top{
+      padding:12px 14px;
+      border-bottom:1px solid var(--border);
+      background:rgba(255,255,255,.62);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+
+    .now{
+      font-weight:900;
+      font-size:18px;
+      background:linear-gradient(to right,#2563EB,#10B981,#7C5CFF);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      filter:drop-shadow(0 2px 2px rgba(37,99,235,.18));
+    }
+
+    .url{
+      color:var(--muted);
+      font-size:12px;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+      max-width:70ch;
+      margin-top:3px;
+      font-weight:700;
+    }
+
+    .btns{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .stage{
+      flex:1;
+      padding:14px;
+      background:
+        radial-gradient(900px 420px at 50% 15%, rgba(255,255,255,.66), transparent 60%),
+        linear-gradient(135deg, rgba(255,255,255,.22), rgba(255,255,255,.10));
+    }
+
+    .frame-wrap{
+      height:100%;
+      background:var(--card2);
+      border:1px solid rgba(148,163,184,.18);
+      border-radius:20px;
+      padding:12px;
+      box-shadow:0 16px 44px rgba(15,23,42,.11);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .empty{
+      height:100%;
+      display:grid;
+      place-items:center;
+      text-align:center;
+      color:var(--muted);
+      font-size:14px;
+      padding:30px;
+    }
+
+    .empty b{
+      font-weight:900;
+      font-size:22px;
+      background:linear-gradient(to right,#2563EB,#10B981,#7C5CFF);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      filter:drop-shadow(0 2px 4px rgba(124,92,255,.22));
+    }
+
+    .empty .sub{
+      margin-top:12px;
+      font-size:13px;
+      line-height:1.55;
+      font-weight:700;
+    }
+
+    iframe{
+      width:100%;
+      height:100%;
+      border:0;
+      border-radius:16px;
+      background:#fff;
+    }
+
+    .mascot{
+      position:absolute;
+      left:14px;
+      bottom:12px;
+      display:flex;
+      align-items:flex-end;
+      gap:10px;
+      pointer-events:none;
+      opacity:.96;
+    }
+
+    .mascot .face{
+      width:54px;height:54px;
+      border-radius:18px;
+      display:grid;
+      place-items:center;
+      font-size:28px;
+      background:linear-gradient(135deg, rgba(131,239,255,.9), rgba(255,255,255,.92));
+      border:1px solid rgba(148,163,184,.20);
+      box-shadow:0 16px 26px rgba(15,23,42,.12);
+      animation:bob 2.2s ease-in-out infinite;
+    }
+
+    @keyframes bob{
+      0%,100%{ transform:translateY(0); }
+      50%{ transform:translateY(-3px); }
+    }
+
+    .mascot .bubble{
+      border-radius:16px;
+      padding:9px 12px;
+      background:rgba(255,255,255,.94);
+      border:1px solid rgba(148,163,184,.18);
+      box-shadow:0 14px 24px rgba(15,23,42,.10);
+      font-size:12px;
+      color:var(--muted);
+      max-width:340px;
+      line-height:1.3;
+      font-weight:700;
+    }
+
+    .mascot .bubble b{ color:var(--text); }
+
+    @media (max-width:980px){
+      body{ overflow:auto; }
+      .wrap{
+        grid-template-columns:1fr;
+        height:auto;
+        min-height:calc(100vh - 74px);
+      }
+      .sidebar{ max-height:52vh; }
+      .stage{ height:72vh; min-height:430px; }
+      .brand{ min-width:0; }
+      .brand .t span{ display:none; }
+      .mascot{ display:none; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bg-stars" aria-hidden="true" id="parallaxBg"></div>
+  <div class="nebula one"></div>
+  <div class="nebula two"></div>
+  <div class="orbit"></div>
+
+  <header>
+    <div class="head-inner">
+      <div class="brand">
+        <img src="../../assets/images/logo-SH.png" alt="Science Horizon Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';">
+        <div class="fallback-logo">🌍</div>
+        <div class="t">
+          <b>B2 English Orbit</b>
+          <span>Science Horizon • Upper-Intermediate</span>
+        </div>
+      </div>
+
+      <div class="right-hint">
+        <div id="countChip" class="chip"><span class="dot"></span> 0 lessons</div>
+        <div class="chip">✨ Tip: Ctrl + F5 sau khi cập nhật</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <aside class="sidebar">
+      <div class="side-top">
+        <div class="search-wrap">
+          <span class="search-ico">🔍</span>
+          <input id="q" class="search" placeholder="Tìm lesson… (01, debate, media, essay, presentation)" />
+        </div>
+
+        <div class="side-meta">
+          <div id="miniText" class="mini">Gõ để lọc lesson nhanh</div>
+          <div class="pill">🧠 Think, argue, present!</div>
+        </div>
+      </div>
+
+      <div id="lessonList" class="list"></div>
+
+      <div class="side-foot">
+        <div class="small">B2 • English Zone</div>
+        <a class="btn primary" href="../">← English</a>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="main-top">
+        <div>
+          <div id="nowTitle" class="now">Chọn một lesson để bắt đầu</div>
+          <div id="nowUrl" class="url"></div>
+        </div>
+
+        <div class="btns">
+          <a id="openBtn" class="btn primary" href="#" target="_blank" rel="noopener" style="display:none;">↗ Open</a>
+          <button id="copyBtn" class="btn" style="display:none;">📋 Copy link</button>
+        </div>
+      </div>
+
+      <div class="stage">
+        <div class="frame-wrap">
+          <div id="emptyState" class="empty">
+            <div>
+              <b>👆 Chọn lesson bên trái</b>
+              <div class="sub">
+                B2 là quỹ đạo giao tiếp tự tin và có lập luận: phân tích vấn đề, tranh luận lịch sự, thuyết trình rõ cấu trúc, viết đoạn/essay có lý do, ví dụ và phản biện cơ bản.<br/>
+                Mỗi lesson sau này chỉ cần tạo folder <b>lesson-01/</b>, <b>lesson-02/</b>... rồi đặt file <b>index.html</b> vào là chạy được.
+              </div>
+            </div>
+          </div>
+
+          <iframe id="lessonFrame" title="B2 English Lesson" style="display:none;"></iframe>
+
+          <div class="mascot" aria-hidden="true">
+            <div class="face">🧠</div>
+            <div class="bubble"><b>Think deeper!</b> Pick a mission and build stronger arguments, examples, and fluency. ✨</div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    const audioCtx = new AudioContext();
+
+    function playSound(type) {
+      if(audioCtx.state === 'suspended') audioCtx.resume();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      const now = audioCtx.currentTime;
+
+      if (type === 'pop') {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(420, now);
+        osc.frequency.exponentialRampToValueAtTime(640, now + 0.1);
+        gain.gain.setValueAtTime(0.16, now);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
+        osc.start(now);
+        osc.stop(now + 0.1);
+      } else {
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(420, now);
+        osc.frequency.setValueAtTime(560, now + 0.1);
+        osc.frequency.setValueAtTime(760, now + 0.22);
+        gain.gain.setValueAtTime(0.14, now);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.42);
+        osc.start(now);
+        osc.stop(now + 0.42);
+      }
+    }
+
+    const groups = [
+      {
+        id: "b2-critical-communication",
+        name: "Critical Communication",
+        icon: "🧠",
+        items: [
+          { id:"lesson-01", title:"Lesson 01 • Expressing Nuanced Opinions", desc:"State opinions with balance, evidence, examples and polite uncertainty", icon:"🗣️", url:"lesson-01/" },
+          { id:"lesson-02", title:"Lesson 02 • Agreeing & Disagreeing Diplomatically", desc:"Challenge ideas politely, soften disagreement and respond to counterpoints", icon:"🤝", url:"lesson-02/" },
+          { id:"lesson-03", title:"Lesson 03 • Cause, Effect & Consequences", desc:"Explain complex reasons, results, trends and social consequences", icon:"🔗", url:"lesson-03/" },
+          { id:"lesson-04", title:"Lesson 04 • Comparing Perspectives", desc:"Compare advantages, disadvantages, viewpoints and possible solutions", icon:"⚖️", url:"lesson-04/" }
+        ]
+      },
+      {
+        id: "b2-academic-work-skills",
+        name: "Academic & Work Skills",
+        icon: "🎓",
+        items: [
+          { id:"lesson-05", title:"Lesson 05 • Structured Presentations", desc:"Introduce a topic, signpost sections, support claims and conclude strongly", icon:"📊", url:"lesson-05/" },
+          { id:"lesson-06", title:"Lesson 06 • Writing a Clear Paragraph", desc:"Topic sentence, supporting details, examples, linking words and conclusion", icon:"✍️", url:"lesson-06/" },
+          { id:"lesson-07", title:"Lesson 07 • Essay Arguments", desc:"Build thesis, reasons, evidence, counterargument and short conclusion", icon:"📝", url:"lesson-07/" },
+          { id:"lesson-08", title:"Lesson 08 • Meetings & Problem Solving", desc:"Make proposals, clarify priorities, negotiate and summarize decisions", icon:"💼", url:"lesson-08/" }
+        ]
+      },
+      {
+        id: "b2-world-topics",
+        name: "World Topics",
+        icon: "🌐",
+        items: [
+          { id:"lesson-09", title:"Lesson 09 • Media & Technology", desc:"Discuss social media, AI, online learning, privacy and digital habits", icon:"💻", url:"lesson-09/" },
+          { id:"lesson-10", title:"Lesson 10 • Environment & Society", desc:"Talk about climate, cities, consumption, responsibility and solutions", icon:"🌱", url:"lesson-10/" },
+          { id:"lesson-11", title:"Lesson 11 • Culture, Identity & Global Life", desc:"Discuss cultural differences, migration, language, values and belonging", icon:"🌏", url:"lesson-11/" },
+          { id:"lesson-12", title:"Lesson 12 • B2 Debate Mission", desc:"Review B2 speaking and writing through a debate, presentation and essay task", icon:"🚀", url:"lesson-12/" }
+        ]
+      }
+    ];
+
+    const listEl = document.getElementById("lessonList");
+    const frame = document.getElementById("lessonFrame");
+    const empty = document.getElementById("emptyState");
+    const nowTitle = document.getElementById("nowTitle");
+    const nowUrl = document.getElementById("nowUrl");
+    const openBtn = document.getElementById("openBtn");
+    const copyBtn = document.getElementById("copyBtn");
+    const search = document.getElementById("q");
+    const countChip = document.getElementById("countChip");
+    const miniText = document.getElementById("miniText");
+
+    const base = location.origin + location.pathname.replace(/index\.html$/,"");
+
+    function flatten(){
+      const out = [];
+      groups.forEach(g => g.items.forEach(it => out.push({ ...it, group:g.name })));
+      return out;
+    }
+
+    const allLessons = flatten();
+    countChip.innerHTML = `<span class="dot"></span> ${allLessons.length} lessons`;
+
+    function directLink(url){ return base + url; }
+    function openLink(lessonId){ return base + `?lesson=${encodeURIComponent(lessonId)}`; }
+
+    function setActive(id){
+      document.querySelectorAll(".item").forEach(x => x.classList.remove("active"));
+      const target = document.querySelector(`[data-id="${id}"]`);
+      if(target) target.classList.add("active");
+    }
+
+    function selectLesson(lesson){
+      playSound('yay');
+      empty.style.display = "none";
+      frame.style.display = "block";
+      frame.src = lesson.url;
+
+      nowTitle.textContent = lesson.title;
+      nowUrl.textContent = directLink(lesson.url);
+
+      openBtn.style.display = "inline-flex";
+      openBtn.href = directLink(lesson.url);
+
+      copyBtn.style.display = "inline-flex";
+      copyBtn.onclick = () => {
+        const link = openLink(lesson.id);
+        const dummy = document.createElement('input');
+        document.body.appendChild(dummy);
+        dummy.value = link;
+        dummy.select();
+        document.execCommand('copy');
+        document.body.removeChild(dummy);
+        copyBtn.textContent = "✅ Copied!";
+        setTimeout(()=>copyBtn.textContent="📋 Copy link", 900);
+      };
+
+      const u = new URL(location.href);
+      u.searchParams.set("lesson", lesson.id);
+      try { history.replaceState(null, "", u.toString()); } catch(e) {}
+
+      setActive(lesson.id);
+    }
+
+    function render(filterText=""){
+      const q = filterText.trim().toLowerCase();
+      listEl.innerHTML = "";
+      let shownCount = 0;
+
+      groups.forEach(group => {
+        const items = group.items.filter(it => {
+          if(!q) return true;
+          return (`${it.title} ${it.desc} ${it.id} ${it.url}`).toLowerCase().includes(q);
+        });
+
+        if(items.length === 0) return;
+
+        const head = document.createElement("div");
+        head.className = "group";
+        head.innerHTML = `
+          <div class="name">${group.icon} ${group.name}</div>
+          <div class="badge">${group.items.length} lessons</div>
+        `;
+        listEl.appendChild(head);
+        listEl.appendChild(Object.assign(document.createElement("div"), { className:"divider" }));
+
+        items.forEach(it => {
+          const btn = document.createElement("button");
+          btn.className = "item";
+          btn.setAttribute("data-id", it.id);
+          btn.innerHTML = `
+            <div class="row">
+              <div class="ico">${it.icon || "📘"}</div>
+              <div class="textbox">
+                <div class="t">${it.title}</div>
+                <div class="d">${it.desc}</div>
+              </div>
+            </div>
+          `;
+          btn.onclick = () => selectLesson(it);
+          listEl.appendChild(btn);
+          shownCount++;
+        });
+      });
+
+      miniText.textContent = q ? `Đang hiện ${shownCount} kết quả` : "Gõ để lọc lesson nhanh";
+    }
+
+    search.addEventListener("input", () => render(search.value));
+    render("");
+
+    const params = new URLSearchParams(location.search);
+    const lessonId = params.get("lesson");
+    if(lessonId){
+      const found = allLessons.find(x => x.id === lessonId);
+      if(found){ selectLesson(found); }
+    }
+
+    document.addEventListener('mousemove', function(event) {
+      if (window.innerWidth > 768) {
+        const x = (event.clientX / window.innerWidth - 0.5) * 18;
+        const y = (event.clientY / window.innerHeight - 0.5) * 18;
+        const bg = document.getElementById('parallaxBg');
+        if (bg) bg.style.transform = `translate(${x}px, ${y}px) scale(1.08)`;
+      }
+    });
+  </script>
+</body>
+</html>
