@@ -1,0 +1,787 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Đại học | Toán ứng dụng | Science Horizon</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --space-dark:#06142e;
+      --space-mid:#0b2457;
+      --cyan:#37d5ff;
+      --blue:#1d8cff;
+      --violet:#7c5cff;
+      --orange:#ff9b3d;
+      --green:#52f5b0;
+      --pink:#ff7ab6;
+      --card:rgba(255,255,255,.88);
+      --card2:rgba(255,255,255,.96);
+      --border:rgba(118,214,255,.32);
+      --text:#0f172a;
+      --muted:#64748b;
+      --shadow:0 22px 60px rgba(0,0,0,.26);
+      --radius:26px;
+    }
+
+    *{box-sizing:border-box}
+
+    html{scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      min-height:100vh;
+      overflow:hidden;
+      font-family:'Be Vietnam Pro', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 12% 12%, rgba(55,213,255,.26), transparent 30%),
+        radial-gradient(circle at 88% 18%, rgba(255,155,61,.18), transparent 30%),
+        radial-gradient(circle at 55% 92%, rgba(124,92,255,.25), transparent 36%),
+        linear-gradient(135deg,#031024 0%,#071b3f 45%,#020712 100%);
+    }
+
+    a{color:inherit;text-decoration:none}
+
+    .bg-space{
+      position:fixed;
+      inset:0;
+      z-index:0;
+      pointer-events:none;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,.86) 1px, transparent 1.6px),
+        radial-gradient(circle, rgba(55,213,255,.62) 1px, transparent 1.5px),
+        radial-gradient(circle, rgba(255,155,61,.52) 1px, transparent 1.5px);
+      background-size:72px 72px,118px 118px,164px 164px;
+      background-position:0 0,34px 58px,90px 26px;
+      opacity:.34;
+      transform:scale(1.08);
+    }
+
+    .nebula{
+      position:fixed;
+      border-radius:999px;
+      filter:blur(58px);
+      pointer-events:none;
+      z-index:0;
+      opacity:.66;
+    }
+    .nebula-cyan{width:430px;height:430px;left:-150px;top:140px;background:rgba(55,213,255,.25)}
+    .nebula-violet{width:520px;height:520px;right:-190px;bottom:40px;background:rgba(124,92,255,.24)}
+
+    header{
+      position:sticky;
+      top:0;
+      z-index:30;
+      border-bottom:1px solid rgba(255,255,255,.12);
+      background:rgba(5,16,42,.72);
+      backdrop-filter:blur(16px);
+      -webkit-backdrop-filter:blur(16px);
+      padding:12px 16px;
+      color:white;
+    }
+
+    .head-inner{
+      max-width:1280px;
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:13px;
+      min-width:260px;
+    }
+
+    .logo{
+      width:48px;
+      height:48px;
+      border-radius:16px;
+      display:grid;
+      place-items:center;
+      background:rgba(255,255,255,.94);
+      color:#0b2457;
+      font-size:25px;
+      box-shadow:0 14px 28px rgba(0,0,0,.28), 0 0 28px rgba(55,213,255,.2);
+      animation:float 4.5s ease-in-out infinite;
+    }
+
+    .brand b{
+      display:block;
+      font-size:22px;
+      font-weight:900;
+      line-height:1.05;
+      background:linear-gradient(90deg,#fff,#8ee8ff,#52f5b0,#ffbd59);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    .brand span{
+      display:block;
+      margin-top:3px;
+      font-size:12px;
+      font-weight:800;
+      color:rgba(255,255,255,.54);
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    .chips{
+      display:flex;
+      align-items:center;
+      justify-content:flex-end;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:9px 13px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:800;
+      color:white;
+      background:rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.18);
+      box-shadow:0 10px 22px rgba(0,0,0,.16);
+      white-space:nowrap;
+    }
+
+    .dot{
+      width:8px;
+      height:8px;
+      border-radius:999px;
+      background:linear-gradient(135deg,var(--cyan),var(--green));
+      box-shadow:0 0 16px rgba(82,245,176,.5);
+    }
+
+    .wrap{
+      position:relative;
+      z-index:5;
+      max-width:1280px;
+      height:calc(100vh - 73px);
+      margin:0 auto;
+      padding:16px;
+      display:grid;
+      grid-template-columns:370px minmax(0,1fr);
+      gap:16px;
+    }
+
+    .sidebar,.main{
+      height:100%;
+      overflow:hidden;
+      border-radius:var(--radius);
+      background:var(--card);
+      border:1px solid rgba(255,255,255,.45);
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(20px) saturate(160%);
+      -webkit-backdrop-filter:blur(20px) saturate(160%);
+    }
+
+    .sidebar{
+      display:flex;
+      flex-direction:column;
+    }
+
+    .side-top{
+      padding:14px;
+      border-bottom:1px solid rgba(148,163,184,.22);
+      background:linear-gradient(135deg,rgba(255,255,255,.76),rgba(255,255,255,.45));
+    }
+
+    .search-wrap{position:relative}
+
+    .search{
+      width:100%;
+      border:2px solid rgba(148,163,184,.28);
+      border-radius:18px;
+      padding:13px 14px 13px 42px;
+      font-size:14px;
+      font-weight:700;
+      outline:none;
+      background:rgba(255,255,255,.94);
+      color:var(--text);
+      transition:.18s ease;
+    }
+
+    .search:focus{
+      border-color:rgba(29,140,255,.48);
+      box-shadow:0 12px 26px rgba(29,140,255,.14);
+    }
+
+    .search-ico{
+      position:absolute;
+      left:14px;
+      top:50%;
+      transform:translateY(-50%);
+      font-size:17px;
+      opacity:.72;
+    }
+
+    .side-meta{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+
+    .mini{font-size:12px;color:var(--muted);font-weight:700}
+
+    .pill{
+      border:1px solid rgba(148,163,184,.28);
+      background:rgba(255,255,255,.78);
+      border-radius:999px;
+      padding:7px 10px;
+      font-size:12px;
+      font-weight:800;
+      box-shadow:0 8px 18px rgba(15,23,42,.08);
+    }
+
+    .list{
+      flex:1;
+      overflow-y:auto;
+      padding:14px;
+      scroll-behavior:smooth;
+    }
+
+    .section-title{
+      margin:7px 4px 12px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+
+    .section-title .name{
+      font-size:14px;
+      font-weight:900;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      background:linear-gradient(90deg,#1d8cff,#7c5cff,#ff7ab6);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    .badge{
+      font-size:11px;
+      font-weight:900;
+      color:var(--muted);
+      padding:5px 9px;
+      border-radius:999px;
+      background:rgba(255,255,255,.72);
+      border:1px solid rgba(148,163,184,.25);
+    }
+
+    .lesson{
+      width:100%;
+      border:3px solid transparent;
+      border-radius:22px;
+      padding:13px;
+      margin-bottom:12px;
+      background:linear-gradient(145deg,rgba(255,255,255,.92),rgba(255,255,255,.72));
+      box-shadow:0 7px 0 rgba(148,163,184,.15),0 14px 28px rgba(15,23,42,.08);
+      cursor:pointer;
+      text-align:left;
+      transition:.18s cubic-bezier(.4,0,.2,1);
+      position:relative;
+      overflow:hidden;
+      font-family:inherit;
+    }
+
+    .lesson::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      opacity:.7;
+      pointer-events:none;
+      background:radial-gradient(420px 120px at 28% 0%, rgba(55,213,255,.13), transparent 62%);
+    }
+
+    .lesson:hover{
+      transform:translateY(-3px);
+      border-color:rgba(29,140,255,.3);
+      box-shadow:0 10px 0 rgba(29,140,255,.18),0 18px 32px rgba(29,140,255,.13);
+    }
+
+    .lesson:active{
+      transform:translateY(3px);
+      box-shadow:0 3px 0 rgba(29,140,255,.23),0 8px 18px rgba(29,140,255,.08);
+    }
+
+    .lesson.active{
+      border-color:rgba(82,245,176,.48);
+      box-shadow:0 7px 0 rgba(82,245,176,.22),0 16px 30px rgba(82,245,176,.13);
+      background:rgba(255,255,255,.98);
+      transform:translateY(-2px);
+    }
+
+    .row{
+      position:relative;
+      z-index:1;
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .ico{
+      flex:0 0 42px;
+      width:42px;
+      height:42px;
+      border-radius:15px;
+      display:grid;
+      place-items:center;
+      font-size:22px;
+      background:linear-gradient(135deg,rgba(255,246,183,.88),rgba(234,246,255,.86));
+      border:1px solid rgba(148,163,184,.22);
+      box-shadow:0 12px 20px rgba(15,23,42,.1);
+    }
+
+    .textbox{min-width:0}
+    .lesson-title{font-weight:900;font-size:15px;color:#26364f;line-height:1.22}
+    .lesson-desc{font-weight:700;font-size:12px;color:var(--muted);margin-top:4px;line-height:1.32}
+
+    .side-foot{
+      padding:12px 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      border-top:1px solid rgba(148,163,184,.22);
+      background:rgba(255,255,255,.56);
+    }
+
+    .small{font-size:12px;font-weight:800;color:var(--muted)}
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      border:2px solid rgba(148,163,184,.22);
+      border-radius:999px;
+      padding:10px 13px;
+      background:rgba(255,255,255,.92);
+      color:#0f172a;
+      cursor:pointer;
+      font-size:13px;
+      font-weight:900;
+      box-shadow:0 4px 0 rgba(148,163,184,.2),0 10px 20px rgba(15,23,42,.08);
+      transition:.16s ease;
+      font-family:inherit;
+      white-space:nowrap;
+    }
+
+    .btn:hover{transform:translateY(-2px);box-shadow:0 6px 0 rgba(148,163,184,.2),0 12px 22px rgba(15,23,42,.11)}
+    .btn:active{transform:translateY(2px);box-shadow:0 2px 0 rgba(148,163,184,.28),0 6px 14px rgba(15,23,42,.08)}
+    .btn.primary{border-color:rgba(29,140,255,.24);background:linear-gradient(135deg,rgba(29,140,255,.16),rgba(82,245,176,.14))}
+
+    .main{
+      display:flex;
+      flex-direction:column;
+    }
+
+    .main-top{
+      padding:14px 16px;
+      border-bottom:1px solid rgba(148,163,184,.22);
+      background:linear-gradient(135deg,rgba(255,255,255,.76),rgba(255,255,255,.48));
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+
+    .now{
+      font-size:19px;
+      font-weight:900;
+      line-height:1.18;
+      background:linear-gradient(90deg,#1d8cff,#14b8a6,#7c5cff);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    .url{
+      max-width:72ch;
+      margin-top:4px;
+      color:var(--muted);
+      font-size:12px;
+      font-weight:700;
+      overflow:hidden;
+      white-space:nowrap;
+      text-overflow:ellipsis;
+    }
+
+    .btns{display:flex;align-items:center;gap:8px;justify-content:flex-end;flex-wrap:wrap}
+
+    .stage{
+      flex:1;
+      padding:16px;
+      background:
+        radial-gradient(900px 420px at 50% 15%, rgba(255,255,255,.66), transparent 62%),
+        linear-gradient(135deg,rgba(255,255,255,.22),rgba(255,255,255,.1));
+    }
+
+    .frame-wrap{
+      position:relative;
+      height:100%;
+      border-radius:22px;
+      padding:13px;
+      background:var(--card2);
+      border:1px solid rgba(148,163,184,.18);
+      box-shadow:0 16px 44px rgba(15,23,42,.11);
+      overflow:hidden;
+    }
+
+    iframe{
+      width:100%;
+      height:100%;
+      border:0;
+      border-radius:17px;
+      background:#fff;
+    }
+
+    .empty{
+      height:100%;
+      display:grid;
+      place-items:center;
+      text-align:center;
+      color:var(--muted);
+      padding:30px;
+    }
+
+    .empty-card{
+      max-width:620px;
+      padding:34px;
+      border-radius:30px;
+      background:
+        radial-gradient(circle at 15% 15%, rgba(55,213,255,.17), transparent 34%),
+        radial-gradient(circle at 85% 18%, rgba(255,155,61,.16), transparent 34%),
+        rgba(255,255,255,.86);
+      border:1px solid rgba(148,163,184,.22);
+      box-shadow:0 20px 44px rgba(15,23,42,.1);
+    }
+
+    .empty b{
+      display:block;
+      font-size:26px;
+      font-weight:900;
+      line-height:1.28;
+      color:#16233b;
+    }
+
+    .empty p{
+      margin:12px 0 0;
+      font-size:15px;
+      font-weight:700;
+      line-height:1.7;
+      color:var(--muted);
+    }
+
+    .mascot{
+      position:absolute;
+      left:18px;
+      bottom:16px;
+      display:flex;
+      align-items:flex-end;
+      gap:10px;
+      pointer-events:none;
+    }
+
+    .face{
+      width:56px;
+      height:56px;
+      border-radius:18px;
+      display:grid;
+      place-items:center;
+      font-size:30px;
+      background:linear-gradient(135deg,rgba(255,246,183,.96),rgba(223,250,239,.94));
+      border:1px solid rgba(148,163,184,.22);
+      box-shadow:0 16px 26px rgba(15,23,42,.12);
+      animation:float 3.6s ease-in-out infinite;
+    }
+
+    .speech{
+      max-width:360px;
+      padding:10px 13px;
+      border-radius:17px;
+      background:rgba(255,255,255,.92);
+      border:1px solid rgba(148,163,184,.18);
+      color:var(--muted);
+      font-size:12px;
+      font-weight:800;
+      box-shadow:0 14px 24px rgba(15,23,42,.1);
+    }
+
+    @keyframes float{
+      0%,100%{transform:translateY(0) rotate(0)}
+      50%{transform:translateY(-5px) rotate(2deg)}
+    }
+
+    @media (max-width:980px){
+      body{overflow:auto}
+      .wrap{grid-template-columns:1fr;height:auto;min-height:calc(100vh - 73px)}
+      .sidebar{max-height:52vh}
+      .stage{height:72vh;min-height:430px}
+      .brand span{display:none}
+      .mascot{display:none}
+    }
+
+    @media (max-width:640px){
+      header{padding:10px 12px}
+      .head-inner{align-items:flex-start;flex-direction:column}
+      .chips{justify-content:flex-start}
+      .brand{min-width:0}
+      .brand b{font-size:19px}
+      .wrap{padding:10px;gap:10px}
+      .sidebar,.main{border-radius:22px}
+      .main-top{align-items:flex-start;flex-direction:column}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bg-space" aria-hidden="true" id="parallaxBg"></div>
+  <div class="nebula nebula-cyan" aria-hidden="true"></div>
+  <div class="nebula nebula-violet" aria-hidden="true"></div>
+
+  <header>
+    <div class="head-inner">
+      <div class="brand">
+        <div class="logo">🧭</div>
+        <div>
+          <b>Toán Đại học</b>
+          <span>Science Horizon • Applied Math</span>
+        </div>
+      </div>
+
+      <div class="chips">
+        <div id="countChip" class="chip"><span class="dot"></span> 0 lessons</div>
+        <div class="chip">🚀 Học bằng nhiệm vụ • Tư duy • Tạo sản phẩm</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <aside class="sidebar">
+      <div class="side-top">
+        <div class="search-wrap">
+          <span class="search-ico">🔍</span>
+          <input id="q" class="search" placeholder="Tìm lesson… (giải tích, đại số tuyến tính, xác suất, tối ưu)" />
+        </div>
+
+        <div class="side-meta">
+          <div id="miniText" class="mini">Gõ để lọc nhanh lesson</div>
+          <div class="pill">🧭 Sẵn sàng vào quỹ đạo!</div>
+        </div>
+      </div>
+
+      <div id="lessonList" class="list"></div>
+
+      <div class="side-foot">
+        <div class="small">ĐẠI HỌC • LESSON MAP</div>
+        <a class="btn primary" href="../">← Toán ứng dụng</a>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="main-top">
+        <div>
+          <div id="nowTitle" class="now">Chọn một lesson để bắt đầu</div>
+          <div id="nowUrl" class="url"></div>
+        </div>
+
+        <div class="btns">
+          <a id="openBtn" class="btn primary" href="#" target="_blank" rel="noopener" style="display:none;">↗ Mở riêng</a>
+          <button id="copyBtn" class="btn" style="display:none;">📋 Copy link</button>
+        </div>
+      </div>
+
+      <div class="stage">
+        <div class="frame-wrap">
+          <div id="emptyState" class="empty">
+            <div class="empty-card">
+              <b>🌟 Chọn lesson ở bên trái</b>
+              <p>
+                Mỗi lesson là một thư mục riêng cho cấp Đại học. Sau này bạn chỉ cần tạo folder đúng tên như
+                <b style="font-size:15px;display:inline;color:#1d8cff">lesson-01/</b>,
+                <b style="font-size:15px;display:inline;color:#1d8cff">lesson-02/</b>
+                rồi thêm file <b style="font-size:15px;display:inline;color:#1d8cff">index.html</b> bên trong là chạy được.
+              </p>
+            </div>
+          </div>
+
+          <iframe id="lessonFrame" title="University Applied Math Lesson" style="display:none;"></iframe>
+
+          <div class="mascot" aria-hidden="true">
+            <div class="face">🛰️</div>
+            <div class="speech"><b>Gợi ý:</b> Bấm lesson bên trái để mở bài học Đại học trong khung này ✨</div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    let audioCtx;
+
+    function playSound(type) {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      const now = audioCtx.currentTime;
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      if (type === 'open') {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(320, now);
+        osc.frequency.exponentialRampToValueAtTime(820, now + 0.13);
+        gain.gain.setValueAtTime(0.2, now);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.13);
+        osc.start(now);
+        osc.stop(now + 0.13);
+      } else {
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(440, now);
+        osc.frequency.setValueAtTime(660, now + 0.1);
+        gain.gain.setValueAtTime(0.13, now);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.26);
+        osc.start(now);
+        osc.stop(now + 0.26);
+      }
+    }
+
+    const lessons = [
+      { id:'lesson-01', title:'Lesson 01 • Giải tích một biến', desc:'Giới hạn, liên tục, đạo hàm, tích phân và cách đọc sự thay đổi của một đại lượng theo thời gian.', icon:'∫', url:'lesson-01/' },
+      { id:'lesson-02', title:'Lesson 02 • Giải tích nhiều biến', desc:'Đạo hàm riêng, gradient, cực trị, mặt mức và cách mô hình hóa hiện tượng có nhiều biến tác động.', icon:'∇', url:'lesson-02/' },
+      { id:'lesson-03', title:'Lesson 03 • Đại số tuyến tính ứng dụng', desc:'Vector, ma trận, hệ phương trình, không gian con, trị riêng và tư duy tuyến tính trong dữ liệu.', icon:'▦', url:'lesson-03/' },
+      { id:'lesson-04', title:'Lesson 04 • Xác suất & thống kê cơ bản', desc:'Biến ngẫu nhiên, phân phối, kỳ vọng, phương sai, ước lượng và đọc dữ liệu bằng tư duy xác suất.', icon:'🎲', url:'lesson-04/' },
+      { id:'lesson-05', title:'Lesson 05 • Mô hình hóa toán học', desc:'Biến tình huống thật thành biến số, giả định, phương trình, ràng buộc và mô hình có thể kiểm tra.', icon:'🧩', url:'lesson-05/' },
+      { id:'lesson-06', title:'Lesson 06 • Tối ưu hóa nhập môn', desc:'Hàm mục tiêu, ràng buộc, gradient descent, cực trị có điều kiện và bài toán ra quyết định.', icon:'🎯', url:'lesson-06/' },
+      { id:'lesson-07', title:'Lesson 07 • Quy hoạch tuyến tính', desc:'Miền nghiệm, hàm mục tiêu tuyến tính, bài toán phân bổ nguồn lực và trực quan hóa nghiệm tối ưu.', icon:'📐', url:'lesson-07/' },
+      { id:'lesson-08', title:'Lesson 08 • Phương trình vi phân', desc:'Mô hình tăng trưởng, suy giảm, chuyển động, lan truyền và các hệ động lực đơn giản.', icon:'〰️', url:'lesson-08/' },
+      { id:'lesson-09', title:'Lesson 09 • Toán rời rạc & mạng lưới', desc:'Đồ thị, cây, đường đi, mạng lưới, thuật toán cơ bản và ứng dụng trong giao thông, xã hội, web.', icon:'🕸️', url:'lesson-09/' },
+      { id:'lesson-10', title:'Lesson 10 • Phân tích dữ liệu bằng Python', desc:'Dùng Python để tính toán, trực quan hóa dữ liệu, mô phỏng mô hình và tạo dashboard nhỏ.', icon:'🐍', url:'lesson-10/' },
+      { id:'lesson-11', title:'Lesson 11 • Mô phỏng & thực nghiệm số', desc:'Monte Carlo, xấp xỉ số, kiểm tra giả thuyết bằng mô phỏng và quan sát kết quả thay đổi theo tham số.', icon:'🛰️', url:'lesson-11/' },
+      { id:'lesson-12', title:'Lesson 12 • Mini project Đại học', desc:'Xây một sản phẩm nhỏ: mô hình tối ưu, mô phỏng động lực, dashboard dữ liệu hoặc công cụ học toán.', icon:'🚀', url:'lesson-12/' }
+    ];
+
+    const listEl = document.getElementById('lessonList');
+    const frame = document.getElementById('lessonFrame');
+    const empty = document.getElementById('emptyState');
+    const nowTitle = document.getElementById('nowTitle');
+    const nowUrl = document.getElementById('nowUrl');
+    const openBtn = document.getElementById('openBtn');
+    const copyBtn = document.getElementById('copyBtn');
+    const search = document.getElementById('q');
+    const countChip = document.getElementById('countChip');
+    const miniText = document.getElementById('miniText');
+
+    const base = location.origin + location.pathname.replace(/index\.html$/, '');
+    countChip.innerHTML = `<span class="dot"></span> ${lessons.length} lessons`;
+
+    function directLink(url) { return base + url; }
+    function openLink(id) { return base + `?lesson=${encodeURIComponent(id)}`; }
+
+    function setActive(id) {
+      document.querySelectorAll('.lesson').forEach(item => item.classList.remove('active'));
+      const target = document.querySelector(`[data-id="${id}"]`);
+      if (target) target.classList.add('active');
+    }
+
+    function selectLesson(lesson) {
+      playSound('open');
+      empty.style.display = 'none';
+      frame.style.display = 'block';
+      frame.src = lesson.url;
+
+      nowTitle.textContent = lesson.title;
+      nowUrl.textContent = directLink(lesson.url);
+
+      openBtn.style.display = 'inline-flex';
+      openBtn.href = directLink(lesson.url);
+
+      copyBtn.style.display = 'inline-flex';
+      copyBtn.onclick = () => {
+        const link = openLink(lesson.id);
+        const dummy = document.createElement('input');
+        document.body.appendChild(dummy);
+        dummy.value = link;
+        dummy.select();
+        document.execCommand('copy');
+        document.body.removeChild(dummy);
+        copyBtn.textContent = '✅ Copied!';
+        setTimeout(() => copyBtn.textContent = '📋 Copy link', 900);
+      };
+
+      const u = new URL(location.href);
+      u.searchParams.set('lesson', lesson.id);
+      try { history.replaceState(null, '', u.toString()); } catch(e) {}
+      setActive(lesson.id);
+    }
+
+    function render(filterText = '') {
+      const q = filterText.trim().toLowerCase();
+      listEl.innerHTML = '';
+      const shown = lessons.filter(lesson => {
+        const text = `${lesson.id} ${lesson.title} ${lesson.desc} ${lesson.url}`.toLowerCase();
+        return !q || text.includes(q);
+      });
+
+      const head = document.createElement('div');
+      head.className = 'section-title';
+      head.innerHTML = `<div class="name">🎓 ĐẠI HỌC • Lesson</div><div class="badge">${shown.length}/${lessons.length}</div>`;
+      listEl.appendChild(head);
+
+      shown.forEach(lesson => {
+        const btn = document.createElement('button');
+        btn.className = 'lesson';
+        btn.setAttribute('data-id', lesson.id);
+        btn.innerHTML = `
+          <div class="row">
+            <div class="ico">${lesson.icon}</div>
+            <div class="textbox">
+              <div class="lesson-title">${lesson.title}</div>
+              <div class="lesson-desc">${lesson.desc}</div>
+            </div>
+          </div>
+        `;
+        btn.onclick = () => selectLesson(lesson);
+        listEl.appendChild(btn);
+      });
+
+      miniText.textContent = q ? `Đang hiện ${shown.length} lesson` : 'Gõ để lọc nhanh lesson';
+    }
+
+    search.addEventListener('input', () => render(search.value));
+    render('');
+
+    const params = new URLSearchParams(location.search);
+    const lessonId = params.get('lesson');
+    if (lessonId) {
+      const found = lessons.find(item => item.id === lessonId);
+      if (found) selectLesson(found);
+    }
+
+    document.addEventListener('mousemove', function(event) {
+      if (window.innerWidth > 768) {
+        const x = (event.clientX / window.innerWidth - 0.5) * 16;
+        const y = (event.clientY / window.innerHeight - 0.5) * 16;
+        const bg = document.getElementById('parallaxBg');
+        if (bg) bg.style.transform = `translate(${x}px, ${y}px) scale(1.08)`;
+      }
+    });
+  </script>
+</body>
+</html>
