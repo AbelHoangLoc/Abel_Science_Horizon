@@ -1,0 +1,16 @@
+.sh-logo {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  width: 130px;
+  height: 130px;
+  object-fit: contain;
+  z-index: 9999;
+
+  
+  background: rgba(255, 255, 255, 0.92);
+  padding: 10px;
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.22);
+}
