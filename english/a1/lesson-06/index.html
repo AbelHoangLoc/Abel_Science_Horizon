@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+
+  <link rel="stylesheet" href="../assets/brand.css">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A1 · Lesson 06 · Family Words</title>
+<style>
+:root{--bg:#080d1a;--card:#0f1729;--card2:#131e35;--border:#1e2d4a;--text:#dde6f5;--muted:#8b9ab5;--accent:#ec4899;--acl:#f9a8d4;--green:#10b981;--red:#ef4444}
+*{box-sizing:border-box;margin:0;padding:0}body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;line-height:1.6;padding:1.5rem 1.25rem 3rem}
+.lsn-header{background:linear-gradient(135deg,#200a1a,#0f1729);border:1px solid var(--border);border-radius:16px;padding:1.5rem;margin-bottom:1.5rem;position:relative;overflow:hidden}
+.lsn-header::before{content:'';position:absolute;top:-40px;right:-40px;width:150px;height:150px;background:radial-gradient(circle,rgba(236,72,153,.3),transparent 70%);pointer-events:none}
+.lsn-badge{display:inline-flex;background:rgba(236,72,153,.15);border:1px solid rgba(249,168,212,.3);border-radius:20px;padding:.25rem .75rem;font-size:.7rem;font-weight:700;color:var(--acl);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.75rem}
+.lsn-header h1{font-size:1.6rem;font-weight:800;background:linear-gradient(90deg,#fbcfe8,#f9a8d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.4rem}
+.lsn-header p{color:var(--muted);font-size:.9rem}.objectives{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}.obj-tag{background:rgba(236,72,153,.12);border:1px solid rgba(236,72,153,.25);border-radius:20px;padding:.25rem .7rem;font-size:.75rem;color:var(--acl)}
+.sec-title{display:flex;align-items:center;gap:.6rem;font-size:1rem;font-weight:700;color:var(--acl);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)}
+.fam-tree{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.65rem;margin-bottom:1.75rem}.fam-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:.85rem;text-align:center;cursor:pointer;transition:all .2s}.fam-card:hover,.fam-card.flip{border-color:var(--accent);background:rgba(236,72,153,.08);transform:translateY(-2px)}.fam-icon{font-size:1.5rem;margin-bottom:.3rem}.fam-en{font-size:.95rem;font-weight:700;color:var(--text)}.fam-vn{font-size:.8rem;color:var(--muted)}.fam-eg{font-size:.72rem;color:var(--acl);margin-top:.2rem;font-style:italic;display:none}.fam-card.flip .fam-eg{display:block}.vc-hint{font-size:.65rem;color:var(--border);margin-top:.3rem;text-align:right}
+.grammar-box{background:linear-gradient(135deg,rgba(236,72,153,.1),rgba(244,114,182,.06));border:1px solid rgba(236,72,153,.2);border-radius:12px;padding:1.1rem;margin-bottom:1.75rem}.grammar-box h3{color:var(--acl);font-size:.9rem;margin-bottom:.8rem}.gram-row{display:flex;gap:.5rem;align-items:flex-start;margin-bottom:.5rem;font-size:.88rem;flex-wrap:wrap}.gram-box{background:rgba(236,72,153,.15);border-radius:6px;padding:.2rem .7rem;color:var(--acl);font-weight:700;font-family:monospace}
+.pattern-list{display:flex;flex-direction:column;gap:.6rem;margin-bottom:1.75rem}.pattern-item{background:var(--card);border-left:3px solid var(--accent);border-radius:0 10px 10px 0;padding:.8rem 1rem}.pat-en{font-size:1rem;font-weight:600;color:var(--text)}.pat-vn{font-size:.82rem;color:var(--muted);margin-top:.2rem}.pat-note{font-size:.78rem;color:var(--acl);margin-top:.25rem;font-style:italic}
+.convo-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1.75rem}.convo-line{display:flex;gap:.7rem;margin-bottom:.65rem;align-items:flex-start}.spk-a{color:#f9a8d4;font-size:.7rem;font-weight:700;text-transform:uppercase;min-width:28px;margin-top:.2rem}.spk-b{color:#34d399;font-size:.7rem;font-weight:700;text-transform:uppercase;min-width:28px;margin-top:.2rem}.bubble{background:var(--card2);border-radius:0 10px 10px 10px;padding:.55rem .85rem;font-size:.9rem;flex:1}.bubble.b{border-radius:10px 10px 10px 0;background:rgba(52,211,153,.07);border:1px solid rgba(52,211,153,.15)}
+.ex-block{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1.75rem}.ex-q{font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:.75rem}input[type=text]{background:var(--card2);border:1px solid var(--border);border-radius:6px;padding:.3rem .6rem;color:var(--text);font-size:.85rem;outline:none}input[type=text]:focus{border-color:var(--accent)}
+.quiz-section{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.25rem;margin-bottom:1.75rem}.quiz-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}.quiz-q{font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:.75rem;padding:.75rem;background:var(--card2);border-radius:8px}.quiz-opts{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.5rem}.quiz-opt{background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:.55rem .75rem;font-size:.85rem;cursor:pointer;transition:all .18s;color:var(--text);text-align:left}.quiz-opt:hover:not(:disabled){border-color:var(--accent);color:var(--acl)}.quiz-opt.correct{border-color:var(--green)!important;background:rgba(16,185,129,.15)!important;color:var(--green)!important}.quiz-opt.wrong{border-color:var(--red)!important;background:rgba(239,68,68,.1)!important;color:var(--red)!important}.quiz-opt:disabled{cursor:default}.quiz-feedback{font-size:.8rem;margin:.4rem 0 .6rem;min-height:1rem}.quiz-feedback.ok{color:var(--green)}.quiz-feedback.no{color:var(--red)}.quiz-nav{display:flex;gap:.5rem;align-items:center;justify-content:space-between}.btn{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:.5rem 1.1rem;font-size:.85rem;font-weight:600;cursor:pointer;transition:opacity .2s}.btn:hover{opacity:.85}.progress-bar{background:var(--border);border-radius:4px;height:4px;flex:1;overflow:hidden}.progress-fill{background:linear-gradient(90deg,var(--accent),#fbcfe8);height:100%;border-radius:4px;transition:width .3s}.result-box{text-align:center;padding:1.25rem;display:none}.result-emoji{font-size:2.5rem;margin-bottom:.5rem}.result-score{font-size:1.5rem;font-weight:800;color:var(--acl);margin-bottom:.25rem}.result-msg{font-size:.85rem;color:var(--muted);margin-bottom:1rem}
+.lesson-footer{display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border)}.footer-nav a{color:var(--accent);text-decoration:none;font-size:.85rem;font-weight:600}
+@media(max-width:650px){.quiz-opts{grid-template-columns:1fr}.lesson-footer{gap:.75rem;flex-wrap:wrap}.fam-tree{grid-template-columns:repeat(auto-fill,minmax(125px,1fr))}}
+</style>
+</head>
+<body>
+
+  <img src="../assets/logo-SH.png" class="sh-logo" alt="Science Horizon">
+<div class="lsn-header">
+  <div class="lsn-badge">👨‍👩‍👧 People & Everyday Life · Lesson 06</div>
+  <h1>Family Words</h1>
+  <p>Học từ vựng về gia đình và cách mô tả các thành viên — nền tảng để kể chuyện về gia đình!</p>
+  <div class="objectives"><span class="obj-tag">👪 Từ vựng gia đình</span><span class="obj-tag">📖 Sở hữu cách</span><span class="obj-tag">💬 Mô tả gia đình</span><span class="obj-tag">🔢 Đếm người</span></div>
+</div>
+
+<div class="sec-title"><span>👨‍👩‍👧</span> Từ Vựng Gia Đình <small style="color:var(--muted);font-weight:400;font-size:.78rem">(nhấn xem ví dụ)</small></div>
+<div class="fam-tree" id="famGrid"></div>
+
+<div class="sec-title"><span>📐</span> Ngữ Pháp</div>
+<div class="grammar-box">
+  <h3>✏️ Sở hữu cách — 's (Possessive)</h3>
+  <div class="gram-row"><span class="gram-box">Mai's</span><span>mother is a teacher.</span><span style="color:var(--muted);font-size:.8rem">→ Mẹ của Mai là giáo viên.</span></div>
+  <div class="gram-row"><span class="gram-box">My father's</span><span>name is Hung.</span><span style="color:var(--muted);font-size:.8rem">→ Tên của bố tôi là Hùng.</span></div>
+  <div class="gram-row"><span class="gram-box">Lan's sister</span><span>is eight years old.</span><span style="color:var(--muted);font-size:.8rem">→ Em gái của Lan tám tuổi.</span></div>
+  <div style="margin-top:.75rem;font-size:.82rem;color:var(--muted);background:rgba(236,72,153,.07);border-radius:8px;padding:.6rem .9rem">💡 <strong style="color:var(--acl)">Tính từ sở hữu:</strong> my, your, his, her, our, their. Ví dụ: <strong>her brother</strong>, <strong>my parents</strong>.</div>
+</div>
+
+<div class="sec-title"><span>💬</span> Mẫu Câu</div>
+<div class="pattern-list">
+  <div class="pattern-item"><div class="pat-en">"There are [số] people in my family."</div><div class="pat-vn">→ Gia đình tôi có [số] người.</div><div class="pat-note">💡 There are four people in my family.</div></div>
+  <div class="pattern-item"><div class="pat-en">"I have [số] brothers and [số] sisters."</div><div class="pat-vn">→ Tôi có [số] anh/em trai và [số] chị/em gái.</div><div class="pat-note">💡 I have one brother and two sisters.</div></div>
+  <div class="pattern-item"><div class="pat-en">"My mother is a [job]. She is [age] years old."</div><div class="pat-vn">→ Mẹ tôi là [nghề]. Bà ấy [tuổi] tuổi.</div><div class="pat-note">💡 Dùng she/he khi nói về người trong gia đình.</div></div>
+  <div class="pattern-item"><div class="pat-en">"I'm an only child."</div><div class="pat-vn">→ Tôi là con một.</div><div class="pat-note">💡 Câu rất hay dùng khi giới thiệu gia đình.</div></div>
+</div>
+
+<div class="sec-title"><span>🗣️</span> Hội Thoại</div>
+<div class="convo-box">
+  <div class="convo-line"><span class="spk-a">A</span><div class="bubble">Do you have a big family?</div></div>
+  <div class="convo-line"><span class="spk-b">B</span><div class="bubble b">Yes! There are five people in my family — my father, my mother, my grandmother, my brother and me.</div></div>
+  <div class="convo-line"><span class="spk-a">A</span><div class="bubble">What does your father do?</div></div>
+  <div class="convo-line"><span class="spk-b">B</span><div class="bubble b">He's an engineer. My mother is a teacher. What about your family?</div></div>
+  <div class="convo-line"><span class="spk-a">A</span><div class="bubble">I have a small family — just my parents and me. I'm an only child.</div></div>
+</div>
+
+<div class="sec-title"><span>✏️</span> Luyện Tập</div>
+<div class="ex-block">
+  <div class="ex-q">📝 Điền từ quan hệ gia đình phù hợp:</div>
+  <div style="display:flex;flex-direction:column;gap:.5rem;font-size:.9rem">
+    <div style="display:flex;align-items:center;gap:.5rem;padding:.5rem .75rem;background:var(--card2);border-radius:8px;flex-wrap:wrap"><span style="flex:1">My father's wife is my ___</span><input type="text" placeholder="mother" style="width:120px" onblur="fc(this,'mother')"></div>
+    <div style="display:flex;align-items:center;gap:.5rem;padding:.5rem .75rem;background:var(--card2);border-radius:8px;flex-wrap:wrap"><span style="flex:1">My mother's father is my ___</span><input type="text" placeholder="grandfather" style="width:130px" onblur="fc(this,'grandfather')"></div>
+    <div style="display:flex;align-items:center;gap:.5rem;padding:.5rem .75rem;background:var(--card2);border-radius:8px;flex-wrap:wrap"><span style="flex:1">My parents' daughter is my ___</span><input type="text" placeholder="sister" style="width:120px" onblur="fc(this,'sister')"></div>
+  </div>
+</div>
+
+<div class="sec-title"><span>🎯</span> Quiz Nhanh (5 câu)</div>
+<div class="quiz-section">
+  <div class="quiz-header"><span id="quizTitle" style="font-size:.85rem;color:var(--muted)">Câu 1 / 5</span><span id="quizScoreDisplay" style="font-size:.85rem;color:var(--muted)">Điểm: 0</span></div>
+  <div id="quizContent"><div class="quiz-q" id="quizQ"></div><div class="quiz-opts" id="quizOpts"></div><div class="quiz-feedback" id="quizFB"></div><div class="quiz-nav"><div class="progress-bar"><div class="progress-fill" id="quizProgress" style="width:20%"></div></div><button class="btn" id="quizNext" style="display:none" onclick="nextQ()">Tiếp →</button></div></div>
+  <div class="result-box" id="quizResult"><div class="result-emoji" id="resEmoji"></div><div class="result-score" id="resScore"></div><div class="result-msg" id="resMsg"></div><button class="btn" onclick="resetQuiz()">🔄 Làm lại</button></div>
+</div>
+
+<div class="lesson-footer"><div class="footer-nav">← <a href="../lesson-05/">Lesson 05</a></div><div style="font-size:.8rem;color:var(--muted)">A1 · Lesson 06 / 12</div><div class="footer-nav"><a href="../lesson-07/">Lesson 07 →</a></div></div>
+
+<script>
+const fam=[{i:'👨',en:'father',vn:'bố / cha',eg:'My father is 45 years old.'},{i:'👩',en:'mother',vn:'mẹ',eg:'My mother is a teacher.'},{i:'👦',en:'brother',vn:'anh / em trai',eg:'I have one brother.'},{i:'👧',en:'sister',vn:'chị / em gái',eg:'My sister is twelve.'},{i:'👴',en:'grandfather',vn:'ông',eg:'My grandfather is seventy.'},{i:'👵',en:'grandmother',vn:'bà',eg:'My grandmother cooks well.'},{i:'👶',en:'baby / child',vn:'em bé / đứa trẻ',eg:'The baby is cute.'},{i:'👨‍👩‍👧',en:'family',vn:'gia đình',eg:'I love my family.'},{i:'👫',en:'parents',vn:'bố mẹ',eg:'My parents are teachers.'},{i:'🧑',en:'child / kid',vn:'đứa con / đứa trẻ',eg:'She has two children.'},{i:'👨‍👦',en:'son',vn:'con trai',eg:'Their son is a doctor.'},{i:'👩‍👧',en:'daughter',vn:'con gái',eg:'Their daughter is a student.'}];
+const g=document.getElementById('famGrid');
+fam.forEach(f=>{g.innerHTML+=`<div class="fam-card" onclick="this.classList.toggle('flip')"><div class="fam-icon">${f.i}</div><div class="fam-en">${f.en}</div><div class="fam-vn">${f.vn}</div><div class="fam-eg">"${f.eg}"</div><div class="vc-hint">nhấn xem ví dụ</div></div>`;});
+function fc(el,ans){const v=el.value.trim().toLowerCase();if(v===ans){el.style.borderColor='#10b981';el.style.color='#10b981';}else if(v){el.style.borderColor='#ef4444';el.style.color='#ef4444';}}
+const qs=[{q:'"sister" nghĩa là?',opts:['Anh/em trai','Chị/em gái','Bố','Mẹ'],ans:1},{q:'Tính từ sở hữu của "she" là?',opts:['his','her','my','our'],ans:1},{q:'"There are four people in my family." — Có mấy người?',opts:['3','4','5','6'],ans:1},{q:'"grandfather" là?',opts:['Bố','Ông','Anh','Con trai'],ans:1},{q:'Câu nào đúng?',opts:["My mother's is a teacher.","My mother is a teacher.","My mother are a teacher.","I mother is a teacher."],ans:1}];
+let qi=0,score=0;
+function renderQ(){const q=qs[qi];document.getElementById('quizTitle').textContent=`Câu ${qi+1} / ${qs.length}`;document.getElementById('quizProgress').style.width=`${((qi+1)/qs.length)*100}%`;document.getElementById('quizQ').textContent=q.q;document.getElementById('quizFB').textContent='';document.getElementById('quizFB').className='quiz-feedback';document.getElementById('quizNext').style.display='none';const opts=document.getElementById('quizOpts');opts.innerHTML='';q.opts.forEach((o,i)=>{const btn=document.createElement('button');btn.className='quiz-opt';btn.textContent=o;btn.onclick=()=>{document.querySelectorAll('.quiz-opt').forEach(b=>b.disabled=true);if(i===q.ans){btn.classList.add('correct');score++;document.getElementById('quizFB').textContent='✅ Chính xác!';document.getElementById('quizFB').className='quiz-feedback ok';}else{btn.classList.add('wrong');document.querySelectorAll('.quiz-opt')[q.ans].classList.add('correct');document.getElementById('quizFB').textContent='❌ Sai rồi! Đáp án đúng đã được tô xanh.';document.getElementById('quizFB').className='quiz-feedback no';}document.getElementById('quizScoreDisplay').textContent=`Điểm: ${score}`;document.getElementById('quizNext').style.display='inline-block';};opts.appendChild(btn);});}
+function nextQ(){qi++;if(qi>=qs.length){document.getElementById('quizContent').style.display='none';const r=document.getElementById('quizResult');r.style.display='block';const pct=Math.round(score/qs.length*100);document.getElementById('resEmoji').textContent=pct>=80?'🏆':pct>=60?'👍':'💪';document.getElementById('resScore').textContent=`${score} / ${qs.length} đúng (${pct}%)`;document.getElementById('resMsg').textContent=pct>=80?'Tuyệt! Bạn biết hết từ vựng gia đình rồi!':'Ôn lại family words và thử tiếp nhé!';}else renderQ();}
+function resetQuiz(){qi=0;score=0;document.getElementById('quizScoreDisplay').textContent='Điểm: 0';document.getElementById('quizContent').style.display='block';document.getElementById('quizResult').style.display='none';renderQ();}
+renderQ();
+</script>
+</body>
+</html>
