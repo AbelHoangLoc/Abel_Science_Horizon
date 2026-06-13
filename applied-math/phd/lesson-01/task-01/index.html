@@ -1,0 +1,1362 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<link rel="stylesheet" href="../assets/brand.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Task 01 · Variational Analysis and Applications | Science Horizon</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=STIX+Two+Math&display=swap');
+
+:root{
+  --space:#06142e;
+  --deep:#071b3f;
+  --night:#020712;
+  --cyan:#37d5ff;
+  --blue:#1d8cff;
+  --violet:#7c5cff;
+  --pink:#ff70b8;
+  --green:#52f5b0;
+  --orange:#ffb45e;
+  --yellow:#ffe66d;
+
+  --card:rgba(255,255,255,.92);
+  --card2:rgba(255,255,255,.97);
+  --glass:rgba(255,255,255,.10);
+  --border:rgba(148,163,184,.28);
+  --rule:rgba(148,163,184,.26);
+
+  --ink:#0f172a;
+  --ink2:#475569;
+  --ink3:#718096;
+
+  --l0:#e9fff6;--l0b:#10b981;--l0t:#047857;
+  --l1:#eaf6ff;--l1b:#1d8cff;--l1t:#075985;
+  --l2:#fff4e6;--l2b:#f59e0b;--l2t:#92400e;
+  --l3:#ffeaf3;--l3b:#ec4899;--l3t:#9d174d;
+  --lx:#f2edff;--lxb:#7c5cff;--lxt:#4c1d95;
+
+  --shadow:0 22px 60px rgba(0,0,0,.26);
+  --shadow2:0 12px 30px rgba(15,23,42,.10);
+  --radius:22px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+html{scroll-behavior:smooth}
+
+body{
+  min-height:100vh;
+  color:var(--ink);
+  font-family:"Be Vietnam Pro", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  font-size:15px;
+  line-height:1.72;
+  padding-bottom:80px;
+  background:
+    radial-gradient(900px 540px at 8% 8%, rgba(55,213,255,.24), transparent 60%),
+    radial-gradient(850px 520px at 92% 12%, rgba(124,92,255,.25), transparent 60%),
+    radial-gradient(850px 520px at 62% 95%, rgba(82,245,176,.13), transparent 60%),
+    linear-gradient(135deg, #031024 0%, #071b3f 48%, #020712 100%);
+  overflow-x:hidden;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:-2;
+  opacity:.38;
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,.88) 1px, transparent 1.6px),
+    radial-gradient(circle, rgba(55,213,255,.70) 1px, transparent 1.5px),
+    radial-gradient(circle, rgba(82,245,176,.58) 1px, transparent 1.5px);
+  background-size:72px 72px,118px 118px,164px 164px;
+  background-position:0 0,34px 58px,90px 26px;
+}
+
+body::after{
+  content:"";
+  position:fixed;
+  right:-320px;
+  top:150px;
+  width:980px;
+  height:250px;
+  border-radius:50%;
+  border:3px solid rgba(55,213,255,.16);
+  border-left-color:rgba(82,245,176,.40);
+  transform:rotate(-17deg);
+  pointer-events:none;
+  z-index:-1;
+}
+
+.hero{
+  position:relative;
+  overflow:hidden;
+  margin:18px auto 0;
+  width:min(1180px, calc(100% - 32px));
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:28px;
+  padding:28px 34px 30px;
+  color:#f8fbff;
+  background:
+    radial-gradient(680px 280px at 8% 0%, rgba(55,213,255,.24), transparent 62%),
+    radial-gradient(680px 300px at 90% 0%, rgba(124,92,255,.28), transparent 62%),
+    linear-gradient(135deg, rgba(5,20,48,.94), rgba(7,27,63,.88));
+  box-shadow:var(--shadow);
+  backdrop-filter:blur(16px);
+}
+
+.hero::before{
+  content:"∂  ∇  ℝⁿ  N(x̄;Ω)  epi φ  D*F  lim sup";
+  position:absolute;
+  right:-36px;
+  bottom:12px;
+  color:rgba(255,255,255,.07);
+  font-family:"STIX Two Math","JetBrains Mono",monospace;
+  font-size:42px;
+  white-space:nowrap;
+  letter-spacing:.02em;
+  pointer-events:none;
+}
+
+.hero::after{
+  content:"";
+  position:absolute;
+  right:44px;
+  top:32px;
+  width:170px;
+  height:44px;
+  border-radius:50%;
+  border:2px solid rgba(82,245,176,.32);
+  transform:rotate(-15deg);
+  pointer-events:none;
+}
+
+.hero-label{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  border:1px solid rgba(255,255,255,.14);
+  background:rgba(255,255,255,.10);
+  border-radius:999px;
+  padding:7px 12px;
+  font-size:11px;
+  letter-spacing:1.8px;
+  text-transform:uppercase;
+  color:rgba(226,246,255,.86);
+  margin-bottom:13px;
+  font-weight:900;
+}
+
+.hero-label::before{content:"🧭";letter-spacing:0}
+
+.hero-title{
+  max-width:900px;
+  font-size:31px;
+  font-weight:900;
+  line-height:1.22;
+  margin-bottom:12px;
+  letter-spacing:-.02em;
+  background:linear-gradient(90deg,#83efff,#52f5b0,#a8b5ff);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 2px 3px rgba(55,213,255,.22));
+}
+
+.hero-title .math,
+.hero-title em{
+  font-family:"STIX Two Math","JetBrains Mono",serif;
+  font-style:normal;
+}
+
+.hero-sub{
+  font-size:14px;
+  color:rgba(226,232,240,.78);
+  font-weight:600;
+  line-height:1.72;
+  max-width:830px;
+}
+
+.hero-pills{
+  margin-top:18px;
+  display:flex;
+  gap:9px;
+  flex-wrap:wrap;
+  position:relative;
+  z-index:1;
+}
+
+.pill{
+  border:1px solid rgba(255,255,255,.16);
+  background:rgba(255,255,255,.10);
+  border-radius:999px;
+  padding:7px 12px;
+  font-size:11px;
+  letter-spacing:.7px;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.86);
+  font-weight:900;
+  box-shadow:0 12px 24px rgba(0,0,0,.12);
+}
+
+.sticky{
+  position:sticky;
+  top:0;
+  z-index:20;
+  width:min(1180px, calc(100% - 32px));
+  margin:14px auto 0;
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:22px;
+  padding:11px 13px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+  background:rgba(6,20,46,.74);
+  backdrop-filter:blur(16px);
+  box-shadow:0 14px 35px rgba(0,0,0,.18);
+}
+
+.search-box{
+  position:relative;
+  flex:1;
+  min-width:240px;
+  max-width:560px;
+}
+
+.sticky input{
+  width:100%;
+  background:rgba(255,255,255,.96);
+  border:2px solid rgba(148,163,184,.28);
+  border-radius:16px;
+  padding:11px 14px 11px 40px;
+  font-family:"Be Vietnam Pro",sans-serif;
+  font-size:13px;
+  color:var(--ink);
+  outline:none;
+  font-weight:700;
+  transition:.15s ease;
+}
+
+.sticky input:focus{
+  border-color:rgba(55,213,255,.60);
+  box-shadow:0 10px 24px rgba(55,213,255,.18);
+}
+
+.s-ico{
+  position:absolute;
+  left:14px;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:16px;
+  color:#64748b;
+  z-index:1;
+}
+
+.s-cnt{
+  font-size:12px;
+  color:rgba(226,232,240,.78);
+  font-weight:900;
+}
+
+.tabs{
+  width:min(1180px, calc(100% - 32px));
+  margin:12px auto 0;
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:22px;
+  padding:8px;
+  display:flex;
+  gap:7px;
+  overflow-x:auto;
+  background:rgba(255,255,255,.10);
+  backdrop-filter:blur(14px);
+  box-shadow:0 12px 30px rgba(0,0,0,.13);
+}
+
+.tab{
+  background:rgba(255,255,255,.88);
+  border:2px solid transparent;
+  border-radius:999px;
+  font-family:"Be Vietnam Pro",sans-serif;
+  font-size:12px;
+  font-weight:900;
+  color:#526174;
+  padding:9px 13px;
+  cursor:pointer;
+  white-space:nowrap;
+  transition:all .15s cubic-bezier(.4,0,.2,1);
+  box-shadow:0 4px 0 rgba(148,163,184,.12);
+}
+
+.tab:hover{
+  transform:translateY(-2px);
+  color:#0f172a;
+  border-color:rgba(55,213,255,.32);
+}
+
+.tab.on{
+  color:#073b4c;
+  border-color:rgba(82,245,176,.55);
+  background:linear-gradient(135deg, rgba(131,239,255,.95), rgba(255,255,255,.94), rgba(82,245,176,.28));
+  box-shadow:0 5px 0 rgba(82,245,176,.22),0 12px 22px rgba(55,213,255,.12);
+}
+
+.body{
+  width:min(1180px, calc(100% - 32px));
+  margin:0 auto;
+  padding:24px 0 32px;
+}
+
+.legend{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:24px;
+  padding:14px;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  box-shadow:var(--shadow2);
+  backdrop-filter:blur(14px);
+}
+
+.leg-item{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:12px;
+  color:var(--ink2);
+  font-weight:800;
+}
+
+.leg-dot{
+  width:14px;
+  height:14px;
+  border-radius:50%;
+  flex-shrink:0;
+  box-shadow:0 0 0 4px rgba(148,163,184,.12);
+}
+
+.sec{
+  margin-bottom:42px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:28px;
+  padding:18px;
+  box-shadow:0 14px 40px rgba(0,0,0,.12);
+  backdrop-filter:blur(12px);
+}
+
+.sec-hdr{
+  display:flex;
+  align-items:center;
+  gap:13px;
+  margin-bottom:16px;
+  padding:6px 4px 16px;
+  border-bottom:1px solid rgba(255,255,255,.16);
+}
+
+.sec-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  border-radius:999px;
+  padding:8px 14px;
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.3px;
+  white-space:nowrap;
+  box-shadow:0 8px 18px rgba(0,0,0,.08);
+}
+
+.sec-title{
+  font-size:21px;
+  font-weight:900;
+  line-height:1.28;
+  color:#eef7ff;
+  letter-spacing:-.01em;
+}
+
+.sec-desc{
+  font-size:13px;
+  color:rgba(226,232,240,.70);
+  margin-top:4px;
+  font-weight:700;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(310px,1fr));
+  gap:13px;
+}
+
+.grid.wide{grid-template-columns:1fr}
+
+.card{
+  background:
+    radial-gradient(380px 120px at 24% 0%, rgba(55,213,255,.11), transparent 65%),
+    var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:16px 18px;
+  transition:transform .15s, box-shadow .15s, border-color .15s;
+  border-left:5px solid;
+  box-shadow:0 10px 24px rgba(15,23,42,.07);
+  overflow:hidden;
+  position:relative;
+}
+
+.card::after{
+  content:"";
+  position:absolute;
+  right:-34px;
+  top:-34px;
+  width:90px;
+  height:90px;
+  border-radius:50%;
+  background:rgba(55,213,255,.08);
+  pointer-events:none;
+}
+
+.card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 18px 35px rgba(15,23,42,.13);
+  border-top-color:rgba(55,213,255,.38);
+}
+
+.card.l0{border-left-color:var(--l0b)}.card.l1{border-left-color:var(--l1b)}
+.card.l2{border-left-color:var(--l2b)}.card.l3{border-left-color:var(--l3b)}
+.card.lx{border-left-color:var(--lxb)}
+
+.card-title{
+  font-weight:900;
+  font-size:14px;
+  color:#162033;
+  margin-bottom:7px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap;
+  line-height:1.38;
+  position:relative;
+  z-index:1;
+}
+
+.card-sym{
+  font-family:"STIX Two Math","JetBrains Mono","DejaVu Sans",serif;
+  font-size:14px;
+  font-weight:500;
+  letter-spacing:.01em;
+  word-break:break-word;
+}
+
+.card-sym.l0{color:var(--l0b)}.card-sym.l1{color:var(--l1b)}
+.card-sym.l2{color:var(--l2b)}.card-sym.l3{color:var(--l3b)}.card-sym.lx{color:var(--lxb)}
+
+.card-body{
+  font-size:13px;
+  color:var(--ink2);
+  line-height:1.72;
+  font-weight:650;
+  position:relative;
+  z-index:1;
+}
+
+.card-where{
+  margin-top:11px;
+  background:rgba(15,23,42,.045);
+  border:1px solid rgba(148,163,184,.18);
+  border-radius:12px;
+  padding:9px 11px;
+  font-size:12px;
+  color:#5f6f86;
+  font-weight:650;
+  line-height:1.62;
+  position:relative;
+  z-index:1;
+}
+
+.card-where b{
+  color:#1f2a3d;
+  font-weight:900;
+}
+
+.card-items{
+  margin-top:9px;
+  padding-left:0;
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+  position:relative;
+  z-index:1;
+}
+
+.card-items li{
+  font-size:12.5px;
+  color:#405066;
+  padding-left:18px;
+  position:relative;
+  line-height:1.62;
+  font-weight:650;
+}
+
+.card-items li::before{
+  content:"✦";
+  position:absolute;
+  left:1px;
+  top:0;
+  color:var(--cyan);
+  font-size:10px;
+}
+
+.badge-tiny{
+  display:inline-block;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.35px;
+  text-transform:uppercase;
+  padding:3px 8px;
+  border-radius:999px;
+}
+
+.must{background:#fff4e6;color:#b45309}
+.good{background:#eaf6ff;color:#0369a1}
+.opt{background:#f2edff;color:#5b21b6}
+
+.roadmap{
+  display:flex;
+  flex-direction:column;
+  gap:0;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:22px;
+  padding:18px 18px 2px;
+  box-shadow:var(--shadow2);
+}
+
+.rm-row{
+  display:grid;
+  grid-template-columns:120px 1fr;
+  gap:0;
+  align-items:stretch;
+}
+
+.rm-left{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:0;
+  padding:0 20px 0 0;
+}
+
+.rm-dot{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:900;
+  font-size:15px;
+  flex-shrink:0;
+  border:1px solid rgba(148,163,184,.20);
+  box-shadow:0 10px 20px rgba(15,23,42,.10);
+}
+
+.rm-line{
+  width:2px;
+  flex:1;
+  min-height:20px;
+}
+
+.rm-right{padding:0 0 28px 0}
+
+.rm-stage{
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:1.05px;
+  text-transform:uppercase;
+  margin-bottom:6px;
+}
+
+.rm-title{
+  font-size:18px;
+  font-weight:900;
+  margin-bottom:7px;
+  color:#142033;
+  line-height:1.35;
+}
+
+.rm-desc{
+  font-size:13px;
+  color:var(--ink2);
+  line-height:1.75;
+  margin-bottom:10px;
+  font-weight:650;
+}
+
+.rm-tags{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+  margin-bottom:8px;
+}
+
+.rtag{
+  font-size:11px;
+  font-weight:900;
+  padding:4px 9px;
+  border-radius:999px;
+  letter-spacing:.25px;
+}
+
+.rm-time{
+  font-size:12px;
+  color:var(--ink3);
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-weight:800;
+}
+
+.rm-time::before{
+  content:"⏱";
+  font-size:12px;
+}
+
+.matrix{
+  width:100%;
+  border-collapse:separate;
+  border-spacing:0;
+  font-size:13px;
+  background:var(--card2);
+  border:1px solid var(--border);
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:var(--shadow2);
+}
+
+.matrix th{
+  background:linear-gradient(135deg, rgba(55,213,255,.14), rgba(124,92,255,.12));
+  font-weight:900;
+  padding:10px 12px;
+  text-align:left;
+  border-right:1px solid rgba(148,163,184,.20);
+  border-bottom:1px solid rgba(148,163,184,.22);
+  font-size:11.5px;
+  text-transform:uppercase;
+  letter-spacing:.4px;
+  color:#26364f;
+  white-space:nowrap;
+}
+
+.matrix td{
+  padding:10px 12px;
+  border-right:1px solid rgba(148,163,184,.18);
+  border-bottom:1px solid rgba(148,163,184,.18);
+  vertical-align:top;
+  line-height:1.58;
+  color:#334155;
+  font-weight:650;
+  background:rgba(255,255,255,.72);
+}
+
+.matrix tr:nth-child(even) td{background:rgba(241,245,249,.70)}
+
+.matrix .k{
+  font-family:"STIX Two Math","JetBrains Mono",monospace;
+  font-size:12px;
+  color:var(--l1b);
+}
+
+.ck{
+  color:var(--l0b)!important;
+  font-weight:900;
+  font-size:14px;
+  text-align:center;
+}
+
+.cx{
+  color:#94a3b8!important;
+  font-size:13px;
+  text-align:center;
+}
+
+.hidden{display:none!important}
+
+.nores{
+  width:min(1180px, calc(100% - 32px));
+  margin:20px auto;
+  text-align:center;
+  padding:50px 20px;
+  color:rgba(226,232,240,.78);
+  font-size:15px;
+  font-weight:800;
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:22px;
+  background:rgba(255,255,255,.08);
+}
+
+strong{font-weight:900;color:#142033}
+
+em{
+  font-style:normal;
+  color:#2563eb;
+  font-weight:800;
+}
+
+code, .math, .formula, sup, sub{
+  font-family:"STIX Two Math","JetBrains Mono","DejaVu Sans",serif;
+}
+
+@media (max-width:760px){
+  body{font-size:14px}
+  .hero{padding:24px 20px}
+  .hero-title{font-size:25px}
+  .hero-sub{font-size:13px}
+  .sec{padding:14px}
+  .sec-hdr{align-items:flex-start;flex-direction:column}
+  .grid{grid-template-columns:1fr}
+  .rm-row{grid-template-columns:68px 1fr}
+  .rm-left{padding-right:12px}
+  .tabs,.sticky,.body,.hero,.nores{width:min(100% - 20px, 1180px)}
+}
+</style>
+</head>
+<body>
+
+<img src="../assets/logo-SH.png" class="sh-logo" alt="Science Horizon">
+<div class="hero">
+  <div class="hero-label">Task 01 · Research Knowledge Map</div>
+  <div class="hero-title">Variational Analysis and Applications<br>Giải tích Biến Phân và Ứng dụng</div>
+  <div class="hero-sub">Bản đồ nền tảng để đọc Chương 1 của Mordukhovich: định nghĩa, bổ đề, định lý, ký hiệu toán học, kiến thức tiên quyết và lộ trình học từ nền tảng đến nghiên cứu.</div>
+  <div class="hero-pills">
+    <span class="pill">50+ khái niệm</span>
+    <span class="pill">5 cấp độ ưu tiên</span>
+    <span class="pill">Lộ trình 6 giai đoạn</span>
+    <span class="pill">Ma trận sử dụng</span>
+  </div>
+</div>
+
+<div class="sticky">
+  <div class="search-box">
+    <span class="s-ico">🔍</span>
+    <input type="text" id="q" placeholder="Tìm kiến thức... (vd: chuỗi số, Cauchy, lồi, Jacobian...)" oninput="doSearch()">
+  </div>
+  <span class="s-cnt" id="scnt"></span>
+</div>
+
+<div class="tabs">
+  <button class="tab on" onclick="showTab('all',this)">Tất cả</button>
+  <button class="tab" onclick="showTab('l0',this)">🟢 Lớp 12</button>
+  <button class="tab" onclick="showTab('l1',this)">🔵 Đại học 1-2</button>
+  <button class="tab" onclick="showTab('l2',this)">🟠 Đại học 3-4</button>
+  <button class="tab" onclick="showTab('l3',this)">🔴 Sau đại học</button>
+  <button class="tab" onclick="showTab('lx',this)">🟣 Tham khảo</button>
+  <button class="tab" onclick="showTab('road',this)">🗺 Lộ trình học</button>
+  <button class="tab" onclick="showTab('matrix',this)">📊 Ma trận sử dụng</button>
+</div>
+
+<div class="body" id="mainbody">
+
+<!-- LEGEND -->
+<div class="legend" id="legendEl">
+  <div class="leg-item"><div class="leg-dot" style="background:var(--l0b)"></div>Bạn đã biết / lớp 12</div>
+  <div class="leg-item"><div class="leg-dot" style="background:var(--l1b)"></div>Đại học năm 1–2 (bắt buộc)</div>
+  <div class="leg-item"><div class="leg-dot" style="background:var(--l2b)"></div>Đại học năm 3–4 (quan trọng)</div>
+  <div class="leg-item"><div class="leg-dot" style="background:var(--l3b)"></div>Sau đại học (nâng cao)</div>
+  <div class="leg-item"><div class="leg-dot" style="background:var(--lxb)"></div>Tham khảo / bối cảnh</div>
+</div>
+
+<!-- ══════ SECTION L0: LỚP 12 ══════ -->
+<div class="sec" data-cat="l0">
+  <div class="sec-hdr">
+    <span class="sec-badge" style="background:var(--l0);color:var(--l0t)">🟢 Cấp độ 0</span>
+    <div><div class="sec-title">Bạn cần biết từ Lớp 12</div><div class="sec-desc">Kiến thức bạn đã (hoặc phải) nắm trước khi đọc bất kỳ trang nào trong sách.</div></div>
+  </div>
+  <div class="grid">
+
+    <div class="card l0" data-s="đạo hàm derivative limit giới hạn lim lớp 12 calculus đạo hàm cơ bản">
+      <div class="card-title"><span class="card-sym l0">f′(x), df/dx</span><span class="badge-tiny must">bắt buộc</span></div>
+      <div class="card-body">Đạo hàm hàm 1 biến: định nghĩa qua giới hạn, các quy tắc tính (tổng, tích, thương, hàm hợp), đạo hàm các hàm cơ bản (xⁿ, eˣ, ln x, sin x, cos x).</div>
+      <ul class="card-items">
+        <li>Giới hạn lim_{x→a} f(x) và các tính chất</li>
+        <li>Định nghĩa đạo hàm qua giới hạn: f′(x)=lim_{h→0}[f(x+h)−f(x)]/h</li>
+        <li>Quy tắc dây chuyền (chain rule): [f(g(x))]′ = f′(g(x))·g′(x)</li>
+        <li>Điều kiện cần cực trị: f′(x̄) = 0</li>
+      </ul>
+      <div class="card-where"><b>Dùng trong Chương 1:</b> Nền tảng của mọi khái niệm. Định lý 1.10 dùng hàm C¹ để mô tả pháp tuyến chính quy. Quy tắc Fermat (Mệnh đề 1.30) tổng quát hóa f′=0.</div>
+    </div>
+
+    <div class="card l0" data-s="vectơ vector dot product tích vô hướng inner product ký hiệu vectơ lớp 12">
+      <div class="card-title"><span class="card-sym l0">⟨v, x⟩ = v₁x₁+…+vₙxₙ</span><span class="badge-tiny must">bắt buộc</span></div>
+      <div class="card-body">Tích vô hướng (dot product / inner product) của hai vectơ trong ℝⁿ. Ý nghĩa hình học: đo "mức độ cùng chiều". Bất đẳng thức Cauchy-Schwarz: |⟨v,x⟩| ≤ ‖v‖·‖x‖.</div>
+      <ul class="card-items">
+        <li>Công thức ⟨v,x⟩ = Σᵢ vᵢxᵢ</li>
+        <li>⟨v,x⟩ = ‖v‖·‖x‖·cos θ — ý nghĩa góc</li>
+        <li>Bất đẳng thức Cauchy-Schwarz (ĐƯỢC DÙNG TRỰC TIẾP trong chứng minh Định lý 1.6!)</li>
+      </ul>
+      <div class="card-where"><b>Dùng trong Chương 1:</b> Định nghĩa (1.5) — nón chính quy; lim sup ⟨v,z−x⟩/‖z−x‖. Bằng chứng Định lý 1.6, Bước 2: <em>Cauchy-Schwarz inequality</em> được gọi đích danh.</div>
+    </div>
+
+    <div class="card l0" data-s="chuẩn norm độ dài vectơ khoảng cách Euclidean distance">
+      <div class="card-title"><span class="card-sym l0">‖x‖ = √(x₁²+…+xₙ²)</span><span class="badge-tiny must">bắt buộc</span></div>
+      <div class="card-body">Chuẩn Euclid (Euclidean norm): độ dài của vectơ x. Đây là thước đo khoảng cách cơ bản nhất trong ℝⁿ.</div>
+      <ul class="card-items">
+        <li>‖x‖ ≥ 0, ‖x‖ = 0 ⟺ x = 0</li>
+        <li>Bất đẳng thức tam giác: ‖x+y‖ ≤ ‖x‖+‖y‖</li>
+        <li>‖αx‖ = |α|·‖x‖</li>
+      </ul>
+      <div class="card-where"><b>Dùng trong Chương 1:</b> Hàm khoảng cách dist(x;Ω)=inf_{z∈Ω}‖x−z‖. Chuẩn hóa vectơ: ‖vₖ‖=1 trong chứng minh Mệnh đề 1.2.</div>
+    </div>
+
+    <div class="card l0" data-s="tập hợp set theory giao hợp ký hiệu logic ∀ ∃ thuộc bao hàm">
+      <div class="card-title"><span class="card-sym l0">∈, ⊂, ∩, ∪, ∀, ∃, ⟹</span><span class="badge-tiny must">bắt buộc</span></div>
+      <div class="card-body">Lý thuyết tập hợp và logic toán cơ bản: membership, bao hàm, giao hợp, lượng từ. Không có thứ này, bạn không đọc được một dòng nào trong sách.</div>
+      <ul class="card-items">
+        <li>x ∈ A (x thuộc A), A ⊂ B (A bao hàm trong B)</li>
+        <li>∀ (với mọi), ∃ (tồn tại), ⟹ (suy ra), ⟺ (tương đương)</li>
+        <li>Tích Descartes: A×B = {(a,b) | a∈A, b∈B}</li>
+        <li>Ánh xạ (function) f: A→B</li>
+      </ul>
+      <div class="card-where"><b>Dùng trong Chương 1:</b> Mọi nơi. Đặc biệt: gph F = {(x,y) | y∈F(x)} dùng tích Descartes. Định nghĩa Lim sup dùng ∃ và dãy hội tụ.</div>
+    </div>
+
+    <div class="card l0" data-s="infimum supremum inf sup min max cận dưới cận trên">
+      <div class="card-title"><span class="card-sym l0">inf, sup, min, max</span><span class="badge-tiny must">bắt buộc</span></div>
+      <div class="card-body">Cận dưới lớn nhất (infimum) và cận trên nhỏ nhất (supremum). Khác với min/max: inf/sup không nhất thiết đạt được trong tập. Quy ước: inf∅ = +∞.</div>
+      <ul class="card-items">
+        <li>inf S = số lớn nhất mà mọi phần tử của S đều ≥ nó</li>
+        <li>inf{1/n: n=1,2,...} = 0 dù 0 ∉ tập</li>
+        <li>dist(x;Ω) = inf_{z∈Ω}‖x−z‖ — định nghĩa dùng inf</li>
+      </ul>
+      <div class="card-where"><b>Dùng trong Chương 1:</b> Ngay đầu §1.1: dist(x;Ω) = inf_{z∈Ω}‖x−z‖. Định nghĩa (1.33): lim inf của hàm vô hướng trong biểu diễn subdifferential.</div>
+    </div>
+
+    <div class="card l0" data-s="tập lồi convex set convexity lồng hàm lồi">
+      <div class="card-title"><span class="card-sym l0">Tập lồi (Convex set)</span><span class="badge-tiny must">bắt buộc</span></div>
+      <div class="card-body">Ω lồi khi: ∀ x,z ∈ Ω, α ∈ [0,1]: z+α(x−z) ∈ Ω. Sách nhắc lại định nghĩa này ngay trong ví dụ 1.5 — cần biết trước để theo kịp.</div>
+      <ul class="card-items">
+        <li>Ví dụ lồi: ℝⁿ, hình cầu, khoảng [a,b], nửa không gian</li>
+        <li>Ví dụ không lồi: hình tròn (chỉ viền), hình chữ C, tập hữu hạn điểm</li>
+        <li>Mệnh đề 1.7: nón pháp tuyến của tập lồi = nón pháp tuyến cổ điển</li>
+      </ul>
+      <div class="card-where"><b>Dùng trong Chương 1:</b> Mệnh đề 1.7 (quan hệ với giải tích lồi), Định nghĩa prenormal cone (1.5) — luôn là tập lồi, Định lý scalarization 1.32.</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════ SECTION L1: ĐẠI HỌC 1-2 ══════ -->
+<div class="sec" data-cat="l1">
+  <div class="sec-hdr">
+    <span class="sec-badge" style="background:var(--l1);color:var(--l1t)">🔵 Cấp độ 1</span>
+    <div><div class="sec-title">Đại Học Năm 1–2 (Bắt Buộc Hoàn Toàn)</div><div class="sec-desc">Không có những thứ này, bạn sẽ không hiểu được các định nghĩa và chứng minh cơ bản nhất của Chương 1.</div></div>
+  </div>
+  <div class="grid">
+
+    <div class="card l1" data-s="chuỗi số dãy số sequence convergence hội tụ xk to x subsequence dãy con">
+      <div class="card-title"><span class="card-sym l1">xₖ → x̄, dãy hội tụ</span><span class="badge-tiny must">bắt buộc</span></div>
+      <div class="card-body">Dãy số và hội tụ trong ℝⁿ: định nghĩa xₖ → x̄ (‖xₖ−x̄‖ → 0), dãy con (subsequence), định lý Bolzano-Weierstrass.</div>
+      <ul class="card-items">
+        <li>Định nghĩa: xₖ → x̄ ⟺ ‖xₖ−x̄‖ → 0</li>
+        <li>Dãy con {xₖⱼ}: trích ra từ dãy gốc, vẫn hội tụ về cùng giới hạn hoặc giới hạn khác</li>
+        <li><strong>Bolzano-Weierstrass</strong>: mọi dãy bị chặn trong ℝⁿ có dãy con hội tụ</li>
+        <li>Dãy Cauchy và tính đầy đủ của ℝⁿ</li>
+      </ul>
+      <div class="card-where"><b>Dùng trong Chương 1:</b> Định nghĩa 1.1: "αₖ(xₖ−wₖ) → v" — cốt lõi định nghĩa nón cơ bản. Toàn bộ khái niệm "Lim sup" được xây từ dãy số. Bolzano-Weierstrass: ngầm dùng trong chứng minh Mệnh đề 1.2 (trích dãy con {vₖ} với ‖vₖ‖=1).</div>
+    </div>
+
+    <div class="card l1" data-s="lim inf lim sup giới hạn trên giới hạn dưới liminf limsup">
+      <div class="card-title"><span class="card-sym l1">lim inf, lim sup (chữ thường)</span><span class="badge-tiny must">bắt buộc</span></div>
+      <div class="card-body">Giới hạn dưới và giới hạn trên của hàm thực khi x→x̄. Khác với giới hạn thông thường: luôn tồn tại, ngay cả khi hàm dao động.</div>
+      <ul class="card-items">
+        <li>lim inf_{x→x̄} f(x) = lim_{δ→0} inf_{‖x−x̄‖&lt;δ} f(x)</li>
+        <li>lim sup_{x→x̄} f(x) = lim_{δ→0} sup_{‖x−x̄‖&lt;δ} f(x)</li>
+        <li>Nếu giới hạn tồn tại: lim inf = lim = lim sup</li>
+        <li>Ứng dụng: kiểm tra tính liên tục, bán liên tục</li>
+      </ul>
+      <div class="card-where"><b>Dùng trong Chương 1:</b> Định nghĩa (1.5) nón chính quy: lim sup_{z→x, z∈Ω} ⟨v,z−x⟩/‖z−x‖ ≤ 0. Định nghĩa (1.33) presubdifferential: lim inf_{x→x̄} [φ(x)−φ(x̄)−⟨v,x−x̄⟩]/‖x−x̄‖ ≥ 0.</div>
+    </div>
+
+    <div class="card l1" data-s="tập đóng tập mở closed open set topology bao đóng phần trong biên interior boundary closure">
+      <div class="card-title"><span class="card-sym l1">Tập đóng, mở, biên, phần trong</span><span class="badge-tiny must">bắt buộc</span></div>
+      <div class="card-body">Cấu trúc topo cơ bản trong ℝⁿ: tập mở, tập đóng, bao đóng cl Ω, phần trong int Ω, biên bd Ω, lân cận (neighborhood). Sách dùng "locally closed" — tập đóng trong lân cận của điểm.</div>
+      <ul class="card-items">
+        <li>Tập đóng: chứa mọi điểm giới hạn của nó (cl Ω = Ω)</li>
+        <li>Tập mở: mọi điểm có một quả cầu nhỏ nằm trong tập</li>
+        <li>Biên bd Ω = cl Ω \ int Ω</li>
+        <li><strong>Locally closed</strong>: Ω∩B_r(x̄) là tập đóng với r>0 nào đó</li>
+        <li>Tập compact = đóng và bị chặn trong ℝⁿ</li>
+      </ul>
+      <div class="card-where"><b>Dùng trong Chương 1:</b> Giả thiết chuẩn: "Ω locally closed quanh x̄". Mệnh đề 1.2: phân biệt boundary points vs interior points. Toàn bộ lý thuyết normal cone cần Ω đóng cục bộ.</div>
+    </div>
+
+    <div class="card l1" data-s="hàm liên tục continuity semicontinuous bán liên tục lsc lower semicontinuous">
+      <div class="card-title"><span class="card-sym l1">Liên tục, bán liên tục dưới (l.s.c.)</span><span class="badge-tiny must">bắt buộc</span></div>
+      <div class="card-body">Hàm liên tục: f(xₖ) → f(x̄) khi xₖ → x̄. Bán liên tục dưới (l.s.c.): φ(x̄) ≤ lim inf_{x→x̄} φ(x). Tương đương: epi φ là tập đóng.</div>
+      <ul class="card-items">
+        <li>Liên tục ⟹ l.s.c. nhưng chiều ngược không đúng</li>
+        <li>Hàm l.s.c. trên tập compact đạt được giá trị nhỏ nhất (Weierstrass)</li>
+        <li>Hàm chỉ thị δ(x;Ω) là l.s.c. khi Ω đóng</li>
+      </ul>
+      <div class="card-where"><b>Dùng trong Chương 1:</b> §1.3 yêu cầu φ l.s.c. proper cho hầu hết định lý. Định lý 1.22: đặc trưng Lipschitz bằng ∂∞. Định nghĩa subdifferential qua epigraph đóng.</div>
+    </div>
+
+    <div class="card l1" data-s="đạo hàm nhiều biến partial derivative gradient Jacobian matrix đạo hàm riêng">
+      <div class="card-title"><span class="card-sym l1">∇f(x̄), Jacobian ∇f(x̄)</span><span class="badge-tiny must">bắt buộc</span></div>
+      <div class="card-body">Đạo hàm hàm nhiều biến: gradient ∇f (vectơ n×1) của hàm thực, ma trận Jacobian (m×n) của ánh xạ f:ℝⁿ→ℝᵐ, chain rule trong nhiều biến.</div>
+      <ul class="card-items">
+        <li>Gradient: ∇φ(x̄) = (∂φ/∂x₁,...,∂φ/∂xₙ)ᵀ</li>
+        <li>Ma trận Jacobian: J_f(x̄)ᵢⱼ = ∂fᵢ/∂xⱼ — ma trận m×n</li>
+        <li>Chain rule: ∇(φ∘g)(x̄) = ∇g(x̄)ᵀ·∇φ(g(x̄))</li>
+        <li>Điều kiện cần cực trị tự do: ∇φ(x̄) = 0</li>
+      </ul>
+      <div class="card-where"><b>Dùng trong Chương 1:</b> Mệnh đề 1.12: coderivative của f trơn = Jacobian chuyển vị D*f(x̄)(v)=∇f(x̄)ᵀv. Định lý 1.10: mô tả pháp tuyến qua hàm trơn tiếp xúc ∇ψ(x̄)=v. Mệnh đề 1.30: quy tắc tổng ∂(ψ+φ)=∇ψ+∂φ.</div>
+    </div>
+
+    <div class="card l1" data-s="ma trận transpose chuyển vị adjoint linear map ánh xạ tuyến tính adjoint operator">
+      <div class="card-title"><span class="card-sym l1">Aᵀ, A* — ma trận chuyển vị</span><span class="badge-tiny must">bắt buộc</span></div>
+      <div class="card-body">Chuyển vị ma trận: (Aᵀ)ᵢⱼ = Aⱼᵢ. Với ánh xạ tuyến tính A: ℝⁿ→ℝᵐ, chuyển vị Aᵀ: ℝᵐ→ℝⁿ thỏa ⟨Ax, y⟩ = ⟨x, Aᵀy⟩ — đây là tính chất then chốt!</div>
+      <ul class="card-items">
+        <li>Tính chất adjoint: ⟨Av,u⟩ = ⟨v,Aᵀu⟩ với mọi v,u</li>
+        <li>Ánh xạ tuyến tính A đơn trị → coderivative D*A(x̄)(v) = Aᵀv</li>
+        <li>Ý nghĩa: chuyển vị "đổi hướng" ánh xạ từ đầu ra về đầu vào</li>
+      </ul>
+      <div class="card-where"><b>Dùng trong Chương 1:</b> Coderivative D*f(x̄)(v)=∇f(x̄)ᵀv — chính là ánh xạ adjoint. Định nghĩa coderivative có dấu (u,−v) phản ánh quan hệ adjoint trong không gian sản phẩm.</div>
+    </div>
+
+    <div class="card l1" data-s="hàm Lipschitz Lipschitz continuous locally Lipschitz modulus constant hằng số">
+      <div class="card-title"><span class="card-sym l1">Hàm Lipschitz (hệ số ℓ)</span><span class="badge-tiny must">bắt buộc</span></div>
+      <div class="card-body">φ Lipschitz cục bộ với hệ số ℓ quanh x̄: ‖φ(x)−φ(z)‖ ≤ ℓ‖x−z‖ với mọi x,z gần x̄. Nghĩa là φ "không biến thiên quá nhanh".</div>
+      <ul class="card-items">
+        <li>φ=|x| Lipschitz ℓ=1; φ=x² KHÔNG Lipschitz toàn cục</li>
+        <li>C¹ ⟹ locally Lipschitz (gradient bị chặn ⟹ Lipschitz)</li>
+        <li>Định lý Rademacher: hàm Lipschitz khả vi gần như mọi nơi</li>
+      </ul>
+      <div class="card-where"><b>Dùng trong Chương 1:</b> Định lý 1.22 (quan trọng nhất): φ Lipschitz cục bộ ⟺ ∂∞φ(x̄)={0}. Định lý 1.23 (biểu diễn subdiff qua coderivative). Định lý 1.28 (limiting representation).</div>
+    </div>
+
+    <div class="card l1" data-s="hàm thực mở rộng extended real R bar +infinity proper function">
+      <div class="card-title"><span class="card-sym l1">ℝ̄ = (−∞,+∞], hàm proper</span><span class="badge-tiny must">bắt buộc</span></div>
+      <div class="card-body">Đường thực mở rộng ℝ̄ cho phép hàm nhận giá trị +∞. Hàm φ: ℝⁿ→ℝ̄ gọi là proper khi: (1) φ>−∞ mọi nơi, (2) ∃x: φ(x)&lt;+∞.</div>
+      <ul class="card-items">
+        <li>Phép tính với +∞: a+(+∞)=+∞, a·(+∞)=+∞ (a>0)</li>
+        <li>Hàm chỉ thị δ(x;Ω): nhận +∞ ngoài Ω — cách mã hóa ràng buộc</li>
+        <li>Proper l.s.c. = điều kiện đứng chuẩn của mọi định lý §1.3</li>
+      </ul>
+      <div class="card-where"><b>Dùng trong Chương 1:</b> Toàn bộ §1.3 dùng φ: ℝⁿ→ℝ̄. Epigraph epi φ = {(x,α)|α≥φ(x)} — cần +∞ để bao gồm điểm không xác định. Định lý 1.22, 1.28 yêu cầu proper l.s.c.</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════ SECTION L2: ĐẠI HỌC 3-4 ══════ -->
+<div class="sec" data-cat="l2">
+  <div class="sec-hdr">
+    <span class="sec-badge" style="background:var(--l2);color:var(--l2t)">🟠 Cấp độ 2</span>
+    <div><div class="sec-title">Đại Học Năm 3–4 (Quan Trọng, Cần Học Thêm)</div><div class="sec-desc">Những kiến thức này giúp bạn hiểu <em>tại sao</em> các công cụ hoạt động, không chỉ <em>cái gì</em>.</div></div>
+  </div>
+  <div class="grid">
+
+    <div class="card l2" data-s="Lim sup outer limit set-valued Painlevé Kuratowski giới hạn ngoài ánh xạ đa trị tập giá trị">
+      <div class="card-title"><span class="card-sym l2">Lim sup F(x) — giới hạn ngoài</span><span class="badge-tiny must">bắt buộc</span></div>
+      <div class="card-body">Giới hạn Painlevé-Kuratowski (chữ HOA) cho ánh xạ đa trị: Lim sup_{x→x̄} F(x) = {y | ∃ xₖ→x̄, yₖ→y: yₖ∈F(xₖ)}. Đây là khái niệm TRUNG TÂM nhất trong Chương 1 — toàn bộ định nghĩa đều dùng nó.</div>
+      <ul class="card-items">
+        <li>Khác với lim sup chữ thường: kết quả là một TẬP HỢP, không phải số</li>
+        <li>Giới hạn ngoài ≥ giới hạn trong (Lim sup ⊃ Lim inf)</li>
+        <li>N(x̄;Ω) = Lim sup_{x→x̄} cone[x−Π(x;Ω)] — Định nghĩa 1.1</li>
+        <li>∂φ(x̄) = Lim sup_{x→φx̄} ∂̂φ(x) — Định lý 1.28</li>
+      </ul>
+      <div class="card-where"><b>Dùng trong Chương 1:</b> Định nghĩa 1.1 (nón cơ bản), Định lý 1.6 (biểu diễn), Mệnh đề 1.3 (robustness), Định lý 1.28 (limiting subdiff). Đây là nền tảng toán của toàn chương.</div>
+    </div>
+
+    <div class="card l2" data-s="ánh xạ đa trị set-valued mapping multifunction F double arrow graph domain range">
+      <div class="card-title"><span class="card-sym l2">F: ℝⁿ ⇒ ℝᵐ — ánh xạ đa trị</span><span class="badge-tiny must">bắt buộc</span></div>
+      <div class="card-body">Ánh xạ đa trị (multifunction): mỗi x cho một TẬP F(x), có thể rỗng. Khái niệm này không có ở lớp 12 hay đại học năm 1. Cần nắm: graph, domain, range, inverse của ánh xạ đa trị.</div>
+      <ul class="card-items">
+        <li>gph F = {(x,y) | y∈F(x)} ⊂ ℝⁿ×ℝᵐ</li>
+        <li>dom F = {x | F(x)≠∅}, rge F = {y | ∃x: y∈F(x)}</li>
+        <li>F⁻¹(y) = {x | y∈F(x)} — ngược của đa trị luôn xác định</li>
+        <li>Bán liên tục trong/ngoài (inner/outer semicontinuity) cho ánh xạ đa trị</li>
+      </ul>
+      <div class="card-where"><b>Dùng trong Chương 1:</b> §1.2 toàn bộ. Coderivative D*F định nghĩa qua N(gph F). Ví dụ 1.13: F(x)=Ax (ánh xạ tuyến tính). Ví dụ 1.14: f(x)=|x| như ánh xạ đơn trị.</div>
+    </div>
+
+    <div class="card l2" data-s="giải tích lồi convex analysis subdifferential convex normal cone supporting hyperplane">
+      <div class="card-title"><span class="card-sym l2">Giải tích lồi cơ bản</span><span class="badge-tiny good">quan trọng</span></div>
+      <div class="card-body">Subdifferential lồi cổ điển: ∂_{conv}φ(x̄) = {v | φ(x)−φ(x̄) ≥ ⟨v,x−x̄⟩ ∀x}. Nón pháp tuyến lồi: N_{conv}(x̄;Ω) = {v | ⟨v,x−x̄⟩≤0 ∀x∈Ω}. Biết cái cũ để hiểu cái mới.</div>
+      <ul class="card-items">
+        <li>Hàm lồi: f(αx+(1−α)y) ≤ αf(x)+(1−α)f(y)</li>
+        <li>Subdifferential lồi: tập các siêu phẳng tiếp xúc từ dưới</li>
+        <li>Mệnh đề 1.7: khi Ω lồi, N(x̄;Ω) = N_{conv}(x̄;Ω)</li>
+        <li>Ví dụ: ∂|x|(0) = [−1,1] (subdiff lồi = subdiff Mordukhovich)</li>
+      </ul>
+      <div class="card-where"><b>Dùng trong Chương 1:</b> Mệnh đề 1.7 đặc biệt so sánh N với nón lồi. Ví dụ 1.21 so sánh ∂φ với ∂_{conv}φ. Hiểu biết về lồi giúp nhận ra khi nào các đối tượng trùng nhau.</div>
+    </div>
+
+    <div class="card l2" data-s="nón cone conic hull convex cone polar dual tangent contingent Bouligand">
+      <div class="card-title"><span class="card-sym l2">Lý thuyết nón (Cone theory)</span><span class="badge-tiny good">quan trọng</span></div>
+      <div class="card-body">Nón (cone): K thỏa αv ∈ K với mọi v∈K, α≥0. Nón lồi, nón đối ngẫu (polar cone). Mối quan hệ giữa nón pháp tuyến và nón tiếp tuyến qua duality.</div>
+      <ul class="card-items">
+        <li>Nón đối ngẫu: K* = {v | ⟨v,w⟩≤0 ∀w∈K}</li>
+        <li>(K*)* = cl co K (bao đóng lồi của K)</li>
+        <li>Mệnh đề 1.9: N̂(x̄;Ω) = T(x̄;Ω)* — duality cơ bản</li>
+        <li>Khi K lồi: K** = K (tự đối ngẫu kép)</li>
+      </ul>
+      <div class="card-where"><b>Dùng trong Chương 1:</b> Mệnh đề 1.9 (đối ngẫu pháp tuyến/tiếp tuyến). Định nghĩa (1.4): cone[x−Π(x;Ω)] là nón được tạo ra. Tính chất: N(x̄;Ω) luôn là nón đóng.</div>
+    </div>
+
+    <div class="card l2" data-s="thượng đồ thị epigraph epi function set above graph">
+      <div class="card-title"><span class="card-sym l2">Thượng đồ thị (Epigraph)</span><span class="badge-tiny must">bắt buộc</span></div>
+      <div class="card-body">epi φ = {(x,α) ∈ ℝⁿ×ℝ | α ≥ φ(x)} — vùng phía TRÊN đồ thị của φ. Đây là tập hình học chứa đựng mọi thông tin của hàm φ, giúp chuyển bài toán về hàm thành bài toán về tập.</div>
+      <ul class="card-items">
+        <li>φ l.s.c. ⟺ epi φ đóng (đặc trưng quan trọng)</li>
+        <li>φ lồi ⟺ epi φ lồi</li>
+        <li>∂φ(x̄) = {v | (v,−1) ∈ N((x̄,φ(x̄)); epi φ)}</li>
+        <li>∂∞φ(x̄) = {v | (v,0) ∈ N((x̄,φ(x̄)); epi φ)}</li>
+      </ul>
+      <div class="card-where"><b>Dùng trong Chương 1:</b> Toàn bộ §1.3. Định nghĩa 1.18 dùng epi φ trực tiếp. Dấu (v,−1) vs (v,0) phân biệt subdiff thường vs kỳ dị — cần hiểu hình học epigraph.</div>
+    </div>
+
+    <div class="card l2" data-s="hàm khoảng cách distance function projection Euclidean projection Π closest point">
+      <div class="card-title"><span class="card-sym l2">Phép chiếu Euclid Π(x;Ω)</span><span class="badge-tiny must">bắt buộc</span></div>
+      <div class="card-body">Điểm trong tập Ω gần điểm x nhất. dist(x;Ω) = min_{z∈Ω}‖x−z‖. Phép chiếu Π(x;Ω) có thể là một điểm (khi Ω lồi) hoặc nhiều điểm (khi Ω không lồi).</div>
+      <ul class="card-items">
+        <li>Khi Ω lồi đóng: chiếu duy nhất, ánh xạ đơn trị</li>
+        <li>Khi Ω không lồi: có thể có nhiều điểm chiếu</li>
+        <li>Tính chất: w=Π(x;Ω) ⟺ ‖x−w‖²≤‖x−z‖² ∀z∈Ω ⟺ ⟨x−w,z−w⟩≤0</li>
+        <li>Bước 1 chứng minh Định lý 1.6 dùng tính chất này trực tiếp</li>
+      </ul>
+      <div class="card-where"><b>Dùng trong Chương 1:</b> Định nghĩa 1.1 HOÀN TOÀN XÂY từ Π. Chứng minh Định lý 1.6 (Bước 1): "pick w∈Π(x;Ω) for all k sufficiently large". Định lý 1.33: subdiff hàm khoảng cách.</div>
+    </div>
+
+    <div class="card l2" data-s="smooth variational principle variational description touching function C1 tiếp xúc">
+      <div class="card-title"><span class="card-sym l2">Nguyên lý biến phân trơn</span><span class="badge-tiny good">quan trọng</span></div>
+      <div class="card-body">Ý tưởng: mọi pháp tuyến chính quy có thể được "thực hiện" bởi một hàm trơn. Định lý 1.10: v∈N̂(x̄;Ω) ⟺ ∃ hàm ψ trơn: ∇ψ(x̄)=v và ψ đạt cực đại trên Ω tại x̄.</div>
+      <ul class="card-items">
+        <li>Hàm ψ "tiếp xúc từ trên" tập Ω tại x̄</li>
+        <li>Kỹ thuật: dùng ψ(x) = ⟨v,x⟩ − C‖x−x̄‖² (parabol)</li>
+        <li>Đây là nền tảng của "fuzzy calculus" và extremal principle (Chương 2)</li>
+      </ul>
+      <div class="card-where"><b>Dùng trong Chương 1:</b> Định lý 1.10 — mô tả biến phân của N̂. Kỹ thuật này tái hiện trong toàn bộ quyển sách. Cần biết C¹ functions và bài toán cực trị có ràng buộc.</div>
+    </div>
+
+    <div class="card l2" data-s="chain rule composition hàm hợp scalarization vô hướng hóa">
+      <div class="card-title"><span class="card-sym l2">Chain rule & scalarization</span><span class="badge-tiny good">quan trọng</span></div>
+      <div class="card-body">Chain rule tổng quát: ∂(φ∘g)(x̄) liên quan đến ∂φ và Jacobian của g. Scalarization: D*f(x̄)(v) = ∂⟨v,f⟩(x̄) — chuyển coderivative về subdiff vô hướng.</div>
+      <ul class="card-items">
+        <li>Chain rule trơn: ∇(φ∘g)(x̄) = ∇g(x̄)ᵀ·∇φ(g(x̄))</li>
+        <li>Scalarization (Định lý 1.32): D*f(x̄)(v) = ∂⟨v,f⟩(x̄)</li>
+        <li>Quy tắc tổng (Mệnh đề 1.30ii): ∂(ψ+φ)(x̄)=∇ψ(x̄)+∂φ(x̄)</li>
+      </ul>
+      <div class="card-where"><b>Dùng trong Chương 1:</b> Định lý 1.32 — scalarization coderivative. Mệnh đề 1.30 — quy tắc tính subdiff. Đây là công cụ tính toán quan trọng nhất trong ứng dụng.</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════ SECTION L3: SAU ĐẠI HỌC ══════ -->
+<div class="sec" data-cat="l3">
+  <div class="sec-hdr">
+    <span class="sec-badge" style="background:var(--l3);color:var(--l3t)">🔴 Cấp độ 3</span>
+    <div><div class="sec-title">Sau Đại Học (Nâng Cao — Hiểu Sâu Hơn)</div><div class="sec-desc">Không bắt buộc để đọc được Chương 1, nhưng cần để hiểu bức tranh lớn và các chứng minh phức tạp.</div></div>
+  </div>
+  <div class="grid">
+
+    <div class="card l3" data-s="giải tích hàm functional analysis Banach space normed space not strictly needed">
+      <div class="card-title"><span class="card-sym l3">Không gian Banach cơ bản</span><span class="badge-tiny opt">tùy chọn</span></div>
+      <div class="card-body">Chương 1 chỉ làm việc trong ℝⁿ (hữu hạn chiều), nhưng các bài tập và chú thích đề cập không gian vô hạn chiều. Biết Banach space giúp hiểu tại sao ℝⁿ "dễ hơn".</div>
+      <ul class="card-items">
+        <li>Không gian Banach = không gian chuẩn đầy đủ</li>
+        <li>ℝⁿ là Banach, nhưng nhiều không gian hàm (L², C[0,1]) cũng vậy</li>
+        <li>Trong ℝⁿ: compact ⟺ đóng + bị chặn (định lý Heine-Borel)</li>
+      </ul>
+      <div class="card-where"><b>Dùng trong Chương 1:</b> Exercises cuối chương về infinite-dimensional extensions. Sách viết: "Finite-dimensional framework allows us to significantly simplify proofs."</div>
+    </div>
+
+    <div class="card l3" data-s="tối ưu cổ điển classical optimization KKT Lagrange multiplier điều kiện tối ưu">
+      <div class="card-title"><span class="card-sym l3">Tối ưu cổ điển — KKT, Lagrange</span><span class="badge-tiny opt">tùy chọn</span></div>
+      <div class="card-body">Điều kiện Karush-Kuhn-Tucker (KKT) và nhân tử Lagrange cho bài toán tối ưu có ràng buộc. Biết cái cũ giúp thấy Chương 1 là "mở rộng" theo hướng nào.</div>
+      <ul class="card-items">
+        <li>∇f(x̄) + Σ λᵢ∇gᵢ(x̄) = 0 (KKT condition)</li>
+        <li>Điều kiện KKT = trường hợp đặc biệt của quy tắc Fermat suy rộng</li>
+        <li>Mordukhovich mở rộng KKT sang hàm phi trơn</li>
+      </ul>
+      <div class="card-where"><b>Dùng trong Chương 1:</b> Mệnh đề 1.30 (Fermat rule) tổng quát hóa KKT. Chương 6 sẽ phát triển đầy đủ điều kiện tối ưu suy rộng.</div>
+    </div>
+
+    <div class="card l3" data-s="metric regularity calmness Aubin property Lipschitz stability set-valued maps">
+      <div class="card-title"><span class="card-sym l3">Tính ổn định ánh xạ đa trị</span><span class="badge-tiny opt">tùy chọn</span></div>
+      <div class="card-body">Metric regularity, calmness, Aubin/Lipschitz property — các tính chất ổn định của ánh xạ đa trị. Được phát triển đầy đủ trong Chương 3, nhưng hữu ích để hiểu động lực của §1.2.</div>
+      <ul class="card-items">
+        <li>Calmness: dist(y; F(x)) ≤ κ‖x−x̄‖ gần (x̄,ȳ)</li>
+        <li>Metric regularity: dist(x; F⁻¹(y)) ≤ κ·dist(y; F(x))</li>
+        <li>Đặc trưng bằng coderivative (Chương 3)</li>
+      </ul>
+      <div class="card-where"><b>Dùng trong Chương 1:</b> Ví dụ 1.14 và Mệnh đề 1.15 đề cập inner semicontinuity — bước đầu của tính ổn định. Coderivative là công cụ để phân tích stability.</div>
+    </div>
+
+    <div class="card l3" data-s="Rockafeller Wets variational analysis reference background classical">
+      <div class="card-title"><span class="card-sym l3">Nền tảng lịch sử biến phân</span><span class="badge-tiny opt">tùy chọn</span></div>
+      <div class="card-body">Giải tích biến phân cổ điển (Euler-Lagrange, Hamilton), lịch sử phát triển từ convex analysis (Fenchel, Moreau, Rockafellar) đến nonsmooth analysis (Clarke, Mordukhovich). Bối cảnh giúp hiểu tại sao cần các công cụ trong Chương 1.</div>
+      <ul class="card-items">
+        <li>Giải tích lồi: Rockafellar (1970) — Convex Analysis</li>
+        <li>Nonsmooth: Clarke (1983) — subdiff không lồi nhưng lồi hóa</li>
+        <li>Mordukhovich (1976, 2006) — nonconvex, limiting approach</li>
+        <li>Rockafellar-Wets (1998) — "Variational Analysis" — sách tham khảo song song</li>
+      </ul>
+      <div class="card-where"><b>Dùng trong Chương 1:</b> Phần Commentary cuối chương dày đặc lịch sử. Hiểu lịch sử giúp thấy tại sao "limiting" (không lồi) là tiến bộ so với "convexified" (Clarke).</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════ SECTION LX: THAM KHẢO ══════ -->
+<div class="sec" data-cat="lx">
+  <div class="sec-hdr">
+    <span class="sec-badge" style="background:var(--lx);color:var(--lxt)">🟣 Tham Khảo</span>
+    <div><div class="sec-title">Kiến Thức Bổ Sung (Không Bắt Buộc)</div><div class="sec-desc">Làm phong phú thêm sự hiểu biết, đặc biệt hữu ích khi đọc phần exercises và commentaries.</div></div>
+  </div>
+  <div class="grid">
+
+    <div class="card lx" data-s="measure theory Rademacher theorem differentiability almost everywhere">
+      <div class="card-title"><span class="card-sym lx">Lý thuyết độ đo, định lý Rademacher</span></div>
+      <div class="card-body">Định lý Rademacher: hàm Lipschitz khả vi "almost everywhere" (gần như mọi nơi). Dùng để hiểu tại sao subdifferential của hàm Lipschitz phản ánh đạo hàm thông thường tại hầu hết các điểm.</div>
+      <div class="card-where"><b>Tham khảo trong:</b> Commentaries §1.3, exercises về Clarke subdifferential và quan hệ với đạo hàm thông thường.</div>
+    </div>
+
+    <div class="card lx" data-s="convex programming duality Fenchel conjugate dual function">
+      <div class="card-title"><span class="card-sym lx">Lý thuyết đối ngẫu Fenchel</span></div>
+      <div class="card-body">Hàm conjugate (Fenchel conjugate): φ*(v) = sup_{x} {⟨v,x⟩ − φ(x)}. Quan hệ với subdifferential lồi: v∈∂φ(x̄) ⟺ x̄∈∂φ*(v). Bối cảnh cho thấy subdifferential Mordukhovich mở rộng điều gì.</div>
+      <div class="card-where"><b>Tham khảo trong:</b> Bối cảnh giải tích lồi cho §1.3. Exercises về quan hệ giữa coderivative và đối ngẫu.</div>
+    </div>
+
+    <div class="card lx" data-s="Clarke generalized gradient convex hull generalized Jacobian comparison">
+      <div class="card-title"><span class="card-sym lx">Subdifferential Clarke (để so sánh)</span></div>
+      <div class="card-body">∂_C φ(x̄) = co ∂φ(x̄) — bao lồi của Mordukhovich subdifferential. Clarke (1983) phát triển trước Mordukhovich. Biết Clarke để thấy Mordukhovich mạnh hơn ở điểm nào (không lồi, scalarization).</div>
+      <div class="card-where"><b>Tham khảo trong:</b> Commentaries §1.3. Ví dụ 1.21 ngầm so sánh. Mordukhovich chọn NOT convexify để giữ thông tin về cấu trúc không lồi.</div>
+    </div>
+
+    <div class="card lx" data-s="optimal control Pontryagin maximum principle control theory">
+      <div class="card-title"><span class="card-sym lx">Điều khiển tối ưu (Optimal Control)</span></div>
+      <div class="card-body">Nguyên lý cực đại Pontryagin, bài toán Bolza. Đây là một trong những động lực lịch sử lớn nhất của Mordukhovich khi phát triển coderivative (1976). Biết để thấy ứng dụng thực sự.</div>
+      <div class="card-where"><b>Tham khảo trong:</b> Preface và Commentary chương 1 đề cập. Ứng dụng đầy đủ trong Chương 6-8.</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════ SECTION ROADMAP ══════ -->
+<div class="sec" data-cat="road" id="roadSec">
+  <div class="sec-hdr">
+    <span class="sec-badge" style="background:#e8f5e9;color:#1b5e20">🗺 Lộ Trình</span>
+    <div><div class="sec-title">Lộ Trình Học Tối Ưu — 6 Giai Đoạn</div><div class="sec-desc">Từ lớp 12 đến đọc được Chương 1 một cách tường tận. Thời gian ước tính cho người có nền toán cơ bản.</div></div>
+  </div>
+  <div class="roadmap">
+
+    <div class="rm-row">
+      <div class="rm-left">
+        <div class="rm-dot" style="background:var(--l0);color:var(--l0t)">0</div>
+        <div class="rm-line" style="background:var(--l0b);opacity:0.3"></div>
+      </div>
+      <div class="rm-right">
+        <div class="rm-stage" style="color:var(--l0b)">Giai đoạn 0 — Nền tảng (Bạn có thể đã có)</div>
+        <div class="rm-title">Giải Tích 1 Biến + Đại Số Tuyến Tính Cơ Bản</div>
+        <div class="rm-desc">Đạo hàm, tích phân, giới hạn (1 biến). Vectơ, ma trận, tích vô hướng, chuẩn. Logic toán và lý thuyết tập hợp cơ bản. Đây là nền tảng tuyệt đối.</div>
+        <div class="rm-tags">
+          <span class="rtag" style="background:var(--l0);color:var(--l0t)">Giải tích 1</span>
+          <span class="rtag" style="background:var(--l0);color:var(--l0t)">Đại số tuyến tính</span>
+          <span class="rtag" style="background:var(--l0);color:var(--l0t)">Lý thuyết tập hợp</span>
+        </div>
+        <div class="rm-time">2–4 tháng nếu chưa có / Ôn lại 1–2 tuần nếu đã biết</div>
+      </div>
+    </div>
+
+    <div class="rm-row">
+      <div class="rm-left">
+        <div class="rm-dot" style="background:var(--l1);color:var(--l1t)">1</div>
+        <div class="rm-line" style="background:var(--l1b);opacity:0.3"></div>
+      </div>
+      <div class="rm-right">
+        <div class="rm-stage" style="color:var(--l1b)">Giai đoạn 1 — Bắt Buộc Học Trước</div>
+        <div class="rm-title">Giải Tích Thực (Real Analysis)</div>
+        <div class="rm-desc">Dãy số trong ℝⁿ (hội tụ, dãy con, Bolzano-Weierstrass), lim inf/lim sup, tập đóng/mở/compact trong ℝⁿ, hàm liên tục và bán liên tục, hàm Lipschitz. Đây là "ngôn ngữ" cơ bản của Chương 1.</div>
+        <div class="rm-tags">
+          <span class="rtag" style="background:var(--l1);color:var(--l1t)">Dãy số ℝⁿ</span>
+          <span class="rtag" style="background:var(--l1);color:var(--l1t)">Topology cơ bản</span>
+          <span class="rtag" style="background:var(--l1);color:var(--l1t)">Hàm Lipschitz</span>
+          <span class="rtag" style="background:var(--l1);color:var(--l1t)">l.s.c.</span>
+        </div>
+        <div class="rm-time">3–4 tháng học nghiêm túc. Sách gợi ý: Rudin "Principles of Mathematical Analysis" Ch.1-7</div>
+      </div>
+    </div>
+
+    <div class="rm-row">
+      <div class="rm-left">
+        <div class="rm-dot" style="background:var(--l1);color:var(--l1t)">2</div>
+        <div class="rm-line" style="background:var(--l1b);opacity:0.3"></div>
+      </div>
+      <div class="rm-right">
+        <div class="rm-stage" style="color:var(--l1b)">Giai đoạn 2 — Bắt Buộc Học Trước</div>
+        <div class="rm-title">Giải Tích Nhiều Biến + Đại Số Tuyến Tính Nâng Cao</div>
+        <div class="rm-desc">Gradient, Jacobian, chain rule nhiều biến, cực trị trong ℝⁿ. Ma trận chuyển vị và tính chất adjoint ⟨Av,u⟩=⟨v,Aᵀu⟩. Khai triển Taylor bậc 2. Implicit function theorem.</div>
+        <div class="rm-tags">
+          <span class="rtag" style="background:var(--l1);color:var(--l1t)">Gradient ∇f</span>
+          <span class="rtag" style="background:var(--l1);color:var(--l1t)">Jacobian matrix</span>
+          <span class="rtag" style="background:var(--l1);color:var(--l1t)">Adjoint Aᵀ</span>
+        </div>
+        <div class="rm-time">3–4 tháng. Sách gợi ý: Hubbard "Vector Calculus, Linear Algebra..." hoặc bất kỳ giáo trình Calculus 3 tốt</div>
+      </div>
+    </div>
+
+    <div class="rm-row">
+      <div class="rm-left">
+        <div class="rm-dot" style="background:var(--l2);color:var(--l2t)">3</div>
+        <div class="rm-line" style="background:var(--l2b);opacity:0.3"></div>
+      </div>
+      <div class="rm-right">
+        <div class="rm-stage" style="color:var(--l2b)">Giai đoạn 3 — Cần Trước Khi Đọc Sâu</div>
+        <div class="rm-title">Giải Tích Lồi + Ánh Xạ Đa Trị</div>
+        <div class="rm-desc">Hàm lồi, subdifferential lồi, nón pháp tuyến lồi, epigraph. Ánh xạ đa trị (set-valued maps): graph, domain, semicontinuity. Giới hạn Painlevé-Kuratowski (Lim sup/Lim inf). Đây là "ngôn ngữ đặc biệt" của sách.</div>
+        <div class="rm-tags">
+          <span class="rtag" style="background:var(--l2);color:var(--l2t)">Convex analysis</span>
+          <span class="rtag" style="background:var(--l2);color:var(--l2t)">Set-valued maps</span>
+          <span class="rtag" style="background:var(--l2);color:var(--l2t)">Lim sup/Lim inf tập</span>
+          <span class="rtag" style="background:var(--l2);color:var(--l2t)">Epigraph</span>
+        </div>
+        <div class="rm-time">4–6 tháng. Sách gợi ý: Rockafellar "Convex Analysis" Ch.1-10 + Aubin-Frankowska "Set-Valued Analysis" Ch.1-2</div>
+      </div>
+    </div>
+
+    <div class="rm-row">
+      <div class="rm-left">
+        <div class="rm-dot" style="background:var(--l2);color:var(--l2t)">4</div>
+        <div class="rm-line" style="background:var(--l2b);opacity:0.3"></div>
+      </div>
+      <div class="rm-right">
+        <div class="rm-stage" style="color:var(--l2b)">Giai đoạn 4 — Đọc Chương 1 Lần Đầu</div>
+        <div class="rm-title">Đọc §1.1 → §1.2 → §1.3 (Kết Hợp Bảng Tra Cứu)</div>
+        <div class="rm-desc">Với nền từ giai đoạn 0–3, bạn có thể đọc Chương 1 — có thể chậm và cần dừng thường xuyên, nhưng sẽ hiểu được. Dùng bảng ký hiệu tra cứu ngay khi gặp khó. Chú ý đặc biệt: §1.1 (pháp tuyến) là nền cho mọi thứ sau.</div>
+        <div class="rm-tags">
+          <span class="rtag" style="background:#e8f5e9;color:#1b5e20">§1.1 Normal Cones</span>
+          <span class="rtag" style="background:#e8f5e9;color:#1b5e20">§1.2 Coderivatives</span>
+          <span class="rtag" style="background:#e8f5e9;color:#1b5e20">§1.3 Subdifferentials</span>
+        </div>
+        <div class="rm-time">2–4 tuần đọc kỹ. Mục tiêu: hiểu được mọi định nghĩa và theo được các chứng minh chính.</div>
+      </div>
+    </div>
+
+    <div class="rm-row">
+      <div class="rm-left">
+        <div class="rm-dot" style="background:var(--l3);color:var(--l3t)">5</div>
+        <div class="rm-line" style="background:transparent"></div>
+      </div>
+      <div class="rm-right">
+        <div class="rm-stage" style="color:var(--l3b)">Giai đoạn 5 — Đọc Sâu & Làm Bài Tập</div>
+        <div class="rm-title">Làm Exercises + Đọc Commentaries Chương 1</div>
+        <div class="rm-desc">Bài tập cuối chương kéo dài sang infinite-dimensional và các ứng dụng. Commentaries chứa lịch sử, tài liệu tham khảo, và các câu hỏi mở. Làm bài tập là cách duy nhất để thực sự nắm vững.</div>
+        <div class="rm-tags">
+          <span class="rtag" style="background:var(--l3);color:var(--l3t)">Exercises</span>
+          <span class="rtag" style="background:var(--l3);color:var(--l3t)">Commentaries</span>
+          <span class="rtag" style="background:var(--l3);color:var(--l3t)">Infinite-dim extensions</span>
+        </div>
+        <div class="rm-time">Liên tục. Hiểu tường tận = có thể tự giải lại mọi chứng minh và giải thích mọi khái niệm bằng lời.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════ SECTION MATRIX ══════ -->
+<div class="sec" data-cat="matrix" id="matrixSec">
+  <div class="sec-hdr">
+    <span class="sec-badge" style="background:#e3f2fd;color:#0d3c7a">📊 Ma Trận</span>
+    <div><div class="sec-title">Ma Trận Kiến Thức × Định Lý Chương 1</div><div class="sec-desc">Kiến thức nào được dùng trong kết quả nào — để bạn biết ưu tiên học cái gì trước.</div></div>
+  </div>
+  <div style="overflow-x:auto">
+  <table class="matrix">
+    <tr>
+      <th>Kiến thức nền</th>
+      <th>Def 1.1<br>N(x̄;Ω)</th>
+      <th>Định lý 1.6<br>Lim sup = N</th>
+      <th>Mệnh đề 1.7<br>Tập lồi</th>
+      <th>Mệnh đề 1.9<br>N̂ = T*</th>
+      <th>Định lý 1.10<br>Biến phân trơn</th>
+      <th>Def 1.11<br>Coderivative</th>
+      <th>Def 1.18<br>∂φ, ∂∞φ</th>
+      <th>Định lý 1.22<br>Lipschitz ↔ ∂∞</th>
+      <th>Định lý 1.28<br>Lim sup ∂̂</th>
+      <th>Định lý 1.33<br>∂d_Ω</th>
+    </tr>
+    <tr><td>Dãy số, hội tụ xₖ→x̄</td><td class="ck">✦✦✦</td><td class="ck">✦✦✦</td><td class="cx">—</td><td class="cx">✦</td><td class="cx">✦</td><td class="ck">✦✦</td><td class="ck">✦✦</td><td class="ck">✦✦</td><td class="ck">✦✦✦</td><td class="ck">✦✦</td></tr>
+    <tr><td>Tích vô hướng ⟨v,x⟩</td><td class="cx">✦</td><td class="ck">✦✦✦</td><td class="ck">✦✦</td><td class="ck">✦✦✦</td><td class="ck">✦✦</td><td class="cx">✦</td><td class="cx">✦</td><td class="cx">✦</td><td class="ck">✦✦</td><td class="ck">✦✦</td></tr>
+    <tr><td>Chuẩn ‖x‖, khoảng cách</td><td class="ck">✦✦✦</td><td class="ck">✦✦✦</td><td class="cx">—</td><td class="cx">✦</td><td class="cx">—</td><td class="cx">✦</td><td class="cx">—</td><td class="ck">✦✦✦</td><td class="cx">✦</td><td class="ck">✦✦✦</td></tr>
+    <tr><td>Infimum / dist(x;Ω)</td><td class="ck">✦✦✦</td><td class="ck">✦✦</td><td class="cx">—</td><td class="cx">—</td><td class="cx">—</td><td class="cx">—</td><td class="cx">—</td><td class="cx">—</td><td class="cx">—</td><td class="ck">✦✦✦</td></tr>
+    <tr><td>Tập đóng, locally closed</td><td class="ck">✦✦✦</td><td class="ck">✦✦</td><td class="cx">✦</td><td class="cx">✦</td><td class="cx">—</td><td class="ck">✦✦</td><td class="ck">✦✦</td><td class="cx">✦</td><td class="ck">✦✦</td><td class="ck">✦✦</td></tr>
+    <tr><td>lim sup/inf (chữ thường)</td><td class="cx">—</td><td class="ck">✦✦✦</td><td class="cx">—</td><td class="ck">✦✦</td><td class="cx">—</td><td class="cx">—</td><td class="ck">✦✦</td><td class="cx">✦</td><td class="ck">✦✦✦</td><td class="cx">—</td></tr>
+    <tr><td>Lim sup (chữ HOA, tập)</td><td class="ck">✦✦✦</td><td class="ck">✦✦✦</td><td class="cx">—</td><td class="cx">—</td><td class="cx">—</td><td class="ck">✦✦✦</td><td class="ck">✦✦✦</td><td class="cx">—</td><td class="ck">✦✦✦</td><td class="cx">—</td></tr>
+    <tr><td>Tập lồi, giải tích lồi</td><td class="cx">—</td><td class="cx">—</td><td class="ck">✦✦✦</td><td class="ck">✦✦</td><td class="cx">—</td><td class="cx">—</td><td class="cx">—</td><td class="cx">—</td><td class="cx">—</td><td class="cx">—</td></tr>
+    <tr><td>Gradient ∇f, Jacobian</td><td class="cx">—</td><td class="cx">—</td><td class="cx">—</td><td class="cx">—</td><td class="ck">✦✦✦</td><td class="ck">✦✦✦</td><td class="cx">—</td><td class="cx">—</td><td class="cx">✦</td><td class="cx">—</td></tr>
+    <tr><td>Ma trận chuyển vị Aᵀ</td><td class="cx">—</td><td class="cx">—</td><td class="cx">—</td><td class="cx">—</td><td class="cx">—</td><td class="ck">✦✦✦</td><td class="cx">—</td><td class="cx">—</td><td class="cx">—</td><td class="cx">—</td></tr>
+    <tr><td>Hàm Lipschitz</td><td class="cx">—</td><td class="cx">—</td><td class="cx">—</td><td class="cx">—</td><td class="cx">—</td><td class="cx">—</td><td class="cx">—</td><td class="ck">✦✦✦</td><td class="ck">✦✦</td><td class="cx">—</td></tr>
+    <tr><td>Epigraph, hàm proper l.s.c.</td><td class="cx">—</td><td class="cx">—</td><td class="cx">—</td><td class="cx">—</td><td class="cx">—</td><td class="cx">—</td><td class="ck">✦✦✦</td><td class="ck">✦✦</td><td class="ck">✦✦✦</td><td class="cx">✦</td></tr>
+    <tr><td>Ánh xạ đa trị, gph F</td><td class="cx">—</td><td class="cx">—</td><td class="cx">—</td><td class="cx">—</td><td class="cx">—</td><td class="ck">✦✦✦</td><td class="cx">—</td><td class="cx">—</td><td class="cx">—</td><td class="cx">—</td></tr>
+    <tr><td>Phép chiếu Π(x;Ω)</td><td class="ck">✦✦✦</td><td class="ck">✦✦✦</td><td class="cx">—</td><td class="cx">—</td><td class="cx">—</td><td class="cx">—</td><td class="cx">—</td><td class="cx">—</td><td class="cx">—</td><td class="ck">✦✦✦</td></tr>
+    <tr><td>Bolzano-Weierstrass</td><td class="cx">✦</td><td class="ck">✦✦</td><td class="cx">—</td><td class="cx">—</td><td class="cx">—</td><td class="cx">—</td><td class="cx">—</td><td class="cx">—</td><td class="ck">✦✦</td><td class="cx">✦</td></tr>
+  </table>
+  </div>
+  <div style="margin-top:12px;font-size:12px;color:var(--ink3)">
+    <span style="color:var(--l0b);font-weight:700">✦✦✦</span> = thiết yếu (không có không hiểu được) &nbsp;|&nbsp;
+    <span style="color:var(--l0b);font-weight:700">✦✦</span> = quan trọng &nbsp;|&nbsp;
+    <span style="color:var(--l0b)">✦</span> = có ích &nbsp;|&nbsp;
+    — = không dùng trực tiếp
+  </div>
+</div>
+
+</div><!-- end mainbody -->
+
+<div class="nores hidden" id="nores">🔍 Không tìm thấy "<span id="qspan"></span>"</div>
+
+<script>
+let curTab='all';
+function showTab(t,btn){
+  curTab=t;
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  document.querySelectorAll('.sec').forEach(s=>{
+    if(t==='all'){s.style.display='';}
+    else if(t==='road'){s.style.display=s.id==='roadSec'?'':(s.dataset.cat===t?'':'none');}
+    else if(t==='matrix'){s.style.display=s.id==='matrixSec'?'':(s.dataset.cat===t?'':'none');}
+    else{s.style.display=s.dataset.cat===t?'':(s.id==='roadSec'||s.id==='matrixSec')?'none':'none';}
+  });
+  document.getElementById('legendEl').style.display=(t==='road'||t==='matrix')?'none':'';
+  doSearch();
+}
+function doSearch(){
+  const q=document.getElementById('q').value.toLowerCase().trim();
+  document.getElementById('qspan').textContent=q;
+  let vis=0;
+  document.querySelectorAll('.card').forEach(c=>{
+    const sec=c.closest('.sec');
+    const tabOk=curTab==='all'||(sec&&sec.dataset.cat===curTab);
+    if(!tabOk){c.classList.add('hidden');return;}
+    if(!q){c.classList.remove('hidden');vis++;return;}
+    if((c.dataset.s||'').toLowerCase().includes(q)||c.textContent.toLowerCase().includes(q)){
+      c.classList.remove('hidden');vis++;
+    }else{c.classList.add('hidden');}
+  });
+  document.querySelectorAll('.sec').forEach(s=>{
+    if(s.id==='roadSec'||s.id==='matrixSec')return;
+    if(curTab!=='all'&&s.dataset.cat!==curTab)return;
+    const any=[...s.querySelectorAll('.card')].some(c=>!c.classList.contains('hidden'));
+    s.style.display=any?'':(q?'none':'');
+  });
+  document.getElementById('nores').classList.toggle('hidden',vis>0||!q);
+  document.getElementById('scnt').textContent=q?`${vis} kết quả`:'';
+}
+</script>
+</body>
+</html>
