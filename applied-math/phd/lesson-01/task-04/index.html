@@ -1,0 +1,1784 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+
+  <link rel="stylesheet" href="../assets/brand.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Task 04 · Chapter 1 Exam Questions | Variational Analysis and Applications</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=STIX+Two+Math&display=swap');
+
+:root {
+  --space:#06142e;
+  --deep:#071b3f;
+  --void:#020712;
+  --cyan:#37d5ff;
+  --blue:#1d8cff;
+  --violet:#7c5cff;
+  --pink:#ff70b8;
+  --green:#52f5b0;
+  --orange:#ffb454;
+  --yellow:#ffe680;
+
+  --bg:#06142e;
+  --bg2:rgba(255,255,255,.075);
+  --bg3:rgba(255,255,255,.12);
+  --ink:#ecf7ff;
+  --ink2:#bdd0e9;
+  --ink3:#7e91ad;
+  --rule:rgba(148,163,184,.22);
+
+  --gold:#ffb454;
+  --gold-bg:rgba(255,180,84,.14);
+  --gold-border:rgba(255,180,84,.36);
+  --blue:#37d5ff;
+  --blue-bg:rgba(55,213,255,.14);
+  --blue-border:rgba(55,213,255,.36);
+  --green:#52f5b0;
+  --green-bg:rgba(82,245,176,.14);
+  --green-border:rgba(82,245,176,.36);
+  --red:#ff6b8a;
+  --red-bg:rgba(255,107,138,.14);
+  --red-border:rgba(255,107,138,.36);
+  --purple:#a78bfa;
+  --purple-bg:rgba(167,139,250,.15);
+  --purple-border:rgba(167,139,250,.36);
+  --teal:#2dd4bf;
+  --teal-bg:rgba(45,212,191,.14);
+  --teal-border:rgba(45,212,191,.36);
+
+  --card:rgba(255,255,255,.92);
+  --card-dark:rgba(255,255,255,.09);
+  --shadow:0 22px 60px rgba(0,0,0,.28);
+  --shadow2:0 12px 28px rgba(2,7,18,.18);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior:smooth; }
+
+body {
+  min-height:100vh;
+  background:
+    radial-gradient(900px 540px at 8% 8%, rgba(55,213,255,.22), transparent 60%),
+    radial-gradient(850px 520px at 92% 12%, rgba(124,92,255,.22), transparent 60%),
+    radial-gradient(850px 520px at 62% 95%, rgba(82,245,176,.12), transparent 60%),
+    linear-gradient(135deg, #031024 0%, #071b3f 48%, #020712 100%);
+  color: var(--ink);
+  font-family: "Be Vietnam Pro", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  padding-bottom: 90px;
+  overflow-x:hidden;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-2;
+  opacity:.38;
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,.86) 1px, transparent 1.6px),
+    radial-gradient(circle, rgba(55,213,255,.65) 1px, transparent 1.5px),
+    radial-gradient(circle, rgba(82,245,176,.55) 1px, transparent 1.5px);
+  background-size:72px 72px,118px 118px,164px 164px;
+  background-position:0 0,34px 58px,90px 26px;
+}
+
+body::after{
+  content:"";
+  position:fixed;
+  right:-360px;
+  top:120px;
+  width:1040px;
+  height:280px;
+  border-radius:50%;
+  border:3px solid rgba(55,213,255,.15);
+  border-left-color:rgba(82,245,176,.42);
+  transform:rotate(-17deg);
+  z-index:-1;
+  pointer-events:none;
+}
+
+/* HERO */
+.hero {
+  position:relative;
+  overflow:hidden;
+  padding: 42px 48px 36px;
+  background:
+    radial-gradient(520px 220px at 12% 0%, rgba(55,213,255,.20), transparent 62%),
+    radial-gradient(540px 240px at 82% 20%, rgba(124,92,255,.20), transparent 62%),
+    rgba(4,16,36,.76);
+  border-bottom:1px solid rgba(255,255,255,.13);
+  box-shadow:0 18px 48px rgba(0,0,0,.18);
+  backdrop-filter:blur(16px);
+}
+
+.hero::before{
+  content:"∂φ  ∂∞φ  D*F  N(x̄;Ω)  epi φ  Π(x;Ω)  T*(x̄;Ω)";
+  position:absolute;
+  right:-70px;
+  top:24px;
+  font-family:"STIX Two Math","JetBrains Mono",monospace;
+  font-size:34px;
+  color:rgba(255,255,255,.045);
+  white-space:nowrap;
+  transform:rotate(-8deg);
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--blue), var(--green), var(--red), var(--purple), var(--cyan));
+}
+
+.hero-label {
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  font-size: 11px;
+  letter-spacing: 2.2px;
+  text-transform: uppercase;
+  color: rgba(236,247,255,.62);
+  margin-bottom: 12px;
+  font-weight:900;
+}
+.hero-label::before{
+  content:"🛰️";
+  letter-spacing:0;
+  font-size:14px;
+}
+
+.hero-title {
+  font-size: 34px;
+  font-weight: 900;
+  color: #f5fbff;
+  line-height: 1.22;
+  margin-bottom: 12px;
+  letter-spacing:-.03em;
+  max-width:1000px;
+}
+
+.hero-title span {
+  display:inline-block;
+  margin-top:6px;
+  font-size: 19px!important;
+  font-weight: 700!important;
+  font-style: normal!important;
+  color: rgba(189,243,255,.88);
+  letter-spacing:0;
+}
+
+.hero-sub {
+  font-size: 14px;
+  color: rgba(221,235,255,.78);
+  font-weight: 500;
+  line-height: 1.75;
+  max-width: 860px;
+  margin-bottom: 18px;
+}
+
+.hero-pills { display: flex; gap: 9px; flex-wrap: wrap; }
+
+.pill {
+  border: 1px solid rgba(255,255,255,0.14);
+  background:rgba(255,255,255,.08);
+  border-radius: 999px;
+  padding: 7px 13px;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: rgba(236,247,255,.76);
+  font-weight:900;
+  box-shadow:0 12px 24px rgba(0,0,0,.12);
+}
+
+/* CONTROLS */
+.controls {
+  position: sticky; top: 0; z-index: 20;
+  background: rgba(4,16,36,.76);
+  border-bottom: 1px solid rgba(255,255,255,.13);
+  padding: 11px 48px;
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  backdrop-filter:blur(16px);
+}
+
+.search-wrap { position: relative; flex: 1; min-width: 220px; max-width: 500px; }
+
+.search-wrap input {
+  width: 100%;
+  background: rgba(255,255,255,.94);
+  border: 2px solid rgba(148,163,184,.25);
+  border-radius: 16px;
+  padding: 10px 14px 10px 40px;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-size: 13px;
+  color: #0f172a;
+  outline: none;
+  transition: .18s ease;
+  font-weight:700;
+  box-shadow:0 12px 24px rgba(0,0,0,.10);
+}
+
+.search-wrap input:focus {
+  border-color: rgba(55,213,255,.60);
+  box-shadow:0 12px 26px rgba(55,213,255,.16);
+}
+.search-wrap input::placeholder { color: #64748b; }
+
+.search-wrap::before {
+  content: '🔍';
+  position: absolute;
+  left: 14px; top: 50%;
+  transform: translateY(-50%);
+  font-size: 13px;
+  z-index:1;
+}
+
+.s-count {
+  font-size: 12px;
+  color: rgba(236,247,255,.68);
+  white-space: nowrap;
+  font-weight:800;
+}
+
+.filter-btns { display: flex; gap: 6px; flex-wrap: wrap; }
+
+.fb {
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 999px;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-size: 11.5px;
+  font-weight: 900;
+  color: rgba(236,247,255,.72);
+  padding: 7px 12px;
+  cursor: pointer;
+  transition: .16s ease;
+  white-space: nowrap;
+  box-shadow:0 10px 18px rgba(0,0,0,.10);
+}
+
+.fb:hover {
+  color:white!important;
+  transform:translateY(-1px);
+  border-color:rgba(55,213,255,.35);
+}
+
+.fb.on {
+  color:#06142e!important;
+  background:linear-gradient(135deg,#83efff,#52f5b0)!important;
+  border-color:transparent!important;
+  box-shadow:0 12px 24px rgba(55,213,255,.22);
+}
+
+/* BODY */
+.body {
+  max-width:1240px;
+  margin:0 auto;
+  padding: 30px 22px;
+}
+
+/* SECTION */
+.section { margin-bottom: 48px; scroll-margin-top:95px; }
+
+.sec-hdr {
+  display: flex; align-items: center; gap: 14px; margin-bottom: 20px;
+  padding:18px;
+  border:1px solid rgba(255,255,255,.13);
+  border-radius:22px;
+  background:rgba(255,255,255,.085);
+  box-shadow:var(--shadow2);
+  backdrop-filter:blur(14px);
+}
+
+.sec-icon {
+  font-size: 23px;
+  width:44px;
+  height:44px;
+  display:grid;
+  place-items:center;
+  border-radius:16px;
+  background:rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.14);
+}
+
+.sec-title {
+  font-size: 23px;
+  font-weight: 900;
+  color:#f5fbff;
+  line-height:1.25;
+}
+
+.sec-count {
+  font-size: 11px;
+  background: rgba(255,255,255,.10);
+  color: rgba(236,247,255,.68);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius: 999px;
+  padding: 5px 10px;
+  font-weight:900;
+}
+
+.sec-desc {
+  font-size: 13px;
+  color: rgba(221,235,255,.70);
+  margin-top: 5px;
+  font-weight:600;
+}
+
+/* QUESTION CARD */
+.q-card {
+  background: rgba(255,255,255,.92);
+  color:#0f172a;
+  border: 1px solid rgba(148,163,184,.22);
+  border-radius: 22px;
+  margin-bottom: 14px;
+  overflow: hidden;
+  transition: .18s ease;
+  border-left: 5px solid;
+  box-shadow:0 8px 0 rgba(148,163,184,.12), 0 18px 35px rgba(15,23,42,.10);
+}
+
+.q-card:hover {
+  transform:translateY(-2px);
+  border-color:rgba(55,213,255,.35);
+  box-shadow:0 10px 0 rgba(55,213,255,.10),0 20px 42px rgba(55,213,255,.12);
+}
+
+.q-header {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 18px 20px; cursor: pointer; user-select: none;
+}
+
+.q-num {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  font-weight: 800;
+  padding: 5px 9px;
+  border-radius: 10px;
+  flex-shrink: 0;
+  margin-top: 1px;
+  border:1px solid rgba(148,163,184,.18);
+}
+
+.q-text { flex: 1; }
+
+.q-title {
+  font-size: 16px;
+  font-weight: 900;
+  color: #0f172a;
+  line-height: 1.45;
+  margin-bottom: 7px;
+}
+
+.q-meta { display: flex; gap: 7px; flex-wrap: wrap; align-items: center; }
+
+.tag {
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 999px;
+  border:1px solid rgba(148,163,184,.14);
+}
+
+.q-toggle {
+  font-size: 18px;
+  color: #64748b;
+  transition: transform 0.25s;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.q-card.open .q-toggle { transform: rotate(180deg); }
+
+/* ANSWER PANEL */
+.q-answer {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.3s;
+  background:
+    radial-gradient(560px 240px at 5% 0%, rgba(55,213,255,.08), transparent 60%),
+    #f8fbff;
+  border-top: 1px solid transparent;
+}
+
+.q-card.open .q-answer {
+  max-height: 9000px;
+  border-top-color: rgba(148,163,184,.22);
+  padding: 22px 24px;
+}
+
+/* ANSWER CONTENT STYLES */
+.ans-block { margin-bottom: 18px; }
+.ans-block:last-child { margin-bottom: 0; }
+
+.ans-label {
+  font-size: 10.5px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #64748b;
+  margin-bottom: 8px;
+  display: flex; align-items: center; gap: 7px;
+}
+
+.ans-label::before {
+  content: '';
+  display: inline-block;
+  width: 4px; height: 15px;
+  border-radius: 4px;
+  background: linear-gradient(180deg,#37d5ff,#52f5b0);
+  opacity: .95;
+}
+
+.ans-text {
+  font-size: 14px;
+  color: #334155;
+  line-height: 1.78;
+  font-weight:600;
+}
+.ans-text b { color: #0f172a; font-weight: 900; }
+.ans-text em { color: #b45309; font-style: normal; font-weight: 900; }
+
+.formula-box {
+  background:
+    radial-gradient(420px 140px at 5% 0%, rgba(55,213,255,.12), transparent 60%),
+    rgba(241,245,249,.98);
+  border-radius: 14px;
+  padding: 12px 15px;
+  font-family: "STIX Two Math","JetBrains Mono","Cambria Math","Noto Sans Math",serif;
+  font-size: 14px;
+  color: #172033;
+  line-height: 1.75;
+  margin: 10px 0;
+  border-left: 3px solid rgba(29,140,255,.35);
+  overflow-x: auto;
+  white-space:pre-wrap;
+}
+
+.step-list { list-style: none; padding: 0; margin: 10px 0; }
+
+.step-list li {
+  display: flex; gap: 12px; padding: 10px 0;
+  border-bottom: 1px solid rgba(148,163,184,.18);
+  font-size: 14px; color: #334155;
+  line-height: 1.68;
+  font-weight:600;
+}
+.step-list li:last-child { border-bottom: none; }
+
+.step-num {
+  min-width: 28px; height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(55,213,255,.20), rgba(82,245,176,.18));
+  color: #0f172a;
+  font-size: 12px;
+  font-weight: 900;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+  border:1px solid rgba(148,163,184,.18);
+}
+
+.highlight-box {
+  border-radius: 15px;
+  padding: 13px 16px;
+  font-size: 13.5px;
+  line-height: 1.75;
+  margin: 10px 0;
+  font-weight:700;
+}
+
+.hl-warn { background: rgba(255,107,138,.10); border: 1px solid rgba(255,107,138,.28); color: #9f1239; }
+.hl-tip  { background: rgba(55,213,255,.10); border: 1px solid rgba(55,213,255,.28); color: #075985; }
+.hl-key  { background: rgba(255,180,84,.12); border: 1px solid rgba(255,180,84,.32); color: #92400e; }
+.hl-good { background: rgba(82,245,176,.10); border: 1px solid rgba(82,245,176,.32); color: #047857; }
+
+.example-block {
+  background: rgba(241,245,249,.95);
+  border-radius: 15px;
+  padding: 14px 16px;
+  margin: 10px 0;
+  font-size: 13.5px;
+  line-height: 1.75;
+  color: #334155;
+  border-left:3px solid rgba(82,245,176,.40);
+  font-weight:600;
+}
+
+.example-block .ex-title {
+  font-size: 10.5px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #64748b;
+  margin-bottom: 8px;
+}
+
+/* tables inside answers */
+table{
+  border-radius:14px;
+  overflow:hidden;
+  background:white;
+}
+th{
+  background:#eaf2ff!important;
+  color:#0f172a!important;
+  font-weight:900!important;
+}
+td, th{
+  border-color:rgba(148,163,184,.22)!important;
+}
+
+/* HIDDEN */
+.hidden { display: none !important; }
+
+.no-results {
+  text-align: center;
+  padding: 60px;
+  color: rgba(236,247,255,.65);
+  font-size: 15px;
+  font-weight:800;
+}
+
+/* FOOTER */
+.task-footer{
+  max-width:1240px;
+  margin:20px auto 0;
+  padding:0 22px;
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.task-footer a{
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 14px;
+  border-radius:999px;
+  background:rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.14);
+  color:#e9fbff;
+  font-weight:900;
+  font-size:13px;
+  box-shadow:0 12px 24px rgba(0,0,0,.14);
+}
+
+.task-footer a:hover{
+  background:rgba(55,213,255,.16);
+  border-color:rgba(55,213,255,.35);
+}
+
+@media (max-width:760px){
+  .hero{padding:30px 18px 26px}
+  .hero-title{font-size:25px}
+  .controls{padding:10px 14px}
+  .body{padding:20px 14px}
+  .sec-hdr{align-items:flex-start}
+  .q-header{padding:16px}
+  .q-card.open .q-answer{padding:18px 16px}
+}
+</style>
+</head>
+<body>
+
+
+  <img src="../assets/logo-SH.png" class="sh-logo" alt="Science Horizon">
+<div class="hero">
+  <div class="hero-label">Science Horizon · Task 04 · Chapter 1 Review</div>
+  <div class="hero-title">Task 04 · Câu Hỏi Ôn Thi Chương 1<br><span style="font-size:24px;font-weight:300;font-style:italic">Variational Analysis and Applications · Mordukhovich</span></div>
+  <div class="hero-sub">Bộ câu hỏi trọng tâm được tuyển chọn từ tất cả các định nghĩa, định lý, ví dụ và bài tập của Chương 1. Mỗi câu có giải thích chi tiết, dễ hiểu bằng tiếng Việt, kèm theo điểm cần nhớ và bẫy hay mắc.</div>
+  <div class="hero-pills">
+    <span class="pill">40 câu hỏi</span>
+    <span class="pill">5 mức độ</span>
+    <span class="pill">Định nghĩa + Tính toán + Chứng minh</span>
+    <span class="pill">Giải thích bằng hình ảnh</span>
+  </div>
+</div>
+
+<!-- CONTROLS -->
+<div class="controls">
+  <div class="search-wrap">
+    <input type="text" id="searchQ" placeholder="Tìm câu hỏi... (vd: coderivative, epigraph, Lipschitz, Fermat...)" oninput="doSearch()">
+  </div>
+  <span class="s-count" id="qcount"></span>
+  <div class="filter-btns">
+    <button class="fb on" style="background:var(--ink)" onclick="filterCat('all',this)">Tất cả</button>
+    <button class="fb" onclick="filterCat('def',this)">🔵 Định nghĩa</button>
+    <button class="fb" onclick="filterCat('calc',this)">🟢 Tính toán</button>
+    <button class="fb" onclick="filterCat('proof',this)">🔴 Chứng minh</button>
+    <button class="fb" onclick="filterCat('compare',this)">🟠 So sánh</button>
+    <button class="fb" onclick="filterCat('hard',this)">⭐ Nâng cao</button>
+  </div>
+</div>
+
+<div class="body" id="mainbody">
+
+<!-- ================================================================
+     NHÓM 1: ĐỊNH NGHĨA & Ý NGHĨA
+================================================================ -->
+<div class="section" data-cat="def">
+<div class="sec-hdr">
+  <span class="sec-icon">🔵</span>
+  <div>
+    <div class="sec-title">Nhóm 1 — Định Nghĩa & Ý Nghĩa</div>
+    <div class="sec-desc">Giáo sư hỏi để kiểm tra bạn có thực sự hiểu khái niệm hay chỉ thuộc lòng. Hãy trả lời bằng cả công thức lẫn lời giải thích.</div>
+  </div>
+  <span class="sec-count" id="cnt-def"></span>
+</div>
+
+<!-- Q1 -->
+<div class="q-card" style="border-left-color:var(--blue)" data-cat="def" data-s="khoảng cách chiếu projection dist Π omega definition hàm khoảng cách euclidean projector">
+  <div class="q-header" onclick="toggle(this)">
+    <div class="q-num" style="background:var(--blue-bg);color:var(--blue)">C1.1</div>
+    <div class="q-text">
+      <div class="q-title">Định nghĩa hàm khoảng cách dist(x;Ω) và phép chiếu Euclid Π(x;Ω). Tại sao Π(x;Ω) có thể là tập nhiều điểm?</div>
+      <div class="q-meta">
+        <span class="tag" style="background:var(--blue-bg);color:var(--blue)">tr.2–3</span>
+        <span class="tag" style="background:var(--bg3);color:var(--ink3)">Def 1.1 — cơ bản</span>
+      </div>
+    </div>
+    <div class="q-toggle">▾</div>
+  </div>
+  <div class="q-answer">
+    <div class="ans-block">
+      <div class="ans-label">Định nghĩa chính xác</div>
+      <div class="formula-box">dist(x; Ω) = d_Ω(x) := inf{‖x − z‖ | z ∈ Ω}
+Π(x; Ω) = Π_Ω(x) := {w ∈ Ω | ‖x − w‖ = dist(x; Ω)}</div>
+      <div class="ans-text">dist(x;Ω) là khoảng cách nhỏ nhất từ điểm x đến bất kỳ điểm nào trong Ω. Π(x;Ω) là tập tất cả các điểm trong Ω đạt khoảng cách tối thiểu đó — tức điểm "chiếu" x lên Ω.</div>
+    </div>
+    <div class="ans-block">
+      <div class="ans-label">Tại sao Π có thể là tập nhiều điểm?</div>
+      <div class="ans-text">Khi Ω <b>lồi đóng</b>: chiếu duy nhất — Π(x;Ω) là một điểm.<br>Khi Ω <b>không lồi</b>: nhiều điểm trong Ω có thể cùng khoảng cách tối thiểu đến x.</div>
+      <div class="example-block">
+        <div class="ex-title">Ví dụ cụ thể</div>
+        Ω = {(x,y) | x²+y²=1} (đường tròn đơn vị), x=(0,0) (tâm).<br>
+        → Mọi điểm trên Ω đều cách (0,0) đúng 1. Do đó Π((0,0);Ω) = toàn bộ đường tròn!
+      </div>
+    </div>
+    <div class="highlight-box hl-tip">💡 <b>Điều giáo sư muốn nghe thêm:</b> Khi Ω đóng cục bộ quanh x̄, Π(x;Ω) ≠ ∅ với x đủ gần x̄. Đây là điều kiện kỹ thuật để Definition 1.1 hoạt động được.</div>
+  </div>
+</div>
+
+<!-- Q2 -->
+<div class="q-card" style="border-left-color:var(--blue)" data-cat="def" data-s="basic normal cone nón pháp tuyến cơ bản Definition 1.1 Lim sup xk wk alphak">
+  <div class="q-header" onclick="toggle(this)">
+    <div class="q-num" style="background:var(--blue-bg);color:var(--blue)">C1.2</div>
+    <div class="q-text">
+      <div class="q-title">Phát biểu Definition 1.1: Nón Pháp Tuyến Cơ Bản N(x̄;Ω). Giải thích ý nghĩa hình học của từng thành phần.</div>
+      <div class="q-meta">
+        <span class="tag" style="background:var(--blue-bg);color:var(--blue)">tr.3 — Def 1.1</span>
+        <span class="tag" style="background:var(--red-bg);color:var(--red)">câu hỏi bắt buộc</span>
+      </div>
+    </div>
+    <div class="q-toggle">▾</div>
+  </div>
+  <div class="q-answer">
+    <div class="ans-block">
+      <div class="ans-label">Định nghĩa</div>
+      <div class="formula-box">N(x̄; Ω) := Lim sup cone[x − Π(x; Ω)]
+                x → x̄
+
+v ∈ N(x̄;Ω) ⟺ ∃ dãy xₖ→x̄, wₖ∈Π(xₖ;Ω), αₖ≥0: αₖ(xₖ−wₖ) → v</div>
+    </div>
+    <div class="ans-block">
+      <div class="ans-label">Giải thích từng thành phần</div>
+      <ul class="step-list">
+        <li><div class="step-num">①</div><div>xₖ → x̄: ta nhìn các điểm tiến về x̄ từ bên ngoài Ω</div></li>
+        <li><div class="step-num">②</div><div>wₖ ∈ Π(xₖ;Ω): chiếu mỗi xₖ xuống Ω — tìm điểm gần nhất trong Ω</div></li>
+        <li><div class="step-num">③</div><div>xₖ − wₖ: vectơ từ điểm chiếu đến xₖ — hướng "ra ngoài" Ω</div></li>
+        <li><div class="step-num">④</div><div>αₖ ≥ 0: nhân với hệ số dương tùy ý để "kéo dài" → tạo nón (cone)</div></li>
+        <li><div class="step-num">⑤</div><div>Lim sup: lấy giới hạn — thu thập tất cả hướng "ra ngoài" có thể đạt được</div></li>
+      </ul>
+    </div>
+    <div class="ans-block">
+      <div class="ans-label">Hai tính chất ngay lập tức từ định nghĩa</div>
+      <div class="ans-text">• N(x̄;Ω) là <em>nón đóng</em> (vì Lim sup của nón đóng là nón đóng)<br>• N(x̄;Ω) có thể <em>không lồi</em> — đây là tính năng đặc trưng quan trọng nhất!</div>
+    </div>
+    <div class="highlight-box hl-warn">⚠ <b>Bẫy phổ biến:</b> Nhiều người nghĩ N(x̄;Ω) luôn lồi. SAI! Example 1.5 (tr.4) cho thấy N((0,0);Ω) không lồi với Ω = {(x,y)|y≥−|x|}.</div>
+  </div>
+</div>
+
+<!-- Q3 -->
+<div class="q-card" style="border-left-color:var(--blue)" data-cat="def" data-s="prenormal cone regular normal N hat formula 1.5 epsilon enlargement lim sup quotient">
+  <div class="q-header" onclick="toggle(this)">
+    <div class="q-num" style="background:var(--blue-bg);color:var(--blue)">C1.3</div>
+    <div class="q-text">
+      <div class="q-title">Định nghĩa Nón Pháp Tuyến Chính Quy N̂(x;Ω) và ε-enlargement Nε(x;Ω). Sự khác biệt với N(x̄;Ω) là gì?</div>
+      <div class="q-meta">
+        <span class="tag" style="background:var(--blue-bg);color:var(--blue)">tr.4 — (1.5)–(1.6)</span>
+        <span class="tag" style="background:var(--bg3);color:var(--ink3)">bước trung gian</span>
+      </div>
+    </div>
+    <div class="q-toggle">▾</div>
+  </div>
+  <div class="q-answer">
+    <div class="ans-block">
+      <div class="ans-label">Công thức</div>
+      <div class="formula-box">N̂(x; Ω) := {v ∈ ℝⁿ | lim sup ⟨v, z−x⟩/‖z−x‖ ≤ 0}   [ε=0]
+                      z→x, z∈Ω
+Nε(x; Ω) := {v ∈ ℝⁿ | lim sup ⟨v, z−x⟩/‖z−x‖ ≤ ε}   [ε>0]</div>
+    </div>
+    <div class="ans-block">
+      <div class="ans-label">Bảng so sánh N̂ với N</div>
+      <div class="ans-text">
+        <table style="width:100%;border-collapse:collapse;font-size:13px">
+          <tr style="background:var(--bg3)"><th style="padding:8px;text-align:left;border:1px solid var(--rule)">Tính chất</th><th style="padding:8px;text-align:left;border:1px solid var(--rule)">N̂(x̄;Ω) — Chính quy</th><th style="padding:8px;text-align:left;border:1px solid var(--rule)">N(x̄;Ω) — Cơ bản</th></tr>
+          <tr><td style="padding:8px;border:1px solid var(--rule)">Cách xây</td><td style="padding:8px;border:1px solid var(--rule)">Tại chính điểm x̄</td><td style="padding:8px;border:1px solid var(--rule)">Giới hạn từ lân cận</td></tr>
+          <tr><td style="padding:8px;border:1px solid var(--rule)">Tính lồi</td><td style="padding:8px;border:1px solid var(--rule)">✅ Luôn lồi</td><td style="padding:8px;border:1px solid var(--rule)">❌ Có thể không lồi</td></tr>
+          <tr><td style="padding:8px;border:1px solid var(--rule)">Quan hệ</td><td style="padding:8px;border:1px solid var(--rule)" colspan="2">N̂(x̄;Ω) ⊂ N(x̄;Ω) — luôn đúng</td></tr>
+          <tr><td style="padding:8px;border:1px solid var(--rule)">Khi Ω lồi</td><td style="padding:8px;border:1px solid var(--rule)" colspan="2">N̂ = N = nón pháp tuyến lồi cổ điển</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="ans-block">
+      <div class="ans-label">Tại sao cần ε-enlargement?</div>
+      <div class="ans-text">Nε là "phiên bản nới lỏng" của N̂ — cho phép sai số ε. Quan trọng vì Định lý 1.6 dùng nó: N(x̄;Ω) = Lim sup Nε(x;Ω) khi ε↓0. Tính ổn định khi ε→0 là then chốt để chứng minh các calculus rules.</div>
+    </div>
+    <div class="highlight-box hl-key">🔑 <b>Điểm mấu chốt:</b> N̂ là tập lồi (luôn), N là tập đóng (không nhất thiết lồi). N̂ = N khi và chỉ khi Ω "bình thường" (vd: lồi, hoặc trơn tại x̄).</div>
+  </div>
+</div>
+
+<!-- Q4 -->
+<div class="q-card" style="border-left-color:var(--blue)" data-cat="def" data-s="contingent cone Bouligand Definition 1.8 T xbar Omega outer limit t down 0 tangent">
+  <div class="q-header" onclick="toggle(this)">
+    <div class="q-num" style="background:var(--blue-bg);color:var(--blue)">C1.4</div>
+    <div class="q-text">
+      <div class="q-title">Định nghĩa Nón Tiếp Tuyến (Contingent Cone) T(x̄;Ω) theo Definition 1.8. Ý nghĩa hình học là gì?</div>
+      <div class="q-meta">
+        <span class="tag" style="background:var(--blue-bg);color:var(--blue)">tr.7–8 — Def 1.8</span>
+      </div>
+    </div>
+    <div class="q-toggle">▾</div>
+  </div>
+  <div class="q-answer">
+    <div class="ans-block">
+      <div class="ans-label">Định nghĩa</div>
+      <div class="formula-box">T(x̄; Ω) := Lim sup (Ω − x̄)/t
+           t↓0
+
+w ∈ T(x̄;Ω) ⟺ ∃ {xₖ}⊂Ω, {αₖ}⊂ℝ₊: xₖ→x̄, αₖ(xₖ−x̄)→w</div>
+    </div>
+    <div class="ans-block">
+      <div class="ans-label">Ý nghĩa hình học</div>
+      <div class="ans-text">T(x̄;Ω) là tập các hướng <b>"đi vào trong Ω"</b> từ x̄. Hình ảnh: thu phóng Ω quanh x̄ với tỉ lệ 1/t → khi t→0, phần còn lại là nón tiếp tuyến.</div>
+      <div class="example-block">
+        <div class="ex-title">Ví dụ: Ω = {(x,y) | y = |x|} tại (0,0)</div>
+        T((0,0); Ω) = Ω chính nó! Vì tập hình chữ V khi co lại vẫn là hình chữ V. T có thể không lồi!
+      </div>
+    </div>
+    <div class="ans-block">
+      <div class="ans-label">Quan hệ đối ngẫu với N̂ (Mệnh đề 1.9)</div>
+      <div class="formula-box">N̂(x̄; Ω) = T*(x̄; Ω) := {v | ⟨v,w⟩ ≤ 0  ∀w ∈ T(x̄;Ω)}</div>
+      <div class="ans-text">Pháp tuyến chính quy = nón đối ngẫu của tiếp tuyến. Đây là tổng quát hóa của separation theorem cho tập lồi.</div>
+    </div>
+    <div class="highlight-box hl-tip">💡 <b>Câu hỏi follow-up hay gặp:</b> "Tại sao N(x̄;Ω) không thể là đối ngẫu của bất kỳ nón tiếp tuyến nào?" → Vì N có thể không lồi, mà nón đối ngẫu của bất kỳ cái gì cũng luôn lồi (theo định nghĩa).</div>
+  </div>
+</div>
+
+<!-- Q5 -->
+<div class="q-card" style="border-left-color:var(--blue)" data-cat="def" data-s="coderivative D star F definition 1.11 gph F normal cone (u -v) sign minus">
+  <div class="q-header" onclick="toggle(this)">
+    <div class="q-num" style="background:var(--blue-bg);color:var(--blue)">C1.5</div>
+    <div class="q-text">
+      <div class="q-title">Định nghĩa Coderivative D*F(x̄,ȳ)(v) theo Definition 1.11. Tại sao có dấu trừ trong (u, −v)?</div>
+      <div class="q-meta">
+        <span class="tag" style="background:var(--blue-bg);color:var(--blue)">tr.13 — Def 1.11</span>
+        <span class="tag" style="background:var(--red-bg);color:var(--red)">câu hỏi bắt buộc</span>
+      </div>
+    </div>
+    <div class="q-toggle">▾</div>
+  </div>
+  <div class="q-answer">
+    <div class="ans-block">
+      <div class="ans-label">Định nghĩa</div>
+      <div class="formula-box">D*F(x̄, ȳ)(v) := {u ∈ ℝⁿ | (u, −v) ∈ N((x̄,ȳ); gph F)}
+
+Áp N lên ĐỒ THỊ gph F ⊂ ℝⁿ×ℝᵐ tại điểm (x̄,ȳ)</div>
+    </div>
+    <div class="ans-block">
+      <div class="ans-label">Tại sao có dấu trừ −v?</div>
+      <div class="ans-text">Đây là quy ước xuất phát từ <b>tính đối ngẫu</b> trong không gian sản phẩm. Khi F = f trơn, coderivative phải bằng Jacobian chuyển vị ∇f(x̄)ᵀ. Với dấu trừ: D*f(x̄)(v) = ∇f(x̄)ᵀv — điều này chỉ đúng khi dùng (u, −v).<br><br>
+      Cách nhớ: "u là phản ứng đầu VÀO khi v là nhiễu ở đầu RA" — dấu trừ phản ánh chiều ngược của ánh xạ (dual).</div>
+    </div>
+    <div class="ans-block">
+      <div class="ans-label">Khi F = f là hàm trơn C¹ (Proposition 1.12, tr.13)</div>
+      <div class="formula-box">D*f(x̄)(v) = D̂*f(x̄)(v) = ∇f(x̄)ᵀv  [Jacobian chuyển vị]</div>
+      <div class="ans-text">Đây là sự kiểm chứng quan trọng: coderivative tổng quát hóa Jacobian chuyển vị cho ánh xạ phi trơn.</div>
+    </div>
+    <div class="highlight-box hl-key">🔑 <b>Nhớ:</b> Với f: ℝⁿ→ℝᵐ trơn, Jacobian ∇f(x̄) là ma trận m×n. Coderivative D*f(x̄): ℝᵐ→ℝⁿ là ánh xạ tuyến tính bằng ma trận chuyển vị n×m. "Đảo chiều" không gian!</div>
+  </div>
+</div>
+
+<!-- Q6 -->
+<div class="q-card" style="border-left-color:var(--blue)" data-cat="def" data-s="epigraph epi phi definition subdifferential basic singular Definition 1.18 (v -1) (v 0)">
+  <div class="q-header" onclick="toggle(this)">
+    <div class="q-num" style="background:var(--blue-bg);color:var(--blue)">C1.6</div>
+    <div class="q-text">
+      <div class="q-title">Định nghĩa Thượng Đồ Thị (epigraph) và hai Vi Phân Con ∂φ(x̄) và ∂∞φ(x̄) theo Definition 1.18. Tại sao dùng (v,−1) và (v,0)?</div>
+      <div class="q-meta">
+        <span class="tag" style="background:var(--blue-bg);color:var(--blue)">tr.19–20 — Def 1.18</span>
+        <span class="tag" style="background:var(--red-bg);color:var(--red)">câu hỏi bắt buộc</span>
+      </div>
+    </div>
+    <div class="q-toggle">▾</div>
+  </div>
+  <div class="q-answer">
+    <div class="ans-block">
+      <div class="ans-label">Thượng đồ thị (Epigraph)</div>
+      <div class="formula-box">epi φ := {(x, α) ∈ ℝⁿ×ℝ | α ≥ φ(x)}  — vùng phía TRÊN đồ thị
+φ l.s.c. ⟺ epi φ là tập đóng  [đặc trưng quan trọng]</div>
+    </div>
+    <div class="ans-block">
+      <div class="ans-label">Hai vi phân con từ Định nghĩa 1.18</div>
+      <div class="formula-box">∂φ(x̄)  := {v | (v, −1) ∈ N((x̄,φ(x̄)); epi φ)}  [cơ bản]
+∂∞φ(x̄) := {v | (v,  0) ∈ N((x̄,φ(x̄)); epi φ)}  [kỳ dị]</div>
+    </div>
+    <div class="ans-block">
+      <div class="ans-label">Tại sao (v, −1) và (v, 0)?</div>
+      <div class="ans-text">Từ Proposition 1.17 (tr.20): mọi (v, −λ) ∈ N((x̄,φ(x̄)); epi φ) đều có <b>λ ≥ 0</b>. Nên chỉ có hai trường hợp:<br>
+      • <b>λ = 1 → (v, −1)</b>: pháp tuyến "nghiêng xuống" → subgradient "thực" của φ → định nghĩa ∂φ<br>
+      • <b>λ = 0 → (v, 0)</b>: pháp tuyến "nằm ngang" → hướng kỳ dị vô cùng → định nghĩa ∂∞φ</div>
+    </div>
+    <div class="highlight-box hl-key">🔑 <b>Hình ảnh hình học:</b> Nhìn vào điểm (x̄, φ(x̄)) trên biên epigraph. Pháp tuyến hướng xuống (−1) = subgradient thực. Pháp tuyến nằm ngang (0) = "hướng tiệm cận" kỳ dị.</div>
+    <div class="highlight-box hl-good">✓ <b>Kiểm chứng:</b> φ∈C¹ → ∂φ(x̄) = {∇φ(x̄)}. φ lồi → ∂φ(x̄) = subdiff lồi cổ điển. φ Lipschitz → ∂∞φ(x̄) = {0}.</div>
+  </div>
+</div>
+
+<!-- Q7 -->
+<div class="q-card" style="border-left-color:var(--blue)" data-cat="def" data-s="regular presubdifferential partial hat 1.33 lim inf quotient geometric description smooth variational">
+  <div class="q-header" onclick="toggle(this)">
+    <div class="q-num" style="background:var(--blue-bg);color:var(--blue)">C1.7</div>
+    <div class="q-text">
+      <div class="q-title">Định nghĩa Vi Phân Con Chính Quy (Regular Subgradient) ∂̂φ(x̄) theo (1.33). Ý nghĩa hình học là gì?</div>
+      <div class="q-meta">
+        <span class="tag" style="background:var(--blue-bg);color:var(--blue)">tr.28 — (1.33)</span>
+      </div>
+    </div>
+    <div class="q-toggle">▾</div>
+  </div>
+  <div class="q-answer">
+    <div class="ans-block">
+      <div class="ans-label">Định nghĩa</div>
+      <div class="formula-box">∂̂φ(x̄) := {v ∈ ℝⁿ | lim inf [φ(x)−φ(x̄)−⟨v,x−x̄⟩] / ‖x−x̄‖ ≥ 0}
+                x→x̄</div>
+    </div>
+    <div class="ans-block">
+      <div class="ans-label">Ý nghĩa hình học</div>
+      <div class="ans-text">v ∈ ∂̂φ(x̄) khi và chỉ khi đường thẳng y = φ(x̄) + ⟨v, x−x̄⟩ "tiếp xúc từ dưới" với φ tại x̄, theo nghĩa: tất cả giá trị φ gần x̄ đều ≥ đường thẳng này (theo nghĩa giới hạn dưới).<br><br>
+      Mô tả biến phân (Theorem 1.27, tr.30): v ∈ ∂̂φ(x̄) ⟺ ∃ hàm ψ trơn: ψ(x̄) = φ(x̄), ∇ψ(x̄) = v, và ψ(x) ≤ φ(x) gần x̄ → <b>ψ "tiếp xúc từ dưới" φ tại x̄</b>.</div>
+    </div>
+    <div class="ans-block">
+      <div class="ans-label">Tính chất quan trọng</div>
+      <div class="formula-box">∂̂φ(x̄) ⊂ ∂φ(x̄)  [luôn đúng]
+∂̂φ(x̄) luôn LỒI  [khác với ∂φ có thể không lồi]
+∂̂φ(x̄) có thể RỖNG  [vd: φ(x)=−|x| tại x=0: ∂̂φ(0)=∅]</div>
+    </div>
+    <div class="highlight-box hl-warn">⚠ <b>Khác biệt then chốt:</b> ∂̂φ(x̄) = ∅ khi hàm "có góc nhọn từ trên" (vd: −|x|). Còn ∂φ(x̄) dùng giới hạn từ lân cận nên thường không rỗng khi φ Lipschitz.</div>
+  </div>
+</div>
+
+</div><!-- end section def -->
+
+<!-- ================================================================
+     NHÓM 2: TÍNH TOÁN CỤ THỂ
+================================================================ -->
+<div class="section" data-cat="calc">
+<div class="sec-hdr">
+  <span class="sec-icon">🟢</span>
+  <div>
+    <div class="sec-title">Nhóm 2 — Tính Toán Cụ Thể</div>
+    <div class="sec-desc">Giáo sư cho một hàm cụ thể và yêu cầu tính. Phải biết cách từng bước, không chỉ biết đáp án.</div>
+  </div>
+  <span class="sec-count" id="cnt-calc"></span>
+</div>
+
+<!-- Q8 -->
+<div class="q-card" style="border-left-color:var(--green)" data-cat="calc" data-s="Example 1.5 N(0,0) Omega y -|x| nonconvex tính nón pháp tuyến hình chữ V">
+  <div class="q-header" onclick="toggle(this)">
+    <div class="q-num" style="background:var(--green-bg);color:var(--green)">C2.1</div>
+    <div class="q-text">
+      <div class="q-title">Tính N((0,0); Ω) với Ω = {(x,y) ∈ ℝ² | y ≥ −|x|}. Tại sao kết quả không lồi? (Example 1.5)</div>
+      <div class="q-meta">
+        <span class="tag" style="background:var(--green-bg);color:var(--green)">tr.4 — Example 1.5</span>
+        <span class="tag" style="background:var(--red-bg);color:var(--red)">câu ví dụ mẫu</span>
+      </div>
+    </div>
+    <div class="q-toggle">▾</div>
+  </div>
+  <div class="q-answer">
+    <div class="ans-block">
+      <div class="ans-label">Hình dạng của Ω</div>
+      <div class="ans-text">Ω là vùng "hình chữ V ngược" — tất cả điểm nằm trên hoặc trên đường y = −|x|. Biên Ω gồm hai tia: y = x (x ≤ 0) và y = −x (x ≥ 0).</div>
+    </div>
+    <div class="ans-block">
+      <div class="ans-label">Tính theo định nghĩa</div>
+      <ul class="step-list">
+        <li><div class="step-num">①</div><div><b>Từ phía phải:</b> xₖ = (ε, −ε/2) → (0,0), wₖ = (ε, −ε) ∈ bd Ω (điểm chiếu trên nhánh phải), αₖ(xₖ−wₖ) = αₖ(0, ε/2) → (0, 1) khi αₖ=2/ε → ∞</div></li>
+        <li><div class="step-num">②</div><div><b>Từ phía trái:</b> tương tự cho xₖ = (−ε, −ε/2), thu được hướng (0, 1) từ phía kia</div></li>
+        <li><div class="step-num">③</div><div>Tổng quát: hướng (v, v) với v ≤ 0 (pháp tuyến vuông góc với nhánh y=−x khi x>0) và (v, −v) với v ≥ 0 (pháp tuyến nhánh y=x khi x<0)</div></li>
+      </ul>
+    </div>
+    <div class="ans-block">
+      <div class="ans-label">Kết quả</div>
+      <div class="formula-box">N((0,0); Ω) = {(v,v) | v≤0} ∪ {(v,−v) | v≥0}
+              = hai tia: hướng (−1,−1) và (1,−1)</div>
+    </div>
+    <div class="ans-block">
+      <div class="ans-label">Tại sao không lồi?</div>
+      <div class="ans-text">Bao lồi của hai tia này sẽ bao gồm vectơ (0,−1) = (−1,−1)/2 + (1,−1)/2. Nhưng (0,−1) KHÔNG thuộc N((0,0);Ω) vì hướng đó không phải là giới hạn của hướng chiếu từ bên ngoài Ω. Cụ thể: không có chuỗi xₖ→(0,0) nào cho αₖ(xₖ−wₖ) → (0,−1).</div>
+    </div>
+    <div class="highlight-box hl-tip">💡 <b>Nhận xét sâu:</b> Điểm (0,0) là "góc nhọn hướng xuống" của Ω. Tại điểm góc nhọn, các pháp tuyến đến từ hai nhánh khác nhau, không "kết nối" qua trung gian → không lồi.</div>
+  </div>
+</div>
+
+<!-- Q9 -->
+<div class="q-card" style="border-left-color:var(--green)" data-cat="calc" data-s="coderivative f(x)=|x| Example 1.14 D*f(0)(v) v>0 v<0 nonconvex interval set">
+  <div class="q-header" onclick="toggle(this)">
+    <div class="q-num" style="background:var(--green-bg);color:var(--green)">C2.2</div>
+    <div class="q-text">
+      <div class="q-title">Tính coderivative D*f(0)(v) của f(x)=|x| tại x̄=0 với mọi v ∈ ℝ. (Example 1.14)</div>
+      <div class="q-meta">
+        <span class="tag" style="background:var(--green-bg);color:var(--green)">tr.15 — Example 1.14</span>
+        <span class="tag" style="background:var(--red-bg);color:var(--red)">câu tính toán mẫu</span>
+      </div>
+    </div>
+    <div class="q-toggle">▾</div>
+  </div>
+  <div class="q-answer">
+    <div class="ans-block">
+      <div class="ans-label">Bước 1: Tính N((0,0); gph f)</div>
+      <div class="ans-text">gph f = {(x, |x|)} = hình chữ V trong ℝ². Tại (0,0) là điểm nhọn.</div>
+      <div class="formula-box">N((0,0); gph f) = {(x,y) | y = |x| và y ≤ −|x|}
+               = {(v,v) | v ≤ 0} ∪ {(v,−v) | v ≥ 0}
+               = hai tia hướng xuống-trái và xuống-phải</div>
+    </div>
+    <div class="ans-block">
+      <div class="ans-label">Bước 2: Áp định nghĩa D*f(0)(v) = {u | (u,−v) ∈ N((0,0);gph f)}</div>
+      <div class="formula-box">Cần (u, −v) ∈ N((0,0); gph f)
+Trường hợp (u, −v) = (t, t) với t≤0: u=t, −v=t → v=−t≥0
+  → u ∈ [−v, v] khi v≥0
+Trường hợp (u, −v) = (t, −t) với t≥0: u=t, −v=−t → v=t≥0
+  → u ∈ [−v, v] khi v≥0 (cùng kết quả)
+Khi v<0: cần (u, −v) = (u, >0). Nhìn N: điểm (u,w) với w>0 chỉ có thể là (v,v) với v>0, tức w=u>0 → u=−v>0 HOẶC u=v>0. → D*f(0)(v) = {−v, v}  [tập 2 điểm, không lồi!]</div>
+    </div>
+    <div class="ans-block">
+      <div class="ans-label">Kết quả cuối</div>
+      <div class="formula-box">D*f(0)(v) = [−v, v]   nếu v ≥ 0  [đoạn thẳng — tập lồi]
+         = {−v, v}   nếu v < 0  [hai điểm — tập KHÔNG lồi!]</div>
+    </div>
+    <div class="highlight-box hl-key">🔑 <b>Điểm thú vị:</b> Khi v<0, coderivative là tập không lồi {−v, v}. Điều này chỉ có thể xảy ra với coderivative Mordukhovich (không phải Clarke-coderivative luôn lồi).</div>
+  </div>
+</div>
+
+<!-- Q10 -->
+<div class="q-card" style="border-left-color:var(--green)" data-cat="calc" data-s="subdifferential |x| -|x| x^{1/3} x^2 sin(1/x) Example 1.21 tính vi phân con">
+  <div class="q-header" onclick="toggle(this)">
+    <div class="q-num" style="background:var(--green-bg);color:var(--green)">C2.3</div>
+    <div class="q-text">
+      <div class="q-title">Tính ∂φ(0) và ∂∞φ(0) cho từng hàm: φ=|x|, φ=−|x|, φ=x^{1/3}, φ=x²sin(1/x). (Example 1.21)</div>
+      <div class="q-meta">
+        <span class="tag" style="background:var(--green-bg);color:var(--green)">tr.21–22 — Example 1.21</span>
+        <span class="tag" style="background:var(--red-bg);color:var(--red)">4 hàm chuẩn</span>
+      </div>
+    </div>
+    <div class="q-toggle">▾</div>
+  </div>
+  <div class="q-answer">
+    <div class="ans-block">
+      <div class="ans-label">Phương pháp: nhìn epigraph và áp Definition 1.18</div>
+      <div class="ans-text">v ∈ ∂φ(0) ⟺ (v,−1) ∈ N((0,φ(0)); epi φ). Ta nhìn vào hình dạng epi φ tại gốc.</div>
+    </div>
+    <div class="ans-block">
+      <div class="ans-label">① φ(x) = |x| — hàm lồi</div>
+      <div class="formula-box">epi φ tại (0,0): vùng phía trên hình chữ V, nón pháp tuyến hướng vào bên trong V
+N((0,0);epi φ) = {(v,−λ) | |v|≤λ, λ≥0}  → (v,−1) khi |v|≤1
+∂|·|(0) = [−1, 1]   ∂∞|·|(0) = {0}  [Lipschitz → ∂∞={0} ✓]</div>
+    </div>
+    <div class="ans-block">
+      <div class="ans-label">② φ(x) = −|x| — hàm không lồi</div>
+      <div class="formula-box">epi(−|x|) tại (0,0): hình chữ V lộn ngược, pháp tuyến là N từ Example 1.5
+N((0,0);epi φ) = {(v,v)|v≤0} ∪ {(v,−v)|v≥0}
+(v,−1) ∈ N ⟺ (v,v) với v=−1 hoặc (v,−v) với v=1
+∂(−|·|)(0) = {−1, 1}  [KHÔNG LỒI!]   ∂∞ = {0}</div>
+    </div>
+    <div class="ans-block">
+      <div class="ans-label">③ φ(x) = x^{1/3} — không Lipschitz tại 0</div>
+      <div class="formula-box">epi(x^{1/3}) tại (0,0): pháp tuyến nằm ngang (tiếp tuyến đứng!)
+N((0,0);epi φ) = {(x,0) | x≥0}
+∂φ(0) = ∅  [RỖNG!]   ∂∞φ(0) = [0,+∞)  [≠{0} → không Lipschitz ✓]</div>
+    </div>
+    <div class="ans-block">
+      <div class="ans-label">④ φ(x) = x²sin(1/x), φ(0)=0 — khả vi nhưng không C¹</div>
+      <div class="formula-box">φ'(0) = 0 (khả vi tại 0), nhưng dao động ±1 gần 0
+∂φ(0) = [−1, 1]   [mặc dù φ'(0) = 0!]
+→ ∂̂φ(0) = {0} nhưng ∂φ(0) rộng hơn nhiều do dao động lân cận</div>
+    </div>
+    <div class="highlight-box hl-warn">⚠ <b>Điểm ④ rất quan trọng:</b> φ khả vi tại x̄ KHÔNG đảm bảo ∂φ(x̄) = {∇φ(x̄)}! Cần f STRICTLY differentiable (hoặc C¹ xung quanh) để ∂φ(x̄) = {∇φ(x̄)}. Điều này phân biệt sách này với lý thuyết cổ điển.</div>
+  </div>
+</div>
+
+<!-- Q11 -->
+<div class="q-card" style="border-left-color:var(--green)" data-cat="calc" data-s="distance function subdiff Theorem 1.33 in-set out-of-set projection normal cone intersection ball">
+  <div class="q-header" onclick="toggle(this)">
+    <div class="q-num" style="background:var(--green-bg);color:var(--green)">C2.4</div>
+    <div class="q-text">
+      <div class="q-title">Phát biểu và áp dụng Theorem 1.33: tính ∂d_Ω(x̄) khi x̄ ∈ Ω và khi x̄ ∉ Ω với Π(x̄;Ω) = {w̄}.</div>
+      <div class="q-meta">
+        <span class="tag" style="background:var(--green-bg);color:var(--green)">tr.37 — Thm 1.33</span>
+      </div>
+    </div>
+    <div class="q-toggle">▾</div>
+  </div>
+  <div class="q-answer">
+    <div class="ans-block">
+      <div class="ans-label">Phát biểu Theorem 1.33</div>
+      <div class="formula-box">TRONG TẬP (x̄ ∈ Ω):
+  ∂̂d_Ω(x̄) = N̂(x̄;Ω) ∩ B
+  ∂ d_Ω(x̄) = N(x̄;Ω) ∩ B
+
+NGOÀI TẬP (x̄ ∉ Ω, Π(x̄;Ω) = {w̄}):
+  ∂̂d_Ω(x̄) = ∂d_Ω(x̄) = {(x̄−w̄)/‖x̄−w̄‖}  [vectơ đơn vị]</div>
+    </div>
+    <div class="ans-block">
+      <div class="ans-label">Ví dụ áp dụng cụ thể</div>
+      <div class="example-block">
+        <div class="ex-title">Ví dụ 1: Ω = [0,1] ⊂ ℝ, x̄ = 0 ∈ Ω</div>
+        N(0;[0,1]) = (−∞, 0] → ∂d_Ω(0) = N(0;[0,1]) ∩ [−1,1] = {−1, 0}? <br>
+        Thực ra N(0;[0,1]) ∩ B = (−∞,0] ∩ [−1,1] = [−1, 0].
+      </div>
+      <div class="example-block">
+        <div class="ex-title">Ví dụ 2: Ω = [0,1], x̄ = −2 ∉ Ω</div>
+        Π(−2; [0,1]) = {0} = w̄, x̄−w̄ = −2, ‖x̄−w̄‖ = 2<br>
+        ∂d_Ω(−2) = {−2/2} = {−1}  [vectơ đơn vị từ w̄=0 đến x̄=−2]
+      </div>
+    </div>
+    <div class="highlight-box hl-tip">💡 <b>Ý nghĩa hình học:</b> Khi ở ngoài tập, subdiff của d_Ω chỉ có một vectơ: hướng từ điểm chiếu đến mình. Hoàn toàn tự nhiên! Khi ở trong tập, subdiff = pháp tuyến chuẩn hóa.</div>
+  </div>
+</div>
+
+<!-- Q12 -->
+<div class="q-card" style="border-left-color:var(--green)" data-cat="calc" data-s="subdifferential calculation Example 1.31 |x1|-|x2| R2 Lipschitz limit regular subgradient boundary">
+  <div class="q-header" onclick="toggle(this)">
+    <div class="q-num" style="background:var(--green-bg);color:var(--green)">C2.5</div>
+    <div class="q-text">
+      <div class="q-title">Tính ∂φ(0,0) với φ(x₁,x₂)=|x₁|−|x₂| bằng phương pháp giới hạn từ lân cận (Theorem 1.28). (Example 1.31)</div>
+      <div class="q-meta">
+        <span class="tag" style="background:var(--green-bg);color:var(--green)">tr.34–35 — Example 1.31</span>
+      </div>
+    </div>
+    <div class="q-toggle">▾</div>
+  </div>
+  <div class="q-answer">
+    <div class="ans-block">
+      <div class="ans-label">Chiến lược: dùng Theorem 1.28 — ∂φ(0) = Lim sup ∂̂φ(x) khi x→0</div>
+    </div>
+    <div class="ans-block">
+      <div class="ans-label">Bước 1: Tính ∂̂φ tại các điểm trơn</div>
+      <div class="formula-box">• x₁>0, x₂>0: φ = x₁−x₂, trơn → ∂̂φ = {(1,−1)}
+• x₁<0, x₂>0: φ = −x₁−x₂     → ∂̂φ = {(−1,−1)}
+• x₁>0, x₂<0: φ = x₁+x₂       → ∂̂φ = {(1,1)}
+• x₁<0, x₂<0: φ = −x₁+x₂      → ∂̂φ = {(−1,1)}
+• x₁=0, x₂>0: ∂̂φ = {(v,−1) | −1≤v≤1}
+• x₁=0, x₂<0: ∂̂φ = {(v,1) | −1≤v≤1}
+• x₂=0: ∂̂φ = ∅  [không thể tiếp xúc từ dưới]</div>
+    </div>
+    <div class="ans-block">
+      <div class="ans-label">Bước 2: Lấy Lim sup khi (x₁,x₂) → (0,0)</div>
+      <div class="ans-text">Từ góc phần tư thứ 1 (x₁>0, x₂>0): lấy giới hạn → (1,−1)<br>
+      Từ góc phần tư thứ 2 (x₁&lt;0, x₂>0): → (−1,−1)<br>
+      Từ góc phần tư thứ 3: → (−1,1) và từ trục x₁=0,x₂>0: → đoạn [(v,−1) | −1≤v≤1]</div>
+    </div>
+    <div class="ans-block">
+      <div class="ans-label">Kết quả</div>
+      <div class="formula-box">∂φ(0,0) = {(v,1) | −1≤v≤1} ∪ {(v,−1) | −1≤v≤1}
+       = hình chữ nhật phẳng nằm ngang ở y=±1  [KHÔNG LỒI!]</div>
+    </div>
+    <div class="highlight-box hl-key">🔑 <b>Nhận xét:</b> Kết quả là hình dạng "hình bướm" — không phải hình vuông hay đa giác lồi. Đây là tính không lồi đặc trưng của basic subdiff.</div>
+  </div>
+</div>
+
+</div><!-- end section calc -->
+
+<!-- ================================================================
+     NHÓM 3: CHỨNG MINH
+================================================================ -->
+<div class="section" data-cat="proof">
+<div class="sec-hdr">
+  <span class="sec-icon">🔴</span>
+  <div>
+    <div class="sec-title">Nhóm 3 — Câu Hỏi Chứng Minh</div>
+    <div class="sec-desc">Giáo sư yêu cầu chứng minh một mệnh đề hoặc giải thích ý tưởng của một bước chứng minh cụ thể.</div>
+  </div>
+  <span class="sec-count" id="cnt-proof"></span>
+</div>
+
+<!-- Q13 -->
+<div class="q-card" style="border-left-color:var(--red)" data-cat="proof" data-s="Proposition 1.2 boundary point N nontrivial chứng minh Bolzano-Weierstrass boundary">
+  <div class="q-header" onclick="toggle(this)">
+    <div class="q-num" style="background:var(--red-bg);color:var(--red)">C3.1</div>
+    <div class="q-text">
+      <div class="q-title">Chứng minh Mệnh đề 1.2: x̄ là điểm biên của Ω khi và chỉ khi N(x̄;Ω) ≠ {0}.</div>
+      <div class="q-meta">
+        <span class="tag" style="background:var(--red-bg);color:var(--red)">tr.3 — Prop 1.2</span>
+        <span class="tag" style="background:var(--gold-bg);color:var(--gold)">chứng minh ngắn</span>
+      </div>
+    </div>
+    <div class="q-toggle">▾</div>
+  </div>
+  <div class="q-answer">
+    <div class="ans-block">
+      <div class="ans-label">Chiều thuận: x̄ ∈ int Ω → N(x̄;Ω) = {0}</div>
+      <div class="ans-text">Khi x̄ ∈ int Ω, mọi x đủ gần x̄ đều có Π(x;Ω) = x (chính nó, vì x ∈ Ω). Do đó xₖ − wₖ = 0 với mọi xₖ đủ gần x̄, nên αₖ(xₖ−wₖ) = 0 → giới hạn là 0. Vậy N(x̄;Ω) = {0}.</div>
+    </div>
+    <div class="ans-block">
+      <div class="ans-label">Chiều ngược: x̄ ∈ bd Ω → N(x̄;Ω) ≠ {0}</div>
+      <ul class="step-list">
+        <li><div class="step-num">①</div><div>x̄ ∈ bd Ω → tồn tại dãy {xₖ} ⊂ ℝⁿ\Ω với xₖ → x̄</div></li>
+        <li><div class="step-num">②</div><div>Chọn wₖ ∈ Π(xₖ;Ω) (chiếu), đặt αₖ = ‖xₖ−wₖ‖⁻¹</div></li>
+        <li><div class="step-num">③</div><div>vₖ = αₖ(xₖ−wₖ) → ‖vₖ‖ = 1 với mọi k</div></li>
+        <li><div class="step-num">④</div><div>Do {vₖ} bị chặn, dùng Bolzano-Weierstrass: ∃ dãy con hội tụ vₖⱼ → v với ‖v‖ = 1</div></li>
+        <li><div class="step-num">⑤</div><div>v ∈ N(x̄;Ω) theo Definition 1.1 và v ≠ 0 vì ‖v‖ = 1 □</div></li>
+      </ul>
+    </div>
+    <div class="highlight-box hl-tip">💡 <b>Bước quan trọng nhất:</b> Bolzano-Weierstrass (dãy bị chặn có dãy con hội tụ) — đây là lý do sách làm việc trong ℝⁿ hữu hạn chiều. Trong vô hạn chiều, cần điều kiện bổ sung (Asplund space).</div>
+  </div>
+</div>
+
+<!-- Q14 -->
+<div class="q-card" style="border-left-color:var(--red)" data-cat="proof" data-s="Theorem 1.6 Step 1 Step 2 Cauchy-Schwarz projection wAlpha estimate key step">
+  <div class="q-header" onclick="toggle(this)">
+    <div class="q-num" style="background:var(--red-bg);color:var(--red)">C3.2</div>
+    <div class="q-text">
+      <div class="q-title">Trong chứng minh Theorem 1.6, giải thích Step 1 và Step 2. Tại sao Cauchy-Schwarz xuất hiện ở Step 2?</div>
+      <div class="q-meta">
+        <span class="tag" style="background:var(--red-bg);color:var(--red)">tr.5–7 — Thm 1.6</span>
+        <span class="tag" style="background:var(--gold-bg);color:var(--gold)">câu hỏi chứng minh kỹ</span>
+      </div>
+    </div>
+    <div class="q-toggle">▾</div>
+  </div>
+  <div class="q-answer">
+    <div class="ans-block">
+      <div class="ans-label">Step 1: x − w ∈ N̂(w;Ω) khi w ∈ Π(x;Ω)</div>
+      <div class="ans-text">Đây là bước hình học cơ bản nhất: vectơ từ điểm chiếu w đến điểm x (tức x−w) là một pháp tuyến chính quy của Ω tại w.<br><br>
+      <b>Chứng minh:</b> Với z ∈ Ω bất kỳ: ‖w−x‖² ≤ ‖z−x‖² (vì w là chiếu gần nhất). Khai triển: ‖w−x‖² ≤ ‖(w−x)+(z−w)‖² = ‖w−x‖² + 2⟨w−x,z−w⟩ + ‖z−w‖².<br>
+      → 0 ≤ 2⟨w−x,z−w⟩ + ‖z−w‖² → ⟨x−w, z−w⟩ ≤ ‖z−w‖²/2 → lim sup ≤ 0 → x−w ∈ N̂(w;Ω).</div>
+    </div>
+    <div class="ans-block">
+      <div class="ans-label">Step 2: Ước lượng ‖w_α − x‖/α ≤ 2ε khi v ∈ Nε(x;Ω)</div>
+      <div class="formula-box">Cho wα ∈ Π(x+αv; Ω), chứng minh lim sup (‖wα−x‖/α) ≤ 2ε
+      
+Từ ‖(x+αv) − wα‖² ≤ ‖(x+αv) − x‖² = α²‖v‖²:
+→ ‖wα−x‖² + 2α⟨v, x−wα⟩ ≤ 0  [khai triển và rút gọn]
+→ ‖wα−x‖² ≤ 2α⟨v, wα−x⟩</div>
+      <div class="ans-text"><b>Cauchy-Schwarz xuất hiện ở đây:</b> ⟨v, wα−x⟩ ≤ ‖v‖·‖wα−x‖<br>
+      → ‖wα−x‖² ≤ 2α‖v‖·‖wα−x‖ → ‖wα−x‖ ≤ 2α‖v‖ → wα → x khi α↓0.<br><br>
+      <b>Tại sao cần?</b> Để "kiểm soát" tốc độ của wα khi α→0 — đảm bảo wα không "chạy quá xa" khỏi x.</div>
+    </div>
+    <div class="highlight-box hl-tip">💡 <b>Ý nghĩa của Step 2:</b> Nó chứng minh rằng Nε có tính "ổn định hình học" — điểm chiếu wα hội tụ về x với tốc độ ít nhất bằng 2ε·α. Đây là chìa khóa để Step 3 và 4 hoạt động.</div>
+  </div>
+</div>
+
+<!-- Q15 -->
+<div class="q-card" style="border-left-color:var(--red)" data-cat="proof" data-s="Proposition 1.9 duality prenormal contingent T star proof v not in N find w T dot product positive">
+  <div class="q-header" onclick="toggle(this)">
+    <div class="q-num" style="background:var(--red-bg);color:var(--red)">C3.3</div>
+    <div class="q-text">
+      <div class="q-title">Chứng minh Mệnh đề 1.9: N̂(x̄;Ω) = T*(x̄;Ω) — đối ngẫu giữa prenormal cone và contingent cone.</div>
+      <div class="q-meta">
+        <span class="tag" style="background:var(--red-bg);color:var(--red)">tr.8–9 — Prop 1.9</span>
+        <span class="tag" style="background:var(--gold-bg);color:var(--gold)">chứng minh hai chiều</span>
+      </div>
+    </div>
+    <div class="q-toggle">▾</div>
+  </div>
+  <div class="q-answer">
+    <div class="ans-block">
+      <div class="ans-label">Chiều 1: N̂(x̄;Ω) ⊂ T*(x̄;Ω)</div>
+      <ul class="step-list">
+        <li><div class="step-num">①</div><div>Lấy v ∈ N̂(x̄;Ω) và w ∈ T(x̄;Ω) bất kỳ</div></li>
+        <li><div class="step-num">②</div><div>Từ w ∈ T(x̄;Ω): có tₖ↓0 và wₖ→w với x̄+tₖwₖ ∈ Ω</div></li>
+        <li><div class="step-num">③</div><div>Từ v ∈ N̂(x̄;Ω) và zₖ = x̄+tₖwₖ ∈ Ω→x̄: với γ>0 bất kỳ, ⟨v, wₖ⟩ ≤ γ‖wₖ‖ cho k lớn</div></li>
+        <li><div class="step-num">④</div><div>Lấy giới hạn: ⟨v,w⟩ ≤ 0 → v ∈ T*(x̄;Ω) □</div></li>
+      </ul>
+    </div>
+    <div class="ans-block">
+      <div class="ans-label">Chiều 2: T*(x̄;Ω) ⊂ N̂(x̄;Ω) — bằng phản chứng</div>
+      <ul class="step-list">
+        <li><div class="step-num">①</div><div>Giả sử v ∉ N̂(x̄;Ω). Từ (1.5): ∃ γ>0, dãy xₖ→x̄, xₖ∈Ω: ⟨v, xₖ−x̄⟩ > γ‖xₖ−x̄‖</div></li>
+        <li><div class="step-num">②</div><div>Đặt αₖ = ‖xₖ−x̄‖⁻¹ và trích dãy con: (xₖ−x̄)/‖xₖ−x̄‖ → w</div></li>
+        <li><div class="step-num">③</div><div>w ∈ T(x̄;Ω) theo Definition 1.8</div></li>
+        <li><div class="step-num">④</div><div>⟨v,w⟩ ≥ γ > 0 → v ∉ T*(x̄;Ω). Mâu thuẫn □</div></li>
+      </ul>
+    </div>
+    <div class="highlight-box hl-key">🔑 <b>Ý nghĩa:</b> Đây là tổng quát hóa phi lồi của separation theorem: "pháp tuyến chính quy = vuông góc với tiếp tuyến". Với tập lồi: N̂ = N = T* (3 thứ trùng nhau). Với tập phi lồi: N̂ = T* nhưng N ⊋ N̂.</div>
+  </div>
+</div>
+
+<!-- Q16 -->
+<div class="q-card" style="border-left-color:var(--red)" data-cat="proof" data-s="Proposition 1.30 Fermat rule local minimizer 0 in partial phi x bar proof sum rule differentiable addition">
+  <div class="q-header" onclick="toggle(this)">
+    <div class="q-num" style="background:var(--red-bg);color:var(--red)">C3.4</div>
+    <div class="q-text">
+      <div class="q-title">Chứng minh Mệnh đề 1.30(i) — Quy tắc Fermat suy rộng: x̄ cực tiểu cục bộ ⟹ 0 ∈ ∂φ(x̄).</div>
+      <div class="q-meta">
+        <span class="tag" style="background:var(--red-bg);color:var(--red)">tr.33 — Prop 1.30(i)</span>
+        <span class="tag" style="background:var(--red-bg);color:var(--red)">câu hỏi cốt lõi nhất</span>
+      </div>
+    </div>
+    <div class="q-toggle">▾</div>
+  </div>
+  <div class="q-answer">
+    <div class="ans-block">
+      <div class="ans-label">Chứng minh 0 ∈ ∂̂φ(x̄) — phần dễ</div>
+      <div class="ans-text">Trực tiếp từ Definition (1.33): nếu x̄ là cực tiểu cục bộ thì φ(x) − φ(x̄) ≥ 0 gần x̄.<br>
+      Do đó: lim inf [φ(x)−φ(x̄)−⟨0, x−x̄⟩]/‖x−x̄‖ = lim inf [φ(x)−φ(x̄)]/‖x−x̄‖ ≥ 0.<br>
+      → 0 ∈ ∂̂φ(x̄) □</div>
+    </div>
+    <div class="ans-block">
+      <div class="ans-label">Chứng minh 0 ∈ ∂φ(x̄) — từ tính bao hàm</div>
+      <div class="formula-box">∂̂φ(x̄) ⊂ ∂φ(x̄)  [từ Theorem 1.28: ∂φ = Lim sup ∂̂φ]
+0 ∈ ∂̂φ(x̄) ⊂ ∂φ(x̄) → 0 ∈ ∂φ(x̄) □</div>
+    </div>
+    <div class="ans-block">
+      <div class="ans-label">Điều kiện đủ khi φ lồi</div>
+      <div class="ans-text">Khi φ lồi: 0 ∈ ∂φ(x̄) ⟺ φ(x) − φ(x̄) ≥ ⟨0, x−x̄⟩ = 0 với mọi x → x̄ là cực tiểu toàn cục! (Proposition 1.25)</div>
+    </div>
+    <div class="highlight-box hl-warn">⚠ <b>Chú ý quan trọng:</b> Chiều ngược 0 ∈ ∂φ(x̄) ⟹ x̄ cực tiểu chỉ đúng khi φ lồi. Với φ phi lồi, 0 ∈ ∂φ(x̄) là điều kiện CẦN nhưng chưa đủ (có thể là điểm yên ngựa hay cực đại).</div>
+  </div>
+</div>
+
+<!-- Q17 -->
+<div class="q-card" style="border-left-color:var(--red)" data-cat="proof" data-s="Theorem 1.22 Lipschitz iff singular subdiff zero proof projection Euclidean modulus ell">
+  <div class="q-header" onclick="toggle(this)">
+    <div class="q-num" style="background:var(--red-bg);color:var(--red)">C3.5</div>
+    <div class="q-text">
+      <div class="q-title">Chứng minh chiều thuận của Theorem 1.22: φ Lipschitz với hệ số ℓ ⟹ ∂∞φ(x̄) = {0} và ‖v‖ ≤ ℓ với mọi v ∈ ∂φ(x̄).</div>
+      <div class="q-meta">
+        <span class="tag" style="background:var(--red-bg);color:var(--red)">tr.23–24 — Thm 1.22</span>
+        <span class="tag" style="background:var(--gold-bg);color:var(--gold)">ý tưởng đẹp</span>
+      </div>
+    </div>
+    <div class="q-toggle">▾</div>
+  </div>
+  <div class="q-answer">
+    <div class="ans-block">
+      <div class="ans-label">Ý tưởng chứng minh: dùng phép chiếu lên epi φ</div>
+      <div class="ans-text">Muốn chứng minh (v,−λ) ∈ N((x̄,φ(x̄)); epi φ) ⟹ ‖v‖ ≤ ℓλ. Đây tương đương ∂φ ⊂ ℓB (khi λ=1) và ∂∞φ = {0} (khi λ=0).</div>
+    </div>
+    <div class="ans-block">
+      <div class="ans-label">Bước chứng minh</div>
+      <ul class="step-list">
+        <li><div class="step-num">①</div><div>Giả sử (w,μ) ∈ Π((x,α); epi φ) — điểm chiếu Euclid trên epi φ. Muốn chứng minh ‖w−x‖ ≤ ℓ|μ−α|.</div></li>
+        <li><div class="step-num">②</div><div>Giả sử ngược: đặt γ = (‖x−w‖ − ℓ(μ−α)) / ((ℓ²+1)‖x−w‖) > 0</div></li>
+        <li><div class="step-num">③</div><div>Đặt z = w + γ(x−w) và ν = μ + γℓ‖x−w‖. Vì φ Lipschitz: (z,ν) ∈ epi φ.</div></li>
+        <li><div class="step-num">④</div><div>Tính ‖(x,α)−(z,ν)‖ < ‖(x,α)−(w,μ)‖ — mâu thuẫn với (w,μ) là điểm chiếu gần nhất!</div></li>
+        <li><div class="step-num">⑤</div><div>→ ‖w−x‖ ≤ ℓ|μ−α| → ‖v‖ ≤ ℓλ với mọi (v,−λ) ∈ N(·; epi φ) □</div></li>
+      </ul>
+    </div>
+    <div class="highlight-box hl-key">🔑 <b>Ý tưởng cốt lõi:</b> Hàm Lipschitz làm cho epigraph "thoải" (không quá dựng đứng) — điểm chiếu trên epi không thể "nhảy xa" so với điểm gốc. Chuẩn hóa bất đẳng thức này cho ra ‖v‖ ≤ ℓ.</div>
+  </div>
+</div>
+
+<!-- Q18 -->
+<div class="q-card" style="border-left-color:var(--red)" data-cat="proof" data-s="Theorem 1.32 scalarization coderivative proof limiting representation basic subgradient">
+  <div class="q-header" onclick="toggle(this)">
+    <div class="q-num" style="background:var(--red-bg);color:var(--red)">C3.6</div>
+    <div class="q-text">
+      <div class="q-title">Phát biểu và chứng minh Theorem 1.32 (Scalarization): D*f(x̄)(v) = ∂⟨v,f⟩(x̄) khi f Lipschitz.</div>
+      <div class="q-meta">
+        <span class="tag" style="background:var(--red-bg);color:var(--red)">tr.35–36 — Thm 1.32</span>
+        <span class="tag" style="background:var(--gold-bg);color:var(--gold)">công thức quan trọng</span>
+      </div>
+    </div>
+    <div class="q-toggle">▾</div>
+  </div>
+  <div class="q-answer">
+    <div class="ans-block">
+      <div class="ans-label">Phát biểu</div>
+      <div class="formula-box">f: ℝⁿ→ℝᵐ liên tục: ∂⟨v,f⟩(x̄) ⊂ D*f(x̄)(v)
+f: ℝⁿ→ℝᵐ Lipschitz cục bộ: D*f(x̄)(v) = ∂⟨v,f⟩(x̄)
+Trong đó ⟨v,f⟩(x) := ⟨v, f(x)⟩  [hàm vô hướng hóa]</div>
+    </div>
+    <div class="ans-block">
+      <div class="ans-label">Chứng minh chiều ∂⟨v,f⟩ ⊂ D*f (cả hai đều cần)</div>
+      <ul class="step-list">
+        <li><div class="step-num">①</div><div>Lấy u ∈ ∂⟨v,f⟩(x̄). Từ Theorem 1.28: có xₖ→x̄, uₖ→u, uₖ ∈ ∂⟨v,f⟩(xₖ)</div></li>
+        <li><div class="step-num">②</div><div>Từ định nghĩa (1.33): ⟨v,f(x)⟩ − ⟨v,f(xₖ)⟩ − ⟨uₖ,x−xₖ⟩ ≥ −γₖ‖x−xₖ‖ gần xₖ</div></li>
+        <li><div class="step-num">③</div><div>→ ⟨uₖ,x−xₖ⟩ − ⟨v,f(x)−f(xₖ)⟩ ≤ γₖ(1+ℓ)‖x−xₖ‖ [dùng Lipschitz của f]</div></li>
+        <li><div class="step-num">④</div><div>→ (uₖ,−v) ∈ Nγₖ((xₖ,f(xₖ)); gph f) → u ∈ D*f(x̄)(v) □</div></li>
+      </ul>
+    </div>
+    <div class="highlight-box hl-key">🔑 <b>Tại sao cần f Lipschitz cho đẳng thức?</b> Chiều ngược D*f ⊂ ∂⟨v,f⟩ dùng Lipschitz để kiểm soát hành vi của f xung quanh xₖ — tránh f "nhảy vô hạn" làm hỏng ước lượng.</div>
+  </div>
+</div>
+
+</div><!-- end section proof -->
+
+<!-- ================================================================
+     NHÓM 4: SO SÁNH VÀ PHÂN TÍCH
+================================================================ -->
+<div class="section" data-cat="compare">
+<div class="sec-hdr">
+  <span class="sec-icon">🟠</span>
+  <div>
+    <div class="sec-title">Nhóm 4 — So Sánh & Phân Tích Sâu</div>
+    <div class="sec-desc">Giáo sư kiểm tra tư duy phản biện — tại sao chọn cái này thay vì cái kia, điều gì quan trọng hơn.</div>
+  </div>
+  <span class="sec-count" id="cnt-compare"></span>
+</div>
+
+<!-- Q19 -->
+<div class="q-card" style="border-left-color:var(--gold)" data-cat="compare" data-s="so sánh N với N̂ nonconvex convex tại sao cần cả hai what when">
+  <div class="q-header" onclick="toggle(this)">
+    <div class="q-num" style="background:var(--gold-bg);color:var(--gold)">C4.1</div>
+    <div class="q-text">
+      <div class="q-title">Tại sao cần cả hai N(x̄;Ω) (cơ bản) và N̂(x̄;Ω) (chính quy)? Mỗi cái có vai trò gì?</div>
+      <div class="q-meta">
+        <span class="tag" style="background:var(--gold-bg);color:var(--gold)">câu hỏi phân tích</span>
+      </div>
+    </div>
+    <div class="q-toggle">▾</div>
+  </div>
+  <div class="q-answer">
+    <div class="ans-block">
+      <div class="ans-label">N̂ có vai trò gì?</div>
+      <div class="ans-text">• Luôn lồi → dễ làm việc với tính đối ngẫu (N̂ = T*)<br>
+      • Tính tại chính điểm → có thể rỗng cho điểm góc nhọn (ví dụ N̂((0,0); hình chữ V) = {0})<br>
+      • Là <b>bước trung gian</b> — dùng để xây N qua giới hạn Lim sup</div>
+    </div>
+    <div class="ans-block">
+      <div class="ans-label">N có vai trò gì?</div>
+      <div class="ans-text">• Chứa đầy đủ thông tin về tất cả hướng pháp tuyến<br>
+      • Không rỗng tại điểm biên (Prop 1.2) → luôn hữu ích<br>
+      • Là công cụ tối ưu thực sự: điều kiện tối ưu 0 ∈ ∂φ + N(x̄;Ω) dùng N chứ không phải N̂</div>
+    </div>
+    <div class="ans-block">
+      <div class="ans-label">Tương tự trong giải tích lồi</div>
+      <div class="ans-text">Trong giải tích lồi: N̂ = N = nón pháp tuyến lồi cổ điển (không cần phân biệt). Giải tích biến phân phi lồi mới cần phân biệt vì hai cái có thể khác nhau.</div>
+    </div>
+    <div class="highlight-box hl-key">🔑 <b>Tóm gọn:</b> N̂ = "bộ phận tốt" (lồi, tính được tại điểm), N = "kết quả đầy đủ" (không lồi, đầy đủ thông tin). Giống như ∂̂φ và ∂φ trong subdifferential.</div>
+  </div>
+</div>
+
+<!-- Q20 -->
+<div class="q-card" style="border-left-color:var(--gold)" data-cat="compare" data-s="tại sao dùng epi thay vì gph epigraph vs graph why order structure function">
+  <div class="q-header" onclick="toggle(this)">
+    <div class="q-num" style="background:var(--gold-bg);color:var(--gold)">C4.2</div>
+    <div class="q-text">
+      <div class="q-title">Tại sao subdifferential của hàm số dùng epigraph thay vì graph? Điều gì sẽ xảy ra nếu ta dùng gph φ?</div>
+      <div class="q-meta">
+        <span class="tag" style="background:var(--gold-bg);color:var(--gold)">câu hỏi tư duy</span>
+      </div>
+    </div>
+    <div class="q-toggle">▾</div>
+  </div>
+  <div class="q-answer">
+    <div class="ans-block">
+      <div class="ans-label">Lý do dùng epi</div>
+      <div class="ans-text">Hàm số φ có <b>thứ tự tự nhiên</b> trên ℝ: α ≥ φ(x) có nghĩa. Epigraph khai thác thứ tự này:<br>
+      • epi φ phản ánh "bên trên" của hàm → subdiff đo hướng "tiếp xúc từ dưới"<br>
+      • (v,−1) ∈ N(epi φ): pháp tuyến nghiêng xuống = subgradient thực<br>
+      • (v,0) ∈ N(epi φ): pháp tuyến nằm ngang = thông tin kỳ dị về tính Lipschitz</div>
+    </div>
+    <div class="ans-block">
+      <div class="ans-label">Nếu dùng gph φ thay thế?</div>
+      <div class="ans-text">Khi dùng gph φ: ta thu được CODERIVATIVE D*φ(x̄)(1), không phải subdifferential!<br><br>
+      Thực ra Theorem 1.23 (tr.23-27) chứng minh: ∂φ(x̄) = D*φ(x̄)(1) — tức <b>cả hai BẰNG nhau</b> khi φ l.s.c.! Nhưng để định nghĩa, dùng epi trực quan hơn vì phân biệt được ∂φ (λ=1) và ∂∞φ (λ=0).</div>
+    </div>
+    <div class="highlight-box hl-tip">💡 <b>Câu trả lời ngắn gọn:</b> Epi cho phép phân biệt "hướng nghiêng" (subgradient thực, λ=1) với "hướng ngang" (thông tin Lipschitz, λ=0). Dùng gph chỉ cho ra coderivative — không phân biệt được hai loại thông tin này.</div>
+  </div>
+</div>
+
+<!-- Q21 -->
+<div class="q-card" style="border-left-color:var(--gold)" data-cat="compare" data-s="tangential preduality tại sao N không thể tangentially generated không lồi cannot be generated by tangent cones">
+  <div class="q-header" onclick="toggle(this)">
+    <div class="q-num" style="background:var(--gold-bg);color:var(--gold)">C4.3</div>
+    <div class="q-text">
+      <div class="q-title">"Tangential Preduality" — Tại sao N(x̄;Ω) không thể được tạo ra từ bất kỳ nón tiếp tuyến nào?</div>
+      <div class="q-meta">
+        <span class="tag" style="background:var(--gold-bg);color:var(--gold)">tr.7–9 — §1.1.2</span>
+        <span class="tag" style="background:var(--gold-bg);color:var(--gold)">câu hỏi sâu</span>
+      </div>
+    </div>
+    <div class="q-toggle">▾</div>
+  </div>
+  <div class="q-answer">
+    <div class="ans-block">
+      <div class="ans-label">Tại sao bất kỳ nón tạo ra từ tiếp tuyến đều phải lồi?</div>
+      <div class="ans-text">Nếu K là nón tiếp tuyến bất kỳ (dù K không lồi), thì K* (nón đối ngẫu) LUÔN lồi:<br>
+      K* = {v | ⟨v,w⟩ ≤ 0 ∀w∈K} — giao của nửa không gian đóng → luôn lồi!<br><br>
+      Do đó: mọi N được định nghĩa qua duality N = K* với K là tiếp tuyến đều phải lồi.</div>
+    </div>
+    <div class="ans-block">
+      <div class="ans-label">N(x̄;Ω) có thể không lồi → không thể là K*</div>
+      <div class="ans-text">Từ Example 1.5: N((0,0);{y≥−|x|}) = hai tia {(v,v)|v≤0} ∪ {(v,−v)|v≥0} — KHÔNG LỒI.<br><br>
+      Vậy N không thể là nón đối ngẫu của bất kỳ K nào → không được tạo ra tiếp tuyến!</div>
+    </div>
+    <div class="ans-block">
+      <div class="ans-label">Nhưng tại sao gọi là "preduality"?</div>
+      <div class="ans-text">Dù N không "hoàn toàn" dual với tiếp tuyến, nhưng N̂ = T* (Prop 1.9) và N = Lim sup N̂ (Thm 1.6). Nên N có "gần" dual với tiếp tuyến — không trực tiếp mà qua bước giới hạn → gọi là "tiếp tuyến <em>sơ bộ đối ngẫu</em>".</div>
+    </div>
+    <div class="highlight-box hl-key">🔑 <b>Đây là điểm khác biệt căn bản:</b> Lý thuyết cũ (Clarke, Ioffe) định nghĩa normal cone = K* nên luôn lồi. Mordukhovich từ bỏ tính lồi để có thể nắm bắt thêm thông tin về cấu trúc phi lồi.</div>
+  </div>
+</div>
+
+<!-- Q22 -->
+<div class="q-card" style="border-left-color:var(--gold)" data-cat="compare" data-s="phân biệt ∂φ và ∂∞φ khi nào singular kỳ dị Lipschitz characterization zero not zero">
+  <div class="q-header" onclick="toggle(this)">
+    <div class="q-num" style="background:var(--gold-bg);color:var(--gold)">C4.4</div>
+    <div class="q-text">
+      <div class="q-title">Phân biệt vai trò của ∂φ và ∂∞φ. Tại sao ∂∞φ(x̄) = {0} đặc trưng cho tính Lipschitz?</div>
+      <div class="q-meta">
+        <span class="tag" style="background:var(--gold-bg);color:var(--gold)">Thm 1.22 — phân tích</span>
+      </div>
+    </div>
+    <div class="q-toggle">▾</div>
+  </div>
+  <div class="q-answer">
+    <div class="ans-block">
+      <div class="ans-label">∂φ — vi phân con cơ bản</div>
+      <div class="ans-text">• Thay thế gradient ∇φ khi φ không trơn<br>
+      • Dùng cho: điều kiện tối ưu (Fermat rule), quy tắc tính (sum, chain, product)<br>
+      • Khi φ trơn: ∂φ(x̄) = {∇φ(x̄)} — thu về đạo hàm cổ điển</div>
+    </div>
+    <div class="ans-block">
+      <div class="ans-label">∂∞φ — vi phân con kỳ dị</div>
+      <div class="ans-text">• Không có tương đương trong giải tích cổ điển hay convex analysis!<br>
+      • Chứa thông tin về "hướng vô hạn" — khi φ tăng nhanh vô hạn<br>
+      • Khi φ Lipschitz: ∂∞φ(x̄) = {0} — không có hướng "đứng thẳng" (Theorem 1.22)</div>
+    </div>
+    <div class="ans-block">
+      <div class="ans-label">Hình ảnh hình học cho ∂∞φ</div>
+      <div class="ans-text">∂∞φ(x̄) = {v | (v,0) ∈ N(epi φ at x̄)} — pháp tuyến NẰMM NGANG của epigraph.<br><br>
+      Khi φ Lipschitz: epi φ có "dốc giới hạn ℓ" → không có pháp tuyến nằm ngang → ∂∞φ = {0}.<br>
+      Khi φ không Lipschitz: epi φ có tiếp tuyến đứng → có pháp tuyến nằm ngang → ∂∞φ ≠ {0}.</div>
+    </div>
+    <div class="example-block">
+      <div class="ex-title">Ví dụ minh họa</div>
+      φ(x)=x^{1/3}: epi φ tại (0,0) có đường tiếp tuyến đứng (đạo hàm → ∞) → ∂∞φ(0) = [0,+∞) ≠ {0}.<br>
+      φ(x)=|x|: epi φ tại (0,0) có dốc giới hạn 1 → ∂∞φ(0) = {0}.
+    </div>
+  </div>
+</div>
+
+<!-- Q23 -->
+<div class="q-card" style="border-left-color:var(--gold)" data-cat="compare" data-s="scalarization tại sao quan trọng practical computation tools reduce coderivative subdifferential">
+  <div class="q-header" onclick="toggle(this)">
+    <div class="q-num" style="background:var(--gold-bg);color:var(--gold)">C4.5</div>
+    <div class="q-text">
+      <div class="q-title">Theorem 1.32 (Scalarization) quan trọng thế nào về mặt thực hành? Tại sao nó "đơn giản hóa" coderivative?</div>
+      <div class="q-meta">
+        <span class="tag" style="background:var(--gold-bg);color:var(--gold)">Thm 1.32 — ứng dụng</span>
+      </div>
+    </div>
+    <div class="q-toggle">▾</div>
+  </div>
+  <div class="q-answer">
+    <div class="ans-block">
+      <div class="ans-label">Vấn đề: Coderivative khó tính trực tiếp</div>
+      <div class="ans-text">D*f(x̄,ȳ)(v) yêu cầu tính N((x̄,ȳ); gph f) trong không gian sản phẩm ℝⁿ×ℝᵐ. Với m lớn (vd: f: ℝ²→ℝ³), gph f là tập trong ℝ⁵ — rất phức tạp!</div>
+    </div>
+    <div class="ans-block">
+      <div class="ans-label">Scalarization giải quyết: chuyển về 1 hàm vô hướng</div>
+      <div class="formula-box">D*f(x̄)(v) = ∂⟨v,f⟩(x̄)
+⟨v,f⟩(x) = ⟨v,f(x)⟩: ℝⁿ → ℝ  [hàm vô hướng 1 chiều]</div>
+      <div class="ans-text">Thay vì tính N trong không gian ℝⁿ×ℝᵐ, chỉ cần tính subdiff của ⟨v,f⟩: ℝⁿ→ℝ trong không gian ℝⁿ — đơn giản hơn nhiều!</div>
+    </div>
+    <div class="example-block">
+      <div class="ex-title">Ví dụ thực hành</div>
+      f(x)=(x₁+x₂, x₁x₂): ℝ²→ℝ², v=(1,0).<br>
+      ⟨v,f⟩(x) = x₁+x₂. Trơn → ∂⟨v,f⟩(x̄) = {∇(x₁+x₂)} = {(1,1)}.<br>
+      → D*f(x̄)(1,0) = {(1,1)}.  Dễ hơn nhiều so với tính N(gph f)!
+    </div>
+    <div class="highlight-box hl-key">🔑 <b>Tầm quan trọng:</b> Scalarization + Coderivative calculus (Ch.3) là "recipe" tính D* nhanh cho hầu hết bài toán ứng dụng. Không có Theorem 1.32, coderivative calculus gần như không dùng được trong thực tế.</div>
+  </div>
+</div>
+
+</div><!-- end section compare -->
+
+<!-- ================================================================
+     NHÓM 5: CÂU HỎI NÂNG CAO
+================================================================ -->
+<div class="section" data-cat="hard">
+<div class="sec-hdr">
+  <span class="sec-icon">⭐</span>
+  <div>
+    <div class="sec-title">Nhóm 5 — Câu Hỏi Nâng Cao</div>
+    <div class="sec-desc">Câu hỏi khó — giáo sư hỏi học viên tiến sĩ xuất sắc, hoặc câu hỏi mở trong phần Commentary.</div>
+  </div>
+  <span class="sec-count" id="cnt-hard"></span>
+</div>
+
+<!-- Q24 -->
+<div class="q-card" style="border-left-color:var(--purple)" data-cat="hard" data-s="Proposition 1.17 (v -lambda) N epi phi lambda >= 0 sloping horizontal normals why structure">
+  <div class="q-header" onclick="toggle(this)">
+    <div class="q-num" style="background:var(--purple-bg);color:var(--purple)">C5.1</div>
+    <div class="q-text">
+      <div class="q-title">Chứng minh Proposition 1.17: Tại sao mọi (v,−λ) ∈ N((x̄,φ(x̄)); epi φ) đều có λ ≥ 0?</div>
+      <div class="q-meta">
+        <span class="tag" style="background:var(--purple-bg);color:var(--purple)">tr.20 — Prop 1.17</span>
+        <span class="tag" style="background:var(--red-bg);color:var(--red)">nền tảng của Def 1.18</span>
+      </div>
+    </div>
+    <div class="q-toggle">▾</div>
+  </div>
+  <div class="q-answer">
+    <div class="ans-block">
+      <div class="ans-label">Ý nghĩa của mệnh đề</div>
+      <div class="ans-text">Mệnh đề này giải thích TẠI SAO định nghĩa ∂φ dùng (v,−1) và ∂∞φ dùng (v,0) — vì chỉ có hai trường hợp λ>0 và λ=0 là có thể!</div>
+    </div>
+    <div class="ans-block">
+      <div class="ans-label">Chứng minh λ ≥ 0</div>
+      <ul class="step-list">
+        <li><div class="step-num">①</div><div>Từ Theorem 1.6: ∃ dãy (xₖ,αₖ) →ᵉᵖⁱ (x̄,φ(x̄)) và (vₖ,−λₖ) → (v,−λ) với (vₖ,−λₖ) ∈ N̂((xₖ,αₖ); epi φ)</div></li>
+        <li><div class="step-num">②</div><div>Đặt x=xₖ, α=αₖ+1 ∈ epi φ (vì αₖ+1 ≥ αₖ ≥ φ(xₖ)). Từ định nghĩa N̂ tại (xₖ,αₖ):</div></li>
+        <li><div class="step-num">③</div><div>⟨(vₖ,−λₖ), (xₖ,αₖ+1) − (xₖ,αₖ)⟩ / ‖(0,1)‖ ≤ 0<br>→ ⟨(vₖ,−λₖ), (0,1)⟩ ≤ 0 → −λₖ ≤ 0 → λₖ ≥ 0</div></li>
+        <li><div class="step-num">④</div><div>Lấy giới hạn: λ = lim λₖ ≥ 0 □</div></li>
+      </ul>
+    </div>
+    <div class="highlight-box hl-key">🔑 <b>Ý nghĩa sâu:</b> λ ≥ 0 phản ánh tính "thứ tự" của ℝ: epi φ nằm "phía trên" → pháp tuyến phải "hướng xuống" (λ ≥ 0). Nếu dùng hypo φ (phía dưới đồ thị), sẽ có λ ≤ 0. Đây là lý do phải dùng epi chứ không dùng hypo trong lý thuyết cực tiểu.</div>
+  </div>
+</div>
+
+<!-- Q25 -->
+<div class="q-card" style="border-left-color:var(--purple)" data-cat="hard" data-s="Theorem 1.23 Step 1 2 3 4 5 proof subdifferential from coderivative l.s.c. continuous tricky key step boundary">
+  <div class="q-header" onclick="toggle(this)">
+    <div class="q-num" style="background:var(--purple-bg);color:var(--purple)">C5.2</div>
+    <div class="q-text">
+      <div class="q-title">Trong chứng minh Theorem 1.23 (∂φ = D*φ(1)), Step 1 là gì và tại sao cần nó?</div>
+      <div class="q-meta">
+        <span class="tag" style="background:var(--purple-bg);color:var(--purple)">tr.23–27 — Thm 1.23</span>
+        <span class="tag" style="background:var(--gold-bg);color:var(--gold)">bước kỹ thuật tinh tế</span>
+      </div>
+    </div>
+    <div class="q-toggle">▾</div>
+  </div>
+  <div class="q-answer">
+    <div class="ans-block">
+      <div class="ans-label">Step 1 phát biểu gì?</div>
+      <div class="ans-text">Với dãy (xₖ,αₖ) →ᵉᵖⁱ (x̄,φ(x̄)): tồn tại dãy con {xₖⱼ} sao cho (xₖⱼ, φ(xₖⱼ)) → (x̄,φ(x̄)).<br><br>
+      Nói đơn giản: từ dãy hội tụ về (x̄,φ(x̄)) trong epi φ, ta có thể trích dãy con nằm trên đồ thị gph φ.</div>
+    </div>
+    <div class="ans-block">
+      <div class="ans-label">Tại sao không hiển nhiên?</div>
+      <div class="ans-text">Dãy (xₖ,αₖ) ∈ epi φ chỉ đảm bảo αₖ ≥ φ(xₖ). Không có lý do rõ ràng tại sao αₖ = φ(xₖ) (trên đồ thị) chứ không phải αₖ > φ(xₖ) (trên epi nhưng không trên gph).<br><br>
+      Step 1 chứng minh: dù αₖ > φ(xₖ) một số k, ta vẫn luôn trích được dãy con nằm trên đồ thị.</div>
+    </div>
+    <div class="ans-block">
+      <div class="ans-label">Ý tưởng chứng minh</div>
+      <div class="ans-text">Chia hai trường hợp:<br>
+      (a) Nếu tập S = {k | φ(xₖ) ≤ αₖ = φ(x̄)} vô hạn → trích dãy con từ S.<br>
+      (b) Ngược lại: φ(xₖ) ≤ φ(x̄) hầu hết k. Dùng l.s.c. của φ: φ(x̄) ≤ lim inf φ(xₖ) → φ(xₖ) → φ(x̄).</div>
+    </div>
+    <div class="highlight-box hl-tip">💡 <b>Tại sao cần Step 1?</b> Để chứng minh ∂φ ⊂ D*φ(1): cần chuyển từ N(epi φ) về N(gph φ). Để làm điều này, cần biết rằng một pháp tuyến của epi φ có thể "tiếp cận" bởi pháp tuyến của gph φ — và Step 1 đảm bảo điều đó.</div>
+  </div>
+</div>
+
+<!-- Q26 -->
+<div class="q-card" style="border-left-color:var(--purple)" data-cat="hard" data-s="Theorem 1.10 part ii smooth concave global maximum hard proof technical Steps 1 2 3">
+  <div class="q-header" onclick="toggle(this)">
+    <div class="q-num" style="background:var(--purple-bg);color:var(--purple)">C5.3</div>
+    <div class="q-text">
+      <div class="q-title">Trong Theorem 1.10(ii), tại sao cần chứng minh dài (Steps 1-3) để chọn được ψ trơn lõm toàn cục?</div>
+      <div class="q-meta">
+        <span class="tag" style="background:var(--purple-bg);color:var(--purple)">tr.9–11 — Thm 1.10(ii)</span>
+        <span class="tag" style="background:var(--gold-bg);color:var(--gold)">câu hỏi kỹ thuật</span>
+      </div>
+    </div>
+    <div class="q-toggle">▾</div>
+  </div>
+  <div class="q-answer">
+    <div class="ans-block">
+      <div class="ans-label">Part (i) dễ, Part (ii) khó — tại sao?</div>
+      <div class="ans-text">• <b>Part (i):</b> Cần ψ khả vi tại x̄ với max trên Ω cục bộ → Dễ: chỉ cần ψ(x) = ⟨v,x−x̄⟩ + min(0,...) → bất kỳ hàm thỏa mãn đều được.<br><br>
+      • <b>Part (ii):</b> Cần ψ <em>trơn trên toàn ℝⁿ</em>, <em>lõm trên toàn ℝⁿ</em>, và đạt max TOÀN CỤC trên Ω duy nhất tại x̄ → Đây là yêu cầu mạnh hơn nhiều.</div>
+    </div>
+    <div class="ans-block">
+      <div class="ans-label">Khó ở chỗ nào?</div>
+      <div class="ans-text">Phải xây hàm σ (Step 1) và τ (Step 2) làm "bộ đệm" để kiểm soát ρ(t):<br>
+      • ρ(t) := sup{⟨v,x−x̄⟩ | x∈Ω, ‖x−x̄‖≤t} → đo "mức vi phạm" của v là pháp tuyến<br>
+      • τ phải vừa lớn hơn ρ (để max tại x̄ là DUY NHẤT), vừa C¹-smooth và lõm<br><br>
+      Xây τ từ ρ cần kỹ thuật vì ρ có thể không smooth.</div>
+    </div>
+    <div class="ans-block">
+      <div class="ans-label">Ý nghĩa của kết quả</div>
+      <div class="ans-text">Nếu chỉ cần "cục bộ" (Part i) thì đơn giản. Nhưng Part (ii) với max TOÀN CỤC duy nhất cho phép áp dụng nguyên lý biến phân mạnh hơn trong Chương 2 (Extremal Principle). Đây là lý do đầu tư công sức cho chứng minh dài.</div>
+    </div>
+    <div class="highlight-box hl-tip">💡 <b>Điểm cốt lõi:</b> Steps 1-2 xây hàm σ,τ bằng tích phân của hàm nhảy bậc — đây là kỹ thuật "smooth bump function" cổ điển trong giải tích thực. Kết quả là ψ(x) = −τ(‖x−x̄‖) − ‖x−x̄‖² + ⟨v,x−x̄⟩.</div>
+  </div>
+</div>
+
+<!-- Q27 -->
+<div class="q-card" style="border-left-color:var(--purple)" data-cat="hard" data-s="Proposition 1.29 singular subgradient Lipschitzian addition key property ∂∞(phi+psi) = ∂∞phi">
+  <div class="q-header" onclick="toggle(this)">
+    <div class="q-num" style="background:var(--purple-bg);color:var(--purple)">C5.4</div>
+    <div class="q-text">
+      <div class="q-title">Phát biểu và giải thích ý nghĩa Mệnh đề 1.29: ∂∞(φ+ψ)(x̄) = ∂∞φ(x̄) khi ψ Lipschitz. Tại sao quan trọng?</div>
+      <div class="q-meta">
+        <span class="tag" style="background:var(--purple-bg);color:var(--purple)">tr.32–33 — Prop 1.29</span>
+      </div>
+    </div>
+    <div class="q-toggle">▾</div>
+  </div>
+  <div class="q-answer">
+    <div class="ans-block">
+      <div class="ans-label">Phát biểu và ý nghĩa</div>
+      <div class="formula-box">φ: ℝⁿ→ℝ̄ finite tại x̄, ψ: ℝⁿ→ℝ Lipschitz gần x̄:
+∂∞(φ+ψ)(x̄) = ∂∞φ(x̄)</div>
+      <div class="ans-text">Khi cộng một hàm Lipschitz ψ vào φ, <b>subdiff kỳ dị không thay đổi</b>. Vì ψ Lipschitz: ∂∞ψ(x̄)={0} (Thm 1.22). Nên "hành vi kỳ dị" của φ+ψ hoàn toàn do φ quyết định.</div>
+    </div>
+    <div class="ans-block">
+      <div class="ans-label">Tại sao quan trọng?</div>
+      <div class="ans-text">• Cho phép "phạt Lipschitz" trong bài toán tối ưu mà không ảnh hưởng đến tính Lipschitz của hàm gốc<br>
+      • Bước đệm cho sum rule của ∂∞ trong Chương 2 (Theorem 2.19): ∂∞(φ₁+φ₂) ⊂ ∂∞φ₁ + ∂∞φ₂<br>
+      • Liên quan đến qualification condition: ∂∞φ₁(x̄) ∩ (−∂∞φ₂(x̄)) = {0}</div>
+    </div>
+    <div class="highlight-box hl-key">🔑 <b>Ghi nhớ:</b> Trong bài toán tối ưu penalty method: min f(x)+λ·g(x) với g Lipschitz. ∂∞(f+λg) = ∂∞f — tính "kỳ dị" (đặc biệt là tính Lipschitz hay không) chỉ phụ thuộc vào f, không bị ảnh hưởng bởi penalty term Lipschitz λg.</div>
+  </div>
+</div>
+
+<!-- Q28 -->
+<div class="q-card" style="border-left-color:var(--purple)" data-cat="hard" data-s="right-sided subdiff ∂≥ Definition 1.36 Theorem 1.38 distance function basic normals enlargement phi+">
+  <div class="q-header" onclick="toggle(this)">
+    <div class="q-num" style="background:var(--purple-bg);color:var(--purple)">C5.5</div>
+    <div class="q-text">
+      <div class="q-title">Tại sao cần định nghĩa ∂≥φ (right-sided subdiff, Def 1.36) riêng? Khi nào ∂≥φ(x̄) ≠ ∂φ(x̄)?</div>
+      <div class="q-meta">
+        <span class="tag" style="background:var(--purple-bg);color:var(--purple)">tr.43 — Def 1.36 + Thm 1.38</span>
+        <span class="tag" style="background:var(--gold-bg);color:var(--gold)">ít ai hỏi nhưng hay gặp</span>
+      </div>
+    </div>
+    <div class="q-toggle">▾</div>
+  </div>
+  <div class="q-answer">
+    <div class="ans-block">
+      <div class="ans-label">Định nghĩa ∂≥φ</div>
+      <div class="formula-box">∂≥φ(x̄) := Lim sup ∂φ(x)   [chỉ lấy giới hạn từ x với φ(x) ≥ φ(x̄)]
+            φ+
+           x →x̄
+Khác với ∂φ(x̄) lấy Lim sup từ mọi x với φ(x)→φ(x̄)</div>
+    </div>
+    <div class="ans-block">
+      <div class="ans-label">Tại sao cần?</div>
+      <div class="ans-text">Để nối subdiff hàm khoảng cách d_Ω(x̄) tại điểm x̄ ∉ Ω với normals của enlargement Ω(ρ).<br><br>
+      Example 1.35 chứng minh: ∂d_Ω(x̄) ⊂ N(x̄; Ω(ρ))∩B KHÔNG ĐÚNG. Nhưng ∂≥d_Ω(x̄) ⊂ N(x̄; Ω(ρ))∩B LẠI ĐÚNG (Theorem 1.38).</div>
+    </div>
+    <div class="ans-block">
+      <div class="ans-label">Khi nào ∂≥ ≠ ∂?</div>
+      <div class="ans-text">Quan hệ: ∂φ(x̄) ⊂ ∂≥φ(x̄) ⊂ ∂φ(x̄).<br>
+      ∂≥ có thể <b>rỗng</b> khi ∂ không rỗng! Ví dụ: f(x) = −|x|, x̄=0. ∂f(0) = {−1,1} nhưng nếu ta chỉ lấy từ x với f(x)≥f(0)=0: không có x nào gần 0 thỏa f(x)=−|x|≥0 → ∂≥f(0) = ∅.<br><br>
+      Khi x̄ là cực tiểu cục bộ: ∂≥φ(x̄) = ∂φ(x̄) (Prop 1.37(i)).</div>
+    </div>
+    <div class="highlight-box hl-tip">💡 <b>Ứng dụng của Theorem 1.38:</b> N(x̄; Ω(ρ)) = ∪_{λ≥0} λ∂≥d_Ω(x̄) — cho phép tính normals của enlargement qua subdiff của hàm khoảng cách. Dùng trong semi-infinite programming và stability analysis.</div>
+  </div>
+</div>
+
+</div><!-- end section hard -->
+
+</div><!-- end mainbody -->
+
+<div class="no-results hidden" id="nores">
+  <div style="font-size:36px;margin-bottom:12px">🔍</div>
+  Không tìm thấy câu hỏi nào khớp với từ khóa này.
+</div>
+
+<script>
+let curCat = 'all';
+
+// Color mapping for filter buttons
+const btnColors = {
+  def: 'var(--blue)', calc: 'var(--green)',
+  proof: 'var(--red)', compare: 'var(--gold)',
+  hard: 'var(--purple)'
+};
+
+document.querySelectorAll('.fb').forEach(btn => {
+  const m = btn.getAttribute('onclick').match(/'(\w+)'/);
+  if (m && btnColors[m[1]]) {
+    const c = btnColors[m[1]];
+    btn.addEventListener('mouseenter', function(){ if(!this.classList.contains('on')) this.style.background=c; this.style.color='white'; });
+    btn.addEventListener('mouseleave', function(){ if(!this.classList.contains('on')){ this.style.background=''; this.style.color=''; } });
+  }
+});
+
+function toggle(hdr) {
+  const card = hdr.closest('.q-card');
+  card.classList.toggle('open');
+}
+
+function filterCat(cat, btn) {
+  curCat = cat;
+  document.querySelectorAll('.fb').forEach(b => {
+    b.classList.remove('on');
+    b.style.background = '';
+    b.style.color = '';
+  });
+  btn.classList.add('on');
+  btn.style.background = cat === 'all' ? 'var(--ink)' : (btnColors[cat] || 'var(--ink)');
+  btn.style.color = 'white';
+
+  document.querySelectorAll('.section').forEach(s => {
+    s.style.display = (cat === 'all' || s.dataset.cat === cat) ? '' : 'none';
+  });
+  doSearch();
+}
+
+function doSearch() {
+  const q = document.getElementById('searchQ').value.toLowerCase().trim();
+  let vis = 0;
+
+  document.querySelectorAll('.q-card').forEach(card => {
+    const sec = card.closest('.section');
+    const tabOk = curCat === 'all' || (sec && sec.dataset.cat === curCat);
+    if (!tabOk) { card.style.display = 'none'; return; }
+    if (!q) { card.style.display = ''; vis++; return; }
+    const txt = (card.dataset.s || '') + ' ' + card.textContent.toLowerCase();
+    if (txt.includes(q)) { card.style.display = ''; vis++; }
+    else card.style.display = 'none';
+  });
+
+  // Hide empty sections
+  document.querySelectorAll('.section').forEach(s => {
+    if (curCat !== 'all' && s.dataset.cat !== curCat) return;
+    const any = [...s.querySelectorAll('.q-card')].some(c => c.style.display !== 'none');
+    s.style.display = any ? '' : 'none';
+  });
+
+  document.getElementById('nores').classList.toggle('hidden', vis > 0 || !q);
+  document.getElementById('qcount').textContent = q ? `${vis} câu hỏi` : '';
+}
+
+// Count questions per section
+function countAll() {
+  const cats = ['def','calc','proof','compare','hard'];
+  cats.forEach(c => {
+    const el = document.getElementById('cnt-' + c);
+    if (el) {
+      const n = document.querySelectorAll(`.q-card[data-cat="${c}"]`).length;
+      el.textContent = n + ' câu';
+    }
+  });
+}
+countAll();
+</script>
+
+<div class="task-footer">
+  <a href="../task-03/">← Task 03 · Optimization Tools</a>
+  <a href="../">↑ Lesson 01 · Variational Analysis</a>
+  <a href="../task-05/">Task 05 →</a>
+</div>
+
+</body>
+</html>
