@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+
+  <link rel="stylesheet" href="../assets/brand.css">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A1 · Lesson 09 · Food & Drinks</title>
+<style>
+:root{--bg:#080d1a;--card:#0f1729;--card2:#131e35;--border:#1e2d4a;--text:#dde6f5;--muted:#8b9ab5;--accent:#84cc16;--acl:#a3e635;--green:#10b981;--red:#ef4444}
+*{box-sizing:border-box;margin:0;padding:0}body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;line-height:1.6;padding:1.5rem 1.25rem 3rem}
+.lsn-header{background:linear-gradient(135deg,#0a1a00,#0f1729);border:1px solid var(--border);border-radius:16px;padding:1.5rem;margin-bottom:1.5rem;position:relative;overflow:hidden}
+.lsn-header::before{content:'';position:absolute;top:-40px;right:-40px;width:150px;height:150px;background:radial-gradient(circle,rgba(132,204,22,.3),transparent 70%);pointer-events:none}
+.lsn-badge{display:inline-flex;background:rgba(132,204,22,.15);border:1px solid rgba(163,230,53,.3);border-radius:20px;padding:.25rem .75rem;font-size:.7rem;font-weight:700;color:var(--acl);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.75rem}
+.lsn-header h1{font-size:1.6rem;font-weight:800;background:linear-gradient(90deg,#d9f99d,#a3e635);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.4rem}
+.lsn-header p{color:var(--muted);font-size:.9rem}
+.objectives{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+.obj-tag{background:rgba(132,204,22,.12);border:1px solid rgba(132,204,22,.25);border-radius:20px;padding:.25rem .7rem;font-size:.75rem;color:var(--acl)}
+.sec-title{display:flex;align-items:center;gap:.6rem;font-size:1rem;font-weight:700;color:var(--acl);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)}
+.food-tabs{display:flex;gap:.5rem;margin-bottom:.9rem;flex-wrap:wrap}
+.food-tab{background:var(--card2);border:1px solid var(--border);border-radius:20px;padding:.3rem .9rem;font-size:.82rem;cursor:pointer;color:var(--muted);transition:all .2s}
+.food-tab.on{background:var(--accent);color:#000;border-color:var(--accent);font-weight:700}
+.food-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:.6rem;margin-bottom:1.75rem}
+.food-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:.75rem .5rem;text-align:center;cursor:pointer;transition:all .2s}
+.food-card:hover,.food-card.flip{border-color:var(--accent);background:rgba(132,204,22,.07)}
+.food-emoji{font-size:1.7rem;margin-bottom:.25rem}
+.food-en{font-size:.85rem;font-weight:700;color:var(--text)}.food-vn{font-size:.73rem;color:var(--muted);margin-top:.1rem}
+.food-card.flip .food-vn{color:var(--acl)}
+.grammar-box{background:linear-gradient(135deg,rgba(132,204,22,.1),rgba(163,230,53,.06));border:1px solid rgba(132,204,22,.2);border-radius:12px;padding:1.1rem;margin-bottom:1.75rem}
+.grammar-box h3{color:var(--acl);font-size:.9rem;margin-bottom:.8rem}
+.gram-row{display:flex;gap:.5rem;align-items:center;margin-bottom:.5rem;font-size:.88rem;flex-wrap:wrap}
+.gram-box{background:rgba(132,204,22,.15);border-radius:6px;padding:.2rem .7rem;color:var(--acl);font-weight:700;font-family:monospace}
+.pattern-list{display:flex;flex-direction:column;gap:.6rem;margin-bottom:1.75rem}
+.pattern-item{background:var(--card);border-left:3px solid var(--accent);border-radius:0 10px 10px 0;padding:.8rem 1rem}
+.pat-en{font-size:1rem;font-weight:600;color:var(--text)}.pat-vn{font-size:.82rem;color:var(--muted);margin-top:.2rem}.pat-note{font-size:.78rem;color:var(--acl);margin-top:.25rem;font-style:italic}
+.convo-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1.75rem}
+.convo-line{display:flex;gap:.7rem;margin-bottom:.65rem;align-items:flex-start}
+.spk-a{color:#a3e635;font-size:.7rem;font-weight:700;text-transform:uppercase;min-width:32px;margin-top:.2rem}
+.spk-w{color:#fbbf24;font-size:.7rem;font-weight:700;text-transform:uppercase;min-width:32px;margin-top:.2rem}
+.bubble{background:var(--card2);border-radius:0 10px 10px 10px;padding:.55rem .85rem;font-size:.9rem;flex:1}
+.bubble.w{border-radius:10px 10px 10px 0;background:rgba(251,191,36,.07);border:1px solid rgba(251,191,36,.15)}
+.order-game{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1.75rem}
+.order-game h3{color:var(--acl);font-size:.9rem;margin-bottom:.75rem}
+.order-items{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.75rem}
+.order-item{background:var(--card2);border:2px solid var(--border);border-radius:8px;padding:.4rem .8rem;font-size:.88rem;cursor:pointer;transition:all .2s;user-select:none}
+.order-item:hover{border-color:var(--accent)}.order-item.picked{opacity:.4;pointer-events:none}
+.order-sentence{min-height:38px;background:var(--card2);border:1px dashed var(--border);border-radius:8px;padding:.4rem .75rem;display:flex;align-items:center;gap:.4rem;flex-wrap:wrap;margin-bottom:.5rem}
+.placed-word{background:rgba(132,204,22,.15);border:1px solid var(--acl);border-radius:6px;padding:.2rem .6rem;font-size:.85rem;color:var(--acl);cursor:pointer}
+.quiz-section{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.25rem;margin-bottom:1.75rem}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+.quiz-q{font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:.75rem;padding:.75rem;background:var(--card2);border-radius:8px}
+.quiz-opts{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.5rem}
+.quiz-opt{background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:.55rem .75rem;font-size:.85rem;cursor:pointer;transition:all .18s;color:var(--text);text-align:left}
+.quiz-opt:hover:not(:disabled){border-color:var(--accent);color:var(--acl)}.quiz-opt.correct{border-color:var(--green)!important;background:rgba(16,185,129,.15)!important;color:var(--green)!important}.quiz-opt.wrong{border-color:var(--red)!important;background:rgba(239,68,68,.1)!important;color:var(--red)!important}.quiz-opt:disabled{cursor:default}
+.quiz-feedback{font-size:.8rem;margin:.4rem 0 .6rem;min-height:1rem}.quiz-feedback.ok{color:var(--green)}.quiz-feedback.no{color:var(--red)}
+.quiz-nav{display:flex;gap:.5rem;align-items:center;justify-content:space-between}
+.btn{background:var(--accent);color:#000;border:none;border-radius:8px;padding:.5rem 1.1rem;font-size:.85rem;font-weight:700;cursor:pointer;transition:opacity .2s}.btn:hover{opacity:.85}
+.btn-sm{background:rgba(132,204,22,.2);color:var(--acl);border:1px solid var(--acl);border-radius:6px;padding:.3rem .7rem;font-size:.8rem;cursor:pointer}
+.progress-bar{background:var(--border);border-radius:4px;height:4px;flex:1;overflow:hidden}.progress-fill{background:linear-gradient(90deg,var(--accent),#d9f99d);height:100%;border-radius:4px;transition:width .3s}
+.result-box{text-align:center;padding:1.25rem;display:none}.result-emoji{font-size:2.5rem;margin-bottom:.5rem}.result-score{font-size:1.5rem;font-weight:800;color:var(--acl);margin-bottom:.25rem}.result-msg{font-size:.85rem;color:var(--muted);margin-bottom:1rem}
+.lesson-footer{display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border)}
+.footer-nav a{color:var(--accent);text-decoration:none;font-size:.85rem;font-weight:600}
+</style>
+</head>
+<body>
+
+  <img src="../assets/logo-SH.png" class="sh-logo" alt="Science Horizon">
+<div class="lsn-header">
+  <div class="lsn-badge">🍜 People & Everyday Life · Lesson 09</div>
+  <h1>Food &amp; Drinks</h1>
+  <p>Học từ vựng về thức ăn và nước uống — gọi món và nói về sở thích ẩm thực!</p>
+  <div class="objectives">
+    <span class="obj-tag">🍕 Thức ăn phổ biến</span>
+    <span class="obj-tag">🥤 Đồ uống</span>
+    <span class="obj-tag">🛎️ Gọi món</span>
+    <span class="obj-tag">💬 I'd like / I want</span>
+  </div>
+</div>
+
+<div class="sec-title"><span>🍽️</span> Thức Ăn & Đồ Uống</div>
+<div class="food-tabs">
+  <button class="food-tab on" onclick="showCat('all',this)">Tất cả</button>
+  <button class="food-tab" onclick="showCat('food',this)">🍽️ Thức ăn</button>
+  <button class="food-tab" onclick="showCat('drink',this)">🥤 Đồ uống</button>
+  <button class="food-tab" onclick="showCat('fruit',this)">🍎 Trái cây</button>
+</div>
+<div class="food-grid" id="foodGrid"></div>
+
+<div class="sec-title"><span>📐</span> Ngữ Pháp</div>
+<div class="grammar-box">
+  <h3>✏️ I want / I'd like — Gọi món và bày tỏ mong muốn</h3>
+  <div class="gram-row"><span class="gram-box">I want</span><span>a coffee, please.</span><span style="color:var(--muted);font-size:.8rem">→ Tôi muốn một ly cà phê.</span></div>
+  <div class="gram-row"><span class="gram-box">I'd like</span><span>a bowl of pho.</span><span style="color:var(--muted);font-size:.8rem">→ Tôi muốn một bát phở. (lịch sự hơn)</span></div>
+  <div class="gram-row"><span class="gram-box">Can I have</span><span>some water?</span><span style="color:var(--muted);font-size:.8rem">→ Cho tôi xin nước được không?</span></div>
+  <div style="margin-top:.75rem;font-size:.82rem;color:var(--muted);background:rgba(132,204,22,.07);border-radius:8px;padding:.6rem .9rem">
+    💡 <strong style="color:var(--acl)">"I'd like"</strong> = "I would like" — lịch sự hơn "I want" khi gọi món ở nhà hàng hay quán ăn.
+  </div>
+</div>
+
+<div class="sec-title"><span>💬</span> Mẫu Câu</div>
+<div class="pattern-list">
+  <div class="pattern-item"><div class="pat-en">"I'd like [food/drink], please."</div><div class="pat-vn">→ Làm ơn cho tôi [món ăn/đồ uống].</div><div class="pat-note">💡 Luôn thêm "please" khi gọi món — lịch sự và tự nhiên</div></div>
+  <div class="pattern-item"><div class="pat-en">"What would you like to eat/drink?"</div><div class="pat-vn">→ Bạn muốn ăn/uống gì?</div><div class="pat-note">💡 Câu hỏi của nhân viên phục vụ — rất phổ biến</div></div>
+  <div class="pattern-item"><div class="pat-en">"I'm hungry / I'm thirsty."</div><div class="pat-vn">→ Tôi đói / Tôi khát nước.</div><div class="pat-note">💡 hungry = đói, thirsty = khát, full = no</div></div>
+</div>
+
+<div class="sec-title"><span>🗣️</span> Hội Thoại — Tại Quán Ăn</div>
+<div class="convo-box">
+  <div class="convo-line"><span class="spk-w">Waiter</span><div class="bubble w">Good evening! What would you like to order?</div></div>
+  <div class="convo-line"><span class="spk-a">A</span><div class="bubble">I'd like a bowl of pho and a glass of orange juice, please.</div></div>
+  <div class="convo-line"><span class="spk-w">Waiter</span><div class="bubble w">Of course! And for you?</div></div>
+  <div class="convo-line"><span class="spk-a">B</span><div class="bubble">Can I have a banh mi and a water, please?</div></div>
+  <div class="convo-line"><span class="spk-w">Waiter</span><div class="bubble w">Sure! Would you like anything else?</div></div>
+  <div class="convo-line"><span class="spk-a">A</span><div class="bubble">No, thank you. That's all.</div></div>
+</div>
+
+<div class="sec-title"><span>✏️</span> Luyện Tập — Sắp Xếp Câu</div>
+<div class="order-game">
+  <h3>Sắp xếp các từ thành câu đúng — nhấn từ theo thứ tự:</h3>
+  <div id="sentenceArea"></div>
+</div>
+
+<div class="sec-title"><span>🎯</span> Quiz Nhanh (5 câu)</div>
+<div class="quiz-section">
+  <div class="quiz-header"><span id="quizTitle" style="font-size:.85rem;color:var(--muted)">Câu 1 / 5</span><span id="quizScoreDisplay" style="font-size:.85rem;color:var(--muted)">Điểm: 0</span></div>
+  <div id="quizContent">
+    <div class="quiz-q" id="quizQ"></div>
+    <div class="quiz-opts" id="quizOpts"></div>
+    <div class="quiz-feedback" id="quizFB"></div>
+    <div class="quiz-nav"><div class="progress-bar"><div class="progress-fill" id="quizProgress" style="width:20%"></div></div><button class="btn" id="quizNext" style="display:none" onclick="nextQ()">Tiếp →</button></div>
+  </div>
+  <div class="result-box" id="quizResult"><div class="result-emoji" id="resEmoji"></div><div class="result-score" id="resScore"></div><div class="result-msg" id="resMsg"></div><button class="btn" onclick="resetQuiz()">🔄 Làm lại</button></div>
+</div>
+<div class="lesson-footer"><div class="footer-nav">← <a href="../lesson-08/">Lesson 08</a></div><div style="font-size:.8rem;color:var(--muted)">A1 · Lesson 09 / 12</div><div class="footer-nav"><a href="../lesson-10/">Lesson 10 →</a></div></div>
+
+<script>
+const foods=[
+  {e:'🍚',en:'rice',vn:'cơm',cat:'food'},{e:'🍜',en:'noodles',vn:'mì',cat:'food'},{e:'🥖',en:'bread',vn:'bánh mì',cat:'food'},{e:'🍳',en:'egg',vn:'trứng',cat:'food'},{e:'🍗',en:'chicken',vn:'thịt gà',cat:'food'},{e:'🥩',en:'beef',vn:'thịt bò',cat:'food'},{e:'🐟',en:'fish',vn:'cá',cat:'food'},{e:'🥦',en:'vegetables',vn:'rau củ',cat:'food'},
+  {e:'☕',en:'coffee',vn:'cà phê',cat:'drink'},{e:'🍵',en:'tea',vn:'trà',cat:'drink'},{e:'🥛',en:'milk',vn:'sữa',cat:'drink'},{e:'🧃',en:'juice',vn:'nước ép',cat:'drink'},{e:'💧',en:'water',vn:'nước',cat:'drink'},{e:'🥤',en:'smoothie',vn:'sinh tố',cat:'drink'},
+  {e:'🍎',en:'apple',vn:'táo',cat:'fruit'},{e:'🍌',en:'banana',vn:'chuối',cat:'fruit'},{e:'🍊',en:'orange',vn:'cam',cat:'fruit'},{e:'🍇',en:'grapes',vn:'nho',cat:'fruit'},{e:'🍓',en:'strawberry',vn:'dâu tây',cat:'fruit'},{e:'🥭',en:'mango',vn:'xoài',cat:'fruit'}
+];
+let currentCat='all';
+function renderFoods(){
+  const fg=document.getElementById('foodGrid');fg.innerHTML='';
+  const filtered=currentCat==='all'?foods:foods.filter(f=>f.cat===currentCat);
+  filtered.forEach(f=>{fg.innerHTML+=`<div class="food-card" onclick="this.classList.toggle('flip')"><div class="food-emoji">${f.e}</div><div class="food-en">${f.en}</div><div class="food-vn">${f.vn}</div></div>`;});
+}
+function showCat(cat,btn){currentCat=cat;document.querySelectorAll('.food-tab').forEach(b=>b.classList.remove('on'));btn.classList.add('on');renderFoods();}
+renderFoods();
+
+// Sentence order game
+const sentences=[{words:["I'd","like","a","coffee","please"],answer:"I'd like a coffee please"},{words:["Can","I","have","some","water"],answer:"Can I have some water"},{words:["What","would","you","like","to","eat"],answer:"What would you like to eat"}];
+let si=0,placed=[];
+function renderSentence(){
+  if(si>=sentences.length){document.getElementById('sentenceArea').innerHTML='<div style="color:var(--acl);font-size:.9rem;padding:.5rem">🎉 Xong hết rồi! Bạn giỏi lắm!</div>';return;}
+  const s=sentences[si];placed=[];
+  document.getElementById('sentenceArea').innerHTML=`
+    <div style="font-size:.82rem;color:var(--muted);margin-bottom:.5rem">Câu ${si+1}/${sentences.length}:</div>
+    <div class="order-sentence" id="oSent"></div>
+    <div class="order-items" id="oItems">${s.words.sort(()=>Math.random()-.5).map((w,i)=>`<span class="order-item" id="oi${i}" onclick="placeWord('${w}',${i})">${w}</span>`).join('')}</div>
+    <div style="display:flex;gap:.5rem;margin-top:.25rem"><button class="btn-sm" onclick="checkSentence()">✓ Kiểm tra</button><button class="btn-sm" onclick="resetSentence()">↺ Reset</button></div>
+    <div id="oFB" style="font-size:.82rem;margin-top:.5rem;min-height:1rem"></div>`;
+}
+function placeWord(w,idx){placed.push(w);document.getElementById('oi'+idx).classList.add('picked');document.getElementById('oSent').innerHTML=placed.map(pw=>`<span class="placed-word" onclick="removeLast()">${pw}</span>`).join('');}
+function removeLast(){placed.pop();renderSentence();placed.forEach((w,i)=>{const s=sentences[si];const fi=s.words.findIndex((fw,fi2)=>fw===w&&!placed.slice(0,i).includes(fw));});}
+function checkSentence(){const ans=placed.join(' ');const fb=document.getElementById('oFB');if(ans.toLowerCase()===sentences[si].answer.toLowerCase()){fb.textContent='✅ Chính xác!';fb.style.color='#10b981';setTimeout(()=>{si++;renderSentence();},1200);}else{fb.textContent='❌ Chưa đúng, thử lại!';fb.style.color='#ef4444';}}
+function resetSentence(){placed=[];renderSentence();}
+renderSentence();
+
+const qs=[{q:'"I\'d like" được dùng để làm gì?',opts:['Hỏi giá','Gọi món lịch sự','Hỏi đường','Chào hỏi'],ans:1},{q:'"I\'m hungry." nghĩa là gì?',opts:['Tôi khát nước','Tôi mệt','Tôi đói','Tôi no'],ans:2},{q:'"Can I have some water?" — câu này dùng khi nào?',opts:['Hỏi giờ','Xin nước uống','Hỏi tên','Chào tạm biệt'],ans:1},{q:'"orange" là loại trái cây nào?',opts:['Táo','Chuối','Cam','Xoài'],ans:2},{q:'Câu nào lịch sự hơn khi gọi món?',opts:["I want a coffee!","Give me coffee.","I'd like a coffee, please.","Coffee now!"],ans:2}];
+let qi=0,score=0;
+function renderQ(){const q=qs[qi];document.getElementById('quizTitle').textContent=`Câu ${qi+1} / ${qs.length}`;document.getElementById('quizProgress').style.width=`${((qi+1)/qs.length)*100}%`;document.getElementById('quizQ').textContent=q.q;document.getElementById('quizFB').textContent='';document.getElementById('quizFB').className='quiz-feedback';document.getElementById('quizNext').style.display='none';const opts=document.getElementById('quizOpts');opts.innerHTML='';q.opts.forEach((o,i)=>{const btn=document.createElement('button');btn.className='quiz-opt';btn.textContent=o;btn.onclick=()=>{document.querySelectorAll('.quiz-opt').forEach(b=>b.disabled=true);if(i===q.ans){btn.classList.add('correct');score++;document.getElementById('quizFB').textContent='✅ Chính xác!';document.getElementById('quizFB').className='quiz-feedback ok';}else{btn.classList.add('wrong');document.querySelectorAll('.quiz-opt')[q.ans].classList.add('correct');document.getElementById('quizFB').textContent='❌ Sai rồi!';document.getElementById('quizFB').className='quiz-feedback no';}document.getElementById('quizScoreDisplay').textContent=`Điểm: ${score}`;document.getElementById('quizNext').style.display='inline-block';};opts.appendChild(btn);});}
+function nextQ(){qi++;if(qi>=qs.length){document.getElementById('quizContent').style.display='none';const r=document.getElementById('quizResult');r.style.display='block';const pct=Math.round(score/qs.length*100);document.getElementById('resEmoji').textContent=pct>=80?'🏆':pct>=60?'👍':'💪';document.getElementById('resScore').textContent=`${score} / ${qs.length} đúng (${pct}%)`;document.getElementById('resMsg').textContent=pct>=80?'Tuyệt vời! Bạn có thể gọi món bằng tiếng Anh rồi!':'Ôn lại và thử tiếp nhé!';}else renderQ();}
+function resetQuiz(){qi=0;score=0;document.getElementById('quizScoreDisplay').textContent='Điểm: 0';document.getElementById('quizContent').style.display='block';document.getElementById('quizResult').style.display='none';renderQ();}
+renderQ();
+</script>
+</body></html>
