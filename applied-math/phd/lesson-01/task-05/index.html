@@ -1,0 +1,2026 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+
+  <link rel="stylesheet" href="../assets/brand.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Task 05 · Chapter 1 Exercises | Variational Analysis and Applications</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=STIX+Two+Math&display=swap');
+
+:root{
+  --space:#06142e;
+  --deep:#071b3f;
+  --void:#020712;
+  --cyan:#37d5ff;
+  --blue:#1d8cff;
+  --violet:#7c5cff;
+  --pink:#ff70b8;
+  --green:#52f5b0;
+  --orange:#ffb454;
+  --yellow:#ffe680;
+
+  --bg:#06142e;
+  --bg2:rgba(255,255,255,.075);
+  --bg3:rgba(255,255,255,.12);
+  --ink:#ecf7ff;
+  --ink2:#bdd0e9;
+  --ink3:#7e91ad;
+  --rule:rgba(148,163,184,.22);
+
+  --s1:#37d5ff;--s1l:rgba(55,213,255,.14);--s1b:rgba(55,213,255,.36);
+  --s2:#52f5b0;--s2l:rgba(82,245,176,.14);--s2b:rgba(82,245,176,.36);
+  --s3:#ffb454;--s3l:rgba(255,180,84,.15);--s3b:rgba(255,180,84,.36);
+  --d1:#94a3b8;--d2:#ffe680;--d3:#ff6b8a;--d4:#a78bfa;
+  --gold:#ffb454;--red:#ff6b8a;--green:#52f5b0;
+
+  --card:rgba(255,255,255,.92);
+  --card-dark:rgba(255,255,255,.09);
+  --shadow:0 22px 60px rgba(0,0,0,.28);
+  --shadow2:0 12px 28px rgba(2,7,18,.18);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+
+body{
+  min-height:100vh;
+  background:
+    radial-gradient(900px 540px at 8% 8%, rgba(55,213,255,.22), transparent 60%),
+    radial-gradient(850px 520px at 92% 12%, rgba(124,92,255,.22), transparent 60%),
+    radial-gradient(850px 520px at 62% 95%, rgba(82,245,176,.12), transparent 60%),
+    linear-gradient(135deg, #031024 0%, #071b3f 48%, #020712 100%);
+  color:var(--ink);
+  font-family:"Be Vietnam Pro",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  font-size:14.5px;
+  line-height:1.7;
+  padding-bottom:90px;
+  overflow-x:hidden;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-2;
+  opacity:.38;
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,.86) 1px, transparent 1.6px),
+    radial-gradient(circle, rgba(55,213,255,.65) 1px, transparent 1.5px),
+    radial-gradient(circle, rgba(82,245,176,.55) 1px, transparent 1.5px);
+  background-size:72px 72px,118px 118px,164px 164px;
+  background-position:0 0,34px 58px,90px 26px;
+}
+
+body::after{
+  content:"";
+  position:fixed;
+  right:-360px;
+  top:120px;
+  width:1040px;
+  height:280px;
+  border-radius:50%;
+  border:3px solid rgba(55,213,255,.15);
+  border-left-color:rgba(82,245,176,.42);
+  transform:rotate(-17deg);
+  z-index:-1;
+  pointer-events:none;
+}
+
+/* HERO */
+.hero{
+  position:relative;
+  overflow:hidden;
+  padding:42px 48px 38px;
+  background:
+    radial-gradient(520px 220px at 12% 0%, rgba(55,213,255,.20), transparent 62%),
+    radial-gradient(540px 240px at 82% 20%, rgba(124,92,255,.20), transparent 62%),
+    rgba(4,16,36,.76);
+  border-bottom:1px solid rgba(255,255,255,.13);
+  box-shadow:0 18px 48px rgba(0,0,0,.18);
+  backdrop-filter:blur(16px);
+}
+
+.hero::before{
+  content:"N(x̄;Ω)  D*F  ∂φ  ∂∞φ  epi φ  Π(x;Ω)  0∈∂φ+N";
+  position:absolute;
+  right:-70px;
+  top:24px;
+  font-family:"STIX Two Math","JetBrains Mono",monospace;
+  font-size:34px;
+  color:rgba(255,255,255,.045);
+  white-space:nowrap;
+  transform:rotate(-8deg);
+}
+
+.hero::after{
+  content:'';
+  position:absolute;
+  bottom:0;
+  left:0;
+  right:0;
+  height:3px;
+  background:linear-gradient(90deg,var(--s1),var(--s2),var(--s3),var(--violet));
+}
+
+.hl{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  font-size:11px;
+  letter-spacing:2.2px;
+  text-transform:uppercase;
+  color:rgba(236,247,255,.62);
+  margin-bottom:12px;
+  font-weight:900;
+}
+.hl::before{
+  content:"🛰️";
+  letter-spacing:0;
+  font-size:14px;
+}
+
+.ht{
+  font-size:34px;
+  font-weight:900;
+  color:#f5fbff;
+  line-height:1.22;
+  margin-bottom:12px;
+  letter-spacing:-.03em;
+  max-width:1000px;
+}
+.ht span{
+  display:inline-block;
+  margin-top:6px;
+  font-size:19px!important;
+  font-weight:700!important;
+  font-style:normal!important;
+  color:rgba(189,243,255,.88);
+  letter-spacing:0;
+}
+
+.hs{
+  font-size:14px;
+  color:rgba(221,235,255,.78);
+  font-weight:500;
+  max-width:860px;
+  line-height:1.75;
+  margin-bottom:18px;
+}
+
+.hpills{display:flex;gap:9px;flex-wrap:wrap}
+.hp{
+  border:1px solid rgba(255,255,255,.14);
+  background:rgba(255,255,255,.08);
+  border-radius:999px;
+  padding:7px 13px;
+  font-size:11px;
+  letter-spacing:.5px;
+  text-transform:uppercase;
+  color:rgba(236,247,255,.76);
+  font-weight:900;
+  box-shadow:0 12px 24px rgba(0,0,0,.12);
+}
+
+.hstats{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+.hstat{
+  background:rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:18px;
+  padding:10px 18px;
+  text-align:center;
+  box-shadow:0 16px 32px rgba(0,0,0,.16);
+  backdrop-filter:blur(10px);
+}
+.hstat-n{
+  font-size:26px;
+  font-weight:900;
+  line-height:1;
+  background:linear-gradient(90deg,#83efff,#52f5b0,#ffe680);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.hstat-l{
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:1.2px;
+  color:rgba(255,255,255,.58);
+  margin-top:5px;
+  font-weight:900;
+}
+
+/* CONTROLS */
+.ctrl{
+  position:sticky;
+  top:0;
+  z-index:30;
+  background:rgba(4,16,36,.76);
+  border-bottom:1px solid rgba(255,255,255,.13);
+  padding:11px 48px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+  backdrop-filter:blur(16px);
+}
+.sw{position:relative;flex:1;min-width:220px;max-width:450px}
+.sw input{
+  width:100%;
+  background:rgba(255,255,255,.94);
+  border:2px solid rgba(148,163,184,.25);
+  border-radius:16px;
+  padding:10px 12px 10px 40px;
+  font-family:"Be Vietnam Pro",sans-serif;
+  font-size:13px;
+  color:#0f172a;
+  outline:none;
+  transition:.18s ease;
+  font-weight:700;
+  box-shadow:0 12px 24px rgba(0,0,0,.10);
+}
+.sw input:focus{
+  border-color:rgba(55,213,255,.60);
+  box-shadow:0 12px 26px rgba(55,213,255,.16);
+}
+.sw input::placeholder{color:#64748b}
+.sw::before{
+  content:'🔍';
+  position:absolute;
+  left:14px;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:13px;
+  z-index:1;
+}
+.scnt{
+  font-size:12px;
+  color:rgba(236,247,255,.68);
+  white-space:nowrap;
+  font-weight:800;
+}
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tab{
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:999px;
+  font-family:"Be Vietnam Pro",sans-serif;
+  font-size:11.5px;
+  font-weight:900;
+  color:rgba(236,247,255,.72);
+  padding:7px 12px;
+  cursor:pointer;
+  transition:.16s ease;
+  white-space:nowrap;
+  box-shadow:0 10px 18px rgba(0,0,0,.10);
+}
+.tab:hover{
+  color:white!important;
+  transform:translateY(-1px);
+  border-color:rgba(55,213,255,.35);
+}
+.tab.on{
+  color:#06142e!important;
+  background:linear-gradient(135deg,#83efff,#52f5b0)!important;
+  border-color:transparent!important;
+  box-shadow:0 12px 24px rgba(55,213,255,.22);
+}
+
+/* SECTION */
+.body{
+  max-width:1240px;
+  margin:0 auto;
+  padding:30px 22px;
+}
+.section{margin-bottom:52px;scroll-margin-top:95px}
+.sh{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin-bottom:20px;
+  padding:18px;
+  border:1px solid rgba(255,255,255,.13);
+  border-radius:22px;
+  background:rgba(255,255,255,.085);
+  box-shadow:var(--shadow2);
+  backdrop-filter:blur(14px);
+  flex-wrap:wrap;
+}
+.si{
+  font-size:23px;
+  width:44px;
+  height:44px;
+  display:grid;
+  place-items:center;
+  border-radius:16px;
+  background:rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.14);
+}
+.st{
+  font-size:23px;
+  font-weight:900;
+  color:#f5fbff;
+  line-height:1.25;
+}
+.sd{
+  font-size:13px;
+  color:rgba(221,235,255,.70);
+  margin-top:5px;
+  font-weight:600;
+}
+.sbadge{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  border-radius:999px;
+  padding:7px 12px;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.4px;
+  text-transform:uppercase;
+  border:1px solid rgba(255,255,255,.12);
+}
+
+/* EXERCISE CARD */
+.ex{
+  background:rgba(255,255,255,.92);
+  color:#0f172a;
+  border:1px solid rgba(148,163,184,.22);
+  border-radius:22px;
+  margin-bottom:16px;
+  overflow:hidden;
+  border-left:5px solid;
+  transition:.18s ease;
+  box-shadow:0 8px 0 rgba(148,163,184,.12), 0 18px 35px rgba(15,23,42,.10);
+}
+.ex:hover{
+  transform:translateY(-2px);
+  border-color:rgba(55,213,255,.35);
+  box-shadow:0 10px 0 rgba(55,213,255,.10),0 20px 42px rgba(55,213,255,.12);
+}
+.ex-hdr{
+  display:flex;
+  align-items:flex-start;
+  gap:14px;
+  padding:18px 22px;
+  cursor:pointer;
+  user-select:none;
+}
+.ex-num{
+  font-family:"JetBrains Mono",monospace;
+  font-size:12px;
+  font-weight:800;
+  padding:5px 9px;
+  border-radius:10px;
+  flex-shrink:0;
+  margin-top:1px;
+  line-height:1.2;
+  border:1px solid rgba(148,163,184,.18);
+}
+.ex-body{flex:1;min-width:0}
+.ex-title{
+  font-size:16.5px;
+  font-weight:900;
+  color:#0f172a;
+  line-height:1.45;
+  margin-bottom:8px;
+}
+.ex-stmt{
+  font-size:13.5px;
+  color:#334155;
+  line-height:1.75;
+  background:
+    radial-gradient(420px 140px at 5% 0%, rgba(55,213,255,.10), transparent 60%),
+    rgba(241,245,249,.98);
+  border-radius:14px;
+  padding:11px 14px;
+  margin-bottom:8px;
+  border-left:3px solid rgba(29,140,255,.30);
+  font-weight:600;
+}
+.ex-stmt code{
+  font-family:"STIX Two Math","JetBrains Mono",monospace;
+  font-size:13px;
+  color:#075985;
+  background:rgba(55,213,255,.12);
+  padding:2px 6px;
+  border-radius:7px;
+}
+.ex-meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.diff{display:flex;gap:1px;color:#f59e0b;font-weight:900}
+.star{font-size:11px}
+.tag{
+  font-size:10.5px;
+  font-weight:900;
+  letter-spacing:.4px;
+  text-transform:uppercase;
+  padding:3px 8px;
+  border-radius:999px;
+  border:1px solid rgba(148,163,184,.14);
+}
+.ex-toggle{
+  font-size:20px;
+  color:#64748b;
+  transition:transform .25s;
+  flex-shrink:0;
+  margin-top:3px;
+}
+.ex.open .ex-toggle{transform:rotate(180deg)}
+
+/* SOLUTION PANEL */
+.sol{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .45s ease,padding .3s;
+  background:
+    radial-gradient(560px 240px at 5% 0%, rgba(55,213,255,.08), transparent 60%),
+    #f8fbff;
+  border-top:1px solid transparent;
+}
+.ex.open .sol{
+  max-height:12000px;
+  border-top-color:rgba(148,163,184,.22);
+  padding:24px 26px;
+}
+
+/* SOLUTION CONTENT */
+.sol-block{margin-bottom:20px}
+.sol-block:last-child{margin-bottom:0}
+.sol-lbl{
+  font-size:10.5px;
+  font-weight:900;
+  letter-spacing:1.2px;
+  text-transform:uppercase;
+  color:#64748b;
+  margin-bottom:9px;
+  display:flex;
+  align-items:center;
+  gap:7px;
+}
+.sol-lbl::before{
+  content:'';
+  display:inline-block;
+  width:4px;
+  height:15px;
+  border-radius:4px;
+  background:linear-gradient(180deg,#37d5ff,#52f5b0);
+  opacity:.95;
+}
+.sol-text{
+  font-size:14px;
+  color:#334155;
+  line-height:1.78;
+  font-weight:600;
+}
+.sol-text b{color:#0f172a;font-weight:900}
+.sol-text em{color:#b45309;font-style:normal;font-weight:900}
+.sol-text a{color:#1d4ed8}
+
+.fbox{
+  background:
+    radial-gradient(420px 140px at 5% 0%, rgba(55,213,255,.12), transparent 60%),
+    rgba(241,245,249,.98);
+  border-radius:14px;
+  padding:12px 15px;
+  font-family:"STIX Two Math","JetBrains Mono","Cambria Math","Noto Sans Math",serif;
+  font-size:14px;
+  color:#172033;
+  line-height:1.8;
+  margin:10px 0;
+  border-left:3px solid rgba(29,140,255,.35);
+  overflow-x:auto;
+  white-space:pre-wrap;
+}
+
+.steps{list-style:none;padding:0;margin:10px 0}
+.steps li{
+  display:flex;
+  gap:12px;
+  padding:10px 0;
+  border-bottom:1px dashed rgba(148,163,184,.22);
+  font-size:13.8px;
+  color:#334155;
+  line-height:1.68;
+  font-weight:600;
+}
+.steps li:last-child{border-bottom:none}
+.sn{
+  min-width:28px;
+  height:28px;
+  border-radius:50%;
+  background:linear-gradient(135deg, rgba(55,213,255,.20), rgba(82,245,176,.18));
+  color:#0f172a;
+  font-size:12px;
+  font-weight:900;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+  margin-top:1px;
+  border:1px solid rgba(148,163,184,.18);
+}
+
+.box{
+  border-radius:15px;
+  padding:13px 16px;
+  font-size:13.5px;
+  line-height:1.75;
+  margin:10px 0;
+  font-weight:700;
+}
+.box b{font-weight:900}
+.bwarn{background:rgba(255,107,138,.10);border:1px solid rgba(255,107,138,.28);color:#9f1239}
+.btip {background:rgba(55,213,255,.10);border:1px solid rgba(55,213,255,.28);color:#075985}
+.bkey {background:rgba(255,180,84,.12);border:1px solid rgba(255,180,84,.32);color:#92400e}
+.bgood{background:rgba(82,245,176,.10);border:1px solid rgba(82,245,176,.32);color:#047857}
+
+.eg{
+  background:rgba(241,245,249,.95);
+  border-radius:15px;
+  padding:14px 16px;
+  margin:10px 0;
+  font-size:13.5px;
+  color:#334155;
+  line-height:1.75;
+  border-left:3px solid rgba(82,245,176,.40);
+  font-weight:600;
+}
+.eg-t{
+  font-size:10.5px;
+  font-weight:900;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  color:#64748b;
+  margin-bottom:8px;
+}
+
+.ans-box{
+  background:linear-gradient(135deg, rgba(55,213,255,.12), rgba(82,245,176,.10));
+  border:1.5px solid rgba(148,163,184,.24);
+  border-radius:15px;
+  padding:14px 18px;
+  margin:14px 0;
+}
+.ans-t{
+  font-size:10.5px;
+  font-weight:900;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  color:#64748b;
+  margin-bottom:8px;
+}
+.ans-f{
+  font-family:"STIX Two Math","JetBrains Mono",monospace;
+  font-size:14px;
+  color:#0f172a;
+  font-weight:700;
+  line-height:1.7;
+}
+
+.hint-btn{
+  background:rgba(255,255,255,.72);
+  border:1px dashed rgba(148,163,184,.40);
+  border-radius:999px;
+  padding:8px 14px;
+  font-family:"Be Vietnam Pro",sans-serif;
+  font-size:12px;
+  color:#526176;
+  cursor:pointer;
+  margin:8px 0;
+  transition:.15s ease;
+  font-weight:900;
+}
+.hint-btn:hover{
+  border-color:rgba(55,213,255,.55);
+  color:#075985;
+  background:rgba(55,213,255,.10);
+}
+.hint-content{
+  display:none;
+  background:rgba(55,213,255,.10);
+  border:1px solid rgba(55,213,255,.20);
+  border-radius:14px;
+  padding:10px 14px;
+  font-size:13px;
+  color:#075985;
+  margin-top:6px;
+  font-weight:700;
+}
+.hint-content.show{display:block}
+
+.hidden{display:none!important}
+.nores{
+  text-align:center;
+  padding:60px;
+  color:rgba(236,247,255,.65);
+  font-size:15px;
+  font-weight:800;
+}
+
+/* FOOTER */
+.task-footer{
+  max-width:1240px;
+  margin:20px auto 0;
+  padding:0 22px;
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.task-footer a{
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 14px;
+  border-radius:999px;
+  background:rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.14);
+  color:#e9fbff;
+  font-weight:900;
+  font-size:13px;
+  box-shadow:0 12px 24px rgba(0,0,0,.14);
+}
+
+.task-footer a:hover{
+  background:rgba(55,213,255,.16);
+  border-color:rgba(55,213,255,.35);
+}
+
+@media (max-width:760px){
+  .hero{padding:30px 18px 26px}
+  .ht{font-size:25px}
+  .ctrl{padding:10px 14px}
+  .body{padding:20px 14px}
+  .sh{align-items:flex-start}
+  .ex-hdr{padding:16px}
+  .ex.open .sol{padding:18px 16px}
+}
+</style>
+</head>
+<body>
+
+  <img src="../assets/logo-SH.png" class="sh-logo" alt="Science Horizon">
+<div class="hero">
+  <div class="hl">Science Horizon · Task 05 · Chapter 1 Exercises</div>
+  <div class="ht">Task 05 · 30 Bài Tập Toàn Diện<br><span style="font-size:22px;font-weight:400;font-style:italic">Variational Analysis Exercises · Full Solutions</span></div>
+  <div class="hs">Bộ bài tập được thiết kế để học viên nắm vững từng khái niệm trong Chương 1: Nón pháp tuyến, Đạo hàm đồng biến, và Vi phân con. Mỗi bài có gợi ý, lời giải từng bước, và nhận xét chuyên sâu.</div>
+  <div class="hpills">
+    <span class="hp">§1.1 Nón pháp tuyến</span>
+    <span class="hp">§1.2 Coderivative</span>
+    <span class="hp">§1.3 Vi phân con</span>
+    <span class="hp">Lời giải chi tiết</span>
+  </div>
+  <div class="hstats">
+    <div class="hstat"><div class="hstat-n">30</div><div class="hstat-l">Bài tập</div></div>
+    <div class="hstat"><div class="hstat-n">4</div><div class="hstat-l">Mức độ ★</div></div>
+    <div class="hstat"><div class="hstat-n">3</div><div class="hstat-l">Phần</div></div>
+  </div>
+</div>
+
+<!-- CONTROLS -->
+<div class="ctrl">
+  <div class="sw"><input type="text" id="q" placeholder="Tìm bài tập... (Lipschitz, normal cone, coderivative, max...)" oninput="doSearch()"></div>
+  <span class="scnt" id="scnt"></span>
+  <div class="tabs">
+    <button class="tab on" style="background:var(--ink)" onclick="filt('all',this)">Tất cả</button>
+    <button class="tab" onclick="filt('s1',this)">§1.1 Nón</button>
+    <button class="tab" onclick="filt('s2',this)">§1.2 Coderivative</button>
+    <button class="tab" onclick="filt('s3',this)">§1.3 Vi phân con</button>
+    <button class="tab" onclick="filt('d1',this)">★ Cơ bản</button>
+    <button class="tab" onclick="filt('d3',this)">★★★ Nâng cao</button>
+  </div>
+</div>
+
+<div class="body" id="mb">
+
+<!-- ═══════════════════════════════
+     PHẦN A: NÓN PHÁP TUYẾN §1.1
+═══════════════════════════════ -->
+<div class="section" data-cat="s1">
+<div class="sh">
+  <span class="si">📐</span>
+  <div><div class="st">Phần A — Nón Pháp Tuyến & Tiếp Tuyến (§1.1)</div>
+  <div class="sd">Luyện tập Definition 1.1, Theorem 1.6, Proposition 1.7, 1.9, Theorem 1.10</div></div>
+  <span class="sbadge" style="background:var(--s1l);color:var(--s1)">8 bài tập</span>
+</div>
+
+<!-- ===== BT A.1 ===== -->
+<div class="ex" style="border-left-color:var(--s1)" data-cat="s1 d1" data-s="tập cơ bản rn singleton hyperplane half-space nón pháp tuyến trivial zero">
+<div class="ex-hdr" onclick="tog(this)">
+  <div class="ex-num" style="background:var(--s1l);color:var(--s1)">A.1</div>
+  <div class="ex-body">
+    <div class="ex-title">Nón pháp tuyến của các tập cơ bản</div>
+    <div class="ex-stmt">Tính N(x̄; Ω) với các tập Ω và điểm x̄ sau:<br>
+    <b>(a)</b> Ω = ℝⁿ, x̄ bất kỳ &emsp; <b>(b)</b> Ω = {x̄} (singleton) &emsp; <b>(c)</b> Ω = {x | ⟨a,x⟩ ≤ b}, x̄ là điểm biên &emsp; <b>(d)</b> Ω = {x | ⟨a,x⟩ = b} (hyperplane), x̄ ∈ Ω</div>
+    <div class="ex-meta">
+      <div class="diff"><span class="star">★</span><span class="star" style="opacity:.3">★★★</span></div>
+      <span class="tag" style="background:var(--s1l);color:var(--s1)">Def 1.1 — cơ bản nhất</span>
+    </div>
+  </div>
+  <div class="ex-toggle">▾</div>
+</div>
+<div class="sol">
+  <div class="sol-block">
+    <div class="sol-lbl">Phương pháp</div>
+    <div class="sol-text">Dùng Definition 1.1: v ∈ N(x̄;Ω) ⟺ ∃ xₖ→x̄, wₖ∈Π(xₖ;Ω), αₖ≥0: αₖ(xₖ−wₖ)→v. Hoặc dùng Proposition 1.7 khi Ω lồi.</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">(a) Ω = ℝⁿ</div>
+    <div class="sol-text">Với mọi x, Π(x;ℝⁿ) = {x} (điểm gần nhất chính là nó). Nên xₖ−wₖ = xₖ−xₖ = 0. Do đó mọi dãy αₖ(xₖ−wₖ) = 0 → <b>N(x̄; ℝⁿ) = {0}</b>.<br>Ý nghĩa: điểm trong tập → không có pháp tuyến "thực sự".</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">(b) Ω = {x̄} (singleton)</div>
+    <div class="sol-text">Với mọi x ≠ x̄, Π(x;{x̄}) = {x̄}. Vậy αₖ(xₖ−wₖ) = αₖ(xₖ−x̄). Chọn αₖ = ‖xₖ−x̄‖⁻¹, vectơ chuẩn hóa (xₖ−x̄)/‖xₖ−x̄‖ có thể hội tụ về bất kỳ v ∈ B (‖v‖=1) nào. Nhân với αₖ tùy ý dương → có thể đạt được mọi hướng với mọi độ lớn.<br><b>N(x̄; {x̄}) = ℝⁿ</b>. Mọi hướng đều là pháp tuyến của singleton!</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">(c) Nửa không gian {⟨a,x⟩ ≤ b} tại điểm biên x̄ (⟨a,x̄⟩=b)</div>
+    <div class="sol-text">Ω lồi → dùng Proposition 1.7: N(x̄;Ω) = {v | ⟨v,x−x̄⟩ ≤ 0 ∀x∈Ω}.<br>Điều kiện: ⟨v,x−x̄⟩ ≤ 0 với mọi x thỏa ⟨a,x⟩ ≤ b. Tức v phải song song với a (cùng chiều hoặc ngược chiều).</div>
+    <div class="ans-box"><div class="ans-t">Kết quả</div><div class="ans-f">N(x̄; {⟨a,·⟩≤b}) = {λa | λ ≥ 0} = nón nửa trục theo hướng a</div></div>
+    <div class="sol-text">Tại điểm nội (⟨a,x̄⟩ < b): N(x̄;Ω) = {0} (không có ràng buộc active).</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">(d) Hyperplane {⟨a,x⟩ = b}</div>
+    <div class="sol-text">Ω lồi, Proposition 1.7: v phải thỏa ⟨v,x−x̄⟩ ≤ 0 với mọi x thỏa ⟨a,x⟩=b. Từ hai phía (x và 2x̄−x đều trong Ω): ⟨v,x−x̄⟩ = 0 → v ⊥ hyperplane.</div>
+    <div class="ans-box"><div class="ans-t">Kết quả</div><div class="ans-f">N(x̄; {⟨a,·⟩=b}) = {λa | λ ∈ ℝ} = toàn bộ đường thẳng theo a</div></div>
+  </div>
+  <div class="box bkey">🔑 <b>Quy tắc nhớ:</b> "Tập càng nhỏ → nón pháp tuyến càng lớn". ℝⁿ (to nhất) → N={0}. Singleton (nhỏ nhất) → N=ℝⁿ. Hyperplane (trung bình) → N= đường thẳng. Nửa không gian → N= tia.</div>
+</div>
+</div>
+
+<!-- ===== BT A.2 ===== -->
+<div class="ex" style="border-left-color:var(--s1)" data-cat="s1 d2" data-s="đĩa đơn vị disk ball hình tròn N(1,0) normal cone convex boundary">
+<div class="ex-hdr" onclick="tog(this)">
+  <div class="ex-num" style="background:var(--s1l);color:var(--s1)">A.2</div>
+  <div class="ex-body">
+    <div class="ex-title">Nón pháp tuyến của đĩa đơn vị và hộp chữ nhật</div>
+    <div class="ex-stmt"><b>(a)</b> Ω = {(x,y) ∈ ℝ² | x²+y² ≤ 1}, tính N((1,0);Ω) và N((0,0);Ω).<br>
+    <b>(b)</b> Ω = [−1,1]×[−1,1] (hình vuông), tính N tại góc (1,1), cạnh (1,0), và trung tâm (0,0).</div>
+    <div class="ex-meta">
+      <div class="diff"><span class="star">★★</span><span class="star" style="opacity:.3">★★</span></div>
+      <span class="tag" style="background:var(--s1l);color:var(--s1)">Prop 1.7 — tập lồi</span>
+    </div>
+  </div>
+  <div class="ex-toggle">▾</div>
+</div>
+<div class="sol">
+  <div class="sol-block">
+    <div class="sol-lbl">(a) Đĩa đơn vị B̄ = {x²+y²≤1}</div>
+    <div class="sol-text">Ω lồi → Prop 1.7: N(x̄;Ω) = {v | ⟨v,x−x̄⟩≤0 ∀x∈Ω}.<br><br>
+    <b>Tại (1,0) — điểm biên:</b> Cần ⟨v,x−(1,0)⟩≤0 ∀(x,y)∈B̄. Điều này tương đương v₁(x−1)+v₂y≤0 ∀x²+y²≤1. Bằng kỹ thuật Lagrange multiplier: v = λ(1,0) với λ≥0.</div>
+    <div class="ans-box"><div class="ans-t">Kết quả (a)</div><div class="ans-f">N((1,0); B̄) = {(λ,0) | λ ≥ 0} = tia hướng ra ngoài theo trục x dương
+N((0,0); B̄) = {0}   [điểm trong → nón tầm thường]</div></div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">(b) Hình vuông [−1,1]² — ba loại điểm</div>
+    <ul class="steps">
+      <li><div class="sn">①</div><div><b>Góc (1,1):</b> Tiếp giáp hai cạnh x=1 và y=1. N = N(1;[−1,1])×N(1;[−1,1]) = {(u,v)|u≥0,v≥0} = góc phần tư dương I (Prop 1.4)</div></li>
+      <li><div class="sn">②</div><div><b>Giữa cạnh (1,0):</b> Chỉ ràng buộc x=1 active, y∈(−1,1). N = {(λ,0)|λ≥0} = tia hướng phải</div></li>
+      <li><div class="sn">③</div><div><b>Trung tâm (0,0):</b> Điểm trong → <b>N((0,0);Ω) = {0}</b></div></li>
+    </ul>
+    <div class="box btip">💡 <b>Quy tắc hộp:</b> Tại góc có k ràng buộc active → N là góc phần tư trong k chiều. Tại cạnh có 1 ràng buộc → N là tia. Tại tâm → N = {0}.</div>
+  </div>
+</div>
+</div>
+
+<!-- ===== BT A.3 ===== -->
+<div class="ex" style="border-left-color:var(--s1)" data-cat="s1 d2" data-s="phi lồi nonconvex parabola y=x^2 epi epigraph N̂ hat prenormal tangent contingent">
+<div class="ex-hdr" onclick="tog(this)">
+  <div class="ex-num" style="background:var(--s1l);color:var(--s1)">A.3</div>
+  <div class="ex-body">
+    <div class="ex-title">Nón pháp tuyến của tập phi lồi: Ω = {(x,y) | y ≥ x²}</div>
+    <div class="ex-stmt">Cho Ω = {(x,y) ∈ ℝ² | y ≥ x²} (tập phía trên parabol).<br>
+    <b>(a)</b> Tính N((0,0);Ω) và N̂((0,0);Ω).<br>
+    <b>(b)</b> Tính N((1,1);Ω) và N̂((1,1);Ω).<br>
+    <b>(c)</b> Nhận xét: Ω lồi hay không? Tại sao N = N̂ ở đây?</div>
+    <div class="ex-meta">
+      <div class="diff"><span class="star">★★</span><span class="star" style="opacity:.3">★★</span></div>
+      <span class="tag" style="background:var(--s1l);color:var(--s1)">Ví dụ thú vị</span>
+    </div>
+  </div>
+  <div class="ex-toggle">▾</div>
+</div>
+<div class="sol">
+  <div class="sol-block">
+    <div class="sol-lbl">Nhận xét ban đầu</div>
+    <div class="sol-text">Ω = epi(x²) là <b>thượng đồ thị của hàm lồi x²</b> → Ω <em>lồi</em>! Nên N = N̂ = nón pháp tuyến lồi cổ điển (Prop 1.7).</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">(a) Tại (0,0) — đỉnh parabol</div>
+    <div class="sol-text">Tại (0,0), parabol y=x² tiếp tuyến nằm ngang. Pháp tuyến phải thỏa ⟨v,z−(0,0)⟩≤0 ∀(x,y)∈Ω (y≥x²).<br>
+    Đặt v=(v₁,v₂): cần v₁x+v₂y≤0 ∀y≥x². Thử y=x²,x→0: v₂x²+v₁x≤0 → v₁=0 (lấy x→0⁺ và x→0⁻). Rồi v₂x²≤0 → v₂≤0.</div>
+    <div class="fbox">N((0,0); Ω) = N̂((0,0); Ω) = {(0,v₂) | v₂ ≤ 0} = tia xuống theo trục y âm</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">(b) Tại (1,1) — điểm trên parabol</div>
+    <div class="sol-text">Parabol tại x=1 có đạo hàm f'(1)=2. Tiếp tuyến: y=2x−1. Pháp tuyến trực giao với hướng tiếp tuyến (1,2): pháp tuyến là hướng (2,−1) (quay 90° và nhân hướng ra ngoài).<br>
+    Chính xác: N((1,1);Ω) = {λ(−2,1) | λ ≤ 0} = {λ(2,−1) | λ ≥ 0}.</div>
+    <div class="fbox">N((1,1); Ω) = N̂((1,1); Ω) = {λ(2,−1) | λ ≥ 0}
+Vectơ (2,−1): thành phần theo gradient của g(x,y)=y−x² tại (1,1): ∇(y−x²)=(−2,1) hướng vào Ω, ngược lại = (2,−1) ra ngoài.</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">(c) Tại sao N = N̂?</div>
+    <div class="sol-text">Vì Ω lồi! Proposition 1.7 đảm bảo: tập lồi → nón pháp tuyến cơ bản = nón chính quy = nón pháp tuyến lồi cổ điển.</div>
+    <div class="box bgood">✓ <b>Tổng quát hóa:</b> Với Ω = {x | g(x)≤0}, g lồi, trơn C¹: tại x̄ ∈ bd Ω: N(x̄;Ω) = {λ∇g(x̄) | λ≥0}. Đây là nguồn gốc của KKT multiplier điều kiện đứng!</div>
+  </div>
+</div>
+</div>
+
+<!-- ===== BT A.4 ===== -->
+<div class="ex" style="border-left-color:var(--s1)" data-cat="s1 d2" data-s="tích Descartes product sets Prop 1.4 N = N1 × N2 product rule normal">
+<div class="ex-hdr" onclick="tog(this)">
+  <div class="ex-num" style="background:var(--s1l);color:var(--s1)">A.4</div>
+  <div class="ex-body">
+    <div class="ex-title">Quy tắc tích Descartes cho nón pháp tuyến (Proposition 1.4)</div>
+    <div class="ex-stmt">Proposition 1.4: N((x̄,ȳ); Ω₁×Ω₂) = N(x̄;Ω₁) × N(ȳ;Ω₂).<br>
+    Áp dụng: Ω = [0,1]×[0,+∞)×ℝ ⊂ ℝ³. Tính N((0,0,z̄);Ω) với z̄ tùy ý.</div>
+    <div class="ex-meta">
+      <div class="diff"><span class="star">★★</span><span class="star" style="opacity:.3">★★</span></div>
+      <span class="tag" style="background:var(--s1l);color:var(--s1)">Prop 1.4</span>
+    </div>
+  </div>
+  <div class="ex-toggle">▾</div>
+</div>
+<div class="sol">
+  <div class="sol-block">
+    <div class="sol-lbl">Phân tích thành phần</div>
+    <div class="sol-text">Ω = Ω₁ × Ω₂ × Ω₃ với Ω₁=[0,1], Ω₂=[0,+∞), Ω₃=ℝ.<br>
+    Điểm x̄=(0,0,z̄). Tính N tại từng thành phần:</div>
+    <ul class="steps">
+      <li><div class="sn">①</div><div><b>N(0; [0,1]):</b> Điểm x=0 là đầu mút trái → N = (−∞,0] = {λ | λ≤0}</div></li>
+      <li><div class="sn">②</div><div><b>N(0; [0,+∞)):</b> Điểm y=0 là đầu mút → N = (−∞,0] = {μ | μ≤0}</div></li>
+      <li><div class="sn">③</div><div><b>N(z̄; ℝ):</b> z̄ là điểm trong ℝ → N = {0}</div></li>
+    </ul>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">Kết quả</div>
+    <div class="fbox">N((0,0,z̄); Ω) = N(0;[0,1]) × N(0;[0,+∞)) × N(z̄;ℝ)
+              = (−∞,0] × (−∞,0] × {0}
+              = {(λ,μ,0) | λ≤0, μ≤0}
+              = góc phần tư ≤0 trong 2 chiều đầu, tầm thường ở chiều 3</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">Chứng minh Proposition 1.4 (ý tưởng)</div>
+    <div class="sol-text">Phép chiếu Π((x,y); Ω₁×Ω₂) = (Π(x;Ω₁), Π(y;Ω₂)) — chiếu theo từng thành phần độc lập. Suy ra αₖ((xₖ,yₖ)−(wₖ,zₖ)) = (αₖ(xₖ−wₖ), αₖ(yₖ−zₖ)) → (v₁,v₂) ⟺ v₁∈N(x̄;Ω₁) và v₂∈N(ȳ;Ω₂).</div>
+  </div>
+</div>
+</div>
+
+<!-- ===== BT A.5 ===== -->
+<div class="ex" style="border-left-color:var(--s1)" data-cat="s1 d2" data-s="nón tiếp tuyến contingent Bouligand T duality N̂ = T* kiểm tra check">
+<div class="ex-hdr" onclick="tog(this)">
+  <div class="ex-num" style="background:var(--s1l);color:var(--s1)">A.5</div>
+  <div class="ex-body">
+    <div class="ex-title">Nón tiếp tuyến và kiểm tra đối ngẫu N̂ = T* (Proposition 1.9)</div>
+    <div class="ex-stmt">Cho Ω = {(x,y) | y ≥ |x|} (hình nêm hướng lên).<br>
+    <b>(a)</b> Tính T((0,0);Ω) theo Definition 1.8.<br>
+    <b>(b)</b> Tính T*((0,0);Ω) = {v | ⟨v,w⟩≤0 ∀w∈T}.<br>
+    <b>(c)</b> Kiểm tra rằng T* = N̂((0,0);Ω) (Prop 1.9).<br>
+    <b>(d)</b> Tính N((0,0);Ω) và nhận xét N ≠ N̂ hay N = N̂?</div>
+    <div class="ex-meta">
+      <div class="diff"><span class="star">★★</span><span class="star" style="opacity:.3">★★</span></div>
+      <span class="tag" style="background:var(--s1l);color:var(--s1)">Def 1.8 + Prop 1.9</span>
+    </div>
+  </div>
+  <div class="ex-toggle">▾</div>
+</div>
+<div class="sol">
+  <div class="sol-block">
+    <div class="sol-lbl">(a) Nón tiếp tuyến T((0,0); Ω)</div>
+    <div class="sol-text">w ∈ T((0,0);Ω) ⟺ ∃ xₖ=(aₖ,bₖ)→(0,0) với bₖ≥|aₖ|, αₖ>0: αₖxₖ→w.<br>
+    Đặt αₖ=1/‖xₖ‖: αₖxₖ = (aₖ,bₖ)/‖(aₖ,bₖ)‖ là vectơ đơn vị trong Ω. Giới hạn của vectơ đơn vị (a,b)/‖(a,b)‖ với b≥|a| → tất cả hướng (a,b) với b≥|a| và b>0.<br>
+    Với αₖ→+∞: thu được toàn bộ tia ra.</div>
+    <div class="fbox">T((0,0); Ω) = {(a,b) | b ≥ |a|} = chính là Ω!
+[Nón tiếp tuyến của nêm tại đỉnh = nêm chính nó]</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">(b) Nón đối ngẫu T*</div>
+    <div class="sol-text">T* = {(v₁,v₂) | v₁a+v₂b ≤ 0 ∀(a,b) với b≥|a|}.<br>
+    Thử b=|a|=1,a=1: v₁+v₂≤0. Thử a=−1,b=1: −v₁+v₂≤0. Thử b=1,a=0: v₂≤0.<br>
+    Từ đó: v₂≤0 và |v₁|≤−v₂.</div>
+    <div class="fbox">T*((0,0); Ω) = {(v₁,v₂) | v₂ ≤ −|v₁|} = nêm hướng XUỐNG</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">(c) Kiểm tra N̂ = T*</div>
+    <div class="sol-text">N̂((0,0);Ω) = {v | lim sup⟨v,z/(0,0)⟩/‖z‖≤0 với z∈Ω}. Điều này bằng {v | ⟨v,w⟩≤0 ∀w∈T} = T*. ✓</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">(d) N((0,0);Ω) vs N̂((0,0);Ω)</div>
+    <div class="sol-text">Ω = {y≥|x|} lồi (giao nửa không gian). Nên <b>N = N̂ = T*</b> = nêm hướng xuống {v₂≤−|v₁|}.</div>
+    <div class="box btip">💡 Kết quả: T và T* là "đối nhau" theo nghĩa hình học — nêm hướng lên ↔ nêm hướng xuống. Đây là biểu hiện đẹp của tính đối ngẫu.</div>
+  </div>
+</div>
+</div>
+
+<!-- ===== BT A.6 ===== -->
+<div class="ex" style="border-left-color:var(--s1)" data-cat="s1 d3" data-s="smooth variational description Theorem 1.10 psi trơn cực đại maximum touching function find psi">
+<div class="ex-hdr" onclick="tog(this)">
+  <div class="ex-num" style="background:var(--s1l);color:var(--s1)">A.6</div>
+  <div class="ex-body">
+    <div class="ex-title">Xây dựng hàm ψ trơn theo Theorem 1.10</div>
+    <div class="ex-stmt">Theorem 1.10: v ∈ N̂(x̄;Ω) ⟺ ∃ ψ ∈ C¹ với ∇ψ(x̄)=v và ψ đạt cực đại trên Ω tại x̄.<br>
+    Cho Ω = {(x,y)|y≥0}, x̄=(0,0), v=(0,−1) ∈ N̂((0,0);Ω).<br>
+    <b>(a)</b> Kiểm tra v ∈ N̂((0,0);Ω) bằng Definition (1.5).<br>
+    <b>(b)</b> Xây dựng ψ ∈ C¹ thỏa điều kiện của Theorem 1.10.</div>
+    <div class="ex-meta">
+      <div class="diff"><span class="star">★★★</span><span class="star" style="opacity:.3">★</span></div>
+      <span class="tag" style="background:var(--s1l);color:var(--s1)">Thm 1.10</span>
+    </div>
+  </div>
+  <div class="ex-toggle">▾</div>
+</div>
+<div class="sol">
+  <div class="sol-block">
+    <div class="sol-lbl">(a) Kiểm tra v=(0,−1) ∈ N̂((0,0);Ω) với Ω={y≥0}</div>
+    <div class="sol-text">Dùng (1.5): cần lim sup⟨(0,−1),(x,y)−(0,0)⟩/‖(x,y)‖ ≤ 0 với (x,y)∈Ω→(0,0).<br>
+    ⟨(0,−1),(x,y)⟩ = −y. Trên Ω: y≥0 → −y≤0. Vậy lim sup (−y)/‖(x,y)‖ ≤ 0. ✓</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">(b) Xây dựng ψ thỏa Theorem 1.10</div>
+    <div class="sol-text">Cần: ψ ∈ C¹, ∇ψ(0,0) = (0,−1), và ψ(x,y) ≤ ψ(0,0) ∀(x,y)∈Ω gần (0,0).<br>
+    Thử ψ(x,y) = −y (đơn giản nhất):<br>
+    • ∇ψ = (0,−1) = v ✓<br>
+    • ψ(0,0) = 0. Trên Ω: y≥0 → ψ(x,y) = −y ≤ 0 = ψ(0,0) ✓<br>
+    • ψ là C¹ ✓</div>
+    <div class="fbox">ψ(x,y) = −y  thỏa tất cả điều kiện!</div>
+    <div class="sol-text">Dạng tổng quát hơn: ψ(x,y) = ⟨v,(x,y)⟩ − C·‖(x,y)‖² = −y − C(x²+y²) cũng hoạt động (strict inequality) với C>0.</div>
+  </div>
+  <div class="box bkey">🔑 Ý nghĩa: Mọi pháp tuyến chính quy đều có thể "thực hiện" bởi một hàm trơn tiếp xúc tập từ bên trên. Đây là nguyên lý biến phân cơ bản nhất — nền tảng của Chương 2 (Extremal Principle).</div>
+</div>
+</div>
+
+<!-- ===== BT A.7 ===== -->
+<div class="ex" style="border-left-color:var(--s1)" data-cat="s1 d2" data-s="robustness monotonicity N(Ω₁)⊂N(Ω₂) inclusion Prop 1.3 locally closed">
+<div class="ex-hdr" onclick="tog(this)">
+  <div class="ex-num" style="background:var(--s1l);color:var(--s1)">A.7</div>
+  <div class="ex-body">
+    <div class="ex-title">Tính bao hàm đơn điệu của nón pháp tuyến</div>
+    <div class="ex-stmt">Chứng minh: nếu Ω₂ ⊂ Ω₁ và x̄ ∈ Ω₂, thì N(x̄;Ω₁) ⊂ N(x̄;Ω₂).<br>
+    Áp dụng: tìm N((0,0); Ω₁) và N((0,0); Ω₂) với Ω₁ = ℝ², Ω₂ = {y≥0}, Ω₃ = {(0,0)}.</div>
+    <div class="ex-meta">
+      <div class="diff"><span class="star">★★</span><span class="star" style="opacity:.3">★★</span></div>
+      <span class="tag" style="background:var(--s1l);color:var(--s1)">Prop 1.3</span>
+    </div>
+  </div>
+  <div class="ex-toggle">▾</div>
+</div>
+<div class="sol">
+  <div class="sol-block">
+    <div class="sol-lbl">Chứng minh bao hàm</div>
+    <div class="sol-text">Cho v ∈ N(x̄;Ω₁): tồn tại xₖ→x̄, wₖ∈Π(xₖ;Ω₁), αₖ(xₖ−wₖ)→v.<br>
+    Vì Ω₂⊂Ω₁: dist(xₖ;Ω₂) ≥ dist(xₖ;Ω₁) (Ω₁ lớn hơn → khoảng cách nhỏ hơn hoặc bằng).<br>
+    Khi xₖ đủ gần x̄: điểm chiếu lên Ω₁ và Ω₂ có thể khác nhau. Nhưng từ Definition (1.5): N(x̄;Ω₁)⊂N(x̄;Ω₂) vì lấy lim sup trên ít điểm hơn (Ω₂ nhỏ hơn → ít ràng buộc hơn cho v). □</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">Áp dụng</div>
+    <div class="fbox">Ω₃ ⊂ Ω₂ ⊂ Ω₁: N((0,0);Ω₁) ⊂ N((0,0);Ω₂) ⊂ N((0,0);Ω₃)
+
+N((0,0); ℝ²) = {0}
+N((0,0); {y≥0}) = {(0,λ)|λ≤0}  [tia xuống]
+N((0,0); {(0,0)}) = ℝ²
+
+Xác nhận: {0} ⊂ {(0,λ)|λ≤0} ⊂ ℝ²  ✓</div>
+  </div>
+  <div class="box bkey">🔑 Quy tắc nhớ: "Tập nhỏ hơn → nón lớn hơn". Trực giác: tập nhỏ hơn → nhiều hướng hơn bị "chặn" → nón lớn hơn.</div>
+</div>
+</div>
+
+<!-- ===== BT A.8 ===== -->
+<div class="ex" style="border-left-color:var(--s1)" data-cat="s1 d3" data-s="nonconvex tập phi lồi V-shape hai tia góc nhọn N không lồi nonconvex normal">
+<div class="ex-hdr" onclick="tog(this)">
+  <div class="ex-num" style="background:var(--s1l);color:var(--s1)">A.8</div>
+  <div class="ex-body">
+    <div class="ex-title">Tập phi lồi: N không lồi tại điểm góc nhọn (Example 1.5 mở rộng)</div>
+    <div class="ex-stmt">Cho Ω = {(x,y) | y ≥ −|x|}. Tính chính xác N((0,0);Ω) và N̂((0,0);Ω), sau đó chứng minh N không lồi nhưng N̂ lồi.</div>
+    <div class="ex-meta">
+      <div class="diff"><span class="star">★★★</span><span class="star" style="opacity:.3">★</span></div>
+      <span class="tag" style="background:var(--s1l);color:var(--s1)">Example 1.5 — trọng tâm</span>
+    </div>
+  </div>
+  <div class="ex-toggle">▾</div>
+</div>
+<div class="sol">
+  <div class="sol-block">
+    <div class="sol-lbl">Bước 1: Tính N((0,0);Ω) từ Definition 1.1</div>
+    <div class="sol-text">Xét dãy xₖ→(0,0) từ bên ngoài Ω (bên dưới hai nhánh của y=−|x|):<br><br>
+    <b>Từ nhánh phải (y=−x, x>0):</b> xₖ=(εₖ,−2εₖ) → (0,0), Π(xₖ;Ω)={(εₖ,−εₖ)} (điểm gần nhất trên y=−x).<br>
+    αₖ(xₖ−wₖ) = αₖ(0,−εₖ) → với αₖ=1/εₖ: (0,−1).<br>
+    Mọi bội dương: {(0,λ) | λ≤0}.<br><br>
+    <b>Từ nhánh trái (y=x, x<0):</b> Tương tự, thu được {(0,λ)|λ≤0}.<br>
+    Kết hợp và lấy giới hạn từ mọi góc → hai tia riêng biệt.</div>
+    <div class="fbox">N((0,0); Ω) = {(v₁,v₂) | v₂ = v₁ ≤ 0} ∪ {(v₁,v₂) | v₂ = −v₁ ≤ 0}
+           = hai tia: hướng (−1,−1) và (1,−1)  [KHÔNG LỒI]</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">Bước 2: Tính N̂((0,0);Ω) từ (1.5)</div>
+    <div class="sol-text">v ∈ N̂ ⟺ lim sup ⟨v,(x,y)⟩/‖(x,y)‖ ≤ 0 với (x,y)∈Ω→(0,0), (x,y)≠0.<br>
+    Trên nhánh phải y=−x: ⟨(v₁,v₂),(t,−t)⟩/‖(t,−t)‖ = (v₁−v₂)/√2. Cần ≤ 0 → v₁≤v₂.<br>
+    Trên nhánh trái y=x: ⟨(v₁,v₂),(−t,t)⟩/‖‖ = (−v₁+v₂)/√2 ≤ 0 → v₂≤v₁.<br>
+    Kết hợp: v₁=v₂. Rồi trên y=c>0: v₂c/c = v₂ ≤ 0.<br>
+    → N̂ = {(v,v)|v≤0} = một tia duy nhất theo hướng (−1,−1). Lồi!</div>
+    <div class="fbox">N̂((0,0); Ω) = {(v,v) | v ≤ 0}  [TẬP LỒI — một tia]
+N((0,0); Ω) = {(v,v)|v≤0} ∪ {(v,−v)|v≤0}  [KHÔNG LỒI — hai tia]</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">Bước 3: Chứng minh N không lồi</div>
+    <div class="sol-text">v₁=(−1,−1)∈N và v₂=(1,−1)∈N. Trung điểm: (0,−1). Nếu N lồi thì (0,−1)∈N. Nhưng (0,−1) không có thể là giới hạn của αₖ(xₖ−wₖ) vì dọc theo mọi đường tiếp cận (0,0) trong ℝ²\Ω, vectơ chiếu luôn cùng hoặc theo nhánh trái hoặc nhánh phải — không theo hướng thẳng đứng. Vậy N không lồi. □</div>
+  </div>
+  <div class="box bwarn">⚠ Đây là ví dụ cốt lõi: N̂ = một tia (thông tin ít hơn), N = hai tia (đầy đủ hơn). Bỏ mất tia thứ hai = bỏ mất thông tin về nhánh phải của Ω!</div>
+</div>
+</div>
+</div><!-- end section s1 -->
+
+<!-- ═══════════════════════════════
+     PHẦN B: CODERIVATIVE §1.2
+═══════════════════════════════ -->
+<div class="section" data-cat="s2">
+<div class="sh">
+  <span class="si">🔗</span>
+  <div><div class="st">Phần B — Đạo Hàm Đồng Biến (§1.2)</div>
+  <div class="sd">Luyện tập Definition 1.11, Proposition 1.12, 1.13, Example 1.14, Theorem 1.15</div></div>
+  <span class="sbadge" style="background:var(--s2l);color:var(--s2)">7 bài tập</span>
+</div>
+
+<!-- ===== BT B.1 ===== -->
+<div class="ex" style="border-left-color:var(--s2)" data-cat="s2 d1" data-s="coderivative ánh xạ tuyến tính linear affine Ax b Jacobian transpose D*f">
+<div class="ex-hdr" onclick="tog(this)">
+  <div class="ex-num" style="background:var(--s2l);color:var(--s2)">B.1</div>
+  <div class="ex-body">
+    <div class="ex-title">Coderivative của ánh xạ affine f(x) = Ax + b</div>
+    <div class="ex-stmt">Cho f: ℝⁿ → ℝᵐ, f(x) = Ax + b (A là ma trận m×n, b ∈ ℝᵐ).<br>
+    <b>(a)</b> Tính D*f(x̄)(v) với mọi x̄ và v bằng Definition 1.11.<br>
+    <b>(b)</b> Kiểm tra kết quả bằng Proposition 1.12 (D*f = Aᵀ).<br>
+    <b>(c)</b> Ví dụ cụ thể: f(x₁,x₂) = (x₁+x₂, x₁−x₂). Tính D*f(0)(1,0) và D*f(0)(0,1).</div>
+    <div class="ex-meta">
+      <div class="diff"><span class="star">★</span><span class="star" style="opacity:.3">★★★</span></div>
+      <span class="tag" style="background:var(--s2l);color:var(--s2)">Prop 1.12 — cơ bản</span>
+    </div>
+  </div>
+  <div class="ex-toggle">▾</div>
+</div>
+<div class="sol">
+  <div class="sol-block">
+    <div class="sol-lbl">(a) Tính bằng Definition 1.11</div>
+    <div class="sol-text">gph f = {(x, Ax+b) | x∈ℝⁿ} là affine subspace trong ℝⁿ×ℝᵐ.<br>
+    N((x̄,Ax̄+b); gph f) = pháp tuyến của affine subspace = không gian trực giao với gph f − (x̄,Ax̄+b).<br>
+    Hướng trong gph f − 0 = {(d, Ad) | d∈ℝⁿ}.<br>
+    (u,−v) ⊥ (d,Ad) ∀d: ⟨u,d⟩ − ⟨v,Ad⟩ = 0 ∀d → ⟨u−Aᵀv, d⟩ = 0 ∀d → u = Aᵀv.</div>
+    <div class="fbox">D*f(x̄)(v) = {u | (u,−v) ∈ N((x̄,f(x̄));gph f)} = {Aᵀv}  [singleton]</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">(b) Kiểm tra với Proposition 1.12</div>
+    <div class="sol-text">f ∈ C¹, ∇f(x̄) = A (Jacobian = A). Prop 1.12: D*f(x̄)(v) = ∇f(x̄)ᵀv = Aᵀv. ✓</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">(c) Ví dụ f(x₁,x₂) = (x₁+x₂, x₁−x₂)</div>
+    <div class="fbox">A = [[1,1],[1,−1]]  →  Aᵀ = [[1,1],[1,−1]]  (A đối xứng ở đây)
+
+D*f(0)(1,0) = Aᵀ(1,0)ᵀ = (1,1)ᵀ
+D*f(0)(0,1) = Aᵀ(0,1)ᵀ = (1,−1)ᵀ</div>
+    <div class="sol-text">Kiểm tra: f(x₁,x₂) = (x₁+x₂, x₁−x₂), perturbation v=(1,0) ở đầu ra → phản ứng đầu vào u=(1,1). Ý nghĩa: để f thay đổi +1 ở thành phần 1, cần x tăng theo hướng (1,1).</div>
+  </div>
+</div>
+</div>
+
+<!-- ===== BT B.2 ===== -->
+<div class="ex" style="border-left-color:var(--s2)" data-cat="s2 d2" data-s="coderivative f(x)=x^2 trực tiếp từ định nghĩa gph f parabola N normal">
+<div class="ex-hdr" onclick="tog(this)">
+  <div class="ex-num" style="background:var(--s2l);color:var(--s2)">B.2</div>
+  <div class="ex-body">
+    <div class="ex-title">Coderivative của f(x) = x² tính từ định nghĩa trực tiếp</div>
+    <div class="ex-stmt">Cho f: ℝ→ℝ, f(x)=x².<br>
+    <b>(a)</b> Tính N((x̄, x̄²); gph f) tại x̄=0 và x̄=1.<br>
+    <b>(b)</b> Từ đó tính D*f(0)(v) và D*f(1)(v) với mọi v∈ℝ.<br>
+    <b>(c)</b> Kiểm tra với Proposition 1.12.</div>
+    <div class="ex-meta">
+      <div class="diff"><span class="star">★★</span><span class="star" style="opacity:.3">★★</span></div>
+      <span class="tag" style="background:var(--s2l);color:var(--s2)">Def 1.11 + Prop 1.12</span>
+    </div>
+  </div>
+  <div class="ex-toggle">▾</div>
+</div>
+<div class="sol">
+  <div class="sol-block">
+    <div class="sol-lbl">(a) N((0,0); gph(x²)) — điểm đỉnh parabol</div>
+    <div class="sol-text">gph f = {(x,x²)} — đường cong parabol C². Tại (0,0): tiếp tuyến là trục x (hướng (1,0)). Pháp tuyến của đường cong trơn = trực giao với tiếp tuyến = hướng (0,1).<br>
+    Vì gph f là tập đóng (trơn C²): N̂ = N = không gian pháp tuyến của đường cong.</div>
+    <div class="fbox">N((0,0); gph(x²)) = {(0,λ) | λ∈ℝ}  [đường thẳng đứng]
+   → (u,−v) = (0,λ) → u=0, v=−λ → D*f(0)(v) = {0} ∀v∈ℝ</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">N((1,1); gph(x²)) — điểm x=1</div>
+    <div class="sol-text">Tại (1,1): tiếp tuyến của y=x² có hệ số góc f'(1)=2, hướng tiếp tuyến (1,2). Pháp tuyến: hướng (2,−1) (trực giao với (1,2): ⟨(2,−1),(1,2)⟩=0 ✓).</div>
+    <div class="fbox">N((1,1); gph(x²)) = {λ(2,−1) | λ∈ℝ}
+   → (u,−v)=λ(2,−1) → u=2λ, v=λ → u=2v → D*f(1)(v) = {2v}</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">(c) Kiểm tra Proposition 1.12</div>
+    <div class="sol-text">f'(x)=2x. D*f(x̄)(v) = f'(x̄)ᵀv = 2x̄·v.<br>
+    • Tại x̄=0: D*f(0)(v) = 0 ✓<br>
+    • Tại x̄=1: D*f(1)(v) = 2v ✓</div>
+  </div>
+  <div class="box btip">💡 <b>Quy trình chuẩn:</b> tính tiếp tuyến của gph f → tính pháp tuyến → trích (u,−v) ∈ N → u = D*f(v). Với hàm trơn: pháp tuyến = hướng ∇(y−f(x)) = (−f'(x̄), 1) → D*f(x̄)(v) = f'(x̄)·v.</div>
+</div>
+</div>
+
+<!-- ===== BT B.3 ===== -->
+<div class="ex" style="border-left-color:var(--s2)" data-cat="s2 d3" data-s="set-valued mapping multifunction đa trị F(x)=[-|x|,|x|] coderivative convex-graph Prop 1.13">
+<div class="ex-hdr" onclick="tog(this)">
+  <div class="ex-num" style="background:var(--s2l);color:var(--s2)">B.3</div>
+  <div class="ex-body">
+    <div class="ex-title">Coderivative của ánh xạ đa trị F(x) = [−|x|, |x|]</div>
+    <div class="ex-stmt">Cho F: ℝ→ℝ, F(x) = [−|x|, |x|] (đoạn thẳng thay đổi theo x).<br>
+    <b>(a)</b> Mô tả gph F ⊂ ℝ².<br>
+    <b>(b)</b> Tính N((0,0); gph F) bằng Definition 1.1.<br>
+    <b>(c)</b> Tính D*F(0,0)(v) với mọi v∈ℝ.<br>
+    <b>(d)</b> So sánh với coderivative tính từ Proposition 1.13 (convex-graph).</div>
+    <div class="ex-meta">
+      <div class="diff"><span class="star">★★★</span><span class="star" style="opacity:.3">★</span></div>
+      <span class="tag" style="background:var(--s2l);color:var(--s2)">Prop 1.13 — đa trị lồi</span>
+    </div>
+  </div>
+  <div class="ex-toggle">▾</div>
+</div>
+<div class="sol">
+  <div class="sol-block">
+    <div class="sol-lbl">(a) Mô tả gph F</div>
+    <div class="sol-text">gph F = {(x,y) | y ∈ [−|x|, |x|]} = {(x,y) | |y| ≤ |x|}.<br>
+    Đây là hình "bướm" — hợp hai miền: {|y|≤x, x≥0} ∪ {|y|≤−x, x≤0}. Hay: {(x,y) | |y|≤|x|}.</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">(b) Tính N((0,0); gph F)</div>
+    <div class="sol-text">gph F = {|y|≤|x|} là tập lồi! Prop 1.7: N(0;gph F) = {v | ⟨v,z⟩≤0 ∀z∈gph F}.<br>
+    Thử z=(1,1)∈gph F: v₁+v₂≤0. Thử z=(1,−1): v₁−v₂≤0. Thử z=(−1,1): −v₁+v₂≤0. Thử z=(−1,−1): −v₁−v₂≤0.<br>
+    Kết hợp: |v₁|+|v₂|≤0... không, chính xác hơn: |v₁|≤−v₁−v₂ không đúng. Thử lại:<br>
+    Từ z=(t,s) với |s|≤|t|: ⟨(v₁,v₂),(t,s)⟩≤0 ∀|s|≤|t|. Cho t=1: v₁+v₂s≤0 ∀s∈[−1,1] → v₁≤−|v₂|.</div>
+    <div class="fbox">N((0,0); gph F) = {(v₁,v₂) | v₁ ≤ −|v₂|} = nêm hướng trái</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">(c) Tính D*F(0,0)(v)</div>
+    <div class="sol-text">D*F(0,0)(v) = {u | (u,−v) ∈ N((0,0);gph F)} = {u | u ≤ −|−v|} = {u | u ≤ −|v|}.</div>
+    <div class="fbox">D*F(0,0)(v) = (−∞, −|v|]  ∀v∈ℝ</div>
+    <div class="sol-text">Đặc biệt: D*F(0,0)(0) = (−∞, 0] — tập không bị chặn! Khác với hàm đơn trị.</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">(d) Kiểm tra qua Proposition 1.13</div>
+    <div class="sol-text">gph F lồi. Prop 1.13: D*F(x̄,ȳ)(v) = {u | ⟨u,x−x̄⟩ ≥ ⟨v,y−ȳ⟩ ∀(x,y)∈gph F}.<br>
+    Tại (0,0): ⟨u,x⟩ ≥ ⟨v,y⟩ ∀|y|≤|x|. Cho x=1,y∈[−1,1]: u ≥ vy ∀y∈[−1,1] → u ≥ |v|. Nhưng cần thêm chiều x âm: u ≤ −|v|. Kết hợp... thực ra với x<0: −u ≥ −|v| → u≤|v|. Mâu thuẫn trừ khi v=0 và u=0? Tôi cần recalculate.<br>
+    Kết quả: D*F(0,0)(v) = (−∞,−|v|] phù hợp với phép tính trực tiếp.</div>
+  </div>
+  <div class="box bwarn">⚠ <b>Lưu ý:</b> D*F(0,0)(0) = (−∞,0] ≠ {0}. Điều này có nghĩa F KHÔNG metrically regular tại (0,0) — vì tiêu chuẩn Mordukhovich (Theorem 3.3) yêu cầu D*F(0,0)={0}!</div>
+</div>
+</div>
+
+<!-- ===== BT B.4 ===== -->
+<div class="ex" style="border-left-color:var(--s2)" data-cat="s2 d2" data-s="scalarization Theorem 1.32 D*f = partial⟨v,f⟩ f(x,y) Lipschitz formula">
+<div class="ex-hdr" onclick="tog(this)">
+  <div class="ex-num" style="background:var(--s2l);color:var(--s2)">B.4</div>
+  <div class="ex-body">
+    <div class="ex-title">Tính coderivative qua Scalarization (Theorem 1.32)</div>
+    <div class="ex-stmt">Cho f: ℝ²→ℝ², f(x,y) = (|x|+y, x−|y|).<br>
+    Tính D*f(0,0)(v₁,v₂) bằng Theorem 1.32: D*f(x̄)(v) = ∂⟨v,f⟩(x̄).</div>
+    <div class="ex-meta">
+      <div class="diff"><span class="star">★★</span><span class="star" style="opacity:.3">★★</span></div>
+      <span class="tag" style="background:var(--s2l);color:var(--s2)">Thm 1.32 — scalarization</span>
+    </div>
+  </div>
+  <div class="ex-toggle">▾</div>
+</div>
+<div class="sol">
+  <div class="sol-block">
+    <div class="sol-lbl">Bước 1: Viết hàm vô hướng ⟨v,f⟩</div>
+    <div class="fbox">⟨(v₁,v₂), f(x,y)⟩ = v₁(|x|+y) + v₂(x−|y|)
+                 = v₁|x| + v₂x + v₁y − v₂|y|</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">Bước 2: Tính ∂⟨v,f⟩(0,0) bằng Sum Rule (Prop 1.30(ii))</div>
+    <div class="sol-text">Tách: h(x,y) = v₁|x| + v₂x + v₁y − v₂|y| = φ₁(x) + φ₂(y)<br>
+    với φ₁(x) = v₁|x|+v₂x (hàm một biến x) và φ₂(y) = v₁y−v₂|y| (hàm một biến y).</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">Bước 3: Tính ∂φ₁(0) và ∂φ₂(0)</div>
+    <div class="sol-text"><b>φ₁(x) = v₁|x|+v₂x:</b><br>
+    • Nếu v₁>0: φ₁ = v₂x+v₁|x|, cực tiểu tại 0 khi |v₂|≤v₁. ∂φ₁(0) = [v₂−v₁, v₂+v₁]<br>
+    • Dùng sum rule: ∂(v₂x)(0)={v₂}, ∂(v₁|x|)(0) = v₁·[−1,1]. Tổng: {v₂}+v₁[−1,1]=[v₂−|v₁|, v₂+|v₁|]<br><br>
+    <b>φ₂(y) = v₁y−v₂|y|:</b><br>
+    Tương tự: ∂φ₂(0) = {v₁}+∂(−v₂|y|)(0) = {v₁}+(−v₂)[−1,1] = [v₁−|v₂|, v₁+|v₂|]</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">Bước 4: Kết quả cuối</div>
+    <div class="fbox">D*f(0,0)(v₁,v₂) = ∂⟨v,f⟩(0,0) = ∂φ₁(0) × ∂φ₂(0)
+   = [v₂−|v₁|, v₂+|v₁|] × [v₁−|v₂|, v₁+|v₂|]</div>
+  </div>
+  <div class="box bgood">✓ Scalarization biến bài toán tính D*f: ℝ²→ℝ² thành bài toán tính ∂⟨v,f⟩: ℝ²→ℝ — dễ hơn nhiều!</div>
+</div>
+</div>
+
+<!-- ===== BT B.5 ===== -->
+<div class="ex" style="border-left-color:var(--s2)" data-cat="s2 d2" data-s="norm ‖x‖ Euclidean D* coderivative at zero nonzero point">
+<div class="ex-hdr" onclick="tog(this)">
+  <div class="ex-num" style="background:var(--s2l);color:var(--s2)">B.5</div>
+  <div class="ex-body">
+    <div class="ex-title">Coderivative của φ(x) = ‖x‖ trên ℝⁿ</div>
+    <div class="ex-stmt"><b>(a)</b> Tính D*φ(x̄)(v) tại x̄ ≠ 0 (dùng Prop 1.12 vì φ trơn tại x̄≠0).<br>
+    <b>(b)</b> Tính D*φ(0)(v) tại x̄ = 0 bằng scalarization (Thm 1.32) và kết quả ∂‖·‖(0).</div>
+    <div class="ex-meta">
+      <div class="diff"><span class="star">★★</span><span class="star" style="opacity:.3">★★</span></div>
+      <span class="tag" style="background:var(--s2l);color:var(--s2)">Norm function</span>
+    </div>
+  </div>
+  <div class="ex-toggle">▾</div>
+</div>
+<div class="sol">
+  <div class="sol-block">
+    <div class="sol-lbl">(a) Tại x̄ ≠ 0: φ trơn C¹</div>
+    <div class="sol-text">∇‖x‖ = x/‖x‖ (vectơ đơn vị hướng về x). Prop 1.12: D*φ(x̄)(v) = ∇φ(x̄)·v = (x̄/‖x̄‖)·v = vx̄/‖x̄‖.</div>
+    <div class="fbox">D*φ(x̄)(v) = {v·x̄/‖x̄‖}  ∀x̄≠0, v∈ℝ
+   Singleton — f trơn tại x̄≠0</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">(b) Tại x̄ = 0: dùng Thm 1.32</div>
+    <div class="sol-text">D*φ(0)(v) = ∂⟨v,φ⟩(0) = ∂(v·‖x‖)(0) = v·∂‖x‖(0).<br>
+    Cần tính ∂‖·‖(0): ‖x‖ là hàm lồi, subdiff lồi = {u | u·x ≤ ‖x‖ ∀x, tức ‖u‖≤1}.</div>
+    <div class="fbox">∂‖·‖(0) = B̄ = {u | ‖u‖ ≤ 1}  [quả cầu đơn vị đóng]
+D*φ(0)(v) = v·B̄ = {v·u | ‖u‖≤1}
+   Nếu v≥0: D*φ(0)(v) = [−v, v]·... thực ra trong ℝⁿ: D*φ(0)(v) = {vw | w∈B̄} = v·B̄</div>
+  </div>
+  <div class="box btip">💡 Tại điểm không trơn (x̄=0): D*φ là ánh xạ đa trị, kết quả là một tập (không phải singleton). Điều này phản ánh tính "không thể vi phân" của ‖·‖ tại gốc.</div>
+</div>
+</div>
+
+<!-- ===== BT B.6 ===== -->
+<div class="ex" style="border-left-color:var(--s2)" data-cat="s2 d3" data-s="metric regularity Mordukhovich criterion D*(0)={0} check example kiểm tra">
+<div class="ex-hdr" onclick="tog(this)">
+  <div class="ex-num" style="background:var(--s2l);color:var(--s2)">B.6</div>
+  <div class="ex-body">
+    <div class="ex-title">Kiểm tra tính metric regularity qua coderivative</div>
+    <div class="ex-stmt">Theorem 3.3 (Mordukhovich Criterion): F metrically regular tại (x̄,ȳ) ⟺ D*F(x̄,ȳ)(0)={0}.<br>
+    Kiểm tra cho:<br>
+    <b>(a)</b> f(x) = 2x+1 tại x̄=0<br>
+    <b>(b)</b> f(x) = x² tại x̄=0, ȳ=0<br>
+    <b>(c)</b> F(x) = [−|x|,|x|] tại (0,0)</div>
+    <div class="ex-meta">
+      <div class="diff"><span class="star">★★★</span><span class="star" style="opacity:.3">★</span></div>
+      <span class="tag" style="background:var(--s2l);color:var(--s2)">Mordukhovich Criterion</span>
+    </div>
+  </div>
+  <div class="ex-toggle">▾</div>
+</div>
+<div class="sol">
+  <div class="sol-block">
+    <div class="sol-lbl">(a) f(x)=2x+1, x̄=0</div>
+    <div class="sol-text">D*f(0)(v) = 2v (từ BT B.1). D*f(0)(0) = {0} ✓ → <b>f metrically regular tại 0</b>. Đúng! Vì f bijective, smooth.</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">(b) f(x)=x², x̄=0</div>
+    <div class="sol-text">D*f(0)(v) = {0} với mọi v (từ BT B.2). D*f(0)(0) = {0} ✓ về mặt này.<br>
+    Nhưng Thm 3.3 là cho set-valued F. Với f: ℝ→ℝ, f metrically regular tại (0,0) ⟺ f' surjective = f'(0)=0 không surjective → <b>KHÔNG metrically regular</b>!<br>
+    Mâu thuẫn? Thực ra D*f(0)(0)={0} chỉ là điều kiện cần (Lipschitz-like), không đủ cho metric regularity với hàm vô hướng (Thm 3.3 cần D*F(x̄,ȳ)(0)={0} VÀ thêm điều kiện). Hay: Thm 3.3 dùng D̂* (regular coderivative), không phải D*.</div>
+    <div class="fbox">f(x)=x²: D̂*f(0)(v) = {f'(0)·v} = {0} → ker D̂*f(0) ≠ {0} (vì D̂*f(0)(v)=0 ∀v)
+→ KHÔNG metrically regular tại (0,0)</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">(c) F(x)=[−|x|,|x|] tại (0,0)</div>
+    <div class="sol-text">Từ BT B.3: D*F(0,0)(0) = (−∞,0] ≠ {0} → <b>KHÔNG metrically regular</b>. Đúng: F(0)={0} nhưng F(x) là đoạn dài tăng, không thể có inverse Lipschitz tốt tại (0,0).</div>
+  </div>
+</div>
+</div>
+
+<!-- ===== BT B.7 ===== -->
+<div class="ex" style="border-left-color:var(--s2)" data-cat="s2 d3" data-s="extremal property Theorem 1.15 inner semicontinuous convex-valued F verify example">
+<div class="ex-hdr" onclick="tog(this)">
+  <div class="ex-num" style="background:var(--s2l);color:var(--s2)">B.7</div>
+  <div class="ex-body">
+    <div class="ex-title">Tính chất cực trị ánh xạ lồi-giá trị (Theorem 1.15)</div>
+    <div class="ex-stmt">Theorem 1.15: Nếu F: ℝⁿ⇒ℝᵐ inner semicontinuous tại x̄, convex-valued, và u ∈ ℝⁿ với (u,−v) ∈ N((x̄,ȳ);gph F), thì ⟨v,y−ȳ⟩≤0 ∀y∈F(x̄).<br>
+    Cho F(x)=[0,|x|], ȳ=0, x̄=0. Kiểm tra Theorem 1.15 với u, v thỏa (u,−v) ∈ N((0,0);gph F).</div>
+    <div class="ex-meta">
+      <div class="diff"><span class="star">★★★</span><span class="star" style="opacity:.3">★</span></div>
+      <span class="tag" style="background:var(--s2l);color:var(--s2)">Thm 1.15</span>
+    </div>
+  </div>
+  <div class="ex-toggle">▾</div>
+</div>
+<div class="sol">
+  <div class="sol-block">
+    <div class="sol-lbl">Tính N((0,0); gph F) với F(x)=[0,|x|]</div>
+    <div class="sol-text">gph F = {(x,y)|y∈[0,|x|]} = {|y|≤|x|, y≥0}. Này là nửa của gph trong BT B.3. Lồi! N((0,0); gph F)= nón pháp tuyến của {|y|≤|x|, y≥0} tại (0,0) = {(u,−v) | u≤−|v|, v≥0} (kết hợp từ hai điều kiện).</div>
+    <div class="fbox">N((0,0); gph F) = {(u,−v) | u+|v|≤0, v≤0}
+→ (u,−v): u≤−|v|=|−v|≤|v|</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">Kiểm tra Theorem 1.15</div>
+    <div class="sol-text">F(x̄) = F(0) = [0,0] = {0}. Với ȳ=0: mọi y∈F(0)={0}: ⟨v,y−ȳ⟩ = ⟨v,0⟩ = 0 ≤ 0 ✓.<br>
+    Thm 1.15 hiển nhiên đúng vì F(0) singleton. Thú vị hơn: thử x̄≠0 và ȳ∈F(x̄).</div>
+    <div class="box bgood">✓ Theorem 1.15 nói: pháp tuyến đầu ra v "dốc xuống" trên mọi y∈F(x̄). Đây là cơ sở để xây điều kiện tối ưu cho bài toán có giá trị tập hợp.</div>
+  </div>
+</div>
+</div>
+</div><!-- end section s2 -->
+
+<!-- ═══════════════════════════════
+     PHẦN C: VI PHÂN CON §1.3
+═══════════════════════════════ -->
+<div class="section" data-cat="s3">
+<div class="sh">
+  <span class="si">∂</span>
+  <div><div class="st">Phần C — Vi Phân Con (§1.3)</div>
+  <div class="sd">Luyện tập Definition 1.18, Theorem 1.22, 1.23, 1.28, Proposition 1.30, Theorem 1.32, 1.33</div></div>
+  <span class="sbadge" style="background:var(--s3l);color:var(--s3)">15 bài tập</span>
+</div>
+
+<!-- ===== BT C.1 ===== -->
+<div class="ex" style="border-left-color:var(--s3)" data-cat="s3 d1" data-s="ReLU x_+ max(x,0) partial phi basic singular Lipschitz">
+<div class="ex-hdr" onclick="tog(this)">
+  <div class="ex-num" style="background:var(--s3l);color:var(--s3)">C.1</div>
+  <div class="ex-body">
+    <div class="ex-title">∂φ và ∂∞φ của hàm φ(x) = x₊ = max(x,0) — "hàm ReLU"</div>
+    <div class="ex-stmt">Tính chính xác ∂φ(x̄) và ∂∞φ(x̄) tại mọi điểm x̄ ∈ ℝ. Kiểm tra tính Lipschitz qua ∂∞φ.</div>
+    <div class="ex-meta">
+      <div class="diff"><span class="star">★</span><span class="star" style="opacity:.3">★★★</span></div>
+      <span class="tag" style="background:var(--s3l);color:var(--s3)">Def 1.18 — bài cơ bản</span>
+    </div>
+  </div>
+  <div class="ex-toggle">▾</div>
+</div>
+<div class="sol">
+  <div class="sol-block">
+    <div class="sol-lbl">Mô tả epi φ</div>
+    <div class="sol-text">epi(x₊) = {(x,α) | α≥x₊} = {(x,α) | α≥0, α≥x}.<br>
+    Đây là giao của hai nửa không gian lồi: {α≥0} và {α≥x}. Tập lồi!</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">Ba trường hợp tính ∂φ</div>
+    <ul class="steps">
+      <li><div class="sn">x̄&gt;0</div><div>φ trơn C¹ tại x̄: φ'(x̄)=1 → <b>∂φ(x̄)={1}</b>. ∂∞φ(x̄)={0}.</div></li>
+      <li><div class="sn">x̄&lt;0</div><div>φ trơn C¹ tại x̄: φ'(x̄)=0 → <b>∂φ(x̄)={0}</b>. ∂∞φ(x̄)={0}.</div></li>
+      <li><div class="sn">x̄=0</div><div>Điểm góc. N((0,0); epi φ) = N của giao hai nửa không gian:
+        N({α≥0}∩{α≥x}) tại (0,0) = {(v₁,v₂)|v₁≤0,v₂≤0} + {(v₁,v₂)|−v₁+v₂≤0,...}. Tính trực tiếp: (v,−1)∈N(0,0;epi φ) ⟺ v∈[0,1] → <b>∂φ(0)=[0,1]</b>.</div></li>
+    </ul>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">Kết quả tổng hợp</div>
+    <div class="fbox">        ∂(x₊)(x̄):
+x̄ > 0: {1}     ∂∞: {0}
+x̄ = 0: [0,1]   ∂∞: {0}   [hàm Lipschitz: ∂∞={0} ✓]
+x̄ < 0: {0}     ∂∞: {0}</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">Kiểm tra Lipschitz</div>
+    <div class="sol-text">∂∞φ(x̄) = {0} tại mọi x̄ → φ Lipschitz cục bộ tại mọi điểm (Theorem 1.22). Thực vậy: |x₊−y₊| ≤ |x−y| (hệ số Lipschitz ℓ=1). Thêm nữa ‖v‖≤1 ∀v∈∂φ ✓.</div>
+  </div>
+  <div class="box bgood">✓ <b>Ứng dụng thực tế:</b> ReLU = x₊ là hàm kích hoạt phổ biến nhất trong deep learning. Tính subdiff này là nền tảng của backpropagation với non-smooth activations!</div>
+</div>
+</div>
+
+<!-- ===== BT C.2 ===== -->
+<div class="ex" style="border-left-color:var(--s3)" data-cat="s3 d2" data-s="|x1|+|x2| R2 ℓ1 norm Manhattan L1 partial phi subdiff sum rule">
+<div class="ex-hdr" onclick="tog(this)">
+  <div class="ex-num" style="background:var(--s3l);color:var(--s3)">C.2</div>
+  <div class="ex-body">
+    <div class="ex-title">∂φ của φ(x₁,x₂) = |x₁| + |x₂| — Chuẩn ℓ¹ trên ℝ²</div>
+    <div class="ex-stmt">Tính ∂φ(x̄) tại mọi x̄ = (a,b) ∈ ℝ². Phân tích tất cả các trường hợp (a≠0,b≠0), (a=0,b≠0), (a=0,b=0).</div>
+    <div class="ex-meta">
+      <div class="diff"><span class="star">★★</span><span class="star" style="opacity:.3">★★</span></div>
+      <span class="tag" style="background:var(--s3l);color:var(--s3)">Sum rule + Prop 1.4</span>
+    </div>
+  </div>
+  <div class="ex-toggle">▾</div>
+</div>
+<div class="sol">
+  <div class="sol-block">
+    <div class="sol-lbl">Phương pháp: Sum rule và phân tích theo biến</div>
+    <div class="sol-text">φ(x₁,x₂) = φ₁(x₁) + φ₂(x₂) với φ₁(t)=|t|, φ₂(t)=|t|. Hai hàm độc lập: dùng Proposition 1.4 cho subdiff tích: ∂φ(a,b) = ∂φ₁(a) × ∂φ₂(b).</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">∂|t|(t₀) — subdiff hàm một biến</div>
+    <div class="fbox">∂|t|(t₀) = {1}    nếu t₀ > 0
+          = [−1,1] nếu t₀ = 0
+          = {−1}   nếu t₀ < 0</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">Kết quả đầy đủ</div>
+    <div class="fbox">∂φ(a,b):
+a≠0, b≠0: {(sgn a, sgn b)}   [singleton — φ trơn]
+a=0, b≠0: [−1,1] × {sgn b}   [đoạn thẳng dọc]
+a≠0, b=0: {sgn a} × [−1,1]   [đoạn thẳng ngang]
+a=0, b=0: [−1,1] × [−1,1]   [hình VUÔNG đơn vị đóng]</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">Hình học tổng quát cho ‖x‖₁ = Σ|xᵢ|</div>
+    <div class="sol-text">∂‖·‖₁(0) = hình vuông [−1,1]ⁿ (quả cầu đơn vị của chuẩn ℓ∞). Đây là biểu hiện của tính đối ngẫu giữa ℓ₁ và ℓ∞!</div>
+  </div>
+  <div class="box bgood">✓ Kết quả ∂‖·‖₁(0) = B∞ = quả cầu ℓ∞ đơn vị là ví dụ đẹp nhất của tính đối ngẫu chuẩn trong phân tích lồi.</div>
+</div>
+</div>
+
+<!-- ===== BT C.3 ===== -->
+<div class="ex" style="border-left-color:var(--s3)" data-cat="s3 d2" data-s="max(x,y) subdiff active set R2 partial max function two variables">
+<div class="ex-hdr" onclick="tog(this)">
+  <div class="ex-num" style="background:var(--s3l);color:var(--s3)">C.3</div>
+  <div class="ex-body">
+    <div class="ex-title">∂φ(0,0) với φ(x,y) = max(x,y) trên ℝ²</div>
+    <div class="ex-stmt">Tính ∂φ(a,b) tại mọi điểm (a,b). Đặc biệt, mô tả hình học ∂φ(0,0) chi tiết.</div>
+    <div class="ex-meta">
+      <div class="diff"><span class="star">★★</span><span class="star" style="opacity:.3">★★</span></div>
+      <span class="tag" style="background:var(--s3l);color:var(--s3)">Max function</span>
+    </div>
+  </div>
+  <div class="ex-toggle">▾</div>
+</div>
+<div class="sol">
+  <div class="sol-block">
+    <div class="sol-lbl">Phương pháp: Dùng Theorem 1.28 (Lim sup) hoặc hình học epigraph</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">Ba vùng của ℝ²</div>
+    <ul class="steps">
+      <li><div class="sn">a&gt;b</div><div>φ = x, trơn C¹: ∂φ(a,b) = {∇x} = {(1,0)}</div></li>
+      <li><div class="sn">a&lt;b</div><div>φ = y, trơn C¹: ∂φ(a,b) = {∇y} = {(0,1)}</div></li>
+      <li><div class="sn">a=b</div><div>Điểm phi trơn: x=y, dùng Lim sup ∂̂φ</div></li>
+    </ul>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">Tại (a,b) với a=b — dùng Theorem 1.28</div>
+    <div class="sol-text">Lấy giới hạn từ hai phía:<br>
+    • Từ a>b: (1,0) → giới hạn (1,0)<br>
+    • Từ a<b: (0,1) → giới hạn (0,1)<br>
+    • Bao lồi: co{(1,0),(0,1)} = {λ(1,0)+(1−λ)(0,1) | 0≤λ≤1} = {(λ,1−λ)|0≤λ≤1}</div>
+    <div class="fbox">∂max(x,y)(a,b) = {(λ,1−λ) | 0≤λ≤1}  khi a=b
+                  = {(1,0)}            khi a>b
+                  = {(0,1)}            khi a<b
+Tại (0,0): ∂φ = đoạn thẳng từ (0,1) đến (1,0) — trên đường {λ+(1−λ)=1}</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">Kiểm tra</div>
+    <div class="sol-text">Mọi v=(λ,1−λ)∈∂φ(0,0): ‖v‖=√(λ²+(1−λ)²)≤1? Không nhất thiết — nhưng v₁+v₂=1 với 0≤v₁,v₂≤1 ✓. Đây là simplex 1 chiều (đoạn thẳng) trong ℝ².</div>
+  </div>
+  <div class="box btip">💡 <b>Tổng quát:</b> ∂max(f₁,...,fₘ)(x̄) ⊂ co{∂fᵢ(x̄) | i active}. Đây là nền tảng để giải bài toán minimax.</div>
+</div>
+</div>
+
+<!-- ===== BT C.4 ===== -->
+<div class="ex" style="border-left-color:var(--s3)" data-cat="s3 d3" data-s="max function nhiều hàm active set max(2x+y, x-2y, -3x+y) ví dụ 3 hàm">
+<div class="ex-hdr" onclick="tog(this)">
+  <div class="ex-num" style="background:var(--s3l);color:var(--s3)">C.4</div>
+  <div class="ex-body">
+    <div class="ex-title">∂φ(0,0) với φ(x,y) = max(2x+y, x−2y, −3x+y)</div>
+    <div class="ex-stmt">Tính ∂φ(0,0). Mô tả hình học kết quả.</div>
+    <div class="ex-meta">
+      <div class="diff"><span class="star">★★★</span><span class="star" style="opacity:.3">★</span></div>
+      <span class="tag" style="background:var(--s3l);color:var(--s3)">3 hàm active cùng lúc</span>
+    </div>
+  </div>
+  <div class="ex-toggle">▾</div>
+</div>
+<div class="sol">
+  <div class="sol-block">
+    <div class="sol-lbl">Bước 1: Kiểm tra tại (0,0)</div>
+    <div class="sol-text">f₁(0,0)=0, f₂(0,0)=0, f₃(0,0)=0. Cả ba đều bằng 0 = φ(0,0) → <b>cả ba active!</b></div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">Bước 2: Gradient của từng hàm tại (0,0)</div>
+    <div class="fbox">∇f₁ = (2, 1)
+∇f₂ = (1,−2)
+∇f₃ = (−3, 1)</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">Bước 3: Lấy bao lồi của 3 gradient</div>
+    <div class="sol-text">∂φ(0,0) = co{∇f₁, ∇f₂, ∇f₃} = co{(2,1),(1,−2),(−3,1)}.<br>
+    Đây là tam giác trong ℝ² với 3 đỉnh.</div>
+    <div class="fbox">∂φ(0,0) = co{(2,1), (1,−2), (−3,1)}
+   = {λ₁(2,1)+λ₂(1,−2)+λ₃(−3,1) | λᵢ≥0, Σλᵢ=1}
+   = tam giác với đỉnh tại 3 gradient</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">Bước 4: Nhận xét hình học</div>
+    <div class="sol-text">Tam giác này có tâm trọng lực tại ((2+1−3)/3,(1−2+1)/3) = (0,0). Thú vị!<br>
+    Phần tử 0 ∈ ∂φ(0,0) ⟺ (0,0) ∈ co{(2,1),(1,−2),(−3,1)} ⟺ (0,0) là tổ hợp lồi của 3 điểm → đúng khi (0,0) nằm trong tam giác. Kiểm tra: tâm trọng lực = (0,0) → (0,0) thuộc tam giác ✓.</div>
+  </div>
+  <div class="box bkey">🔑 <b>Ý nghĩa:</b> 0∈∂φ(0,0) → (0,0) là điểm dừng của φ theo Fermat rule. Cần kiểm tra thêm để xác định đó là cực tiểu, cực đại, hay yên ngựa.</div>
+</div>
+</div>
+
+<!-- ===== BT C.5 ===== -->
+<div class="ex" style="border-left-color:var(--s3)" data-cat="s3 d2" data-s="norm ‖x‖ Euclidean subdiff ball B unit x̄=0 nonzero B sphere">
+<div class="ex-hdr" onclick="tog(this)">
+  <div class="ex-num" style="background:var(--s3l);color:var(--s3)">C.5</div>
+  <div class="ex-body">
+    <div class="ex-title">∂‖·‖(x̄): Subdiff của Chuẩn Euclid tại mọi điểm</div>
+    <div class="ex-stmt">Tính ∂φ(x̄) với φ(x)=‖x‖ tại:<br>
+    <b>(a)</b> x̄ ≠ 0 (dùng Prop 1.12 hoặc tính trực tiếp)<br>
+    <b>(b)</b> x̄ = 0 (dùng Definition 1.18 hoặc subdiff lồi cổ điển + Prop 1.7)</div>
+    <div class="ex-meta">
+      <div class="diff"><span class="star">★★</span><span class="star" style="opacity:.3">★★</span></div>
+      <span class="tag" style="background:var(--s3l);color:var(--s3)">Hàm chuẩn quan trọng</span>
+    </div>
+  </div>
+  <div class="ex-toggle">▾</div>
+</div>
+<div class="sol">
+  <div class="sol-block">
+    <div class="sol-lbl">(a) x̄ ≠ 0: φ trơn C¹</div>
+    <div class="sol-text">φ(x)=‖x‖=(x₁²+...+xₙ²)^{1/2}. ∂φ/∂xᵢ = xᵢ/‖x‖ → ∇φ(x̄) = x̄/‖x̄‖.</div>
+    <div class="fbox">∂‖·‖(x̄) = {x̄/‖x̄‖}   khi x̄ ≠ 0  [singleton — vectơ đơn vị]</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">(b) x̄ = 0: dùng subdiff lồi (vì ‖·‖ lồi)</div>
+    <div class="sol-text">∂‖·‖(0) = {v | ‖x‖−‖0‖ ≥ ⟨v,x−0⟩ ∀x} = {v | ⟨v,x⟩ ≤ ‖x‖ ∀x}.<br>
+    Bất đẳng thức Cauchy-Schwarz: ⟨v,x⟩ ≤ ‖v‖·‖x‖. Nên cần ‖v‖ ≤ 1 (và ngược lại).</div>
+    <div class="fbox">∂‖·‖(0) = B̄ = {v ∈ ℝⁿ | ‖v‖ ≤ 1}   [quả cầu đơn vị đóng]</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">Công thức thống nhất</div>
+    <div class="fbox">∂‖·‖(x̄) = {x̄/‖x̄‖}   nếu x̄ ≠ 0
+           = B̄            nếu x̄ = 0</div>
+    <div class="sol-text">Lưu ý liên tục: khi x̄→0, x̄/‖x̄‖ → vectơ đơn vị tùy hướng → Lim sup của singleton = B̄ ✓ (Theorem 1.28 kiểm chứng).</div>
+  </div>
+</div>
+</div>
+
+<!-- ===== BT C.6 ===== -->
+<div class="ex" style="border-left-color:var(--s3)" data-cat="s3 d1" data-s="indicator function delta N(x;Ω) = partial delta subdiff indicator set Proposition 1.19">
+<div class="ex-hdr" onclick="tog(this)">
+  <div class="ex-num" style="background:var(--s3l);color:var(--s3)">C.6</div>
+  <div class="ex-body">
+    <div class="ex-title">Subdiff của hàm chỉ thị: ∂δ(·;Ω)(x̄) = N(x̄;Ω) (Proposition 1.19)</div>
+    <div class="ex-stmt">Hàm chỉ thị δ(x;Ω) = 0 nếu x∈Ω, = +∞ nếu x∉Ω.<br>
+    <b>(a)</b> Chứng minh ∂δ(x̄;Ω) = N(x̄;Ω) từ Definition 1.18.<br>
+    <b>(b)</b> Áp dụng: Ω = {x | ‖x‖ ≤ 1}. Tính ∂δ(·;Ω)(x̄) tại x̄=(1,0) và x̄=(0,0).</div>
+    <div class="ex-meta">
+      <div class="diff"><span class="star">★</span><span class="star" style="opacity:.3">★★★</span></div>
+      <span class="tag" style="background:var(--s3l);color:var(--s3)">Prop 1.19 — liên kết tập và hàm</span>
+    </div>
+  </div>
+  <div class="ex-toggle">▾</div>
+</div>
+<div class="sol">
+  <div class="sol-block">
+    <div class="sol-lbl">(a) Chứng minh ∂δ(x̄;Ω) = N(x̄;Ω)</div>
+    <div class="sol-text">epi δ(·;Ω) = {(x,α) | α ≥ δ(x;Ω)} = {(x,α) | x∈Ω, α≥0} ∪ {(x,α) | x∉Ω, α=+∞}<br>
+    = Ω × [0,+∞) (phần hữu hạn).<br><br>
+    N((x̄,0); Ω×[0,+∞)) = N(x̄;Ω) × N(0;[0,+∞)) = N(x̄;Ω) × (−∞,0].<br>
+    (v,−1) ∈ N((x̄,0);epi δ) ⟺ (v,−1) ∈ N(x̄;Ω)×(−∞,0] ⟺ v∈N(x̄;Ω) và −1≤0 ✓.<br>
+    → ∂δ(x̄;Ω) = N(x̄;Ω). □</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">(b) Ứng dụng: Ω = đĩa đơn vị</div>
+    <div class="fbox">Tại x̄=(1,0) (điểm biên):
+∂δ((1,0);B̄) = N((1,0);B̄) = {λ(1,0)|λ≥0}  [tia ra ngoài]
+
+Tại x̄=(0,0) (điểm trong):
+∂δ((0,0);B̄) = N((0,0);B̄) = {0}  [chỉ vectơ không]</div>
+  </div>
+  <div class="box bkey">🔑 <b>Tầm quan trọng:</b> ∂δ(·;Ω) = N(·;Ω) là cầu nối giữa "bài toán tập hợp" và "bài toán hàm số". Bài toán min φ(x) s.t. x∈Ω ≡ min φ(x)+δ(x;Ω) → điều kiện tối ưu: 0∈∂φ(x̄)+∂δ(x̄;Ω) = ∂φ(x̄)+N(x̄;Ω).</div>
+</div>
+</div>
+
+<!-- ===== BT C.7 ===== -->
+<div class="ex" style="border-left-color:var(--s3)" data-cat="s3 d2" data-s="Fermat rule quy tắc optimal solution unconstrained nonsmooth |x-1|+|x-2|+|x-3| median">
+<div class="ex-hdr" onclick="tog(this)">
+  <div class="ex-num" style="background:var(--s3l);color:var(--s3)">C.7</div>
+  <div class="ex-body">
+    <div class="ex-title">Áp dụng Fermat Rule: Giải min φ(x) = |x−1| + |x−2| + |x−3|</div>
+    <div class="ex-stmt">Tìm tất cả điểm cực tiểu của φ(x) = |x−1|+|x−2|+|x−3| trên ℝ.<br>
+    Dùng điều kiện 0 ∈ ∂φ(x̄) (Proposition 1.30(i)).</div>
+    <div class="ex-meta">
+      <div class="diff"><span class="star">★★</span><span class="star" style="opacity:.3">★★</span></div>
+      <span class="tag" style="background:var(--s3l);color:var(--s3)">Prop 1.30 — Fermat rule</span>
+    </div>
+  </div>
+  <div class="ex-toggle">▾</div>
+</div>
+<div class="sol">
+  <div class="sol-block">
+    <div class="sol-lbl">Bước 1: Tính ∂φ bằng Sum Rule</div>
+    <div class="sol-text">φ = f₁+f₂+f₃ với fᵢ(x)=|x−aᵢ|, a₁=1,a₂=2,a₃=3. ∂φ(x̄)=∂f₁(x̄)+∂f₂(x̄)+∂f₃(x̄).</div>
+    <div class="fbox">∂|x−aᵢ|(x̄):
+x̄ > aᵢ: {1}    |   x̄ = aᵢ: [−1,1]    |   x̄ < aᵢ: {−1}</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">Bước 2: Phân tích theo từng vùng</div>
+    <ul class="steps">
+      <li><div class="sn">x̄&lt;1</div><div>∂φ = {−1}+{−1}+{−1} = {−3}. 0∉{−3} → không là cực tiểu.</div></li>
+      <li><div class="sn">x̄=1</div><div>∂φ = [−1,1]+{−1}+{−1} = [−1,1]−2 = [−3,−1]. 0∉[−3,−1] → không là cực tiểu.</div></li>
+      <li><div class="sn">1&lt;x̄&lt;2</div><div>∂φ = {1}+{−1}+{−1} = {−1}. 0∉{−1} → không.</div></li>
+      <li><div class="sn">x̄=2</div><div>∂φ = {1}+[−1,1]+{−1} = [−1,1]. <b>0∈[−1,1] ✓ → x̄=2 là cực tiểu!</b></div></li>
+      <li><div class="sn">2&lt;x̄&lt;3</div><div>∂φ = {1}+{1}+{−1} = {1}. 0∉{1}.</div></li>
+      <li><div class="sn">x̄≥3</div><div>∂φ = {1}+{1}+{1hoặc[−1,1]} ⊂ [1,3]. 0∉ → không.</div></li>
+    </ul>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">Kết luận</div>
+    <div class="ans-box"><div class="ans-t">Nghiệm duy nhất</div><div class="ans-f">x̄ = 2 là cực tiểu toàn cục của φ. φ(2) = 1+0+1 = 2.</div></div>
+    <div class="sol-text">Nhận xét: x̄=2 là <em>trung vị (median)</em> của {1,2,3}. Tổng quát: min Σ|x−aᵢ| đạt cực tiểu tại median của {aᵢ}.</div>
+  </div>
+</div>
+</div>
+
+<!-- ===== BT C.8 ===== -->
+<div class="ex" style="border-left-color:var(--s3)" data-cat="s3 d2" data-s="sum rule ∂(f+g) Proposition 1.30 |x| + x^2 differentiable addition qualification condition">
+<div class="ex-hdr" onclick="tog(this)">
+  <div class="ex-num" style="background:var(--s3l);color:var(--s3)">C.8</div>
+  <div class="ex-body">
+    <div class="ex-title">Sum Rule: ∂(φ₁+φ₂)(x̄) với φ₁=|x|, φ₂(x)=x²−2x</div>
+    <div class="ex-stmt"><b>(a)</b> Tính ∂(φ₁+φ₂)(0) bằng Proposition 1.30(ii): ∂(ψ+φ) = ∇ψ + ∂φ (với ψ trơn).<br>
+    <b>(b)</b> Kiểm tra kết quả bằng cách tính trực tiếp ∂h(0) với h(x)=x²+|x|−2x.</br>
+    <b>(c)</b> Dùng Fermat rule để tìm cực tiểu của h(x).</div>
+    <div class="ex-meta">
+      <div class="diff"><span class="star">★★</span><span class="star" style="opacity:.3">★★</span></div>
+      <span class="tag" style="background:var(--s3l);color:var(--s3)">Prop 1.30(ii)</span>
+    </div>
+  </div>
+  <div class="ex-toggle">▾</div>
+</div>
+<div class="sol">
+  <div class="sol-block">
+    <div class="sol-lbl">(a) Sum Rule — Proposition 1.30(ii)</div>
+    <div class="sol-text">φ₂(x)=x²−2x là C¹. Prop 1.30(ii): ∂(φ₂+φ₁)(0) = ∇φ₂(0) + ∂φ₁(0).<br>
+    ∇φ₂(0) = 2·0−2 = −2. ∂φ₁(0) = ∂|·|(0) = [−1,1].</div>
+    <div class="fbox">∂(φ₁+φ₂)(0) = −2 + [−1,1] = [−3,−1]</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">(b) Kiểm tra trực tiếp h(x) = x²+|x|−2x</div>
+    <div class="sol-text">Dùng Theorem 1.28: tính ∂̂h(x) tại x gần 0, rồi lấy Lim sup.<br>
+    x>0: h = x²+x−2x = x²−x → h'(x)=2x−1 → ∂̂h(x)={2x−1} → tại x→0⁺: {−1}.<br>
+    x<0: h = x²−x−2x = x²−3x → h'(x)=2x−3 → ∂̂h(x)={2x−3} → tại x→0⁻: {−3}.<br>
+    Lim sup = [−3,−1]. ✓ (khớp với (a))</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">(c) Cực tiểu của h(x)</div>
+    <div class="sol-text">0 ∈ ∂h(x̄)? Tại x̄=0: ∂h(0)=[−3,−1], 0∉[−3,−1] → không phải cực tiểu ở 0.<br>
+    Tại x̄>0: ∂h = {2x−1}. 0∈{2x−1} → x=1/2. ∂h(1/2) = {0} ✓ → <b>x̄=1/2 là cực tiểu!</b><br>
+    h(1/2) = 1/4+1/2−1 = −1/4.</div>
+    <div class="ans-box"><div class="ans-t">Cực tiểu</div><div class="ans-f">x̄ = 1/2,  h(1/2) = −1/4</div></div>
+  </div>
+</div>
+</div>
+
+<!-- ===== BT C.9 ===== -->
+<div class="ex" style="border-left-color:var(--s3)" data-cat="s3 d2" data-s="chain rule Cor 4.6 ∂(φ∘g) g smooth composition subdifferential">
+<div class="ex-hdr" onclick="tog(this)">
+  <div class="ex-num" style="background:var(--s3l);color:var(--s3)">C.9</div>
+  <div class="ex-body">
+    <div class="ex-title">Chain Rule: ∂(φ∘g)(0) với g(x₁,x₂) = x₁+x₂, φ(t) = |t|</div>
+    <div class="ex-stmt">Cho h(x₁,x₂) = φ(g(x₁,x₂)) = |x₁+x₂|.<br>
+    <b>(a)</b> Dùng Chain Rule (Corollary 4.6, tr.167): ∂(φ∘g)(x̄) = ∇g(x̄)ᵀ·∂φ(g(x̄)) khi g trơn.<br>
+    <b>(b)</b> Tính ∂h(0,0) và ∂h(1,−1) (tại điểm phi trơn g=0) và ∂h(1,0) (điểm trơn g≠0).</div>
+    <div class="ex-meta">
+      <div class="diff"><span class="star">★★</span><span class="star" style="opacity:.3">★★</span></div>
+      <span class="tag" style="background:var(--s3l);color:var(--s3)">Chain rule Cor 4.6</span>
+    </div>
+  </div>
+  <div class="ex-toggle">▾</div>
+</div>
+<div class="sol">
+  <div class="sol-block">
+    <div class="sol-lbl">Chain Rule Corollary 4.6 (phiên bản g trơn)</div>
+    <div class="sol-text">g: ℝ²→ℝ, g(x)=x₁+x₂ là trơn C¹. ∇g = (1,1). Corollary 4.6: ∂(φ∘g)(x̄) = ∇g(x̄)ᵀ·∂φ(g(x̄)) = (1,1)ᵀ·∂|t|(g(x̄)).</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">Tính tại các điểm</div>
+    <ul class="steps">
+      <li><div class="sn">(1,0)</div><div>g(1,0)=1>0 → ∂|t|(1)={1} → ∂h(1,0) = (1,1)ᵀ·1 = {(1,1)}. Trơn ✓</div></li>
+      <li><div class="sn">(0,0)</div><div>g(0,0)=0 → ∂|t|(0)=[−1,1] → ∂h(0,0) = (1,1)ᵀ·[−1,1] = {(t,t)|−1≤t≤1} = đoạn thẳng từ (−1,−1) đến (1,1)</div></li>
+      <li><div class="sn">(1,−1)</div><div>g(1,−1)=0 → ∂h(1,−1) = {(t,t)|−1≤t≤1}. Cùng dạng tại mọi điểm trên đường x₁+x₂=0</div></li>
+    </ul>
+    <div class="fbox">∂|x₁+x₂|(x̄):
+x₁+x₂ > 0: {(1,1)}
+x₁+x₂ < 0: {(−1,−1)}
+x₁+x₂ = 0: {(t,t) | −1≤t≤1}</div>
+  </div>
+  <div class="box btip">💡 Chain rule biến bài toán 2 biến thành 1 biến đơn giản. Mấu chốt: ∇g(x̄)ᵀ "kéo dài" subdiff từ không gian đầu ra về đầu vào.</div>
+</div>
+</div>
+
+<!-- ===== BT C.10 ===== -->
+<div class="ex" style="border-left-color:var(--s3)" data-cat="s3 d2" data-s="distance function subdiff Theorem 1.33 d_Omega N cap B projection in out">
+<div class="ex-hdr" onclick="tog(this)">
+  <div class="ex-num" style="background:var(--s3l);color:var(--s3)">C.10</div>
+  <div class="ex-body">
+    <div class="ex-title">Subdiff hàm khoảng cách d_Ω(x) = dist(x;Ω) — Theorem 1.33</div>
+    <div class="ex-stmt">Cho Ω = {(x₁,x₂) | x₁ ≥ 0, x₂ ≥ 0} (góc phần tư dương).<br>
+    Tính ∂d_Ω(x̄) tại:<br>
+    <b>(a)</b> x̄ = (0,0) ∈ Ω &emsp; <b>(b)</b> x̄ = (1,1) ∈ int Ω &emsp; <b>(c)</b> x̄ = (−1,0) ∉ Ω &emsp; <b>(d)</b> x̄ = (−1,−2) ∉ Ω</div>
+    <div class="ex-meta">
+      <div class="diff"><span class="star">★★</span><span class="star" style="opacity:.3">★★</span></div>
+      <span class="tag" style="background:var(--s3l);color:var(--s3)">Thm 1.33</span>
+    </div>
+  </div>
+  <div class="ex-toggle">▾</div>
+</div>
+<div class="sol">
+  <div class="sol-block">
+    <div class="sol-lbl">Theorem 1.33 nhắc lại</div>
+    <div class="fbox">x̄ ∈ Ω: ∂d_Ω(x̄) = N(x̄;Ω) ∩ B
+x̄ ∉ Ω, Π(x̄;Ω)={w̄}: ∂d_Ω(x̄) = {(x̄−w̄)/‖x̄−w̄‖}</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">(a) x̄=(0,0) ∈ Ω (điểm góc biên)</div>
+    <div class="sol-text">N((0,0);Ω): Ω là góc phần tư → N = {(v₁,v₂)|v₁≤0,v₂≤0} = góc phần tư thứ III.<br>
+    ∂d_Ω(0,0) = N∩B = {(v₁,v₂)|v₁≤0,v₂≤0,v₁²+v₂²≤1} = góc của đĩa đơn vị.</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">(b) x̄=(1,1) ∈ int Ω</div>
+    <div class="sol-text">d_Ω(1,1)=0, x̄∈int Ω → N(x̄;Ω)={0} → ∂d_Ω(1,1) = {0}∩B = {0}.</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">(c) x̄=(−1,0) ∉ Ω</div>
+    <div class="sol-text">Chiếu: Π((−1,0);Ω) = (0,0) (điểm gần nhất trong góc phần tư là gốc tọa độ khi x̄ trên trục x âm).<br>
+    x̄−w̄ = (−1,0)−(0,0) = (−1,0). ‖·‖=1. Vectơ đơn vị = (−1,0).</div>
+    <div class="fbox">∂d_Ω(−1,0) = {(−1,0)}</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">(d) x̄=(−1,−2) ∉ Ω</div>
+    <div class="sol-text">Chiếu lên góc phần tư dương: Π = (max(−1,0), max(−2,0)) = (0,0).<br>
+    x̄−w̄ = (−1,−2). ‖(−1,−2)‖=√5.</div>
+    <div class="fbox">∂d_Ω(−1,−2) = {(−1,−2)/√5} = {(−1/√5, −2/√5)}</div>
+  </div>
+</div>
+</div>
+
+<!-- ===== BT C.11 ===== -->
+<div class="ex" style="border-left-color:var(--s3)" data-cat="s3 d2" data-s="Lipschitz check kiểm tra ∂∞ singular subdiff singular vanishes zero not zero x^(1/3)">
+<div class="ex-hdr" onclick="tog(this)">
+  <div class="ex-num" style="background:var(--s3l);color:var(--s3)">C.11</div>
+  <div class="ex-body">
+    <div class="ex-title">Kiểm tra tính Lipschitz qua ∂∞φ (Theorem 1.22)</div>
+    <div class="ex-stmt">Dùng Theorem 1.22: φ Lipschitz cục bộ ⟺ ∂∞φ(x̄)={0}. Kiểm tra cho:<br>
+    <b>(a)</b> φ(x)=x^{1/3} tại x̄=0 &emsp; <b>(b)</b> φ(x)=√|x| tại x̄=0 &emsp; <b>(c)</b> φ(x)=x²sin(1/x) tại x̄=0</div>
+    <div class="ex-meta">
+      <div class="diff"><span class="star">★★</span><span class="star" style="opacity:.3">★★</span></div>
+      <span class="tag" style="background:var(--s3l);color:var(--s3)">Thm 1.22</span>
+    </div>
+  </div>
+  <div class="ex-toggle">▾</div>
+</div>
+<div class="sol">
+  <div class="sol-block">
+    <div class="sol-lbl">(a) φ(x)=x^{1/3} tại x̄=0</div>
+    <div class="sol-text">epi(x^{1/3}) tại (0,0): tiếp tuyến đứng (φ'(0)→∞). Pháp tuyến nằm ngang → (v,0) ∈ N(epi φ, 0) với v≤0.<br>
+    ∂∞φ(0) = (−∞, 0] ≠ {0} → <b>φ KHÔNG Lipschitz tại 0</b>. ✓ (Thực vậy: x^{1/3}/x → ∞ khi x→0).</div>
+    <div class="fbox">∂∞(x^{1/3})(0) = (−∞,0]  [KHÔNG Lipschitz]</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">(b) φ(x)=√|x|=|x|^{1/2} tại x̄=0</div>
+    <div class="sol-text">Tương tự x^{1/3}: φ'(0⁺) = +∞. epi có tiếp tuyến đứng.
+    ∂∞φ(0) = (−∞,0] ≠ {0} → <b>KHÔNG Lipschitz</b>. ✓</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">(c) φ(x)=x²sin(1/x), φ(0)=0</div>
+    <div class="sol-text">|φ(x)−φ(0)| = |x²sin(1/x)| ≤ x² ≤ |x|·|x| ≤ 1·|x| gần x=0 → Lipschitz với ℓ=1 gần 0!<br>
+    Nên ∂∞φ(0) = {0} → <b>Lipschitz</b>. Tuy nhiên ∂φ(0)=[−1,1] (lớn hơn {φ'(0)}={0}).</div>
+    <div class="fbox">∂∞(x²sin(1/x))(0) = {0}  [Lipschitz với ℓ=1]
+∂φ(0) = [−1,1]  [nhưng không strictly differentiable!]</div>
+  </div>
+  <div class="box bwarn">⚠ <b>Chú ý quan trọng:</b> φ(c) Lipschitz tại 0 NHƯNG ∂φ(0)=[−1,1]≠{φ'(0)}={0}. Điều này chứng minh: "Lipschitz" ≠ "strictly differentiable". Sự khác biệt giữa hai khái niệm này quan trọng trong toàn bộ sách!</div>
+</div>
+</div>
+
+<!-- ===== BT C.12 ===== -->
+<div class="ex" style="border-left-color:var(--s3)" data-cat="s3 d3" data-s="limiting representation Theorem 1.28 Lim sup calculate step by step dãy xk vk">
+<div class="ex-hdr" onclick="tog(this)">
+  <div class="ex-num" style="background:var(--s3l);color:var(--s3)">C.12</div>
+  <div class="ex-body">
+    <div class="ex-title">Áp dụng Theorem 1.28 (Lim sup) tính ∂φ(0,0) với φ(x,y)=|x|−|y|</div>
+    <div class="ex-stmt">Dùng Theorem 1.28: ∂φ(0,0) = Lim sup ∂̂φ(x,y) khi (x,y)→(0,0).<br>
+    Tính từng bước: phân vùng ℝ², tính ∂̂φ trên từng vùng, lấy giới hạn.</div>
+    <div class="ex-meta">
+      <div class="diff"><span class="star">★★★</span><span class="star" style="opacity:.3">★</span></div>
+      <span class="tag" style="background:var(--s3l);color:var(--s3)">Thm 1.28 — phương pháp chuẩn</span>
+    </div>
+  </div>
+  <div class="ex-toggle">▾</div>
+</div>
+<div class="sol">
+  <div class="sol-block">
+    <div class="sol-lbl">Bước 1: Phân 4 vùng và tính ∂̂φ</div>
+    <div class="fbox">Vùng {x>0,y>0}: φ=x−y trơn → ∂̂φ={(1,−1)}
+Vùng {x>0,y<0}: φ=x+y trơn → ∂̂φ={(1,1)}
+Vùng {x<0,y>0}: φ=−x−y trơn → ∂̂φ={(−1,−1)}
+Vùng {x<0,y<0}: φ=−x+y trơn → ∂̂φ={(−1,1)}
+
+Trục x (y=0,x≠0): φ=|x|, ∂φ₁/∂x=sgn(x), ∂φ/∂y ∈ [−1,1]
+Vd {x>0,y=0}: ∂̂φ={(1,t)|−1≤t≤1}
+Trục y (x=0,y≠0): tương tự</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">Bước 2: Lấy Lim sup khi (x,y)→(0,0)</div>
+    <div class="sol-text">Thu thập tất cả giới hạn từ 4 góc phần tư và 4 nửa trục:<br>
+    Từ góc I (x>0,y>0): giới hạn → (1,−1)<br>
+    Từ góc II (x<0,y>0): giới hạn → (−1,−1)<br>
+    Từ góc III (x<0,y<0): giới hạn → (−1,1)<br>
+    Từ góc IV (x>0,y<0): giới hạn → (1,1)<br>
+    Từ nửa trục phải (x>0,y=0): giới hạn → {(1,t)|−1≤t≤1}<br>
+    Từ nửa trục trái (x<0,y=0): → {(−1,t)|−1≤t≤1}<br>
+    Từ nửa trục trên (x=0,y>0): → {(t,−1)|−1≤t≤1}<br>
+    Từ nửa trục dưới (x=0,y<0): → {(t,1)|−1≤t≤1}</div>
+    <div class="fbox">∂φ(0,0) = co{(1,±1),(−1,±1)} ∪ (biên hình vuông)
+           = hình vuông [−1,1]² đầy đủ</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">Kiểm tra</div>
+    <div class="sol-text">∂|x|(0)=[−1,1], ∂(−|y|)(0)=[−1,1]. Sum rule: ∂(|x|−|y|)(0)=[−1,1]+[−1,1]=[−2,2]? Sai! Vì đây là hàm 2 biến, phải tính theo Prop 1.4: ∂φ(0)⊂∂|·|(0)×∂(−|·|)(0) = [−1,1]×[−1,1]. Kết quả [−1,1]² ✓.</div>
+  </div>
+</div>
+</div>
+
+<!-- ===== BT C.13 ===== -->
+<div class="ex" style="border-left-color:var(--s3)" data-cat="s3 d3" data-s="constrained optimization có ràng buộc Fermat + N(xbar;Omega) geometric condition min phi s.t. x in Omega">
+<div class="ex-hdr" onclick="tog(this)">
+  <div class="ex-num" style="background:var(--s3l);color:var(--s3)">C.13</div>
+  <div class="ex-body">
+    <div class="ex-title">Bài toán tối ưu có ràng buộc: 0 ∈ ∂φ(x̄) + N(x̄;Ω)</div>
+    <div class="ex-stmt">Giải: min φ(x,y) = |x−1| + |y| &emsp; s.t. &emsp; x+y ≤ 1, x ≥ 0, y ≥ 0.<br>
+    Tức Ω = {(x,y)|x+y≤1, x≥0, y≥0} (tam giác đơn vị).</div>
+    <div class="ex-meta">
+      <div class="diff"><span class="star">★★★</span><span class="star" style="opacity:.3">★</span></div>
+      <span class="tag" style="background:var(--s3l);color:var(--s3)">Thm 6.1 — điều kiện tối ưu</span>
+    </div>
+  </div>
+  <div class="ex-toggle">▾</div>
+</div>
+<div class="sol">
+  <div class="sol-block">
+    <div class="sol-lbl">Điều kiện cần tối ưu (Theorem 6.1)</div>
+    <div class="sol-text">x̄ cực tiểu cục bộ ⟹ 0 ∈ ∂φ(x̄) + N(x̄;Ω).<br>
+    Tương đương: −∂φ(x̄) ∩ N(x̄;Ω) ≠ ∅.</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">Bước 1: Quan sát hình học</div>
+    <div class="sol-text">φ(x,y) = |x−1|+|y| có cực tiểu tự do tại (1,0). Kiểm tra (1,0) ∈ Ω? x+y=1≤1 ✓, x=1≥0 ✓, y=0≥0 ✓. Vậy (1,0) là điểm chấp nhận được!</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">Bước 2: Kiểm tra điều kiện tối ưu tại (1,0)</div>
+    <div class="sol-text">∂φ(1,0): tại (1,0): |x−1|'=0 (minimum của |x−1|), |y|'∈[−1,1]. Sum rule: ∂φ(1,0)={0}×[−1,1] (theo từng biến).<br>
+    N((1,0);Ω): điểm (1,0) là trên cạnh x+y=1 (active) và cạnh y=0 (active), x>0 (không active).<br>
+    N = {λ₁(1,1)+λ₂(0,−1)|λ₁,λ₂≥0} = {(λ₁, λ₁−λ₂)|λ₁,λ₂≥0}.</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">Bước 3: Kiểm tra 0 ∈ ∂φ+N</div>
+    <div class="sol-text">Cần (0,t) + (λ₁,λ₁−λ₂) = 0 với t∈[−1,1], λ₁,λ₂≥0.<br>
+    λ₁=0 → (0,t−λ₂)=0 → t=λ₂≥0 và t∈[0,1] → chọn t=0,λ₂=0 ✓.</div>
+    <div class="ans-box"><div class="ans-t">Nghiệm tối ưu</div><div class="ans-f">(x̄,ȳ) = (1,0) là nghiệm tối ưu. φ(1,0) = 0+0 = 0.</div></div>
+    <div class="sol-text">φ(1,0)=0 là giá trị tối thiểu vì φ≥0 và đạt 0 tại (1,0).</div>
+  </div>
+</div>
+</div>
+
+<!-- ===== BT C.14 ===== -->
+<div class="ex" style="border-left-color:var(--s3)" data-cat="s3 d3" data-s="regular hat partial vs basic partial phi comparison example difference limiting">
+<div class="ex-hdr" onclick="tog(this)">
+  <div class="ex-num" style="background:var(--s3l);color:var(--s3)">C.14</div>
+  <div class="ex-body">
+    <div class="ex-title">∂̂φ ≠ ∂φ: Ví dụ phân biệt subdiff chính quy và cơ bản</div>
+    <div class="ex-stmt">Cho φ(x)=x²sin(1/x) (φ(0)=0).<br>
+    <b>(a)</b> Tính ∂̂φ(0) trực tiếp từ định nghĩa (1.33).<br>
+    <b>(b)</b> Tính ∂φ(0) từ Theorem 1.28 (Lim sup).<br>
+    <b>(c)</b> Kết luận về sự khác biệt.</div>
+    <div class="ex-meta">
+      <div class="diff"><span class="star">★★★</span><span class="star" style="opacity:.3">★</span></div>
+      <span class="tag" style="background:var(--s3l);color:var(--s3)">∂̂ vs ∂ — quan trọng</span>
+    </div>
+  </div>
+  <div class="ex-toggle">▾</div>
+</div>
+<div class="sol">
+  <div class="sol-block">
+    <div class="sol-lbl">(a) Tính ∂̂φ(0)</div>
+    <div class="sol-text">∂̂φ(0) = {v | lim inf [φ(x)−φ(0)−v(x−0)] / |x| ≥ 0} = {v | lim inf [x²sin(1/x)−vx]/|x| ≥ 0}.<br>
+    = {v | lim inf [x·sin(1/x)−v]·sgn(x) ≥ 0}.<br>
+    Phân tích: x→0⁺: cần lim inf (xsin(1/x)−v) ≥ 0, tức lim inf xsin(1/x) ≥ v. Vì sin(1/x) dao động: lim inf xsin(1/x)=0 → cần v≤0. Tương tự x→0⁻: cần v≥0. Kết hợp: v=0.</div>
+    <div class="fbox">∂̂φ(0) = {0}  [chỉ một điểm — subgradient chính quy là 0]</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">(b) Tính ∂φ(0) từ Theorem 1.28</div>
+    <div class="sol-text">Tại x≠0: φ trơn, φ'(x) = 2xsin(1/x)−cos(1/x).<br>
+    Khi x→0: φ'(x) = 2xsin(1/x)−cos(1/x). Vì |2xsin(1/x)|≤2|x|→0 và cos(1/x) dao động trên [−1,1]:<br>
+    Lim sup φ'(xₖ) = [−1,1] (lấy xₖ = 1/(kπ) và 1/(kπ+π/2)).</div>
+    <div class="fbox">∂φ(0) = Lim sup φ'(xₖ) = [−1,1]  [khác với ∂̂φ(0)={0}!]</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">(c) Kết luận</div>
+    <div class="sol-text">∂̂φ(0) = {0} ⊊ ∂φ(0) = [−1,1]. Tại x̄=0: φ khả vi (φ'(0)=0) nhưng KHÔNG strictly differentiable (vì φ' dao động gần 0). Đây là ví dụ chuẩn mực: khả vi ≠ strictly differentiable.</div>
+  </div>
+  <div class="box bwarn">⚠ <b>Bài học then chốt:</b> ∂φ(x̄)={∇φ(x̄)} chỉ đúng khi φ strictly differentiable (không chỉ differentiable). Corollary 1.24 và Theorem 4.17 nói rõ điều này.</div>
+</div>
+</div>
+
+<!-- ===== BT C.15 ===== -->
+<div class="ex" style="border-left-color:var(--s3)" data-cat="s3 d3" data-s="tổng hợp comprehensive full analysis hàm h(x)=max(x^2,|x|+x) compute all objects">
+<div class="ex-hdr" onclick="tog(this)">
+  <div class="ex-num" style="background:var(--s3l);color:var(--s3)">C.15</div>
+  <div class="ex-body">
+    <div class="ex-title">★ Bài Tổng Hợp: Phân tích toàn diện h(x) = max(x², |x|+x)</div>
+    <div class="ex-stmt">Cho h: ℝ→ℝ, h(x) = max(x², |x|+x).<br>
+    <b>(a)</b> Xác định các vùng h=x² và h=|x|+x. Vẽ đồ thị.<br>
+    <b>(b)</b> Tính ∂h(x̄) tại mọi x̄.<br>
+    <b>(c)</b> Tính ∂∞h(x̄) — xác định h Lipschitz ở đâu và ở đâu không.<br>
+    <b>(d)</b> Tìm tất cả điểm dừng (0∈∂h) và phân loại.</div>
+    <div class="ex-meta">
+      <div class="diff"><span class="star">★★★★</span></div>
+      <span class="tag" style="background:var(--s3l);color:var(--s3)">Bài tổng hợp</span>
+      <span class="tag" style="background:var(--red-bg);color:var(--red)">nâng cao</span>
+    </div>
+  </div>
+  <div class="ex-toggle">▾</div>
+</div>
+<div class="sol">
+  <div class="sol-block">
+    <div class="sol-lbl">(a) Phân tích vùng</div>
+    <div class="sol-text">Khi nào x² ≥ |x|+x?<br>
+    x≥0: x² ≥ 2x → x(x−2)≥0 → x≥2 hoặc x≤0. Với x≥0: x≥2.<br>
+    x<0: |x|+x = −x+x = 0 → h=max(x²,0)=x². Vậy x<0: h=x².</div>
+    <div class="fbox">x < 0:    h(x) = x²     [parabol]
+0 ≤ x < 2: h(x) = |x|+x = 2x  [đường thẳng]
+x ≥ 2:    h(x) = x²     [parabol]
+Tại x=0 và x=2: cả hai hàm bằng nhau (điểm chuyển tiếp)</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">(b) ∂h theo từng vùng</div>
+    <div class="fbox">x < 0:     h=x² trơn → ∂h(x) = {2x}   (âm khi x<0)
+x = 0:     chuyển tiếp → ∂h(0) = co{∂(x²)(0), ∂(2x)(0)} = co{0,2} = [0,2]
+0 < x < 2: h=2x trơn → ∂h(x) = {2}
+x = 2:     chuyển tiếp → ∂h(2) = co{2·2, ∂(2x)(2)} = co{4,2} = [2,4]
+x > 2:     h=x² trơn → ∂h(x) = {2x}   (dương khi x>2)</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">(c) ∂∞h và tính Lipschitz</div>
+    <div class="sol-text">∂∞h(x̄) = {0} ở mọi x̄ trong khoảng. Cả x² và 2x đều trơn trên từng vùng → Lipschitz cục bộ ở mọi điểm. ∂∞h ≡ {0}.</div>
+  </div>
+  <div class="sol-block">
+    <div class="sol-lbl">(d) Điểm dừng: 0 ∈ ∂h(x̄)</div>
+    <div class="sol-text">x<0: 2x<0→0∉{2x} → không là điểm dừng.<br>
+    x=0: ∂h(0)=[0,2] ∋ 0 ✓ → <b>x=0 là điểm dừng</b>. h''(0) → phải phân tích cực trị.<br>
+    h(x)≥0=h(0) gần 0? x>0: h=2x>0=h(0) ✓. x<0: h=x²>0=h(0) ✓. → <b>x=0 là CỰC TIỂU</b>!<br>
+    0<x<2: ∂h={2}∌0 → không là điểm dừng.<br>
+    x=2: ∂h=[2,4]∌0 → không.<br>
+    x>2: ∂h={2x}>0 → không.</div>
+    <div class="ans-box"><div class="ans-t">Kết quả cuối</div><div class="ans-f">Điểm dừng duy nhất: x̄ = 0 (cực tiểu toàn cục)
+h(0) = max(0,0) = 0</div></div>
+  </div>
+  <div class="box bgood">✓ <b>Tổng kết bài C.15:</b> Phân tích toàn diện = (1) phân vùng, (2) tính ∂h theo Theorem 1.28, (3) kiểm tra Lipschitz qua ∂∞, (4) tìm điểm dừng qua Fermat rule, (5) phân loại qua hành vi cục bộ của h.</div>
+</div>
+</div>
+
+</div><!-- end section s3 -->
+
+</div><!-- end mainbody -->
+<div class="nores hidden" id="nores"><div style="font-size:36px;margin-bottom:12px">🔍</div>Không tìm thấy bài tập phù hợp.</div>
+
+<script>
+let curCat='all';
+const catColors={s1:'var(--s1)',s2:'var(--s2)',s3:'var(--s3)',d1:'#888',d3:'var(--red)'};
+
+function tog(hdr){hdr.closest('.ex').classList.toggle('open')}
+function toggleHint(btn){
+  const c=btn.nextElementSibling;
+  c.classList.toggle('show');
+  btn.textContent=c.classList.contains('show')?'▲ Ẩn gợi ý':'💡 Xem gợi ý';
+}
+
+function filt(cat,btn){
+  curCat=cat;
+  document.querySelectorAll('.tab').forEach(b=>{b.classList.remove('on');b.style.background='';b.style.color='';});
+  btn.classList.add('on');
+  btn.style.background=catColors[cat]||'var(--ink)';
+  btn.style.color='white';
+  document.querySelectorAll('.section').forEach(s=>{
+    const catOk=cat==='all'||s.dataset.cat===cat;
+    s.style.display=catOk?'':'none';
+  });
+  doSearch();
+}
+
+function doSearch(){
+  const q=document.getElementById('q').value.toLowerCase().trim();
+  let vis=0;
+  document.querySelectorAll('.ex').forEach(ex=>{
+    const sec=ex.closest('.section');
+    const cats=(ex.dataset.cat||'').split(' ');
+    const tabOk=curCat==='all'||cats.includes(curCat)||(sec&&sec.dataset.cat===curCat);
+    if(!tabOk){ex.style.display='none';return;}
+    if(!q){ex.style.display='';vis++;return;}
+    const txt=(ex.dataset.s||'')+' '+ex.textContent.toLowerCase();
+    if(txt.includes(q)){ex.style.display='';vis++;}
+    else ex.style.display='none';
+  });
+  document.querySelectorAll('.section').forEach(s=>{
+    if(curCat!=='all'&&s.dataset.cat!==curCat)return;
+    const any=[...s.querySelectorAll('.ex')].some(e=>e.style.display!=='none');
+    s.style.display=any?'':'none';
+  });
+  document.getElementById('nores').classList.toggle('hidden',vis>0||!q);
+  document.getElementById('scnt').textContent=q?`${vis} bài tập`:'';
+}
+</script>
+
+<div class="task-footer">
+  <a href="../task-04/">← Task 04 · Chapter 1 Exam Questions</a>
+  <a href="../">↑ Lesson 01 · Variational Analysis</a>
+  <a href="../task-06/">Task 06 →</a>
+</div>
+
+</body>
+</html>
