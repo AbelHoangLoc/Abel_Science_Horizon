@@ -1,0 +1,954 @@
+<!doctype html>
+<html lang="vi">
+<head>
+
+  <link rel="stylesheet" href="../assets/brand.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Task 02 · Bảng Ký Hiệu & Thuật Ngữ | Science Horizon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=STIX+Two+Math&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#031024; --deep:#071b3f; --cyan:#37d5ff; --green:#52f5b0; --violet:#7c5cff;
+  --text:#0f172a; --muted:#5b6b85; --card:rgba(255,255,255,.94); --border:rgba(148,163,184,.24);
+  --shadow:0 18px 45px rgba(0,0,0,.22);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  min-height:100vh; color:var(--text);
+  font-family:"Be Vietnam Pro",system-ui,sans-serif; font-size:15px; line-height:1.7; padding-bottom:70px;
+  background:
+    radial-gradient(900px 540px at 8% 8%, rgba(55,213,255,.22), transparent 60%),
+    radial-gradient(850px 520px at 92% 12%, rgba(124,92,255,.22), transparent 60%),
+    radial-gradient(850px 520px at 62% 95%, rgba(82,245,176,.13), transparent 60%),
+    linear-gradient(135deg,#031024 0%,#071b3f 48%,#020712 100%);
+}
+body::before{
+  content:""; position:fixed; inset:0; z-index:-2; opacity:.35;
+  background-image:
+    radial-gradient(circle,rgba(255,255,255,.85) 1px,transparent 1.6px),
+    radial-gradient(circle,rgba(55,213,255,.65) 1px,transparent 1.5px),
+    radial-gradient(circle,rgba(82,245,176,.55) 1px,transparent 1.5px);
+  background-size:72px 72px,118px 118px,164px 164px; background-position:0 0,34px 58px,90px 26px;
+}
+body::after{
+  content:""; position:fixed; right:-320px; top:150px; width:920px; height:230px; border-radius:50%;
+  border:3px solid rgba(55,213,255,.18); border-left-color:rgba(82,245,176,.42); transform:rotate(-17deg); z-index:-1;
+}
+.shell{max-width:1280px;margin:0 auto;padding:18px}
+.hero{
+  position:relative; overflow:hidden; border:1px solid rgba(255,255,255,.14); border-radius:30px; color:white;
+  background:radial-gradient(700px 280px at 22% 0%,rgba(55,213,255,.22),transparent 65%),
+             radial-gradient(700px 280px at 88% 18%,rgba(124,92,255,.28),transparent 65%),
+             rgba(4,16,36,.72);
+  backdrop-filter:blur(18px); box-shadow:var(--shadow); padding:30px; margin-bottom:16px;
+}
+.hero::after{
+  content:"∂  ∇  ℝⁿ  epi φ  N(x̄;Ω)  Lim sup";
+  position:absolute; right:28px; bottom:12px; color:rgba(255,255,255,.08);
+  font-family:"STIX Two Math",serif; font-size:38px; white-space:nowrap;
+}
+.brand{display:flex;gap:16px;align-items:center}
+.logo{width:60px;height:60px;border-radius:20px;background:rgba(255,255,255,.94);display:grid;place-items:center;font-size:31px;box-shadow:0 12px 25px rgba(0,0,0,.22)}
+.eyebrow{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.62);font-weight:900;margin-bottom:7px}
+h1{font-size:clamp(25px,3vw,39px);line-height:1.15;font-weight:900;letter-spacing:-.04em;background:linear-gradient(90deg,#83efff,#52f5b0,#c4b5fd);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.sub{margin-top:10px;max-width:880px;color:rgba(255,255,255,.75);font-size:14px;font-weight:700}
+.pills{margin-top:16px;display:flex;gap:8px;flex-wrap:wrap}
+.pill{border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.10);border-radius:999px;padding:7px 12px;color:rgba(255,255,255,.88);font-size:12px;font-weight:900}
+.panel{background:rgba(255,255,255,.88);border:1px solid rgba(255,255,255,.34);border-radius:28px;box-shadow:var(--shadow);overflow:hidden;backdrop-filter:blur(16px)}
+.toolbar{position:sticky;top:0;z-index:30;background:rgba(248,250,252,.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.search-wrap{position:relative;padding:14px 18px 12px;display:flex;gap:12px;align-items:center}
+.search-icon{position:absolute;left:34px;top:50%;transform:translateY(-50%);font-size:16px;color:#64748b}
+#q{width:100%;max-width:720px;border:2px solid rgba(148,163,184,.28);border-radius:18px;padding:12px 14px 12px 44px;font-family:inherit;font-weight:700;outline:none;background:rgba(255,255,255,.96);box-shadow:0 8px 18px rgba(15,23,42,.06)}
+#q:focus{border-color:rgba(55,213,255,.56);box-shadow:0 10px 24px rgba(55,213,255,.18)}
+#count{font-size:12px;color:#64748b;font-weight:900}
+.tabs{display:flex;gap:4px;padding:0 18px;overflow-x:auto;border-bottom:1px solid rgba(148,163,184,.2)}
+.tab{appearance:none;border:none;background:transparent;color:#64748b;font-family:inherit;font-size:13px;font-weight:900;padding:12px 12px;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap}
+.tab:hover{color:#0f172a} .tab.active{color:#2563eb;border-bottom-color:#37d5ff}
+.content{padding:24px;background:radial-gradient(900px 380px at 50% 0%,rgba(55,213,255,.08),transparent 60%),linear-gradient(180deg,rgba(255,255,255,.60),rgba(255,255,255,.30))}
+.note{background:linear-gradient(135deg,rgba(251,191,36,.16),rgba(55,213,255,.08));border:1px solid rgba(251,191,36,.28);border-radius:18px;padding:14px 16px;margin-bottom:22px;color:#475569;font-weight:700;box-shadow:0 10px 25px rgba(15,23,42,.08)}
+.sec{margin-bottom:38px}
+.sec.hidden,.card.hidden{display:none!important}
+.sec-head{display:flex;align-items:center;gap:12px;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid rgba(148,163,184,.25)}
+.sec-icon{width:40px;height:40px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,rgba(55,213,255,.16),rgba(124,92,255,.10));color:var(--c);font-size:20px}
+.sec h2{font-size:18px;font-weight:900;color:#172033;letter-spacing:-.02em}
+.sec-head p{font-size:12px;color:#64748b;font-weight:800}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.grid.wide{grid-template-columns:repeat(auto-fill,minmax(380px,1fr))}
+.card{position:relative;overflow:hidden;background:var(--card);border:1px solid rgba(148,163,184,.22);border-radius:20px;padding:16px 18px;box-shadow:0 8px 0 rgba(148,163,184,.10),0 16px 34px rgba(15,23,42,.08);transition:.18s}
+.card::before{content:"";position:absolute;inset:0;background:radial-gradient(420px 120px at 16% 0%,rgba(55,213,255,.12),transparent 60%),radial-gradient(420px 120px at 92% 0%,rgba(124,92,255,.08),transparent 60%);pointer-events:none}
+.card:hover{transform:translateY(-3px);border-color:rgba(55,213,255,.38);box-shadow:0 10px 0 rgba(55,213,255,.12),0 18px 34px rgba(55,213,255,.14)}
+.card.hit{border-color:rgba(82,245,176,.62);background:white}
+.trap{background:linear-gradient(135deg,rgba(255,107,107,.13),rgba(255,255,255,.96));border-color:rgba(255,107,107,.22)}
+.sym{position:relative;z-index:1;font-family:"STIX Two Math","JetBrains Mono","Cambria Math",serif;font-size:23px;line-height:1.25;font-weight:700;margin-bottom:5px;overflow-wrap:anywhere}
+.how{position:relative;z-index:1;font-family:"JetBrains Mono",monospace;font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.06em;font-weight:900;margin-bottom:8px}
+.card h3{position:relative;z-index:1;font-size:15px;font-weight:900;color:#172033;margin-bottom:7px}
+.card p{position:relative;z-index:1;font-size:13.5px;color:#475569;line-height:1.75;font-weight:600}
+.eg{position:relative;z-index:1;margin-top:10px;background:linear-gradient(135deg,rgba(15,23,42,.04),rgba(55,213,255,.06));border-left:3px solid rgba(55,213,255,.42);border-radius:0 12px 12px 0;padding:9px 11px;font-size:12.5px;color:#53637a;line-height:1.65;font-weight:600}
+.eg b{color:#a16207;font-weight:900}
+.footer{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:18px;padding:16px 18px;border-radius:22px;background:rgba(255,255,255,.86);border:1px solid rgba(148,163,184,.22);box-shadow:0 10px 25px rgba(15,23,42,.10);color:#64748b;font-size:13px;font-weight:900}
+.footer a{color:#2563eb;text-decoration:none} .footer a:hover{text-decoration:underline}
+@media(max-width:760px){.shell{padding:10px}.hero{padding:22px 18px;border-radius:22px}.brand{align-items:flex-start}.logo{width:48px;height:48px;font-size:24px}.content{padding:16px}.grid,.grid.wide{grid-template-columns:1fr}.footer{flex-direction:column;text-align:center}}
+</style>
+</head>
+<body>
+
+  <img src="../assets/logo-SH.png" class="sh-logo" alt="Science Horizon">
+<div class="shell">
+  <section class="hero">
+    <div class="brand">
+      <div class="logo">🔭</div>
+      <div>
+        <div class="eyebrow">Task 02 · Variational Analysis and Applications</div>
+        <h1>Bảng Ký Hiệu & Thuật Ngữ Chương 1</h1>
+        <div class="sub">Bản tra cứu song ngữ cho Giải tích Biến phân: ký hiệu nền tảng, tập hợp, giới hạn Painlevé–Kuratowski, ánh xạ đa trị, nón pháp tuyến, coderivative và subdifferential.</div>
+        <div class="pills"><span class="pill">🧭 Mordukhovich</span><span class="pill">∂ · ∇ · ℝⁿ</span><span class="pill">Science Horizon</span><span class="pill">13 sections</span></div>
+      </div>
+    </div>
+  </section>
+  <main class="panel">
+    <div class="toolbar">
+      <div class="search-wrap"><span class="search-icon">🔍</span><input id="q" placeholder="Tìm ký hiệu hoặc thuật ngữ... (vd: normal, epi, lim sup, proper, Clarke)" oninput="filterCards()"><span id="count"></span></div>
+      <div class="tabs"><button class="tab active" data-tab="all">Tất cả</button><button class="tab" data-tab="basic">1. Ký hiệu cơ bản</button><button class="tab" data-tab="set">2. Tập hợp</button><button class="tab" data-tab="limit">3. Giới hạn đặc biệt</button><button class="tab" data-tab="mapping">4. Ánh xạ</button><button class="tab" data-tab="normal">5. Nón pháp tuyến</button><button class="tab" data-tab="coderiv">6. Coderivative</button><button class="tab" data-tab="subdiff">7. Vi phân con</button><button class="tab" data-tab="func">8. Hàm số</button><button class="tab" data-tab="greek">9. Chữ Hy Lạp</button><button class="tab" data-tab="compare">10. So sánh subdiff</button><button class="tab" data-tab="construct">11. Cấu trúc quan trọng</button><button class="tab" data-tab="trap">12. Bẫy hay nhầm</button><button class="tab" data-tab="phrase">13. Cách đọc câu toán</button></div>
+    </div>
+    <div class="content">
+      <div class="note"><b>💡 Mẹo đọc:</b> <span class="math">:=</span> là “bằng theo định nghĩa”; <span class="math">⇒</span> là “suy ra”; <span class="math">→</span> là “tiến tới” hoặc “ánh xạ đến”. Đặc biệt chú ý phân biệt <span class="math">lim sup</span> chữ thường và <span class="math">Lim sup</span> chữ hoa.</div>
+      
+    <section class="sec" data-cat="basic">
+      <div class="sec-head">
+        <span class="sec-icon" style="--c:#37d5ff">🔭</span>
+        <div>
+          <h2>1. Ký hiệu cơ bản</h2>
+          <p>9 mục tra cứu · nhấn tab hoặc dùng ô tìm kiếm để lọc nhanh</p>
+        </div>
+      </div>
+      <div class="grid">
+        
+        <article class="card" data-search="r n euclid space ℝⁿ Không gian Euclid n chiều Tập hợp tất cả vectơ có n thành phần thực. Đây là không gian nền của toàn bộ chương.">
+          <div class="sym" style="color:#37d5ff">ℝⁿ</div>
+          <div class="how">R mũ n</div>
+          <h3>Không gian Euclid n chiều</h3>
+          <p>Tập hợp tất cả vectơ có n thành phần thực. Đây là không gian nền của toàn bộ chương.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> ℝ² là mặt phẳng; ℝ³ là không gian 3 chiều.</div>
+        </article>
+        <article class="card" data-search="inner product dot product ⟨v,x⟩ Tích vô hướng Nếu v=(v₁,…,vₙ), x=(x₁,…,xₙ) thì ⟨v,x⟩=Σvᵢxᵢ. Dùng để đo hướng và góc.">
+          <div class="sym" style="color:#37d5ff">⟨v,x⟩</div>
+          <div class="how">tích vô hướng của v và x</div>
+          <h3>Tích vô hướng</h3>
+          <p>Nếu v=(v₁,…,vₙ), x=(x₁,…,xₙ) thì ⟨v,x⟩=Σvᵢxᵢ. Dùng để đo hướng và góc.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> Cauchy–Schwarz: |⟨v,x⟩|≤‖v‖‖x‖.</div>
+        </article>
+        <article class="card" data-search="norm distance ‖x‖ Chuẩn Euclid Độ dài của vectơ x: ‖x‖=√(x₁²+…+xₙ²).">
+          <div class="sym" style="color:#37d5ff">‖x‖</div>
+          <div class="how">chuẩn của x</div>
+          <h3>Chuẩn Euclid</h3>
+          <p>Độ dài của vectơ x: ‖x‖=√(x₁²+…+xₙ²).</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> x=(3,4) ⇒ ‖x‖=5.</div>
+        </article>
+        <article class="card" data-search="ball neighborhood Bᵣ(x) Quả cầu đóng Bᵣ(x)={z∈ℝⁿ | ‖z−x‖≤r}.">
+          <div class="sym" style="color:#37d5ff">Bᵣ(x)</div>
+          <div class="how">quả cầu bán kính r tâm x</div>
+          <h3>Quả cầu đóng</h3>
+          <p>Bᵣ(x)={z∈ℝⁿ | ‖z−x‖≤r}.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> Dùng để nói “gần x̄”, “locally at x̄”.</div>
+        </article>
+        <article class="card" data-search="definition colon equals := Ký hiệu định nghĩa A:=B nghĩa là A được định nghĩa bằng B, không chỉ là một đẳng thức thông thường.">
+          <div class="sym" style="color:#37d5ff">:=</div>
+          <div class="how">bằng theo định nghĩa</div>
+          <h3>Ký hiệu định nghĩa</h3>
+          <p>A:=B nghĩa là A được định nghĩa bằng B, không chỉ là một đẳng thức thông thường.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> dist(x;Ω):=inf_{z∈Ω}‖x−z‖.</div>
+        </article>
+        <article class="card" data-search="gradient nabla derivative ∇f(x̄) Gradient Vectơ các đạo hàm riêng của f tại x̄; chỉ tồn tại khi f khả vi/trơn.">
+          <div class="sym" style="color:#37d5ff">∇f(x̄)</div>
+          <div class="how">gradient của f tại x-bar</div>
+          <h3>Gradient</h3>
+          <p>Vectơ các đạo hàm riêng của f tại x̄; chỉ tồn tại khi f khả vi/trơn.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> f(x,y)=x²+y³ ⇒ ∇f=(2x,3y²).</div>
+        </article>
+        <article class="card" data-search="logic quantifier ∀, ∃, ⟹, ⟺ Logic toán học Các lượng từ và ký hiệu suy luận xuất hiện liên tục trong định nghĩa và chứng minh.">
+          <div class="sym" style="color:#37d5ff">∀, ∃, ⟹, ⟺</div>
+          <div class="how">với mọi, tồn tại, suy ra, tương đương</div>
+          <h3>Logic toán học</h3>
+          <p>Các lượng từ và ký hiệu suy luận xuất hiện liên tục trong định nghĩa và chứng minh.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> ∀x∈ℝ: x²≥0; x=0 ⟺ ‖x‖=0.</div>
+        </article>
+        <article class="card" data-search="infimum supremum inf, sup Infimum / Supremum Giống min/max nhưng không cần đạt được trong tập.">
+          <div class="sym" style="color:#37d5ff">inf, sup</div>
+          <div class="how">cận dưới lớn nhất, cận trên nhỏ nhất</div>
+          <h3>Infimum / Supremum</h3>
+          <p>Giống min/max nhưng không cần đạt được trong tập.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> inf{1/n:n≥1}=0 dù 0 không thuộc tập.</div>
+        </article>
+        <article class="card" data-search="extended real infinity ℝ̄=(−∞,+∞] Đường thực mở rộng Cho phép hàm nhận giá trị +∞ để mã hóa ràng buộc hoặc điểm không khả thi.">
+          <div class="sym" style="color:#37d5ff">ℝ̄=(−∞,+∞]</div>
+          <div class="how">R mở rộng</div>
+          <h3>Đường thực mở rộng</h3>
+          <p>Cho phép hàm nhận giá trị +∞ để mã hóa ràng buộc hoặc điểm không khả thi.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> δ(x;Ω)=+∞ nếu x∉Ω.</div>
+        </article>
+      </div>
+    </section>
+    <section class="sec" data-cat="set">
+      <div class="sec-head">
+        <span class="sec-icon" style="--c:#52f5b0">🧩</span>
+        <div>
+          <h2>2. Tập hợp</h2>
+          <p>8 mục tra cứu · nhấn tab hoặc dùng ô tìm kiếm để lọc nhanh</p>
+        </div>
+      </div>
+      <div class="grid">
+        
+        <article class="card" data-search="closure closed cl Ω Closure Tập Ω cộng thêm mọi điểm giới hạn của nó.">
+          <div class="sym" style="color:#52f5b0">cl Ω</div>
+          <div class="how">bao đóng của Ω</div>
+          <h3>Closure</h3>
+          <p>Tập Ω cộng thêm mọi điểm giới hạn của nó.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> Ω=(0,1) ⇒ cl Ω=[0,1].</div>
+        </article>
+        <article class="card" data-search="interior int Ω Interior Các điểm có một quả cầu nhỏ nằm hoàn toàn trong Ω.">
+          <div class="sym" style="color:#52f5b0">int Ω</div>
+          <div class="how">phần trong của Ω</div>
+          <h3>Interior</h3>
+          <p>Các điểm có một quả cầu nhỏ nằm hoàn toàn trong Ω.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> int[0,1]=(0,1).</div>
+        </article>
+        <article class="card" data-search="boundary bd Ω Boundary Các điểm mà mọi lân cận đều chạm cả trong và ngoài Ω.">
+          <div class="sym" style="color:#52f5b0">bd Ω</div>
+          <div class="how">biên của Ω</div>
+          <h3>Boundary</h3>
+          <p>Các điểm mà mọi lân cận đều chạm cả trong và ngoài Ω.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> Ω={x:‖x‖≤1} ⇒ bd Ω={x:‖x‖=1}.</div>
+        </article>
+        <article class="card" data-search="convex hull co Ω Convex hull Tập lồi nhỏ nhất chứa Ω.">
+          <div class="sym" style="color:#52f5b0">co Ω</div>
+          <div class="how">bao lồi của Ω</div>
+          <h3>Convex hull</h3>
+          <p>Tập lồi nhỏ nhất chứa Ω.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> Ba điểm không thẳng hàng tạo ra tam giác đặc.</div>
+        </article>
+        <article class="card" data-search="cone conic hull cone Ω Conic hull Tập các bội không âm của phần tử trong Ω.">
+          <div class="sym" style="color:#52f5b0">cone Ω</div>
+          <div class="how">bao nón của Ω</div>
+          <h3>Conic hull</h3>
+          <p>Tập các bội không âm của phần tử trong Ω.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> cone{(1,0)}={(t,0):t≥0}.</div>
+        </article>
+        <article class="card" data-search="indicator function δ(x;Ω) Hàm chỉ thị Bằng 0 nếu x∈Ω, bằng +∞ nếu x∉Ω; dùng để đưa ràng buộc vào hàm mục tiêu.">
+          <div class="sym" style="color:#52f5b0">δ(x;Ω)</div>
+          <div class="how">delta x omega</div>
+          <h3>Hàm chỉ thị</h3>
+          <p>Bằng 0 nếu x∈Ω, bằng +∞ nếu x∉Ω; dùng để đưa ràng buộc vào hàm mục tiêu.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> min f(x)+δ(x;Ω) tương đương min f(x) với x∈Ω.</div>
+        </article>
+        <article class="card" data-search="convex set Ω lồi Tập lồi Với mọi x,z∈Ω và α∈[0,1], điểm z+α(x−z) vẫn thuộc Ω.">
+          <div class="sym" style="color:#52f5b0">Ω lồi</div>
+          <div class="how">omega lồi</div>
+          <h3>Tập lồi</h3>
+          <p>Với mọi x,z∈Ω và α∈[0,1], điểm z+α(x−z) vẫn thuộc Ω.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> Hình tròn đặc lồi; đường tròn chỉ viền không lồi.</div>
+        </article>
+        <article class="card" data-search="epigraph epi epi φ Thượng đồ thị epi φ={(x,α)∈ℝⁿ×ℝ | α≥φ(x)}. Subdifferential được xây qua nón pháp tuyến của epi φ.">
+          <div class="sym" style="color:#52f5b0">epi φ</div>
+          <div class="how">epigraph của phi</div>
+          <h3>Thượng đồ thị</h3>
+          <p>epi φ={(x,α)∈ℝⁿ×ℝ | α≥φ(x)}. Subdifferential được xây qua nón pháp tuyến của epi φ.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> φ(x)=x² ⇒ epi φ là vùng phía trên parabol.</div>
+        </article>
+      </div>
+    </section>
+    <section class="sec" data-cat="limit">
+      <div class="sec-head">
+        <span class="sec-icon" style="--c:#fbbf24">🌌</span>
+        <div>
+          <h2>3. Giới hạn đặc biệt</h2>
+          <p>9 mục tra cứu · nhấn tab hoặc dùng ô tìm kiếm để lọc nhanh</p>
+        </div>
+      </div>
+      <div class="grid">
+        
+        <article class="card" data-search="xbar reference point x̄, ȳ Điểm tham chiếu Điểm cố định tại đó ta tính normal cone, coderivative, hoặc subdifferential.">
+          <div class="sym" style="color:#fbbf24">x̄, ȳ</div>
+          <div class="how">x-bar, y-bar</div>
+          <h3>Điểm tham chiếu</h3>
+          <p>Điểm cố định tại đó ta tính normal cone, coderivative, hoặc subdifferential.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> N(x̄;Ω) là nón pháp tuyến tại x̄.</div>
+        </article>
+        <article class="card" data-search="convergence x→x̄ Hội tụ ‖x−x̄‖→0. Thường hiểu qua dãy xₖ→x̄.">
+          <div class="sym" style="color:#fbbf24">x→x̄</div>
+          <div class="how">x tiến tới x-bar</div>
+          <h3>Hội tụ</h3>
+          <p>‖x−x̄‖→0. Thường hiểu qua dãy xₖ→x̄.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> xₖ=1/k→0.</div>
+        </article>
+        <article class="card" data-search="restricted convergence x→^Ω x̄ Hội tụ trong tập x→x̄ và x∈Ω. Tức dãy tiến đến x̄ nhưng chỉ đi bên trong Ω.">
+          <div class="sym" style="color:#fbbf24">x→^Ω x̄</div>
+          <div class="how">x tiến tới x-bar trong Ω</div>
+          <h3>Hội tụ trong tập</h3>
+          <p>x→x̄ và x∈Ω. Tức dãy tiến đến x̄ nhưng chỉ đi bên trong Ω.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> Ω=[0,1], xₖ=1/k→^Ω0.</div>
+        </article>
+        <article class="card" data-search="phi convergence x→^φ x̄ Hội tụ kèm giá trị hàm x→x̄ đồng thời φ(x)→φ(x̄). Cần khi φ không liên tục.">
+          <div class="sym" style="color:#fbbf24">x→^φ x̄</div>
+          <div class="how">x tiến tới x-bar kèm phi</div>
+          <h3>Hội tụ kèm giá trị hàm</h3>
+          <p>x→x̄ đồng thời φ(x)→φ(x̄). Cần khi φ không liên tục.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> Nếu φ liên tục thì điều kiện này tự động đúng.</div>
+        </article>
+        <article class="card" data-search="decrease to zero t↓0 Tiến về 0 từ phía dương t&gt;0 và t tiến về 0. Dùng khi chia cho t hoặc xét hướng.">
+          <div class="sym" style="color:#fbbf24">t↓0</div>
+          <div class="how">t giảm về 0</div>
+          <h3>Tiến về 0 từ phía dương</h3>
+          <p>t>0 và t tiến về 0. Dùng khi chia cho t hoặc xét hướng.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> Directional derivative thường dùng t↓0.</div>
+        </article>
+        <article class="card" data-search="liminf lower limit lim inf Lower limit Giá trị đáy mà hàm có thể tiến tới quanh điểm.">
+          <div class="sym" style="color:#fbbf24">lim inf</div>
+          <div class="how">giới hạn dưới</div>
+          <h3>Lower limit</h3>
+          <p>Giá trị đáy mà hàm có thể tiến tới quanh điểm.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> sin(1/x) khi x→0 có lim inf=-1.</div>
+        </article>
+        <article class="card" data-search="limsup upper limit lim sup Upper limit Giá trị đỉnh mà hàm có thể tiến tới quanh điểm.">
+          <div class="sym" style="color:#fbbf24">lim sup</div>
+          <div class="how">giới hạn trên</div>
+          <h3>Upper limit</h3>
+          <p>Giá trị đỉnh mà hàm có thể tiến tới quanh điểm.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> sin(1/x) khi x→0 có lim sup=1.</div>
+        </article>
+        <article class="card" data-search="outer limit set valued Lim sup F(x) Painlevé–Kuratowski outer limit Tập mọi y có thể là giới hạn của yₖ∈F(xₖ) với xₖ→x̄.">
+          <div class="sym" style="color:#fbbf24">Lim sup F(x)</div>
+          <div class="how">giới hạn ngoài</div>
+          <h3>Painlevé–Kuratowski outer limit</h3>
+          <p>Tập mọi y có thể là giới hạn của yₖ∈F(xₖ) với xₖ→x̄.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> Đây là ký hiệu trung tâm của normal cone Mordukhovich.</div>
+        </article>
+        <article class="card" data-search="lower semicontinuous l.s.c. Lower semicontinuous φ(x̄)≤lim inf_{x→x̄}φ(x). Tương đương epi φ đóng.">
+          <div class="sym" style="color:#fbbf24">l.s.c.</div>
+          <div class="how">bán liên tục dưới</div>
+          <h3>Lower semicontinuous</h3>
+          <p>φ(x̄)≤lim inf_{x→x̄}φ(x). Tương đương epi φ đóng.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> Điều kiện chuẩn cho nhiều định lý về ∂φ.</div>
+        </article>
+      </div>
+    </section>
+    <section class="sec" data-cat="mapping">
+      <div class="sec-head">
+        <span class="sec-icon" style="--c:#ff70b8">🛰️</span>
+        <div>
+          <h2>4. Ánh xạ</h2>
+          <p>8 mục tra cứu · nhấn tab hoặc dùng ô tìm kiếm để lọc nhanh</p>
+        </div>
+      </div>
+      <div class="grid">
+        
+        <article class="card" data-search="single valued f:ℝⁿ→ℝᵐ Ánh xạ đơn trị Mỗi x cho đúng một giá trị f(x).">
+          <div class="sym" style="color:#ff70b8">f:ℝⁿ→ℝᵐ</div>
+          <div class="how">f từ R-n vào R-m</div>
+          <h3>Ánh xạ đơn trị</h3>
+          <p>Mỗi x cho đúng một giá trị f(x).</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> f(x,y)=x²+y².</div>
+        </article>
+        <article class="card" data-search="set valued multifunction F:ℝⁿ⇒ℝᵐ Ánh xạ đa trị Mỗi x cho một tập F(x), có thể rỗng hoặc nhiều phần tử.">
+          <div class="sym" style="color:#ff70b8">F:ℝⁿ⇒ℝᵐ</div>
+          <div class="how">F từ R-n vào R-m, mũi tên đôi</div>
+          <h3>Ánh xạ đa trị</h3>
+          <p>Mỗi x cho một tập F(x), có thể rỗng hoặc nhiều phần tử.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> S(p)=argminₓ f(x,p) thường là đa trị.</div>
+        </article>
+        <article class="card" data-search="graph gph F Đồ thị gph F={(x,y)|y∈F(x)}. Coderivative được định nghĩa qua nón pháp tuyến của gph F.">
+          <div class="sym" style="color:#ff70b8">gph F</div>
+          <div class="how">graph của F</div>
+          <h3>Đồ thị</h3>
+          <p>gph F={(x,y)|y∈F(x)}. Coderivative được định nghĩa qua nón pháp tuyến của gph F.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> Với f(x)=x², gph f là parabol.</div>
+        </article>
+        <article class="card" data-search="domain dom F Miền xác định dom F={x|F(x)≠∅}.">
+          <div class="sym" style="color:#ff70b8">dom F</div>
+          <div class="how">domain của F</div>
+          <h3>Miền xác định</h3>
+          <p>dom F={x|F(x)≠∅}.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> F(x)=√x ⇒ dom F=[0,+∞).</div>
+        </article>
+        <article class="card" data-search="range rge F Miền giá trị rge F={y|∃x:y∈F(x)}.">
+          <div class="sym" style="color:#ff70b8">rge F</div>
+          <div class="how">range của F</div>
+          <h3>Miền giá trị</h3>
+          <p>rge F={y|∃x:y∈F(x)}.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> f(x)=x² ⇒ rge f=[0,+∞).</div>
+        </article>
+        <article class="card" data-search="inverse F⁻¹(y) Ánh xạ ngược F⁻¹(y)={x|y∈F(x)}. Với đa trị, ký hiệu này luôn có nghĩa.">
+          <div class="sym" style="color:#ff70b8">F⁻¹(y)</div>
+          <div class="how">F nghịch tại y</div>
+          <h3>Ánh xạ ngược</h3>
+          <p>F⁻¹(y)={x|y∈F(x)}. Với đa trị, ký hiệu này luôn có nghĩa.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> f(x)=x² ⇒ f⁻¹(4)={−2,2}.</div>
+        </article>
+        <article class="card" data-search="jacobian transpose coderivative ∇f(x̄)ᵀ Adjoint / Transpose Jacobian Chuyển nhiễu ở đầu ra về không gian đầu vào. Khi f trơn: D*f(x̄)(v)=∇f(x̄)ᵀv.">
+          <div class="sym" style="color:#ff70b8">∇f(x̄)ᵀ</div>
+          <div class="how">Jacobian chuyển vị</div>
+          <h3>Adjoint / Transpose Jacobian</h3>
+          <p>Chuyển nhiễu ở đầu ra về không gian đầu vào. Khi f trơn: D*f(x̄)(v)=∇f(x̄)ᵀv.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> Đây là cầu nối giữa đạo hàm cổ điển và coderivative.</div>
+        </article>
+        <article class="card" data-search="lipschitz locally Lipschitz Không biến thiên quá nhanh ‖f(x)−f(z)‖≤ℓ‖x−z‖ gần x̄.">
+          <div class="sym" style="color:#ff70b8">locally Lipschitz</div>
+          <div class="how">Lipschitz cục bộ</div>
+          <h3>Không biến thiên quá nhanh</h3>
+          <p>‖f(x)−f(z)‖≤ℓ‖x−z‖ gần x̄.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> |x| là Lipschitz với ℓ=1.</div>
+        </article>
+      </div>
+    </section>
+    <section class="sec" data-cat="normal">
+      <div class="sec-head">
+        <span class="sec-icon" style="--c:#1d8cff">🧭</span>
+        <div>
+          <h2>5. Nón pháp tuyến</h2>
+          <p>7 mục tra cứu · nhấn tab hoặc dùng ô tìm kiếm để lọc nhanh</p>
+        </div>
+      </div>
+      <div class="grid">
+        
+        <article class="card" data-search="distance function dist(x;Ω)=dΩ(x) Hàm khoảng cách dist(x;Ω)=inf_{z∈Ω}‖x−z‖.">
+          <div class="sym" style="color:#1d8cff">dist(x;Ω)=dΩ(x)</div>
+          <div class="how">khoảng cách từ x đến Ω</div>
+          <h3>Hàm khoảng cách</h3>
+          <p>dist(x;Ω)=inf_{z∈Ω}‖x−z‖.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> Nếu x∈Ω thì dist(x;Ω)=0.</div>
+        </article>
+        <article class="card" data-search="projection Π(x;Ω) Projector Tập các điểm w∈Ω gần x nhất.">
+          <div class="sym" style="color:#1d8cff">Π(x;Ω)</div>
+          <div class="how">phép chiếu lên Ω</div>
+          <h3>Projector</h3>
+          <p>Tập các điểm w∈Ω gần x nhất.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> Với Ω=[−1,1], x=3 ⇒ Π(x;Ω)={1}.</div>
+        </article>
+        <article class="card" data-search="normal cone limiting N(x̄;Ω) Basic / Limiting normal cone N(x̄;Ω)=Lim sup_{x→x̄} cone[x−Π(x;Ω)]. Có thể không lồi.">
+          <div class="sym" style="color:#1d8cff">N(x̄;Ω)</div>
+          <div class="how">nón pháp tuyến cơ bản</div>
+          <h3>Basic / Limiting normal cone</h3>
+          <p>N(x̄;Ω)=Lim sup_{x→x̄} cone[x−Π(x;Ω)]. Có thể không lồi.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> Khái niệm trung tâm của Mordukhovich.</div>
+        </article>
+        <article class="card" data-search="regular normal hat N̂(x̄;Ω) Regular normal cone Dùng lim sup tỷ số ⟨v,z−x̄⟩/‖z−x̄‖≤0. Luôn lồi.">
+          <div class="sym" style="color:#1d8cff">N̂(x̄;Ω)</div>
+          <div class="how">nón pháp tuyến chính quy</div>
+          <h3>Regular normal cone</h3>
+          <p>Dùng lim sup tỷ số ⟨v,z−x̄⟩/‖z−x̄‖≤0. Luôn lồi.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> N̂⊂N; khi Ω lồi thì thường trùng với normal cone lồi.</div>
+        </article>
+        <article class="card" data-search="epsilon normal Nε(x̄;Ω) ε-normal cone Phiên bản nới lỏng của N̂ với sai số ε.">
+          <div class="sym" style="color:#1d8cff">Nε(x̄;Ω)</div>
+          <div class="how">N-epsilon</div>
+          <h3>ε-normal cone</h3>
+          <p>Phiên bản nới lỏng của N̂ với sai số ε.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> Dùng trong biểu diễn giới hạn của N.</div>
+        </article>
+        <article class="card" data-search="tangent cone T(x̄;Ω) Tangent / Contingent cone Các hướng có thể đi vào Ω từ x̄.">
+          <div class="sym" style="color:#1d8cff">T(x̄;Ω)</div>
+          <div class="how">nón tiếp tuyến</div>
+          <h3>Tangent / Contingent cone</h3>
+          <p>Các hướng có thể đi vào Ω từ x̄.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> T là đối tượng đối ngẫu với N̂.</div>
+        </article>
+        <article class="card" data-search="polar dual T*(x̄;Ω) Dual / Polar cone T*={v|⟨v,w⟩≤0 ∀w∈T}.">
+          <div class="sym" style="color:#1d8cff">T*(x̄;Ω)</div>
+          <div class="how">nón đối ngẫu của T</div>
+          <h3>Dual / Polar cone</h3>
+          <p>T*={v|⟨v,w⟩≤0 ∀w∈T}.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> Mệnh đề quan trọng: N̂(x̄;Ω)=T*(x̄;Ω).</div>
+        </article>
+      </div>
+    </section>
+    <section class="sec" data-cat="coderiv">
+      <div class="sec-head">
+        <span class="sec-icon" style="--c:#52f5b0">🔁</span>
+        <div>
+          <h2>6. Coderivative</h2>
+          <p>5 mục tra cứu · nhấn tab hoặc dùng ô tìm kiếm để lọc nhanh</p>
+        </div>
+      </div>
+      <div class="grid">
+        
+        <article class="card" data-search="coderivative basic D*F(x̄,ȳ)(v) Basic coderivative D*F(x̄,ȳ)(v)={u|(u,−v)∈N((x̄,ȳ);gph F)}.">
+          <div class="sym" style="color:#52f5b0">D*F(x̄,ȳ)(v)</div>
+          <div class="how">D-star F tác động lên v</div>
+          <h3>Basic coderivative</h3>
+          <p>D*F(x̄,ȳ)(v)={u|(u,−v)∈N((x̄,ȳ);gph F)}.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> Dấu trừ ở −v rất quan trọng.</div>
+        </article>
+        <article class="card" data-search="regular coderivative D̂*F(x̄,ȳ)(v) Regular coderivative Dùng N̂ thay vì N trong định nghĩa coderivative.">
+          <div class="sym" style="color:#52f5b0">D̂*F(x̄,ȳ)(v)</div>
+          <div class="how">D-hat-star</div>
+          <h3>Regular coderivative</h3>
+          <p>Dùng N̂ thay vì N trong định nghĩa coderivative.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> D̂*F⊂D*F.</div>
+        </article>
+        <article class="card" data-search="single valued coderivative D*f(x̄)(v) Single-valued notation Khi F=f đơn trị, ȳ=f(x̄) nên thường bỏ ȳ.">
+          <div class="sym" style="color:#52f5b0">D*f(x̄)(v)</div>
+          <div class="how">coderivative rút gọn</div>
+          <h3>Single-valued notation</h3>
+          <p>Khi F=f đơn trị, ȳ=f(x̄) nên thường bỏ ȳ.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> D*f(x̄)(v)=D*f(x̄,f(x̄))(v).</div>
+        </article>
+        <article class="card" data-search="smooth coderivative jacobian D*f(x̄)(v)=∇f(x̄)ᵀv Smooth case Nếu f trơn thì coderivative chính là Jacobian chuyển vị.">
+          <div class="sym" style="color:#52f5b0">D*f(x̄)(v)=∇f(x̄)ᵀv</div>
+          <div class="how">coderivative của hàm trơn</div>
+          <h3>Smooth case</h3>
+          <p>Nếu f trơn thì coderivative chính là Jacobian chuyển vị.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> Đây là cách hiểu trực giác tốt nhất.</div>
+        </article>
+        <article class="card" data-search="inner semicontinuous F isc Bán liên tục trong Mọi điểm trong F(x̄) được xấp xỉ bởi điểm trong F(x) khi x→x̄.">
+          <div class="sym" style="color:#52f5b0">F isc</div>
+          <div class="how">F inner semicontinuous</div>
+          <h3>Bán liên tục trong</h3>
+          <p>Mọi điểm trong F(x̄) được xấp xỉ bởi điểm trong F(x) khi x→x̄.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> Liên quan tới ổn định của ánh xạ đa trị.</div>
+        </article>
+      </div>
+    </section>
+    <section class="sec" data-cat="subdiff">
+      <div class="sec-head">
+        <span class="sec-icon" style="--c:#7c5cff">∂</span>
+        <div>
+          <h2>7. Vi phân con</h2>
+          <p>7 mục tra cứu · nhấn tab hoặc dùng ô tìm kiếm để lọc nhanh</p>
+        </div>
+      </div>
+      <div class="grid">
+        
+        <article class="card" data-search="basic subdifferential ∂φ(x̄) Basic subdifferential ∂φ(x̄)={v|(v,−1)∈N((x̄,φ(x̄));epi φ)}. Có thể không lồi.">
+          <div class="sym" style="color:#7c5cff">∂φ(x̄)</div>
+          <div class="how">partial phi tại x-bar</div>
+          <h3>Basic subdifferential</h3>
+          <p>∂φ(x̄)={v|(v,−1)∈N((x̄,φ(x̄));epi φ)}. Có thể không lồi.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> Nếu φ C¹ thì ∂φ(x̄)={∇φ(x̄)}.</div>
+        </article>
+        <article class="card" data-search="singular subdifferential ∂∞φ(x̄) Singular subdifferential ∂∞φ(x̄)={v|(v,0)∈N((x̄,φ(x̄));epi φ)}. Dùng để kiểm tra Lipschitz.">
+          <div class="sym" style="color:#7c5cff">∂∞φ(x̄)</div>
+          <div class="how">partial infinity phi</div>
+          <h3>Singular subdifferential</h3>
+          <p>∂∞φ(x̄)={v|(v,0)∈N((x̄,φ(x̄));epi φ)}. Dùng để kiểm tra Lipschitz.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> φ Lipschitz cục bộ ⇔ ∂∞φ(x̄)={0}.</div>
+        </article>
+        <article class="card" data-search="regular subdifferential ∂̂φ(x̄) Regular subdifferential Phiên bản chính quy/Fréchet. Luôn lồi, có thể rỗng.">
+          <div class="sym" style="color:#7c5cff">∂̂φ(x̄)</div>
+          <div class="how">partial-hat phi</div>
+          <h3>Regular subdifferential</h3>
+          <p>Phiên bản chính quy/Fréchet. Luôn lồi, có thể rỗng.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> Là bước trung gian để lấy giới hạn ra ∂φ.</div>
+        </article>
+        <article class="card" data-search="epsilon subdifferential ∂εφ(x̄) ε-subdifferential Nới lỏng ∂̂ bằng sai số ε. Khi ε=0 thì trở về ∂̂.">
+          <div class="sym" style="color:#7c5cff">∂εφ(x̄)</div>
+          <div class="how">partial epsilon phi</div>
+          <h3>ε-subdifferential</h3>
+          <p>Nới lỏng ∂̂ bằng sai số ε. Khi ε=0 thì trở về ∂̂.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> Dùng trong biểu diễn Lim sup của ∂φ.</div>
+        </article>
+        <article class="card" data-search="directional contingent derivative dφ(x̄;w) Contingent derivative Tốc độ thay đổi nhỏ nhất theo hướng w.">
+          <div class="sym" style="color:#7c5cff">dφ(x̄;w)</div>
+          <div class="how">d phi theo hướng w</div>
+          <h3>Contingent derivative</h3>
+          <p>Tốc độ thay đổi nhỏ nhất theo hướng w.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> v∈∂̂φ(x̄) ⇔ ⟨v,w⟩≤dφ(x̄;w) với mọi w.</div>
+        </article>
+        <article class="card" data-search="fermat rule 0∈∂φ(x̄) Fermat rule suy rộng Nếu x̄ là cực tiểu cục bộ thì 0∈∂φ(x̄).">
+          <div class="sym" style="color:#7c5cff">0∈∂φ(x̄)</div>
+          <div class="how">không thuộc partial phi</div>
+          <h3>Fermat rule suy rộng</h3>
+          <p>Nếu x̄ là cực tiểu cục bộ thì 0∈∂φ(x̄).</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> Mở rộng f′(x̄)=0 cho hàm phi trơn.</div>
+        </article>
+        <article class="card" data-search="sum rule ∂(ψ+φ)=∇ψ+∂φ Sum rule Nếu ψ trơn, phần trơn tách ra thành gradient, phần phi trơn giữ subdiff.">
+          <div class="sym" style="color:#7c5cff">∂(ψ+φ)=∇ψ+∂φ</div>
+          <div class="how">quy tắc tổng</div>
+          <h3>Sum rule</h3>
+          <p>Nếu ψ trơn, phần trơn tách ra thành gradient, phần phi trơn giữ subdiff.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> h(x)=x²+|x| ⇒ ∂h(0)=[−1,1].</div>
+        </article>
+      </div>
+    </section>
+    <section class="sec" data-cat="func">
+      <div class="sec-head">
+        <span class="sec-icon" style="--c:#ffb86b">ƒ</span>
+        <div>
+          <h2>8. Hàm số</h2>
+          <p>7 mục tra cứu · nhấn tab hoặc dùng ô tìm kiếm để lọc nhanh</p>
+        </div>
+      </div>
+      <div class="grid">
+        
+        <article class="card" data-search="proper function φ proper Hàm proper φ(x)&gt;−∞ mọi x và tồn tại ít nhất một điểm có φ(x)&lt;+∞.">
+          <div class="sym" style="color:#ffb86b">φ proper</div>
+          <div class="how">phi proper</div>
+          <h3>Hàm proper</h3>
+          <p>φ(x)>−∞ mọi x và tồn tại ít nhất một điểm có φ(x)<+∞.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> φ≡+∞ không proper.</div>
+        </article>
+        <article class="card" data-search="lsc lower semicontinuous φ l.s.c. Lower semicontinuity φ(x̄)≤lim inf φ(x). Tương đương epi φ đóng.">
+          <div class="sym" style="color:#ffb86b">φ l.s.c.</div>
+          <div class="how">phi bán liên tục dưới</div>
+          <h3>Lower semicontinuity</h3>
+          <p>φ(x̄)≤lim inf φ(x). Tương đương epi φ đóng.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> Điều kiện đứng chuẩn trong §1.3.</div>
+        </article>
+        <article class="card" data-search="smooth class C¹, C², Cᵏ Lớp hàm trơn C¹ có đạo hàm bậc một liên tục; C² có đạo hàm bậc hai liên tục.">
+          <div class="sym" style="color:#ffb86b">C¹, C², Cᵏ</div>
+          <div class="how">C một, C hai, C k</div>
+          <h3>Lớp hàm trơn</h3>
+          <p>C¹ có đạo hàm bậc một liên tục; C² có đạo hàm bậc hai liên tục.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> |x| liên tục nhưng không C¹ tại 0.</div>
+        </article>
+        <article class="card" data-search="coercive φ coercive Hàm tăng ra vô cực φ(x)→+∞ khi ‖x‖→+∞. Giúp đảm bảo nghiệm tối ưu tồn tại.">
+          <div class="sym" style="color:#ffb86b">φ coercive</div>
+          <div class="how">phi coercive</div>
+          <h3>Hàm tăng ra vô cực</h3>
+          <p>φ(x)→+∞ khi ‖x‖→+∞. Giúp đảm bảo nghiệm tối ưu tồn tại.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> x²+1 là coercive.</div>
+        </article>
+        <article class="card" data-search="positive part x₊=max(x,0) Phần dương Bằng x nếu x≥0, bằng 0 nếu x&lt;0.">
+          <div class="sym" style="color:#ffb86b">x₊=max(x,0)</div>
+          <div class="how">x-plus</div>
+          <h3>Phần dương</h3>
+          <p>Bằng x nếu x≥0, bằng 0 nếu x<0.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> ReLU trong machine learning chính là x₊.</div>
+        </article>
+        <article class="card" data-search="scalarization ⟨v,f⟩(x) Scalarization ⟨v,f⟩(x):=⟨v,f(x)⟩, biến ánh xạ vector thành hàm vô hướng.">
+          <div class="sym" style="color:#ffb86b">⟨v,f⟩(x)</div>
+          <div class="how">v-f của x</div>
+          <h3>Scalarization</h3>
+          <p>⟨v,f⟩(x):=⟨v,f(x)⟩, biến ánh xạ vector thành hàm vô hướng.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> D*f(x̄)(v)=∂⟨v,f⟩(x̄).</div>
+        </article>
+        <article class="card" data-search="lipschitz modulus Lip(f;x̄) hoặc ℓ Lipschitz modulus Đo tốc độ biến thiên tối đa quanh x̄.">
+          <div class="sym" style="color:#ffb86b">Lip(f;x̄) hoặc ℓ</div>
+          <div class="how">hằng số Lipschitz</div>
+          <h3>Lipschitz modulus</h3>
+          <p>Đo tốc độ biến thiên tối đa quanh x̄.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> Nếu f C¹, ℓ liên quan tới chuẩn của Jacobian.</div>
+        </article>
+      </div>
+    </section>
+    <section class="sec" data-cat="greek">
+      <div class="sec-head">
+        <span class="sec-icon" style="--c:#c4b5fd">λ</span>
+        <div>
+          <h2>9. Chữ Hy Lạp</h2>
+          <p>7 mục tra cứu · nhấn tab hoặc dùng ô tìm kiếm để lọc nhanh</p>
+        </div>
+      </div>
+      <div class="grid">
+        
+        <article class="card" data-search="alpha α Alpha Hệ số tỉ lệ hoặc tọa độ trong epigraph.">
+          <div class="sym" style="color:#c4b5fd">α</div>
+          <div class="how">alpha</div>
+          <h3>Alpha</h3>
+          <p>Hệ số tỉ lệ hoặc tọa độ trong epigraph.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> (x,α)∈epi φ nghĩa là α≥φ(x).</div>
+        </article>
+        <article class="card" data-search="epsilon ε Sai số nhỏ Dùng trong Nε, ∂ε và các lập luận xấp xỉ.">
+          <div class="sym" style="color:#c4b5fd">ε</div>
+          <div class="how">epsilon</div>
+          <h3>Sai số nhỏ</h3>
+          <p>Dùng trong Nε, ∂ε và các lập luận xấp xỉ.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> Cho ε→0 để lấy đối tượng limiting.</div>
+        </article>
+        <article class="card" data-search="delta δ Bán kính lân cận / hàm chỉ thị Có thể là số nhỏ δ&gt;0 hoặc hàm chỉ thị δ(x;Ω).">
+          <div class="sym" style="color:#c4b5fd">δ</div>
+          <div class="how">delta</div>
+          <h3>Bán kính lân cận / hàm chỉ thị</h3>
+          <p>Có thể là số nhỏ δ>0 hoặc hàm chỉ thị δ(x;Ω).</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> Bδ(x̄) là quả cầu nhỏ quanh x̄.</div>
+        </article>
+        <article class="card" data-search="lambda λ Nhân tử / hệ số co giãn Dùng cho Lagrange multiplier hoặc λ↓0 trong ∂∞.">
+          <div class="sym" style="color:#c4b5fd">λ</div>
+          <div class="how">lambda</div>
+          <h3>Nhân tử / hệ số co giãn</h3>
+          <p>Dùng cho Lagrange multiplier hoặc λ↓0 trong ∂∞.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> ∂∞φ=Lim sup λ∂φ khi λ↓0.</div>
+        </article>
+        <article class="card" data-search="phi psi φ, ψ Hàm vô hướng φ thường là hàm chính, ψ thường là hàm phụ/trơn.">
+          <div class="sym" style="color:#c4b5fd">φ, ψ</div>
+          <div class="how">phi, psi</div>
+          <h3>Hàm vô hướng</h3>
+          <p>φ thường là hàm chính, ψ thường là hàm phụ/trơn.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> ψ dùng trong định lý biến phân trơn.</div>
+        </article>
+        <article class="card" data-search="omega Ω Tập ràng buộc Ký hiệu chuẩn cho tập trong normal cone.">
+          <div class="sym" style="color:#c4b5fd">Ω</div>
+          <div class="how">omega hoa</div>
+          <h3>Tập ràng buộc</h3>
+          <p>Ký hiệu chuẩn cho tập trong normal cone.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> N(x̄;Ω) là pháp tuyến của Ω tại x̄.</div>
+        </article>
+        <article class="card" data-search="kappa κ Hằng số ổn định Thường dùng cho calmness, metric regularity.">
+          <div class="sym" style="color:#c4b5fd">κ</div>
+          <div class="how">kappa</div>
+          <h3>Hằng số ổn định</h3>
+          <p>Thường dùng cho calmness, metric regularity.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> dist(y;F(x))≤κ‖x−x̄‖.</div>
+        </article>
+      </div>
+    </section>
+    <section class="sec" data-cat="compare">
+      <div class="sec-head">
+        <span class="sec-icon" style="--c:#7c5cff">⚖️</span>
+        <div>
+          <h2>10. So sánh subdiff</h2>
+          <p>5 mục tra cứu · nhấn tab hoặc dùng ô tìm kiếm để lọc nhanh</p>
+        </div>
+      </div>
+      <div class="grid wide">
+        
+        <article class="card" data-search="So sánh subdiff ∂̂φ(x̄) Regular / Fréchet subdifferential Luôn lồi, có thể rỗng">
+          <div class="sym" style="color:#7c5cff">∂̂φ(x̄)</div>
+          <div class="how">đọc / hiểu theo ngữ cảnh</div>
+          <h3>Regular / Fréchet subdifferential</h3>
+          <p>Luôn lồi, có thể rỗng</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> Khi φ C¹: {∇φ(x̄)}</div>
+        </article>
+        <article class="card" data-search="So sánh subdiff ∂φ(x̄) Basic / Limiting / Mordukhovich subdifferential Có thể không lồi, là công cụ chính">
+          <div class="sym" style="color:#7c5cff">∂φ(x̄)</div>
+          <div class="how">đọc / hiểu theo ngữ cảnh</div>
+          <h3>Basic / Limiting / Mordukhovich subdifferential</h3>
+          <p>Có thể không lồi, là công cụ chính</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> Khi φ lồi: trùng subdiff lồi</div>
+        </article>
+        <article class="card" data-search="So sánh subdiff ∂∞φ(x̄) Singular subdifferential Đo hướng kỳ dị, đặc trưng Lipschitz">
+          <div class="sym" style="color:#7c5cff">∂∞φ(x̄)</div>
+          <div class="how">đọc / hiểu theo ngữ cảnh</div>
+          <h3>Singular subdifferential</h3>
+          <p>Đo hướng kỳ dị, đặc trưng Lipschitz</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> Lipschitz ⇔ ∂∞={0}</div>
+        </article>
+        <article class="card" data-search="So sánh subdiff ∂Cφ(x̄) Clarke subdifferential Là bao lồi của ∂φ trong nhiều trường hợp">
+          <div class="sym" style="color:#7c5cff">∂Cφ(x̄)</div>
+          <div class="how">đọc / hiểu theo ngữ cảnh</div>
+          <h3>Clarke subdifferential</h3>
+          <p>Là bao lồi của ∂φ trong nhiều trường hợp</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> Có thể mất thông tin phi lồi</div>
+        </article>
+        <article class="card" data-search="So sánh subdiff ∂convφ(x̄) Convex subdifferential Chỉ dành cho hàm lồi">
+          <div class="sym" style="color:#7c5cff">∂convφ(x̄)</div>
+          <div class="how">đọc / hiểu theo ngữ cảnh</div>
+          <h3>Convex subdifferential</h3>
+          <p>Chỉ dành cho hàm lồi</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> Khi hàm lồi, các khái niệm thường trùng nhau</div>
+        </article>
+      </div>
+    </section>
+    <section class="sec" data-cat="construct">
+      <div class="sec-head">
+        <span class="sec-icon" style="--c:#10b981">🏗️</span>
+        <div>
+          <h2>11. Cấu trúc quan trọng</h2>
+          <p>6 mục tra cứu · nhấn tab hoặc dùng ô tìm kiếm để lọc nhanh</p>
+        </div>
+      </div>
+      <div class="grid">
+        
+        <article class="card" data-search="coderivative structure (u,−v)∈N((x̄,ȳ);gph F) Cấu trúc coderivative Dấu trừ nằm ở thành phần đầu ra. Đây là quy ước đối ngẫu quan trọng.">
+          <div class="sym" style="color:#10b981">(u,−v)∈N((x̄,ȳ);gph F)</div>
+          <div class="how">cặp u trừ v thuộc normal cone của graph</div>
+          <h3>Cấu trúc coderivative</h3>
+          <p>Dấu trừ nằm ở thành phần đầu ra. Đây là quy ước đối ngẫu quan trọng.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> D*F(x̄,ȳ)(v)={u|(u,−v)∈N(gph F)}.</div>
+        </article>
+        <article class="card" data-search="subdiff structure (v,−1)∈N(epi φ) Cấu trúc subdifferential λ=−1 tạo ra subgradient thật của φ.">
+          <div class="sym" style="color:#10b981">(v,−1)∈N(epi φ)</div>
+          <div class="how">v trừ một trong normal cone của epigraph</div>
+          <h3>Cấu trúc subdifferential</h3>
+          <p>λ=−1 tạo ra subgradient thật của φ.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> ∂φ dùng (v,−1).</div>
+        </article>
+        <article class="card" data-search="singular structure (v,0)∈N(epi φ) Cấu trúc singular subdifferential λ=0 tạo ra hướng kỳ dị, liên quan tới non-Lipschitz.">
+          <div class="sym" style="color:#10b981">(v,0)∈N(epi φ)</div>
+          <div class="how">v không trong normal cone của epigraph</div>
+          <h3>Cấu trúc singular subdifferential</h3>
+          <p>λ=0 tạo ra hướng kỳ dị, liên quan tới non-Lipschitz.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> ∂∞φ dùng (v,0).</div>
+        </article>
+        <article class="card" data-search="phi convergence structure x→^φx̄ Hội tụ kèm giá trị Cần x→x̄ và φ(x)→φ(x̄).">
+          <div class="sym" style="color:#10b981">x→^φx̄</div>
+          <div class="how">hai điều kiện đồng thời</div>
+          <h3>Hội tụ kèm giá trị</h3>
+          <p>Cần x→x̄ và φ(x)→φ(x̄).</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> Dùng khi φ không liên tục.</div>
+        </article>
+        <article class="card" data-search="local near near x̄ Tính cục bộ Nghĩa là trong một lân cận đủ nhỏ Bδ(x̄).">
+          <div class="sym" style="color:#10b981">near x̄</div>
+          <div class="how">gần x-bar</div>
+          <h3>Tính cục bộ</h3>
+          <p>Nghĩa là trong một lân cận đủ nhỏ Bδ(x̄).</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> Không cần đúng trên toàn không gian.</div>
+        </article>
+        <article class="card" data-search="smooth structure D*f=∇fᵀv Trường hợp trơn Cách hiểu trực giác của coderivative.">
+          <div class="sym" style="color:#10b981">D*f=∇fᵀv</div>
+          <div class="how">coderivative = Jacobian chuyển vị</div>
+          <h3>Trường hợp trơn</h3>
+          <p>Cách hiểu trực giác của coderivative.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> Khi f trơn, mọi thứ trở về đạo hàm cổ điển.</div>
+        </article>
+      </div>
+    </section>
+    <section class="sec" data-cat="trap">
+      <div class="sec-head">
+        <span class="sec-icon" style="--c:#ff6b6b">⚠️</span>
+        <div>
+          <h2>12. Bẫy hay nhầm</h2>
+          <p>6 mục tra cứu · nhấn tab hoặc dùng ô tìm kiếm để lọc nhanh</p>
+        </div>
+      </div>
+      <div class="grid">
+        
+        <article class="card trap" data-search="arrow trap f:ℝⁿ→ℝᵐ vs F:ℝⁿ⇒ℝᵐ Ánh xạ đơn trị và đa trị khác nhau → cho một giá trị; ⇒ cho một tập giá trị.">
+          <div class="sym" style="color:#ff6b6b">f:ℝⁿ→ℝᵐ vs F:ℝⁿ⇒ℝᵐ</div>
+          <div class="how">mũi tên đơn vs đôi</div>
+          <h3>Ánh xạ đơn trị và đa trị khác nhau</h3>
+          <p>→ cho một giá trị; ⇒ cho một tập giá trị.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> Đừng viết mũi tên đơn cho multifunction nếu muốn chuẩn ký hiệu.</div>
+        </article>
+        <article class="card trap" data-search="gph epi trap gph f vs epi f Đồ thị khác thượng đồ thị Coderivative dùng gph; subdifferential dùng epi.">
+          <div class="sym" style="color:#ff6b6b">gph f vs epi f</div>
+          <div class="how">graph vs epigraph</div>
+          <h3>Đồ thị khác thượng đồ thị</h3>
+          <p>Coderivative dùng gph; subdifferential dùng epi.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> f(x)=x²: gph là parabol, epi là vùng phía trên.</div>
+        </article>
+        <article class="card trap" data-search="nonconvex trap N không nhất thiết lồi Nón pháp tuyến cơ bản có thể không lồi Đây là điểm mạnh của Mordukhovich: giữ thông tin phi lồi.">
+          <div class="sym" style="color:#ff6b6b">N không nhất thiết lồi</div>
+          <div class="how">normal cone nonconvex</div>
+          <h3>Nón pháp tuyến cơ bản có thể không lồi</h3>
+          <p>Đây là điểm mạnh của Mordukhovich: giữ thông tin phi lồi.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> Clarke thường lồi hóa và có thể mất thông tin.</div>
+        </article>
+        <article class="card trap" data-search="hat trap N̂≠N, ∂̂≠∂ Chính quy khác cơ bản Hat là đối tượng chính quy tại điểm; không hat là đối tượng limiting qua lân cận.">
+          <div class="sym" style="color:#ff6b6b">N̂≠N, ∂̂≠∂</div>
+          <div class="how">dấu hat rất quan trọng</div>
+          <h3>Chính quy khác cơ bản</h3>
+          <p>Hat là đối tượng chính quy tại điểm; không hat là đối tượng limiting qua lân cận.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> N̂⊂N và ∂̂⊂∂.</div>
+        </article>
+        <article class="card trap" data-search="limsup trap Lim sup ≠ lim sup Hai loại giới hạn khác nhau lim sup thường cho số; Lim sup hoa cho tập.">
+          <div class="sym" style="color:#ff6b6b">Lim sup ≠ lim sup</div>
+          <div class="how">chữ hoa vs chữ thường</div>
+          <h3>Hai loại giới hạn khác nhau</h3>
+          <p>lim sup thường cho số; Lim sup hoa cho tập.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> Lim sup là Painlevé–Kuratowski outer limit.</div>
+        </article>
+        <article class="card trap" data-search="proper trap proper không phải “đẹp” Proper là điều kiện kỹ thuật Proper nghĩa là không bằng +∞ mọi nơi và không nhận −∞.">
+          <div class="sym" style="color:#ff6b6b">proper không phải “đẹp”</div>
+          <div class="how">proper function trap</div>
+          <h3>Proper là điều kiện kỹ thuật</h3>
+          <p>Proper nghĩa là không bằng +∞ mọi nơi và không nhận −∞.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> Trước khi áp dụng định lý, kiểm tra proper l.s.c.</div>
+        </article>
+      </div>
+    </section>
+    <section class="sec" data-cat="phrase">
+      <div class="sec-head">
+        <span class="sec-icon" style="--c:#37d5ff">📖</span>
+        <div>
+          <h2>13. Cách đọc câu toán</h2>
+          <p>9 mục tra cứu · nhấn tab hoặc dùng ô tìm kiếm để lọc nhanh</p>
+        </div>
+      </div>
+      <div class="grid wide">
+        
+        <article class="card" data-search="phrase v∈∂φ(x̄) v là một subgradient của φ tại x̄ Giống đạo hàm nhưng tổng quát hơn.">
+          <div class="sym" style="color:#37d5ff">v∈∂φ(x̄)</div>
+          <div class="how">đọc / hiểu theo ngữ cảnh</div>
+          <h3>v là một subgradient của φ tại x̄</h3>
+          <p>Giống đạo hàm nhưng tổng quát hơn.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> Dùng như một câu tra cứu nhanh khi đọc chứng minh hoặc định nghĩa.</div>
+        </article>
+        <article class="card" data-search="phrase 0∈∂φ(x̄) x̄ thỏa điều kiện tối ưu suy rộng Mở rộng f′(x̄)=0.">
+          <div class="sym" style="color:#37d5ff">0∈∂φ(x̄)</div>
+          <div class="how">đọc / hiểu theo ngữ cảnh</div>
+          <h3>x̄ thỏa điều kiện tối ưu suy rộng</h3>
+          <p>Mở rộng f′(x̄)=0.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> Dùng như một câu tra cứu nhanh khi đọc chứng minh hoặc định nghĩa.</div>
+        </article>
+        <article class="card" data-search="phrase N(x̄;Ω)={0} x̄ thường là điểm trong hoặc không có pháp tuyến thật Không có hướng ra ngoài đáng kể.">
+          <div class="sym" style="color:#37d5ff">N(x̄;Ω)={0}</div>
+          <div class="how">đọc / hiểu theo ngữ cảnh</div>
+          <h3>x̄ thường là điểm trong hoặc không có pháp tuyến thật</h3>
+          <p>Không có hướng ra ngoài đáng kể.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> Dùng như một câu tra cứu nhanh khi đọc chứng minh hoặc định nghĩa.</div>
+        </article>
+        <article class="card" data-search="phrase ∂∞φ(x̄)={0} φ Lipschitz cục bộ tại x̄ Định lý 1.22.">
+          <div class="sym" style="color:#37d5ff">∂∞φ(x̄)={0}</div>
+          <div class="how">đọc / hiểu theo ngữ cảnh</div>
+          <h3>φ Lipschitz cục bộ tại x̄</h3>
+          <p>Định lý 1.22.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> Dùng như một câu tra cứu nhanh khi đọc chứng minh hoặc định nghĩa.</div>
+        </article>
+        <article class="card" data-search="phrase u∈D*F(x̄,ȳ)(v) u là phản ứng đầu vào với nhiễu v ở đầu ra Coderivative mô tả độ nhạy ngược.">
+          <div class="sym" style="color:#37d5ff">u∈D*F(x̄,ȳ)(v)</div>
+          <div class="how">đọc / hiểu theo ngữ cảnh</div>
+          <h3>u là phản ứng đầu vào với nhiễu v ở đầu ra</h3>
+          <p>Coderivative mô tả độ nhạy ngược.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> Dùng như một câu tra cứu nhanh khi đọc chứng minh hoặc định nghĩa.</div>
+        </article>
+        <article class="card" data-search="phrase x→^Ωx̄ x tiến tới x̄ từ trong Ω Hội tụ có ràng buộc tập.">
+          <div class="sym" style="color:#37d5ff">x→^Ωx̄</div>
+          <div class="how">đọc / hiểu theo ngữ cảnh</div>
+          <h3>x tiến tới x̄ từ trong Ω</h3>
+          <p>Hội tụ có ràng buộc tập.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> Dùng như một câu tra cứu nhanh khi đọc chứng minh hoặc định nghĩa.</div>
+        </article>
+        <article class="card" data-search="phrase Lim sup F(x) tập giá trị mà F(x) có thể tiến đến Outer limit của ánh xạ đa trị.">
+          <div class="sym" style="color:#37d5ff">Lim sup F(x)</div>
+          <div class="how">đọc / hiểu theo ngữ cảnh</div>
+          <h3>tập giá trị mà F(x) có thể tiến đến</h3>
+          <p>Outer limit của ánh xạ đa trị.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> Dùng như một câu tra cứu nhanh khi đọc chứng minh hoặc định nghĩa.</div>
+        </article>
+        <article class="card" data-search="phrase φ proper l.s.c. φ không vô nghĩa và không nhảy xuống bất ngờ Điều kiện đứng chuẩn.">
+          <div class="sym" style="color:#37d5ff">φ proper l.s.c.</div>
+          <div class="how">đọc / hiểu theo ngữ cảnh</div>
+          <h3>φ không vô nghĩa và không nhảy xuống bất ngờ</h3>
+          <p>Điều kiện đứng chuẩn.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> Dùng như một câu tra cứu nhanh khi đọc chứng minh hoặc định nghĩa.</div>
+        </article>
+        <article class="card" data-search="phrase N̂(x̄;Ω)=T*(x̄;Ω) pháp tuyến chính quy là nón đối ngẫu của tiếp tuyến Quan hệ đối ngẫu đẹp.">
+          <div class="sym" style="color:#37d5ff">N̂(x̄;Ω)=T*(x̄;Ω)</div>
+          <div class="how">đọc / hiểu theo ngữ cảnh</div>
+          <h3>pháp tuyến chính quy là nón đối ngẫu của tiếp tuyến</h3>
+          <p>Quan hệ đối ngẫu đẹp.</p>
+          <div class="eg"><b>Ghi nhớ / ví dụ:</b> Dùng như một câu tra cứu nhanh khi đọc chứng minh hoặc định nghĩa.</div>
+        </article>
+      </div>
+    </section>
+    </div>
+  </main>
+  <div class="footer"><div>← <a href="../task-01/">Task 01</a></div><div>Lesson 01 · Task 02 / 36 · Mathematical Symbols & Terminology</div><div><a href="../task-03/">Task 03 →</a></div></div>
+</div>
+<script>
+let activeTab='all';
+document.querySelectorAll('.tab').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));btn.classList.add('active');activeTab=btn.dataset.tab;filterCards();}));
+function norm(s){return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
+function filterCards(){
+  const q=norm(document.getElementById('q').value.trim());
+  let visible=0;
+  document.querySelectorAll('.sec').forEach(sec=>{
+    const tabOk=activeTab==='all'||sec.dataset.cat===activeTab;
+    let secVisible=0;
+    sec.querySelectorAll('.card').forEach(card=>{
+      const text=norm(card.dataset.search+' '+card.textContent);
+      const ok=tabOk && (!q || text.includes(q));
+      card.classList.toggle('hidden',!ok);
+      card.classList.toggle('hit',!!q && ok);
+      if(ok){visible++; secVisible++;}
+    });
+    sec.classList.toggle('hidden',!tabOk || secVisible===0);
+  });
+  document.getElementById('count').textContent=q?`${visible} kết quả`:'';
+}
+filterCards();
+</script>
+</body>
+</html>
