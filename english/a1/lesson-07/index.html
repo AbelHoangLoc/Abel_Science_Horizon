@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+
+  <link rel="stylesheet" href="../assets/brand.css">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A1 · Lesson 07 · Colors & Objects</title>
+<style>
+:root{--bg:#080d1a;--card:#0f1729;--card2:#131e35;--border:#1e2d4a;--text:#dde6f5;--muted:#8b9ab5;--accent:#f97316;--acl:#fb923c;--green:#10b981;--red:#ef4444}
+*{box-sizing:border-box;margin:0;padding:0}body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;line-height:1.6;padding:1.5rem 1.25rem 3rem}
+.lsn-header{background:linear-gradient(135deg,#1f0a00,#0f1729);border:1px solid var(--border);border-radius:16px;padding:1.5rem;margin-bottom:1.5rem;position:relative;overflow:hidden}
+.lsn-header::before{content:'';position:absolute;top:-40px;right:-40px;width:150px;height:150px;background:radial-gradient(circle,rgba(249,115,22,.3),transparent 70%);pointer-events:none}
+.lsn-badge{display:inline-flex;background:rgba(249,115,22,.15);border:1px solid rgba(251,146,60,.3);border-radius:20px;padding:.25rem .75rem;font-size:.7rem;font-weight:700;color:var(--acl);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.75rem}
+.lsn-header h1{font-size:1.6rem;font-weight:800;background:linear-gradient(90deg,#fed7aa,#fb923c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.4rem}
+.lsn-header p{color:var(--muted);font-size:.9rem}
+.objectives{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+.obj-tag{background:rgba(249,115,22,.12);border:1px solid rgba(249,115,22,.25);border-radius:20px;padding:.25rem .7rem;font-size:.75rem;color:var(--acl)}
+.sec-title{display:flex;align-items:center;gap:.6rem;font-size:1rem;font-weight:700;color:var(--acl);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)}
+.color-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:.65rem;margin-bottom:1.75rem}
+.color-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:.75rem;text-align:center;cursor:pointer;transition:all .2s}
+.color-card:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,.3)}
+.color-swatch{width:48px;height:48px;border-radius:50%;margin:0 auto .5rem;border:3px solid rgba(255,255,255,.1)}
+.color-en{font-size:.9rem;font-weight:700;color:var(--text)}.color-vn{font-size:.75rem;color:var(--muted);margin-top:.1rem}
+.obj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.65rem;margin-bottom:1.75rem}
+.obj-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:.85rem;cursor:pointer;transition:all .2s}
+.obj-card:hover,.obj-card.flip{border-color:var(--accent);background:rgba(249,115,22,.08)}
+.obj-icon{font-size:1.4rem;margin-bottom:.3rem}.obj-en{font-size:.9rem;font-weight:700;color:var(--text)}.obj-vn{font-size:.78rem;color:var(--muted)}
+.obj-card.flip .obj-eg{display:block}.obj-eg{display:none;font-size:.72rem;color:var(--acl);margin-top:.2rem;font-style:italic}
+.grammar-box{background:linear-gradient(135deg,rgba(249,115,22,.1),rgba(251,146,60,.06));border:1px solid rgba(249,115,22,.2);border-radius:12px;padding:1.1rem;margin-bottom:1.75rem}
+.grammar-box h3{color:var(--acl);font-size:.9rem;margin-bottom:.8rem}
+.gram-row{display:flex;gap:.5rem;align-items:center;margin-bottom:.5rem;font-size:.88rem;flex-wrap:wrap}
+.gram-box{background:rgba(249,115,22,.15);border-radius:6px;padding:.2rem .7rem;color:var(--acl);font-weight:700;font-family:monospace}
+.pattern-list{display:flex;flex-direction:column;gap:.6rem;margin-bottom:1.75rem}
+.pattern-item{background:var(--card);border-left:3px solid var(--accent);border-radius:0 10px 10px 0;padding:.8rem 1rem}
+.pat-en{font-size:1rem;font-weight:600;color:var(--text)}.pat-vn{font-size:.82rem;color:var(--muted);margin-top:.2rem}.pat-note{font-size:.78rem;color:var(--acl);margin-top:.25rem;font-style:italic}
+.convo-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1.75rem}
+.convo-line{display:flex;gap:.7rem;margin-bottom:.65rem;align-items:flex-start}
+.spk-a{color:#fb923c;font-size:.7rem;font-weight:700;text-transform:uppercase;min-width:28px;margin-top:.2rem}
+.spk-b{color:#34d399;font-size:.7rem;font-weight:700;text-transform:uppercase;min-width:28px;margin-top:.2rem}
+.bubble{background:var(--card2);border-radius:0 10px 10px 10px;padding:.55rem .85rem;font-size:.9rem;flex:1}
+.bubble.b{border-radius:10px 10px 10px 0;background:rgba(52,211,153,.07);border:1px solid rgba(52,211,153,.15)}
+.color-quiz-area{margin-bottom:1.75rem}
+.cq-block{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:.75rem}
+.cq-q{font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:.75rem}
+.color-opts{display:flex;flex-wrap:wrap;gap:.5rem}
+.color-opt-btn{border:none;border-radius:20px;padding:.35rem .9rem;font-size:.82rem;font-weight:700;cursor:pointer;transition:all .2s;color:#fff}
+.color-opt-btn.correct{outline:3px solid var(--green);transform:scale(1.1)}
+.color-opt-btn.wrong{opacity:.4}
+.quiz-section{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.25rem;margin-bottom:1.75rem}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+.quiz-q{font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:.75rem;padding:.75rem;background:var(--card2);border-radius:8px}
+.quiz-opts{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.5rem}
+.quiz-opt{background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:.55rem .75rem;font-size:.85rem;cursor:pointer;transition:all .18s;color:var(--text);text-align:left}
+.quiz-opt:hover:not(:disabled){border-color:var(--accent);color:var(--acl)}.quiz-opt.correct{border-color:var(--green)!important;background:rgba(16,185,129,.15)!important;color:var(--green)!important}.quiz-opt.wrong{border-color:var(--red)!important;background:rgba(239,68,68,.1)!important;color:var(--red)!important}.quiz-opt:disabled{cursor:default}
+.quiz-feedback{font-size:.8rem;margin:.4rem 0 .6rem;min-height:1rem}.quiz-feedback.ok{color:var(--green)}.quiz-feedback.no{color:var(--red)}
+.quiz-nav{display:flex;gap:.5rem;align-items:center;justify-content:space-between}
+.btn{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:.5rem 1.1rem;font-size:.85rem;font-weight:600;cursor:pointer;transition:opacity .2s}.btn:hover{opacity:.85}
+.progress-bar{background:var(--border);border-radius:4px;height:4px;flex:1;overflow:hidden}.progress-fill{background:linear-gradient(90deg,var(--accent),#fed7aa);height:100%;border-radius:4px;transition:width .3s}
+.result-box{text-align:center;padding:1.25rem;display:none}.result-emoji{font-size:2.5rem;margin-bottom:.5rem}.result-score{font-size:1.5rem;font-weight:800;color:var(--acl);margin-bottom:.25rem}.result-msg{font-size:.85rem;color:var(--muted);margin-bottom:1rem}
+.lesson-footer{display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border)}
+.footer-nav a{color:var(--accent);text-decoration:none;font-size:.85rem;font-weight:600}
+</style>
+</head>
+<body>
+
+  <img src="../assets/logo-SH.png" class="sh-logo" alt="Science Horizon">
+<div class="lsn-header">
+  <div class="lsn-badge">🎨 People & Everyday Life · Lesson 07</div>
+  <h1>Colors &amp; Objects</h1>
+  <p>Học màu sắc và đồ vật xung quanh — mô tả thế giới bằng tiếng Anh!</p>
+  <div class="objectives">
+    <span class="obj-tag">🎨 12 màu sắc</span>
+    <span class="obj-tag">📚 Đồ dùng học tập</span>
+    <span class="obj-tag">👆 This is / That is</span>
+    <span class="obj-tag">🔵 Màu + danh từ</span>
+  </div>
+</div>
+
+<div class="sec-title"><span>🎨</span> Màu Sắc</div>
+<div class="color-grid" id="colorGrid"></div>
+
+<div class="sec-title"><span>📚</span> Đồ Vật Xung Quanh <small style="color:var(--muted);font-weight:400;font-size:.78rem">(nhấn xem ví dụ)</small></div>
+<div class="obj-grid" id="objGrid"></div>
+
+<div class="sec-title"><span>📐</span> Ngữ Pháp</div>
+<div class="grammar-box">
+  <h3>✏️ This is / That is — Đây là / Đó là</h3>
+  <div class="gram-row"><span class="gram-box">This is</span><span>a red pen.</span><span style="color:var(--muted);font-size:.8rem">→ Đây là cái bút đỏ. (gần)</span></div>
+  <div class="gram-row"><span class="gram-box">That is</span><span>a blue book.</span><span style="color:var(--muted);font-size:.8rem">→ Đó là cuốn sách xanh. (xa)</span></div>
+  <div class="gram-row"><span class="gram-box">These are</span><span>green apples.</span><span style="color:var(--muted);font-size:.8rem">→ Đây là những quả táo xanh. (gần, nhiều)</span></div>
+  <div class="gram-row"><span class="gram-box">Those are</span><span>yellow flowers.</span><span style="color:var(--muted);font-size:.8rem">→ Đó là những bông hoa vàng. (xa, nhiều)</span></div>
+  <div style="margin-top:.75rem;font-size:.82rem;color:var(--muted);background:rgba(249,115,22,.07);border-radius:8px;padding:.6rem .9rem">
+    💡 <strong style="color:var(--acl)">Thứ tự:</strong> Tính từ màu sắc đứng TRƯỚC danh từ trong tiếng Anh: "a <strong>red</strong> pen" (không phải "a pen red")
+  </div>
+</div>
+
+<div class="sec-title"><span>💬</span> Mẫu Câu</div>
+<div class="pattern-list">
+  <div class="pattern-item"><div class="pat-en">"What color is this?" — "It's [color]."</div><div class="pat-vn">→ Cái này màu gì? — Nó màu [màu].</div><div class="pat-note">💡 "What color is your bag?" — "It's black."</div></div>
+  <div class="pattern-item"><div class="pat-en">"This is a [color] [object]."</div><div class="pat-vn">→ Đây là [màu] [đồ vật].</div><div class="pat-note">💡 "This is a blue pen." / "That is a red book."</div></div>
+  <div class="pattern-item"><div class="pat-en">"My [object] is [color]."</div><div class="pat-vn">→ [Đồ vật] của tôi màu [màu].</div><div class="pat-note">💡 "My bag is black and my pen is blue."</div></div>
+</div>
+
+<div class="sec-title"><span>🗣️</span> Hội Thoại</div>
+<div class="convo-box">
+  <div class="convo-line"><span class="spk-a">A</span><div class="bubble">What color is your school bag?</div></div>
+  <div class="convo-line"><span class="spk-b">B</span><div class="bubble b">It's dark blue. And this is my pencil case — it's orange!</div></div>
+  <div class="convo-line"><span class="spk-a">A</span><div class="bubble">That's cool! What's in your pencil case?</div></div>
+  <div class="convo-line"><span class="spk-b">B</span><div class="bubble b">I have a red pen, a black pen, an eraser, and a ruler. What about you?</div></div>
+  <div class="convo-line"><span class="spk-a">A</span><div class="bubble">I have the same things! Oh, is that your book on the desk?</div></div>
+  <div class="convo-line"><span class="spk-b">B</span><div class="bubble b">Yes! That's my English book. It's green!</div></div>
+</div>
+
+<div class="sec-title"><span>🎯</span> Quiz Nhanh (5 câu)</div>
+<div class="quiz-section">
+  <div class="quiz-header"><span id="quizTitle" style="font-size:.85rem;color:var(--muted)">Câu 1 / 5</span><span id="quizScoreDisplay" style="font-size:.85rem;color:var(--muted)">Điểm: 0</span></div>
+  <div id="quizContent">
+    <div class="quiz-q" id="quizQ"></div>
+    <div class="quiz-opts" id="quizOpts"></div>
+    <div class="quiz-feedback" id="quizFB"></div>
+    <div class="quiz-nav"><div class="progress-bar"><div class="progress-fill" id="quizProgress" style="width:20%"></div></div><button class="btn" id="quizNext" style="display:none" onclick="nextQ()">Tiếp →</button></div>
+  </div>
+  <div class="result-box" id="quizResult"><div class="result-emoji" id="resEmoji"></div><div class="result-score" id="resScore"></div><div class="result-msg" id="resMsg"></div><button class="btn" onclick="resetQuiz()">🔄 Làm lại</button></div>
+</div>
+<div class="lesson-footer"><div class="footer-nav">← <a href="../lesson-06/">Lesson 06</a></div><div style="font-size:.8rem;color:var(--muted)">A1 · Lesson 07 / 12</div><div class="footer-nav"><a href="../lesson-08/">Lesson 08 →</a></div></div>
+
+<script>
+const colors=[{en:'red',vn:'đỏ',hex:'#ef4444'},{en:'blue',vn:'xanh dương',hex:'#3b82f6'},{en:'green',vn:'xanh lá',hex:'#22c55e'},{en:'yellow',vn:'vàng',hex:'#eab308'},{en:'orange',vn:'cam',hex:'#f97316'},{en:'purple',vn:'tím',hex:'#a855f7'},{en:'pink',vn:'hồng',hex:'#ec4899'},{en:'black',vn:'đen',hex:'#1f2937'},{en:'white',vn:'trắng',hex:'#f1f5f9'},{en:'brown',vn:'nâu',hex:'#92400e'},{en:'grey',vn:'xám',hex:'#6b7280'},{en:'dark blue',vn:'xanh đậm',hex:'#1d4ed8'}];
+const cg=document.getElementById('colorGrid');
+colors.forEach(c=>{cg.innerHTML+=`<div class="color-card"><div class="color-swatch" style="background:${c.hex}"></div><div class="color-en">${c.en}</div><div class="color-vn">${c.vn}</div></div>`;});
+const objs=[{i:'✏️',en:'pencil',vn:'bút chì',eg:'I have a yellow pencil.'},{i:'🖊️',en:'pen',vn:'bút mực',eg:'This is a blue pen.'},{i:'📚',en:'book',vn:'sách',eg:'That is a big book.'},{i:'📒',en:'notebook',vn:'vở ghi',eg:'My notebook is green.'},{i:'📏',en:'ruler',vn:'thước kẻ',eg:'The ruler is long.'},{i:'🗑️',en:'eraser',vn:'tẩy',eg:'I need an eraser.'},{i:'🎒',en:'bag/backpack',vn:'túi / ba lô',eg:'My bag is black.'},{i:'📐',en:'pencil case',vn:'hộp bút',eg:'This pencil case is orange.'},{i:'🪑',en:'chair',vn:'ghế',eg:'The chair is white.'},{i:'🪟',en:'window',vn:'cửa sổ',eg:'The window is big.'},{i:'🖥️',en:'computer',vn:'máy tính',eg:'That computer is new.'},{i:'📌',en:'board',vn:'bảng',eg:'Look at the board!'}];
+const og=document.getElementById('objGrid');
+objs.forEach(o=>{og.innerHTML+=`<div class="obj-card" onclick="this.classList.toggle('flip')"><div class="obj-icon">${o.i}</div><div class="obj-en">${o.en}</div><div class="obj-vn">${o.vn}</div><div class="obj-eg">"${o.eg}"</div></div>`;});
+const qs=[{q:'Màu "purple" là màu gì?',opts:['Xanh lá','Đỏ','Tím','Vàng'],ans:2},{q:'"This is a red pen." — "This" dùng khi nào?',opts:['Vật ở xa','Vật ở gần','Nhiều vật','Vật không biết'],ans:1},{q:'Câu nào đúng thứ tự?',opts:['a pen red','a red pen','red a pen','pen a red'],ans:1},{q:'"eraser" là gì?',opts:['Cục tẩy','Bút chì','Thước kẻ','Vở ghi'],ans:0},{q:'Dùng "These are" khi nào?',opts:['1 vật ở gần','1 vật ở xa','Nhiều vật ở gần','Nhiều vật ở xa'],ans:2}];
+let qi=0,score=0;
+function renderQ(){const q=qs[qi];document.getElementById('quizTitle').textContent=`Câu ${qi+1} / ${qs.length}`;document.getElementById('quizProgress').style.width=`${((qi+1)/qs.length)*100}%`;document.getElementById('quizQ').textContent=q.q;document.getElementById('quizFB').textContent='';document.getElementById('quizFB').className='quiz-feedback';document.getElementById('quizNext').style.display='none';const opts=document.getElementById('quizOpts');opts.innerHTML='';q.opts.forEach((o,i)=>{const btn=document.createElement('button');btn.className='quiz-opt';btn.textContent=o;btn.onclick=()=>{document.querySelectorAll('.quiz-opt').forEach(b=>b.disabled=true);if(i===q.ans){btn.classList.add('correct');score++;document.getElementById('quizFB').textContent='✅ Chính xác!';document.getElementById('quizFB').className='quiz-feedback ok';}else{btn.classList.add('wrong');document.querySelectorAll('.quiz-opt')[q.ans].classList.add('correct');document.getElementById('quizFB').textContent='❌ Sai rồi!';document.getElementById('quizFB').className='quiz-feedback no';}document.getElementById('quizScoreDisplay').textContent=`Điểm: ${score}`;document.getElementById('quizNext').style.display='inline-block';};opts.appendChild(btn);});}
+function nextQ(){qi++;if(qi>=qs.length){document.getElementById('quizContent').style.display='none';const r=document.getElementById('quizResult');r.style.display='block';const pct=Math.round(score/qs.length*100);document.getElementById('resEmoji').textContent=pct>=80?'🏆':pct>=60?'👍':'💪';document.getElementById('resScore').textContent=`${score} / ${qs.length} đúng (${pct}%)`;document.getElementById('resMsg').textContent=pct>=80?'Tuyệt! Bạn biết màu sắc tiếng Anh rất tốt!':'Ôn lại và thử tiếp nhé!';}else renderQ();}
+function resetQuiz(){qi=0;score=0;document.getElementById('quizScoreDisplay').textContent='Điểm: 0';document.getElementById('quizContent').style.display='block';document.getElementById('quizResult').style.display='none';renderQ();}
+renderQ();
+</script>
+</body></html>
