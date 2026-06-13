@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <link rel="stylesheet" href="../assets/brand.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A1 · Lesson 01 · Hello & Goodbye</title>
+<style>
+:root{--bg:#080d1a;--card:#0f1729;--card2:#131e35;--border:#1e2d4a;--text:#dde6f5;--muted:#8b9ab5;--accent:#7c3aed;--acl:#a78bfa;--green:#10b981;--yellow:#f59e0b;--red:#ef4444;--pink:#ec4899}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;line-height:1.6;padding:1.5rem 1.25rem 3rem}
+/* ── HEADER ── */
+.lsn-header{background:linear-gradient(135deg,#1a0a3e 0%,#0f1729 60%);border:1px solid var(--border);border-radius:16px;padding:1.5rem;margin-bottom:1.5rem;position:relative;overflow:hidden}
+.lsn-header::before{content:'';position:absolute;top:-40px;right:-40px;width:160px;height:160px;background:radial-gradient(circle,rgba(124,58,237,.35) 0%,transparent 70%);pointer-events:none}
+.lsn-badge{display:inline-flex;align-items:center;gap:.4rem;background:rgba(124,58,237,.2);border:1px solid rgba(167,139,250,.3);border-radius:20px;padding:.25rem .75rem;font-size:.7rem;font-weight:700;color:var(--acl);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.75rem}
+.lsn-header h1{font-size:1.6rem;font-weight:800;background:linear-gradient(90deg,#c4b5fd,#818cf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.4rem}
+.lsn-header p{color:var(--muted);font-size:.9rem}
+.objectives{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+.obj-tag{background:rgba(124,58,237,.15);border:1px solid rgba(124,58,237,.3);border-radius:20px;padding:.25rem .7rem;font-size:.75rem;color:var(--acl)}
+/* ── SECTION TITLE ── */
+.sec-title{display:flex;align-items:center;gap:.6rem;font-size:1rem;font-weight:700;color:var(--acl);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)}
+.sec-title span{font-size:1.2rem}
+/* ── VOCAB ── */
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:.7rem;margin-bottom:1.75rem}
+.vocab-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:.85rem .9rem;cursor:pointer;transition:all .2s;position:relative}
+.vocab-card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 4px 20px rgba(124,58,237,.2)}
+.vocab-card.flipped .vc-front{display:none}
+.vocab-card.flipped .vc-back{display:flex}
+.vc-back{display:none;flex-direction:column;align-items:center;justify-content:center;min-height:60px}
+.vc-en{font-size:.95rem;font-weight:700;color:var(--text);margin-bottom:.2rem}
+.vc-vn{font-size:.8rem;color:var(--muted)}
+.vc-hint{font-size:.65rem;color:var(--accent);margin-top:.3rem;text-align:right}
+/* ── PATTERNS ── */
+.pattern-list{display:flex;flex-direction:column;gap:.6rem;margin-bottom:1.75rem}
+.pattern-item{background:var(--card);border-left:3px solid var(--accent);border-radius:0 10px 10px 0;padding:.8rem 1rem}
+.pat-en{font-size:1rem;font-weight:600;color:var(--text)}
+.pat-vn{font-size:.82rem;color:var(--muted);margin-top:.2rem}
+.pat-note{font-size:.78rem;color:var(--acl);margin-top:.25rem;font-style:italic}
+/* ── GRAMMAR BOX ── */
+.grammar-box{background:linear-gradient(135deg,rgba(124,58,237,.12),rgba(99,102,241,.08));border:1px solid rgba(124,58,237,.25);border-radius:12px;padding:1.1rem;margin-bottom:1.75rem}
+.grammar-box h3{color:var(--acl);font-size:.9rem;margin-bottom:.8rem}
+.grammar-row{display:flex;gap:.75rem;margin-bottom:.5rem;font-size:.88rem;align-items:center}
+.gram-label{color:var(--muted);min-width:70px;font-size:.8rem}
+.gram-form{background:rgba(124,58,237,.15);border-radius:6px;padding:.2rem .6rem;color:var(--acl);font-weight:600;font-family:monospace}
+.arrow{color:var(--muted);font-size:.75rem}
+.gram-result{color:var(--text)}
+/* ── CONVERSATION ── */
+.convo-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1.75rem}
+.convo-line{display:flex;gap:.7rem;margin-bottom:.65rem;align-items:flex-start}
+.convo-speaker{font-size:.7rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;min-width:28px;margin-top:.2rem}
+.speaker-a{color:#a78bfa}
+.speaker-b{color:#34d399}
+.convo-bubble{background:var(--card2);border-radius:0 10px 10px 10px;padding:.55rem .85rem;font-size:.9rem;flex:1}
+.convo-bubble.b{border-radius:10px 10px 10px 0;background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.15)}
+/* ── PRACTICE ── */
+.practice-area{margin-bottom:1.75rem}
+.ex-block{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:.75rem}
+.ex-q{font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:.75rem}
+.match-pairs{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+.match-btn{background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:.5rem .75rem;font-size:.85rem;cursor:pointer;text-align:center;transition:all .2s;color:var(--text)}
+.match-btn:hover{border-color:var(--accent)}
+.match-btn.selected{border-color:var(--accent);background:rgba(124,58,237,.2);color:var(--acl)}
+.match-btn.correct{border-color:var(--green);background:rgba(16,185,129,.15);color:var(--green)}
+.match-btn.wrong{border-color:var(--red);background:rgba(239,68,68,.1);color:var(--red)}
+/* ── QUIZ ── */
+.quiz-section{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.25rem;margin-bottom:1.75rem}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+.quiz-title{font-size:.95rem;font-weight:700;color:var(--text)}
+.quiz-score{font-size:.8rem;color:var(--muted)}
+.quiz-q{font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:.75rem;padding:.75rem;background:var(--card2);border-radius:8px}
+.quiz-opts{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom.75rem}
+.quiz-opt{background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:.55rem .75rem;font-size:.85rem;cursor:pointer;transition:all .18s;color:var(--text);text-align:left}
+.quiz-opt:hover:not(:disabled){border-color:var(--accent);color:var(--acl)}
+.quiz-opt.correct{border-color:var(--green)!important;background:rgba(16,185,129,.15)!important;color:var(--green)!important}
+.quiz-opt.wrong{border-color:var(--red)!important;background:rgba(239,68,68,.1)!important;color:var(--red)!important}
+.quiz-opt:disabled{cursor:default;opacity:.75}
+.quiz-feedback{font-size:.8rem;margin:.5rem 0 .75rem;min-height:1rem}
+.quiz-feedback.ok{color:var(--green)}
+.quiz-feedback.no{color:var(--red)}
+.quiz-nav{display:flex;gap:.5rem;align-items:center;justify-content:space-between}
+.btn{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:.5rem 1.1rem;font-size:.85rem;font-weight:600;cursor:pointer;transition:opacity .2s}
+.btn:hover{opacity:.85}
+.btn-outline{background:transparent;border:1px solid var(--border);color:var(--muted)}
+.progress-bar{background:var(--border);border-radius:4px;height:4px;flex:1;overflow:hidden}
+.progress-fill{background:linear-gradient(90deg,var(--accent),#818cf8);height:100%;border-radius:4px;transition:width .3s}
+/* ── RESULT ── */
+.result-box{text-align:center;padding:1.25rem;display:none}
+.result-emoji{font-size:2.5rem;margin-bottom:.5rem}
+.result-score{font-size:1.5rem;font-weight:800;color:var(--acl);margin-bottom:.25rem}
+.result-msg{font-size:.85rem;color:var(--muted);margin-bottom:1rem}
+/* ── FOOTER ── */
+.lesson-footer{display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border)}
+.footer-nav a{color:var(--accent);text-decoration:none;font-size:.85rem;font-weight:600}
+.footer-nav a:hover{color:var(--acl)}
+</style>
+</head>
+<body>
+<img src="../assets/logo-SH.png" class="sh-logo" alt="Science Horizon">
+<!-- ── HEADER ── -->
+<div class="lsn-header">
+  <div class="lsn-badge">⭐ A1 Foundation · Lesson 01</div>
+  <h1>Hello &amp; Goodbye</h1>
+  <p>Học cách chào hỏi và tạm biệt — những câu tiếng Anh đầu tiên bạn cần biết!</p>
+  <div class="objectives">
+    <span class="obj-tag">👋 Chào hỏi tự nhiên</span>
+    <span class="obj-tag">🗣️ Giới thiệu tên</span>
+    <span class="obj-tag">🌅 Chào theo thời gian</span>
+    <span class="obj-tag">💬 Hỏi tên người khác</span>
+  </div>
+</div>
+
+<!-- ── VOCABULARY ── -->
+<div class="sec-title"><span>📚</span> Từ Vựng <small style="color:var(--muted);font-weight:400;font-size:.8rem">(nhấn để xem nghĩa)</small></div>
+<div class="vocab-grid" id="vocabGrid"></div>
+
+<!-- ── KEY PATTERNS ── -->
+<div class="sec-title"><span>💬</span> Mẫu Câu Quan Trọng</div>
+<div class="pattern-list" id="patterns"></div>
+
+<!-- ── GRAMMAR ── -->
+<div class="sec-title"><span>📐</span> Ngữ Pháp</div>
+<div class="grammar-box">
+  <h3>✏️ I am = I'm (dạng rút gọn — viết tắt)</h3>
+  <div class="grammar-row"><span class="gram-label">Đầy đủ:</span><span class="gram-form">I am Mai.</span><span class="arrow">→</span><span class="gram-result">rút gọn: <strong>I'm Mai.</strong></span></div>
+  <div class="grammar-row"><span class="gram-label">Câu hỏi:</span><span class="gram-form">What is</span><span class="arrow">→</span><span class="gram-result">rút gọn: <strong>What's</strong> your name?</span></div>
+  <div style="margin-top:.75rem;font-size:.82rem;color:var(--muted);background:rgba(124,58,237,.08);border-radius:8px;padding:.6rem .9rem">
+    💡 <strong style="color:var(--acl)">Lưu ý:</strong> Tiếng Anh hay dùng rút gọn khi nói chuyện thường ngày. <em>I'm, You're, He's, She's, It's, We're, They're</em>
+  </div>
+</div>
+
+<!-- ── CONVERSATION ── -->
+<div class="sec-title"><span>🗣️</span> Hội Thoại Mẫu</div>
+<div class="convo-box" id="convo1"></div>
+
+<!-- ── PRACTICE ── -->
+<div class="sec-title"><span>✏️</span> Luyện Tập</div>
+<div class="practice-area" id="practice"></div>
+
+<!-- ── QUIZ ── -->
+<div class="sec-title"><span>🎯</span> Quiz Nhanh (5 câu)</div>
+<div class="quiz-section">
+  <div class="quiz-header">
+    <span class="quiz-title" id="quizTitle">Câu 1 / 5</span>
+    <span class="quiz-score" id="quizScoreDisplay">Điểm: 0</span>
+  </div>
+  <div id="quizContent">
+    <div class="quiz-q" id="quizQ"></div>
+    <div class="quiz-opts" id="quizOpts"></div>
+    <div class="quiz-feedback" id="quizFB"></div>
+    <div class="quiz-nav">
+      <div class="progress-bar"><div class="progress-fill" id="quizProgress" style="width:20%"></div></div>
+      <button class="btn" id="quizNext" style="display:none" onclick="nextQ()">Tiếp →</button>
+    </div>
+  </div>
+  <div class="result-box" id="quizResult">
+    <div class="result-emoji" id="resEmoji"></div>
+    <div class="result-score" id="resScore"></div>
+    <div class="result-msg" id="resMsg"></div>
+    <button class="btn" onclick="resetQuiz()">🔄 Làm lại</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="lesson-footer">
+  <div class="footer-nav">← <a href="../">Danh sách bài</a></div>
+  <div style="font-size:.8rem;color:var(--muted)">A1 · Lesson 01 / 12</div>
+  <div class="footer-nav"><a href="../lesson-02/">Lesson 02 →</a></div>
+</div>
+
+<script>
+// ── VOCAB DATA ──
+const vocab = [
+  {en:"Hello",vn:"Xin chào (thân mật)"},
+  {en:"Hi",vn:"Chào (thông thường)"},
+  {en:"Goodbye",vn:"Tạm biệt (lịch sự)"},
+  {en:"Bye",vn:"Tạm biệt (thân mật)"},
+  {en:"Good morning",vn:"Chào buổi sáng"},
+  {en:"Good afternoon",vn:"Chào buổi chiều"},
+  {en:"Good evening",vn:"Chào buổi tối"},
+  {en:"Good night",vn:"Chúc ngủ ngon"},
+  {en:"See you",vn:"Gặp lại sau"},
+  {en:"See you tomorrow",vn:"Hẹn gặp ngày mai"},
+  {en:"Thank you",vn:"Cảm ơn"},
+  {en:"You're welcome",vn:"Không có gì"},
+  {en:"Please",vn:"Làm ơn / Xin"},
+  {en:"Sorry / Excuse me",vn:"Xin lỗi"},
+  {en:"Nice to meet you",vn:"Rất vui được gặp bạn"},
+];
+const vGrid = document.getElementById("vocabGrid");
+vocab.forEach(v => {
+  vGrid.innerHTML += `<div class="vocab-card" onclick="this.classList.toggle('flipped')">
+    <div class="vc-front"><div class="vc-en">${v.en}</div><div class="vc-hint">nhấn để xem</div></div>
+    <div class="vc-back"><div class="vc-en">${v.en}</div><div class="vc-vn">${v.vn}</div></div>
+  </div>`;
+});
+
+// ── PATTERNS ──
+const pats = [
+  {en:"Hello! I'm [tên]. What's your name?", vn:"Xin chào! Tôi là [tên]. Tên bạn là gì?", note:"Cách giới thiệu bản thân và hỏi tên người khác"},
+  {en:"My name is [tên]. Nice to meet you!", vn:"Tên tôi là [tên]. Rất vui được gặp bạn!", note:"Trả lời khi được hỏi tên"},
+  {en:"How are you? — I'm fine, thank you!", vn:"Bạn có khỏe không? — Tôi khỏe, cảm ơn!", note:"Câu hỏi thăm sức khỏe phổ biến nhất"},
+  {en:"Good morning / afternoon / evening!", vn:"Chào buổi sáng / chiều / tối!", note:"Chào tùy theo thời điểm trong ngày"},
+  {en:"Goodbye! See you tomorrow!", vn:"Tạm biệt! Hẹn gặp ngày mai!", note:"Cách nói tạm biệt khi chia tay"},
+];
+const pList = document.getElementById("patterns");
+pats.forEach(p => {
+  pList.innerHTML += `<div class="pattern-item">
+    <div class="pat-en">"${p.en}"</div>
+    <div class="pat-vn">→ ${p.vn}</div>
+    <div class="pat-note">💡 ${p.note}</div>
+  </div>`;
+});
+
+// ── CONVERSATION ──
+const conv = [
+  {sp:"A",cls:"speaker-a",text:"Hello! I'm Mai. What's your name?",b:false},
+  {sp:"B",cls:"speaker-b",text:"Hi, Mai! I'm Tom. Nice to meet you!",b:true},
+  {sp:"A",cls:"speaker-a",text:"Nice to meet you too! How are you?",b:false},
+  {sp:"B",cls:"speaker-b",text:"I'm fine, thank you! And you?",b:true},
+  {sp:"A",cls:"speaker-a",text:"I'm great! See you tomorrow, Tom!",b:false},
+  {sp:"B",cls:"speaker-b",text:"Goodbye, Mai! See you!",b:true},
+];
+const cBox = document.getElementById("convo1");
+conv.forEach(c => {
+  cBox.innerHTML += `<div class="convo-line">
+    <span class="convo-speaker ${c.cls}">${c.sp}</span>
+    <div class="convo-bubble${c.b?' b':''}">${c.text}</div>
+  </div>`;
+});
+
+// ── PRACTICE ──
+document.getElementById("practice").innerHTML = `
+<div class="ex-block">
+  <div class="ex-q">🔤 Điền từ đúng vào chỗ trống:</div>
+  <div style="display:flex;flex-direction:column;gap:.5rem;font-size:.9rem">
+    ${[
+      ["Good _____ ! (8 giờ sáng)", "morning"],
+      ["___ to meet you!", "Nice"],
+      ["See you _____! (ngày mai)", "tomorrow"],
+      ["You're _____! (sau cảm ơn)", "welcome"],
+    ].map((q,i)=>`
+    <div style="display:flex;align-items:center;gap:.6rem;padding:.5rem .75rem;background:var(--card2);border-radius:8px">
+      <span style="font-size:.75rem;color:var(--muted);min-width:14px">${i+1}.</span>
+      <span style="flex:1">${q[0]}</span>
+      <input type="text" placeholder="..." style="background:var(--card);border:1px solid var(--border);border-radius:6px;padding:.3rem .6rem;color:var(--text);font-size:.85rem;width:110px;outline:none"
+        onblur="checkFill(this,'${q[1]}')" onkeydown="if(event.key==='Enter')checkFill(this,'${q[1]}')">
+    </div>`).join('')}
+  </div>
+</div>`;
+
+function checkFill(el,ans){
+  if(el.value.trim().toLowerCase()===ans.toLowerCase()){
+    el.style.borderColor='#10b981';el.style.color='#10b981';
+  } else if(el.value.trim()){
+    el.style.borderColor='#ef4444';el.style.color='#ef4444';
+  }
+}
+
+// ── QUIZ ──
+const qs = [
+  {q:'"Good morning" có nghĩa là gì?',opts:['Chào buổi chiều','Chào buổi sáng','Chúc ngủ ngon','Gặp lại sau'],ans:1},
+  {q:'Câu nào dùng để hỏi tên?',opts:['How are you?','What\'s your name?','Nice to meet you!','Goodbye!'],ans:1},
+  {q:'"You\'re welcome" là câu trả lời cho?',opts:['Hello!','Goodbye!','Thank you!','How are you?'],ans:2},
+  {q:'Dạng rút gọn của "I am" là?',opts:["I'm","Im","Iam","I`m"],ans:0},
+  {q:'"See you tomorrow" nghĩa là?',opts:['Hẹn gặp ngày mai','Tôi gặp bạn','Xem bạn đi','Đi cùng tôi'],ans:0},
+];
+let qi=0,score=0;
+function renderQ(){
+  const q=qs[qi];
+  document.getElementById('quizTitle').textContent=`Câu ${qi+1} / ${qs.length}`;
+  document.getElementById('quizProgress').style.width=`${((qi+1)/qs.length)*100}%`;
+  document.getElementById('quizQ').textContent=q.q;
+  document.getElementById('quizFB').textContent='';
+  document.getElementById('quizFB').className='quiz-feedback';
+  document.getElementById('quizNext').style.display='none';
+  const opts=document.getElementById('quizOpts');
+  opts.innerHTML='';
+  q.opts.forEach((o,i)=>{
+    const btn=document.createElement('button');
+    btn.className='quiz-opt';btn.textContent=o;
+    btn.onclick=()=>{
+      document.querySelectorAll('.quiz-opt').forEach(b=>b.disabled=true);
+      if(i===q.ans){btn.classList.add('correct');score++;document.getElementById('quizFB').textContent='✅ Chính xác!';document.getElementById('quizFB').className='quiz-feedback ok';}
+      else{btn.classList.add('wrong');document.querySelectorAll('.quiz-opt')[q.ans].classList.add('correct');document.getElementById('quizFB').textContent='❌ Sai rồi! Đáp án đúng được đánh dấu xanh.';document.getElementById('quizFB').className='quiz-feedback no';}
+      document.getElementById('quizScoreDisplay').textContent=`Điểm: ${score}`;
+      document.getElementById('quizNext').style.display='inline-block';
+    };
+    opts.appendChild(btn);
+  });
+}
+function nextQ(){
+  qi++;
+  if(qi>=qs.length){
+    document.getElementById('quizContent').style.display='none';
+    const r=document.getElementById('quizResult');r.style.display='block';
+    const pct=Math.round(score/qs.length*100);
+    document.getElementById('resEmoji').textContent=pct>=80?'🏆':pct>=60?'👍':'💪';
+    document.getElementById('resScore').textContent=`${score} / ${qs.length} đúng (${pct}%)`;
+    document.getElementById('resMsg').textContent=pct>=80?'Xuất sắc! Bạn đã nắm vững Lesson 01!':pct>=60?'Tốt lắm! Ôn lại một chút nhé.':'Cố lên! Xem lại bài và thử lại nhé.';
+  } else renderQ();
+}
+function resetQuiz(){qi=0;score=0;document.getElementById('quizScoreDisplay').textContent='Điểm: 0';document.getElementById('quizContent').style.display='block';document.getElementById('quizResult').style.display='none';renderQ();}
+renderQ();
+</script>
+</body>
+</html>
