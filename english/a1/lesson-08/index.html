@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+
+  <link rel="stylesheet" href="../assets/brand.css">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A1 · Lesson 08 · Animals & Likes</title>
+<style>
+:root{--bg:#080d1a;--card:#0f1729;--card2:#131e35;--border:#1e2d4a;--text:#dde6f5;--muted:#8b9ab5;--accent:#14b8a6;--acl:#2dd4bf;--green:#10b981;--red:#ef4444}
+*{box-sizing:border-box;margin:0;padding:0}body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;line-height:1.6;padding:1.5rem 1.25rem 3rem}
+.lsn-header{background:linear-gradient(135deg,#001a18,#0f1729);border:1px solid var(--border);border-radius:16px;padding:1.5rem;margin-bottom:1.5rem;position:relative;overflow:hidden}
+.lsn-header::before{content:'';position:absolute;top:-40px;right:-40px;width:150px;height:150px;background:radial-gradient(circle,rgba(20,184,166,.3),transparent 70%);pointer-events:none}
+.lsn-badge{display:inline-flex;background:rgba(20,184,166,.15);border:1px solid rgba(45,212,191,.3);border-radius:20px;padding:.25rem .75rem;font-size:.7rem;font-weight:700;color:var(--acl);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.75rem}
+.lsn-header h1{font-size:1.6rem;font-weight:800;background:linear-gradient(90deg,#99f6e4,#2dd4bf);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.4rem}
+.lsn-header p{color:var(--muted);font-size:.9rem}
+.objectives{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+.obj-tag{background:rgba(20,184,166,.12);border:1px solid rgba(20,184,166,.25);border-radius:20px;padding:.25rem .7rem;font-size:.75rem;color:var(--acl)}
+.sec-title{display:flex;align-items:center;gap:.6rem;font-size:1rem;font-weight:700;color:var(--acl);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)}
+.animal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:.6rem;margin-bottom:1.75rem}
+.animal-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:.75rem .5rem;text-align:center;cursor:pointer;transition:all .2s}
+.animal-card:hover,.animal-card.flip{border-color:var(--accent);background:rgba(20,184,166,.08)}
+.animal-emoji{font-size:1.8rem;margin-bottom:.3rem}
+.animal-en{font-size:.88rem;font-weight:700;color:var(--text)}.animal-vn{font-size:.75rem;color:var(--muted);margin-top:.1rem}
+.animal-card.flip .animal-sound{display:block}.animal-sound{display:none;font-size:.72rem;color:var(--acl);margin-top:.2rem;font-style:italic}
+.like-board{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.1rem;margin-bottom:1.75rem}
+.like-board h3{color:var(--acl);font-size:.9rem;margin-bottom:.9rem}
+.like-row{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-bottom:.5rem}
+.like-box{border-radius:10px;padding:.7rem .9rem;font-size:.88rem}
+.like-yes{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.25)}
+.like-no{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2)}
+.like-label{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-bottom:.3rem}
+.like-label.y{color:var(--green)}.like-label.n{color:var(--red)}
+.grammar-box{background:linear-gradient(135deg,rgba(20,184,166,.1),rgba(45,212,191,.06));border:1px solid rgba(20,184,166,.2);border-radius:12px;padding:1.1rem;margin-bottom:1.75rem}
+.grammar-box h3{color:var(--acl);font-size:.9rem;margin-bottom:.8rem}
+.gram-table{width:100%;border-collapse:collapse}
+.gram-table th{background:rgba(20,184,166,.2);color:var(--acl);font-size:.8rem;padding:.5rem .7rem;text-align:left;border:1px solid var(--border)}
+.gram-table td{font-size:.85rem;padding:.45rem .7rem;border:1px solid var(--border);color:var(--text)}
+.gram-table tr:nth-child(even) td{background:var(--card2)}
+.pattern-list{display:flex;flex-direction:column;gap:.6rem;margin-bottom:1.75rem}
+.pattern-item{background:var(--card);border-left:3px solid var(--accent);border-radius:0 10px 10px 0;padding:.8rem 1rem}
+.pat-en{font-size:1rem;font-weight:600;color:var(--text)}.pat-vn{font-size:.82rem;color:var(--muted);margin-top:.2rem}.pat-note{font-size:.78rem;color:var(--acl);margin-top:.25rem;font-style:italic}
+.convo-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1.75rem}
+.convo-line{display:flex;gap:.7rem;margin-bottom:.65rem;align-items:flex-start}
+.spk-a{color:#2dd4bf;font-size:.7rem;font-weight:700;text-transform:uppercase;min-width:28px;margin-top:.2rem}
+.spk-b{color:#34d399;font-size:.7rem;font-weight:700;text-transform:uppercase;min-width:28px;margin-top:.2rem}
+.bubble{background:var(--card2);border-radius:0 10px 10px 10px;padding:.55rem .85rem;font-size:.9rem;flex:1}
+.bubble.b{border-radius:10px 10px 10px 0;background:rgba(52,211,153,.07);border:1px solid rgba(52,211,153,.15)}
+.like-game{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1.75rem}
+.like-game h3{color:var(--acl);font-size:.9rem;margin-bottom:.75rem}
+.lg-animal{display:flex;align-items:center;gap:.75rem;padding:.65rem .75rem;background:var(--card2);border-radius:8px;margin-bottom:.5rem}
+.lg-emoji{font-size:1.5rem}.lg-name{flex:1;font-size:.9rem;font-weight:600}
+.lg-btns{display:flex;gap:.4rem}
+.lg-btn{border:none;border-radius:6px;padding:.3rem .7rem;font-size:.8rem;font-weight:700;cursor:pointer;transition:all .2s}
+.lg-like{background:rgba(16,185,129,.2);color:var(--green)}.lg-like:hover,.lg-like.on{background:var(--green);color:#000}
+.lg-dislike{background:rgba(239,68,68,.15);color:var(--red)}.lg-dislike:hover,.lg-dislike.on{background:var(--red);color:#fff}
+.like-result-area{font-size:.88rem;margin-top:.75rem;color:var(--muted);min-height:1.5rem;font-style:italic}
+.quiz-section{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.25rem;margin-bottom:1.75rem}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+.quiz-q{font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:.75rem;padding:.75rem;background:var(--card2);border-radius:8px}
+.quiz-opts{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.5rem}
+.quiz-opt{background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:.55rem .75rem;font-size:.85rem;cursor:pointer;transition:all .18s;color:var(--text);text-align:left}
+.quiz-opt:hover:not(:disabled){border-color:var(--accent);color:var(--acl)}.quiz-opt.correct{border-color:var(--green)!important;background:rgba(16,185,129,.15)!important;color:var(--green)!important}.quiz-opt.wrong{border-color:var(--red)!important;background:rgba(239,68,68,.1)!important;color:var(--red)!important}.quiz-opt:disabled{cursor:default}
+.quiz-feedback{font-size:.8rem;margin:.4rem 0 .6rem;min-height:1rem}.quiz-feedback.ok{color:var(--green)}.quiz-feedback.no{color:var(--red)}
+.quiz-nav{display:flex;gap:.5rem;align-items:center;justify-content:space-between}
+.btn{background:var(--accent);color:#000;border:none;border-radius:8px;padding:.5rem 1.1rem;font-size:.85rem;font-weight:700;cursor:pointer;transition:opacity .2s}.btn:hover{opacity:.85}
+.progress-bar{background:var(--border);border-radius:4px;height:4px;flex:1;overflow:hidden}.progress-fill{background:linear-gradient(90deg,var(--accent),#99f6e4);height:100%;border-radius:4px;transition:width .3s}
+.result-box{text-align:center;padding:1.25rem;display:none}.result-emoji{font-size:2.5rem;margin-bottom:.5rem}.result-score{font-size:1.5rem;font-weight:800;color:var(--acl);margin-bottom:.25rem}.result-msg{font-size:.85rem;color:var(--muted);margin-bottom:1rem}
+.lesson-footer{display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border)}
+.footer-nav a{color:var(--accent);text-decoration:none;font-size:.85rem;font-weight:600}
+</style>
+</head>
+<body>
+
+  <img src="../assets/logo-SH.png" class="sh-logo" alt="Science Horizon">
+<div class="lsn-header">
+  <div class="lsn-badge">🐾 People & Everyday Life · Lesson 08</div>
+  <h1>Animals &amp; Likes</h1>
+  <p>Học từ vựng về động vật và cách nói thích / không thích — bày tỏ cảm xúc bằng tiếng Anh!</p>
+  <div class="objectives">
+    <span class="obj-tag">🐾 16 con vật</span>
+    <span class="obj-tag">💚 I like / I don't like</span>
+    <span class="obj-tag">❓ Do you like…?</span>
+    <span class="obj-tag">📝 He/She likes</span>
+  </div>
+</div>
+
+<div class="sec-title"><span>🐾</span> Động Vật <small style="color:var(--muted);font-weight:400;font-size:.78rem">(nhấn để xem tiếng kêu)</small></div>
+<div class="animal-grid" id="animalGrid"></div>
+
+<div class="sec-title"><span>📐</span> Ngữ Pháp — Like / Don't Like</div>
+<div class="grammar-box">
+  <h3>✏️ I like / I don't like + V-ing hoặc Noun</h3>
+  <table class="gram-table">
+    <tr><th>Chủ ngữ</th><th>Khẳng định</th><th>Phủ định</th></tr>
+    <tr><td>I / You / We / They</td><td><strong style="color:var(--green)">like</strong> cats</td><td><strong style="color:var(--red)">don't like</strong> snakes</td></tr>
+    <tr><td>He / She / It</td><td><strong style="color:var(--green)">likes</strong> dogs</td><td><strong style="color:var(--red)">doesn't like</strong> spiders</td></tr>
+  </table>
+  <div style="margin-top:.75rem;font-size:.82rem;color:var(--muted);background:rgba(20,184,166,.07);border-radius:8px;padding:.6rem .9rem">
+    💡 <strong style="color:var(--acl)">Hỏi:</strong> "Do you like cats?" → "Yes, I do." / "No, I don't." <br>
+    &nbsp;&nbsp;&nbsp; "Does she like dogs?" → "Yes, she does." / "No, she doesn't."
+  </div>
+</div>
+
+<div class="sec-title"><span>💬</span> Mẫu Câu</div>
+<div class="pattern-list">
+  <div class="pattern-item"><div class="pat-en">"I like [animals]. They are [adj]."</div><div class="pat-vn">→ Tôi thích [con vật]. Chúng [tính từ].</div><div class="pat-note">💡 "I like dogs. They are friendly and cute."</div></div>
+  <div class="pattern-item"><div class="pat-en">"Do you like [animals]?" — "Yes, I do!" / "No, I don't."</div><div class="pat-vn">→ Bạn có thích [con vật] không? — Có! / Không.</div><div class="pat-note">💡 Short answers: "Yes, I do." hoặc "No, I don't." (không nói "Yes, I like.")</div></div>
+  <div class="pattern-item"><div class="pat-en">"My favourite animal is a [animal] because it is [adj]."</div><div class="pat-vn">→ Con vật yêu thích của tôi là [con vật] vì nó [tính từ].</div><div class="pat-note">💡 favourite (BrE) = favorite (AmE) = yêu thích nhất</div></div>
+</div>
+
+<div class="sec-title"><span>🗣️</span> Hội Thoại</div>
+<div class="convo-box">
+  <div class="convo-line"><span class="spk-a">A</span><div class="bubble">Do you have a pet?</div></div>
+  <div class="convo-line"><span class="spk-b">B</span><div class="bubble b">Yes! I have a cat. Her name is Mochi. Do you like cats?</div></div>
+  <div class="convo-line"><span class="spk-a">A</span><div class="bubble">Yes, I do! Cats are so cute. I don't have a pet, but I like dogs too.</div></div>
+  <div class="convo-line"><span class="spk-b">B</span><div class="bubble b">What's your favourite animal?</div></div>
+  <div class="convo-line"><span class="spk-a">A</span><div class="bubble">My favourite animal is a dolphin because it is very intelligent and friendly!</div></div>
+  <div class="convo-line"><span class="spk-b">B</span><div class="bubble b">Wow, dolphins are amazing! I don't like spiders though — they are scary!</div></div>
+</div>
+
+<div class="sec-title"><span>🎮</span> Luyện Tập — Bạn Thích Gì?</div>
+<div class="like-game">
+  <h3>Chọn 👍 hoặc 👎 cho từng con vật. Sau đó xem câu tiếng Anh của bạn!</h3>
+  <div id="likeGameArea"></div>
+  <button class="btn" style="margin-top:.75rem" onclick="buildLikeSentence()">✨ Tạo câu của tôi</button>
+  <div class="like-result-area" id="likeResult"></div>
+</div>
+
+<div class="sec-title"><span>🎯</span> Quiz Nhanh (5 câu)</div>
+<div class="quiz-section">
+  <div class="quiz-header"><span id="quizTitle" style="font-size:.85rem;color:var(--muted)">Câu 1 / 5</span><span id="quizScoreDisplay" style="font-size:.85rem;color:var(--muted)">Điểm: 0</span></div>
+  <div id="quizContent">
+    <div class="quiz-q" id="quizQ"></div>
+    <div class="quiz-opts" id="quizOpts"></div>
+    <div class="quiz-feedback" id="quizFB"></div>
+    <div class="quiz-nav"><div class="progress-bar"><div class="progress-fill" id="quizProgress" style="width:20%"></div></div><button class="btn" id="quizNext" style="display:none" onclick="nextQ()">Tiếp →</button></div>
+  </div>
+  <div class="result-box" id="quizResult"><div class="result-emoji" id="resEmoji"></div><div class="result-score" id="resScore"></div><div class="result-msg" id="resMsg"></div><button class="btn" onclick="resetQuiz()">🔄 Làm lại</button></div>
+</div>
+<div class="lesson-footer"><div class="footer-nav">← <a href="../lesson-07/">Lesson 07</a></div><div style="font-size:.8rem;color:var(--muted)">A1 · Lesson 08 / 12</div><div class="footer-nav"><a href="../lesson-09/">Lesson 09 →</a></div></div>
+
+<script>
+const animals=[{e:'🐱',en:'cat',vn:'mèo',s:'Meow!'},{e:'🐶',en:'dog',vn:'chó',s:'Woof!'},{e:'🐟',en:'fish',vn:'cá',s:'...'},{e:'🐰',en:'rabbit',vn:'thỏ',s:'...'},{e:'🐦',en:'bird',vn:'chim',s:'Tweet!'},{e:'🐢',en:'turtle',vn:'rùa',s:'...'},{e:'🦁',en:'lion',vn:'sư tử',s:'Roar!'},{e:'🐘',en:'elephant',vn:'voi',s:'...'},{e:'🐧',en:'penguin',vn:'chim cánh cụt',s:'...'},{e:'🦊',en:'fox',vn:'cáo',s:'...'},{e:'🦋',en:'butterfly',vn:'bướm',s:'...'},{e:'🐍',en:'snake',vn:'rắn',s:'Hiss!'},{e:'🦅',en:'eagle',vn:'đại bàng',s:'...'},{e:'🐠',en:'dolphin',vn:'cá heo',s:'...'},{e:'🐼',en:'panda',vn:'gấu trúc',s:'...'},{e:'🐸',en:'frog',vn:'ếch',s:'Ribbit!'}];
+const ag=document.getElementById('animalGrid');
+animals.forEach(a=>{ag.innerHTML+=`<div class="animal-card" onclick="this.classList.toggle('flip')"><div class="animal-emoji">${a.e}</div><div class="animal-en">${a.en}</div><div class="animal-vn">${a.vn}</div><div class="animal-sound">${a.s}</div></div>`;});
+// Like game
+const gameAnimals=animals.slice(0,6);
+const lga=document.getElementById('likeGameArea');
+const choices={};
+gameAnimals.forEach((a,i)=>{
+  lga.innerHTML+=`<div class="lg-animal"><span class="lg-emoji">${a.e}</span><span class="lg-name">${a.en} (${a.vn})</span><div class="lg-btns"><button class="lg-btn lg-like" id="lk${i}" onclick="setPref(${i},'like')">👍 Like</button><button class="lg-btn lg-dislike" id="dl${i}" onclick="setPref(${i},'dislike')">👎 Don't like</button></div></div>`;
+});
+function setPref(i,pref){choices[i]=pref;document.getElementById('lk'+i).classList.toggle('on',pref==='like');document.getElementById('dl'+i).classList.toggle('on',pref==='dislike');}
+function buildLikeSentence(){
+  const likes=[],dislikes=[];
+  gameAnimals.forEach((a,i)=>{if(choices[i]==='like')likes.push(a.en);else if(choices[i]==='dislike')dislikes.push(a.en);});
+  let out='';
+  if(likes.length)out+=`I like ${likes.join(', ')}. `;
+  if(dislikes.length)out+=`I don't like ${dislikes.join(', ')}.`;
+  document.getElementById('likeResult').textContent=out||'Chọn ít nhất một con vật nhé!';
+}
+const qs=[{q:'"She ___ cats." — She là ngôi 3, dùng gì?',opts:["like","likes","don't like","liking"],ans:1},{q:'"Do you like dogs?" — Trả lời ngắn ĐÚNG là?',opts:["Yes, I like.","Yes, like.","Yes, I do.","Yes, do I."],ans:2},{q:'"dolphin" là con vật gì?',opts:['Cá mập','Cá heo','Cá voi','Ếch'],ans:1},{q:'"He doesn\'t like spiders." — Nghĩa là?',opts:['Anh ấy thích nhện','Anh ấy không thích nhện','Anh ấy nuôi nhện','Anh ấy sợ nhện'],ans:1},{q:'Câu nào đúng?',opts:['I likes cats.','She like dogs.','They likes fish.','He likes rabbits.'],ans:3}];
+let qi=0,score=0;
+function renderQ(){const q=qs[qi];document.getElementById('quizTitle').textContent=`Câu ${qi+1} / ${qs.length}`;document.getElementById('quizProgress').style.width=`${((qi+1)/qs.length)*100}%`;document.getElementById('quizQ').textContent=q.q;document.getElementById('quizFB').textContent='';document.getElementById('quizFB').className='quiz-feedback';document.getElementById('quizNext').style.display='none';const opts=document.getElementById('quizOpts');opts.innerHTML='';q.opts.forEach((o,i)=>{const btn=document.createElement('button');btn.className='quiz-opt';btn.textContent=o;btn.onclick=()=>{document.querySelectorAll('.quiz-opt').forEach(b=>b.disabled=true);if(i===q.ans){btn.classList.add('correct');score++;document.getElementById('quizFB').textContent='✅ Chính xác!';document.getElementById('quizFB').className='quiz-feedback ok';}else{btn.classList.add('wrong');document.querySelectorAll('.quiz-opt')[q.ans].classList.add('correct');document.getElementById('quizFB').textContent='❌ Sai rồi!';document.getElementById('quizFB').className='quiz-feedback no';}document.getElementById('quizScoreDisplay').textContent=`Điểm: ${score}`;document.getElementById('quizNext').style.display='inline-block';};opts.appendChild(btn);});}
+function nextQ(){qi++;if(qi>=qs.length){document.getElementById('quizContent').style.display='none';const r=document.getElementById('quizResult');r.style.display='block';const pct=Math.round(score/qs.length*100);document.getElementById('resEmoji').textContent=pct>=80?'🏆':pct>=60?'👍':'💪';document.getElementById('resScore').textContent=`${score} / ${qs.length} đúng (${pct}%)`;document.getElementById('resMsg').textContent=pct>=80?'Xuất sắc! Bạn nắm vững I like rồi!':'Ôn lại và thử tiếp nhé!';}else renderQ();}
+function resetQuiz(){qi=0;score=0;document.getElementById('quizScoreDisplay').textContent='Điểm: 0';document.getElementById('quizContent').style.display='block';document.getElementById('quizResult').style.display='none';renderQ();}
+renderQ();
+</script>
+</body></html>
