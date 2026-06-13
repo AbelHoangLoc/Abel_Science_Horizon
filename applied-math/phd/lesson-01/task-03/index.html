@@ -1,0 +1,1653 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+
+  <link rel="stylesheet" href="../assets/brand.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Task 03 · Optimization Tools | Variational Analysis and Applications</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=STIX+Two+Math&display=swap');
+
+:root{
+  --space:#06142e;
+  --deep:#071b3f;
+  --void:#020712;
+  --cyan:#37d5ff;
+  --blue:#1d8cff;
+  --violet:#7c5cff;
+  --pink:#ff70b8;
+  --green:#52f5b0;
+  --orange:#ffb454;
+  --yellow:#ffe680;
+
+  --bg:#06142e;
+  --bg2:rgba(255,255,255,.075);
+  --bg3:rgba(255,255,255,.12);
+  --ink:#ecf7ff;
+  --ink2:#bdd0e9;
+  --ink3:#7e91ad;
+  --rule:rgba(148,163,184,.22);
+
+  --c1:#37d5ff;--c1l:rgba(55,213,255,.14);--c1d:#bdf3ff;
+  --c2:#52f5b0;--c2l:rgba(82,245,176,.14);--c2d:#c9ffe8;
+  --c3:#ffb454;--c3l:rgba(255,180,84,.15);--c3d:#ffe4bd;
+  --c4:#ff6b8a;--c4l:rgba(255,107,138,.14);--c4d:#ffd0dc;
+  --c5:#a78bfa;--c5l:rgba(167,139,250,.15);--c5d:#e4d8ff;
+  --c6:#2dd4bf;--c6l:rgba(45,212,191,.14);--c6d:#c7fff8;
+  --c7:#facc15;--c7l:rgba(250,204,21,.14);--c7d:#fff4ad;
+  --c8:#22c55e;--c8l:rgba(34,197,94,.14);--c8d:#c9ffd9;
+  --c9:#f472b6;--c9l:rgba(244,114,182,.14);--c9d:#ffd4eb;
+
+  --gold:#ffe680;
+  --page-color:#1d8cff;
+  --card:rgba(255,255,255,.09);
+  --card2:rgba(255,255,255,.13);
+  --glass:rgba(255,255,255,.10);
+  --shadow:0 22px 60px rgba(0,0,0,.28);
+  --shadow2:0 12px 28px rgba(2,7,18,.18);
+  --radius:22px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+html{scroll-behavior:smooth}
+
+body{
+  min-height:100vh;
+  color:var(--ink);
+  font-family:"Be Vietnam Pro", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-size:14px;
+  line-height:1.7;
+  padding-bottom:80px;
+  background:
+    radial-gradient(900px 540px at 8% 8%, rgba(55,213,255,.22), transparent 60%),
+    radial-gradient(850px 520px at 92% 12%, rgba(124,92,255,.22), transparent 60%),
+    radial-gradient(850px 520px at 62% 95%, rgba(82,245,176,.12), transparent 60%),
+    linear-gradient(135deg, #031024 0%, #071b3f 48%, #020712 100%);
+  overflow-x:hidden;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-2;
+  opacity:.38;
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,.86) 1px, transparent 1.6px),
+    radial-gradient(circle, rgba(55,213,255,.65) 1px, transparent 1.5px),
+    radial-gradient(circle, rgba(82,245,176,.55) 1px, transparent 1.5px);
+  background-size:72px 72px,118px 118px,164px 164px;
+  background-position:0 0,34px 58px,90px 26px;
+}
+
+body::after{
+  content:"";
+  position:fixed;
+  right:-360px;
+  top:128px;
+  width:1040px;
+  height:280px;
+  border-radius:50%;
+  border:3px solid rgba(55,213,255,.15);
+  border-left-color:rgba(82,245,176,.42);
+  transform:rotate(-17deg);
+  z-index:-1;
+  pointer-events:none;
+}
+
+/* HERO */
+.hero{
+  position:relative;
+  overflow:hidden;
+  padding:42px 44px 34px;
+  background:
+    radial-gradient(520px 220px at 12% 0%, rgba(55,213,255,.20), transparent 62%),
+    radial-gradient(540px 240px at 82% 20%, rgba(124,92,255,.20), transparent 62%),
+    rgba(4,16,36,.76);
+  border-bottom:1px solid rgba(255,255,255,.13);
+  box-shadow:0 18px 48px rgba(0,0,0,.18);
+  backdrop-filter:blur(16px);
+}
+
+.hero::before{
+  content:"∇  ∂  N(x̄;Ω)  D*F  epi φ  lim sup";
+  position:absolute;
+  right:-22px;
+  top:22px;
+  font-family:"STIX Two Math","JetBrains Mono",monospace;
+  font-size:34px;
+  color:rgba(255,255,255,.045);
+  white-space:nowrap;
+  transform:rotate(-8deg);
+}
+
+.hero::after{
+  content:"";
+  position:absolute;
+  right:-90px;
+  top:-90px;
+  width:330px;
+  height:330px;
+  border-radius:999px;
+  background:radial-gradient(circle, rgba(55,213,255,.20), transparent 64%);
+  pointer-events:none;
+}
+
+.hero-eye{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  font-size:11px;
+  letter-spacing:2.2px;
+  text-transform:uppercase;
+  color:rgba(236,247,255,.62);
+  margin-bottom:12px;
+  font-weight:900;
+}
+
+.hero-eye::before{
+  content:"🛰️";
+  letter-spacing:0;
+  font-size:14px;
+}
+
+.hero-title{
+  font-size:34px;
+  font-weight:900;
+  color:#f5fbff;
+  line-height:1.22;
+  margin-bottom:12px;
+  letter-spacing:-.03em;
+  max-width:960px;
+}
+
+.hero-title span{
+  display:inline-block;
+  margin-top:6px;
+  font-size:19px!important;
+  font-weight:700!important;
+  font-style:normal!important;
+  color:rgba(189,243,255,.88);
+  letter-spacing:0;
+}
+
+.hero-sub{
+  font-size:14px;
+  color:rgba(221,235,255,.78);
+  font-weight:500;
+  line-height:1.75;
+  max-width:860px;
+  margin-bottom:18px;
+}
+
+.hero-stats{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.stat{
+  text-align:center;
+  background:rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:18px;
+  padding:10px 18px;
+  box-shadow:0 16px 32px rgba(0,0,0,.16);
+  backdrop-filter:blur(10px);
+}
+
+.stat-num{
+  font-size:26px;
+  font-weight:900;
+  line-height:1;
+  background:linear-gradient(90deg,#83efff,#52f5b0,#ffe680);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.stat-lbl{
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:1.2px;
+  color:rgba(255,255,255,.58);
+  margin-top:5px;
+  font-weight:900;
+}
+
+/* STICKY NAV */
+.nav{
+  position:sticky;
+  top:0;
+  z-index:30;
+  background:rgba(4,16,36,.76);
+  border-bottom:1px solid rgba(255,255,255,.13);
+  padding:10px 44px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+  backdrop-filter:blur(16px);
+}
+
+.nav-search{
+  position:relative;
+  flex:1;
+  min-width:220px;
+  max-width:450px;
+}
+
+.nav-search input{
+  width:100%;
+  background:rgba(255,255,255,.94);
+  border:2px solid rgba(148,163,184,.25);
+  border-radius:16px;
+  padding:10px 12px 10px 40px;
+  font-family:"Be Vietnam Pro",sans-serif;
+  font-size:13px;
+  color:#0f172a;
+  outline:none;
+  transition:.18s ease;
+  font-weight:700;
+  box-shadow:0 12px 24px rgba(0,0,0,.10);
+}
+
+.nav-search input:focus{
+  border-color:rgba(55,213,255,.60);
+  box-shadow:0 12px 26px rgba(55,213,255,.16);
+}
+
+.nav-search input::placeholder{color:#64748b}
+
+.nav-search::before{
+  content:"🔍";
+  position:absolute;
+  left:14px;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:14px;
+  z-index:1;
+}
+
+.scnt{
+  font-size:12px;
+  color:rgba(236,247,255,.68);
+  font-weight:800;
+}
+
+.tabs-wrap{
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+}
+
+.tv{
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:999px;
+  font-family:"Be Vietnam Pro",sans-serif;
+  font-size:11.5px;
+  font-weight:900;
+  color:rgba(236,247,255,.72);
+  padding:7px 11px;
+  cursor:pointer;
+  transition:.16s ease;
+  white-space:nowrap;
+  box-shadow:0 10px 18px rgba(0,0,0,.10);
+}
+
+.tv:hover{
+  color:white;
+  transform:translateY(-1px);
+  border-color:rgba(55,213,255,.35);
+}
+
+.tv.on{
+  color:#06142e!important;
+  background:linear-gradient(135deg,#83efff,#52f5b0)!important;
+  border-color:transparent!important;
+  box-shadow:0 12px 24px rgba(55,213,255,.22);
+}
+
+/* CHAPTER SECTIONS */
+.body{
+  max-width:1240px;
+  margin:0 auto;
+  padding:28px 22px;
+}
+
+.chapter{
+  margin-bottom:48px;
+  scroll-margin-top:95px;
+}
+
+.ch-hdr{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin-bottom:18px;
+  padding:18px;
+  border:1px solid rgba(255,255,255,.13);
+  border-radius:22px;
+  flex-wrap:wrap;
+  background:rgba(255,255,255,.085);
+  box-shadow:var(--shadow2);
+  backdrop-filter:blur(14px);
+}
+
+.ch-num{
+  font-size:12px;
+  color:rgba(236,247,255,.56);
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+
+.ch-title{
+  font-size:22px;
+  font-weight:900;
+  color:#f5fbff;
+  line-height:1.25;
+}
+
+.ch-desc{
+  font-size:12.5px;
+  color:rgba(221,235,255,.70);
+  margin-top:5px;
+  max-width:850px;
+  font-weight:600;
+}
+
+.ch-tag{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  border-radius:999px;
+  padding:7px 12px;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.4px;
+  text-transform:uppercase;
+  border:1px solid rgba(255,255,255,.12);
+}
+
+/* TOOL CARDS */
+.tools-grid{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.tool{
+  background:rgba(255,255,255,.92);
+  color:#0f172a;
+  border:1px solid rgba(148,163,184,.22);
+  border-radius:22px;
+  border-left:5px solid;
+  padding:16px 18px;
+  transition:.18s ease;
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  gap:14px;
+  align-items:start;
+  box-shadow:0 8px 0 rgba(148,163,184,.12), 0 18px 35px rgba(15,23,42,.10);
+}
+
+.tool:hover{
+  transform:translateY(-3px);
+  border-color:rgba(55,213,255,.35);
+  box-shadow:0 11px 0 rgba(55,213,255,.12),0 20px 42px rgba(55,213,255,.12);
+}
+
+.tool-num{
+  font-size:12px;
+  color:#64748b;
+  font-weight:900;
+  min-width:32px;
+  padding-top:2px;
+}
+
+.tool-body{min-width:0}
+
+.tool-ref{
+  font-family:"JetBrains Mono",monospace;
+  font-size:11px;
+  font-weight:700;
+  color:#1d8cff;
+  letter-spacing:-.01em;
+}
+
+.tool-name{
+  font-weight:900;
+  font-size:15px;
+  color:#0f172a;
+  margin:4px 0 7px;
+  line-height:1.35;
+}
+
+.tool-formula{
+  font-family:"STIX Two Math","JetBrains Mono","Cambria Math","Noto Sans Math",serif;
+  font-size:13.5px;
+  background:
+    radial-gradient(420px 140px at 5% 0%, rgba(55,213,255,.12), transparent 60%),
+    rgba(241,245,249,.98);
+  border-radius:13px;
+  padding:10px 12px;
+  margin:7px 0 8px;
+  color:#172033;
+  line-height:1.7;
+  border-left:3px solid rgba(29,140,255,.35);
+  white-space:pre-wrap;
+  overflow-x:auto;
+}
+
+.tool-desc{
+  font-size:13px;
+  color:#334155;
+  line-height:1.75;
+  font-weight:600;
+}
+
+.tool-use{
+  margin-top:8px;
+  font-size:12.5px;
+  color:#526176;
+  padding:8px 10px;
+  background:linear-gradient(135deg, rgba(55,213,255,.10), rgba(82,245,176,.08));
+  border-radius:12px;
+  border-left:3px solid rgba(82,245,176,.40);
+  font-weight:600;
+  line-height:1.65;
+}
+
+.tool-use b{
+  color:#0f172a;
+  font-weight:900;
+}
+
+.tool-page{
+  text-align:right;
+  min-width:72px;
+}
+
+.page-badge{
+  display:inline-flex;
+  flex-direction:column;
+  align-items:center;
+  background:linear-gradient(135deg,#1d8cff,#7c5cff);
+  color:white;
+  border-radius:14px;
+  padding:7px 10px;
+  font-size:10px;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.5px;
+  cursor:pointer;
+  box-shadow:0 14px 24px rgba(29,140,255,.20);
+}
+
+.page-badge span{
+  font-size:18px;
+  font-weight:900;
+  line-height:1.1;
+  color:#e9fbff;
+}
+
+.imp-tag{
+  display:inline-block;
+  font-size:9.5px;
+  font-weight:900;
+  letter-spacing:.4px;
+  text-transform:uppercase;
+  padding:2px 7px;
+  border-radius:999px;
+  margin-left:6px;
+  vertical-align:middle;
+}
+
+.imp-core{background:rgba(255,180,84,.18);color:#b45309}
+.imp-key{background:rgba(29,140,255,.15);color:#1d4ed8}
+.imp-new{background:rgba(82,245,176,.16);color:#047857}
+.imp-adv{background:rgba(167,139,250,.17);color:#6d28d9}
+
+/* KEY INSIGHT BOX */
+.insight{
+  background:
+    radial-gradient(560px 220px at 10% 0%, rgba(55,213,255,.17), transparent 62%),
+    radial-gradient(520px 220px at 90% 0%, rgba(124,92,255,.18), transparent 62%),
+    rgba(255,255,255,.09);
+  color:#f5fbff;
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:24px;
+  padding:20px 22px;
+  margin-bottom:22px;
+  box-shadow:var(--shadow2);
+  backdrop-filter:blur(14px);
+}
+
+.insight-title{
+  font-size:17px;
+  font-weight:900;
+  margin-bottom:9px;
+  color:#dffbff;
+}
+
+.insight-body{
+  font-size:13px;
+  line-height:1.8;
+  color:rgba(221,235,255,.80);
+  font-weight:600;
+}
+
+.insight-body code{
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:7px;
+  padding:2px 6px;
+  font-family:"STIX Two Math","JetBrains Mono",monospace;
+  font-size:13px;
+  color:#83efff;
+}
+
+/* NO RESULTS */
+.nores{
+  text-align:center;
+  padding:60px;
+  color:rgba(236,247,255,.60);
+  font-size:15px;
+  font-weight:800;
+}
+
+.hidden{display:none!important}
+
+/* ROADMAP */
+.roadmap-box{
+  background:rgba(255,255,255,.90);
+  color:#0f172a;
+  border:1px solid rgba(148,163,184,.22);
+  border-radius:24px;
+  padding:18px 20px;
+  margin-bottom:22px;
+  box-shadow:var(--shadow2);
+}
+
+.rm-title{
+  font-size:17px;
+  font-weight:900;
+  margin-bottom:14px;
+  color:#0f172a;
+}
+
+.rm-flow{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.rm-step{
+  background:linear-gradient(135deg, rgba(55,213,255,.12), rgba(82,245,176,.10));
+  border:1px solid rgba(148,163,184,.24);
+  border-radius:16px;
+  padding:10px 14px;
+  font-size:12px;
+  font-weight:900;
+  color:#27364d;
+  box-shadow:0 10px 20px rgba(15,23,42,.05);
+}
+
+.rm-arrow{
+  color:#64748b;
+  font-size:17px;
+  font-weight:900;
+}
+
+/* FOOTER */
+.task-footer{
+  max-width:1240px;
+  margin:20px auto 0;
+  padding:0 22px;
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.task-footer a{
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 14px;
+  border-radius:999px;
+  background:rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.14);
+  color:#e9fbff;
+  font-weight:900;
+  font-size:13px;
+  box-shadow:0 12px 24px rgba(0,0,0,.14);
+}
+
+.task-footer a:hover{
+  background:rgba(55,213,255,.16);
+  border-color:rgba(55,213,255,.35);
+}
+
+@media (max-width:760px){
+  .hero{padding:30px 18px 26px}
+  .hero-title{font-size:25px}
+  .nav{padding:10px 14px}
+  .body{padding:20px 14px}
+  .tool{grid-template-columns:1fr;gap:8px}
+  .tool-num{display:none}
+  .tool-page{text-align:left}
+  .rm-flow{align-items:stretch}
+  .rm-step{width:100%}
+  .rm-arrow{display:none}
+}
+</style>
+</head>
+<body>
+
+
+  <img src="../assets/logo-SH.png" class="sh-logo" alt="Science Horizon">
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eye">Science Horizon · Variational Analysis and Applications · Task 03</div>
+  <div class="hero-title">Task 03 · Công Cụ Tối Ưu Trong Giải Tích Biến Phân<br><span style="font-size:20px;font-weight:400;font-style:italic">Optimization Tools · Mathematical Galaxy Map</span></div>
+  <div class="hero-sub">Bản đồ hệ thống các công cụ tối ưu trong Mordukhovich 2018: 70+ công cụ được tổ chức theo 9 nhóm chức năng — từ nền tảng vi phân suy rộng đến điều kiện tối ưu, tính ổn định, đến các ứng dụng nâng cao.</div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">70+</div><div class="stat-lbl">Công cụ & định lý</div></div>
+    <div class="stat"><div class="stat-num">10</div><div class="stat-lbl">Chương</div></div>
+    <div class="stat"><div class="stat-num">9</div><div class="stat-lbl">Nhóm chức năng</div></div>
+    <div class="stat"><div class="stat-num">636</div><div class="stat-lbl">Trang đã đọc</div></div>
+  </div>
+</div>
+
+<!-- NAV -->
+<div class="nav">
+  <div class="nav-search">
+    <input type="text" id="q" placeholder="Tìm công cụ... (vd: Ekeland, subdiff, chain rule, coderivative...)" oninput="doSearch()">
+  </div>
+  <span class="scnt" id="scnt"></span>
+  <div class="tabs-wrap">
+    <button class="tv on" style="background:var(--ink)" onclick="filt('all',this)">Tất cả</button>
+    <button class="tv" style="--c:var(--c1)" onclick="filt('g1',this)">§ Vi phân suy rộng</button>
+    <button class="tv" style="--c:var(--c2)" onclick="filt('g2',this)">§ Nguyên lý biến phân</button>
+    <button class="tv" style="--c:var(--c3)" onclick="filt('g3',this)">§ Quy tắc tính</button>
+    <button class="tv" style="--c:var(--c4)" onclick="filt('g4',this)">§ Tính ổn định</button>
+    <button class="tv" style="--c:var(--c5)" onclick="filt('g5',this)">§ Giá trị trung bình</button>
+    <button class="tv" style="--c:var(--c6)" onclick="filt('g6',this)">§ Toán tử đơn điệu</button>
+    <button class="tv" style="--c:var(--c7)" onclick="filt('g7',this)">§ Điều kiện tối ưu</button>
+    <button class="tv" style="--c:var(--c8)" onclick="filt('g8',this)">§ Bán vô hạn</button>
+    <button class="tv" style="--c:var(--c9)" onclick="filt('g9',this)">§ Đa mục tiêu</button>
+  </div>
+</div>
+
+<div class="body" id="mainbody">
+
+<!-- INSIGHT BOX -->
+<div class="insight" id="insightBox">
+  <div class="insight-title">🔑 Kiến Trúc Tổng Thể Của Sách</div>
+  <div class="insight-body">
+    Toàn bộ công cụ được xây từ <code>N(x̄;Ω)</code> (nón pháp tuyến, Def 1.1 tr.3) → áp lên <code>gph F</code> = Coderivative, áp lên <code>epi φ</code> = Subdifferential.
+    Chuỗi logic: <strong>Công cụ vi phân</strong> (Ch.1) → <strong>Nguyên lý cực trị</strong> (Ch.2) → <strong>Quy tắc tính</strong> (Ch.2-4) → <strong>Tính ổn định</strong> (Ch.3) → <strong>Điều kiện tối ưu</strong> (Ch.6) → <strong>Ứng dụng</strong> (Ch.7-10).
+  </div>
+</div>
+
+<!-- ROADMAP -->
+<div class="roadmap-box" id="roadmapBox">
+  <div class="rm-title">Lộ Trình Giải Bài Toán Tối Ưu Thực Tế</div>
+  <div class="rm-flow">
+    <div class="rm-step">① Xác định<br>dạng bài toán</div>
+    <div class="rm-arrow">→</div>
+    <div class="rm-step">② Kiểm tra<br>điều kiện đứng</div>
+    <div class="rm-arrow">→</div>
+    <div class="rm-step">③ Tính<br>subdiff / coderiv</div>
+    <div class="rm-arrow">→</div>
+    <div class="rm-step">④ Áp dụng<br>quy tắc tính</div>
+    <div class="rm-arrow">→</div>
+    <div class="rm-step">⑤ Viết điều kiện<br>tối ưu (Thm 6.x)</div>
+    <div class="rm-arrow">→</div>
+    <div class="rm-step">⑥ Phân tích<br>tính ổn định</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     NHÓM 1: CÔNG CỤ VI PHÂN SUY RỘNG
+     ═══════════════════════════════════════════ -->
+<div class="chapter" data-cat="g1">
+<div class="ch-hdr">
+  <span class="ch-num">Chương 1</span>
+  <div>
+    <div class="ch-title">Công Cụ Vi Phân Suy Rộng</div>
+    <div class="ch-desc">Xây dựng bộ công cụ nền tảng: nón pháp tuyến, coderivative, subdifferential — tất cả từ một ý tưởng hình học duy nhất</div>
+  </div>
+  <span class="ch-tag" style="background:var(--c1l);color:var(--c1d)">🔵 Nền tảng tuyệt đối</span>
+</div>
+<div class="tools-grid">
+
+<div class="tool" style="border-left-color:var(--c1)" data-s="normal cone nón pháp tuyến cơ bản basic limiting N omega projection chiếu">
+  <div class="tool-num">1.1</div>
+  <div class="tool-body">
+    <div class="tool-ref" style="color:var(--c1)">Definition 1.1 <span class="imp-tag imp-core">nền tảng</span></div>
+    <div class="tool-name">Nón Pháp Tuyến Cơ Bản (Basic Normal Cone)</div>
+    <div class="tool-formula">N(x̄;Ω) := Lim sup cone[x − Π(x;Ω)]
+                x→x̄
+Mỗi v ∈ N(x̄;Ω): ∃ xₖ→x̄, wₖ∈Π(xₖ;Ω), αₖ≥0: αₖ(xₖ−wₖ)→v</div>
+    <div class="tool-desc">Nón pháp tuyến xây từ phép chiếu hình học lên Ω. Tính chất then chốt: là nón ĐÓNG nhưng có thể KHÔNG LỒI. Đây là công cụ trung tâm của toàn bộ sách.</div>
+    <div class="tool-use"><b>Ứng dụng:</b> Viết điều kiện tối ưu với ràng buộc x∈Ω: 0 ∈ ∂φ(x̄) + N(x̄;Ω). Nền tảng xây dựng coderivative và subdifferential.</div>
+  </div>
+  <div class="tool-page"><div class="page-badge">tr.<span>3</span></div></div>
+</div>
+
+<div class="tool" style="border-left-color:var(--c1)" data-s="prenormal cone nón chính quy regular normal N hat epsilon enlargement">
+  <div class="tool-num">1.2</div>
+  <div class="tool-body">
+    <div class="tool-ref" style="color:var(--c1)">Formula (1.5)–(1.6)</div>
+    <div class="tool-name">Nón Pháp Tuyến Chính Quy & Mở Rộng ε</div>
+    <div class="tool-formula">N̂(x;Ω) = {v | lim sup[⟨v,z−x⟩/‖z−x‖] ≤ 0}  [luôn LỒI]
+           z→x, z∈Ω
+Nε(x;Ω) = {v | lim sup[⟨v,z−x⟩/‖z−x‖] ≤ ε}   [ε-mở rộng]</div>
+    <div class="tool-desc">N̂ là "bước trung gian" lồi, tính tại chính điểm. N được xây từ Lim sup N̂ tại các điểm lân cận. Biểu diễn qua ε-mở rộng cho tính ổn định.</div>
+    <div class="tool-use"><b>Định lý 1.6 (tr.5):</b> N(x̄;Ω) = Lim sup N̂(x;Ω) = Lim sup Nε(x;Ω). Dùng để chứng minh các kết quả calculus.</div>
+  </div>
+  <div class="tool-page"><div class="page-badge">tr.<span>4</span></div></div>
+</div>
+
+<div class="tool" style="border-left-color:var(--c1)" data-s="contingent cone nón tiếp tuyến Bouligand T duality đối ngẫu">
+  <div class="tool-num">1.3</div>
+  <div class="tool-body">
+    <div class="tool-ref" style="color:var(--c1)">Definition 1.8 + Proposition 1.9</div>
+    <div class="tool-name">Nón Tiếp Tuyến & Đối Ngẫu Tiếp Tuyến</div>
+    <div class="tool-formula">T(x̄;Ω) := Lim sup (Ω−x̄)/t   [nón Bouligand/tiếp tuyến]
+            t↓0
+Đối ngẫu: N̂(x̄;Ω) = T*(x̄;Ω) = {v | ⟨v,w⟩≤0 ∀w∈T(x̄;Ω)}</div>
+    <div class="tool-desc">T(x̄;Ω) là hướng "đi vào Ω". Quan hệ đối ngẫu N̂ = T* là tổng quát hóa separation theorem cho tập không lồi.</div>
+    <div class="tool-use"><b>Ứng dụng:</b> Kiểm tra tính chất hình học. Nền tảng cho Extremal Principle ở Chương 2. Định nghĩa conic/contingent extremal systems (Def 2.6, tr.73).</div>
+  </div>
+  <div class="tool-page"><div class="page-badge">tr.<span>7–9</span></div></div>
+</div>
+
+<div class="tool" style="border-left-color:var(--c1)" data-s="smooth variational description biến phân trơn C1 tiếp xúc touching function psi">
+  <div class="tool-num">1.4</div>
+  <div class="tool-body">
+    <div class="tool-ref" style="color:var(--c1)">Theorem 1.10 <span class="imp-tag imp-key">công cụ kỹ thuật</span></div>
+    <div class="tool-name">Mô Tả Biến Phân Trơn cho N̂ (Smooth Variational Description)</div>
+    <div class="tool-formula">v ∈ N̂(x̄;Ω) ⟺ ∃ hàm ψ∈C¹ với ∇ψ(x̄)=v và
+                   ψ(x) ≤ ψ(x̄) ∀x∈Ω gần x̄
+                   [ψ đạt cực đại trên Ω tại x̄]</div>
+    <div class="tool-desc">Mọi pháp tuyến chính quy có thể "thực hiện" bằng một hàm trơn tiếp xúc từ trên. Đây là nguyên lý variational cơ bản nhất.</div>
+    <div class="tool-use"><b>Ứng dụng:</b> Chứng minh kỹ thuật ở Chương 2-6. Cầu nối giữa "hình học" (nón) và "giải tích" (hàm). Tái xuất hiện trong mọi chứng minh dùng smooth approximation.</div>
+  </div>
+  <div class="tool-page"><div class="page-badge">tr.<span>9–12</span></div></div>
+</div>
+
+<div class="tool" style="border-left-color:var(--c1)" data-s="coderivative đạo hàm đồng biến D star F basic set-valued graph gph">
+  <div class="tool-num">1.5</div>
+  <div class="tool-body">
+    <div class="tool-ref" style="color:var(--c1)">Definition 1.11 <span class="imp-tag imp-core">nền tảng</span></div>
+    <div class="tool-name">Đạo Hàm Đồng Biến Cơ Bản (Basic Coderivative)</div>
+    <div class="tool-formula">D*F(x̄,ȳ)(v) := {u ∈ ℝⁿ | (u,−v) ∈ N((x̄,ȳ); gph F)}
+Áp nón pháp tuyến N lên ĐỒ THỊ gph F ⊂ ℝⁿ×ℝᵐ</div>
+    <div class="tool-desc">Tổng quát hóa Jacobian chuyển vị cho ánh xạ đa trị phi trơn. Khi F=f trơn: D*f(x̄)(v) = ∇f(x̄)ᵀv (Prop 1.12, tr.13).</div>
+    <div class="tool-use"><b>Ứng dụng:</b> Đặc trưng metric regularity (Thm 3.3, tr.107). Viết điều kiện tối ưu cho variational systems (Thm 3.20, tr.127). Scalarization = ∂⟨v,f⟩ (Thm 1.32, tr.35).</div>
+  </div>
+  <div class="tool-page"><div class="page-badge">tr.<span>13</span></div></div>
+</div>
+
+<div class="tool" style="border-left-color:var(--c1)" data-s="basic subdifferential partial phi singular infinity vi phân con cơ bản kỳ dị epigraph epi">
+  <div class="tool-num">1.6</div>
+  <div class="tool-body">
+    <div class="tool-ref" style="color:var(--c1)">Definition 1.18 <span class="imp-tag imp-core">nền tảng</span></div>
+    <div class="tool-name">Vi Phân Con Cơ Bản & Kỳ Dị (∂φ và ∂∞φ)</div>
+    <div class="tool-formula">∂φ(x̄) := {v | (v,−1) ∈ N((x̄,φ(x̄)); epi φ)}   [cơ bản]
+∂∞φ(x̄) := {v | (v,0) ∈ N((x̄,φ(x̄)); epi φ)}    [kỳ dị]
+Áp N lên THƯỢNG ĐỒ THỊ epi φ ⊂ ℝⁿ×ℝ</div>
+    <div class="tool-desc">∂φ tổng quát gradient cho hàm phi trơn. ∂∞φ đặc trưng tính Lipschitz: φ Lipschitz cục bộ ⟺ ∂∞φ(x̄)={0} (Thm 1.22, tr.23).</div>
+    <div class="tool-use"><b>Ứng dụng trực tiếp:</b> Quy tắc Fermat: x̄ cực tiểu ⟹ 0∈∂φ(x̄) (Prop 1.30, tr.33). Mọi điều kiện tối ưu ở Chương 6 đều dùng ∂φ và ∂∞φ.</div>
+  </div>
+  <div class="tool-page"><div class="page-badge">tr.<span>19</span></div></div>
+</div>
+
+<div class="tool" style="border-left-color:var(--c1)" data-s="subdifferential Lipschitz Thm 1.22 locally Lipschitzian function compact bounded">
+  <div class="tool-num">1.7</div>
+  <div class="tool-body">
+    <div class="tool-ref" style="color:var(--c1)">Theorem 1.22 <span class="imp-tag imp-key">dùng thường xuyên</span></div>
+    <div class="tool-name">Subdifferential Hàm Lipschitz Cục Bộ</div>
+    <div class="tool-formula">φ Lipschitz mod. ℓ quanh x̄ ⟺ ∂∞φ(x̄) = {0}
+                         AND  ∂φ(x̄) ⊂ ℓ·B  (compact, bị chặn)
+∂φ(x̄) ≠ ∅  khi φ Lipschitz</div>
+    <div class="tool-desc">Định lý cơ bản nhất về subdifferential. Khi Lipschitz: subdiff cơ bản compact và không rỗng, subdiff kỳ dị tầm thường.</div>
+    <div class="tool-use"><b>Dùng trong:</b> Kiểm tra hàm có Lipschitz không. Bước chuẩn đầu tiên trong mọi bài toán tối ưu phi trơn. Thm 3.3 dùng kết quả này.</div>
+  </div>
+  <div class="tool-page"><div class="page-badge">tr.<span>23</span></div></div>
+</div>
+
+<div class="tool" style="border-left-color:var(--c1)" data-s="subdifferential from coderivative Thm 1.23 continuous function representation">
+  <div class="tool-num">1.8</div>
+  <div class="tool-body">
+    <div class="tool-ref" style="color:var(--c1)">Theorem 1.23</div>
+    <div class="tool-name">Subdifferential Từ Coderivative (Thể Hiện Thống Nhất)</div>
+    <div class="tool-formula">∂φ(x̄) = D*f(x̄)(1)  khi f = φ hàm thực l.s.c. liên tục
+v ∈ ∂φ(x̄) ⟺ (v,−1) ∈ N((x̄,φ(x̄));epi φ)
+           ⟺ (v,−1) ∈ D*(epi-mapping)(x̄,φ(x̄))(0)</div>
+    <div class="tool-desc">Thống nhất subdifferential và coderivative: subdiff = coderivative của ánh xạ epigraph. Mọi công thức tính subdiff đều có thể suy ra từ coderivative calculus (Chương 3).</div>
+    <div class="tool-use"><b>Ứng dụng:</b> Chuyển bài toán về subdiff sang bài toán về coderivative để dùng Chương 3. Thm 4.5 (tr.167) mở rộng cho hàm hợp.</div>
+  </div>
+  <div class="tool-page"><div class="page-badge">tr.<span>23–25</span></div></div>
+</div>
+
+<div class="tool" style="border-left-color:var(--c1)" data-s="regular subdifferential hat partial presubdifferential Fréchet geometric description Thm 1.26">
+  <div class="tool-num">1.9</div>
+  <div class="tool-body">
+    <div class="tool-ref" style="color:var(--c1)">Theorem 1.26–1.27</div>
+    <div class="tool-name">Vi Phân Con Chính Quy ∂̂φ — Mô Tả Hình Học & Biến Phân</div>
+    <div class="tool-formula">∂̂φ(x̄) = {v | lim inf[φ(x)−φ(x̄)−⟨v,x−x̄⟩]/‖x−x̄‖ ≥ 0}
+Biến phân: v∈∂̂φ(x̄) ⟺ ∃ψ trơn C¹, ψ≤φ gần x̄, ψ(x̄)=φ(x̄), ∇ψ(x̄)=v
+                   [ψ "tiếp xúc từ dưới"]</div>
+    <div class="tool-desc">∂̂φ là bước trung gian lồi. Quan trọng: mô tả biến phân trơn (Thm 1.27) là kỹ thuật nền tảng của toàn bộ giải tích biến phân phi lồi.</div>
+    <div class="tool-use"><b>Ứng dụng:</b> Thm 1.28: ∂φ(x̄) = Lim sup ∂̂φ(x) — cách tính ∂φ từ ∂̂φ. Nền tảng cho fuzzy calculus và mọi chứng minh calculus rule.</div>
+  </div>
+  <div class="tool-page"><div class="page-badge">tr.<span>29–31</span></div></div>
+</div>
+
+<div class="tool" style="border-left-color:var(--c1)" data-s="limiting representation basic subdifferential Thm 1.28 Lim sup epsilon subgradient">
+  <div class="tool-num">1.10</div>
+  <div class="tool-body">
+    <div class="tool-ref" style="color:var(--c1)">Theorem 1.28 <span class="imp-tag imp-core">quan trọng nhất</span></div>
+    <div class="tool-name">Biểu Diễn Giới Hạn (Limiting Representations) — Cách Tính ∂φ</div>
+    <div class="tool-formula">∂φ(x̄) = Lim sup ∂̂φ(x)    [giới hạn ∂̂ từ lân cận]
+           φ
+          x→x̄
+∂φ(x̄) = Lim sup ∂εφ(x)   [ổn định với ε-enlargement]
+          φ
+         x→x̄, ε↓0
+∂∞φ(x̄) = Lim sup λ·∂φ(x) [subgradient kỳ dị = co giãn về 0]
+           φ
+          x→x̄, λ↓0</div>
+    <div class="tool-desc">Công thức tính thực tế: muốn tính ∂φ(x̄), tính ∂̂φ tại các điểm lân cận rồi lấy giới hạn ngoài. Đây là "recipe" tính subdiff phi trơn trong thực tế.</div>
+    <div class="tool-use"><b>Ứng dụng:</b> Tính ∂φ(0) của f(x)=|x|, f(x)=max(fᵢ), f(x)=min(fᵢ). Chứng minh mọi sum rule, chain rule, product rule ở Chương 2 và 4.</div>
+  </div>
+  <div class="tool-page"><div class="page-badge">tr.<span>31–33</span></div></div>
+</div>
+
+<div class="tool" style="border-left-color:var(--c1)" data-s="Fermat rule quy tắc Fermat optimality condition Prop 1.30 sum rule elementary">
+  <div class="tool-num">1.11</div>
+  <div class="tool-body">
+    <div class="tool-ref" style="color:var(--c1)">Proposition 1.30 <span class="imp-tag imp-core">dùng mọi bài toán</span></div>
+    <div class="tool-name">Quy Tắc Fermat Suy Rộng + Quy Tắc Tổng Cơ Bản</div>
+    <div class="tool-formula">(i) FERMAT: x̄ cực tiểu cục bộ của φ ⟹ 0 ∈ ∂φ(x̄) và 0 ∈ ∂̂φ(x̄)
+(ii) SUM RULE: ∂(ψ+φ)(x̄) ⊂ ∇ψ(x̄) + ∂φ(x̄)  [ψ khả vi tại x̄]
+              = ∇ψ(x̄) + ∂φ(x̄)   [bằng khi ψ trơn C¹]</div>
+    <div class="tool-desc">Fermat rule = mở rộng của f′(x̄)=0 sang hàm phi trơn. Sum rule = tách phần trơn ra gradient, phần phi trơn giữ nguyên. CỰC KỲ THƯỜNG DÙNG.</div>
+    <div class="tool-use"><b>Ứng dụng ngay lập tức:</b> Mọi bài toán unconstrained nonsmooth. Kết hợp với N(x̄;Ω): 0∈∂φ(x̄)+N(x̄;Ω) cho bài có ràng buộc.</div>
+  </div>
+  <div class="tool-page"><div class="page-badge">tr.<span>33</span></div></div>
+</div>
+
+<div class="tool" style="border-left-color:var(--c1)" data-s="scalarization coderivative Thm 1.32 inner product composition vô hướng hóa">
+  <div class="tool-num">1.12</div>
+  <div class="tool-body">
+    <div class="tool-ref" style="color:var(--c1)">Theorem 1.32 <span class="imp-tag imp-key">công cụ tính toán</span></div>
+    <div class="tool-name">Scalarization — Chuyển Coderivative Về Subdifferential</div>
+    <div class="tool-formula">D*f(x̄)(v) = ∂⟨v,f⟩(x̄)   [f: ℝⁿ→ℝᵐ Lipschitz cục bộ]
+⟨v,f⟩(x) := ⟨v, f(x)⟩  [hàm vô hướng hóa]
+D̂*f(x̄)(v) = ∂̂⟨v,f⟩(x̄) [phiên bản chính quy]</div>
+    <div class="tool-desc">Thay vì tính coderivative (phức tạp hơn), chỉ cần tính subdifferential của hàm vô hướng ⟨v,f⟩. Giảm độ phức tạp từ bậc cao xuống một bước.</div>
+    <div class="tool-use"><b>Ứng dụng:</b> Tính D*f(x̄) cho f(x)=|x|, f(x)=Ax+b, f(x)=g∘h. Kết hợp với Chương 3 (coderivative calculus) để tính nhanh.</div>
+  </div>
+  <div class="tool-page"><div class="page-badge">tr.<span>35</span></div></div>
+</div>
+
+<div class="tool" style="border-left-color:var(--c1)" data-s="distance function subdifferential Thm 1.33 in-set out-of-set projection">
+  <div class="tool-num">1.13</div>
+  <div class="tool-body">
+    <div class="tool-ref" style="color:var(--c1)">Theorem 1.33 <span class="imp-tag imp-key">kết quả ứng dụng</span></div>
+    <div class="tool-name">Subdifferential Hàm Khoảng Cách d_Ω(x) = dist(x;Ω)</div>
+    <div class="tool-formula">x̄ ∈ Ω: ∂̂d_Ω(x̄) = N̂(x̄;Ω) ∩ B    [trong tập]
+        ∂d_Ω(x̄)  = N(x̄;Ω) ∩ B
+x̄ ∉ Ω, Π(x̄;Ω)={w̄}: ∂̂d_Ω(x̄)=∂d_Ω(x̄)={(x̄−w̄)/‖x̄−w̄‖}
+                         [vectơ đơn vị từ chiếu đến x̄]</div>
+    <div class="tool-desc">Hàm khoảng cách xuất hiện khắp nơi: penalty methods, constraint qualifications, metric regularity. Kết quả này là cầu nối giữa hàm số và tập hợp.</div>
+    <div class="tool-use"><b>Ứng dụng:</b> Phương pháp phạt (penalty): min φ(x)+λ·d_Ω(x). Metric regularity và covering. Proximity algorithms trong tối ưu lồi phi trơn.</div>
+  </div>
+  <div class="tool-page"><div class="page-badge">tr.<span>37–43</span></div></div>
+</div>
+
+<div class="tool" style="border-left-color:var(--c1)" data-s="second order subdifferential bậc 2 Def 3.17 hessian generalized">
+  <div class="tool-num">1.14</div>
+  <div class="tool-body">
+    <div class="tool-ref" style="color:var(--c1)">Definition 3.17</div>
+    <div class="tool-name">Vi Phân Con Bậc Hai ∂²φ (Second-Order Subdifferential)</div>
+    <div class="tool-formula">∂²φ(x̄,ȳ)(w) := D*∂φ(x̄,ȳ)(w)  với ȳ ∈ ∂φ(x̄)
+[Coderivative của ánh xạ subdifferential ∂φ: ℝⁿ ⇒ ℝⁿ]</div>
+    <div class="tool-desc">Tổng quát hóa Hessian ∇²φ cho hàm phi trơn. Khi φ trơn C²: ∂²φ(x̄,∇φ(x̄))(w) = {∇²φ(x̄)w}. Dùng để phân tích bậc 2 và stability.</div>
+    <div class="tool-use"><b>Ứng dụng:</b> Phân tích metric regularity của variational systems (§3.3). Điều kiện đủ bậc hai cho cực tiểu cục bộ. Tính ổn định monotone operators (Ch.5).</div>
+  </div>
+  <div class="tool-page"><div class="page-badge">tr.<span>123</span></div></div>
+</div>
+
+</div><!-- end tools-grid -->
+</div><!-- end chapter g1 -->
+
+<!-- ═══════════════════════════════════════════
+     NHÓM 2: NGUYÊN LÝ BIẾN PHÂN
+     ═══════════════════════════════════════════ -->
+<div class="chapter" data-cat="g2">
+<div class="ch-hdr">
+  <span class="ch-num">Chương 2</span>
+  <div>
+    <div class="ch-title">Nguyên Lý Biến Phân Cơ Bản</div>
+    <div class="ch-desc">Extremal Principle — "vũ khí hạng nặng" để chứng minh mọi kết quả calculus không lồi. Tương đương với separation theorem cho convex analysis.</div>
+  </div>
+  <span class="ch-tag" style="background:var(--c2l);color:var(--c2d)">🟢 Vũ khí chứng minh</span>
+</div>
+<div class="tools-grid">
+
+<div class="tool" style="border-left-color:var(--c2)" data-s="basic extremal principle nguyên lý cực trị cơ bản Thm 2.3 local extremality set systems">
+  <div class="tool-num">2.1</div>
+  <div class="tool-body">
+    <div class="tool-ref" style="color:var(--c2)">Theorem 2.3 — Extremal Principle <span class="imp-tag imp-core">vũ khí trung tâm</span></div>
+    <div class="tool-name">Nguyên Lý Cực Trị Cơ Bản (Basic Extremal Principle)</div>
+    <div class="tool-formula">{Ω₁,...,Ωs, x̄} là hệ cực trị cục bộ ⟹
+∃ v₁∈N(x̄;Ω₁),...,vₛ∈N(x̄;Ωₛ): v₁+...+vₛ=0, ‖v₁‖+...+‖vₛ‖=1
+[tổng pháp tuyến = 0 với chuẩn hóa]</div>
+    <div class="tool-desc">Tổng quát hóa phi lồi của separation theorem. "Cực trị cục bộ" = ∩Ωᵢ không thể dịch chuyển trong bất kỳ hướng nào. Được chứng minh bằng phương pháp metric approximations (MMA).</div>
+    <div class="tool-use"><b>Ứng dụng:</b> Dùng để chứng minh MỌI calculus rule (intersection rule, sum rule, chain rule) ở Chương 2-4. Không có Extremal Principle, không có calculus.</div>
+  </div>
+  <div class="tool-page"><div class="page-badge">tr.<span>69</span></div></div>
+</div>
+
+<div class="tool" style="border-left-color:var(--c2)" data-s="approximate extremal principle xấp xỉ Cor 2.5 epsilon normals">
+  <div class="tool-num">2.2</div>
+  <div class="tool-body">
+    <div class="tool-ref" style="color:var(--c2)">Corollary 2.5</div>
+    <div class="tool-name">Nguyên Lý Cực Trị Xấp Xỉ (Approximate Extremal Principle)</div>
+    <div class="tool-formula">∃ xᵢ∈Ωᵢ∩(x̄+εB), vᵢ∈Nε(xᵢ;Ωᵢ): ‖xᵢ−x̄‖≤ε, ‖v₁+...+vₛ‖≤ε
+[điều kiện xấp xỉ với ε nhỏ tùy ý]</div>
+    <div class="tool-desc">Phiên bản xấp xỉ của Extremal Principle — dùng ε-normals thay vì normals chính xác. Có tính chất quan trọng: tương đương Thm 2.3 trong ℝⁿ, nhưng mạnh hơn trong không gian vô hạn chiều.</div>
+    <div class="tool-use"><b>Ứng dụng:</b> Nền tảng cho infinite-dimensional extensions. Chứng minh fuzzy calculus rules trong Banach spaces. Kết nối với Ekeland's principle.</div>
+  </div>
+  <div class="tool-page"><div class="page-badge">tr.<span>73</span></div></div>
+</div>
+
+<div class="tool" style="border-left-color:var(--c2)" data-s="conic extremal principle countable sets Thm 2.9 infinite intersection">
+  <div class="tool-num">2.3</div>
+  <div class="tool-body">
+    <div class="tool-ref" style="color:var(--c2)">Theorem 2.9 + Theorem 2.11</div>
+    <div class="tool-name">Nguyên Lý Cực Trị Đếm Được (Countable Extremal Principles)</div>
+    <div class="tool-formula">Hệ ĐẾM ĐƯỢC {Ωᵢ}ᵢ∈ℕ cực trị conic/tiếp tuyến:
+⟹ Điều kiện cực trị conic: vᵢ∈N(x̄;Ωᵢ): Σᵢ‖vᵢ‖=1, Σᵢvᵢ=0
+⟹ Điều kiện cực trị tiếp tuyến+pháp tuyến</div>
+    <div class="tool-desc">Mở rộng Extremal Principle từ hữu hạn sang đếm được tập. Quan trọng cho semi-infinite programming (Chương 7-8) với vô số ràng buộc.</div>
+    <div class="tool-use"><b>Ứng dụng:</b> Semi-infinite programming với countable constraints (Chương 8). Tính pháp tuyến của giao vô số tập (§8.4). Ràng buộc chỉ số đếm được.</div>
+  </div>
+  <div class="tool-page"><div class="page-badge">tr.<span>75–79</span></div></div>
+</div>
+
+<div class="tool" style="border-left-color:var(--c2)" data-s="Ekeland variational principle Cor 2.13 approximate minimum suboptimal solution">
+  <div class="tool-num">2.4</div>
+  <div class="tool-body">
+    <div class="tool-ref" style="color:var(--c2)">Theorem 2.12 + Corollary 2.13 <span class="imp-tag imp-key">dùng rộng rãi</span></div>
+    <div class="tool-name">Nguyên Lý Biến Phân Ekeland (Ekeland Variational Principle)</div>
+    <div class="tool-formula">φ l.s.c., x₀ ε-optimal, λ>0:
+∃ x̄: ‖x̄−x₀‖≤λ, φ(x̄)≤φ(x₀)
+và x̄ là CỰC TIỂU CHÍNH XÁC của φ(·)+(ε/λ)‖·−x̄‖
+[xấp xỉ ε-minimum bằng exact minimum của perturbation]</div>
+    <div class="tool-desc">Một trong những nguyên lý quan trọng nhất của giải tích hiện đại. Cho phép chuyển "xấp xỉ cực tiểu" thành "cực tiểu chính xác" với chi phí perturbation nhỏ.</div>
+    <div class="tool-use"><b>Ứng dụng:</b> Chứng minh tính tồn tại nghiệm. Fixed point theorems (Prop 2.15, tr.83). Subdifferential almost stationary conditions (Thm 2.14, tr.83). Set optimization (Chương 9).</div>
+  </div>
+  <div class="tool-page"><div class="page-badge">tr.<span>81–83</span></div></div>
+</div>
+
+<div class="tool" style="border-left-color:var(--c2)" data-s="fixed point Prop 2.15 set-valued mapping F multifunction">
+  <div class="tool-num">2.5</div>
+  <div class="tool-body">
+    <div class="tool-ref" style="color:var(--c2)">Proposition 2.15</div>
+    <div class="tool-name">Điểm Bất Động Ánh Xạ Đa Trị (Fixed Points of Multifunctions)</div>
+    <div class="tool-formula">F: ℝⁿ ⇒ ℝⁿ với gph F closed, và các điều kiện variational
+⟹ ∃ x̄ ∈ F(x̄)   [điểm bất động]</div>
+    <div class="tool-desc">Hệ quả của nguyên lý biến phân tổng quát. Không cần F liên tục — chỉ cần điều kiện về φ và θ trong Thm 2.12.</div>
+    <div class="tool-use"><b>Ứng dụng:</b> Tồn tại nghiệm equilibrium trong kinh tế. Tồn tại nghiệm variational inequalities. Generalized Nash equilibrium.</div>
+  </div>
+  <div class="tool-page"><div class="page-badge">tr.<span>83</span></div></div>
+</div>
+
+</div></div>
+
+<!-- ═══════════════════════════════════════════
+     NHÓM 3: QUY TẮC TÍNH (CALCULUS RULES)
+     ═══════════════════════════════════════════ -->
+<div class="chapter" data-cat="g3">
+<div class="ch-hdr">
+  <span class="ch-num">Chương 2–4</span>
+  <div>
+    <div class="ch-title">Quy Tắc Tính Vi Phân (Calculus Rules)</div>
+    <div class="ch-desc">Công thức tính subdiff, coderivative, normals của các tổ hợp hàm — không thể giải bài toán thực tế nếu không có những quy tắc này</div>
+  </div>
+  <span class="ch-tag" style="background:var(--c3l);color:var(--c3d)">🟠 Tính toán thực tế</span>
+</div>
+<div class="tools-grid">
+
+<div class="tool" style="border-left-color:var(--c3)" data-s="intersection rule giao tập Thm 2.16 qualification condition">
+  <div class="tool-num">3.1</div>
+  <div class="tool-body">
+    <div class="tool-ref" style="color:var(--c3)">Theorem 2.16 + Corollary 2.17–2.18 <span class="imp-tag imp-key">dùng thường</span></div>
+    <div class="tool-name">Quy Tắc Giao & Tổng Tập (Intersection & Sum Rules for Sets)</div>
+    <div class="tool-formula">Điều kiện đứng (QUALIFICATION): ∂∞φ₁(x̄) ∩ (−∂∞φ₂(x̄)) = {0}
+N(x̄; Ω₁∩Ω₂) ⊂ N(x̄;Ω₁) + N(x̄;Ω₂)  [giao]
+N(x̄; Ω₁+Ω₂) ⊂ N₁(x₁;Ω₁) × N₂(x₂;Ω₂)  [tổng, x̄=x₁+x₂]
+Hữu hạn: N(x̄; ∩ᵢΩᵢ) ⊂ Σᵢ N(x̄;Ωᵢ)  [Cor 2.17]</div>
+    <div class="tool-desc">Quy tắc cơ bản cho tập hợp. "Điều kiện đứng" (qualification condition) là điều kiện kỹ thuật đảm bảo đẳng thức đúng (không chỉ bao hàm).</div>
+    <div class="tool-use"><b>Ứng dụng:</b> Tính N(x̄;Ω₁∩Ω₂) = giao của nhiều ràng buộc. Bài toán min φ(x): x∈Ω₁∩Ω₂ → điều kiện tối ưu dùng sum of normals.</div>
+  </div>
+  <div class="tool-page"><div class="page-badge">tr.<span>85</span></div></div>
+</div>
+
+<div class="tool" style="border-left-color:var(--c3)" data-s="sum rule subdifferential Thm 2.19 Cor 2.20 2.21 lower semicontinuous functions">
+  <div class="tool-num">3.2</div>
+  <div class="tool-body">
+    <div class="tool-ref" style="color:var(--c3)">Theorem 2.19 + Corollary 2.20–2.21 <span class="imp-tag imp-core">dùng mọi nơi</span></div>
+    <div class="tool-name">Quy Tắc Tổng Subdifferential (Sum Rules for Subdifferentials)</div>
+    <div class="tool-formula">∂(φ₁+φ₂)(x̄) ⊂ ∂φ₁(x̄) + ∂φ₂(x̄)  [φ₁,φ₂ l.s.c., QC thỏa]
+∂(φ₁+φ₂)(x̄) = ∂φ₁(x̄) + ∂φ₂(x̄)  [khi một hàm Lipschitz: Cor 2.20]
+∂(Σᵢφᵢ)(x̄) ⊂ Σᵢ∂φᵢ(x̄)  [hữu hạn hàm: Cor 2.21]</div>
+    <div class="tool-desc">Quy tắc quan trọng nhất trong giải tích phi trơn. Bước đầu tiên khi đối mặt với hàm mục tiêu là tổng. Qualification condition = ∂∞φ₁(x̄)∩(−∂∞φ₂(x̄))={0}.</div>
+    <div class="tool-use"><b>Ứng dụng trực tiếp:</b> Bất kỳ bài toán min φ₁(x)+φ₂(x)+... đều bắt đầu từ đây. Penalty method: min f(x)+λ·h(x) → ∂(f+λh) ⊂ ∂f + λ∂h.</div>
+  </div>
+  <div class="tool-page"><div class="page-badge">tr.<span>87–89</span></div></div>
+</div>
+
+<div class="tool" style="border-left-color:var(--c3)" data-s="coderivative sum rule Thm 3.9 Cor 3.10 set-valued mappings Lipschitz-like">
+  <div class="tool-num">3.3</div>
+  <div class="tool-body">
+    <div class="tool-ref" style="color:var(--c3)">Theorem 3.9 + Corollary 3.10</div>
+    <div class="tool-name">Quy Tắc Tổng Coderivative (Coderivative Sum Rules)</div>
+    <div class="tool-formula">D*(F₁+F₂)(x̄,ȳ)(v) ⊂ ∪ [D*F₁(x̄,ȳ₁)(v)+D*F₂(x̄,ȳ₂)(v)]
+                             ȳ₁+ȳ₂=ȳ
+Khi F₁ or F₂ Lipschitz-like (Cor 3.10):
+D*(F₁+F₂)(x̄,ȳ)(v) = D*F₁(x̄,ȳ₁)(v) + D*F₂(x̄,ȳ₂)(v)</div>
+    <div class="tool-desc">Tương tự sum rule cho subdiff nhưng cho coderivative của ánh xạ đa trị. Dùng để phân tích stability của tổng ánh xạ.</div>
+    <div class="tool-use"><b>Ứng dụng:</b> Tính coderivative của F=F₁+F₂ trong variational system (§3.3). Stability analysis khi bài toán là tổng của các subsystems.</div>
+  </div>
+  <div class="tool-page"><div class="page-badge">tr.<span>115</span></div></div>
+</div>
+
+<div class="tool" style="border-left-color:var(--c3)" data-s="coderivative chain rule Thm 3.11 Cor 3.12 composition normals inverse images">
+  <div class="tool-num">3.4</div>
+  <div class="tool-body">
+    <div class="tool-ref" style="color:var(--c3)">Theorem 3.11 + Corollaries 3.12–3.15 <span class="imp-tag imp-key">chain rule</span></div>
+    <div class="tool-name">Quy Tắc Dây Chuyền Coderivative (Coderivative Chain Rules)</div>
+    <div class="tool-formula">F: ℝᵐ⇒ℝˡ, G: ℝⁿ⇒ℝᵐ, H=F∘G:
+D*(F∘G)(x̄,z̄)(w) ⊂ D*G(x̄,ȳ)(D*F(ȳ,z̄)(w))  [Thm 3.11(i)]
+= D*G(x̄,ȳ)(D*F(ȳ,z̄)(w))  [khi F Lipschitz-like: Cor 3.12]
+Normals to Inverse Images (Cor 3.13):
+N(x̄; G⁻¹(Ω)) ⊂ D*G(x̄,ȳ)(N(ȳ;Ω))</div>
+    <div class="tool-desc">Chain rule cho ánh xạ đa trị. Corollary 3.13 đặc biệt hữu ích: tính N của preimage G⁻¹(Ω) từ coderivative của G và N(Ω).</div>
+    <div class="tool-use"><b>Ứng dụng:</b> Bài toán constraint set = {x: g(x)∈Ω} → N(x̄;Ω_feasible) = D*g(x̄)N(g(x̄);Ω). Chuyển ràng buộc hàm về ràng buộc tập.</div>
+  </div>
+  <div class="tool-page"><div class="page-badge">tr.<span>117–121</span></div></div>
+</div>
+
+<div class="tool" style="border-left-color:var(--c3)" data-s="marginal function subgradient Thm 4.1 Cor 4.2 4.3 optimal value function value function">
+  <div class="tool-num">3.5</div>
+  <div class="tool-body">
+    <div class="tool-ref" style="color:var(--c3)">Theorem 4.1 + Corollary 4.2–4.3 <span class="imp-tag imp-core">hàm giá trị tối ưu</span></div>
+    <div class="tool-name">Subdifferential Hàm Biên / Hàm Giá Trị Tối Ưu (Marginal Functions)</div>
+    <div class="tool-formula">μ(x) = inf{φ(x,y) | y∈F(x)}  [marginal/value function]
+∂μ(x̄) ⊂ ∪ {∂ₓφ(x̄,ȳ) + D*F(x̄,ȳ)(∂ᵧφ(x̄,ȳ))}  [Thm 4.1]
+      ȳ∈M(x̄)
+M(x̄) = {ȳ∈F(x̄) | φ(x̄,ȳ)=μ(x̄)}  [optimal solutions]
+Khi F Lipschitz-like / metrically regular: đẳng thức [Cor 4.2]</div>
+    <div class="tool-desc">Hàm giá trị tối ưu μ(x) = giá trị tối ưu phụ thuộc tham số x. Kết quả này là trái tim của bilevel programming và sensitivity analysis.</div>
+    <div class="tool-use"><b>Ứng dụng:</b> Bilevel programming (§6.2, tr.232). Sensitivity analysis. Bài toán phụ thuộc tham số. DC semi-infinite programs (§7.5). Welfare economics (Ch.10).</div>
+  </div>
+  <div class="tool-page"><div class="page-badge">tr.<span>161–165</span></div></div>
+</div>
+
+<div class="tool" style="border-left-color:var(--c3)" data-s="subdifferential composition Thm 4.5 Cor 4.6 chain rule functions basic singular">
+  <div class="tool-num">3.6</div>
+  <div class="tool-body">
+    <div class="tool-ref" style="color:var(--c3)">Theorem 4.5 + Corollary 4.6</div>
+    <div class="tool-name">Chain Rule Subdifferential Hàm Hợp (Subdiff of Compositions)</div>
+    <div class="tool-formula">h(x) = φ(g(x)), g: ℝⁿ→ℝᵐ Lipschitz, φ: ℝᵐ→ℝ̄ l.s.c.:
+∂h(x̄) ⊂ ∪ ∂⟨v,g⟩(x̄)  [Thm 4.5]
+        v∈∂φ(g(x̄))
+∂(φ∘g)(x̄) = ∇g(x̄)ᵀ·∂φ(g(x̄))  [g trơn C¹: Cor 4.6 — thường dùng nhất]</div>
+    <div class="tool-desc">Quy tắc dây chuyền cho hàm hợp. Trường hợp g trơn C¹ (Cor 4.6) là công thức tính phổ biến nhất: nhân Jacobian của g với subdiff của φ.</div>
+    <div class="tool-use"><b>Ví dụ:</b> h(x)=‖Ax+b‖ → ∂h(x̄) = Aᵀ·∂‖·‖(Ax̄+b). h(x)=max(g₁(x),...,gₙ(x)) → dùng Thm 4.10. h(x)=φ(g(x)) với g trơn → dùng Cor 4.6.</div>
+  </div>
+  <div class="tool-page"><div class="page-badge">tr.<span>165–167</span></div></div>
+</div>
+
+<div class="tool" style="border-left-color:var(--c3)" data-s="product rule quotient rule Cor 4.7 4.8 phi1 phi2 tích thương">
+  <div class="tool-num">3.7</div>
+  <div class="tool-body">
+    <div class="tool-ref" style="color:var(--c3)">Corollary 4.7 + 4.8</div>
+    <div class="tool-name">Quy Tắc Tích & Thương (Product & Quotient Rules)</div>
+    <div class="tool-formula">∂(φ₁·φ₂)(x̄) ⊂ φ₂(x̄)∂φ₁(x̄) + φ₁(x̄)∂φ₂(x̄)  [tích]
+∂(φ₁/φ₂)(x̄) ⊂ [φ₂(x̄)∂φ₁(x̄) − φ₁(x̄)∂φ₂(x̄)] / φ₂(x̄)²
+                 [thương, φ₂(x̄)≠0]</div>
+    <div class="tool-desc">Tổng quát hóa phi trơn của quy tắc tích và thương cổ điển. Điều kiện đứng thường bao gồm giả thiết Lipschitz cho một trong hai hàm.</div>
+    <div class="tool-use"><b>Ví dụ:</b> h(x)=f(x)·g(x) với g(x)=|x| → ∂h tại x=0. Bài toán tỉ lệ Rayleigh trong eigenvalue optimization. Hàm mục tiêu dạng tích/thương trong portfolio optimization.</div>
+  </div>
+  <div class="tool-page"><div class="page-badge">tr.<span>167</span></div></div>
+</div>
+
+<div class="tool" style="border-left-color:var(--c3)" data-s="subdifferential maximum min function Thm 4.10 Prop 4.9 supremum infimum">
+  <div class="tool-num">3.8</div>
+  <div class="tool-body">
+    <div class="tool-ref" style="color:var(--c3)">Theorem 4.10 + Proposition 4.9 <span class="imp-tag imp-key">max/min functions</span></div>
+    <div class="tool-name">Subdifferential Hàm Max & Min (Max/Min Rules)</div>
+    <div class="tool-formula">φ(x) = max{φ₁(x),...,φₘ(x)}:  [Thm 4.10]
+∂φ(x̄) ⊂ co{∪ ∂φᵢ(x̄)}  [bao lồi của active subdiff]
+           i∈I(x̄)
+I(x̄) = {i | φᵢ(x̄)=φ(x̄)}  [active index set]
+φ(x)=min{φ₁,...,φₘ}: ∂φ(x̄) ⊃ ∂φⱼ(x̄) với j: φⱼ(x̄)=φ(x̄)  [Prop 4.9]</div>
+    <div class="tool-desc">Hàm max/min xuất hiện ở khắp nơi: robust optimization, minimax problems, piecewise linear functions. Công thức active set là công cụ tính toán thiết yếu.</div>
+    <div class="tool-use"><b>Ứng dụng:</b> Minimax problems. Chebyshev approximation. Robust optimization. SVM hinge loss. Semi-infinite programming (Ch.7-8) với supremum over index set.</div>
+  </div>
+  <div class="tool-page"><div class="page-badge">tr.<span>169</span></div></div>
+</div>
+
+</div></div>
+
+<!-- ═══════════════════════════════════════════
+     NHÓM 4: TÍNH ỔN ĐỊNH
+     ═══════════════════════════════════════════ -->
+<div class="chapter" data-cat="g4">
+<div class="ch-hdr">
+  <span class="ch-num">Chương 3</span>
+  <div>
+    <div class="ch-title">Tính Ổn Định Ánh Xạ (Well-Posedness & Stability)</div>
+    <div class="ch-desc">Khi nào nghiệm thay đổi ổn định khi tham số nhiễu? — Đặc trưng hoàn toàn bằng coderivative</div>
+  </div>
+  <span class="ch-tag" style="background:var(--c4l);color:var(--c4d)">🔴 Phân tích độ nhạy</span>
+</div>
+<div class="tools-grid">
+
+<div class="tool" style="border-left-color:var(--c4)" data-s="Lipschitz-like Aubin property metric regularity linear openness well-posedness Thm 3.2">
+  <div class="tool-num">4.1</div>
+  <div class="tool-body">
+    <div class="tool-ref" style="color:var(--c4)">Theorem 3.2 — Tương Đương Well-Posedness</div>
+    <div class="tool-name">Tam Tính Chất Tương Đương: Lipschitz-Like / Metric Reg / Linear Openness</div>
+    <div class="tool-formula">F: ℝⁿ⇒ℝᵐ, (x̄,ȳ)∈gph F. Ba tính chất TƯƠNG ĐƯƠNG:
+(a) Lipschitz-like (Aubin property): dist(y;F(x)) ≤ κ‖x−x̄‖
+(b) Metric regularity: dist(x;F⁻¹(y)) ≤ κ·dist(y;F(x))
+(c) Linear openness: F(Bδ(x̄)) ⊃ Bλδ(ȳ)∩Bε(ȳ)
+Cùng modulus κ ↔ reg F(x̄,ȳ).</div>
+    <div class="tool-desc">Ba ngôn ngữ mô tả cùng một tính chất ổn định. Metric regularity = "nghiệm thay đổi Lipschitz theo tham số". Linear openness = "ánh xạ mở tuyến tính".</div>
+    <div class="tool-use"><b>Ứng dụng:</b> Sensitivity analysis. Convergence of Newton method. Tồn tại nghiệm khi thay đổi tham số. Kết nối với implicit function theorem phi trơn.</div>
+  </div>
+  <div class="tool-page"><div class="page-badge">tr.<span>105</span></div></div>
+</div>
+
+<div class="tool" style="border-left-color:var(--c4)" data-s="coderivative criterion metric regularity Thm 3.3 Mordukhovich criterion D star">
+  <div class="tool-num">4.2</div>
+  <div class="tool-body">
+    <div class="tool-ref" style="color:var(--c4)">Theorem 3.3 <span class="imp-tag imp-core">Mordukhovich Criterion</span></div>
+    <div class="tool-name">Tiêu Chuẩn Coderivative (Mordukhovich Criterion)</div>
+    <div class="tool-formula">F metrically regular ở (x̄,ȳ) ⟺ D*F(x̄,ȳ)(0) = {0}
+                           ⟺ ker D*F(x̄,ȳ) = {0}
+Lipschitz-like (Aubin): ‖D*F(x̄,ȳ)‖ = reg F(x̄,ȳ) < ∞
+reg F(x̄,ȳ) = ‖D*F(x̄,ȳ)‖ := sup{‖u‖ | u∈D*F(x̄,ȳ)(v), ‖v‖≤1}</div>
+    <div class="tool-desc">Đây là kết quả trung tâm nhất của Chương 3. Cho phép kiểm tra metric regularity bằng cách tính coderivative — không cần xét trực tiếp định nghĩa phức tạp.</div>
+    <div class="tool-use"><b>Ứng dụng:</b> Kiểm tra nghiệm bài toán tối ưu có ổn định không. Newton method cho variational inequalities. Implicit mapping theorem phi trơn. Coderivative calculus (§3.2) để tính reg F.</div>
+  </div>
+  <div class="tool-page"><div class="page-badge">tr.<span>107</span></div></div>
+</div>
+
+<div class="tool" style="border-left-color:var(--c4)" data-s="metric regularity smooth mappings Cor 3.7 3.8 Jacobian surjective">
+  <div class="tool-num">4.3</div>
+  <div class="tool-body">
+    <div class="tool-ref" style="color:var(--c4)">Corollary 3.7–3.8</div>
+    <div class="tool-name">Metric Regularity Hàm Lipschitz & Hàm Trơn (Đặc Trường Hợp)</div>
+    <div class="tool-formula">f: ℝⁿ→ℝᵐ Lipschitz xung quanh x̄:
+f metrically regular ⟺ D*f(x̄)(0)={0} ⟺ f locally surjective
+f∈C¹ (Cor 3.8): f metrically regular ⟺ ∇f(x̄) surjective
+                ⟺ ∇f(x̄)ᵀv=0 ⟹ v=0  ⟺ rank ∇f(x̄)=m</div>
+    <div class="tool-desc">Trường hợp đặc biệt khi f trơn: metric regularity = Jacobian full row rank. Đây là Robinson-Ursescu theorem phi lồi (Cor 3.6 cho convex graph).</div>
+    <div class="tool-use"><b>Ứng dụng:</b> Kiểm tra constraint qualification trong bài toán tối ưu trơn. LICQ (Linear Independence Constraint Qualification) là trường hợp đặc biệt.</div>
+  </div>
+  <div class="tool-page"><div class="page-badge">tr.<span>113</span></div></div>
+</div>
+
+<div class="tool" style="border-left-color:var(--c4)" data-s="metric regularity PVS parametric variational system Thm 3.20 solution map stability">
+  <div class="tool-num">4.4</div>
+  <div class="tool-body">
+    <div class="tool-ref" style="color:var(--c4)">Theorem 3.20 + Corollaries 3.21–3.22</div>
+    <div class="tool-name">Metric Regularity Hệ Biến Phân Tham Số (PVS)</div>
+    <div class="tool-formula">S(x) = {y | f(x,y) ∈ Q(y)}  [PVS: solution map]
+S metrically regular ⟺ coderivative condition on f và Q
+(Prop 3.16): D*S(x̄,ȳ)(·) tính được từ D*f và D*Q
+Cor 3.21: Subdifferential PVS với composite potentials</div>
+    <div class="tool-desc">Phân tích stability của nghiệm S(x) khi tham số x thay đổi. Áp dụng Mordukhovich criterion (Thm 3.3) cho PVS cụ thể.</div>
+    <div class="tool-use"><b>Ứng dụng:</b> Stability của variational inequalities. Sensitivity của optimal control. Nghiệm KKT thay đổi theo tham số như thế nào? Tồn tại nghiệm implicit problem.</div>
+  </div>
+  <div class="tool-page"><div class="page-badge">tr.<span>127</span></div></div>
+</div>
+
+<div class="tool" style="border-left-color:var(--c4)" data-s="strong metric regularity Def 5.12 single-valued localization Lipschitzian">
+  <div class="tool-num">4.5</div>
+  <div class="tool-body">
+    <div class="tool-ref" style="color:var(--c4)">Definition 5.12 + Theorem 5.14–5.16</div>
+    <div class="tool-name">Metric Regularity Mạnh & Coderivative (Strong Metric Regularity)</div>
+    <div class="tool-formula">F: ℝⁿ⇒ℝᵐ strongly metrically regular ở (x̄,ȳ):
+⟺ F⁻¹ có single-valued Lipschitzian localization
+⟺ Neighborhood coderivative condition (Thm 5.14)
+⟺ D*F(x,y)(0)={0} ∀(x,y)∈gph F∩U  (Thm 5.16 pointbased)</div>
+    <div class="tool-desc">Strong metric regularity mạnh hơn metric regularity thông thường: nghiệm không chỉ ổn định mà còn đơn trị và Lipschitz. Dùng cho Newton method superlinear convergence.</div>
+    <div class="tool-use"><b>Ứng dụng:</b> Newton method và các variant có hội tụ siêu tuyến tính. Strongly monotone operators (Ch.5). Độc nhất nghiệm variational inequality.</div>
+  </div>
+  <div class="tool-page"><div class="page-badge">tr.<span>203–210</span></div></div>
+</div>
+
+</div></div>
+
+<!-- ═══════════════════════════════════════════
+     NHÓM 5: ĐỊNH LÝ GIÁ TRỊ TRUNG BÌNH
+     ═══════════════════════════════════════════ -->
+<div class="chapter" data-cat="g5">
+<div class="ch-hdr">
+  <span class="ch-num">Chương 4</span>
+  <div>
+    <div class="ch-title">Định Lý Giá Trị Trung Bình Phi Trơn (Nonsmooth MVT)</div>
+    <div class="ch-desc">Tổng quát hóa định lý giá trị trung bình cổ điển cho hàm phi trơn — công cụ thiết yếu để chứng minh tính Lipschitz, đơn điệu, và lồi</div>
+  </div>
+  <span class="ch-tag" style="background:var(--c5l);color:var(--c5d)">🟣 Phân tích tính chất hàm</span>
+</div>
+<div class="tools-grid">
+
+<div class="tool" style="border-left-color:var(--c5)" data-s="mean value theorem MVT symmetric Thm 4.11 Cor 4.12 continuous Lipschitz">
+  <div class="tool-num">5.1</div>
+  <div class="tool-body">
+    <div class="tool-ref" style="color:var(--c5)">Theorem 4.11 + Corollary 4.12</div>
+    <div class="tool-name">Định Lý Giá Trị Trung Bình Đối Xứng (Symmetric MVT)</div>
+    <div class="tool-formula">φ liên tục trên [a,b]:
+φ(b)−φ(a) ∈ ⟨∂sφ(c), b−a⟩ với c ∈ [a,b]
+[∂sφ = symmetric subdiff = {v | v∈∂φ(c) và (b−a)·v ≥ 0}]
+φ Lipschitz: φ(b)−φ(a) ∈ ⟨v, b−a⟩ với v∈∂φ(c)  [Cor 4.12]</div>
+    <div class="tool-desc">Tổng quát hóa f(b)−f(a) = f′(c)(b−a). Dùng symmetric subgradients để đảm bảo có c thích hợp ngay cả khi hàm không trơn.</div>
+    <div class="tool-use"><b>Ứng dụng:</b> Ước lượng thay đổi của hàm phi trơn. Chứng minh tính Lipschitz. Bounding error trong numerical methods. Thm 4.15 — đặc trưng Lipschitz.</div>
+  </div>
+  <div class="tool-page"><div class="page-badge">tr.<span>171–173</span></div></div>
+</div>
+
+<div class="tool" style="border-left-color:var(--c5)" data-s="approximate mean value theorem Thm 4.13 Cor 4.14 lsc functions inequality">
+  <div class="tool-num">5.2</div>
+  <div class="tool-body">
+    <div class="tool-ref" style="color:var(--c5)">Theorem 4.13 + Corollary 4.14 <span class="imp-tag imp-key">cho l.s.c.</span></div>
+    <div class="tool-name">Định Lý Giá Trị Trung Bình Xấp Xỉ (Approximate MVT)</div>
+    <div class="tool-formula">φ l.s.c. (không cần liên tục), φ(b) > φ(a):
+∃ c ∈ [a,b], vₖ→v với vₖ∈∂φ(cₖ), cₖ→c:
+⟨v, b−a⟩ ≥ [φ(b)−φ(a)]/‖b−a‖ > 0  [Cor 4.14]
+∃ xₖ∈[a,b], vₖ∈∂φ(xₖ): ⟨vₖ,b−a⟩ > 0 [xấp xỉ]</div>
+    <div class="tool-desc">Phiên bản mạnh hơn cho hàm l.s.c. (không cần liên tục). Dùng subdiff sequences thay vì subdiff tại một điểm.</div>
+    <div class="tool-use"><b>Ứng dụng:</b> Thm 4.15 — đặc trưng local Lipschitz continuity: ‖∂φ‖≤ℓ ⟺ φ Lipschitz ℓ. Chứng minh tính bất biến, không giảm, không tăng của hàm.</div>
+  </div>
+  <div class="tool-page"><div class="page-badge">tr.<span>173–175</span></div></div>
+</div>
+
+<div class="tool" style="border-left-color:var(--c5)" data-s="Lipschitz characterization Thm 4.15 4.17 strict differentiability monotonicity convexity Thm 4.18 4.19">
+  <div class="tool-num">5.3</div>
+  <div class="tool-body">
+    <div class="tool-ref" style="color:var(--c5)">Theorems 4.15, 4.17, 4.18, 4.19 <span class="imp-tag imp-key">đặc trưng tính chất</span></div>
+    <div class="tool-name">Đặc Trưng Subdiff: Lipschitz / Khả Vi Chặt / Đơn Điệu / Lồi</div>
+    <div class="tool-formula">Thm 4.15: φ Lipschitz mod.ℓ ⟺ ‖v‖≤ℓ ∀v∈∂φ(x) gần x̄
+Thm 4.16: φ hằng số cục bộ ⟺ 0∈∂φ(x) gần x̄
+Thm 4.17: φ strictly differentiable ⟺ ∂φ(x̄)={∇φ(x̄)} singleton
+Thm 4.18: φ đơn điệu tăng ⟺ ∂φ(x)⊂[0,+∞) trên U
+Thm 4.19: ∂φ globally monotone ⟹ φ lồi</div>
+    <div class="tool-desc">Bốn đặc trưng quan trọng nhất: Lipschitz qua ‖subdiff‖, tính khả vi chặt qua singleton, đơn điệu qua dấu subdiff, lồi qua monotone subdiff.</div>
+    <div class="tool-use"><b>Dùng để chứng minh:</b> φ có Lipschitz không? φ trơn thực sự không? φ lồi không? Liên quan chặt đến Ch.5 (maximal monotone operators) và Ch.6 (optimality conditions).</div>
+  </div>
+  <div class="tool-page"><div class="page-badge">tr.<span>175–179</span></div></div>
+</div>
+
+</div></div>
+
+<!-- ═══════════════════════════════════════════
+     NHÓM 6: TOÁN TỬ ĐƠN ĐIỆU
+     ═══════════════════════════════════════════ -->
+<div class="chapter" data-cat="g6">
+<div class="ch-hdr">
+  <span class="ch-num">Chương 5</span>
+  <div>
+    <div class="ch-title">Đặc Trưng Coderivative Toán Tử Đơn Điệu (Monotone Operators)</div>
+    <div class="ch-desc">Khi nào F là toán tử đơn điệu cực đại? — Đặc trưng hoàn toàn bằng coderivative, với calculus mạnh mẽ</div>
+  </div>
+  <span class="ch-tag" style="background:var(--c6l);color:var(--c6d)">🩵 Toán tử và ứng dụng</span>
+</div>
+<div class="tools-grid">
+
+<div class="tool" style="border-left-color:var(--c6)" data-s="maximal monotone operator coderivative characterization Thm 5.6 global">
+  <div class="tool-num">6.1</div>
+  <div class="tool-body">
+    <div class="tool-ref" style="color:var(--c6)">Theorem 5.6 + Corollary 5.9</div>
+    <div class="tool-name">Đặc Trưng Coderivative — Toán Tử Đơn Điệu Cực Đại Toàn Cục</div>
+    <div class="tool-formula">T: ℝⁿ⇒ℝⁿ maximal monotone globally ⟺
+(Thm 5.6-i) ⟨D*T(x̄,v̄)(w), w⟩ ≥ 0 ∀w∈ℝⁿ, (x̄,v̄)∈gph T
+(Cor 5.9): Strong global maximal monotone ⟺
+            D*T(x̄,v̄)(w)= {M(x̄,v̄)w} với M ≥ 0 (definite)</div>
+    <div class="tool-desc">Đặc trưng HOÀN TOÀN maximal monotonicity bằng coderivative — không cần dùng Minty theorem hay extension arguments. Mở cửa cho calculus.</div>
+    <div class="tool-use"><b>Ứng dụng:</b> Subdifferential ∂φ của hàm lồi là maximal monotone — kiểm tra qua coderivative. Variational inequalities: T+F có maximal monotone không? Algorithm design.</div>
+  </div>
+  <div class="tool-page"><div class="page-badge">tr.<span>199–201</span></div></div>
+</div>
+
+<div class="tool" style="border-left-color:var(--c6)" data-s="strong local maximal monotone Thm 5.13 5.14 5.16 pointbased coderivative localization">
+  <div class="tool-num">6.2</div>
+  <div class="tool-body">
+    <div class="tool-ref" style="color:var(--c6)">Theorems 5.13, 5.14, 5.16</div>
+    <div class="tool-name">Đặc Trưng Coderivative — Đơn Điệu Mạnh Cục Bộ</div>
+    <div class="tool-formula">T: ℝⁿ⇒ℝⁿ strong locally maximal monotone ở (x̄,v̄) ⟺
+Thm 5.13: T có Lipschitzian single-valued localization
+Thm 5.14: ⟨D*T(x,v)(w),w⟩ ≥ σ‖w‖² gần (x̄,v̄)  [đồng nhất dương]
+Thm 5.16 (pointbased): điều kiện tại chính (x̄,v̄)  [không cần lân cận]</div>
+    <div class="tool-desc">Kết quả mới và mạnh hơn global maximal monotone: cho phép kiểm tra tại một điểm. Thm 5.16 (pointbased) là kết quả tiên tiến nhất trong Ch.5.</div>
+    <div class="tool-use"><b>Ứng dụng:</b> Strong metric regularity (Cor 5.15). Superlinear convergence của algorithms. Stability của equilibrium với strong monotone field.</div>
+  </div>
+  <div class="tool-page"><div class="page-badge">tr.<span>203–210</span></div></div>
+</div>
+
+</div></div>
+
+<!-- ═══════════════════════════════════════════
+     NHÓM 7: ĐIỀU KIỆN TỐI ƯU
+     ═══════════════════════════════════════════ -->
+<div class="chapter" data-cat="g7">
+<div class="ch-hdr">
+  <span class="ch-num">Chương 6</span>
+  <div>
+    <div class="ch-title">Điều Kiện Tối Ưu — Lập Trình Phi Khả Vi & Bilevel</div>
+    <div class="ch-desc">Đây là đích đến cuối cùng của Chương 1-5: dùng tất cả công cụ đã xây để viết điều kiện cần tối ưu cho bài toán tổng quát nhất</div>
+  </div>
+  <span class="ch-tag" style="background:var(--c7l);color:var(--c7d)">⭐ Ứng dụng trực tiếp</span>
+</div>
+<div class="tools-grid">
+
+<div class="tool" style="border-left-color:var(--c7)" data-s="optimality conditions single geometric constraint Thm 6.1 lower upper subdifferential">
+  <div class="tool-num">7.1</div>
+  <div class="tool-body">
+    <div class="tool-ref" style="color:var(--c7)">Theorem 6.1 + Remark 6.2 <span class="imp-tag imp-core">bài toán cơ bản</span></div>
+    <div class="tool-name">Điều Kiện Tối Ưu: Một Ràng Buộc Hình Học</div>
+    <div class="tool-formula">min φ(x)  s.t.  x ∈ Ω  [Ω locally closed, φ l.s.c.]
+x̄ CỰC TIỂU CỤC BỘ ⟹
+(Lower) 0 ∈ ∂φ(x̄) + N(x̄;Ω)   [subdiff cơ bản]
+(Upper) 0 ∈ ∂⁺φ(x̄) + N̂(x̄;Ω)  [upper subdiff]
+Khi Ω=ℝⁿ: thu về 0 ∈ ∂φ(x̄)  [Fermat rule, Prop 1.30]</div>
+    <div class="tool-desc">Dạng tổng quát nhất của KKT condition cho hàm phi trơn với ràng buộc tập hợp. "Lower" dùng ∂φ (cơ bản), "Upper" dùng ∂⁺φ = −∂(−φ). Cả hai đều là điều kiện CẦN.</div>
+    <div class="tool-use"><b>Template chuẩn:</b> Mọi bài toán constrained → (1) viết dạng min φ s.t. x∈Ω, (2) tính N(x̄;Ω) từ Ch.1-2, (3) tính ∂φ từ Ch.1,4, (4) check 0∈∂φ+N.</div>
+  </div>
+  <div class="tool-page"><div class="page-badge">tr.<span>219–221</span></div></div>
+</div>
+
+<div class="tool" style="border-left-color:var(--c7)" data-s="DC optimization difference convex Prop 6.3 DC program">
+  <div class="tool-num">7.2</div>
+  <div class="tool-body">
+    <div class="tool-ref" style="color:var(--c7)">Proposition 6.3</div>
+    <div class="tool-name">Bài Toán Tối Ưu DC (Difference of Convex)</div>
+    <div class="tool-formula">min φ₁(x) − φ₂(x)  s.t. x∈Ω  [φ₁,φ₂ lồi, φ=φ₁−φ₂ DC]
+x̄ cực tiểu cục bộ ⟹
+∂φ₂(x̄) ∩ (∂φ₁(x̄) + N(x̄;Ω)) ≠ ∅
+Điều kiện lower: 0 ∈ ∂φ₁(x̄) − ∂φ₂(x̄) + N(x̄;Ω)</div>
+    <div class="tool-desc">DC programming = phổ biến nhất trong tối ưu phi lồi. Hầu hết hàm phi lồi thực tế đều viết được dạng DC. Điều kiện tối ưu đẹp và tính được.</div>
+    <div class="tool-use"><b>Ứng dụng:</b> Neural network training (ReLU = DC). Sparse optimization (ℓ₀ norm). Phase retrieval. Bilinear programming. DC-SIP (§7.5, tr.321).</div>
+  </div>
+  <div class="tool-page"><div class="page-badge">tr.<span>223</span></div></div>
+</div>
+
+<div class="tool" style="border-left-color:var(--c7)" data-s="many geometric constraints Thm 6.5 inequality equality lower subdiff conditions qualification">
+  <div class="tool-num">7.3</div>
+  <div class="tool-body">
+    <div class="tool-ref" style="color:var(--c7)">Theorem 6.5 + Corollary 6.6 <span class="imp-tag imp-key">bài toán có constraints</span></div>
+    <div class="tool-name">Điều Kiện Tối Ưu: Nhiều Ràng Buộc Hàm Số</div>
+    <div class="tool-formula">min φ(x)  s.t.  φᵢ(x) ≤ 0 (i∈I), φⱼ(x) = 0 (j∈J), x∈Ω
+x̄ cực tiểu ⟹ ∃ λᵢ≥0 (active), λⱼ∈ℝ:
+0 ∈ ∂φ(x̄) + Σ λᵢ∂φᵢ(x̄) + Σ λⱼ∂φⱼ(x̄) + N(x̄;Ω)
+Cor 6.6: Ràng buộc đẳng thức qua symmetric subgradients</div>
+    <div class="tool-desc">Tổng quát hóa KKT condition cho hàm phi trơn với cả inequality và equality constraints. Nhân tử λᵢ,λⱼ xuất hiện tự nhiên từ Extremal Principle.</div>
+    <div class="tool-use"><b>Ứng dụng:</b> Mọi bài toán tối ưu phi trơn với constraints. Qualification condition (QC): ∂∞φ(x̄)∩(−Σ∂∞φᵢ(x̄)) = {0} đảm bảo không degenerate.</div>
+  </div>
+  <div class="tool-page"><div class="page-badge">tr.<span>225–229</span></div></div>
+</div>
+
+<div class="tool" style="border-left-color:var(--c7)" data-s="condensed optimality Thm 6.10 abstract maximum principle Cor 6.11 upper Thm 6.12">
+  <div class="tool-num">7.4</div>
+  <div class="tool-body">
+    <div class="tool-ref" style="color:var(--c7)">Theorem 6.10 + Corollary 6.11 + Theorem 6.12</div>
+    <div class="tool-name">Điều Kiện Ngưng Tụ, Maximum Principle, & Upper Subdiff</div>
+    <div class="tool-formula">Thm 6.10 (Condensed lower): tổng hợp tất cả constraints vào một nón
+Cor 6.11 (Abstract Max Principle): Ω lồi →
+  0 ∈ ∂φ(x̄) + N(x̄;Ω)  [dạng nón pháp tuyến gọn]
+Thm 6.12 (Upper subdiff conditions):
+  x̄ cực tiểu ⟹ ∂⁺φ(x̄) ∩ (−N(x̄;Ω)) ≠ ∅</div>
+    <div class="tool-desc">Ba góc nhìn về điều kiện tối ưu: (1) ngưng tụ (compact form), (2) nguyên lý maximum trừu tượng (convex Ω), (3) upper subdiff (dùng khi lower không thông tin đủ).</div>
+    <div class="tool-use"><b>Ứng dụng:</b> Cor 6.11 = trường hợp đặc biệt khi Ω lồi: nón pháp tuyến lồi, dùng được separation theorem. Thm 6.12 dùng khi hàm là −φ (tối đa hóa).</div>
+  </div>
+  <div class="tool-page"><div class="page-badge">tr.<span>229–233</span></div></div>
+</div>
+
+<div class="tool" style="border-left-color:var(--c7)" data-s="bilevel programming optimistic pessimistic Def 6.14 Thm 6.21 partial calmness value function approach">
+  <div class="tool-num">7.5</div>
+  <div class="tool-body">
+    <div class="tool-ref" style="color:var(--c7)">Theorem 6.21 + §6.2–6.3 <span class="imp-tag imp-adv">bài toán nâng cao</span></div>
+    <div class="tool-name">Điều Kiện Tối Ưu Bilevel Programming</div>
+    <div class="tool-formula">Bilevel: min F(x,y)  s.t. x∈X, y∈S(x)
+         S(x) = argmin{f(x,y) | g(x,y)≤0}  [lower-level]
+Value function approach: y∈S(x) ⟺ f(x,y)−v(x)≤0
+v(x) = inf{f(x,y)|g(x,y)≤0}  [tối ưu hóa đơn lớp]
+Partial calmness (Def 6.14) ⟹ Thm 6.21 optimality conditions</div>
+    <div class="tool-desc">Bilevel programming = bài toán tổng quát nhất, không trơn ngay cả khi dữ liệu trơn. Value function approach chuyển về single-level nonsmooth program.</div>
+    <div class="tool-use"><b>Ứng dụng:</b> Lập lịch hai cấp, giá cả Stackelberg, hyperparameter optimization trong ML, robust optimization với adversarial constraints. DC-SIP bilevel (§7.5.4, tr.340).</div>
+  </div>
+  <div class="tool-page"><div class="page-badge">tr.<span>232–247</span></div></div>
+</div>
+
+</div></div>
+
+<!-- ═══════════════════════════════════════════
+     NHÓM 8: TỐI ƯU BÁN VÔ HẠN
+     ═══════════════════════════════════════════ -->
+<div class="chapter" data-cat="g8">
+<div class="ch-hdr">
+  <span class="ch-num">Chương 7–8</span>
+  <div>
+    <div class="ch-title">Tối Ưu Bán Vô Hạn (Semi-Infinite Programming)</div>
+    <div class="ch-desc">Bài toán tối ưu với VÔ SỐ ràng buộc (ràng buộc indexed by t∈T vô hạn) — xuất hiện trong robust optimization, water resource management, control</div>
+  </div>
+  <span class="ch-tag" style="background:var(--c8l);color:var(--c8d)">🟢 Vô số ràng buộc</span>
+</div>
+<div class="tools-grid">
+
+<div class="tool" style="border-left-color:var(--c8)" data-s="infinite linear constraint systems stability Lipschitz §7.1 strong Slater coderivative characterization">
+  <div class="tool-num">8.1</div>
+  <div class="tool-body">
+    <div class="tool-ref" style="color:var(--c8)">§7.1 — Theorems 7.1.1–7.1.3</div>
+    <div class="tool-name">Tính Ổn Định Hệ Bất Đẳng Thức Tuyến Tính Vô Hạn</div>
+    <div class="tool-formula">Hệ: {⟨aₜ,x⟩ ≤ bₜ | t∈T}  [T tùy ý, có thể vô hạn]
+Feasible set: C(a,b) = {x | ⟨aₜ,x⟩≤bₜ ∀t∈T}
+Strong Slater Condition: ∃x₀: sup_{t∈T}[⟨aₜ,x₀⟩−bₜ] < 0
+Lipschitz-like of solution map ⟺ coderivative condition (§7.1.3)</div>
+    <div class="tool-desc">Khi số ràng buộc vô hạn, tính ổn định cần điều kiện mạnh hơn (Strong Slater). Coderivative cho phép tính modulus Lipschitz chính xác.</div>
+    <div class="tool-use"><b>Ứng dụng thực tế:</b> Water resource optimization (§7.2.4, tr.284). Robust linear programming. Chebyshev approximation. Control constraints over continuous time.</div>
+  </div>
+  <div class="tool-page"><div class="page-badge">tr.<span>260–278</span></div></div>
+</div>
+
+<div class="tool" style="border-left-color:var(--c8)" data-s="SIP optimality conditions §7.2 upper lower subdiff infinite constraints linear convex">
+  <div class="tool-num">8.2</div>
+  <div class="tool-body">
+    <div class="tool-ref" style="color:var(--c8)">§7.2 — Theorems 7.2.2–7.2.3</div>
+    <div class="tool-name">Điều Kiện Tối Ưu SIP: Ràng Buộc Tuyến Tính Vô Hạn</div>
+    <div class="tool-formula">min φ(x)  s.t.  ⟨aₜ,x⟩ ≤ bₜ ∀t∈T  [T compact/arbitrary]
+Upper subdiff conditions (§7.2.2):
+0 ∈ ∂⁺φ(x̄) + cone{aₜ | t∈T(x̄)}  [active set T(x̄)]
+Lower subdiff conditions (§7.2.3):
+0 ∈ ∂φ(x̄) + Σᵢ λᵢaₜᵢ  [finite combination: λᵢ≥0, Σλᵢ=1]</div>
+    <div class="tool-desc">Điều kiện tối ưu cho SIP với vô số linear constraints. Kết quả đẹp: chỉ cần HỮUU HẠN ràng buộc active trong điều kiện optimality (finite dimensional result).</div>
+    <div class="tool-use"><b>Ứng dụng:</b> Linear programming với vô số constraints. Optimal control discretization. Water resource management (§7.2.4). Semi-infinite robust optimization.</div>
+  </div>
+  <div class="tool-page"><div class="page-badge">tr.<span>279–290</span></div></div>
+</div>
+
+<div class="tool" style="border-left-color:var(--c8)" data-s="nonconvex SIP Chương 8 §8.1 8.2 8.3 Lipschitzian nonlinear qualification conditions">
+  <div class="tool-num">8.3</div>
+  <div class="tool-body">
+    <div class="tool-ref" style="color:var(--c8)">§8.1–8.3 — Theorems 8.1.3, 8.2.3, 8.3.2</div>
+    <div class="tool-name">SIP Phi Lồi: Ràng Buộc Phi Tuyến Vô Hạn</div>
+    <div class="tool-formula">min φ(x)  s.t.  gₜ(x) ≤ 0 ∀t∈T  [gₜ phi lồi, T compact]
+Normals to constraint set (§8.1.2): N(x̄; ∩ₜ{gₜ≤0})
+= cl{Σ finite λₜ∇gₜ(x̄) | λₜ≥0, active t}  [countable index]
+Optimality (§8.1.3): 0∈∂φ(x̄) + N(x̄; feasible set)
+Lipschitzian SIP (§8.2): basic subgradients of sup_t gₜ(x)</div>
+    <div class="tool-desc">Kết quả mới nhất (2018): SIP phi lồi với cả differentiable và Lipschitzian data. Công thức normals đến giao vô số tập phi lồi là đột phá của Chương 8.</div>
+    <div class="tool-use"><b>Ứng dụng:</b> Robust nonlinear programming. Semi-infinite control. DC-SIP bilevel (§7.5.4). Cone-constrained SIP (§8.3). Countable constraints (§8.4).</div>
+  </div>
+  <div class="tool-page"><div class="page-badge">tr.<span>351–415</span></div></div>
+</div>
+
+</div></div>
+
+<!-- ═══════════════════════════════════════════
+     NHÓM 9: ĐA MỤC TIÊU & KINH TẾ
+     ═══════════════════════════════════════════ -->
+<div class="chapter" data-cat="g9">
+<div class="ch-hdr">
+  <span class="ch-num">Chương 9–10</span>
+  <div>
+    <div class="ch-title">Tối Ưu Đa Mục Tiêu & Mô Hình Kinh Tế</div>
+    <div class="ch-desc">Tối ưu hóa tập giá trị (set-valued optimization), tối ưu Pareto, và ứng dụng vào welfare economics — kết hợp biến phân với microeconomics</div>
+  </div>
+  <span class="ch-tag" style="background:var(--c9l);color:var(--c9d)">🟣 Ứng dụng nâng cao</span>
+</div>
+<div class="tools-grid">
+
+<div class="tool" style="border-left-color:var(--c9)" data-s="Ekeland variational principle set-valued mappings Ch.9 ordered mappings existence Pareto minimizers">
+  <div class="tool-num">9.1</div>
+  <div class="tool-body">
+    <div class="tool-ref" style="color:var(--c9)">Theorem 9.2.2–9.2.3 (§9.2)</div>
+    <div class="tool-name">Nguyên Lý Biến Phân Ekeland Cho Ánh Xạ Đa Trị</div>
+    <div class="tool-formula">F: X → 2^Z (set-valued), ordered by cone K ⊂ Z:
+Ekeland-type: ∃x̄: F(x̄)+d(x̄,x₀)K ⊂ F(x₀)  [variational cond.]
+Subdiff variational principle (§9.2.3):
+∃x̄: 0 ∈ D*F(x̄,ȳ)(K*-valued)  [set-valued Fermat rule]</div>
+    <div class="tool-desc">Mở rộng Ekeland's principle cho ánh xạ set-valued. Cần để chứng minh tồn tại Pareto-type minimizers (§9.3).</div>
+    <div class="tool-use"><b>Ứng dụng:</b> Tồn tại nghiệm cho bài toán đa mục tiêu không có giả thiết coercivity. Fixed point cho set-valued mappings. Welfare economics equilibrium (Ch.10).</div>
+  </div>
+  <div class="tool-page"><div class="page-badge">tr.<span>456–466</span></div></div>
+</div>
+
+<div class="tool" style="border-left-color:var(--c9)" data-s="Pareto optimal multiobjective optimality conditions Thm 9.4.1 9.4.2 constrained set-valued Fermat rule">
+  <div class="tool-num">9.2</div>
+  <div class="tool-body">
+    <div class="tool-ref" style="color:var(--c9)">Theorems 9.4.1–9.4.2</div>
+    <div class="tool-name">Điều Kiện Tối Ưu Pareto (Set-Valued Optimization)</div>
+    <div class="tool-formula">min F(x)  s.t. x∈Ω  [F: ℝⁿ→2^Z, K-minimal solution]
+Fermat rule (§9.4.1): x̄ relative Pareto minimizer ⟹
+0 ∈ D*F(x̄,ȳ)(K*\{0}) + N(x̄;Ω)
+Constrained (§9.4.2): kết hợp coderivative của F
+với normals đến constraint set Ω</div>
+    <div class="tool-desc">Điều kiện cần cho relative Pareto-type minimizers (efficient, weakly efficient, và các dạng tổng quát). Dùng coderivative thay cho gradient.</div>
+    <div class="tool-use"><b>Ứng dụng:</b> Multi-objective engineering design. Portfolio optimization. Welfare economics: second welfare theorem (Ch.10). Resource allocation với nhiều tiêu chí.</div>
+  </div>
+  <div class="tool-page"><div class="page-badge">tr.<span>478–485</span></div></div>
+</div>
+
+<div class="tool" style="border-left-color:var(--c9)" data-s="welfare economics second welfare theorem Ch.10 Pareto allocation extremal principle microeconomics">
+  <div class="tool-num">9.3</div>
+  <div class="tool-body">
+    <div class="tool-ref" style="color:var(--c9)">Chapter 10 — Theorems 10.3.1–10.4.2</div>
+    <div class="tool-name">Định Lý Phúc Lợi Thứ Hai (Second Welfare Theorem)</div>
+    <div class="tool-formula">Mô hình kinh tế: (φᵢ, Ωᵢ, S, eᵢ) [consumers, producers, commodity]
+Tối ưu tập giá trị: min Σᵢ Fᵢ(xᵢ)  s.t. Σxᵢ ∈ S
+Extremal Principle → Marginal Price p̄:
+⟨p̄, ·⟩ ≤ sup_{yᵢ∈Ωᵢ}⟨p̄,yᵢ⟩  [profit maximization]
+→ Second welfare theorem cho Pareto allocations phi lồi</div>
+    <div class="tool-desc">Ứng dụng toàn bộ variational analysis vào microeconomics: welfare theorem cho thị trường phi lồi (nonconvex production sets) — kết quả không thể đạt được với công cụ lồi.</div>
+    <div class="tool-use"><b>Tầm quan trọng:</b> Giải quyết bài toán mở về welfare theorem cho nonconvex economies. Kết hợp set optimization (Ch.9) với economic modeling. Global và local versions.</div>
+  </div>
+  <div class="tool-page"><div class="page-badge">tr.<span>499–528</span></div></div>
+</div>
+
+</div></div>
+
+</div><!-- end mainbody -->
+
+<div class="nores hidden" id="nores">
+  <div style="font-size:36px;margin-bottom:12px">🔍</div>
+  Không tìm thấy công cụ nào khớp với "<span id="qspan"></span>"
+</div>
+
+<script>
+let curFilt = 'all';
+const colors = {
+  g1:'var(--c1)',g2:'var(--c2)',g3:'var(--c3)',g4:'var(--c4)',
+  g5:'var(--c5)',g6:'var(--c6)',g7:'var(--c7)',g8:'var(--c8)',g9:'var(--c9)'
+};
+
+// Set tab colors
+document.querySelectorAll('.tv[onclick]').forEach(btn => {
+  const m = btn.getAttribute('onclick').match(/'(g\d+)'/);
+  if (m && colors[m[1]]) {
+    btn.addEventListener('mouseenter', function(){ if(!this.classList.contains('on')) this.style.background=colors[m[1]]+'22'; });
+    btn.addEventListener('mouseleave', function(){ if(!this.classList.contains('on')) this.style.background=''; });
+  }
+});
+
+function filt(f, btn) {
+  curFilt = f;
+  document.querySelectorAll('.tv').forEach(b => {
+    b.classList.remove('on');
+    b.style.background = '';
+    b.style.color = '';
+  });
+  btn.classList.add('on');
+  btn.style.background = f === 'all' ? 'var(--ink)' : (colors[f] || 'var(--ink)');
+  btn.style.color = 'white';
+
+  document.querySelectorAll('.chapter').forEach(c => {
+    c.style.display = (f === 'all' || c.dataset.cat === f) ? '' : 'none';
+  });
+  document.getElementById('insightBox').style.display = f === 'all' ? '' : 'none';
+  document.getElementById('roadmapBox').style.display = f === 'all' ? '' : 'none';
+  doSearch();
+}
+
+function doSearch() {
+  const q = document.getElementById('q').value.toLowerCase().trim();
+  document.getElementById('qspan').textContent = q;
+  let vis = 0;
+
+  document.querySelectorAll('.tool').forEach(t => {
+    const chap = t.closest('.chapter');
+    const tabOk = curFilt === 'all' || (chap && chap.dataset.cat === curFilt);
+    if (!tabOk) { t.style.display = 'none'; return; }
+    if (!q) { t.style.display = ''; vis++; return; }
+    const txt = (t.dataset.s || '') + ' ' + t.textContent.toLowerCase();
+    if (txt.includes(q)) { t.style.display = ''; vis++; }
+    else t.style.display = 'none';
+  });
+
+  // Hide empty chapters
+  document.querySelectorAll('.chapter').forEach(c => {
+    if (curFilt !== 'all' && c.dataset.cat !== curFilt) return;
+    const any = [...c.querySelectorAll('.tool')].some(t => t.style.display !== 'none');
+    c.style.display = (any || !q) ? '' : 'none';
+  });
+
+  document.getElementById('nores').classList.toggle('hidden', vis > 0 || !q);
+  document.getElementById('scnt').textContent = q ? `${vis} công cụ` : '';
+}
+</script>
+
+<div class="task-footer">
+  <a href="../task-02/">← Task 02 · Symbols & Terminology</a>
+  <a href="../">↑ Lesson 01 · Variational Analysis</a>
+  <a href="../task-04/">Task 04 →</a>
+</div>
+
+</body>
+</html>
