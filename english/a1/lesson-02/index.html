@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <link rel="stylesheet" href="../assets/brand.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A1 · Lesson 02 · Alphabet Orbit</title>
+<style>
+:root{--bg:#080d1a;--card:#0f1729;--card2:#131e35;--border:#1e2d4a;--text:#dde6f5;--muted:#8b9ab5;--accent:#0ea5e9;--acl:#38bdf8;--green:#10b981;--red:#ef4444}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;line-height:1.6;padding:1.5rem 1.25rem 3rem}
+.lsn-header{background:linear-gradient(135deg,#0a1f3e,#0f1729);border:1px solid var(--border);border-radius:16px;padding:1.5rem;margin-bottom:1.5rem;position:relative;overflow:hidden}
+.lsn-header::before{content:'';position:absolute;top:-40px;right:-40px;width:160px;height:160px;background:radial-gradient(circle,rgba(14,165,233,.3),transparent 70%);pointer-events:none}
+.lsn-badge{display:inline-flex;align-items:center;gap:.4rem;background:rgba(14,165,233,.15);border:1px solid rgba(56,189,248,.3);border-radius:20px;padding:.25rem .75rem;font-size:.7rem;font-weight:700;color:var(--acl);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.75rem}
+.lsn-header h1{font-size:1.6rem;font-weight:800;background:linear-gradient(90deg,#7dd3fc,#38bdf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.4rem}
+.lsn-header p{color:var(--muted);font-size:.9rem}
+.objectives{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+.obj-tag{background:rgba(14,165,233,.12);border:1px solid rgba(14,165,233,.25);border-radius:20px;padding:.25rem .7rem;font-size:.75rem;color:var(--acl)}
+.sec-title{display:flex;align-items:center;gap:.6rem;font-size:1rem;font-weight:700;color:var(--acl);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)}
+.alpha-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(70px,1fr));gap:.5rem;margin-bottom:1.75rem}
+.alpha-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:.65rem .5rem;text-align:center;cursor:pointer;transition:all .2s}
+.alpha-card:hover,.alpha-card.active{border-color:var(--accent);background:rgba(14,165,233,.1)}
+.alpha-upper{font-size:1.4rem;font-weight:800;color:var(--acl);line-height:1}
+.alpha-lower{font-size:.95rem;color:var(--text);margin-top:.1rem}
+.alpha-sound{font-size:.65rem;color:var(--muted);margin-top:.15rem}
+.vowel-mark{position:absolute;top:4px;right:6px;width:6px;height:6px;background:#f59e0b;border-radius:50%}
+.alpha-card{position:relative}
+.pattern-list{display:flex;flex-direction:column;gap:.6rem;margin-bottom:1.75rem}
+.pattern-item{background:var(--card);border-left:3px solid var(--accent);border-radius:0 10px 10px 0;padding:.8rem 1rem}
+.pat-en{font-size:1rem;font-weight:600;color:var(--text)}
+.pat-vn{font-size:.82rem;color:var(--muted);margin-top:.2rem}
+.pat-note{font-size:.78rem;color:var(--acl);margin-top:.25rem;font-style:italic}
+.grammar-box{background:linear-gradient(135deg,rgba(14,165,233,.1),rgba(6,182,212,.06));border:1px solid rgba(14,165,233,.2);border-radius:12px;padding:1.1rem;margin-bottom:1.75rem}
+.grammar-box h3{color:var(--acl);font-size:.9rem;margin-bottom:.8rem}
+.vowel-box{display:flex;gap:.5rem;flex-wrap:wrap;margin:.5rem 0;padding:.6rem;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);border-radius:8px}
+.vl{background:#f59e0b;color:#000;border-radius:5px;padding:.2rem .55rem;font-size:.9rem;font-weight:700}
+.convo-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1.75rem}
+.convo-line{display:flex;gap:.7rem;margin-bottom:.65rem;align-items:flex-start}
+.convo-speaker{font-size:.7rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;min-width:28px;margin-top:.2rem}
+.speaker-a{color:#38bdf8}.speaker-b{color:#34d399}
+.convo-bubble{background:var(--card2);border-radius:0 10px 10px 10px;padding:.55rem .85rem;font-size:.9rem;flex:1}
+.convo-bubble.b{border-radius:10px 10px 10px 0;background:rgba(52,211,153,.07);border:1px solid rgba(52,211,153,.15)}
+.spell-letter{display:inline-block;background:rgba(14,165,233,.15);color:var(--acl);border-radius:5px;padding:.1rem .4rem;font-weight:700;margin:0 1px;font-size:.95rem}
+.practice-area{margin-bottom:1.75rem}
+.ex-block{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:.75rem}
+.ex-q{font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:.75rem}
+input[type=text]{background:var(--card2);border:1px solid var(--border);border-radius:6px;padding:.3rem .6rem;color:var(--text);font-size:.85rem;outline:none;transition:border .2s}
+input[type=text]:focus{border-color:var(--accent)}
+.quiz-section{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.25rem;margin-bottom:1.75rem}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+.quiz-title,.quiz-score{font-size:.85rem;color:var(--muted)}
+.quiz-q{font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:.75rem;padding:.75rem;background:var(--card2);border-radius:8px}
+.quiz-opts{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.5rem}
+.quiz-opt{background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:.55rem .75rem;font-size:.85rem;cursor:pointer;transition:all .18s;color:var(--text);text-align:left}
+.quiz-opt:hover:not(:disabled){border-color:var(--accent);color:var(--acl)}
+.quiz-opt.correct{border-color:var(--green)!important;background:rgba(16,185,129,.15)!important;color:var(--green)!important}
+.quiz-opt.wrong{border-color:var(--red)!important;background:rgba(239,68,68,.1)!important;color:var(--red)!important}
+.quiz-opt:disabled{cursor:default}
+.quiz-feedback{font-size:.8rem;margin:.4rem 0 .6rem;min-height:1rem}
+.quiz-feedback.ok{color:var(--green)}.quiz-feedback.no{color:var(--red)}
+.quiz-nav{display:flex;gap:.5rem;align-items:center;justify-content:space-between}
+.btn{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:.5rem 1.1rem;font-size:.85rem;font-weight:600;cursor:pointer;transition:opacity .2s}
+.btn:hover{opacity:.85}
+.progress-bar{background:var(--border);border-radius:4px;height:4px;flex:1;overflow:hidden}
+.progress-fill{background:linear-gradient(90deg,var(--accent),#7dd3fc);height:100%;border-radius:4px;transition:width .3s}
+.result-box{text-align:center;padding:1.25rem;display:none}
+.result-emoji{font-size:2.5rem;margin-bottom:.5rem}
+.result-score{font-size:1.5rem;font-weight:800;color:var(--acl);margin-bottom:.25rem}
+.result-msg{font-size:.85rem;color:var(--muted);margin-bottom:1rem}
+.lesson-footer{display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border)}
+.footer-nav a{color:var(--accent);text-decoration:none;font-size:.85rem;font-weight:600}
+</style>
+</head>
+<body>
+
+  <img src="../assets/logo-SH.png" class="sh-logo" alt="Science Horizon">
+<div class="lsn-header">
+  <div class="lsn-badge">🔤 A1 Foundation · Lesson 02</div>
+  <h1>Alphabet Orbit</h1>
+  <p>Học bảng chữ cái tiếng Anh — nền tảng để đọc, viết và đánh vần mọi từ!</p>
+  <div class="objectives">
+    <span class="obj-tag">🔤 26 chữ cái A–Z</span>
+    <span class="obj-tag">🔊 Nguyên âm & phụ âm</span>
+    <span class="obj-tag">✍️ Đánh vần tên</span>
+    <span class="obj-tag">❓ Hỏi cách đánh vần</span>
+  </div>
+</div>
+
+<div class="sec-title"><span>🔤</span> Bảng Chữ Cái A–Z <small style="color:var(--muted);font-weight:400;font-size:.78rem">(🟡 = nguyên âm)</small></div>
+<div class="alpha-grid" id="alphaGrid"></div>
+
+<div class="sec-title"><span>💬</span> Mẫu Câu Quan Trọng</div>
+<div class="pattern-list">
+  <div class="pattern-item"><div class="pat-en">"How do you spell your name?"</div><div class="pat-vn">→ Bạn đánh vần tên như thế nào?</div><div class="pat-note">💡 Hỏi khi muốn biết cách viết tên ai đó</div></div>
+  <div class="pattern-item"><div class="pat-en">"My name is Mai. <span class="spell-letter">M</span>-<span class="spell-letter">A</span>-<span class="spell-letter">I</span>."</div><div class="pat-vn">→ Tên tôi là Mai. M-A-I.</div><div class="pat-note">💡 Đọc từng chữ cái khi đánh vần</div></div>
+  <div class="pattern-item"><div class="pat-en">"What letter is this?" — "It's the letter B."</div><div class="pat-vn">→ Đây là chữ gì? — Đây là chữ B.</div><div class="pat-note">💡 Nhớ nói "the letter" trước tên chữ cái</div></div>
+  <div class="pattern-item"><div class="pat-en">"Capital A" (A) &nbsp;·&nbsp; "Small a" (a)</div><div class="pat-vn">→ Chữ A hoa &nbsp;·&nbsp; Chữ a thường</div><div class="pat-note">💡 Capital = hoa, Small/Lowercase = thường</div></div>
+</div>
+
+<div class="sec-title"><span>📐</span> Ngữ Pháp</div>
+<div class="grammar-box">
+  <h3>✏️ Nguyên âm (Vowels) và Phụ âm (Consonants)</h3>
+  <div style="font-size:.85rem;color:var(--muted);margin-bottom:.6rem">Tiếng Anh có <strong style="color:var(--text)">5 nguyên âm chính</strong> — rất quan trọng trong phát âm:</div>
+  <div class="vowel-box">
+    <span class="vl">A</span><span class="vl">E</span><span class="vl">I</span><span class="vl">O</span><span class="vl">U</span>
+    <span style="font-size:.82rem;color:var(--muted);align-self:center;margin-left:.25rem">→ và đôi khi: Y</span>
+  </div>
+  <div style="font-size:.82rem;color:var(--muted);margin-top:.7rem;background:rgba(14,165,233,.07);border-radius:8px;padding:.6rem .9rem">
+    💡 <strong style="color:var(--acl)">Lưu ý "a/an":</strong> Dùng <strong style="color:#34d399">an</strong> trước nguyên âm: <em>an apple, an egg, an ice cream</em> · Dùng <strong style="color:#38bdf8">a</strong> trước phụ âm: <em>a book, a cat</em>
+  </div>
+</div>
+
+<div class="sec-title"><span>🗣️</span> Hội Thoại Mẫu</div>
+<div class="convo-box">
+  <div class="convo-line"><span class="convo-speaker speaker-a">A</span><div class="convo-bubble">Hello! What's your name?</div></div>
+  <div class="convo-line"><span class="convo-speaker speaker-b">B</span><div class="convo-bubble b">My name is Linh.</div></div>
+  <div class="convo-line"><span class="convo-speaker speaker-a">A</span><div class="convo-bubble">How do you spell that?</div></div>
+  <div class="convo-line"><span class="convo-speaker speaker-b">B</span><div class="convo-bubble b"><span class="spell-letter">L</span>-<span class="spell-letter">I</span>-<span class="spell-letter">N</span>-<span class="spell-letter">H</span>. Linh.</div></div>
+  <div class="convo-line"><span class="convo-speaker speaker-a">A</span><div class="convo-bubble">Nice to meet you, Linh! I'm Alex. <span class="spell-letter">A</span>-<span class="spell-letter">L</span>-<span class="spell-letter">E</span>-<span class="spell-letter">X</span>.</div></div>
+</div>
+
+<div class="sec-title"><span>✏️</span> Luyện Tập</div>
+<div class="practice-area">
+  <div class="ex-block">
+    <div class="ex-q">✍️ Đánh vần các từ sau (viết từng chữ cái, cách nhau bằng dấu -)</div>
+    <div style="display:flex;flex-direction:column;gap:.5rem;font-size:.9rem">
+      <div style="display:flex;align-items:center;gap:.6rem;padding:.5rem .75rem;background:var(--card2);border-radius:8px">
+        <span style="flex:1">CAT → </span>
+        <input type="text" placeholder="C-A-T" style="width:120px" onblur="spellCheck(this,'C-A-T')">
+      </div>
+      <div style="display:flex;align-items:center;gap:.6rem;padding:.5rem .75rem;background:var(--card2);border-radius:8px">
+        <span style="flex:1">DOG → </span>
+        <input type="text" placeholder="D-O-G" style="width:120px" onblur="spellCheck(this,'D-O-G')">
+      </div>
+      <div style="display:flex;align-items:center;gap:.6rem;padding:.5rem .75rem;background:var(--card2);border-radius:8px">
+        <span style="flex:1">BOOK → </span>
+        <input type="text" placeholder="B-O-O-K" style="width:130px" onblur="spellCheck(this,'B-O-O-K')">
+      </div>
+      <div style="display:flex;align-items:center;gap:.6rem;padding:.5rem .75rem;background:var(--card2);border-radius:8px">
+        <span style="flex:1">FISH → </span>
+        <input type="text" placeholder="F-I-S-H" style="width:130px" onblur="spellCheck(this,'F-I-S-H')">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sec-title"><span>🎯</span> Quiz Nhanh (5 câu)</div>
+<div class="quiz-section">
+  <div class="quiz-header"><span class="quiz-title" id="quizTitle">Câu 1 / 5</span><span class="quiz-score" id="quizScoreDisplay">Điểm: 0</span></div>
+  <div id="quizContent">
+    <div class="quiz-q" id="quizQ"></div>
+    <div class="quiz-opts" id="quizOpts"></div>
+    <div class="quiz-feedback" id="quizFB"></div>
+    <div class="quiz-nav"><div class="progress-bar"><div class="progress-fill" id="quizProgress" style="width:20%"></div></div><button class="btn" id="quizNext" style="display:none" onclick="nextQ()">Tiếp →</button></div>
+  </div>
+  <div class="result-box" id="quizResult">
+    <div class="result-emoji" id="resEmoji"></div>
+    <div class="result-score" id="resScore"></div>
+    <div class="result-msg" id="resMsg"></div>
+    <button class="btn" onclick="resetQuiz()">🔄 Làm lại</button>
+  </div>
+</div>
+
+<div class="lesson-footer">
+  <div class="footer-nav">← <a href="../lesson-01/">Lesson 01</a></div>
+  <div style="font-size:.8rem;color:var(--muted)">A1 · Lesson 02 / 12</div>
+  <div class="footer-nav"><a href="../lesson-03/">Lesson 03 →</a></div>
+</div>
+
+<script>
+const letters=[{l:'A',s:'ei'},{l:'B',s:'biː'},{l:'C',s:'siː'},{l:'D',s:'diː'},{l:'E',s:'iː'},{l:'F',s:'ef'},{l:'G',s:'dʒiː'},{l:'H',s:'eɪtʃ'},{l:'I',s:'aɪ'},{l:'J',s:'dʒeɪ'},{l:'K',s:'keɪ'},{l:'L',s:'el'},{l:'M',s:'em'},{l:'N',s:'en'},{l:'O',s:'əʊ'},{l:'P',s:'piː'},{l:'Q',s:'kjuː'},{l:'R',s:'ɑːr'},{l:'S',s:'es'},{l:'T',s:'tiː'},{l:'U',s:'juː'},{l:'V',s:'viː'},{l:'W',s:'ˈdʌb.ə.ljuː'},{l:'X',s:'eks'},{l:'Y',s:'waɪ'},{l:'Z',s:'zed'}];
+const vowels=['A','E','I','O','U'];
+const ag=document.getElementById('alphaGrid');
+letters.forEach(lt=>{
+  const isV=vowels.includes(lt.l);
+  ag.innerHTML+=`<div class="alpha-card${isV?' vowel':''}">
+    ${isV?'<div class="vowel-mark"></div>':''}
+    <div class="alpha-upper">${lt.l}</div>
+    <div class="alpha-lower">${lt.l.toLowerCase()}</div>
+    <div class="alpha-sound">/${lt.s}/</div>
+  </div>`;
+});
+
+function spellCheck(el,ans){
+  const v=el.value.trim().toUpperCase().replace(/\s/g,'');
+  const a=ans.replace(/\s/g,'');
+  if(v===a){el.style.borderColor='#10b981';el.style.color='#10b981';}
+  else if(el.value.trim()){el.style.borderColor='#ef4444';el.style.color='#ef4444';}
+}
+
+const qs=[
+  {q:'Chữ cái nào là nguyên âm (vowel)?',opts:['B','C','E','G'],ans:2},
+  {q:'Có bao nhiêu chữ cái trong bảng chữ cái tiếng Anh?',opts:['24','25','26','28'],ans:2},
+  {q:'"An apple" hay "A apple"?',opts:['A apple','An apple','The apple','One apple'],ans:1},
+  {q:'Chữ hoa (Capital) của "m" là?',opts:['m','M','n','N'],ans:1},
+  {q:'Đánh vần tên "TOM" đúng là?',opts:['T-O-M','T-A-M','T-U-M','T-E-M'],ans:0},
+];
+let qi=0,score=0;
+function renderQ(){
+  const q=qs[qi];
+  document.getElementById('quizTitle').textContent=`Câu ${qi+1} / ${qs.length}`;
+  document.getElementById('quizProgress').style.width=`${((qi+1)/qs.length)*100}%`;
+  document.getElementById('quizQ').textContent=q.q;
+  document.getElementById('quizFB').textContent='';document.getElementById('quizFB').className='quiz-feedback';
+  document.getElementById('quizNext').style.display='none';
+  const opts=document.getElementById('quizOpts');opts.innerHTML='';
+  q.opts.forEach((o,i)=>{
+    const btn=document.createElement('button');btn.className='quiz-opt';btn.textContent=o;
+    btn.onclick=()=>{
+      document.querySelectorAll('.quiz-opt').forEach(b=>b.disabled=true);
+      if(i===q.ans){btn.classList.add('correct');score++;document.getElementById('quizFB').textContent='✅ Chính xác!';document.getElementById('quizFB').className='quiz-feedback ok';}
+      else{btn.classList.add('wrong');document.querySelectorAll('.quiz-opt')[q.ans].classList.add('correct');document.getElementById('quizFB').textContent='❌ Sai rồi!';document.getElementById('quizFB').className='quiz-feedback no';}
+      document.getElementById('quizScoreDisplay').textContent=`Điểm: ${score}`;
+      document.getElementById('quizNext').style.display='inline-block';
+    };opts.appendChild(btn);
+  });
+}
+function nextQ(){qi++;if(qi>=qs.length){document.getElementById('quizContent').style.display='none';const r=document.getElementById('quizResult');r.style.display='block';const pct=Math.round(score/qs.length*100);document.getElementById('resEmoji').textContent=pct>=80?'🏆':pct>=60?'👍':'💪';document.getElementById('resScore').textContent=`${score} / ${qs.length} đúng (${pct}%)`;document.getElementById('resMsg').textContent=pct>=80?'Tuyệt vời! Bạn nhớ bảng chữ cái rất tốt!':pct>=60?'Khá tốt! Luyện thêm nhé.':'Xem lại bảng chữ cái và thử lại!';}else renderQ();}
+function resetQuiz(){qi=0;score=0;document.getElementById('quizScoreDisplay').textContent='Điểm: 0';document.getElementById('quizContent').style.display='block';document.getElementById('quizResult').style.display='none';renderQ();}
+renderQ();
+</script>
+</body>
+</html>
