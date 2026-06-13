@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <link rel="stylesheet" href="../assets/brand.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A1 · Lesson 03 · Numbers 1–20</title>
+<style>
+:root{--bg:#080d1a;--card:#0f1729;--card2:#131e35;--border:#1e2d4a;--text:#dde6f5;--muted:#8b9ab5;--accent:#f59e0b;--acl:#fbbf24;--green:#10b981;--red:#ef4444}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;line-height:1.6;padding:1.5rem 1.25rem 3rem}
+.lsn-header{background:linear-gradient(135deg,#1a1200,#0f1729);border:1px solid var(--border);border-radius:16px;padding:1.5rem;margin-bottom:1.5rem;position:relative;overflow:hidden}
+.lsn-header::before{content:'';position:absolute;top:-40px;right:-40px;width:160px;height:160px;background:radial-gradient(circle,rgba(245,158,11,.3),transparent 70%);pointer-events:none}
+.lsn-badge{display:inline-flex;align-items:center;background:rgba(245,158,11,.15);border:1px solid rgba(251,191,36,.3);border-radius:20px;padding:.25rem .75rem;font-size:.7rem;font-weight:700;color:var(--acl);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.75rem}
+.lsn-header h1{font-size:1.6rem;font-weight:800;background:linear-gradient(90deg,#fde68a,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.4rem}
+.lsn-header p{color:var(--muted);font-size:.9rem}
+.objectives{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+.obj-tag{background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.25);border-radius:20px;padding:.25rem .7rem;font-size:.75rem;color:var(--acl)}
+.sec-title{display:flex;align-items:center;gap:.6rem;font-size:1rem;font-weight:700;color:var(--acl);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)}
+.num-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:.6rem;margin-bottom:1.75rem}
+.num-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:.8rem;display:flex;align-items:center;gap:.7rem;cursor:pointer;transition:all .2s}
+.num-card:hover,.num-card.flipped{border-color:var(--accent);background:rgba(245,158,11,.08)}
+.num-digit{font-size:1.5rem;font-weight:800;color:var(--acl);min-width:36px;text-align:center}
+.num-word{font-size:.9rem;font-weight:600;color:var(--text)}
+.num-card.flipped .num-vn{display:block}
+.num-vn{display:none;font-size:.75rem;color:var(--muted);margin-top:.1rem}
+.pattern-list{display:flex;flex-direction:column;gap:.6rem;margin-bottom:1.75rem}
+.pattern-item{background:var(--card);border-left:3px solid var(--accent);border-radius:0 10px 10px 0;padding:.8rem 1rem}
+.pat-en{font-size:1rem;font-weight:600;color:var(--text)}.pat-vn{font-size:.82rem;color:var(--muted);margin-top:.2rem}.pat-note{font-size:.78rem;color:var(--acl);margin-top:.25rem;font-style:italic}
+.grammar-box{background:linear-gradient(135deg,rgba(245,158,11,.1),rgba(251,191,36,.06));border:1px solid rgba(245,158,11,.2);border-radius:12px;padding:1.1rem;margin-bottom:1.75rem}
+.grammar-box h3{color:var(--acl);font-size:.9rem;margin-bottom:.8rem}
+.gram-row{display:flex;gap:.5rem;align-items:center;margin-bottom:.5rem;font-size:.88rem;flex-wrap:wrap}
+.gram-box{background:rgba(245,158,11,.15);border-radius:6px;padding:.2rem .6rem;color:var(--acl);font-weight:700;font-family:monospace}
+.convo-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1.75rem}
+.convo-line{display:flex;gap:.7rem;margin-bottom:.65rem;align-items:flex-start}
+.speaker-a{color:#fbbf24;font-size:.7rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;min-width:28px;margin-top:.2rem}
+.speaker-b{color:#34d399;font-size:.7rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;min-width:28px;margin-top:.2rem}
+.convo-bubble{background:var(--card2);border-radius:0 10px 10px 10px;padding:.55rem .85rem;font-size:.9rem;flex:1}
+.convo-bubble.b{border-radius:10px 10px 10px 0;background:rgba(52,211,153,.07);border:1px solid rgba(52,211,153,.15)}
+.practice-area{margin-bottom:1.75rem}
+.ex-block{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:.75rem}
+.ex-q{font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:.75rem}
+input[type=text]{background:var(--card2);border:1px solid var(--border);border-radius:6px;padding:.3rem .6rem;color:var(--text);font-size:.85rem;outline:none}
+input[type=text]:focus{border-color:var(--accent)}
+.quiz-section{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.25rem;margin-bottom:1.75rem}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+.quiz-q{font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:.75rem;padding:.75rem;background:var(--card2);border-radius:8px}
+.quiz-opts{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.5rem}
+.quiz-opt{background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:.55rem .75rem;font-size:.85rem;cursor:pointer;transition:all .18s;color:var(--text);text-align:left}
+.quiz-opt:hover:not(:disabled){border-color:var(--accent);color:var(--acl)}
+.quiz-opt.correct{border-color:var(--green)!important;background:rgba(16,185,129,.15)!important;color:var(--green)!important}
+.quiz-opt.wrong{border-color:var(--red)!important;background:rgba(239,68,68,.1)!important;color:var(--red)!important}
+.quiz-opt:disabled{cursor:default}
+.quiz-feedback{font-size:.8rem;margin:.4rem 0 .6rem;min-height:1rem}
+.quiz-feedback.ok{color:var(--green)}.quiz-feedback.no{color:var(--red)}
+.quiz-nav{display:flex;gap:.5rem;align-items:center;justify-content:space-between}
+.btn{background:var(--accent);color:#000;border:none;border-radius:8px;padding:.5rem 1.1rem;font-size:.85rem;font-weight:700;cursor:pointer;transition:opacity .2s}
+.btn:hover{opacity:.85}
+.progress-bar{background:var(--border);border-radius:4px;height:4px;flex:1;overflow:hidden}
+.progress-fill{background:linear-gradient(90deg,var(--accent),#fde68a);height:100%;border-radius:4px;transition:width .3s}
+.result-box{text-align:center;padding:1.25rem;display:none}
+.result-emoji{font-size:2.5rem;margin-bottom:.5rem}.result-score{font-size:1.5rem;font-weight:800;color:var(--acl);margin-bottom:.25rem}.result-msg{font-size:.85rem;color:var(--muted);margin-bottom:1rem}
+.lesson-footer{display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border)}
+.footer-nav a{color:var(--accent);text-decoration:none;font-size:.85rem;font-weight:600}
+</style>
+</head>
+<body>
+
+  <img src="../assets/logo-SH.png" class="sh-logo" alt="Science Horizon">
+<div class="lsn-header">
+  <div class="lsn-badge">🔢 A1 Foundation · Lesson 03</div>
+  <h1>Numbers 1–20</h1>
+  <p>Học đếm số và dùng số trong cuộc sống hàng ngày — tuổi, số điện thoại, địa chỉ!</p>
+  <div class="objectives">
+    <span class="obj-tag">🔢 Đếm 1–20</span>
+    <span class="obj-tag">🎂 Hỏi tuổi</span>
+    <span class="obj-tag">📱 Số điện thoại</span>
+    <span class="obj-tag">🏠 Số nhà</span>
+  </div>
+</div>
+
+<div class="sec-title"><span>🔢</span> Số 1–20 <small style="color:var(--muted);font-weight:400;font-size:.78rem">(nhấn để xem tiếng Việt)</small></div>
+<div class="num-grid" id="numGrid"></div>
+
+<div class="sec-title"><span>💬</span> Mẫu Câu Quan Trọng</div>
+<div class="pattern-list">
+  <div class="pattern-item"><div class="pat-en">"How old are you?" — "I am [number] years old."</div><div class="pat-vn">→ Bạn bao nhiêu tuổi? — Tôi [số] tuổi.</div><div class="pat-note">💡 "years old" = tuổi. Rút gọn: "I'm twelve."</div></div>
+  <div class="pattern-item"><div class="pat-en">"What is your phone number?" — "It's 09 — one — two — three…"</div><div class="pat-vn">→ Số điện thoại của bạn là gì? — Là 09-1-2-3…</div><div class="pat-note">💡 Đọc từng chữ số một, không đọc số to</div></div>
+  <div class="pattern-item"><div class="pat-en">"How many students are in your class?" — "There are twenty."</div><div class="pat-vn">→ Lớp bạn có bao nhiêu học sinh? — Có hai mươi.</div><div class="pat-note">💡 How many + danh từ số nhiều → hỏi số lượng đếm được</div></div>
+</div>
+
+<div class="sec-title"><span>📐</span> Ngữ Pháp</div>
+<div class="grammar-box">
+  <h3>✏️ Số + danh từ và cách dùng</h3>
+  <div class="gram-row"><span class="gram-box">1 book</span><span style="color:var(--muted)">→</span><span>one book (số ít)</span></div>
+  <div class="gram-row"><span class="gram-box">2 books</span><span style="color:var(--muted)">→</span><span>two books (số nhiều — thêm s)</span></div>
+  <div class="gram-row"><span class="gram-box">I am 15.</span><span style="color:var(--muted)">→</span><span>I am fifteen years old.</span></div>
+  <div style="margin-top:.75rem;font-size:.82rem;color:var(--muted);background:rgba(245,158,11,.07);border-radius:8px;padding:.6rem .9rem">
+    💡 <strong style="color:var(--acl)">Quy tắc "teens" (13–19):</strong> thirteen, fourteen, fifteen, sixteen, seventeen, eighteen, nineteen — đuôi <strong>-teen</strong>
+  </div>
+</div>
+
+<div class="sec-title"><span>🗣️</span> Hội Thoại Mẫu</div>
+<div class="convo-box">
+  <div class="convo-line"><span class="speaker-a">A</span><div class="convo-bubble">Hi! How old are you?</div></div>
+  <div class="convo-line"><span class="speaker-b">B</span><div class="convo-bubble b">I'm fifteen. And you?</div></div>
+  <div class="convo-line"><span class="speaker-a">A</span><div class="convo-bubble">I'm sixteen! What's your phone number?</div></div>
+  <div class="convo-line"><span class="speaker-b">B</span><div class="convo-bubble b">It's zero — nine — eight — one — two — three — four — five — six — seven.</div></div>
+  <div class="convo-line"><span class="speaker-a">A</span><div class="convo-bubble">Great, thank you!</div></div>
+</div>
+
+<div class="sec-title"><span>✏️</span> Luyện Tập</div>
+<div class="practice-area">
+  <div class="ex-block">
+    <div class="ex-q">🔢 Viết bằng chữ các số sau:</div>
+    <div style="display:flex;flex-direction:column;gap:.5rem">
+      <div style="display:flex;align-items:center;gap:.6rem;padding:.5rem .75rem;background:var(--card2);border-radius:8px">
+        <span style="min-width:30px;font-weight:700;color:var(--acl)">5</span>
+        <input type="text" placeholder="five" style="width:130px" onblur="numCheck(this,'five')">
+      </div>
+      <div style="display:flex;align-items:center;gap:.6rem;padding:.5rem .75rem;background:var(--card2);border-radius:8px">
+        <span style="min-width:30px;font-weight:700;color:var(--acl)">13</span>
+        <input type="text" placeholder="thirteen" style="width:130px" onblur="numCheck(this,'thirteen')">
+      </div>
+      <div style="display:flex;align-items:center;gap:.6rem;padding:.5rem .75rem;background:var(--card2);border-radius:8px">
+        <span style="min-width:30px;font-weight:700;color:var(--acl)">20</span>
+        <input type="text" placeholder="twenty" style="width:130px" onblur="numCheck(this,'twenty')">
+      </div>
+      <div style="display:flex;align-items:center;gap:.6rem;padding:.5rem .75rem;background:var(--card2);border-radius:8px">
+        <span style="min-width:30px;font-weight:700;color:var(--acl)">18</span>
+        <input type="text" placeholder="eighteen" style="width:130px" onblur="numCheck(this,'eighteen')">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sec-title"><span>🎯</span> Quiz Nhanh (5 câu)</div>
+<div class="quiz-section">
+  <div class="quiz-header"><span id="quizTitle" style="font-size:.85rem;color:var(--muted)">Câu 1 / 5</span><span id="quizScoreDisplay" style="font-size:.85rem;color:var(--muted)">Điểm: 0</span></div>
+  <div id="quizContent">
+    <div class="quiz-q" id="quizQ"></div>
+    <div class="quiz-opts" id="quizOpts"></div>
+    <div class="quiz-feedback" id="quizFB"></div>
+    <div class="quiz-nav"><div class="progress-bar"><div class="progress-fill" id="quizProgress" style="width:20%"></div></div><button class="btn" id="quizNext" style="display:none" onclick="nextQ()">Tiếp →</button></div>
+  </div>
+  <div class="result-box" id="quizResult"><div class="result-emoji" id="resEmoji"></div><div class="result-score" id="resScore"></div><div class="result-msg" id="resMsg"></div><button class="btn" onclick="resetQuiz()">🔄 Làm lại</button></div>
+</div>
+
+<div class="lesson-footer">
+  <div class="footer-nav">← <a href="../lesson-02/">Lesson 02</a></div>
+  <div style="font-size:.8rem;color:var(--muted)">A1 · Lesson 03 / 12</div>
+  <div class="footer-nav"><a href="../lesson-04/">Lesson 04 →</a></div>
+</div>
+
+<script>
+const nums=[{n:1,w:'one',v:'một'},{n:2,w:'two',v:'hai'},{n:3,w:'three',v:'ba'},{n:4,w:'four',v:'bốn'},{n:5,w:'five',v:'năm'},{n:6,w:'six',v:'sáu'},{n:7,w:'seven',v:'bảy'},{n:8,w:'eight',v:'tám'},{n:9,w:'nine',v:'chín'},{n:10,w:'ten',v:'mười'},{n:11,w:'eleven',v:'mười một'},{n:12,w:'twelve',v:'mười hai'},{n:13,w:'thirteen',v:'mười ba'},{n:14,w:'fourteen',v:'mười bốn'},{n:15,w:'fifteen',v:'mười lăm'},{n:16,w:'sixteen',v:'mười sáu'},{n:17,w:'seventeen',v:'mười bảy'},{n:18,w:'eighteen',v:'mười tám'},{n:19,w:'nineteen',v:'mười chín'},{n:20,w:'twenty',v:'hai mươi'}];
+const g=document.getElementById('numGrid');
+nums.forEach(nm=>{g.innerHTML+=`<div class="num-card" onclick="this.classList.toggle('flipped')"><div class="num-digit">${nm.n}</div><div><div class="num-word">${nm.w}</div><div class="num-vn">${nm.v}</div></div></div>`;});
+function numCheck(el,ans){const v=el.value.trim().toLowerCase();if(v===ans){el.style.borderColor='#10b981';el.style.color='#10b981';}else if(v){el.style.borderColor='#ef4444';el.style.color='#ef4444';}}
+const qs=[{q:'"fifteen" là số mấy?',opts:['13','14','15','16'],ans:2},{q:'"twenty" nghĩa là gì?',opts:['12','15','18','20'],ans:3},{q:'Câu nào đúng?',opts:['I am fifteen year old.','I am fifteen years old.','I have fifteen years.','My age is fifteen year.'],ans:1},{q:'"How many" dùng để hỏi gì?',opts:['Hỏi giá tiền','Hỏi số lượng','Hỏi tuổi','Hỏi thời gian'],ans:1},{q:'Số 11 viết bằng chữ là?',opts:['elevent','eleven','elveen','elleven'],ans:1}];
+let qi=0,score=0;
+function renderQ(){const q=qs[qi];document.getElementById('quizTitle').textContent=`Câu ${qi+1} / ${qs.length}`;document.getElementById('quizProgress').style.width=`${((qi+1)/qs.length)*100}%`;document.getElementById('quizQ').textContent=q.q;document.getElementById('quizFB').textContent='';document.getElementById('quizFB').className='quiz-feedback';document.getElementById('quizNext').style.display='none';const opts=document.getElementById('quizOpts');opts.innerHTML='';q.opts.forEach((o,i)=>{const btn=document.createElement('button');btn.className='quiz-opt';btn.textContent=o;btn.onclick=()=>{document.querySelectorAll('.quiz-opt').forEach(b=>b.disabled=true);if(i===q.ans){btn.classList.add('correct');score++;document.getElementById('quizFB').textContent='✅ Chính xác!';document.getElementById('quizFB').className='quiz-feedback ok';}else{btn.classList.add('wrong');document.querySelectorAll('.quiz-opt')[q.ans].classList.add('correct');document.getElementById('quizFB').textContent='❌ Sai rồi!';document.getElementById('quizFB').className='quiz-feedback no';}document.getElementById('quizScoreDisplay').textContent=`Điểm: ${score}`;document.getElementById('quizNext').style.display='inline-block';};opts.appendChild(btn);});}
+function nextQ(){qi++;if(qi>=qs.length){document.getElementById('quizContent').style.display='none';const r=document.getElementById('quizResult');r.style.display='block';const pct=Math.round(score/qs.length*100);document.getElementById('resEmoji').textContent=pct>=80?'🏆':pct>=60?'👍':'💪';document.getElementById('resScore').textContent=`${score} / ${qs.length} đúng (${pct}%)`;document.getElementById('resMsg').textContent=pct>=80?'Tuyệt! Bạn giỏi đếm số lắm!':pct>=60?'Tốt! Luyện thêm nhé.':'Xem lại bảng số và thử lại!';}else renderQ();}
+function resetQuiz(){qi=0;score=0;document.getElementById('quizScoreDisplay').textContent='Điểm: 0';document.getElementById('quizContent').style.display='block';document.getElementById('quizResult').style.display='none';renderQ();}
+renderQ();
+</script>
+</body>
+</html>
