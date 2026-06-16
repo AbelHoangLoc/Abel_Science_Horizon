@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+
+  <link rel="stylesheet" href="../assets/brand.css">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A1 · Lesson 10 · Days & Time</title>
+<style>
+:root{--bg:#080d1a;--card:#0f1729;--card2:#131e35;--border:#1e2d4a;--text:#dde6f5;--muted:#8b9ab5;--accent:#6366f1;--acl:#818cf8;--green:#10b981;--red:#ef4444;--yellow:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;line-height:1.6;padding:1.5rem 1.25rem 3rem}
+.lsn-header{background:linear-gradient(135deg,#080a30,#0f1729);border:1px solid var(--border);border-radius:16px;padding:1.5rem;margin-bottom:1.5rem;position:relative;overflow:hidden}
+.lsn-header::before{content:'';position:absolute;top:-40px;right:-40px;width:150px;height:150px;background:radial-gradient(circle,rgba(99,102,241,.35),transparent 70%);pointer-events:none}
+.lsn-badge{display:inline-flex;background:rgba(99,102,241,.15);border:1px solid rgba(129,140,248,.3);border-radius:20px;padding:.25rem .75rem;font-size:.7rem;font-weight:700;color:var(--acl);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.75rem}
+.lsn-header h1{font-size:1.6rem;font-weight:800;background:linear-gradient(90deg,#c7d2fe,#818cf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.4rem}
+.lsn-header p{color:var(--muted);font-size:.9rem}
+.objectives{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+.obj-tag{background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.25);border-radius:20px;padding:.25rem .7rem;font-size:.75rem;color:var(--acl)}
+.sec-title{display:flex;align-items:center;gap:.6rem;font-size:1rem;font-weight:700;color:var(--acl);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)}
+/* Days grid */
+.days-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:.4rem;margin-bottom:1.75rem}
+.day-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:.6rem .3rem;text-align:center;cursor:pointer;transition:all .2s}
+.day-card:hover,.day-card.on{border-color:var(--accent);background:rgba(99,102,241,.12)}
+.day-num{font-size:.7rem;font-weight:700;color:var(--acl);margin-bottom:.2rem}
+.day-en{font-size:.72rem;font-weight:700;color:var(--text)}
+.day-short{font-size:.65rem;color:var(--muted)}
+.day-card.weekend{border-color:rgba(245,158,11,.3);background:rgba(245,158,11,.05)}
+.day-card.weekend .day-en{color:var(--yellow)}
+/* Months */
+.months-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;margin-bottom:1.75rem}
+.month-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:.6rem .5rem;text-align:center;cursor:pointer;transition:all .2s}
+.month-card:hover{border-color:var(--accent);background:rgba(99,102,241,.08)}
+.month-num{font-size:.7rem;color:var(--muted);margin-bottom:.1rem}
+.month-en{font-size:.82rem;font-weight:700;color:var(--text)}
+.month-vn{font-size:.7rem;color:var(--muted);margin-top:.1rem}
+.month-card.flip .month-vn{color:var(--acl)}
+/* Clock */
+.clock-section{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.1rem;margin-bottom:1.75rem}
+.clock-display{display:flex;align-items:center;justify-content:center;font-size:2.5rem;font-weight:800;font-family:monospace;color:var(--acl);letter-spacing:.05em;margin:.75rem 0;background:rgba(99,102,241,.08);border-radius:10px;padding:.5rem}
+.time-examples{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+.time-ex{background:var(--card2);border-radius:8px;padding:.55rem .8rem;font-size:.85rem}
+.time-digital{font-weight:700;color:var(--acl);font-family:monospace}
+.time-spoken{color:var(--muted);font-size:.78rem;margin-top:.2rem}
+.grammar-box{background:linear-gradient(135deg,rgba(99,102,241,.1),rgba(129,140,248,.06));border:1px solid rgba(99,102,241,.2);border-radius:12px;padding:1.1rem;margin-bottom:1.75rem}
+.grammar-box h3{color:var(--acl);font-size:.9rem;margin-bottom:.8rem}
+.gram-row{display:flex;gap:.5rem;align-items:center;margin-bottom:.5rem;font-size:.88rem;flex-wrap:wrap}
+.gram-box{background:rgba(99,102,241,.15);border-radius:6px;padding:.2rem .7rem;color:var(--acl);font-weight:700;font-family:monospace}
+.pattern-list{display:flex;flex-direction:column;gap:.6rem;margin-bottom:1.75rem}
+.pattern-item{background:var(--card);border-left:3px solid var(--accent);border-radius:0 10px 10px 0;padding:.8rem 1rem}
+.pat-en{font-size:1rem;font-weight:600;color:var(--text)}.pat-vn{font-size:.82rem;color:var(--muted);margin-top:.2rem}.pat-note{font-size:.78rem;color:var(--acl);margin-top:.25rem;font-style:italic}
+.convo-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1.75rem}
+.convo-line{display:flex;gap:.7rem;margin-bottom:.65rem;align-items:flex-start}
+.spk-a{color:#818cf8;font-size:.7rem;font-weight:700;text-transform:uppercase;min-width:28px;margin-top:.2rem}
+.spk-b{color:#34d399;font-size:.7rem;font-weight:700;text-transform:uppercase;min-width:28px;margin-top:.2rem}
+.bubble{background:var(--card2);border-radius:0 10px 10px 10px;padding:.55rem .85rem;font-size:.9rem;flex:1}
+.bubble.b{border-radius:10px 10px 10px 0;background:rgba(52,211,153,.07);border:1px solid rgba(52,211,153,.15)}
+/* Time quiz game */
+.time-game{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1.75rem}
+.time-game h3{color:var(--acl);font-size:.9rem;margin-bottom:.75rem}
+.tg-clock{font-size:1.8rem;font-weight:800;font-family:monospace;color:var(--acl);text-align:center;padding:.5rem;background:rgba(99,102,241,.08);border-radius:8px;margin-bottom:.75rem;letter-spacing:.05em}
+.tg-opts{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.5rem}
+.tg-opt{background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:.5rem .7rem;font-size:.85rem;cursor:pointer;transition:all .18s;color:var(--text);text-align:center}
+.tg-opt:hover{border-color:var(--accent);color:var(--acl)}.tg-opt.ok{border-color:var(--green)!important;background:rgba(16,185,129,.15)!important;color:var(--green)!important}.tg-opt.no{border-color:var(--red)!important;color:var(--red)!important}
+.tg-fb{font-size:.82rem;min-height:1rem;margin-bottom:.5rem}
+.tg-fb.ok{color:var(--green)}.tg-fb.no{color:var(--red)}
+.quiz-section{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.25rem;margin-bottom:1.75rem}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+.quiz-q{font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:.75rem;padding:.75rem;background:var(--card2);border-radius:8px}
+.quiz-opts{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.5rem}
+.quiz-opt{background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:.55rem .75rem;font-size:.85rem;cursor:pointer;transition:all .18s;color:var(--text);text-align:left}
+.quiz-opt:hover:not(:disabled){border-color:var(--accent);color:var(--acl)}.quiz-opt.correct{border-color:var(--green)!important;background:rgba(16,185,129,.15)!important;color:var(--green)!important}.quiz-opt.wrong{border-color:var(--red)!important;background:rgba(239,68,68,.1)!important;color:var(--red)!important}.quiz-opt:disabled{cursor:default}
+.quiz-feedback{font-size:.8rem;margin:.4rem 0 .6rem;min-height:1rem}.quiz-feedback.ok{color:var(--green)}.quiz-feedback.no{color:var(--red)}
+.quiz-nav{display:flex;gap:.5rem;align-items:center;justify-content:space-between}
+.btn{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:.5rem 1.1rem;font-size:.85rem;font-weight:700;cursor:pointer;transition:opacity .2s}.btn:hover{opacity:.85}
+.btn-sm{background:rgba(99,102,241,.2);color:var(--acl);border:1px solid var(--acl);border-radius:6px;padding:.3rem .7rem;font-size:.8rem;cursor:pointer}
+.progress-bar{background:var(--border);border-radius:4px;height:4px;flex:1;overflow:hidden}.progress-fill{background:linear-gradient(90deg,var(--accent),#c7d2fe);height:100%;border-radius:4px;transition:width .3s}
+.result-box{text-align:center;padding:1.25rem;display:none}.result-emoji{font-size:2.5rem;margin-bottom:.5rem}.result-score{font-size:1.5rem;font-weight:800;color:var(--acl);margin-bottom:.25rem}.result-msg{font-size:.85rem;color:var(--muted);margin-bottom:1rem}
+.lesson-footer{display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border)}
+.footer-nav a{color:var(--accent);text-decoration:none;font-size:.85rem;font-weight:600}
+</style>
+</head>
+<body>
+
+  <img src="../assets/logo-SH.png" class="sh-logo" alt="Science Horizon">
+<div class="lsn-header">
+  <div class="lsn-badge">🕐 People & Everyday Life · Lesson 10</div>
+  <h1>Days &amp; Time</h1>
+  <p>Học các ngày trong tuần, tháng trong năm và cách nói giờ giấc bằng tiếng Anh!</p>
+  <div class="objectives">
+    <span class="obj-tag">📅 7 ngày trong tuần</span>
+    <span class="obj-tag">🗓️ 12 tháng</span>
+    <span class="obj-tag">🕐 Đọc giờ</span>
+    <span class="obj-tag">📌 Giới từ in/on/at</span>
+  </div>
+</div>
+
+<!-- DAYS -->
+<div class="sec-title"><span>📅</span> Ngày Trong Tuần <small style="color:var(--muted);font-weight:400;font-size:.78rem">🟡 = cuối tuần</small></div>
+<div class="days-grid" id="daysGrid"></div>
+
+<!-- MONTHS -->
+<div class="sec-title"><span>🗓️</span> Tháng Trong Năm <small style="color:var(--muted);font-weight:400;font-size:.78rem">(nhấn xem tiếng Việt)</small></div>
+<div class="months-grid" id="monthsGrid"></div>
+
+<!-- CLOCK -->
+<div class="sec-title"><span>🕐</span> Đọc Giờ (Telling the Time)</div>
+<div class="clock-section">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem">
+    <span style="font-size:.85rem;font-weight:600;color:var(--text)">Đồng hồ hiện tại:</span>
+    <button class="btn-sm" onclick="updateClock()">🔄 Cập nhật</button>
+  </div>
+  <div class="clock-display" id="clockDisplay">00:00</div>
+  <div style="font-size:.82rem;color:var(--muted);margin-bottom:.9rem">Cách đọc giờ phổ biến:</div>
+  <div class="time-examples" id="timeExamples"></div>
+</div>
+
+<!-- GRAMMAR -->
+<div class="sec-title"><span>📐</span> Ngữ Pháp — Giới Từ Thời Gian</div>
+<div class="grammar-box">
+  <h3>✏️ IN / ON / AT — 3 giới từ không được nhầm lẫn</h3>
+  <div class="gram-row"><span class="gram-box">IN</span><span>the morning / afternoon / evening</span><span style="color:var(--muted);font-size:.8rem">→ buổi sáng / chiều / tối</span></div>
+  <div class="gram-row"><span class="gram-box">IN</span><span>January / 2024 / summer</span><span style="color:var(--muted);font-size:.8rem">→ tháng 1 / năm 2024 / mùa hè</span></div>
+  <div class="gram-row"><span class="gram-box">ON</span><span>Monday / Friday / the weekend</span><span style="color:var(--muted);font-size:.8rem">→ vào thứ Hai / thứ Sáu / cuối tuần</span></div>
+  <div class="gram-row"><span class="gram-box">AT</span><span>7 o'clock / midnight / noon</span><span style="color:var(--muted);font-size:.8rem">→ lúc 7 giờ / nửa đêm / trưa</span></div>
+  <div style="margin-top:.75rem;font-size:.82rem;color:var(--muted);background:rgba(99,102,241,.07);border-radius:8px;padding:.6rem .9rem">
+    💡 <strong style="color:var(--acl)">Quy tắc vàng:</strong> <strong>in</strong> = khoảng thời gian rộng (tháng/năm/buổi) · <strong>on</strong> = ngày cụ thể (thứ/ngày) · <strong>at</strong> = thời điểm chính xác (giờ)
+  </div>
+</div>
+
+<!-- PATTERNS -->
+<div class="sec-title"><span>💬</span> Mẫu Câu</div>
+<div class="pattern-list">
+  <div class="pattern-item"><div class="pat-en">"What day is it today?" — "It's Monday."</div><div class="pat-vn">→ Hôm nay là thứ mấy? — Hôm nay là thứ Hai.</div><div class="pat-note">💡 "Today is Monday." hoặc "It's Monday today." đều đúng</div></div>
+  <div class="pattern-item"><div class="pat-en">"What time is it?" — "It's seven o'clock." / "It's half past seven."</div><div class="pat-vn">→ Mấy giờ rồi? — 7 giờ. / 7 giờ rưỡi.</div><div class="pat-note">💡 o'clock = đúng giờ · half past = rưỡi · quarter past = 15 phút</div></div>
+  <div class="pattern-item"><div class="pat-en">"What month is it?" — "It's January." / "It's the first month of the year."</div><div class="pat-vn">→ Tháng mấy rồi? — Tháng Một.</div><div class="pat-note">💡 Tên tháng luôn viết hoa: January, February, March…</div></div>
+  <div class="pattern-item"><div class="pat-en">"My birthday is on [date] in [month]."</div><div class="pat-vn">→ Sinh nhật của tôi vào ngày [ngày] tháng [tháng].</div><div class="pat-note">💡 "My birthday is on the 5th of March." — dùng ON + ngày</div></div>
+</div>
+
+<!-- CONVERSATION -->
+<div class="sec-title"><span>🗣️</span> Hội Thoại</div>
+<div class="convo-box">
+  <div class="convo-line"><span class="spk-a">A</span><div class="bubble">Excuse me, what time is it?</div></div>
+  <div class="convo-line"><span class="spk-b">B</span><div class="bubble b">It's quarter past nine — nine fifteen.</div></div>
+  <div class="convo-line"><span class="spk-a">A</span><div class="bubble">Oh! I'm late! My class starts at nine o'clock on Mondays.</div></div>
+  <div class="convo-line"><span class="spk-b">B</span><div class="bubble b">Don't worry! What day is today? Is it Monday?</div></div>
+  <div class="convo-line"><span class="spk-a">A</span><div class="bubble">Yes, it's Monday, the 15th of March. I have English class in the morning every Monday!</div></div>
+  <div class="convo-line"><span class="spk-b">B</span><div class="bubble b">Run! See you later!</div></div>
+</div>
+
+<!-- TIME GAME -->
+<div class="sec-title"><span>🎮</span> Luyện Đọc Giờ</div>
+<div class="time-game">
+  <h3>Đọc đồng hồ và chọn cách đọc đúng:</h3>
+  <div class="tg-clock" id="tgClock"></div>
+  <div class="tg-opts" id="tgOpts"></div>
+  <div class="tg-fb" id="tgFB"></div>
+  <button class="btn-sm" id="tgNext" onclick="nextTimeQ()" style="display:none">Câu tiếp →</button>
+</div>
+
+<!-- QUIZ -->
+<div class="sec-title"><span>🎯</span> Quiz Nhanh (5 câu)</div>
+<div class="quiz-section">
+  <div class="quiz-header"><span id="quizTitle" style="font-size:.85rem;color:var(--muted)">Câu 1 / 5</span><span id="quizScoreDisplay" style="font-size:.85rem;color:var(--muted)">Điểm: 0</span></div>
+  <div id="quizContent">
+    <div class="quiz-q" id="quizQ"></div>
+    <div class="quiz-opts" id="quizOpts"></div>
+    <div class="quiz-feedback" id="quizFB"></div>
+    <div class="quiz-nav"><div class="progress-bar"><div class="progress-fill" id="quizProgress" style="width:20%"></div></div><button class="btn" id="quizNext" style="display:none" onclick="nextQ()">Tiếp →</button></div>
+  </div>
+  <div class="result-box" id="quizResult"><div class="result-emoji" id="resEmoji"></div><div class="result-score" id="resScore"></div><div class="result-msg" id="resMsg"></div><button class="btn" onclick="resetQuiz()">🔄 Làm lại</button></div>
+</div>
+
+<div class="lesson-footer">
+  <div class="footer-nav">← <a href="../lesson-09/">Lesson 09</a></div>
+  <div style="font-size:.8rem;color:var(--muted)">A1 · Lesson 10 / 12</div>
+  <div class="footer-nav"><a href="../lesson-11/">Lesson 11 →</a></div>
+</div>
+
+<script>
+// Days
+const days=[{en:'Monday',short:'Mon',vn:'Thứ Hai',n:1},{en:'Tuesday',short:'Tue',vn:'Thứ Ba',n:2},{en:'Wednesday',short:'Wed',vn:'Thứ Tư',n:3},{en:'Thursday',short:'Thu',vn:'Thứ Năm',n:4},{en:'Friday',short:'Fri',vn:'Thứ Sáu',n:5},{en:'Saturday',short:'Sat',vn:'Thứ Bảy',n:6,we:true},{en:'Sunday',short:'Sun',vn:'Chủ Nhật',n:7,we:true}];
+const dg=document.getElementById('daysGrid');
+const today=new Date().getDay();
+days.forEach((d,i)=>{
+  const isToday=(today===0?6:today-1)===i;
+  dg.innerHTML+=`<div class="day-card${d.we?' weekend':''}${isToday?' on':''}" title="${d.vn}" onclick="this.classList.toggle('on')">
+    <div class="day-num">${d.n}</div><div class="day-en">${d.en}</div><div class="day-short">${d.vn}</div></div>`;
+});
+
+// Months
+const months=['January','February','March','April','May','June','July','August','September','October','November','December'];
+const monthsVN=['Tháng 1','Tháng 2','Tháng 3','Tháng 4','Tháng 5','Tháng 6','Tháng 7','Tháng 8','Tháng 9','Tháng 10','Tháng 11','Tháng 12'];
+const mg=document.getElementById('monthsGrid');
+months.forEach((m,i)=>{mg.innerHTML+=`<div class="month-card" onclick="this.classList.toggle('flip')"><div class="month-num">${i+1}</div><div class="month-en">${m}</div><div class="month-vn">${monthsVN[i]}</div></div>`;});
+
+// Clock
+function updateClock(){
+  const now=new Date();
+  const h=String(now.getHours()).padStart(2,'0');
+  const m=String(now.getMinutes()).padStart(2,'0');
+  document.getElementById('clockDisplay').textContent=`${h}:${m}`;
+}
+updateClock();
+setInterval(updateClock,10000);
+
+const timeExs=[{dig:'7:00',spoken:"seven o'clock"},{dig:'7:15',spoken:'quarter past seven'},{dig:'7:30',spoken:'half past seven'},{dig:'7:45',spoken:'quarter to eight'},{dig:'12:00',spoken:'twelve o\'clock / noon'},{dig:'0:00',spoken:'midnight'}];
+const te=document.getElementById('timeExamples');
+timeExs.forEach(t=>{te.innerHTML+=`<div class="time-ex"><div class="time-digital">${t.dig}</div><div class="time-spoken">${t.spoken}</div></div>`;});
+
+// Time game
+const timeQs=[{time:'3:00',opts:["three o'clock","quarter past three","half past three","quarter to three"],ans:0},{time:'6:30',opts:["six o'clock","quarter past six","half past six","quarter to six"],ans:2},{time:'9:15',opts:["quarter to nine","quarter past nine","half past nine","nine o'clock"],ans:1},{time:'11:45',opts:["quarter to twelve","quarter past eleven","half past eleven","eleven o'clock"],ans:0},{time:'12:00',opts:["midnight","noon / twelve o'clock","half past twelve","quarter past twelve"],ans:1}];
+let tqi=0;
+function renderTimeQ(){
+  if(tqi>=timeQs.length){document.getElementById('tgClock').textContent='🎉 Done!';document.getElementById('tgOpts').innerHTML='';document.getElementById('tgFB').textContent='Làm xong hết rồi!';document.getElementById('tgFB').className='tg-fb ok';document.getElementById('tgNext').style.display='none';return;}
+  const q=timeQs[tqi];
+  document.getElementById('tgClock').textContent=q.time;
+  document.getElementById('tgFB').textContent='';document.getElementById('tgFB').className='tg-fb';
+  document.getElementById('tgNext').style.display='none';
+  const opts=document.getElementById('tgOpts');opts.innerHTML='';
+  q.opts.forEach((o,i)=>{opts.innerHTML+=`<button class="tg-opt" onclick="checkTimeQ(${i},${q.ans})">${o}</button>`;});
+}
+function checkTimeQ(i,ans){
+  document.querySelectorAll('.tg-opt').forEach(b=>b.style.pointerEvents='none');
+  const btns=document.querySelectorAll('.tg-opt');
+  if(i===ans){btns[i].classList.add('ok');document.getElementById('tgFB').textContent='✅ Đúng rồi!';document.getElementById('tgFB').className='tg-fb ok';}
+  else{btns[i].classList.add('no');btns[ans].classList.add('ok');document.getElementById('tgFB').textContent='❌ Sai! Xem đáp án xanh.';document.getElementById('tgFB').className='tg-fb no';}
+  document.getElementById('tgNext').style.display='inline-block';
+}
+function nextTimeQ(){tqi++;renderTimeQ();}
+renderTimeQ();
+
+const qs=[{q:'Giới từ nào dùng với ngày trong tuần: "___ Monday"?',opts:['in','on','at','by'],ans:1},{q:'"It\'s half past eight." — Đồng hồ đang chỉ mấy giờ?',opts:['7:30','8:00','8:30','8:15'],ans:2},{q:'Tháng 3 tiếng Anh là?',opts:['February','March','May','April'],ans:1},{q:'"What ___ is it today?" — Điền đúng để hỏi thứ mấy:',opts:['time','month','day','year'],ans:2},{q:'"at noon" nghĩa là?',opts:['Buổi sáng','Buổi chiều','12 giờ trưa','Nửa đêm'],ans:2}];
+let qi=0,score=0;
+function renderQ(){const q=qs[qi];document.getElementById('quizTitle').textContent=`Câu ${qi+1} / ${qs.length}`;document.getElementById('quizProgress').style.width=`${((qi+1)/qs.length)*100}%`;document.getElementById('quizQ').textContent=q.q;document.getElementById('quizFB').textContent='';document.getElementById('quizFB').className='quiz-feedback';document.getElementById('quizNext').style.display='none';const opts=document.getElementById('quizOpts');opts.innerHTML='';q.opts.forEach((o,i)=>{const btn=document.createElement('button');btn.className='quiz-opt';btn.textContent=o;btn.onclick=()=>{document.querySelectorAll('.quiz-opt').forEach(b=>b.disabled=true);if(i===q.ans){btn.classList.add('correct');score++;document.getElementById('quizFB').textContent='✅ Chính xác!';document.getElementById('quizFB').className='quiz-feedback ok';}else{btn.classList.add('wrong');document.querySelectorAll('.quiz-opt')[q.ans].classList.add('correct');document.getElementById('quizFB').textContent='❌ Sai rồi!';document.getElementById('quizFB').className='quiz-feedback no';}document.getElementById('quizScoreDisplay').textContent=`Điểm: ${score}`;document.getElementById('quizNext').style.display='inline-block';};opts.appendChild(btn);});}
+function nextQ(){qi++;if(qi>=qs.length){document.getElementById('quizContent').style.display='none';const r=document.getElementById('quizResult');r.style.display='block';const pct=Math.round(score/qs.length*100);document.getElementById('resEmoji').textContent=pct>=80?'🏆':pct>=60?'👍':'💪';document.getElementById('resScore').textContent=`${score} / ${qs.length} đúng (${pct}%)`;document.getElementById('resMsg').textContent=pct>=80?'Xuất sắc! Bạn biết cách nói giờ và ngày rồi!':'Ôn lại và thử tiếp nhé!';}else renderQ();}
+function resetQuiz(){qi=0;score=0;document.getElementById('quizScoreDisplay').textContent='Điểm: 0';document.getElementById('quizContent').style.display='block';document.getElementById('quizResult').style.display='none';renderQ();}
+renderQ();
+</script>
+</body></html>
