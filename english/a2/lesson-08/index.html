@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+
+  <link rel="stylesheet" href="../assets/brand.css">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A2 · Lesson 08 · Health & Feelings</title>
+<style>
+:root{--bg:#080d1a;--card:#0f1729;--card2:#131e35;--border:#1e2d4a;--text:#dde6f5;--muted:#8b9ab5;--accent:#dc2626;--accent2:#fca5a5;--green:#10b981;--red:#ef4444}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;line-height:1.6;padding:1.5rem 1.25rem 3rem}
+.lsn-header{background:linear-gradient(135deg,#1f0505,#0f1729);border:1px solid var(--border);border-radius:16px;padding:1.5rem;margin-bottom:1.5rem;position:relative;overflow:hidden}
+.lsn-header::before{content:'';position:absolute;top:-40px;right:-40px;width:150px;height:150px;background:radial-gradient(circle,rgba(220,38,38,.3),transparent 70%);pointer-events:none}
+.lsn-badge{display:inline-flex;background:rgba(220,38,38,.15);border:1px solid rgba(252,165,165,.3);border-radius:20px;padding:.25rem .75rem;font-size:.7rem;font-weight:700;color:var(--accent2);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.75rem}
+.lsn-header h1{font-size:1.6rem;font-weight:800;background:linear-gradient(90deg,#fecaca,#fca5a5);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.4rem}
+.lsn-header p{color:var(--muted);font-size:.9rem}
+.objectives{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+.obj-tag{background:rgba(220,38,38,.12);border:1px solid rgba(220,38,38,.25);border-radius:20px;padding:.25rem .7rem;font-size:.75rem;color:var(--accent2)}
+.sec-title{display:flex;align-items:center;gap:.6rem;font-size:1rem;font-weight:700;color:var(--accent2);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)}
+.feeling-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:.6rem;margin-bottom:1.75rem}
+.f-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:.8rem .6rem;text-align:center;cursor:pointer;transition:all .2s}
+.f-card:hover,.f-card.flip{border-color:var(--accent);background:rgba(220,38,38,.07)}
+.f-emoji{font-size:1.6rem;margin-bottom:.3rem}
+.f-en{font-size:.88rem;font-weight:700;color:var(--text)}.f-vn{font-size:.75rem;color:var(--muted);margin-top:.1rem}
+.f-card.flip .f-eg{display:block}.f-eg{display:none;font-size:.7rem;color:var(--accent2);margin-top:.2rem;font-style:italic}
+.symptom-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.55rem;margin-bottom:1.75rem}
+.sym-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:.65rem .85rem;cursor:pointer;transition:all .2s}
+.sym-card:hover{border-color:var(--accent);background:rgba(220,38,38,.06)}
+.sym-en{font-size:.88rem;font-weight:700;color:var(--text)}.sym-vn{font-size:.76rem;color:var(--muted);margin-top:.1rem}
+.grammar-box{background:linear-gradient(135deg,rgba(220,38,38,.09),rgba(220,38,38,.04));border:1px solid rgba(220,38,38,.18);border-radius:12px;padding:1.1rem;margin-bottom:1.75rem}
+.grammar-box h3{color:var(--accent2);font-size:.9rem;margin-bottom:.8rem}
+.gram-box{background:rgba(220,38,38,.18);border-radius:6px;padding:.2rem .7rem;color:var(--accent2);font-weight:700;font-family:monospace;display:inline-block}
+.gram-row{display:flex;gap:.5rem;align-items:center;margin-bottom:.5rem;font-size:.88rem;flex-wrap:wrap}
+.should-table{width:100%;border-collapse:collapse;font-size:.85rem;margin-bottom:.6rem}
+.should-table th{background:rgba(220,38,38,.15);color:var(--accent2);padding:.45rem .65rem;text-align:left;border:1px solid var(--border);font-size:.78rem}
+.should-table td{padding:.4rem .65rem;border:1px solid var(--border);color:var(--text)}
+.should-table tr:nth-child(even) td{background:var(--card2)}
+.pattern-list{margin-bottom:1.75rem}
+.pattern-item{background:var(--card);border-left:3px solid var(--accent);border-radius:0 10px 10px 0;padding:.8rem 1rem;margin-bottom:.6rem}
+.pat-en{font-size:1rem;font-weight:600;color:var(--text)}.pat-vn{font-size:.82rem;color:var(--muted);margin-top:.2rem}.pat-note{font-size:.78rem;color:var(--accent2);margin-top:.25rem;font-style:italic}
+.convo-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1.75rem}
+.convo-line{display:flex;gap:.7rem;margin-bottom:.65rem;align-items:flex-start}
+.spk-d{color:#fca5a5;font-size:.7rem;font-weight:700;text-transform:uppercase;min-width:36px;margin-top:.2rem}
+.spk-p{color:#34d399;font-size:.7rem;font-weight:700;text-transform:uppercase;min-width:36px;margin-top:.2rem}
+.bubble{background:var(--card2);border-radius:0 10px 10px 10px;padding:.55rem .85rem;font-size:.9rem;flex:1}
+.bubble.p{border-radius:10px 10px 10px 0;background:rgba(52,211,153,.07);border:1px solid rgba(52,211,153,.15)}
+.advice-game{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1.75rem}
+.advice-game h3{color:var(--accent2);font-size:.9rem;margin-bottom:.75rem}
+.prob-card{background:rgba(220,38,38,.07);border:1px solid rgba(220,38,38,.2);border-radius:8px;padding:.75rem;margin-bottom:.6rem;font-size:.9rem}
+.prob-label{font-size:.7rem;font-weight:700;color:var(--accent2);text-transform:uppercase;letter-spacing:.04em;margin-bottom:.3rem}
+.advice-opts{display:grid;grid-template-columns:1fr 1fr;gap:.4rem;margin-top:.5rem}
+.adv-btn{background:var(--card2);border:1px solid var(--border);border-radius:7px;padding:.4rem .65rem;font-size:.82rem;cursor:pointer;color:var(--text);transition:all .18s;text-align:left}
+.adv-btn:hover{border-color:var(--accent)}.adv-btn.ok{border-color:var(--green);background:rgba(16,185,129,.12);color:var(--green)}.adv-btn.no{border-color:var(--red);color:var(--red)}
+.fill-block{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1.75rem}
+.fill-q{font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:.75rem}
+.fill-row{display:flex;align-items:center;gap:.5rem;padding:.45rem .75rem;background:var(--card2);border-radius:8px;margin-bottom:.4rem;font-size:.88rem}
+input[type=text]{background:var(--card2);border:1px solid var(--border);border-radius:6px;padding:.3rem .6rem;color:var(--text);font-size:.85rem;outline:none}
+input[type=text]:focus{border-color:var(--accent)}
+.quiz-section{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.25rem;margin-bottom:1.75rem}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+.quiz-q{font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:.75rem;padding:.75rem;background:var(--card2);border-radius:8px}
+.quiz-opts{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.5rem}
+.quiz-opt{background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:.55rem .75rem;font-size:.85rem;cursor:pointer;transition:all .18s;color:var(--text);text-align:left}
+.quiz-opt:hover:not(:disabled){border-color:var(--accent);color:var(--accent2)}.quiz-opt.correct{border-color:var(--green)!important;background:rgba(16,185,129,.15)!important;color:var(--green)!important}.quiz-opt.wrong{border-color:var(--red)!important;background:rgba(239,68,68,.1)!important;color:var(--red)!important}.quiz-opt:disabled{cursor:default}
+.quiz-feedback{font-size:.8rem;margin:.4rem 0 .6rem;min-height:1rem}.quiz-feedback.ok{color:var(--green)}.quiz-feedback.no{color:var(--red)}
+.quiz-nav{display:flex;gap:.5rem;align-items:center;justify-content:space-between}
+.btn{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:.5rem 1.1rem;font-size:.85rem;font-weight:700;cursor:pointer;transition:opacity .2s}.btn:hover{opacity:.85}
+.btn-sm{background:rgba(220,38,38,.15);color:var(--accent2);border:1px solid var(--accent2);border-radius:6px;padding:.3rem .7rem;font-size:.8rem;cursor:pointer}
+.progress-bar{background:var(--border);border-radius:4px;height:4px;flex:1;overflow:hidden}.progress-fill{background:var(--accent);height:100%;border-radius:4px;transition:width .3s}
+.result-box{text-align:center;padding:1.25rem;display:none}.result-emoji{font-size:2.5rem;margin-bottom:.5rem}.result-score{font-size:1.5rem;font-weight:800;color:var(--accent2);margin-bottom:.25rem}.result-msg{font-size:.85rem;color:var(--muted);margin-bottom:1rem}
+.lesson-footer{display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border)}
+.footer-nav a{color:var(--accent);text-decoration:none;font-size:.85rem;font-weight:600}
+</style>
+</head>
+<body>
+<img src="../assets/logo-SH.png" class="sh-logo" alt="Science Horizon">
+<div class="lsn-header">
+  <div class="lsn-badge">💊 A2 Daily English · Lesson 08</div>
+  <h1>Health &amp; Feelings</h1>
+  <p>Mô tả cảm xúc, triệu chứng bệnh và đưa ra lời khuyên — should/shouldn't!</p>
+  <div class="objectives">
+    <span class="obj-tag">😊 Cảm xúc & trạng thái</span>
+    <span class="obj-tag">🤒 Triệu chứng bệnh</span>
+    <span class="obj-tag">💡 Should / Shouldn't</span>
+    <span class="obj-tag">🏥 Tại phòng khám</span>
+  </div>
+</div>
+
+<div class="sec-title"><span>😊</span> Cảm Xúc & Trạng Thái <small style="color:var(--muted);font-weight:400;font-size:.78rem">(nhấn xem ví dụ)</small></div>
+<div class="feeling-grid" id="feelingGrid"></div>
+
+<div class="sec-title"><span>🤒</span> Triệu Chứng Bệnh Thông Thường</div>
+<div class="symptom-grid" id="symGrid"></div>
+
+<div class="sec-title"><span>📐</span> Ngữ Pháp — Should / Shouldn't</div>
+<div class="grammar-box">
+  <h3>✏️ Should = nên · Shouldn't = không nên (lời khuyên)</h3>
+  <table class="should-table">
+    <tr><th>Cấu trúc</th><th>Ví dụ</th><th>Nghĩa</th></tr>
+    <tr><td><span class="gram-box">S + should + V</span></td><td>You <strong>should</strong> drink more water.</td><td>Bạn nên uống nhiều nước hơn.</td></tr>
+    <tr><td><span class="gram-box">S + shouldn't + V</span></td><td>You <strong>shouldn't</strong> eat junk food.</td><td>Bạn không nên ăn đồ ăn nhanh.</td></tr>
+    <tr><td><span class="gram-box">Should + S + V?</span></td><td><strong>Should</strong> I see a doctor?</td><td>Tôi có nên đến gặp bác sĩ không?</td></tr>
+  </table>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-top:.5rem;font-size:.82rem">
+    <div style="background:rgba(220,38,38,.07);border-radius:8px;padding:.6rem .85rem">
+      <strong style="color:var(--accent2)">Should vs Must:</strong><br>
+      <strong>should</strong> = lời khuyên (gentle)<br>
+      <em>"You should exercise more."</em><br><br>
+      <strong>must</strong> = bắt buộc (obligation)<br>
+      <em>"You must take this medicine."</em>
+    </div>
+    <div style="background:rgba(220,38,38,.07);border-radius:8px;padding:.6rem .85rem">
+      <strong style="color:var(--accent2)">Cũng hay dùng:</strong><br>
+      <strong>had better</strong> = nên (mạnh hơn should)<br>
+      <em>"You had better rest."</em><br><br>
+      <strong>ought to</strong> = nên (trang trọng)<br>
+      <em>"She ought to see a doctor."</em>
+    </div>
+  </div>
+</div>
+
+<div class="sec-title"><span>💬</span> Mẫu Câu</div>
+<div class="pattern-list">
+  <div class="pattern-item"><div class="pat-en">"How are you feeling?" — "I'm feeling terrible. I have a fever and a sore throat."</div><div class="pat-vn">→ Bạn cảm thấy thế nào? — Tôi cảm thấy rất tệ. Tôi bị sốt và đau họng.</div><div class="pat-note">💡 How are you feeling? = câu hỏi thăm sức khỏe chi tiết hơn "How are you?"</div></div>
+  <div class="pattern-item"><div class="pat-en">"You look tired. You should get some rest and drink plenty of fluids."</div><div class="pat-vn">→ Bạn trông có vẻ mệt. Bạn nên nghỉ ngơi và uống nhiều nước.</div><div class="pat-note">💡 "You look + adjective" = Bạn trông có vẻ [tính từ]</div></div>
+  <div class="pattern-item"><div class="pat-en">"I think you should see a doctor. You shouldn't ignore these symptoms."</div><div class="pat-vn">→ Tôi nghĩ bạn nên đi gặp bác sĩ. Bạn không nên bỏ qua các triệu chứng này.</div><div class="pat-note">💡 I think you should... = cách đưa ra lời khuyên lịch sự và tự nhiên</div></div>
+</div>
+
+<div class="sec-title"><span>🗣️</span> Hội Thoại — Tại Phòng Khám</div>
+<div class="convo-box">
+  <div class="convo-line"><span class="spk-d">Doctor</span><div class="bubble">Good morning! How are you feeling today?</div></div>
+  <div class="convo-line"><span class="spk-p">Patient</span><div class="bubble p">Not very well, doctor. I've had a headache for two days, and I feel very tired all the time.</div></div>
+  <div class="convo-line"><span class="spk-d">Doctor</span><div class="bubble">I see. Any other symptoms? Fever? Sore throat?</div></div>
+  <div class="convo-line"><span class="spk-p">Patient</span><div class="bubble p">Yes, I had a slight fever last night — about 38 degrees. And my throat hurts a little.</div></div>
+  <div class="convo-line"><span class="spk-d">Doctor</span><div class="bubble">It sounds like you have the flu. You should rest at home for a few days. You shouldn't go to work.</div></div>
+  <div class="convo-line"><span class="spk-p">Patient</span><div class="bubble p">Should I take any medicine?</div></div>
+  <div class="convo-line"><span class="spk-d">Doctor</span><div class="bubble">Yes — I'll give you a prescription. You should drink plenty of fluids and eat light meals. Come back in three days if you don't feel better.</div></div>
+</div>
+
+<div class="sec-title"><span>🎮</span> Luyện Tập — Đưa Ra Lời Khuyên</div>
+<div class="advice-game" id="adviceGame">
+  <h3>Đọc vấn đề và chọn lời khuyên đúng:</h3>
+</div>
+
+<div class="sec-title"><span>🎯</span> Quiz Nhanh (5 câu)</div>
+<div class="quiz-section">
+  <div class="quiz-header"><span id="quizTitle" style="font-size:.85rem;color:var(--muted)">Câu 1 / 5</span><span id="quizScoreDisplay" style="font-size:.85rem;color:var(--muted)">Điểm: 0</span></div>
+  <div id="quizContent">
+    <div class="quiz-q" id="quizQ"></div>
+    <div class="quiz-opts" id="quizOpts"></div>
+    <div class="quiz-feedback" id="quizFB"></div>
+    <div class="quiz-nav"><div class="progress-bar"><div class="progress-fill" id="quizProgress" style="width:20%"></div></div><button class="btn" id="quizNext" style="display:none" onclick="nextQ()">Tiếp →</button></div>
+  </div>
+  <div class="result-box" id="quizResult"><div class="result-emoji" id="resEmoji"></div><div class="result-score" id="resScore"></div><div class="result-msg" id="resMsg"></div><button class="btn" onclick="resetQuiz()">🔄 Làm lại</button></div>
+</div>
+<div class="lesson-footer"><div class="footer-nav">← <a href="../lesson-07/">Lesson 07</a></div><div style="font-size:.8rem;color:var(--muted)">A2 · Lesson 08 / 12</div><div class="footer-nav"><a href="../lesson-09/">Lesson 09 →</a></div></div>
+
+<script>
+const feelings=[{e:'😊',en:'happy / cheerful',vn:'vui vẻ / phấn khởi',eg:"I feel happy today!"},{e:'😢',en:'sad / upset',vn:'buồn / buồn bực',eg:"She looks sad."},{e:'😰',en:'anxious / worried',vn:'lo lắng',eg:"I'm anxious about the exam."},{e:'😤',en:'angry / frustrated',vn:'tức giận / bực bội',eg:"He's frustrated with work."},{e:'😴',en:'tired / exhausted',vn:'mệt mỏi / kiệt sức',eg:"I'm exhausted after the trip."},{e:'🤩',en:'excited / thrilled',vn:'hào hứng / phấn khích',eg:"I'm so excited about the trip!"},{e:'😰',en:'stressed / nervous',vn:'căng thẳng / hồi hộp',eg:"She's nervous before the test."},{e:'😌',en:'relaxed / calm',vn:'thư giãn / bình tĩnh',eg:"I feel calm now."},{e:'🤒',en:'sick / unwell',vn:'bệnh / không khỏe',eg:"I feel sick today."},{e:'😕',en:'confused / lost',vn:'bối rối / lạc lõng',eg:"I'm confused about this."},{e:'🥱',en:'bored',vn:'chán nản',eg:"I'm so bored!"},{e:'😎',en:'confident',vn:'tự tin',eg:"She feels confident."}];
+const fg=document.getElementById('feelingGrid');
+feelings.forEach(f=>{fg.innerHTML+=`<div class="f-card" onclick="this.classList.toggle('flip')"><div class="f-emoji">${f.e}</div><div class="f-en">${f.en}</div><div class="f-vn">${f.vn}</div><div class="f-eg">"${f.eg}"</div></div>`;});
+const syms=[{en:'have a headache',vn:'đau đầu'},{en:'have a fever',vn:'bị sốt'},{en:'have a cold',vn:'bị cảm lạnh'},{en:'have a sore throat',vn:'đau họng'},{en:'feel nauseous',vn:'buồn nôn'},{en:'have a cough',vn:'bị ho'},{en:'have a stomachache',vn:'đau bụng'},{en:'feel dizzy',vn:'chóng mặt'},{en:'have a runny nose',vn:'chảy nước mũi'},{en:'have backache',vn:'đau lưng'},{en:'have an allergy',vn:'dị ứng'},{en:'feel exhausted',vn:'kiệt sức'}];
+const sg=document.getElementById('symGrid');
+syms.forEach(s=>{sg.innerHTML+=`<div class="sym-card"><div class="sym-en">${s.en}</div><div class="sym-vn">${s.vn}</div></div>`;});
+
+// Advice game
+const adviceQs=[
+  {prob:"I have a bad headache and feel very tired.",correct:"You should rest and drink some water.",wrong:["You should eat more pizza.","You should go running now.","You shouldn't sleep."]},
+  {prob:"I have a bad cough and a sore throat.",correct:"You shouldn't smoke and should drink warm tea.",wrong:["You should eat ice cream.","You should go swimming.","You shouldn't drink water."]},
+  {prob:"I'm feeling very stressed about my exams.",correct:"You should take short breaks and try to relax.",wrong:["You should study 24 hours non-stop.","You shouldn't sleep at all.","You should forget about the exam."]},
+];
+let aqi=0;
+function renderAdvice(){
+  const ag=document.getElementById('adviceGame');
+  if(aqi>=adviceQs.length){ag.innerHTML+='<div style="color:var(--green);font-size:.9rem;padding:.5rem">🎉 Tuyệt vời! Bạn đưa ra lời khuyên rất tốt!</div>';return;}
+  const q=adviceQs[aqi];
+  const allOpts=[q.correct,...q.wrong].sort(()=>Math.random()-.5);
+  const qEl=document.createElement('div');
+  qEl.innerHTML=`<div class="prob-card"><div class="prob-label">Vấn đề ${aqi+1}/${adviceQs.length}:</div><div>"${q.prob}"</div></div><div class="advice-opts">${allOpts.map(o=>`<button class="adv-btn" onclick="checkAdvice(this,'${o}'==='${q.correct}')">${o}</button>`).join('')}</div><div id="advFB${aqi}" style="font-size:.8rem;margin-top:.4rem;min-height:1rem"></div>`;
+  ag.appendChild(qEl);
+}
+function checkAdvice(btn,correct){
+  const row=btn.closest('.advice-opts');
+  row.querySelectorAll('.adv-btn').forEach(b=>b.style.pointerEvents='none');
+  if(correct){btn.classList.add('ok');document.getElementById(`advFB${aqi}`).textContent='✅ Đúng rồi!';document.getElementById(`advFB${aqi}`).style.color='#10b981';}
+  else{btn.classList.add('no');row.querySelectorAll('.adv-btn').forEach(b=>{if(b.textContent===adviceQs[aqi].correct)b.classList.add('ok');});document.getElementById(`advFB${aqi}`).textContent='❌ Sai! Xem đáp án đúng.';document.getElementById(`advFB${aqi}`).style.color='#ef4444';}
+  aqi++;setTimeout(()=>renderAdvice(),1000);
+}
+renderAdvice();
+
+const qs=[{q:'"You ___ eat so much junk food." — Lời khuyên phủ định:',opts:['should','would','shouldn\'t','couldn\'t'],ans:2},{q:'"Should I see a doctor?" — Trả lời đúng:',opts:['Yes, you should.','Yes, you do.','Yes, you are.','Yes, you will.'],ans:0},{q:'"I have a fever." — Lời khuyên hợp lý nhất:',opts:['You should go swimming.','You should rest and drink water.','You should eat spicy food.','You should work harder.'],ans:1},{q:'"feel nauseous" nghĩa là?',opts:['Cảm thấy buồn ngủ','Cảm thấy buồn nôn','Cảm thấy chóng mặt','Cảm thấy mệt'],ans:1},{q:'Should vs Must — Sự khác biệt là?',opts:['Không có khác biệt','Should = bắt buộc, Must = lời khuyên','Should = lời khuyên, Must = bắt buộc','Cả hai đều là lời khuyên'],ans:2}];
+let qi=0,score=0;
+function renderQ(){const q=qs[qi];document.getElementById('quizTitle').textContent=`Câu ${qi+1} / ${qs.length}`;document.getElementById('quizProgress').style.width=`${((qi+1)/qs.length)*100}%`;document.getElementById('quizQ').textContent=q.q;document.getElementById('quizFB').textContent='';document.getElementById('quizFB').className='quiz-feedback';document.getElementById('quizNext').style.display='none';const opts=document.getElementById('quizOpts');opts.innerHTML='';q.opts.forEach((o,i)=>{const btn=document.createElement('button');btn.className='quiz-opt';btn.textContent=o;btn.onclick=()=>{document.querySelectorAll('.quiz-opt').forEach(b=>b.disabled=true);if(i===q.ans){btn.classList.add('correct');score++;document.getElementById('quizFB').textContent='✅ Chính xác!';document.getElementById('quizFB').className='quiz-feedback ok';}else{btn.classList.add('wrong');document.querySelectorAll('.quiz-opt')[q.ans].classList.add('correct');document.getElementById('quizFB').textContent='❌ Sai rồi!';document.getElementById('quizFB').className='quiz-feedback no';}document.getElementById('quizScoreDisplay').textContent=`Điểm: ${score}`;document.getElementById('quizNext').style.display='inline-block';};opts.appendChild(btn);});}
+function nextQ(){qi++;if(qi>=qs.length){document.getElementById('quizContent').style.display='none';const r=document.getElementById('quizResult');r.style.display='block';const pct=Math.round(score/qs.length*100);document.getElementById('resEmoji').textContent=pct>=80?'🏆':pct>=60?'👍':'💪';document.getElementById('resScore').textContent=`${score} / ${qs.length} đúng (${pct}%)`;document.getElementById('resMsg').textContent=pct>=80?'Xuất sắc! Health & Should thành thạo rồi!':'Ôn thêm và thử lại nhé!';}else renderQ();}
+function resetQuiz(){qi=0;score=0;document.getElementById('quizScoreDisplay').textContent='Điểm: 0';document.getElementById('quizContent').style.display='block';document.getElementById('quizResult').style.display='none';renderQ();}
+renderQ();
+</script>
+</body></html>
