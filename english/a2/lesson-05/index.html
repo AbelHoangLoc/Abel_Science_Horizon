@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+
+  <link rel="stylesheet" href="../assets/brand.css">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A2 · Lesson 05 · Getting Around</title>
+<style>
+:root{--bg:#080d1a;--card:#0f1729;--card2:#131e35;--border:#1e2d4a;--text:#dde6f5;--muted:#8b9ab5;--accent:#0891b2;--accent2:#67e8f9;--green:#10b981;--red:#ef4444}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;line-height:1.6;padding:1.5rem 1.25rem 3rem}
+.lsn-header{background:linear-gradient(135deg,#001825,#0f1729);border:1px solid var(--border);border-radius:16px;padding:1.5rem;margin-bottom:1.5rem;position:relative;overflow:hidden}
+.lsn-header::before{content:'';position:absolute;top:-40px;right:-40px;width:150px;height:150px;background:radial-gradient(circle,rgba(8,145,178,.3),transparent 70%);pointer-events:none}
+.lsn-badge{display:inline-flex;background:rgba(8,145,178,.15);border:1px solid rgba(103,232,249,.3);border-radius:20px;padding:.25rem .75rem;font-size:.7rem;font-weight:700;color:var(--accent2);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.75rem}
+.lsn-header h1{font-size:1.6rem;font-weight:800;background:linear-gradient(90deg,#a5f3fc,#67e8f9);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.4rem}
+.lsn-header p{color:var(--muted);font-size:.9rem}
+.objectives{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+.obj-tag{background:rgba(8,145,178,.12);border:1px solid rgba(8,145,178,.25);border-radius:20px;padding:.25rem .7rem;font-size:.75rem;color:var(--accent2)}
+.sec-title{display:flex;align-items:center;gap:.6rem;font-size:1rem;font-weight:700;color:var(--accent2);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)}
+.transport-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:.6rem;margin-bottom:1.75rem}
+.trans-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:.8rem .7rem;text-align:center;cursor:pointer;transition:all .2s}
+.trans-card:hover,.trans-card.flip{border-color:var(--accent);background:rgba(8,145,178,.08)}
+.trans-emoji{font-size:1.5rem;margin-bottom:.3rem}
+.trans-en{font-size:.88rem;font-weight:700;color:var(--text)}.trans-vn{font-size:.75rem;color:var(--muted);margin-top:.1rem}
+.trans-card.flip .trans-phrase{display:block}.trans-phrase{display:none;font-size:.7rem;color:var(--accent2);margin-top:.2rem;font-style:italic}
+.dir-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.5rem;margin-bottom:.75rem}
+.dir-item{background:rgba(8,145,178,.08);border:1px solid rgba(8,145,178,.2);border-radius:8px;padding:.55rem .85rem;font-size:.85rem;display:flex;gap:.6rem;align-items:center}
+.dir-icon{font-size:1.1rem}.dir-en{font-weight:700;color:var(--accent2)}.dir-vn{color:var(--muted);font-size:.78rem}
+.grammar-box{background:linear-gradient(135deg,rgba(8,145,178,.1),rgba(8,145,178,.04));border:1px solid rgba(8,145,178,.2);border-radius:12px;padding:1.1rem;margin-bottom:1.75rem}
+.grammar-box h3{color:var(--accent2);font-size:.9rem;margin-bottom:.8rem}
+.gram-box{background:rgba(8,145,178,.2);border-radius:6px;padding:.2rem .7rem;color:var(--accent2);font-weight:700;font-family:monospace;display:inline-block}
+.gram-row{display:flex;gap:.5rem;align-items:center;margin-bottom:.5rem;font-size:.88rem;flex-wrap:wrap}
+.pattern-list{margin-bottom:1.75rem}
+.pattern-item{background:var(--card);border-left:3px solid var(--accent);border-radius:0 10px 10px 0;padding:.8rem 1rem;margin-bottom:.6rem}
+.pat-en{font-size:1rem;font-weight:600;color:var(--text)}.pat-vn{font-size:.82rem;color:var(--muted);margin-top:.2rem}.pat-note{font-size:.78rem;color:var(--accent2);margin-top:.25rem;font-style:italic}
+.convo-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1.75rem}
+.convo-line{display:flex;gap:.7rem;margin-bottom:.65rem;align-items:flex-start}
+.spk-a{color:#67e8f9;font-size:.7rem;font-weight:700;text-transform:uppercase;min-width:28px;margin-top:.2rem}
+.spk-b{color:#34d399;font-size:.7rem;font-weight:700;text-transform:uppercase;min-width:28px;margin-top:.2rem}
+.bubble{background:var(--card2);border-radius:0 10px 10px 10px;padding:.55rem .85rem;font-size:.9rem;flex:1}
+.bubble.b{border-radius:10px 10px 10px 0;background:rgba(52,211,153,.07);border:1px solid rgba(52,211,153,.15)}
+.map-game{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1.75rem}
+.map-game h3{color:var(--accent2);font-size:.9rem;margin-bottom:.75rem}
+.map-desc{background:rgba(8,145,178,.07);border-radius:8px;padding:.75rem;font-size:.9rem;line-height:1.8;margin-bottom:.75rem;border-left:3px solid var(--accent)}
+.map-opts{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+.map-btn{background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:.5rem .75rem;font-size:.85rem;cursor:pointer;text-align:center;transition:all .2s;color:var(--text)}
+.map-btn:hover{border-color:var(--accent);color:var(--accent2)}.map-btn.ok{border-color:var(--green)!important;background:rgba(16,185,129,.15)!important;color:var(--green)!important}.map-btn.no{border-color:var(--red)!important;color:var(--red)!important}
+.quiz-section{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.25rem;margin-bottom:1.75rem}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+.quiz-q{font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:.75rem;padding:.75rem;background:var(--card2);border-radius:8px}
+.quiz-opts{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.5rem}
+.quiz-opt{background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:.55rem .75rem;font-size:.85rem;cursor:pointer;transition:all .18s;color:var(--text);text-align:left}
+.quiz-opt:hover:not(:disabled){border-color:var(--accent);color:var(--accent2)}.quiz-opt.correct{border-color:var(--green)!important;background:rgba(16,185,129,.15)!important;color:var(--green)!important}.quiz-opt.wrong{border-color:var(--red)!important;background:rgba(239,68,68,.1)!important;color:var(--red)!important}.quiz-opt:disabled{cursor:default}
+.quiz-feedback{font-size:.8rem;margin:.4rem 0 .6rem;min-height:1rem}.quiz-feedback.ok{color:var(--green)}.quiz-feedback.no{color:var(--red)}
+.quiz-nav{display:flex;gap:.5rem;align-items:center;justify-content:space-between}
+.btn{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:.5rem 1.1rem;font-size:.85rem;font-weight:700;cursor:pointer;transition:opacity .2s}.btn:hover{opacity:.85}
+.btn-sm{background:rgba(8,145,178,.2);color:var(--accent2);border:1px solid var(--accent2);border-radius:6px;padding:.3rem .7rem;font-size:.8rem;cursor:pointer}
+.progress-bar{background:var(--border);border-radius:4px;height:4px;flex:1;overflow:hidden}.progress-fill{background:var(--accent);height:100%;border-radius:4px;transition:width .3s}
+.result-box{text-align:center;padding:1.25rem;display:none}.result-emoji{font-size:2.5rem;margin-bottom:.5rem}.result-score{font-size:1.5rem;font-weight:800;color:var(--accent2);margin-bottom:.25rem}.result-msg{font-size:.85rem;color:var(--muted);margin-bottom:1rem}
+.lesson-footer{display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border)}
+.footer-nav a{color:var(--accent);text-decoration:none;font-size:.85rem;font-weight:600}
+</style>
+</head>
+<body>
+  <img src="../assets/logo-SH.png" class="sh-logo" alt="Science Horizon">
+<div class="lsn-header">
+  <div class="lsn-badge">🗺️ A2 Daily English · Lesson 05</div>
+  <h1>Getting Around</h1>
+  <p>Phương tiện giao thông và hỏi đường — di chuyển tự tin bằng tiếng Anh!</p>
+  <div class="objectives">
+    <span class="obj-tag">🚌 Phương tiện giao thông</span>
+    <span class="obj-tag">🗺️ Hỏi đường</span>
+    <span class="obj-tag">➡️ Chỉ hướng đi</span>
+    <span class="obj-tag">⏱️ Hỏi thời gian đi lại</span>
+  </div>
+</div>
+
+<div class="sec-title"><span>🚌</span> Phương Tiện Giao Thông <small style="color:var(--muted);font-weight:400;font-size:.78rem">(nhấn xem cách dùng)</small></div>
+<div class="transport-grid" id="transGrid"></div>
+
+<div class="sec-title"><span>📐</span> Ngữ Pháp — Giới Từ Phương Tiện & Chỉ Hướng</div>
+<div class="grammar-box">
+  <h3>✏️ Cách đi bằng phương tiện gì</h3>
+  <div class="gram-row"><span class="gram-box">by</span><span>bus / taxi / train / plane / car / bike</span><span style="color:var(--muted);font-size:.8rem">→ I go to work <strong>by bus</strong>.</span></div>
+  <div class="gram-row"><span class="gram-box">on</span><span>foot</span><span style="color:var(--muted);font-size:.8rem">→ I walk <strong>on foot</strong>. (bộ hành)</span></div>
+  <div class="gram-row"><span class="gram-box">in</span><span>a car / taxi / boat</span><span style="color:var(--muted);font-size:.8rem">→ She travels <strong>in a car</strong>. (ngồi trong)</span></div>
+  <div style="margin-top:.8rem"><div style="font-size:.82rem;font-weight:700;color:var(--accent2);margin-bottom:.5rem">🧭 Từ chỉ hướng & vị trí:</div>
+  <div class="dir-grid" id="dirGrid"></div></div>
+</div>
+
+<div class="sec-title"><span>💬</span> Mẫu Câu Hỏi Đường</div>
+<div class="pattern-list">
+  <div class="pattern-item"><div class="pat-en">"Excuse me, how do I get to the train station?"</div><div class="pat-vn">→ Xin lỗi, tôi đến nhà ga bằng cách nào?</div><div class="pat-note">💡 Lịch sự nhất: "Excuse me" trước, "please" sau</div></div>
+  <div class="pattern-item"><div class="pat-en">"Go straight ahead, then turn left at the traffic lights."</div><div class="pat-vn">→ Đi thẳng, rồi rẽ trái ở đèn giao thông.</div><div class="pat-note">💡 traffic lights (đèn giao thông) · roundabout (vòng xuyến) · crossroads (ngã tư)</div></div>
+  <div class="pattern-item"><div class="pat-en">"How long does it take to get there?" — "It takes about 20 minutes by bus."</div><div class="pat-vn">→ Đến đó mất bao lâu? — Mất khoảng 20 phút đi xe buýt.</div><div class="pat-note">💡 It takes [time] + by/on foot — cấu trúc cố định để nói thời gian di chuyển</div></div>
+  <div class="pattern-item"><div class="pat-en">"Is it far from here?" — "No, it's just around the corner — about 5 minutes on foot."</div><div class="pat-vn">→ Có xa đây không? — Không, gần thôi — khoảng 5 phút đi bộ.</div><div class="pat-note">💡 around the corner (quanh góc phố) = rất gần · not far = không xa</div></div>
+</div>
+
+<div class="sec-title"><span>🗣️</span> Hội Thoại — Hỏi Đường</div>
+<div class="convo-box">
+  <div class="convo-line"><span class="spk-a">A</span><div class="bubble">Excuse me, I'm looking for the Central Post Office. Am I going the right way?</div></div>
+  <div class="convo-line"><span class="spk-b">B</span><div class="bubble b">Hmm, not quite. You need to turn around and go back to the main road.</div></div>
+  <div class="convo-line"><span class="spk-a">A</span><div class="bubble">Oh! And then what do I do?</div></div>
+  <div class="convo-line"><span class="spk-b">B</span><div class="bubble b">Turn right at the traffic lights, then go straight ahead for about 200 metres. The post office is on your left, next to a supermarket.</div></div>
+  <div class="convo-line"><span class="spk-a">A</span><div class="bubble">Great, thank you! How long will it take?</div></div>
+  <div class="convo-line"><span class="spk-b">B</span><div class="bubble b">Only about 5 minutes on foot. You can't miss it — it's a large yellow building.</div></div>
+  <div class="convo-line"><span class="spk-a">A</span><div class="bubble">Perfect, thank you so much!</div></div>
+</div>
+
+<div class="sec-title"><span>🎮</span> Luyện Tập — Chỉ Đường</div>
+<div class="map-game">
+  <h3>Đọc chỉ dẫn và chọn đáp án đúng:</h3>
+  <div class="map-desc" id="mapDesc"></div>
+  <div class="map-opts" id="mapOpts"></div>
+  <div id="mapFB" style="font-size:.82rem;margin-top:.5rem;min-height:1rem"></div>
+  <button class="btn-sm" id="mapNext" onclick="nextMapQ()" style="display:none;margin-top:.5rem">Câu tiếp →</button>
+</div>
+
+<div class="sec-title"><span>🎯</span> Quiz Nhanh (5 câu)</div>
+<div class="quiz-section">
+  <div class="quiz-header"><span id="quizTitle" style="font-size:.85rem;color:var(--muted)">Câu 1 / 5</span><span id="quizScoreDisplay" style="font-size:.85rem;color:var(--muted)">Điểm: 0</span></div>
+  <div id="quizContent">
+    <div class="quiz-q" id="quizQ"></div>
+    <div class="quiz-opts" id="quizOpts"></div>
+    <div class="quiz-feedback" id="quizFB"></div>
+    <div class="quiz-nav"><div class="progress-bar"><div class="progress-fill" id="quizProgress" style="width:20%"></div></div><button class="btn" id="quizNext" style="display:none" onclick="nextQ()">Tiếp →</button></div>
+  </div>
+  <div class="result-box" id="quizResult"><div class="result-emoji" id="resEmoji"></div><div class="result-score" id="resScore"></div><div class="result-msg" id="resMsg"></div><button class="btn" onclick="resetQuiz()">🔄 Làm lại</button></div>
+</div>
+
+<div class="lesson-footer">
+  <div class="footer-nav">← <a href="../lesson-04/">Lesson 04</a></div>
+  <div style="font-size:.8rem;color:var(--muted)">A2 · Lesson 05 / 12</div>
+  <div class="footer-nav"><a href="../lesson-06/">Lesson 06 →</a></div>
+</div>
+
+<script>
+const trans=[{e:'🚌',en:'bus',vn:'xe buýt',p:'by bus'},{e:'🚗',en:'car',vn:'ô tô',p:'by car / in a car'},{e:'🏍️',en:'motorbike',vn:'xe máy',p:'by motorbike'},{e:'🚲',en:'bicycle',vn:'xe đạp',p:'by bicycle / by bike'},{e:'🚂',en:'train',vn:'tàu hỏa',p:'by train'},{e:'✈️',en:'plane',vn:'máy bay',p:'by plane / by air'},{e:'🚕',en:'taxi',vn:'taxi',p:'by taxi'},{e:'🚢',en:'ferry / boat',vn:'phà / thuyền',p:'by ferry / by boat'},{e:'🚶',en:'on foot',vn:'đi bộ',p:'on foot / walk'},{e:'🚁',en:'helicopter',vn:'trực thăng',p:'by helicopter'},{e:'🛵',en:'scooter',vn:'xe scooter',p:'by scooter'},{e:'🚄',en:'metro / subway',vn:'tàu điện ngầm',p:'by metro / by subway'}];
+const tg=document.getElementById('transGrid');
+trans.forEach(t=>{tg.innerHTML+=`<div class="trans-card" onclick="this.classList.toggle('flip')"><div class="trans-emoji">${t.e}</div><div class="trans-en">${t.en}</div><div class="trans-vn">${t.vn}</div><div class="trans-phrase">→ ${t.p}</div></div>`;});
+const dirs=[{i:'⬆️',en:'Go straight (ahead)',vn:'Đi thẳng'},{i:'↩️',en:'Turn left',vn:'Rẽ trái'},{i:'↪️',en:'Turn right',vn:'Rẽ phải'},{i:'↩️',en:'Turn around / Go back',vn:'Quay lại'},{i:'🚦',en:'At the traffic lights',vn:'Tại đèn giao thông'},{i:'🔄',en:'At the roundabout',vn:'Tại vòng xuyến'},{i:'➡️',en:'Past the / past',vn:'Đi qua...'},{i:'📍',en:'On your left/right',vn:'Ở bên trái/phải bạn'}];
+const dg=document.getElementById('dirGrid');
+dirs.forEach(d=>{dg.innerHTML+=`<div class="dir-item"><span class="dir-icon">${d.i}</span><div><div class="dir-en">${d.en}</div><div class="dir-vn">${d.vn}</div></div></div>`;});
+
+const mapQs=[
+  {d:'From the school: Go straight ahead, then turn LEFT at the traffic lights. The supermarket is on your RIGHT.',q:'Where is the supermarket?',opts:['On the left after turning','On the right after turning left','Straight ahead','Behind the school'],ans:1},
+  {d:'Take bus number 5. Get off at City Park stop. Walk straight for 200m. The museum is on your left.',q:'How do you get to the museum?',opts:['Bus 5, then walk 200m left','Bus 5, then turn right','Walk 200m, take bus 5','Take a taxi'],ans:0},
+  {d:'It takes 30 minutes by bus or 10 minutes by taxi to get to the airport.',q:'Which is faster to the airport?',opts:['Bus','Taxi','Train','On foot'],ans:1},
+];
+let mqi=0;
+function renderMapQ(){if(mqi>=mapQs.length){document.getElementById('mapDesc').textContent='🎉 Bạn làm xong hết rồi!';document.getElementById('mapOpts').innerHTML='';document.getElementById('mapNext').style.display='none';return;}const q=mapQs[mqi];document.getElementById('mapDesc').textContent=q.d;document.getElementById('mapFB').textContent='';document.getElementById('mapNext').style.display='none';const opts=document.getElementById('mapOpts');opts.innerHTML='';q.opts.forEach((o,i)=>{opts.innerHTML+=`<button class="map-btn" onclick="checkMapQ(${i},${q.ans},this)">${o}</button>`;});}
+function checkMapQ(i,ans,btn){document.querySelectorAll('.map-btn').forEach(b=>b.style.pointerEvents='none');const fb=document.getElementById('mapFB');if(i===ans){btn.classList.add('ok');fb.textContent='✅ Chính xác!';fb.style.color='#10b981';}else{btn.classList.add('no');document.querySelectorAll('.map-btn')[ans].classList.add('ok');fb.textContent='❌ Sai rồi!';fb.style.color='#ef4444';}document.getElementById('mapNext').style.display='inline-block';}
+function nextMapQ(){mqi++;renderMapQ();}
+renderMapQ();
+
+const qs=[{q:'"I go to school ___ bus." — Điền đúng giới từ:',opts:['in','on','by','with'],ans:2},{q:'"How long does it take?" dùng để hỏi điều gì?',opts:['Khoảng cách bao xa','Đi bằng gì','Mất bao nhiêu thời gian','Giá vé bao nhiêu'],ans:2},{q:'"Turn left at the traffic lights." nghĩa là?',opts:['Đi thẳng ở đèn xanh','Rẽ trái tại đèn giao thông','Dừng lại ở đèn đỏ','Rẽ phải tại đèn'],ans:1},{q:'"on foot" nghĩa là?',opts:['Bằng xe','Đi bộ','Trên xe buýt','Bằng taxi'],ans:1},{q:'Câu hỏi đường lịch sự nhất:',opts:["Where station?","Tell me the station!","Excuse me, how do I get to the station?","Station where?"],ans:2}];
+let qi=0,score=0;
+function renderQ(){const q=qs[qi];document.getElementById('quizTitle').textContent=`Câu ${qi+1} / ${qs.length}`;document.getElementById('quizProgress').style.width=`${((qi+1)/qs.length)*100}%`;document.getElementById('quizQ').textContent=q.q;document.getElementById('quizFB').textContent='';document.getElementById('quizFB').className='quiz-feedback';document.getElementById('quizNext').style.display='none';const opts=document.getElementById('quizOpts');opts.innerHTML='';q.opts.forEach((o,i)=>{const btn=document.createElement('button');btn.className='quiz-opt';btn.textContent=o;btn.onclick=()=>{document.querySelectorAll('.quiz-opt').forEach(b=>b.disabled=true);if(i===q.ans){btn.classList.add('correct');score++;document.getElementById('quizFB').textContent='✅ Chính xác!';document.getElementById('quizFB').className='quiz-feedback ok';}else{btn.classList.add('wrong');document.querySelectorAll('.quiz-opt')[q.ans].classList.add('correct');document.getElementById('quizFB').textContent='❌ Sai rồi!';document.getElementById('quizFB').className='quiz-feedback no';}document.getElementById('quizScoreDisplay').textContent=`Điểm: ${score}`;document.getElementById('quizNext').style.display='inline-block';};opts.appendChild(btn);});}
+function nextQ(){qi++;if(qi>=qs.length){document.getElementById('quizContent').style.display='none';const r=document.getElementById('quizResult');r.style.display='block';const pct=Math.round(score/qs.length*100);document.getElementById('resEmoji').textContent=pct>=80?'🏆':pct>=60?'👍':'💪';document.getElementById('resScore').textContent=`${score} / ${qs.length} đúng (${pct}%)`;document.getElementById('resMsg').textContent=pct>=80?'Tuyệt! Bạn có thể hỏi đường bằng tiếng Anh rồi!':'Ôn thêm và thử lại nhé!';}else renderQ();}
+function resetQuiz(){qi=0;score=0;document.getElementById('quizScoreDisplay').textContent='Điểm: 0';document.getElementById('quizContent').style.display='block';document.getElementById('quizResult').style.display='none';renderQ();}
+renderQ();
+</script>
+</body></html>
