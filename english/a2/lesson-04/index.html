@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+
+  <link rel="stylesheet" href="../../assets/brand.css">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A2 · Lesson 04 · Shopping & Money</title>
+<style>
+:root{--bg:#080d1a;--card:#0f1729;--card2:#131e35;--border:#1e2d4a;--text:#dde6f5;--muted:#8b9ab5;--accent:#7c3aed;--accent2:#c4b5fd;--green:#10b981;--red:#ef4444}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;line-height:1.6;padding:1.5rem 1.25rem 3rem}
+.lsn-header{background:linear-gradient(135deg,#12053a,#0f1729);border:1px solid var(--border);border-radius:16px;padding:1.5rem;margin-bottom:1.5rem;position:relative;overflow:hidden}
+.lsn-header::before{content:'';position:absolute;top:-40px;right:-40px;width:150px;height:150px;background:radial-gradient(circle,rgba(124,58,237,.3),transparent 70%);pointer-events:none}
+.lsn-badge{display:inline-flex;background:rgba(124,58,237,.15);border:1px solid rgba(196,181,253,.3);border-radius:20px;padding:.25rem .75rem;font-size:.7rem;font-weight:700;color:var(--accent2);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.75rem}
+.lsn-header h1{font-size:1.6rem;font-weight:800;background:linear-gradient(90deg,#ddd6fe,#c4b5fd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.4rem}
+.lsn-header p{color:var(--muted);font-size:.9rem}
+.objectives{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+.obj-tag{background:rgba(124,58,237,.12);border:1px solid rgba(124,58,237,.25);border-radius:20px;padding:.25rem .7rem;font-size:.75rem;color:var(--accent2)}
+.sec-title{display:flex;align-items:center;gap:.6rem;font-size:1rem;font-weight:700;color:var(--accent2);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)}
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:.6rem;margin-bottom:1.75rem}
+.vocab-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:.8rem;cursor:pointer;transition:all .2s}
+.vocab-card:hover,.vocab-card.flip{border-color:var(--accent);background:rgba(124,58,237,.08)}
+.vc-en{font-size:.9rem;font-weight:700;color:var(--text)}.vc-vn{font-size:.78rem;color:var(--muted);margin-top:.1rem}.vc-eg{font-size:.7rem;color:var(--accent2);margin-top:.2rem;font-style:italic;display:none}
+.vocab-card.flip .vc-eg{display:block}
+.grammar-box{background:linear-gradient(135deg,rgba(124,58,237,.1),rgba(124,58,237,.04));border:1px solid rgba(124,58,237,.2);border-radius:12px;padding:1.1rem;margin-bottom:1.75rem}
+.grammar-box h3{color:var(--accent2);font-size:.9rem;margin-bottom:.8rem}
+.gram-box{background:rgba(124,58,237,.2);border-radius:6px;padding:.2rem .7rem;color:var(--accent2);font-weight:700;font-family:monospace;display:inline-block}
+.gram-row{display:flex;gap:.5rem;align-items:center;margin-bottom:.5rem;font-size:.88rem;flex-wrap:wrap}
+.price-tag{background:rgba(124,58,237,.15);border:1px solid rgba(124,58,237,.3);border-radius:8px;padding:.5rem .85rem;font-size:.9rem;display:inline-flex;align-items:center;gap:.5rem}
+.pt-num{font-size:1.1rem;font-weight:800;color:var(--accent2)}
+.pt-say{font-size:.8rem;color:var(--muted)}
+.price-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:.5rem;margin-bottom:.75rem}
+.pattern-list{margin-bottom:1.75rem}
+.pattern-item{background:var(--card);border-left:3px solid var(--accent);border-radius:0 10px 10px 0;padding:.8rem 1rem;margin-bottom:.6rem}
+.pat-en{font-size:1rem;font-weight:600;color:var(--text)}.pat-vn{font-size:.82rem;color:var(--muted);margin-top:.2rem}.pat-note{font-size:.78rem;color:var(--accent2);margin-top:.25rem;font-style:italic}
+.convo-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1.75rem}
+.convo-line{display:flex;gap:.7rem;margin-bottom:.65rem;align-items:flex-start}
+.spk-c{color:#c4b5fd;font-size:.7rem;font-weight:700;text-transform:uppercase;min-width:36px;margin-top:.2rem}
+.spk-s{color:#34d399;font-size:.7rem;font-weight:700;text-transform:uppercase;min-width:36px;margin-top:.2rem}
+.bubble{background:var(--card2);border-radius:0 10px 10px 10px;padding:.55rem .85rem;font-size:.9rem;flex:1}
+.bubble.s{border-radius:10px 10px 10px 0;background:rgba(52,211,153,.07);border:1px solid rgba(52,211,153,.15)}
+.shopping-game{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1.75rem}
+.shopping-game h3{color:var(--accent2);font-size:.9rem;margin-bottom:.8rem}
+.cart-item{display:flex;align-items:center;gap:.75rem;padding:.5rem .75rem;background:var(--card2);border-radius:8px;margin-bottom:.4rem}
+.cart-emoji{font-size:1.3rem}.cart-name{flex:1;font-size:.88rem}.cart-price{color:var(--accent2);font-weight:700;font-family:monospace}
+.cart-total{border-top:1px solid var(--border);padding-top:.6rem;margin-top:.6rem;display:flex;justify-content:space-between;font-weight:700;font-size:.9rem}
+.fill-block{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1.75rem}
+.fill-q{font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:.75rem}
+.fill-row{display:flex;align-items:center;gap:.5rem;padding:.45rem .75rem;background:var(--card2);border-radius:8px;margin-bottom:.4rem;font-size:.88rem}
+input[type=text]{background:var(--card2);border:1px solid var(--border);border-radius:6px;padding:.3rem .6rem;color:var(--text);font-size:.85rem;outline:none}
+input[type=text]:focus{border-color:var(--accent)}
+.quiz-section{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.25rem;margin-bottom:1.75rem}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+.quiz-q{font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:.75rem;padding:.75rem;background:var(--card2);border-radius:8px}
+.quiz-opts{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.5rem}
+.quiz-opt{background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:.55rem .75rem;font-size:.85rem;cursor:pointer;transition:all .18s;color:var(--text);text-align:left}
+.quiz-opt:hover:not(:disabled){border-color:var(--accent);color:var(--accent2)}.quiz-opt.correct{border-color:var(--green)!important;background:rgba(16,185,129,.15)!important;color:var(--green)!important}.quiz-opt.wrong{border-color:var(--red)!important;background:rgba(239,68,68,.1)!important;color:var(--red)!important}.quiz-opt:disabled{cursor:default}
+.quiz-feedback{font-size:.8rem;margin:.4rem 0 .6rem;min-height:1rem}.quiz-feedback.ok{color:var(--green)}.quiz-feedback.no{color:var(--red)}
+.quiz-nav{display:flex;gap:.5rem;align-items:center;justify-content:space-between}
+.btn{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:.5rem 1.1rem;font-size:.85rem;font-weight:700;cursor:pointer;transition:opacity .2s}.btn:hover{opacity:.85}
+.progress-bar{background:var(--border);border-radius:4px;height:4px;flex:1;overflow:hidden}.progress-fill{background:var(--accent);height:100%;border-radius:4px;transition:width .3s}
+.result-box{text-align:center;padding:1.25rem;display:none}.result-emoji{font-size:2.5rem;margin-bottom:.5rem}.result-score{font-size:1.5rem;font-weight:800;color:var(--accent2);margin-bottom:.25rem}.result-msg{font-size:.85rem;color:var(--muted);margin-bottom:1rem}
+.lesson-footer{display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border)}
+.footer-nav a{color:var(--accent);text-decoration:none;font-size:.85rem;font-weight:600}
+</style>
+</head>
+<body>
+  <img src="../../assets/logo-SH.png" class="sh-logo" alt="Science Horizon">
+<div class="lsn-header">
+  <div class="lsn-badge">🛍️ A2 Daily English · Lesson 04</div>
+  <h1>Shopping &amp; Money</h1>
+  <p>Mua sắm, hỏi giá, trả tiền và mặc cả — tiếng Anh trong siêu thị và cửa hàng!</p>
+  <div class="objectives">
+    <span class="obj-tag">🛍️ Từ vựng mua sắm</span>
+    <span class="obj-tag">💰 Hỏi giá cả</span>
+    <span class="obj-tag">🔢 Đọc số tiền</span>
+    <span class="obj-tag">💳 Can I / Could I</span>
+  </div>
+</div>
+
+<div class="sec-title"><span>📚</span> Từ Vựng Mua Sắm <small style="color:var(--muted);font-weight:400;font-size:.78rem">(nhấn xem ví dụ)</small></div>
+<div class="vocab-grid" id="vocabGrid"></div>
+
+<div class="sec-title"><span>💰</span> Đọc Số Tiền</div>
+<div class="grammar-box">
+  <h3>✏️ Cách đọc giá tiền trong tiếng Anh</h3>
+  <div class="price-grid" id="priceGrid"></div>
+  <div style="margin-top:.75rem;font-size:.82rem;color:var(--muted);background:rgba(124,58,237,.07);border-radius:8px;padding:.6rem .9rem">
+    💡 <strong style="color:var(--accent2)">Cách đọc:</strong> $5.99 → "five dollars and ninety-nine cents" hoặc tự nhiên hơn: "five ninety-nine" · £10 → "ten pounds" · €20.50 → "twenty euros fifty"
+  </div>
+</div>
+
+<div class="sec-title"><span>💬</span> Mẫu Câu Mua Sắm</div>
+<div class="pattern-list">
+  <div class="pattern-item"><div class="pat-en">"How much is this?" / "How much does this cost?"</div><div class="pat-vn">→ Cái này giá bao nhiêu?</div><div class="pat-note">💡 Hai cách hỏi giá đều phổ biến — dùng cả hai đều được</div></div>
+  <div class="pattern-item"><div class="pat-en">"Can I try this on?" / "Do you have this in a larger size?"</div><div class="pat-vn">→ Tôi có thể thử cái này không? / Bạn có size lớn hơn không?</div><div class="pat-note">💡 try on = thử quần áo · size: small, medium, large, extra-large</div></div>
+  <div class="pattern-item"><div class="pat-en">"I'll take it." / "I'd like to buy this, please."</div><div class="pat-vn">→ Tôi lấy cái này. / Tôi muốn mua cái này.</div><div class="pat-note">💡 "I'll take it" = quyết định mua tức thì — rất tự nhiên trong tiếng Anh</div></div>
+  <div class="pattern-item"><div class="pat-en">"That's too expensive. Is there a discount?" / "Can you give me a better price?"</div><div class="pat-vn">→ Đắt quá. Có giảm giá không? / Bạn có thể bớt giá không?</div><div class="pat-note">💡 discount (giảm giá) · on sale (đang sale) · bargain (món hời)</div></div>
+</div>
+
+<div class="sec-title"><span>🗣️</span> Hội Thoại — Tại Cửa Hàng Quần Áo</div>
+<div class="convo-box">
+  <div class="convo-line"><span class="spk-s">Staff</span><div class="bubble s">Good afternoon! Can I help you?</div></div>
+  <div class="convo-line"><span class="spk-c">Cust.</span><div class="bubble">Yes, please. How much is this jacket?</div></div>
+  <div class="convo-line"><span class="spk-s">Staff</span><div class="bubble s">It's sixty-five dollars. It's on sale — twenty percent off!</div></div>
+  <div class="convo-line"><span class="spk-c">Cust.</span><div class="bubble">Oh nice! Can I try it on?</div></div>
+  <div class="convo-line"><span class="spk-s">Staff</span><div class="bubble s">Of course. The fitting rooms are over there on the left. What size do you need?</div></div>
+  <div class="convo-line"><span class="spk-c">Cust.</span><div class="bubble">Medium, please. Do you also have it in blue?</div></div>
+  <div class="convo-line"><span class="spk-s">Staff</span><div class="bubble s">Let me check… yes, we have it in blue and grey in medium!</div></div>
+  <div class="convo-line"><span class="spk-c">Cust.</span><div class="bubble">Great, I'll take the blue one. Can I pay by card?</div></div>
+  <div class="convo-line"><span class="spk-s">Staff</span><div class="bubble s">Absolutely! Please follow me to the cashier.</div></div>
+</div>
+
+<div class="sec-title"><span>🛒</span> Luyện Tập — Tính Tiền</div>
+<div class="shopping-game">
+  <h3>Tính tổng tiền giỏ hàng dưới đây:</h3>
+  <div id="cartItems"></div>
+  <div class="cart-total"><span>Total:</span><span id="cartTotal" style="color:var(--accent2)">$0.00</span></div>
+  <div style="margin-top:.75rem;display:flex;align-items:center;gap:.6rem">
+    <span style="font-size:.88rem">Your answer: $</span>
+    <input type="number" id="totalInput" placeholder="0.00" style="background:var(--card2);border:1px solid var(--border);border-radius:6px;padding:.3rem .6rem;color:var(--text);font-size:.85rem;outline:none;width:90px">
+    <button class="btn" onclick="checkTotal()" style="padding:.4rem .9rem;font-size:.82rem">Check ✓</button>
+    <span id="totalFB" style="font-size:.82rem"></span>
+  </div>
+</div>
+
+<div class="sec-title"><span>🎯</span> Quiz Nhanh (5 câu)</div>
+<div class="quiz-section">
+  <div class="quiz-header"><span id="quizTitle" style="font-size:.85rem;color:var(--muted)">Câu 1 / 5</span><span id="quizScoreDisplay" style="font-size:.85rem;color:var(--muted)">Điểm: 0</span></div>
+  <div id="quizContent">
+    <div class="quiz-q" id="quizQ"></div>
+    <div class="quiz-opts" id="quizOpts"></div>
+    <div class="quiz-feedback" id="quizFB"></div>
+    <div class="quiz-nav"><div class="progress-bar"><div class="progress-fill" id="quizProgress" style="width:20%"></div></div><button class="btn" id="quizNext" style="display:none" onclick="nextQ()">Tiếp →</button></div>
+  </div>
+  <div class="result-box" id="quizResult"><div class="result-emoji" id="resEmoji"></div><div class="result-score" id="resScore"></div><div class="result-msg" id="resMsg"></div><button class="btn" onclick="resetQuiz()">🔄 Làm lại</button></div>
+</div>
+
+<div class="lesson-footer">
+  <div class="footer-nav">← <a href="../lesson-03/">Lesson 03</a></div>
+  <div style="font-size:.8rem;color:var(--muted)">A2 · Lesson 04 / 12</div>
+  <div class="footer-nav"><a href="../lesson-05/">Lesson 05 →</a></div>
+</div>
+
+<script>
+const vocab=[{en:'price / cost',vn:'giá / chi phí',eg:'How much does it cost?'},{en:'receipt',vn:'hóa đơn',eg:'Can I have a receipt?'},{en:'discount',vn:'giảm giá',eg:'Is there a discount?'},{en:'on sale',vn:'đang giảm giá',eg:'This jacket is on sale!'},{en:'cashier',vn:'thu ngân',eg:'Pay at the cashier.'},{en:'fitting room',vn:'phòng thử đồ',eg:'Where are the fitting rooms?'},{en:'size',vn:'kích cỡ / size',eg:'Do you have this in small?'},{en:'refund',vn:'hoàn tiền',eg:'I want a refund, please.'},{en:'exchange',vn:'đổi hàng',eg:'Can I exchange this?'},{en:'bargain',vn:'món hời',eg:'$10 for this? What a bargain!'},{en:'cash / card',vn:'tiền mặt / thẻ',eg:'Do you accept card?'},{en:'change',vn:'tiền thối lại',eg:'Keep the change!'}];
+const g=document.getElementById('vocabGrid');
+vocab.forEach(v=>{g.innerHTML+=`<div class="vocab-card" onclick="this.classList.toggle('flip')"><div class="vc-en">${v.en}</div><div class="vc-vn">${v.vn}</div><div class="vc-eg">"${v.eg}"</div></div>`;});
+const prices=[{n:'$5.99',s:'five dollars ninety-nine'},{n:'$12.50',s:'twelve dollars fifty'},{n:'£20',s:'twenty pounds'},{n:'€35.99',s:'thirty-five euros ninety-nine'},{n:'$100',s:'one hundred dollars'},{n:'$0.75',s:'seventy-five cents'}];
+const pg=document.getElementById('priceGrid');
+prices.forEach(p=>{pg.innerHTML+=`<div class="price-tag"><span class="pt-num">${p.n}</span><span class="pt-say">→ "${p.s}"</span></div>`;});
+const cart=[{e:'👕',n:'T-shirt',p:12.99},{e:'👖',n:'Jeans',p:34.50},{e:'👟',n:'Sneakers',p:45.00},{e:'🎒',n:'Backpack',p:22.99}];
+const ci=document.getElementById('cartItems');
+let total=0;
+cart.forEach(c=>{total+=c.p;ci.innerHTML+=`<div class="cart-item"><span class="cart-emoji">${c.e}</span><span class="cart-name">${c.n}</span><span class="cart-price">$${c.p.toFixed(2)}</span></div>`;});
+document.getElementById('cartTotal').textContent=`$${total.toFixed(2)}`;
+function checkTotal(){const v=parseFloat(document.getElementById('totalInput').value);const fb=document.getElementById('totalFB');if(Math.abs(v-total)<0.01){fb.textContent='✅ Đúng rồi!';fb.style.color='#10b981';}else{fb.textContent=`❌ Sai! Đáp án: $${total.toFixed(2)}`;fb.style.color='#ef4444';}}
+const qs=[{q:'"How much is this?" dùng để?',opts:['Hỏi kích cỡ','Hỏi màu sắc','Hỏi giá','Hỏi chất liệu'],ans:2},{q:'"Can I try this on?" nghĩa là?',opts:['Có thể mua không?','Có thể thử không?','Có giảm giá không?','Có size khác không?'],ans:1},{q:'"on sale" nghĩa là?',opts:['Hết hàng','Đang giảm giá','Hàng mới về','Giá cao hơn'],ans:1},{q:'Câu nào tự nhiên nhất khi quyết định mua?',opts:["I want to buy this.","I'll take it.","Give me this.","This is mine."],ans:1},{q:'"receipt" là gì?',opts:['Hoàn tiền','Giảm giá','Hóa đơn','Phòng thử đồ'],ans:2}];
+let qi=0,score=0;
+function renderQ(){const q=qs[qi];document.getElementById('quizTitle').textContent=`Câu ${qi+1} / ${qs.length}`;document.getElementById('quizProgress').style.width=`${((qi+1)/qs.length)*100}%`;document.getElementById('quizQ').textContent=q.q;document.getElementById('quizFB').textContent='';document.getElementById('quizFB').className='quiz-feedback';document.getElementById('quizNext').style.display='none';const opts=document.getElementById('quizOpts');opts.innerHTML='';q.opts.forEach((o,i)=>{const btn=document.createElement('button');btn.className='quiz-opt';btn.textContent=o;btn.onclick=()=>{document.querySelectorAll('.quiz-opt').forEach(b=>b.disabled=true);if(i===q.ans){btn.classList.add('correct');score++;document.getElementById('quizFB').textContent='✅ Chính xác!';document.getElementById('quizFB').className='quiz-feedback ok';}else{btn.classList.add('wrong');document.querySelectorAll('.quiz-opt')[q.ans].classList.add('correct');document.getElementById('quizFB').textContent='❌ Sai rồi!';document.getElementById('quizFB').className='quiz-feedback no';}document.getElementById('quizScoreDisplay').textContent=`Điểm: ${score}`;document.getElementById('quizNext').style.display='inline-block';};opts.appendChild(btn);});}
+function nextQ(){qi++;if(qi>=qs.length){document.getElementById('quizContent').style.display='none';const r=document.getElementById('quizResult');r.style.display='block';const pct=Math.round(score/qs.length*100);document.getElementById('resEmoji').textContent=pct>=80?'🏆':pct>=60?'👍':'💪';document.getElementById('resScore').textContent=`${score} / ${qs.length} đúng (${pct}%)`;document.getElementById('resMsg').textContent=pct>=80?'Tuyệt! Bạn có thể mua sắm bằng tiếng Anh rồi!':'Ôn thêm và thử lại nhé!';}else renderQ();}
+function resetQuiz(){qi=0;score=0;document.getElementById('quizScoreDisplay').textContent='Điểm: 0';document.getElementById('quizContent').style.display='block';document.getElementById('quizResult').style.display='none';renderQ();}
+renderQ();
+</script>
+</body></html>
