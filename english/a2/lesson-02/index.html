@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+
+  <link rel="stylesheet" href="../../assets/brand.css">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A2 · Lesson 02 · Past Adventures</title>
+<style>
+:root{--bg:#080d1a;--card:#0f1729;--card2:#131e35;--border:#1e2d4a;--text:#dde6f5;--muted:#8b9ab5;--accent:#d97706;--accent2:#fcd34d;--green:#10b981;--red:#ef4444}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;line-height:1.6;padding:1.5rem 1.25rem 3rem}
+.lsn-header{background:linear-gradient(135deg,#1a0f00,#0f1729);border:1px solid var(--border);border-radius:16px;padding:1.5rem;margin-bottom:1.5rem;position:relative;overflow:hidden}
+.lsn-header::before{content:'';position:absolute;top:-40px;right:-40px;width:150px;height:150px;background:radial-gradient(circle,rgba(217,119,6,.35),transparent 70%);pointer-events:none}
+.lsn-badge{display:inline-flex;background:rgba(217,119,6,.15);border:1px solid rgba(252,211,77,.3);border-radius:20px;padding:.25rem .75rem;font-size:.7rem;font-weight:700;color:var(--accent2);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.75rem}
+.lsn-header h1{font-size:1.6rem;font-weight:800;background:linear-gradient(90deg,#fde68a,#fcd34d);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.4rem}
+.lsn-header p{color:var(--muted);font-size:.9rem}
+.objectives{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+.obj-tag{background:rgba(217,119,6,.12);border:1px solid rgba(217,119,6,.25);border-radius:20px;padding:.25rem .7rem;font-size:.75rem;color:var(--accent2)}
+.sec-title{display:flex;align-items:center;gap:.6rem;font-size:1rem;font-weight:700;color:var(--accent2);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)}
+.irr-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:.5rem;margin-bottom:1.75rem}
+.irr-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:.65rem .85rem;cursor:pointer;transition:all .2s}
+.irr-card:hover,.irr-card.flip{border-color:var(--accent);background:rgba(217,119,6,.08)}
+.irr-base{font-size:.88rem;font-weight:700;color:var(--text)}.irr-past{font-size:.8rem;color:var(--muted);margin-top:.1rem}
+.irr-card.flip .irr-past{color:var(--accent2)}
+.grammar-box{background:linear-gradient(135deg,rgba(217,119,6,.1),rgba(217,119,6,.05));border:1px solid rgba(217,119,6,.2);border-radius:12px;padding:1.1rem;margin-bottom:1.75rem}
+.grammar-box h3{color:var(--accent2);font-size:.9rem;margin-bottom:.8rem}
+.gram-box{background:rgba(217,119,6,.2);border-radius:6px;padding:.2rem .7rem;color:var(--accent2);font-weight:700;font-family:monospace;display:inline-block}
+.gram-row{display:flex;gap:.5rem;align-items:flex-start;margin-bottom:.55rem;font-size:.88rem;flex-wrap:wrap}
+.pattern-list{margin-bottom:1.75rem}
+.pattern-item{background:var(--card);border-left:3px solid var(--accent);border-radius:0 10px 10px 0;padding:.8rem 1rem;margin-bottom:.6rem}
+.pat-en{font-size:1rem;font-weight:600;color:var(--text)}.pat-vn{font-size:.82rem;color:var(--muted);margin-top:.2rem}.pat-note{font-size:.78rem;color:var(--accent2);margin-top:.25rem;font-style:italic}
+.convo-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1.75rem}
+.convo-line{display:flex;gap:.7rem;margin-bottom:.65rem;align-items:flex-start}
+.spk-a{color:#fcd34d;font-size:.7rem;font-weight:700;text-transform:uppercase;min-width:28px;margin-top:.2rem}
+.spk-b{color:#34d399;font-size:.7rem;font-weight:700;text-transform:uppercase;min-width:28px;margin-top:.2rem}
+.bubble{background:var(--card2);border-radius:0 10px 10px 10px;padding:.55rem .85rem;font-size:.9rem;flex:1}
+.bubble.b{border-radius:10px 10px 10px 0;background:rgba(52,211,153,.07);border:1px solid rgba(52,211,153,.15)}
+.fill-block{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1.75rem}
+.fill-q{font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:.75rem}
+.fill-row{display:flex;align-items:center;gap:.5rem;padding:.45rem .75rem;background:var(--card2);border-radius:8px;margin-bottom:.4rem;font-size:.88rem}
+input[type=text]{background:var(--card2);border:1px solid var(--border);border-radius:6px;padding:.3rem .6rem;color:var(--text);font-size:.85rem;outline:none}
+input[type=text]:focus{border-color:var(--accent)}
+.story-card{background:linear-gradient(135deg,rgba(217,119,6,.08),rgba(217,119,6,.03));border:1px solid rgba(217,119,6,.2);border-radius:12px;padding:1.1rem;margin-bottom:1.75rem}
+.story-card h3{color:var(--accent2);font-size:.9rem;margin-bottom:.7rem}
+.story-text{font-size:.9rem;color:var(--text);line-height:1.85}
+.hl{color:var(--accent2);font-weight:700}
+.quiz-section{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.25rem;margin-bottom:1.75rem}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+.quiz-q{font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:.75rem;padding:.75rem;background:var(--card2);border-radius:8px}
+.quiz-opts{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.5rem}
+.quiz-opt{background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:.55rem .75rem;font-size:.85rem;cursor:pointer;transition:all .18s;color:var(--text);text-align:left}
+.quiz-opt:hover:not(:disabled){border-color:var(--accent);color:var(--accent2)}.quiz-opt.correct{border-color:var(--green)!important;background:rgba(16,185,129,.15)!important;color:var(--green)!important}.quiz-opt.wrong{border-color:var(--red)!important;background:rgba(239,68,68,.1)!important;color:var(--red)!important}.quiz-opt:disabled{cursor:default}
+.quiz-feedback{font-size:.8rem;margin:.4rem 0 .6rem;min-height:1rem}.quiz-feedback.ok{color:var(--green)}.quiz-feedback.no{color:var(--red)}
+.quiz-nav{display:flex;gap:.5rem;align-items:center;justify-content:space-between}
+.btn{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:.5rem 1.1rem;font-size:.85rem;font-weight:700;cursor:pointer;transition:opacity .2s}.btn:hover{opacity:.85}
+.progress-bar{background:var(--border);border-radius:4px;height:4px;flex:1;overflow:hidden}.progress-fill{background:var(--accent);height:100%;border-radius:4px;transition:width .3s}
+.result-box{text-align:center;padding:1.25rem;display:none}.result-emoji{font-size:2.5rem;margin-bottom:.5rem}.result-score{font-size:1.5rem;font-weight:800;color:var(--accent2);margin-bottom:.25rem}.result-msg{font-size:.85rem;color:var(--muted);margin-bottom:1rem}
+.lesson-footer{display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border)}
+.footer-nav a{color:var(--accent);text-decoration:none;font-size:.85rem;font-weight:600}
+</style>
+</head>
+<body>
+  <img src="../../assets/logo-SH.png" class="sh-logo" alt="Science Horizon">
+<div class="lsn-header">
+  <div class="lsn-badge">📖 A2 Daily English · Lesson 02</div>
+  <h1>Past Adventures</h1>
+  <p>Kể về những gì đã xảy ra — Past Simple (Quá khứ đơn) với động từ đều và bất quy tắc!</p>
+  <div class="objectives">
+    <span class="obj-tag">📖 Past Simple</span>
+    <span class="obj-tag">✅ Regular & Irregular Verbs</span>
+    <span class="obj-tag">❓ Did you…?</span>
+    <span class="obj-tag">🚫 didn't + V</span>
+  </div>
+</div>
+
+<div class="sec-title"><span>📚</span> Động Từ Bất Quy Tắc Quan Trọng <small style="color:var(--muted);font-weight:400;font-size:.78rem">(nhấn xem dạng quá khứ)</small></div>
+<div class="irr-grid" id="irrGrid"></div>
+
+<div class="sec-title"><span>📐</span> Ngữ Pháp — Past Simple</div>
+<div class="grammar-box">
+  <h3>✏️ 3 cấu trúc cần nhớ</h3>
+  <div class="gram-row"><span class="gram-box">Khẳng định</span><span>S + <strong>V-ed</strong> / <strong>V2</strong></span><span style="color:var(--muted);font-size:.8rem">→ I <strong>visited</strong> Hội An. / She <strong>went</strong> home.</span></div>
+  <div class="gram-row"><span class="gram-box">Phủ định</span><span>S + <strong>didn't</strong> + V (nguyên thể)</span><span style="color:var(--muted);font-size:.8rem">→ I <strong>didn't go</strong> to Huế. ✗ didn't went</span></div>
+  <div class="gram-row"><span class="gram-box">Câu hỏi</span><span><strong>Did</strong> + S + V (nguyên thể)?</span><span style="color:var(--muted);font-size:.8rem">→ <strong>Did</strong> you enjoy it? — Yes, I <strong>did</strong>.</span></div>
+  <div style="margin-top:.75rem;display:grid;grid-template-columns:1fr 1fr;gap:.6rem">
+    <div style="background:rgba(217,119,6,.07);border-radius:8px;padding:.6rem .9rem;font-size:.82rem;color:var(--muted)">
+      ✅ <strong style="color:var(--accent2)">Regular verbs — thêm -ed:</strong><br>
+      visit → visit<strong>ed</strong><br>
+      cook → cook<strong>ed</strong><br>
+      watch → watch<strong>ed</strong><br>
+      <em style="color:#888">stop → stopp<strong>ed</strong> (gấp đôi cuối)</em>
+    </div>
+    <div style="background:rgba(217,119,6,.07);border-radius:8px;padding:.6rem .9rem;font-size:.82rem;color:var(--muted)">
+      ⚡ <strong style="color:var(--accent2)">Signal words:</strong><br>
+      yesterday · last night<br>
+      last week / month / year<br>
+      in 2020 · two days ago<br>
+      when I was young
+    </div>
+  </div>
+</div>
+
+<div class="sec-title"><span>💬</span> Mẫu Câu</div>
+<div class="pattern-list">
+  <div class="pattern-item"><div class="pat-en">"What did you do last weekend?"</div><div class="pat-vn">→ Cuối tuần trước bạn đã làm gì?</div><div class="pat-note">💡 Câu hỏi quá khứ phổ biến nhất — học thuộc lòng!</div></div>
+  <div class="pattern-item"><div class="pat-en">"I went to the beach. We had a great time!"</div><div class="pat-vn">→ Tôi đã đi biển. Chúng tôi đã có khoảng thời gian tuyệt vời!</div><div class="pat-note">💡 go → went · have → had · buy → bought (bất quy tắc phổ biến nhất)</div></div>
+  <div class="pattern-item"><div class="pat-en">"Did you enjoy the food?" — "Yes, it was delicious!" / "No, it wasn't very good."</div><div class="pat-vn">→ Bạn có thích đồ ăn không? — Có, ngon lắm! / Không, không ngon lắm.</div><div class="pat-note">💡 was / were = dạng quá khứ của am/is/are</div></div>
+  <div class="pattern-item"><div class="pat-en">"I didn't sleep well last night because I was too excited."</div><div class="pat-vn">→ Tôi đã không ngủ ngon tối qua vì tôi quá hào hứng.</div><div class="pat-note">💡 didn't + V nguyên thể (KHÔNG V-ed): ✗ "didn't went" → ✓ "didn't go"</div></div>
+</div>
+
+<div class="sec-title"><span>📝</span> Câu Chuyện Mẫu — Kỳ Nghỉ Cuối Tuần</div>
+<div class="story-card">
+  <h3>📖 Đọc và chú ý các động từ quá khứ (in đậm màu vàng)</h3>
+  <div class="story-text">
+    Last Saturday, my family <span class="hl">went</span> to Vũng Tàu beach. We <span class="hl">woke up</span> early and <span class="hl">took</span> a bus at 7 a.m. When we <span class="hl">arrived</span>, the weather <span class="hl">was</span> perfect — sunny and warm.
+    <br><br>
+    We <span class="hl">swam</span> in the sea, <span class="hl">ate</span> fresh seafood, and <span class="hl">walked</span> along the beach. My sister <span class="hl">bought</span> some souvenirs. I <span class="hl">took</span> many photos and <span class="hl">posted</span> them online.
+    <br><br>
+    We <span class="hl">didn't stay</span> overnight — we <span class="hl">came</span> back home in the evening. I <span class="hl">was</span> tired but very happy. It <span class="hl">was</span> a wonderful day!
+  </div>
+</div>
+
+<div class="sec-title"><span>🗣️</span> Hội Thoại</div>
+<div class="convo-box">
+  <div class="convo-line"><span class="spk-a">A</span><div class="bubble">Hey! How was your weekend?</div></div>
+  <div class="convo-line"><span class="spk-b">B</span><div class="bubble b">It was amazing! I went to Đà Lạt with my friends.</div></div>
+  <div class="convo-line"><span class="spk-a">A</span><div class="bubble">Really? What did you do there?</div></div>
+  <div class="convo-line"><span class="spk-b">B</span><div class="bubble b">We visited a flower garden, ate lots of local food, and stayed at a cosy guesthouse. The weather was perfect!</div></div>
+  <div class="convo-line"><span class="spk-a">A</span><div class="bubble">That sounds great! Did you take many photos?</div></div>
+  <div class="convo-line"><span class="spk-b">B</span><div class="bubble b">Yes, I took hundreds! But I forgot my charger so my phone died on day two. I didn't take any photos after that!</div></div>
+  <div class="convo-line"><span class="spk-a">A</span><div class="bubble">Oh no! But it sounds like you had an amazing trip anyway!</div></div>
+</div>
+
+<div class="sec-title"><span>✏️</span> Luyện Tập — Chia Động Từ Quá Khứ</div>
+<div class="fill-block">
+  <div class="fill-q">Điền dạng đúng của động từ trong ngoặc:</div>
+  <div class="fill-row"><span style="flex:1">1. Yesterday, I ___ (go) to the market.</span><input type="text" placeholder="went" style="width:100px" onblur="fc(this,'went')"></div>
+  <div class="fill-row"><span style="flex:1">2. She ___ (eat) phở for breakfast.</span><input type="text" placeholder="ate" style="width:100px" onblur="fc(this,'ate')"></div>
+  <div class="fill-row"><span style="flex:1">3. They ___ (not watch) TV last night.</span><input type="text" placeholder="didn't watch" style="width:120px" onblur="fc(this,'didn\'t watch')"></div>
+  <div class="fill-row"><span style="flex:1">4. ___ you ___ (enjoy) the party? (Yes/No Q)</span><input type="text" placeholder="Did enjoy" style="width:110px" onblur="fc(this,'did enjoy')"></div>
+  <div class="fill-row"><span style="flex:1">5. The weather ___ (be) sunny and warm.</span><input type="text" placeholder="was" style="width:100px" onblur="fc(this,'was')"></div>
+</div>
+
+<div class="sec-title"><span>🎯</span> Quiz Nhanh (5 câu)</div>
+<div class="quiz-section">
+  <div class="quiz-header"><span id="quizTitle" style="font-size:.85rem;color:var(--muted)">Câu 1 / 5</span><span id="quizScoreDisplay" style="font-size:.85rem;color:var(--muted)">Điểm: 0</span></div>
+  <div id="quizContent">
+    <div class="quiz-q" id="quizQ"></div>
+    <div class="quiz-opts" id="quizOpts"></div>
+    <div class="quiz-feedback" id="quizFB"></div>
+    <div class="quiz-nav"><div class="progress-bar"><div class="progress-fill" id="quizProgress" style="width:20%"></div></div><button class="btn" id="quizNext" style="display:none" onclick="nextQ()">Tiếp →</button></div>
+  </div>
+  <div class="result-box" id="quizResult"><div class="result-emoji" id="resEmoji"></div><div class="result-score" id="resScore"></div><div class="result-msg" id="resMsg"></div><button class="btn" onclick="resetQuiz()">🔄 Làm lại</button></div>
+</div>
+
+<div class="lesson-footer">
+  <div class="footer-nav">← <a href="../lesson-01/">Lesson 01</a></div>
+  <div style="font-size:.8rem;color:var(--muted)">A2 · Lesson 02 / 12</div>
+  <div class="footer-nav"><a href="../lesson-03/">Lesson 03 →</a></div>
+</div>
+
+<script>
+const irr=[{v:"go",p:"went"},{v:"eat",p:"ate"},{v:"see",p:"saw"},{v:"have",p:"had"},{v:"make",p:"made"},{v:"take",p:"took"},{v:"come",p:"came"},{v:"buy",p:"bought"},{v:"meet",p:"met"},{v:"run",p:"ran"},{v:"get",p:"got"},{v:"give",p:"gave"},{v:"think",p:"thought"},{v:"find",p:"found"},{v:"sleep",p:"slept"},{v:"swim",p:"swam"},{v:"write",p:"wrote"},{v:"speak",p:"spoke"},{v:"drive",p:"drove"},{v:"wake",p:"woke"}];
+const ig=document.getElementById('irrGrid');
+irr.forEach(w=>{ig.innerHTML+=`<div class="irr-card" onclick="this.classList.toggle('flip')"><div class="irr-base">${w.v}</div><div class="irr-past">→ ${w.p}</div></div>`;});
+function fc(el,ans){const v=el.value.trim().toLowerCase();if(v===ans){el.style.borderColor='#10b981';el.style.color='#10b981';}else if(v){el.style.borderColor='#ef4444';el.style.color='#ef4444';}}
+const qs=[{q:'Past Simple của "go" là?',opts:['goed','gone','went','goes'],ans:2},{q:'"She ___ a book last night." — Chia đúng (read):',opts:['readed','red','reads','read'],ans:3},{q:'Câu phủ định quá khứ đúng là?',opts:["I didn't went.","I not went.","I didn't go.","I don't went."],ans:2},{q:'"Did you enjoy the trip?" — Trả lời ngắn đúng:',opts:['Yes, I enjoyed.','Yes, I did.','Yes, did I.','Yes, I do.'],ans:1},{q:'Signal word nào CHỈ thì quá khứ?',opts:['tomorrow','usually','yesterday','often'],ans:2}];
+let qi=0,score=0;
+function renderQ(){const q=qs[qi];document.getElementById('quizTitle').textContent=`Câu ${qi+1} / ${qs.length}`;document.getElementById('quizProgress').style.width=`${((qi+1)/qs.length)*100}%`;document.getElementById('quizQ').textContent=q.q;document.getElementById('quizFB').textContent='';document.getElementById('quizFB').className='quiz-feedback';document.getElementById('quizNext').style.display='none';const opts=document.getElementById('quizOpts');opts.innerHTML='';q.opts.forEach((o,i)=>{const btn=document.createElement('button');btn.className='quiz-opt';btn.textContent=o;btn.onclick=()=>{document.querySelectorAll('.quiz-opt').forEach(b=>b.disabled=true);if(i===q.ans){btn.classList.add('correct');score++;document.getElementById('quizFB').textContent='✅ Chính xác!';document.getElementById('quizFB').className='quiz-feedback ok';}else{btn.classList.add('wrong');document.querySelectorAll('.quiz-opt')[q.ans].classList.add('correct');document.getElementById('quizFB').textContent='❌ Sai rồi!';document.getElementById('quizFB').className='quiz-feedback no';}document.getElementById('quizScoreDisplay').textContent=`Điểm: ${score}`;document.getElementById('quizNext').style.display='inline-block';};opts.appendChild(btn);});}
+function nextQ(){qi++;if(qi>=qs.length){document.getElementById('quizContent').style.display='none';const r=document.getElementById('quizResult');r.style.display='block';const pct=Math.round(score/qs.length*100);document.getElementById('resEmoji').textContent=pct>=80?'🏆':pct>=60?'👍':'💪';document.getElementById('resScore').textContent=`${score} / ${qs.length} đúng (${pct}%)`;document.getElementById('resMsg').textContent=pct>=80?'Xuất sắc! Past Simple thành thạo rồi!':pct>=60?'Tốt! Ôn thêm nhé.':'Xem lại và thử tiếp!';}else renderQ();}
+function resetQuiz(){qi=0;score=0;document.getElementById('quizScoreDisplay').textContent='Điểm: 0';document.getElementById('quizContent').style.display='block';document.getElementById('quizResult').style.display='none';renderQ();}
+renderQ();
+</script>
+</body></html>
