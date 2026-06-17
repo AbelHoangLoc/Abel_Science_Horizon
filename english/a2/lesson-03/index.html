@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+
+  <link rel="stylesheet" href="../../assets/brand.css">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A2 · Lesson 03 · My Home</title>
+<style>
+:root{--bg:#080d1a;--card:#0f1729;--card2:#131e35;--border:#1e2d4a;--text:#dde6f5;--muted:#8b9ab5;--accent:#059669;--accent2:#6ee7b7;--green:#10b981;--red:#ef4444}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;line-height:1.6;padding:1.5rem 1.25rem 3rem}
+.lsn-header{background:linear-gradient(135deg,#00180e,#0f1729);border:1px solid var(--border);border-radius:16px;padding:1.5rem;margin-bottom:1.5rem;position:relative;overflow:hidden}
+.lsn-header::before{content:'';position:absolute;top:-40px;right:-40px;width:150px;height:150px;background:radial-gradient(circle,rgba(5,150,105,.3),transparent 70%);pointer-events:none}
+.lsn-badge{display:inline-flex;background:rgba(5,150,105,.15);border:1px solid rgba(110,231,183,.3);border-radius:20px;padding:.25rem .75rem;font-size:.7rem;font-weight:700;color:var(--accent2);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.75rem}
+.lsn-header h1{font-size:1.6rem;font-weight:800;background:linear-gradient(90deg,#a7f3d0,#6ee7b7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.4rem}
+.lsn-header p{color:var(--muted);font-size:.9rem}
+.objectives{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+.obj-tag{background:rgba(5,150,105,.12);border:1px solid rgba(5,150,105,.25);border-radius:20px;padding:.25rem .7rem;font-size:.75rem;color:var(--accent2)}
+.sec-title{display:flex;align-items:center;gap:.6rem;font-size:1rem;font-weight:700;color:var(--accent2);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)}
+.room-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.6rem;margin-bottom:1.75rem}
+.room-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:.85rem;cursor:pointer;transition:all .2s;text-align:center}
+.room-card:hover,.room-card.flip{border-color:var(--accent);background:rgba(5,150,105,.08)}
+.room-emoji{font-size:1.5rem;margin-bottom:.3rem}
+.room-en{font-size:.9rem;font-weight:700;color:var(--text)}.room-vn{font-size:.78rem;color:var(--muted)}
+.room-card.flip .room-items{display:block}.room-items{display:none;font-size:.7rem;color:var(--accent2);margin-top:.3rem;line-height:1.5}
+.furniture-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:.55rem;margin-bottom:1.75rem}
+.furn-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:.65rem .8rem;cursor:pointer;transition:all .2s}
+.furn-card:hover,.furn-card.flip{border-color:var(--accent);background:rgba(5,150,105,.07)}
+.furn-en{font-size:.88rem;font-weight:700;color:var(--text)}.furn-vn{font-size:.76rem;color:var(--muted);margin-top:.1rem}
+.furn-card.flip .furn-vn{color:var(--accent2)}
+.grammar-box{background:linear-gradient(135deg,rgba(5,150,105,.1),rgba(5,150,105,.04));border:1px solid rgba(5,150,105,.2);border-radius:12px;padding:1.1rem;margin-bottom:1.75rem}
+.grammar-box h3{color:var(--accent2);font-size:.9rem;margin-bottom:.8rem}
+.prep-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:.5rem;margin-bottom:.6rem}
+.prep-item{background:rgba(5,150,105,.08);border-radius:8px;padding:.5rem .75rem;font-size:.85rem}
+.prep-word{font-weight:700;color:var(--accent2);font-family:monospace}.prep-vn{color:var(--muted);font-size:.78rem}
+.gram-box{background:rgba(5,150,105,.2);border-radius:6px;padding:.2rem .7rem;color:var(--accent2);font-weight:700;font-family:monospace;display:inline-block}
+.gram-row{display:flex;gap:.5rem;align-items:center;margin-bottom:.5rem;font-size:.88rem;flex-wrap:wrap}
+.pattern-list{margin-bottom:1.75rem}
+.pattern-item{background:var(--card);border-left:3px solid var(--accent);border-radius:0 10px 10px 0;padding:.8rem 1rem;margin-bottom:.6rem}
+.pat-en{font-size:1rem;font-weight:600;color:var(--text)}.pat-vn{font-size:.82rem;color:var(--muted);margin-top:.2rem}.pat-note{font-size:.78rem;color:var(--accent2);margin-top:.25rem;font-style:italic}
+.convo-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1.75rem}
+.convo-line{display:flex;gap:.7rem;margin-bottom:.65rem;align-items:flex-start}
+.spk-a{color:#6ee7b7;font-size:.7rem;font-weight:700;text-transform:uppercase;min-width:28px;margin-top:.2rem}
+.spk-b{color:#93c5fd;font-size:.7rem;font-weight:700;text-transform:uppercase;min-width:28px;margin-top:.2rem}
+.bubble{background:var(--card2);border-radius:0 10px 10px 10px;padding:.55rem .85rem;font-size:.9rem;flex:1}
+.bubble.b{border-radius:10px 10px 10px 0;background:rgba(147,197,253,.07);border:1px solid rgba(147,197,253,.15)}
+.fill-block{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1.75rem}
+.fill-q{font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:.75rem}
+.fill-row{display:flex;align-items:center;gap:.5rem;padding:.45rem .75rem;background:var(--card2);border-radius:8px;margin-bottom:.4rem;font-size:.88rem}
+input[type=text]{background:var(--card2);border:1px solid var(--border);border-radius:6px;padding:.3rem .6rem;color:var(--text);font-size:.85rem;outline:none}
+input[type=text]:focus{border-color:var(--accent)}
+.quiz-section{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.25rem;margin-bottom:1.75rem}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+.quiz-q{font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:.75rem;padding:.75rem;background:var(--card2);border-radius:8px}
+.quiz-opts{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.5rem}
+.quiz-opt{background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:.55rem .75rem;font-size:.85rem;cursor:pointer;transition:all .18s;color:var(--text);text-align:left}
+.quiz-opt:hover:not(:disabled){border-color:var(--accent);color:var(--accent2)}.quiz-opt.correct{border-color:var(--green)!important;background:rgba(16,185,129,.15)!important;color:var(--green)!important}.quiz-opt.wrong{border-color:var(--red)!important;background:rgba(239,68,68,.1)!important;color:var(--red)!important}.quiz-opt:disabled{cursor:default}
+.quiz-feedback{font-size:.8rem;margin:.4rem 0 .6rem;min-height:1rem}.quiz-feedback.ok{color:var(--green)}.quiz-feedback.no{color:var(--red)}
+.quiz-nav{display:flex;gap:.5rem;align-items:center;justify-content:space-between}
+.btn{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:.5rem 1.1rem;font-size:.85rem;font-weight:700;cursor:pointer;transition:opacity .2s}.btn:hover{opacity:.85}
+.progress-bar{background:var(--border);border-radius:4px;height:4px;flex:1;overflow:hidden}.progress-fill{background:var(--accent);height:100%;border-radius:4px;transition:width .3s}
+.result-box{text-align:center;padding:1.25rem;display:none}.result-emoji{font-size:2.5rem;margin-bottom:.5rem}.result-score{font-size:1.5rem;font-weight:800;color:var(--accent2);margin-bottom:.25rem}.result-msg{font-size:.85rem;color:var(--muted);margin-bottom:1rem}
+.lesson-footer{display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border)}
+.footer-nav a{color:var(--accent);text-decoration:none;font-size:.85rem;font-weight:600}
+</style>
+</head>
+<body>
+  <img src="../../assets/logo-SH.png" class="sh-logo" alt="Science Horizon">
+<div class="lsn-header">
+  <div class="lsn-badge">🏠 A2 Daily English · Lesson 03</div>
+  <h1>My Home</h1>
+  <p>Mô tả căn nhà, phòng ốc và đồ đạc — nền tảng để nói về không gian sống!</p>
+  <div class="objectives">
+    <span class="obj-tag">🏠 Các phòng trong nhà</span>
+    <span class="obj-tag">🛋️ Đồ nội thất</span>
+    <span class="obj-tag">📍 Giới từ vị trí</span>
+    <span class="obj-tag">💬 There is / There are</span>
+  </div>
+</div>
+
+<div class="sec-title"><span>🏠</span> Các Phòng Trong Nhà <small style="color:var(--muted);font-weight:400;font-size:.78rem">(nhấn xem đồ vật trong phòng)</small></div>
+<div class="room-grid" id="roomGrid"></div>
+
+<div class="sec-title"><span>🛋️</span> Đồ Nội Thất & Đồ Vật <small style="color:var(--muted);font-weight:400;font-size:.78rem">(nhấn xem tiếng Việt)</small></div>
+<div class="furniture-grid" id="furnGrid"></div>
+
+<div class="sec-title"><span>📐</span> Ngữ Pháp</div>
+<div class="grammar-box">
+  <h3>✏️ Giới từ vị trí (Prepositions of Place)</h3>
+  <div class="prep-grid" id="prepGrid"></div>
+  <div style="margin-top:.75rem;border-top:1px solid rgba(5,150,105,.2);padding-top:.75rem">
+    <div class="gram-row"><span class="gram-box">There is</span><span>a bed <strong>in</strong> the bedroom.</span><span style="color:var(--muted);font-size:.8rem">→ Có một cái giường trong phòng ngủ.</span></div>
+    <div class="gram-row"><span class="gram-box">There are</span><span>two chairs <strong>next to</strong> the table.</span><span style="color:var(--muted);font-size:.8rem">→ Có hai cái ghế cạnh bàn.</span></div>
+  </div>
+  <div style="margin-top:.75rem;font-size:.82rem;color:var(--muted);background:rgba(5,150,105,.07);border-radius:8px;padding:.6rem .9rem">
+    💡 <strong style="color:var(--accent2)">There is vs There are:</strong> There <strong>is</strong> + số ít / không đếm được · There <strong>are</strong> + số nhiều
+  </div>
+</div>
+
+<div class="sec-title"><span>💬</span> Mẫu Câu</div>
+<div class="pattern-list">
+  <div class="pattern-item"><div class="pat-en">"My house has [số] bedrooms and [số] bathrooms."</div><div class="pat-vn">→ Nhà tôi có [số] phòng ngủ và [số] phòng tắm.</div><div class="pat-note">💡 Mô tả nhà: "I live in a house / an apartment / a flat."</div></div>
+  <div class="pattern-item"><div class="pat-en">"The sofa is in front of the TV. The lamp is next to the bed."</div><div class="pat-vn">→ Ghế sofa ở trước TV. Đèn bàn ở cạnh giường.</div><div class="pat-note">💡 Dùng giới từ để mô tả vị trí đồ vật trong nhà</div></div>
+  <div class="pattern-item"><div class="pat-en">"Where is the bathroom?" — "It's upstairs, next to the bedroom."</div><div class="pat-vn">→ Phòng tắm ở đâu? — Ở tầng trên, cạnh phòng ngủ.</div><div class="pat-note">💡 upstairs (tầng trên) · downstairs (tầng dưới) · on the left/right</div></div>
+</div>
+
+<div class="sec-title"><span>🗣️</span> Hội Thoại — Tham Quan Căn Hộ Mới</div>
+<div class="convo-box">
+  <div class="convo-line"><span class="spk-b">B</span><div class="bubble b">Welcome! Come in — this is my new apartment!</div></div>
+  <div class="convo-line"><span class="spk-a">A</span><div class="bubble">Wow, it's lovely! How many rooms does it have?</div></div>
+  <div class="convo-line"><span class="spk-b">B</span><div class="bubble b">It has two bedrooms, one bathroom, a living room and a small kitchen.</div></div>
+  <div class="convo-line"><span class="spk-a">A</span><div class="bubble">Is there a balcony?</div></div>
+  <div class="convo-line"><span class="spk-b">B</span><div class="bubble b">Yes! There's a small balcony off the living room. You can see the park from there.</div></div>
+  <div class="convo-line"><span class="spk-a">A</span><div class="bubble">That's amazing! Where's your bedroom?</div></div>
+  <div class="convo-line"><span class="spk-b">B</span><div class="bubble b">It's down the hall, on the right. There's a big wardrobe next to the bed and a desk in the corner.</div></div>
+</div>
+
+<div class="sec-title"><span>✏️</span> Luyện Tập — Điền Giới Từ Đúng</div>
+<div class="fill-block">
+  <div class="fill-q">Điền giới từ phù hợp (in / on / under / next to / in front of / behind):</div>
+  <div class="fill-row"><span style="flex:1">The cat is ___ the sofa. (bên dưới)</span><input type="text" placeholder="under" style="width:110px" onblur="fc(this,'under')"></div>
+  <div class="fill-row"><span style="flex:1">The lamp is ___ the table. (trên mặt bàn)</span><input type="text" placeholder="on" style="width:110px" onblur="fc(this,'on')"></div>
+  <div class="fill-row"><span style="flex:1">The wardrobe is ___ the bedroom. (bên trong)</span><input type="text" placeholder="in" style="width:110px" onblur="fc(this,'in')"></div>
+  <div class="fill-row"><span style="flex:1">The chair is ___ the desk. (cạnh bên)</span><input type="text" placeholder="next to" style="width:110px" onblur="fc(this,'next to')"></div>
+</div>
+
+<div class="sec-title"><span>🎯</span> Quiz Nhanh (5 câu)</div>
+<div class="quiz-section">
+  <div class="quiz-header"><span id="quizTitle" style="font-size:.85rem;color:var(--muted)">Câu 1 / 5</span><span id="quizScoreDisplay" style="font-size:.85rem;color:var(--muted)">Điểm: 0</span></div>
+  <div id="quizContent">
+    <div class="quiz-q" id="quizQ"></div>
+    <div class="quiz-opts" id="quizOpts"></div>
+    <div class="quiz-feedback" id="quizFB"></div>
+    <div class="quiz-nav"><div class="progress-bar"><div class="progress-fill" id="quizProgress" style="width:20%"></div></div><button class="btn" id="quizNext" style="display:none" onclick="nextQ()">Tiếp →</button></div>
+  </div>
+  <div class="result-box" id="quizResult"><div class="result-emoji" id="resEmoji"></div><div class="result-score" id="resScore"></div><div class="result-msg" id="resMsg"></div><button class="btn" onclick="resetQuiz()">🔄 Làm lại</button></div>
+</div>
+
+<div class="lesson-footer">
+  <div class="footer-nav">← <a href="../lesson-02/">Lesson 02</a></div>
+  <div style="font-size:.8rem;color:var(--muted)">A2 · Lesson 03 / 12</div>
+  <div class="footer-nav"><a href="../lesson-04/">Lesson 04 →</a></div>
+</div>
+
+<script>
+const rooms=[{e:'🛋️',en:'Living room',vn:'Phòng khách',items:'sofa, TV, coffee table, curtains'},{e:'🍳',en:'Kitchen',vn:'Nhà bếp',items:'fridge, oven, sink, microwave'},{e:'🛏️',en:'Bedroom',vn:'Phòng ngủ',items:'bed, wardrobe, desk, lamp'},{e:'🚿',en:'Bathroom',vn:'Phòng tắm',items:'shower, bathtub, toilet, mirror'},{e:'🍽️',en:'Dining room',vn:'Phòng ăn',items:'dining table, chairs, shelves'},{e:'🏡',en:'Garden/Yard',vn:'Sân vườn',items:'plants, lawn, fence, gate'},{e:'🚗',en:'Garage',vn:'Nhà để xe',items:'car, tools, storage boxes'},{e:'🛤️',en:'Hallway',vn:'Hành lang',items:'door, coat rack, umbrella stand'}];
+const rg=document.getElementById('roomGrid');
+rooms.forEach(r=>{rg.innerHTML+=`<div class="room-card" onclick="this.classList.toggle('flip')"><div class="room-emoji">${r.e}</div><div class="room-en">${r.en}</div><div class="room-vn">${r.vn}</div><div class="room-items">📦 ${r.items}</div></div>`;});
+const furn=[{en:'sofa / couch',vn:'ghế sofa'},{en:'wardrobe',vn:'tủ quần áo'},{en:'bookshelf',vn:'giá sách'},{en:'fridge',vn:'tủ lạnh'},{en:'oven',vn:'lò nướng'},{en:'microwave',vn:'lò vi sóng'},{en:'curtains',vn:'rèm cửa'},{en:'pillow',vn:'gối'},{en:'blanket',vn:'chăn'},{en:'lamp',vn:'đèn bàn/đèn đứng'},{en:'mirror',vn:'gương'},{en:'carpet/rug',vn:'thảm'},{en:'air conditioner',vn:'máy lạnh/điều hòa'},{en:'washing machine',vn:'máy giặt'},{en:'sink',vn:'bồn rửa'},{en:'bathtub',vn:'bồn tắm'}];
+const fg=document.getElementById('furnGrid');
+furn.forEach(f=>{fg.innerHTML+=`<div class="furn-card" onclick="this.classList.toggle('flip')"><div class="furn-en">${f.en}</div><div class="furn-vn">${f.vn}</div></div>`;});
+const preps=[{w:'in',vn:'trong, bên trong',eg:'in the box'},{w:'on',vn:'trên (bề mặt)',eg:'on the table'},{w:'under',vn:'dưới, bên dưới',eg:'under the bed'},{w:'next to',vn:'kế bên, cạnh',eg:'next to the door'},{w:'in front of',vn:'phía trước',eg:'in front of the TV'},{w:'behind',vn:'phía sau',eg:'behind the sofa'},{w:'between',vn:'ở giữa (2 vật)',eg:'between the chairs'},{w:'above',vn:'phía trên (không chạm)',eg:'above the door'}];
+const pg=document.getElementById('prepGrid');
+preps.forEach(p=>{pg.innerHTML+=`<div class="prep-item"><span class="prep-word">${p.w}</span> <span class="prep-vn">= ${p.vn}</span><div style="font-size:.7rem;color:#555;margin-top:.1rem"><em>${p.eg}</em></div></div>`;});
+function fc(el,ans){const v=el.value.trim().toLowerCase();if(v===ans){el.style.borderColor='#10b981';el.style.color='#10b981';}else if(v){el.style.borderColor='#ef4444';el.style.color='#ef4444';}}
+const qs=[{q:'"There ___ two chairs next to the table." — Điền đúng:',opts:['is','are','have','has'],ans:1},{q:'"The lamp is ___ the desk." (trên mặt bàn)',opts:['in','under','on','behind'],ans:2},{q:'"wardrobe" là gì?',opts:['Bàn làm việc','Tủ quần áo','Giá sách','Gương'],ans:1},{q:'Câu nào đúng?',opts:['There are a sofa.','There is two sofas.','There is a sofa.','There are sofa.'],ans:2},{q:'"upstairs" nghĩa là?',opts:['Tầng trệt','Bên ngoài','Tầng trên','Hành lang'],ans:2}];
+let qi=0,score=0;
+function renderQ(){const q=qs[qi];document.getElementById('quizTitle').textContent=`Câu ${qi+1} / ${qs.length}`;document.getElementById('quizProgress').style.width=`${((qi+1)/qs.length)*100}%`;document.getElementById('quizQ').textContent=q.q;document.getElementById('quizFB').textContent='';document.getElementById('quizFB').className='quiz-feedback';document.getElementById('quizNext').style.display='none';const opts=document.getElementById('quizOpts');opts.innerHTML='';q.opts.forEach((o,i)=>{const btn=document.createElement('button');btn.className='quiz-opt';btn.textContent=o;btn.onclick=()=>{document.querySelectorAll('.quiz-opt').forEach(b=>b.disabled=true);if(i===q.ans){btn.classList.add('correct');score++;document.getElementById('quizFB').textContent='✅ Chính xác!';document.getElementById('quizFB').className='quiz-feedback ok';}else{btn.classList.add('wrong');document.querySelectorAll('.quiz-opt')[q.ans].classList.add('correct');document.getElementById('quizFB').textContent='❌ Sai rồi!';document.getElementById('quizFB').className='quiz-feedback no';}document.getElementById('quizScoreDisplay').textContent=`Điểm: ${score}`;document.getElementById('quizNext').style.display='inline-block';};opts.appendChild(btn);});}
+function nextQ(){qi++;if(qi>=qs.length){document.getElementById('quizContent').style.display='none';const r=document.getElementById('quizResult');r.style.display='block';const pct=Math.round(score/qs.length*100);document.getElementById('resEmoji').textContent=pct>=80?'🏆':pct>=60?'👍':'💪';document.getElementById('resScore').textContent=`${score} / ${qs.length} đúng (${pct}%)`;document.getElementById('resMsg').textContent=pct>=80?'Tuyệt! Bạn có thể mô tả nhà rất tốt rồi!':'Ôn thêm và thử lại nhé!';}else renderQ();}
+function resetQuiz(){qi=0;score=0;document.getElementById('quizScoreDisplay').textContent='Điểm: 0';document.getElementById('quizContent').style.display='block';document.getElementById('quizResult').style.display='none';renderQ();}
+renderQ();
+</script>
+</body></html>
