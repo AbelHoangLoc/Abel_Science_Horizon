@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B1 · Lesson 02 · Telling Stories</title>
+<link rel="stylesheet" href="../assets/brand.css">
+<style>
+:root{--bg:#080d1a;--card:#0f1729;--card2:#131e35;--border:#1e2d4a;--text:#dde6f5;--muted:#8b9ab5;--accent:#b45309;--accent2:#fcd34d;--green:#10b981;--red:#ef4444}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;line-height:1.6;padding:1.5rem 1.25rem 3rem}
+.lsn-header{background:linear-gradient(135deg,#1a0e00,#0f1729);border:1px solid var(--border);border-radius:16px;padding:1.5rem;margin-bottom:1.5rem;position:relative;overflow:hidden}
+.lsn-header::before{content:'';position:absolute;top:-40px;right:-40px;width:160px;height:160px;background:radial-gradient(circle,rgba(180,83,9,.3),transparent 70%);pointer-events:none}
+.lsn-badge{display:inline-flex;background:rgba(180,83,9,.15);border:1px solid rgba(252,211,77,.3);border-radius:20px;padding:.25rem .75rem;font-size:.7rem;font-weight:700;color:var(--accent2);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.75rem}
+.lsn-header h1{font-size:1.6rem;font-weight:800;background:linear-gradient(90deg,#fef3c7,#fcd34d);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.4rem}
+.lsn-header p{color:var(--muted);font-size:.9rem}
+.objectives{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+.obj-tag{background:rgba(180,83,9,.12);border:1px solid rgba(180,83,9,.25);border-radius:20px;padding:.25rem .7rem;font-size:.75rem;color:var(--accent2)}
+.sec-title{display:flex;align-items:center;gap:.6rem;font-size:1rem;font-weight:700;color:var(--accent2);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)}
+.grammar-box{background:linear-gradient(135deg,rgba(180,83,9,.1),rgba(180,83,9,.04));border:1px solid rgba(180,83,9,.2);border-radius:12px;padding:1.1rem;margin-bottom:1.75rem}
+.grammar-box h3{color:var(--accent2);font-size:.9rem;margin-bottom:.8rem}
+.gram-box{background:rgba(180,83,9,.2);border-radius:6px;padding:.2rem .7rem;color:var(--accent2);font-weight:700;font-family:monospace;display:inline-block}
+.gram-row{display:flex;gap:.5rem;align-items:flex-start;margin-bottom:.55rem;font-size:.88rem;flex-wrap:wrap}
+.tense-timeline{background:var(--card2);border-radius:12px;padding:1rem;margin-bottom:1.1rem;position:relative}
+.timeline-bar{height:4px;background:linear-gradient(90deg,var(--border),var(--accent2),var(--border));border-radius:4px;margin:.75rem 0;position:relative}
+.tl-point{position:absolute;top:-10px;display:flex;flex-direction:column;align-items:center;gap:.25rem}
+.tl-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.tl-label{font-size:.68rem;white-space:nowrap;font-weight:700;margin-top:.2rem}
+.tl-sub{font-size:.6rem;color:var(--muted);white-space:nowrap}
+.narrative-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.6rem;margin-bottom:1.75rem}
+.narr-card{border-radius:11px;padding:.8rem .85rem}
+.narr-card.pp{background:rgba(180,83,9,.1);border:1px solid rgba(180,83,9,.25)}
+.narr-card.ps{background:rgba(99,102,241,.1);border:1px solid rgba(99,102,241,.25)}
+.narr-card.pc{background:rgba(5,150,105,.1);border:1px solid rgba(5,150,105,.25)}
+.narr-title{font-weight:800;font-size:.82rem;margin-bottom:.4rem}
+.narr-title.pp{color:var(--accent2)}.narr-title.ps{color:#a5b4fc}.narr-title.pc{color:#6ee7b7}
+.narr-form{font-size:.78rem;font-family:monospace;margin-bottom:.35rem;color:var(--muted)}
+.narr-use{font-size:.76rem;color:var(--muted);line-height:1.5}
+.story-card{background:linear-gradient(135deg,rgba(180,83,9,.07),rgba(180,83,9,.03));border:1px solid rgba(180,83,9,.18);border-radius:12px;padding:1.1rem;margin-bottom:1.75rem}
+.story-card h3{color:var(--accent2);font-size:.9rem;margin-bottom:.75rem}
+.story-text{font-size:.9rem;color:var(--text);line-height:1.9}
+.hl-pp{color:var(--accent2);font-weight:700}
+.hl-ps{color:#a5b4fc;font-weight:700}
+.hl-pc{color:#6ee7b7;font-weight:700}
+.connectors-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:.5rem;margin-bottom:1.75rem}
+.conn-card{background:var(--card);border:1px solid var(--border);border-radius:9px;padding:.6rem .85rem}
+.conn-word{font-weight:700;color:var(--accent2);font-size:.88rem;font-family:monospace}
+.conn-vn{font-size:.76rem;color:var(--muted);margin-top:.1rem}
+.conn-eg{font-size:.72rem;color:#666;margin-top:.2rem;font-style:italic}
+.pattern-list{margin-bottom:1.75rem}
+.pattern-item{background:var(--card);border-left:3px solid var(--accent);border-radius:0 10px 10px 0;padding:.8rem 1rem;margin-bottom:.6rem}
+.pat-en{font-size:1rem;font-weight:600;color:var(--text)}.pat-vn{font-size:.82rem;color:var(--muted);margin-top:.2rem}.pat-note{font-size:.78rem;color:var(--accent2);margin-top:.25rem;font-style:italic}
+.fill-block{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1.75rem}
+.fill-q{font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:.75rem}
+.fill-row{display:flex;align-items:center;gap:.5rem;padding:.45rem .75rem;background:var(--card2);border-radius:8px;margin-bottom:.4rem;font-size:.88rem;flex-wrap:wrap}
+input[type=text]{background:var(--card2);border:1px solid var(--border);border-radius:6px;padding:.3rem .6rem;color:var(--text);font-size:.85rem;outline:none}
+input[type=text]:focus{border-color:var(--accent)}
+.quiz-section{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.25rem;margin-bottom:1.75rem}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+.quiz-q{font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:.75rem;padding:.75rem;background:var(--card2);border-radius:8px}
+.quiz-opts{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.5rem}
+.quiz-opt{background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:.55rem .75rem;font-size:.85rem;cursor:pointer;transition:all .18s;color:var(--text);text-align:left}
+.quiz-opt:hover:not(:disabled){border-color:var(--accent);color:var(--accent2)}.quiz-opt.correct{border-color:var(--green)!important;background:rgba(16,185,129,.15)!important;color:var(--green)!important}.quiz-opt.wrong{border-color:var(--red)!important;background:rgba(239,68,68,.1)!important;color:var(--red)!important}.quiz-opt:disabled{cursor:default}
+.quiz-feedback{font-size:.8rem;margin:.4rem 0 .6rem;min-height:1rem}.quiz-feedback.ok{color:var(--green)}.quiz-feedback.no{color:var(--red)}
+.quiz-nav{display:flex;gap:.5rem;align-items:center;justify-content:space-between}
+.btn{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:.5rem 1.1rem;font-size:.85rem;font-weight:700;cursor:pointer;transition:opacity .2s}.btn:hover{opacity:.85}
+.progress-bar{background:var(--border);border-radius:4px;height:4px;flex:1;overflow:hidden}.progress-fill{background:var(--accent);height:100%;border-radius:4px;transition:width .3s}
+.result-box{text-align:center;padding:1.25rem;display:none}.result-emoji{font-size:2.5rem;margin-bottom:.5rem}.result-score{font-size:1.5rem;font-weight:800;color:var(--accent2);margin-bottom:.25rem}.result-msg{font-size:.85rem;color:var(--muted);margin-bottom:1rem}
+.lesson-footer{display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border)}
+.footer-nav a{color:var(--accent);text-decoration:none;font-size:.85rem;font-weight:600}
+</style>
+</head>
+<body>
+<img src="../assets/logo-SH.png" class="sh-logo" alt="Science Horizon">
+<div class="lsn-header">
+  <div class="lsn-badge">📖 B1 Intermediate · Lesson 02</div>
+  <h1>Telling Stories</h1>
+  <p>Kể chuyện sinh động bằng 3 thì quá khứ phối hợp — Past Perfect, Past Simple & Past Continuous!</p>
+  <div class="objectives">
+    <span class="obj-tag">📖 Past Perfect (had done)</span>
+    <span class="obj-tag">🔄 3 thì quá khứ phối hợp</span>
+    <span class="obj-tag">🔗 Connectors kể chuyện</span>
+    <span class="obj-tag">✍️ Kỹ năng narrative</span>
+  </div>
+</div>
+
+<div class="sec-title"><span>📐</span> Ba Thì Quá Khứ — Phối Hợp Kể Chuyện</div>
+<div class="narrative-grid">
+  <div class="narr-card pp">
+    <div class="narr-title pp">Past Perfect</div>
+    <div class="narr-form">had + V3</div>
+    <div class="narr-use">Hành động xảy ra <strong>TRƯỚC</strong> một hành động khác trong quá khứ<br><br>
+    "By the time she arrived, I <strong>had already left</strong>."</div>
+  </div>
+  <div class="narr-card ps">
+    <div class="narr-title ps">Past Simple</div>
+    <div class="narr-form">V-ed / V2</div>
+    <div class="narr-use">Hành động chính trong câu chuyện — xảy ra theo trình tự<br><br>
+    "She <strong>walked</strong> in and <strong>saw</strong> the mess."</div>
+  </div>
+  <div class="narr-card pc">
+    <div class="narr-title pc">Past Continuous</div>
+    <div class="narr-form">was/were + V-ing</div>
+    <div class="narr-use">Bối cảnh, hành động ĐANG diễn ra khi sự việc xảy ra<br><br>
+    "It <strong>was raining</strong> when I <strong>left</strong>."</div>
+  </div>
+</div>
+
+<div class="sec-title"><span>⏱️</span> Timeline — Hình Dung Trình Tự Thời Gian</div>
+<div class="tense-timeline">
+  <div style="font-size:.82rem;color:var(--muted);margin-bottom:.4rem">Ví dụ: "When Minh arrived at the party, everyone had already gone home."</div>
+  <div class="timeline-bar" style="position:relative;height:4px;background:linear-gradient(90deg,#1e2d4a,#fcd34d,#1e2d4a);border-radius:4px;margin:2.2rem 0 1.2rem">
+    <div style="position:absolute;left:15%;top:-10px;text-align:center">
+      <div style="width:12px;height:12px;background:#fcd34d;border-radius:50%;margin:0 auto 4px"></div>
+      <div style="font-size:.68rem;font-weight:700;color:#fcd34d;white-space:nowrap">Everyone left</div>
+      <div style="font-size:.6rem;color:var(--muted)">Past Perfect<br>(trước đó)</div>
+    </div>
+    <div style="position:absolute;left:55%;top:-10px;text-align:center">
+      <div style="width:12px;height:12px;background:#a5b4fc;border-radius:50%;margin:0 auto 4px"></div>
+      <div style="font-size:.68rem;font-weight:700;color:#a5b4fc;white-space:nowrap">Minh arrived</div>
+      <div style="font-size:.6rem;color:var(--muted)">Past Simple<br>(điểm mốc)</div>
+    </div>
+    <div style="position:absolute;right:2%;top:-10px;text-align:center">
+      <div style="font-size:.68rem;color:var(--muted)">NOW</div>
+    </div>
+  </div>
+</div>
+
+<div class="grammar-box">
+  <h3>✏️ Cấu trúc Past Perfect</h3>
+  <div class="gram-row"><span class="gram-box">Khẳng định</span><span>S + <strong>had</strong> + V3</span><span style="color:var(--muted)">→</span><span>She <strong>had finished</strong> work before I called.</span></div>
+  <div class="gram-row"><span class="gram-box">Phủ định</span><span>S + <strong>hadn't</strong> + V3</span><span style="color:var(--muted)">→</span><span>I <strong>hadn't eaten</strong> anything all day.</span></div>
+  <div class="gram-row"><span class="gram-box">Câu hỏi</span><span><strong>Had</strong> + S + V3?</span><span style="color:var(--muted)">→</span><span><strong>Had</strong> you ever been there before?</span></div>
+  <div style="margin-top:.75rem;background:rgba(180,83,9,.07);border-radius:8px;padding:.65rem .9rem;font-size:.82rem;color:var(--muted)">
+    💡 <strong style="color:var(--accent2)">Từ kết hợp thường gặp:</strong> by the time · after · before · when · as soon as · because · already (had <strong>already</strong> + V3) · just (had <strong>just</strong> + V3)
+  </div>
+</div>
+
+<div class="sec-title"><span>🔗</span> Connectors — Kết Nối Câu Chuyện Mạch Lạc</div>
+<div class="connectors-grid" id="connGrid"></div>
+
+<div class="sec-title"><span>📝</span> Câu Chuyện Mẫu — Đọc & Phân Tích Màu Sắc</div>
+<div class="story-card">
+  <h3>🎨 Màu vàng = Past Perfect · Màu tím = Past Simple · Màu xanh = Past Continuous</h3>
+  <div class="story-text">
+    It <span class="hl-ps">was</span> a Thursday afternoon. Outside, it <span class="hl-pc">was raining</span> heavily and the streets <span class="hl-pc">were almost empty</span>. Lan <span class="hl-ps">sat</span> at her desk, staring at the letter she <span class="hl-pp">had received</span> that morning.
+    <br><br>
+    She <span class="hl-pp">had applied</span> for the scholarship six months earlier and <span class="hl-pp">had almost given up hope</span>. But now, the letter in her hands <span class="hl-ps">told</span> a different story. She <span class="hl-pp">had won</span>.
+    <br><br>
+    Suddenly, her phone <span class="hl-ps">rang</span>. It <span class="hl-ps">was</span> her mother. "<span class="hl-ps">Have you heard</span> the news?" she <span class="hl-ps">asked</span>. Lan <span class="hl-ps">laughed</span> and <span class="hl-ps">wiped</span> a tear from her eye. "Yes, Mum," she <span class="hl-ps">said</span>. "I <span class="hl-pp">had been waiting</span> for this moment my whole life."
+  </div>
+</div>
+
+<div class="sec-title"><span>💬</span> Mẫu Câu Kể Chuyện</div>
+<div class="pattern-list">
+  <div class="pattern-item"><div class="pat-en">"By the time I arrived at the cinema, the film had already started."</div><div class="pat-vn">→ Khi tôi đến rạp, bộ phim đã bắt đầu rồi.</div><div class="pat-note">💡 by the time + Past Simple → sự kiện muộn hơn. had already + V3 → xảy ra trước.</div></div>
+  <div class="pattern-item"><div class="pat-en">"She was walking home when she suddenly heard a strange noise."</div><div class="pat-vn">→ Cô ấy đang đi bộ về nhà thì đột nhiên nghe tiếng động lạ.</div><div class="pat-note">💡 was/were + V-ing (bối cảnh) + when + Past Simple (sự kiện bất ngờ)</div></div>
+  <div class="pattern-item"><div class="pat-en">"He had never seen anything like it before in his entire life."</div><div class="pat-vn">→ Anh ấy chưa bao giờ thấy điều gì như vậy trong cả cuộc đời.</div><div class="pat-note">💡 had never + V3 = chưa bao giờ làm gì trước thời điểm đó</div></div>
+</div>
+
+<div class="sec-title"><span>✏️</span> Luyện Tập — Điền Past Perfect Đúng</div>
+<div class="fill-block">
+  <div class="fill-q">Điền Past Perfect hoặc Past Simple phù hợp:</div>
+  <div class="fill-row"><span style="flex:1">1. When she woke up, the rain ___ (stop).</span><input type="text" placeholder="had stopped" style="width:130px" onblur="fc(this,'had stopped')"></div>
+  <div class="fill-row"><span style="flex:1">2. I was tired because I ___ (not sleep) well.</span><input type="text" placeholder="hadn't slept" style="width:130px" onblur="fc(this,'hadn\'t slept')"></div>
+  <div class="fill-row"><span style="flex:1">3. By the time he ___ (arrive), we ___ (eat) dinner.</span><input type="text" placeholder="arrived" style="width:90px" onblur="fc(this,'arrived')"><span>/</span><input type="text" placeholder="had eaten" style="width:110px" onblur="fc(this,'had eaten')"></div>
+  <div class="fill-row"><span style="flex:1">4. She ___ (never travel) abroad before her trip to Japan.</span><input type="text" placeholder="had never travelled" style="width:175px" onblur="fc(this,'had never travelled')"></div>
+</div>
+
+<div class="sec-title"><span>🎯</span> Quiz Nhanh (5 câu)</div>
+<div class="quiz-section">
+  <div class="quiz-header"><span id="quizTitle" style="font-size:.85rem;color:var(--muted)">Câu 1 / 5</span><span id="quizScoreDisplay" style="font-size:.85rem;color:var(--muted)">Điểm: 0</span></div>
+  <div id="quizContent">
+    <div class="quiz-q" id="quizQ"></div>
+    <div class="quiz-opts" id="quizOpts"></div>
+    <div class="quiz-feedback" id="quizFB"></div>
+    <div class="quiz-nav"><div class="progress-bar"><div class="progress-fill" id="quizProgress" style="width:20%"></div></div><button class="btn" id="quizNext" style="display:none" onclick="nextQ()">Tiếp →</button></div>
+  </div>
+  <div class="result-box" id="quizResult"><div class="result-emoji" id="resEmoji"></div><div class="result-score" id="resScore"></div><div class="result-msg" id="resMsg"></div><button class="btn" onclick="resetQuiz()">🔄 Làm lại</button></div>
+</div>
+<div class="lesson-footer"><div class="footer-nav">← <a href="../lesson-01/">Lesson 01</a></div><div style="font-size:.8rem;color:var(--muted)">B1 · Lesson 02 / 12</div><div class="footer-nav"><a href="../lesson-03/">Lesson 03 →</a></div></div>
+
+<script>
+const conns=[
+  {w:'Suddenly',vn:'Đột nhiên',eg:'Suddenly, the lights went out.'},
+  {w:'At that moment',vn:'Vào lúc đó',eg:'At that moment, she realised.'},
+  {w:'By the time',vn:'Khi đến lúc',eg:'By the time he arrived...'},
+  {w:'As soon as',vn:'Ngay khi',eg:'As soon as she heard it...'},
+  {w:'The next day',vn:'Ngày hôm sau',eg:'The next day, things changed.'},
+  {w:'Meanwhile',vn:'Trong lúc đó',eg:'Meanwhile, back at home...'},
+  {w:'Eventually',vn:'Cuối cùng',eg:'Eventually, she found the key.'},
+  {w:'After a while',vn:'Sau một lúc',eg:'After a while, he felt better.'},
+  {w:'All of a sudden',vn:'Thình lình',eg:'All of a sudden, it rang.'},
+  {w:'To make matters worse',vn:'Tệ hơn nữa',eg:'To make matters worse, it rained.'},
+  {w:'Fortunately',vn:'May mắn thay',eg:'Fortunately, nobody was hurt.'},
+  {w:'Unfortunately',vn:'Không may thay',eg:'Unfortunately, he missed the bus.'},
+];
+const cg=document.getElementById('connGrid');
+conns.forEach(c=>{cg.innerHTML+=`<div class="conn-card"><div class="conn-word">${c.w}</div><div class="conn-vn">${c.vn}</div><div class="conn-eg">"${c.eg}"</div></div>`;});
+function fc(el,ans){const v=el.value.trim().toLowerCase();if(v===ans){el.style.borderColor='#10b981';el.style.color='#10b981';}else if(v){el.style.borderColor='#ef4444';el.style.color='#ef4444';}}
+const qs=[
+  {q:'Past Perfect của "go" là?',opts:['had gone','has gone','went','have gone'],ans:0},
+  {q:'"By the time she called, I ___ (leave) already." — Điền đúng:',opts:['have left','left','had left','was leaving'],ans:2},
+  {q:'Past Continuous dùng để làm gì trong kể chuyện?',opts:['Hành động chính','Bối cảnh đang diễn ra','Hành động xảy ra trước','Kết quả'],ans:1},
+  {q:'"Suddenly" dùng để?',opts:['Kết thúc câu chuyện','Giới thiệu nhân vật','Tạo sự kiện bất ngờ','Mô tả bối cảnh'],ans:2},
+  {q:'Câu nào dùng Past Perfect đúng?',opts:['She had eat before I arrived.','She had eaten before I arrive.','She had eaten before I arrived.','She had eating before I arrived.'],ans:2}
+];
+let qi=0,score=0;
+function renderQ(){const q=qs[qi];document.getElementById('quizTitle').textContent=`Câu ${qi+1} / ${qs.length}`;document.getElementById('quizProgress').style.width=`${((qi+1)/qs.length)*100}%`;document.getElementById('quizQ').textContent=q.q;document.getElementById('quizFB').textContent='';document.getElementById('quizFB').className='quiz-feedback';document.getElementById('quizNext').style.display='none';const opts=document.getElementById('quizOpts');opts.innerHTML='';q.opts.forEach((o,i)=>{const btn=document.createElement('button');btn.className='quiz-opt';btn.textContent=o;btn.onclick=()=>{document.querySelectorAll('.quiz-opt').forEach(b=>b.disabled=true);if(i===q.ans){btn.classList.add('correct');score++;document.getElementById('quizFB').textContent='✅ Chính xác!';document.getElementById('quizFB').className='quiz-feedback ok';}else{btn.classList.add('wrong');document.querySelectorAll('.quiz-opt')[q.ans].classList.add('correct');document.getElementById('quizFB').textContent='❌ Sai rồi!';document.getElementById('quizFB').className='quiz-feedback no';}document.getElementById('quizScoreDisplay').textContent=`Điểm: ${score}`;document.getElementById('quizNext').style.display='inline-block';};opts.appendChild(btn);});}
+function nextQ(){qi++;if(qi>=qs.length){document.getElementById('quizContent').style.display='none';const r=document.getElementById('quizResult');r.style.display='block';const pct=Math.round(score/qs.length*100);document.getElementById('resEmoji').textContent=pct>=80?'🏆':pct>=60?'👍':'💪';document.getElementById('resScore').textContent=`${score} / ${qs.length} đúng (${pct}%)`;document.getElementById('resMsg').textContent=pct>=80?'Tuyệt! Narrative tenses thành thạo rồi!':'Ôn thêm và thử lại nhé!';}else renderQ();}
+function resetQuiz(){qi=0;score=0;document.getElementById('quizScoreDisplay').textContent='Điểm: 0';document.getElementById('quizContent').style.display='block';document.getElementById('quizResult').style.display='none';renderQ();}
+renderQ();
+</script>
+</body></html>
