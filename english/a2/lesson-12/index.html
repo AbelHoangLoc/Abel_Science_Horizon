@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+
+  <link rel="stylesheet" href="../assets/brand.css">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A2 · Lesson 12 · Final Review & Test</title>
+<style>
+:root{--bg:#080d1a;--card:#0f1729;--card2:#131e35;--border:#1e2d4a;--text:#dde6f5;--muted:#8b9ab5;--gold:#f59e0b;--acl:#fcd34d;--green:#10b981;--red:#ef4444;--blue:#38bdf8;--purple:#a78bfa;--teal:#5eead4}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;line-height:1.6;padding:1.5rem 1.25rem 3rem}
+
+/* HEADER */
+.lsn-header{background:linear-gradient(135deg,#12100a,#0f1729,#0a1220);border:2px solid rgba(245,158,11,.25);border-radius:16px;padding:1.75rem 1.5rem;margin-bottom:1.5rem;position:relative;overflow:hidden;text-align:center}
+.lsn-header::before{content:'';position:absolute;top:-60px;left:50%;transform:translateX(-50%);width:220px;height:220px;background:radial-gradient(circle,rgba(245,158,11,.18),transparent 70%);pointer-events:none}
+.lsn-badge{display:inline-flex;background:rgba(245,158,11,.15);border:1px solid rgba(252,211,77,.35);border-radius:20px;padding:.25rem .9rem;font-size:.7rem;font-weight:700;color:var(--acl);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.9rem}
+.lsn-header h1{font-size:1.8rem;font-weight:900;background:linear-gradient(90deg,#fde68a,#fbbf24,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.5rem}
+.lsn-header p{color:var(--muted);font-size:.9rem;max-width:520px;margin:0 auto}
+.objectives{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem;justify-content:center}
+.obj-tag{background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.25);border-radius:20px;padding:.25rem .7rem;font-size:.75rem;color:var(--acl)}
+.sec-title{display:flex;align-items:center;gap:.6rem;font-size:1rem;font-weight:700;color:var(--acl);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)}
+
+/* SUMMARY GRID */
+.summary-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:.6rem;margin-bottom:1.75rem}
+.sum-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:.85rem;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
+.sum-card:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,.25);border-color:var(--gold)}
+.sum-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:12px 12px 0 0}
+.sum-icon{font-size:1.3rem;margin-bottom:.35rem}
+.sum-lsn{font-size:.65rem;color:var(--muted);font-weight:700;letter-spacing:.04em;text-transform:uppercase;margin-bottom:.15rem}
+.sum-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:.3rem}
+.sum-grammar{font-size:.72rem;color:var(--muted);line-height:1.5}
+.sum-tag{display:inline-block;border-radius:4px;padding:.1rem .5rem;font-size:.65rem;font-weight:700;margin-top:.3rem}
+
+/* GRAMMAR QUICK REVIEW */
+.grammar-cards{display:flex;flex-direction:column;gap:.7rem;margin-bottom:1.75rem}
+.gram-review-card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.grr-header{display:flex;align-items:center;gap:.75rem;padding:.75rem 1rem;cursor:pointer}
+.grr-icon{font-size:1.2rem}
+.grr-title{font-weight:700;font-size:.9rem;color:var(--text);flex:1}
+.grr-chevron{color:var(--muted);transition:transform .2s}
+.grr-header.open .grr-chevron{transform:rotate(180deg)}
+.grr-body{display:none;padding:.1rem 1rem .85rem;border-top:1px solid var(--border)}
+.grr-body.open{display:block}
+.gram-box{background:rgba(245,158,11,.18);border-radius:6px;padding:.2rem .7rem;color:var(--acl);font-weight:700;font-family:monospace;display:inline-block;font-size:.82rem}
+.gram-eg{font-size:.85rem;margin:.4rem 0;padding:.5rem .75rem;background:var(--card2);border-radius:7px;border-left:3px solid var(--gold)}
+.gram-note{font-size:.78rem;color:var(--muted);margin-top:.35rem;font-style:italic}
+
+/* FINAL TEST */
+.test-wrap{background:var(--card);border:2px solid rgba(245,158,11,.25);border-radius:16px;padding:1.25rem;margin-bottom:1.75rem}
+.test-head{text-align:center;margin-bottom:1.1rem;padding-bottom:.9rem;border-bottom:1px solid var(--border)}
+.test-head h2{font-size:1.1rem;font-weight:800;color:var(--acl);margin-bottom:.3rem}
+.test-head p{font-size:.82rem;color:var(--muted)}
+.test-stats{display:flex;gap:.75rem;justify-content:center;margin-top:.75rem;flex-wrap:wrap}
+.stat-box{background:var(--card2);border-radius:8px;padding:.4rem .9rem;text-align:center}
+.stat-num{font-size:1.1rem;font-weight:800;color:var(--acl);display:block}
+.stat-lbl{font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.prog-track{background:var(--border);border-radius:8px;height:8px;margin:1rem 0 .75rem;overflow:hidden}
+.prog-fill{background:linear-gradient(90deg,var(--gold),#fde68a);height:100%;border-radius:8px;transition:width .4s;width:0%}
+.test-q-block{background:var(--card2);border-radius:10px;padding:.9rem 1rem;margin-bottom:.8rem}
+.tq-meta{font-size:.7rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:.35rem;display:flex;gap:.5rem;align-items:center}
+.tq-lesson-tag{border-radius:4px;padding:.1rem .5rem;font-size:.65rem;font-weight:700}
+.tq-q{font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:.7rem;line-height:1.55}
+.tq-opts{display:grid;grid-template-columns:1fr 1fr;gap:.4rem}
+.tq-opt{background:var(--card);border:1px solid var(--border);border-radius:7px;padding:.45rem .65rem;font-size:.83rem;cursor:pointer;color:var(--text);transition:all .16s;text-align:left;line-height:1.4}
+.tq-opt:hover:not(:disabled){border-color:var(--gold);color:var(--acl)}
+.tq-opt.correct{border-color:var(--green)!important;background:rgba(16,185,129,.15)!important;color:var(--green)!important}
+.tq-opt.wrong{border-color:var(--red)!important;background:rgba(239,68,68,.08)!important;color:var(--red)!important}
+.tq-opt:disabled{cursor:default}
+
+/* RESULT */
+.final-result{text-align:center;padding:1.5rem;display:none}
+.res-trophy{font-size:3.5rem;margin-bottom:.75rem;animation:pop .5s ease}
+@keyframes pop{0%{transform:scale(.5)}80%{transform:scale(1.15)}100%{transform:scale(1)}}
+.res-grade{font-size:2.5rem;font-weight:900;margin-bottom:.2rem}
+.grade-s{background:linear-gradient(90deg,#fde68a,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.grade-a{background:linear-gradient(90deg,#c7d2fe,#818cf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.grade-b{background:linear-gradient(90deg,#bbf7d0,#4ade80);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.grade-c{background:linear-gradient(90deg,#fde68a,#d97706);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.res-sub{font-size:.88rem;color:var(--muted);margin-bottom:1rem;line-height:1.6}
+.res-breakdown{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-bottom:1.1rem}
+.rb-item{background:var(--card2);border-radius:8px;padding:.6rem;text-align:center}
+.rb-num{font-size:1.15rem;font-weight:800;color:var(--acl);display:block}
+.rb-lbl{font-size:.65rem;color:var(--muted)}
+.next-level-box{background:linear-gradient(135deg,rgba(56,189,248,.12),rgba(167,139,250,.12));border:1px solid rgba(56,189,248,.25);border-radius:12px;padding:1rem;margin-bottom:.9rem;text-align:left}
+.nl-title{font-size:.88rem;font-weight:700;color:var(--blue);margin-bottom:.45rem}
+.nl-text{font-size:.82rem;color:var(--muted);line-height:1.65}
+.btn{background:linear-gradient(135deg,var(--gold),#f97316);color:#000;border:none;border-radius:8px;padding:.55rem 1.2rem;font-size:.88rem;font-weight:800;cursor:pointer;margin:.25rem;transition:opacity .2s}
+.btn:hover{opacity:.85}
+.btn-sec{background:var(--card2);color:var(--muted);border:1px solid var(--border)}
+.lesson-footer{display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border)}
+.footer-nav a{color:var(--gold);text-decoration:none;font-size:.85rem;font-weight:600}
+</style>
+</head>
+<body>
+
+<img src="../assets/logo-SH.png" class="sh-logo" alt="Science Horizon">
+<div class="lsn-header">
+  <div class="lsn-badge">🏆 A2 Final · Lesson 12</div>
+  <h1>A2 Review &amp; Final Test</h1>
+  <p>Ôn lại 11 bài đã học và kiểm tra xem bạn đã sẵn sàng lên B1 chưa!</p>
+  <div class="objectives">
+    <span class="obj-tag">📋 Ôn 11 bài học A2</span>
+    <span class="obj-tag">🎯 Kiểm tra 20 câu</span>
+    <span class="obj-tag">🏅 Nhận kết quả</span>
+    <span class="obj-tag">🚀 Sẵn sàng lên B1</span>
+  </div>
+</div>
+
+<!-- SUMMARY -->
+<div class="sec-title"><span>📋</span> Tổng Ôn 11 Bài A2</div>
+<div class="summary-grid" id="summaryGrid"></div>
+
+<!-- GRAMMAR QUICK REVIEW -->
+<div class="sec-title"><span>⚡</span> Ôn Nhanh Ngữ Pháp A2</div>
+<div class="grammar-cards" id="gramCards"></div>
+
+<!-- FINAL TEST -->
+<div class="sec-title"><span>🎯</span> Kiểm Tra Cuối Khoá A2 (20 câu)</div>
+<div class="test-wrap">
+  <div class="test-head">
+    <h2>🏆 A2 Final Test</h2>
+    <p>20 câu hỏi từ tất cả 11 bài học. Đạt 70% (14/20) để hoàn thành A2!</p>
+    <div class="test-stats">
+      <div class="stat-box"><span class="stat-num" id="statDone">0</span><span class="stat-lbl">Đã làm</span></div>
+      <div class="stat-box"><span class="stat-num" id="statRight">0</span><span class="stat-lbl">Đúng</span></div>
+      <div class="stat-box"><span class="stat-num">20</span><span class="stat-lbl">Tổng</span></div>
+    </div>
+  </div>
+  <div class="prog-track"><div class="prog-fill" id="testProg"></div></div>
+  <div id="testQs"></div>
+  <div id="submitArea" style="text-align:center;margin-top:1rem;display:none">
+    <button class="btn" onclick="submitTest()">✅ Nộp bài & Xem kết quả</button>
+  </div>
+  <div class="final-result" id="finalResult"></div>
+</div>
+
+<div class="lesson-footer">
+  <div class="footer-nav">← <a href="../lesson-11/">Lesson 11</a></div>
+  <div style="font-size:.8rem;color:var(--muted)">A2 · Lesson 12 / 12 · 🏁 Hoàn thành A2!</div>
+  <div class="footer-nav"><a href="../../b1/">Lên B1 →</a></div>
+</div>
+
+<script>
+/* ── SUMMARY DATA ── */
+const lessons = [
+  {icon:'📆',n:'01',title:'Daily Routines',color:'#3b82f6',grammar:'Present Simple + Adverbs of Frequency',tag:'always/usually/often/never'},
+  {icon:'📖',n:'02',title:'Past Adventures',color:'#d97706',grammar:'Past Simple — V-ed & Irregular V2',tag:'went/ate/saw/had'},
+  {icon:'🏠',n:'03',title:'My Home',color:'#059669',grammar:'There is/are + Prepositions of Place',tag:'in/on/under/next to'},
+  {icon:'🛍️',n:'04',title:'Shopping & Money',color:'#7c3aed',grammar:'How much? Can I try on? I\'ll take it.',tag:'receipt/discount/on sale'},
+  {icon:'🗺️',n:'05',title:'Getting Around',color:'#0891b2',grammar:'Directions + by bus/on foot',tag:'turn left/go straight'},
+  {icon:'🌤️',n:'06',title:'Weather & Seasons',color:'#0284c7',grammar:'Comparatives — hotter/more beautiful',tag:'hotter than/the hottest'},
+  {icon:'🎨',n:'07',title:'Hobbies & Free Time',color:'#7c3aed',grammar:'Going to (future plans)',tag:'am/is/are going to + V'},
+  {icon:'💊',n:'08',title:'Health & Feelings',color:'#dc2626',grammar:'Should / Shouldn\'t (advice)',tag:'you should rest / shouldn\'t'},
+  {icon:'🍽️',n:'09',title:'At the Restaurant',color:'#b45309',grammar:'I\'d like / Could I have (polite requests)',tag:'starter/main/dessert/bill'},
+  {icon:'✈️',n:'10',title:'Travel & Holidays',color:'#0369a1',grammar:'Present Perfect — Have been to',tag:'have/has been to · ever/never'},
+  {icon:'💼',n:'11',title:'Jobs & Work',color:'#0f766e',grammar:'Can / Can\'t (ability)',tag:'I can speak / can\'t drive'},
+];
+
+const sg = document.getElementById('summaryGrid');
+lessons.forEach(l => {
+  sg.innerHTML += `<div class="sum-card" style="cursor:pointer" onclick="location.href='../lesson-${l.n}/'">
+    <div style="position:absolute;top:0;left:0;right:0;height:3px;background:${l.color};border-radius:12px 12px 0 0"></div>
+    <div class="sum-icon">${l.icon}</div>
+    <div class="sum-lsn">Lesson ${l.n}</div>
+    <div class="sum-title">${l.title}</div>
+    <div class="sum-grammar" style="color:#666">${l.grammar}</div>
+    <div class="sum-tag" style="background:${l.color}22;color:${l.color}">${l.tag}</div>
+  </div>`;
+});
+
+/* ── GRAMMAR QUICK REVIEW ── */
+const gramReviews = [
+  {icon:'🔁',title:'Adverbs of Frequency (L01)',color:'#3b82f6',
+   content:`<div class="gram-box">S + ADV + V</div> &nbsp; <div class="gram-box">S + be + ADV</div>
+   <div class="gram-eg">I <strong>always</strong> wake up at 6. &nbsp;·&nbsp; She <strong>is never</strong> late.</div>
+   <div class="gram-note">Thứ tự: always → usually → often → sometimes → rarely → never (100% → 0%)</div>`},
+  {icon:'📖',title:'Past Simple (L02)',color:'#d97706',
+   content:`<div class="gram-box">S + V-ed / V2</div> &nbsp; <div class="gram-box">S + didn't + V</div> &nbsp; <div class="gram-box">Did + S + V?</div>
+   <div class="gram-eg">I <strong>went</strong> to Da Lat. &nbsp;·&nbsp; She <strong>didn't eat</strong> breakfast. &nbsp;·&nbsp; <strong>Did</strong> you enjoy it?</div>
+   <div class="gram-note">✗ "I didn't went" → ✓ "I didn't go" — phủ định luôn dùng V nguyên thể!</div>`},
+  {icon:'📊',title:'Comparatives & Superlatives (L06)',color:'#0284c7',
+   content:`<div class="gram-box">short adj + -er than</div> &nbsp; <div class="gram-box">more + long adj + than</div>
+   <div class="gram-eg">Today is <strong>hotter than</strong> yesterday. &nbsp;·&nbsp; July is <strong>the hottest</strong> month.</div>
+   <div class="gram-note">Bất quy tắc: good → better → best &nbsp;·&nbsp; bad → worse → worst</div>`},
+  {icon:'🔮',title:'Going to — Future Plans (L07)',color:'#7c3aed',
+   content:`<div class="gram-box">S + am/is/are + going to + V</div>
+   <div class="gram-eg">I <strong>am going to</strong> travel to Japan next year.</div>
+   <div class="gram-note">Going to = kế hoạch đã có sẵn từ trước · Will = quyết định tức thì khi đang nói</div>`},
+  {icon:'💡',title:'Should / Shouldn\'t (L08)',color:'#dc2626',
+   content:`<div class="gram-box">S + should + V</div> &nbsp; <div class="gram-box">S + shouldn't + V</div>
+   <div class="gram-eg">You <strong>should</strong> rest. &nbsp;·&nbsp; You <strong>shouldn't</strong> smoke.</div>
+   <div class="gram-note">Should = lời khuyên nhẹ nhàng · Must = bắt buộc · Had better = nên (mạnh hơn should)</div>`},
+  {icon:'🌍',title:'Present Perfect — Have been to (L10)',color:'#0369a1',
+   content:`<div class="gram-box">S + have/has + been to + place</div>
+   <div class="gram-eg"><strong>Have</strong> you <strong>ever been to</strong> Japan? &nbsp;·&nbsp; I've <strong>never been to</strong> Europe.</div>
+   <div class="gram-note">Been to = đã đến và đã về · Gone to = đã đi và đang ở đó (chưa về)</div>`},
+  {icon:'✅',title:'Can / Can\'t — Ability (L11)',color:'#0f766e',
+   content:`<div class="gram-box">S + can + V</div> &nbsp; <div class="gram-box">S + can't + V</div>
+   <div class="gram-eg">I <strong>can</strong> speak three languages. &nbsp;·&nbsp; She <strong>can't</strong> drive yet.</div>
+   <div class="gram-note">Can KHÔNG chia theo ngôi: He can (KHÔNG phải "He cans"). Could = lịch sự hơn hoặc quá khứ.</div>`},
+];
+const gc = document.getElementById('gramCards');
+gramReviews.forEach((g, i) => {
+  gc.innerHTML += `<div class="gram-review-card">
+    <div class="grr-header" onclick="toggleGram(${i})">
+      <span class="grr-icon">${g.icon}</span>
+      <span class="grr-title" style="color:${g.color}">${g.title}</span>
+      <span class="grr-chevron" id="gc${i}">▼</span>
+    </div>
+    <div class="grr-body" id="gb${i}">${g.content}</div>
+  </div>`;
+});
+function toggleGram(i) {
+  const body = document.getElementById('gb' + i);
+  const chev = document.getElementById('gc' + i);
+  const hdr  = body.previousElementSibling;
+  const open = body.classList.toggle('open');
+  hdr.classList.toggle('open', open);
+  chev.textContent = open ? '▲' : '▼';
+}
+
+/* ── FINAL TEST QUESTIONS (20) ── */
+const allQs = [
+  // L01 — Daily Routines
+  {lesson:'L01',color:'#3b82f6',q:'Câu nào đặt adverb of frequency ĐÚNG?',opts:['I wake up always at 6.','I always wake up at 6.','Always I wake up at 6.','I wake always up at 6.'],ans:1},
+  {lesson:'L01',color:'#3b82f6',q:'"twice a week" nghĩa là?',opts:['Một lần một tuần','Hai lần một ngày','Hai lần một tuần','Ba lần một tuần'],ans:2},
+  // L02 — Past Simple
+  {lesson:'L02',color:'#d97706',q:'Past Simple của "go" là?',opts:['goed','gone','went','goes'],ans:2},
+  {lesson:'L02',color:'#d97706',q:'Câu phủ định quá khứ đúng:',opts:["I didn't went.","I not went.","I didn't go.","I don't went."],ans:2},
+  // L03 — My Home
+  {lesson:'L03',color:'#059669',q:'"The cat is ___ the sofa." (bên dưới)',opts:['in','on','under','next to'],ans:2},
+  {lesson:'L03',color:'#059669',q:'Câu nào đúng?',opts:['There are a sofa.','There is two sofas.','There is a sofa.','There are sofa.'],ans:2},
+  // L04 — Shopping
+  {lesson:'L04',color:'#7c3aed',q:'"on sale" nghĩa là?',opts:['Hết hàng','Đang giảm giá','Hàng mới','Giá tăng'],ans:1},
+  {lesson:'L04',color:'#7c3aed',q:'Câu nào tự nhiên nhất khi quyết định mua?',opts:["I want this.","I'll take it.","Give me this.","This is mine."],ans:1},
+  // L05 — Getting Around
+  {lesson:'L05',color:'#0891b2',q:'"I go to school ___ bus."',opts:['in','on','by','with'],ans:2},
+  {lesson:'L05',color:'#0891b2',q:'"How long does it take?" hỏi về?',opts:['Khoảng cách','Phương tiện','Thời gian','Giá vé'],ans:2},
+  // L06 — Weather
+  {lesson:'L06',color:'#0284c7',q:'So sánh hơn của "hot" là?',opts:['hoter','hotter','more hot','hottest'],ans:1},
+  {lesson:'L06',color:'#0284c7',q:'So sánh nhất của "bad" là?',opts:['baddest','more bad','the worst','the baddest'],ans:2},
+  // L07 — Hobbies
+  {lesson:'L07',color:'#7c3aed',q:'"I ___ going to learn Japanese." (I)',opts:['am','is','are','be'],ans:0},
+  {lesson:'L07',color:'#7c3aed',q:'"She enjoys ___ (swim)" — Dạng đúng:',opts:['swim','to swim','swimming','swims'],ans:2},
+  // L08 — Health
+  {lesson:'L08',color:'#dc2626',q:'"You ___ eat junk food." (lời khuyên phủ định)',opts:['should','would','shouldn\'t','couldn\'t'],ans:2},
+  {lesson:'L08',color:'#dc2626',q:'"feel nauseous" nghĩa là?',opts:['Buồn ngủ','Buồn nôn','Chóng mặt','Mệt'],ans:1},
+  // L09 — Restaurant
+  {lesson:'L09',color:'#b45309',q:'Câu gọi món lịch sự nhất:',opts:["I want steak.","Give me steak.","Could I have the steak, please?","Steak!"],ans:2},
+  {lesson:'L09',color:'#b45309',q:'"starter" trong nhà hàng là?',opts:['Món chính','Món tráng miệng','Món khai vị','Đồ uống'],ans:2},
+  // L10 — Travel
+  {lesson:'L10',color:'#0369a1',q:'"Have you ever been to Japan?" — Trả lời đúng:',opts:['Yes, I have been.','Yes, I went.','Yes, I have!','Yes, I been.'],ans:2},
+  // L11 — Jobs
+  {lesson:'L11',color:'#0f766e',q:'Câu nào đúng với "can"?',opts:["He cans cook well.","He can cooks well.","He can cook well.","He can cooking well."],ans:2},
+];
+
+// Shuffle và lấy 20 câu (đủ rồi vì đúng 20)
+const shuffled = allQs.sort(() => Math.random() - .5);
+let answered = {}, correct = 0;
+
+function renderTest() {
+  const tqs = document.getElementById('testQs');
+  shuffled.forEach((q, i) => {
+    tqs.innerHTML += `<div class="test-q-block" id="tqb${i}">
+      <div class="tq-meta">
+        <span>Câu ${i+1}/20</span>
+        <span class="tq-lesson-tag" style="background:${q.color}22;color:${q.color}">${q.lesson}</span>
+      </div>
+      <div class="tq-q">${q.q}</div>
+      <div class="tq-opts">${q.opts.map((o,j)=>`<button class="tq-opt" id="tqo${i}_${j}" onclick="pickAns(${i},${j},${q.ans})">${o}</button>`).join('')}</div>
+    </div>`;
+  });
+  document.getElementById('submitArea').style.display = 'block';
+}
+
+function pickAns(qi, chosen, ans) {
+  if (answered[qi] !== undefined) return;
+  answered[qi] = chosen;
+  if (chosen === ans) correct++;
+  const done = Object.keys(answered).length;
+  document.getElementById('statDone').textContent = done;
+  document.getElementById('statRight').textContent = correct;
+  document.getElementById('testProg').style.width = `${done/20*100}%`;
+  for (let j = 0; j < shuffled[qi].opts.length; j++) {
+    const btn = document.getElementById(`tqo${qi}_${j}`);
+    btn.disabled = true;
+    if (j === ans) btn.classList.add('correct');
+    else if (j === chosen) btn.classList.add('wrong');
+  }
+}
+
+function submitTest() {
+  const done = Object.keys(answered).length;
+  if (done < 20) { alert(`Còn ${20-done} câu chưa trả lời!`); return; }
+  document.getElementById('testQs').style.display = 'none';
+  document.getElementById('submitArea').style.display = 'none';
+  const pct = Math.round(correct / 20 * 100);
+  let trophy, gradeClass, gradeLetter, msg;
+  if (pct >= 90)      { trophy='🏆'; gradeClass='grade-s'; gradeLetter='S'; msg='Xuất sắc tuyệt vời! Bạn thực sự thành thạo A2!'; }
+  else if (pct >= 75) { trophy='🥇'; gradeClass='grade-a'; gradeLetter='A'; msg='Hoàn thành A2! Sẵn sàng bước vào B1 rồi!'; }
+  else if (pct >= 60) { trophy='🥈'; gradeClass='grade-b'; gradeLetter='B'; msg='Kết quả tốt! Ôn lại một chút rồi lên B1 nhé.'; }
+  else                { trophy='💪'; gradeClass='grade-c'; gradeLetter='C'; msg='Ôn lại các bài học yếu và thử lại!'; }
+
+  const fr = document.getElementById('finalResult');
+  fr.style.display = 'block';
+  fr.innerHTML = `
+    <div class="res-trophy">${trophy}</div>
+    <div class="res-grade ${gradeClass}">${correct}/20 · ${pct}%</div>
+    <div class="res-sub">${msg}</div>
+    <div class="res-breakdown">
+      <div class="rb-item"><span class="rb-num">${correct}</span><span class="rb-lbl">Đúng</span></div>
+      <div class="rb-item"><span class="rb-num">${20-correct}</span><span class="rb-lbl">Sai</span></div>
+      <div class="rb-item"><span class="rb-num">${pct}%</span><span class="rb-lbl">Điểm</span></div>
+    </div>
+    ${pct >= 60 ? `
+    <div class="next-level-box">
+      <div class="nl-title">🚀 Bước tiếp theo — B1 Intermediate!</div>
+      <div class="nl-text">
+        Ở A2, bạn đã thành thạo: thì quá khứ đơn, tương lai "going to", hiện tại hoàn thành "have been to", so sánh (comparatives), can/can't, should/shouldn't, và từ vựng đa dạng về nhà cửa, mua sắm, du lịch, sức khỏe và công việc.
+        <br><br>
+        <strong style="color:#38bdf8">Ở B1, bạn sẽ học:</strong> Present Perfect nâng cao · Câu điều kiện · Câu bị động · Modal verbs · Kể chuyện phức tạp hơn · Viết paragraph · Và nhiều hơn nữa!
+      </div>
+    </div>` : `
+    <div style="background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);border-radius:10px;padding:.9rem;margin-bottom:.75rem;font-size:.82rem;color:var(--muted)">
+      📚 Gợi ý: Xem lại các lesson có tag đỏ trong bài test, ôn grammar và từ vựng, rồi thử lại!
+    </div>`}
+    <div style="display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center">
+      <button class="btn" onclick="location.reload()">🔄 Làm lại test</button>
+      <button class="btn btn-sec" onclick="location.href='../'">📚 Về A2</button>
+      ${pct >= 60 ? '<button class="btn" onclick="location.href=\'../../b1/\'">🚀 Lên B1!</button>' : ''}
+    </div>`;
+}
+
+renderTest();
+</script>
+</body></html>
