@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+
+  <link rel="stylesheet" href="../assets/brand.css">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A1 · Lesson 11 · My Body</title>
+<style>
+:root{--bg:#080d1a;--card:#0f1729;--card2:#131e35;--border:#1e2d4a;--text:#dde6f5;--muted:#8b9ab5;--accent:#e879f9;--acl:#f0abfc;--green:#10b981;--red:#ef4444}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;line-height:1.6;padding:1.5rem 1.25rem 3rem}
+.lsn-header{background:linear-gradient(135deg,#1a0020,#0f1729);border:1px solid var(--border);border-radius:16px;padding:1.5rem;margin-bottom:1.5rem;position:relative;overflow:hidden}
+.lsn-header::before{content:'';position:absolute;top:-40px;right:-40px;width:150px;height:150px;background:radial-gradient(circle,rgba(232,121,249,.3),transparent 70%);pointer-events:none}
+.lsn-badge{display:inline-flex;background:rgba(232,121,249,.15);border:1px solid rgba(240,171,252,.3);border-radius:20px;padding:.25rem .75rem;font-size:.7rem;font-weight:700;color:var(--acl);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.75rem}
+.lsn-header h1{font-size:1.6rem;font-weight:800;background:linear-gradient(90deg,#f5d0fe,#f0abfc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.4rem}
+.lsn-header p{color:var(--muted);font-size:.9rem}
+.objectives{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+.obj-tag{background:rgba(232,121,249,.12);border:1px solid rgba(232,121,249,.25);border-radius:20px;padding:.25rem .7rem;font-size:.75rem;color:var(--acl)}
+.sec-title{display:flex;align-items:center;gap:.6rem;font-size:1rem;font-weight:700;color:var(--acl);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)}
+/* Body diagram */
+.body-layout{display:grid;grid-template-columns:1fr 140px 1fr;gap:.5rem;margin-bottom:1.75rem;align-items:start}
+.body-labels-left,.body-labels-right{display:flex;flex-direction:column;gap:.5rem}
+.body-label{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:.4rem .7rem;font-size:.8rem;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:.4rem}
+.body-label:hover,.body-label.on{border-color:var(--accent);background:rgba(232,121,249,.08)}
+.bl-en{font-weight:700;color:var(--text)}.bl-vn{color:var(--muted);font-size:.72rem}
+.body-label.on .bl-vn{color:var(--acl)}
+.body-arrow-r{color:var(--accent);font-size:.7rem}
+.body-arrow-l{color:var(--accent);font-size:.7rem}
+.body-center{display:flex;flex-direction:column;align-items:center;gap:.3rem}
+.body-figure{font-size:5rem;text-align:center;filter:drop-shadow(0 0 20px rgba(232,121,249,.3))}
+.body-center-label{font-size:.72rem;color:var(--muted);text-align:center}
+/* Parts grid */
+.parts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:.6rem;margin-bottom:1.75rem}
+.part-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:.85rem;cursor:pointer;transition:all .2s;text-align:center}
+.part-card:hover,.part-card.flip{border-color:var(--accent);background:rgba(232,121,249,.07)}
+.part-emoji{font-size:1.4rem;margin-bottom:.3rem}.part-en{font-size:.9rem;font-weight:700;color:var(--text)}.part-vn{font-size:.78rem;color:var(--muted)}
+.part-card.flip .part-eg{display:block}.part-eg{display:none;font-size:.7rem;color:var(--acl);margin-top:.2rem;font-style:italic}
+.grammar-box{background:linear-gradient(135deg,rgba(232,121,249,.1),rgba(240,171,252,.06));border:1px solid rgba(232,121,249,.2);border-radius:12px;padding:1.1rem;margin-bottom:1.75rem}
+.grammar-box h3{color:var(--acl);font-size:.9rem;margin-bottom:.8rem}
+.gram-row{display:flex;gap:.5rem;align-items:center;margin-bottom:.5rem;font-size:.88rem;flex-wrap:wrap}
+.gram-box{background:rgba(232,121,249,.15);border-radius:6px;padding:.2rem .7rem;color:var(--acl);font-weight:700;font-family:monospace}
+.pattern-list{display:flex;flex-direction:column;gap:.6rem;margin-bottom:1.75rem}
+.pattern-item{background:var(--card);border-left:3px solid var(--accent);border-radius:0 10px 10px 0;padding:.8rem 1rem}
+.pat-en{font-size:1rem;font-weight:600;color:var(--text)}.pat-vn{font-size:.82rem;color:var(--muted);margin-top:.2rem}.pat-note{font-size:.78rem;color:var(--acl);margin-top:.25rem;font-style:italic}
+.convo-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1.75rem}
+.convo-line{display:flex;gap:.7rem;margin-bottom:.65rem;align-items:flex-start}
+.spk-a{color:#f0abfc;font-size:.7rem;font-weight:700;text-transform:uppercase;min-width:32px;margin-top:.2rem}
+.spk-d{color:#fbbf24;font-size:.7rem;font-weight:700;text-transform:uppercase;min-width:32px;margin-top:.2rem}
+.bubble{background:var(--card2);border-radius:0 10px 10px 10px;padding:.55rem .85rem;font-size:.9rem;flex:1}
+.bubble.d{border-radius:10px 10px 10px 0;background:rgba(251,191,36,.07);border:1px solid rgba(251,191,36,.15)}
+/* Point game */
+.point-game{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1.75rem}
+.point-game h3{color:var(--acl);font-size:.9rem;margin-bottom:.75rem}
+.pg-q{font-size:1rem;font-weight:700;color:var(--acl);text-align:center;padding:.75rem;background:rgba(232,121,249,.08);border-radius:8px;margin-bottom:.75rem}
+.pg-opts{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem}
+.pg-opt{background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:.5rem;font-size:.82rem;cursor:pointer;text-align:center;transition:all .2s}
+.pg-opt:hover{border-color:var(--accent)}.pg-opt.ok{border-color:var(--green);background:rgba(16,185,129,.15);color:var(--green)}.pg-opt.no{border-color:var(--red);color:var(--red)}
+.pg-fb{font-size:.82rem;margin-top:.5rem;min-height:1rem;text-align:center}
+.pg-fb.ok{color:var(--green)}.pg-fb.no{color:var(--red)}
+.quiz-section{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.25rem;margin-bottom:1.75rem}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+.quiz-q{font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:.75rem;padding:.75rem;background:var(--card2);border-radius:8px}
+.quiz-opts{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.5rem}
+.quiz-opt{background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:.55rem .75rem;font-size:.85rem;cursor:pointer;transition:all .18s;color:var(--text);text-align:left}
+.quiz-opt:hover:not(:disabled){border-color:var(--accent);color:var(--acl)}.quiz-opt.correct{border-color:var(--green)!important;background:rgba(16,185,129,.15)!important;color:var(--green)!important}.quiz-opt.wrong{border-color:var(--red)!important;background:rgba(239,68,68,.1)!important;color:var(--red)!important}.quiz-opt:disabled{cursor:default}
+.quiz-feedback{font-size:.8rem;margin:.4rem 0 .6rem;min-height:1rem}.quiz-feedback.ok{color:var(--green)}.quiz-feedback.no{color:var(--red)}
+.quiz-nav{display:flex;gap:.5rem;align-items:center;justify-content:space-between}
+.btn{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:.5rem 1.1rem;font-size:.85rem;font-weight:700;cursor:pointer;transition:opacity .2s}.btn:hover{opacity:.85}
+.btn-sm{background:rgba(232,121,249,.15);color:var(--acl);border:1px solid var(--acl);border-radius:6px;padding:.3rem .7rem;font-size:.8rem;cursor:pointer}
+.progress-bar{background:var(--border);border-radius:4px;height:4px;flex:1;overflow:hidden}.progress-fill{background:linear-gradient(90deg,var(--accent),#f5d0fe);height:100%;border-radius:4px;transition:width .3s}
+.result-box{text-align:center;padding:1.25rem;display:none}.result-emoji{font-size:2.5rem;margin-bottom:.5rem}.result-score{font-size:1.5rem;font-weight:800;color:var(--acl);margin-bottom:.25rem}.result-msg{font-size:.85rem;color:var(--muted);margin-bottom:1rem}
+.lesson-footer{display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border)}
+.footer-nav a{color:var(--accent);text-decoration:none;font-size:.85rem;font-weight:600}
+</style>
+</head>
+<body>
+
+  <img src="../assets/logo-SH.png" class="sh-logo" alt="Science Horizon">
+<div class="lsn-header">
+  <div class="lsn-badge">🫀 People & Everyday Life · Lesson 11</div>
+  <h1>My Body</h1>
+  <p>Học các bộ phận cơ thể và cách mô tả ngoại hình, tình trạng sức khỏe!</p>
+  <div class="objectives">
+    <span class="obj-tag">🫀 Bộ phận cơ thể</span>
+    <span class="obj-tag">🤕 Nói khi đau</span>
+    <span class="obj-tag">👁️ Mô tả ngoại hình</span>
+    <span class="obj-tag">📝 have/has</span>
+  </div>
+</div>
+
+<!-- BODY PARTS GRID -->
+<div class="sec-title"><span>🫀</span> Bộ Phận Cơ Thể <small style="color:var(--muted);font-weight:400;font-size:.78rem">(nhấn xem ví dụ)</small></div>
+<div class="parts-grid" id="partsGrid"></div>
+
+<!-- GRAMMAR -->
+<div class="sec-title"><span>📐</span> Ngữ Pháp</div>
+<div class="grammar-box">
+  <h3>✏️ have / has — Mô tả đặc điểm cơ thể</h3>
+  <div class="gram-row"><span class="gram-box">I have</span><span>black hair and brown eyes.</span><span style="color:var(--muted);font-size:.8rem">→ Tôi có tóc đen và mắt nâu.</span></div>
+  <div class="gram-row"><span class="gram-box">She has</span><span>a small nose and big eyes.</span><span style="color:var(--muted);font-size:.8rem">→ Cô ấy có mũi nhỏ và mắt to.</span></div>
+  <div class="gram-row"><span class="gram-box">I have</span><span style="color:var(--red)">a headache.</span><span style="color:var(--muted);font-size:.8rem">→ Tôi bị đau đầu.</span></div>
+  <div class="gram-row"><span class="gram-box">My</span><span style="color:var(--red)">leg hurts.</span><span style="color:var(--muted);font-size:.8rem">→ Chân tôi bị đau.</span></div>
+  <div style="margin-top:.75rem;font-size:.82rem;color:var(--muted);background:rgba(232,121,249,.07);border-radius:8px;padding:.6rem .9rem">
+    💡 <strong style="color:var(--acl)">Nói khi đau:</strong> "I have a + [bộ phận]ache" → headache (đau đầu), stomachache (đau bụng), toothache (đau răng), backache (đau lưng)
+  </div>
+</div>
+
+<!-- PATTERNS -->
+<div class="sec-title"><span>💬</span> Mẫu Câu</div>
+<div class="pattern-list">
+  <div class="pattern-item"><div class="pat-en">"I have [adj] hair and [adj] eyes."</div><div class="pat-vn">→ Tôi có tóc [màu/kiểu] và mắt [màu].</div><div class="pat-note">💡 Hair: long (dài), short (ngắn), curly (xoăn), straight (thẳng), black/brown/blonde</div></div>
+  <div class="pattern-item"><div class="pat-en">"I have a [body part]ache." / "My [body part] hurts."</div><div class="pat-vn">→ Tôi bị đau [bộ phận].</div><div class="pat-note">💡 "I have a headache." = "My head hurts." — cả hai đều đúng</div></div>
+  <div class="pattern-item"><div class="pat-en">"Touch your [body part]!" — "Simon says, touch your nose!"</div><div class="pat-vn">→ Chạm vào [bộ phận] đi!</div><div class="pat-note">💡 Simon says = trò chơi trong lớp học — chỉ làm khi nghe "Simon says"</div></div>
+</div>
+
+<!-- CONVERSATION -->
+<div class="sec-title"><span>🗣️</span> Hội Thoại — Tại Phòng Mạch</div>
+<div class="convo-box">
+  <div class="convo-line"><span class="spk-d">Doctor</span><div class="bubble d">Good morning! What's the problem?</div></div>
+  <div class="convo-line"><span class="spk-a">A</span><div class="bubble">Good morning, Doctor. I have a headache and my throat hurts.</div></div>
+  <div class="convo-line"><span class="spk-d">Doctor</span><div class="bubble d">I see. How long have you had this problem?</div></div>
+  <div class="convo-line"><span class="spk-a">A</span><div class="bubble">Since yesterday. My stomach hurts too.</div></div>
+  <div class="convo-line"><span class="spk-d">Doctor</span><div class="bubble d">Open your mouth, please. Say "Ahh". Now — does your chest hurt?</div></div>
+  <div class="convo-line"><span class="spk-a">A</span><div class="bubble">No, my chest is fine. Just my head, throat and stomach.</div></div>
+  <div class="convo-line"><span class="spk-d">Doctor</span><div class="bubble d">You have a cold. Drink lots of water and rest. I'll give you some medicine.</div></div>
+</div>
+
+<!-- POINT GAME -->
+<div class="sec-title"><span>🎮</span> Luyện Tập — Simon Says!</div>
+<div class="point-game">
+  <h3>Nhấn đúng bộ phận cơ thể được hỏi:</h3>
+  <div class="pg-q" id="pgQ">Đang tải...</div>
+  <div class="pg-opts" id="pgOpts"></div>
+  <div class="pg-fb" id="pgFB"></div>
+  <button class="btn-sm" id="pgNext" onclick="nextBodyQ()" style="display:none;margin-top:.5rem">Câu tiếp →</button>
+</div>
+
+<!-- QUIZ -->
+<div class="sec-title"><span>🎯</span> Quiz Nhanh (5 câu)</div>
+<div class="quiz-section">
+  <div class="quiz-header"><span id="quizTitle" style="font-size:.85rem;color:var(--muted)">Câu 1 / 5</span><span id="quizScoreDisplay" style="font-size:.85rem;color:var(--muted)">Điểm: 0</span></div>
+  <div id="quizContent">
+    <div class="quiz-q" id="quizQ"></div>
+    <div class="quiz-opts" id="quizOpts"></div>
+    <div class="quiz-feedback" id="quizFB"></div>
+    <div class="quiz-nav"><div class="progress-bar"><div class="progress-fill" id="quizProgress" style="width:20%"></div></div><button class="btn" id="quizNext" style="display:none" onclick="nextQ()">Tiếp →</button></div>
+  </div>
+  <div class="result-box" id="quizResult"><div class="result-emoji" id="resEmoji"></div><div class="result-score" id="resScore"></div><div class="result-msg" id="resMsg"></div><button class="btn" onclick="resetQuiz()">🔄 Làm lại</button></div>
+</div>
+
+<div class="lesson-footer">
+  <div class="footer-nav">← <a href="../lesson-10/">Lesson 10</a></div>
+  <div style="font-size:.8rem;color:var(--muted)">A1 · Lesson 11 / 12</div>
+  <div class="footer-nav"><a href="../lesson-12/">Lesson 12 →</a></div>
+</div>
+
+<script>
+const parts=[{e:'👁️',en:'eye',vn:'mắt',eg:'I have brown eyes.'},{e:'👃',en:'nose',vn:'mũi',eg:'She has a small nose.'},{e:'👄',en:'mouth',vn:'miệng',eg:'Open your mouth!'},{e:'👂',en:'ear',vn:'tai',eg:'I can hear with my ears.'},{e:'💇',en:'hair',vn:'tóc',eg:'He has short black hair.'},{e:'🧠',en:'head',vn:'đầu',eg:'I have a headache.'},{e:'🦷',en:'tooth/teeth',vn:'răng',eg:'Brush your teeth!'},{e:'🦶',en:'foot/feet',vn:'bàn chân',eg:'My feet are sore.'},{e:'🤚',en:'hand',vn:'bàn tay',eg:'Raise your hand!'},{e:'💪',en:'arm',vn:'cánh tay',eg:'He has strong arms.'},{e:'🦵',en:'leg',vn:'chân',eg:'My leg hurts.'},{e:'🫀',en:'heart',vn:'tim',eg:'Your heart is strong.'}];
+const pg=document.getElementById('partsGrid');
+parts.forEach(p=>{pg.innerHTML+=`<div class="part-card" onclick="this.classList.toggle('flip')"><div class="part-emoji">${p.e}</div><div class="part-en">${p.en}</div><div class="part-vn">${p.vn}</div><div class="part-eg">"${p.eg}"</div></div>`;});
+
+// Body quiz game
+const bodyQs=[
+  {q:'Touch your 👁️ eyes!',correct:'eyes',opts:['nose','eyes','mouth','ear']},
+  {q:'Point to your 👂 ear!',correct:'ear',opts:['hair','arm','ear','leg']},
+  {q:'Touch your 👄 mouth!',correct:'mouth',opts:['mouth','eye','foot','hand']},
+  {q:'Raise your 🤚 hand!',correct:'hand',opts:['leg','head','hand','tooth']},
+  {q:'Touch your 👃 nose!',correct:'nose',opts:['ear','nose','arm','eye']},
+];
+let bqi=0;
+function renderBodyQ(){
+  if(bqi>=bodyQs.length){document.getElementById('pgQ').textContent='🎉 Bạn giỏi lắm!';document.getElementById('pgOpts').innerHTML='';document.getElementById('pgFB').textContent='';document.getElementById('pgNext').style.display='none';return;}
+  const q=bodyQs[bqi];
+  document.getElementById('pgQ').textContent=q.q;
+  document.getElementById('pgFB').textContent='';document.getElementById('pgFB').className='pg-fb';
+  document.getElementById('pgNext').style.display='none';
+  const opts=document.getElementById('pgOpts');opts.innerHTML='';
+  const shuffled=[...q.opts].sort(()=>Math.random()-.5);
+  shuffled.forEach(o=>{opts.innerHTML+=`<button class="pg-opt" onclick="checkBodyQ('${o}','${q.correct}',this)">${o}</button>`;});
+}
+function checkBodyQ(ans,correct,btn){
+  document.querySelectorAll('.pg-opt').forEach(b=>b.style.pointerEvents='none');
+  if(ans===correct){btn.classList.add('ok');document.getElementById('pgFB').textContent='✅ Đúng rồi!';document.getElementById('pgFB').className='pg-fb ok';}
+  else{btn.classList.add('no');document.querySelectorAll('.pg-opt').forEach(b=>{if(b.textContent===correct)b.classList.add('ok');});document.getElementById('pgFB').textContent='❌ Sai! Xem đáp án xanh.';document.getElementById('pgFB').className='pg-fb no';}
+  document.getElementById('pgNext').style.display='inline-block';
+}
+function nextBodyQ(){bqi++;renderBodyQ();}
+renderBodyQ();
+
+const qs=[{q:'"I have a headache." nghĩa là?',opts:['Tôi nhức mắt','Tôi đau đầu','Tôi đau lưng','Tôi đau bụng'],ans:1},{q:'Câu nào đúng khi mô tả người khác?',opts:['She have blue eyes.','She has blue eyes.','She is blue eyes.','Her have blue eyes.'],ans:1},{q:'"tooth" số nhiều là?',opts:['tooths','teeths','teeth','tooth'],ans:2},{q:'Từ nào là bộ phận trên khuôn mặt?',opts:['arm','leg','ear','knee'],ans:2},{q:'"My stomach hurts." — đau ở đâu?',opts:['Đầu','Lưng','Bụng','Chân'],ans:2}];
+let qi=0,score=0;
+function renderQ(){const q=qs[qi];document.getElementById('quizTitle').textContent=`Câu ${qi+1} / ${qs.length}`;document.getElementById('quizProgress').style.width=`${((qi+1)/qs.length)*100}%`;document.getElementById('quizQ').textContent=q.q;document.getElementById('quizFB').textContent='';document.getElementById('quizFB').className='quiz-feedback';document.getElementById('quizNext').style.display='none';const opts=document.getElementById('quizOpts');opts.innerHTML='';q.opts.forEach((o,i)=>{const btn=document.createElement('button');btn.className='quiz-opt';btn.textContent=o;btn.onclick=()=>{document.querySelectorAll('.quiz-opt').forEach(b=>b.disabled=true);if(i===q.ans){btn.classList.add('correct');score++;document.getElementById('quizFB').textContent='✅ Chính xác!';document.getElementById('quizFB').className='quiz-feedback ok';}else{btn.classList.add('wrong');document.querySelectorAll('.quiz-opt')[q.ans].classList.add('correct');document.getElementById('quizFB').textContent='❌ Sai rồi!';document.getElementById('quizFB').className='quiz-feedback no';}document.getElementById('quizScoreDisplay').textContent=`Điểm: ${score}`;document.getElementById('quizNext').style.display='inline-block';};opts.appendChild(btn);});}
+function nextQ(){qi++;if(qi>=qs.length){document.getElementById('quizContent').style.display='none';const r=document.getElementById('quizResult');r.style.display='block';const pct=Math.round(score/qs.length*100);document.getElementById('resEmoji').textContent=pct>=80?'🏆':pct>=60?'👍':'💪';document.getElementById('resScore').textContent=`${score} / ${qs.length} đúng (${pct}%)`;document.getElementById('resMsg').textContent=pct>=80?'Tuyệt! Bạn biết hết bộ phận cơ thể rồi!':'Ôn lại và thử tiếp nhé!';}else renderQ();}
+function resetQuiz(){qi=0;score=0;document.getElementById('quizScoreDisplay').textContent='Điểm: 0';document.getElementById('quizContent').style.display='block';document.getElementById('quizResult').style.display='none';renderQ();}
+renderQ();
+</script>
+</body></html>
