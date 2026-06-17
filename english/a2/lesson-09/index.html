@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+
+  <link rel="stylesheet" href="../assets/brand.css">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A2 · Lesson 09 · At the Restaurant</title>
+<style>
+:root{--bg:#080d1a;--card:#0f1729;--card2:#131e35;--border:#1e2d4a;--text:#dde6f5;--muted:#8b9ab5;--accent:#b45309;--accent2:#fcd34d;--green:#10b981;--red:#ef4444}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;line-height:1.6;padding:1.5rem 1.25rem 3rem}
+.lsn-header{background:linear-gradient(135deg,#1a0e00,#0f1729);border:1px solid var(--border);border-radius:16px;padding:1.5rem;margin-bottom:1.5rem;position:relative;overflow:hidden}
+.lsn-header::before{content:'';position:absolute;top:-40px;right:-40px;width:150px;height:150px;background:radial-gradient(circle,rgba(180,83,9,.3),transparent 70%);pointer-events:none}
+.lsn-badge{display:inline-flex;background:rgba(180,83,9,.15);border:1px solid rgba(252,211,77,.3);border-radius:20px;padding:.25rem .75rem;font-size:.7rem;font-weight:700;color:var(--accent2);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.75rem}
+.lsn-header h1{font-size:1.6rem;font-weight:800;background:linear-gradient(90deg,#fef3c7,#fcd34d);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.4rem}
+.lsn-header p{color:var(--muted);font-size:.9rem}
+.objectives{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+.obj-tag{background:rgba(180,83,9,.12);border:1px solid rgba(180,83,9,.25);border-radius:20px;padding:.25rem .7rem;font-size:.75rem;color:var(--accent2)}
+.sec-title{display:flex;align-items:center;gap:.6rem;font-size:1rem;font-weight:700;color:var(--accent2);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)}
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:.6rem;margin-bottom:1.75rem}
+.vocab-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:.8rem;cursor:pointer;transition:all .2s}
+.vocab-card:hover,.vocab-card.flip{border-color:var(--accent);background:rgba(180,83,9,.08)}
+.vc-en{font-size:.9rem;font-weight:700;color:var(--text)}.vc-vn{font-size:.78rem;color:var(--muted);margin-top:.1rem}
+.vocab-card.flip .vc-eg{display:block}.vc-eg{display:none;font-size:.7rem;color:var(--accent2);margin-top:.2rem;font-style:italic}
+.grammar-box{background:linear-gradient(135deg,rgba(180,83,9,.1),rgba(180,83,9,.04));border:1px solid rgba(180,83,9,.2);border-radius:12px;padding:1.1rem;margin-bottom:1.75rem}
+.grammar-box h3{color:var(--accent2);font-size:.9rem;margin-bottom:.8rem}
+.gram-box{background:rgba(180,83,9,.2);border-radius:6px;padding:.2rem .7rem;color:var(--accent2);font-weight:700;font-family:monospace;display:inline-block}
+.gram-row{display:flex;gap:.5rem;align-items:center;margin-bottom:.5rem;font-size:.88rem;flex-wrap:wrap}
+.menu-card{background:linear-gradient(135deg,rgba(180,83,9,.08),rgba(180,83,9,.04));border:1px solid rgba(180,83,9,.2);border-radius:12px;padding:1rem;margin-bottom:1.75rem}
+.menu-card h3{color:var(--accent2);font-size:.9rem;margin-bottom:.75rem}
+.menu-section{margin-bottom:.8rem}
+.menu-title{font-size:.75rem;font-weight:700;color:var(--accent2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.4rem;padding-bottom:.3rem;border-bottom:1px solid rgba(180,83,9,.2)}
+.menu-item{display:flex;justify-content:space-between;align-items:center;padding:.35rem 0;font-size:.88rem;border-bottom:1px dashed rgba(255,255,255,.05)}
+.menu-name{color:var(--text)}.menu-desc{font-size:.72rem;color:var(--muted);margin-top:.1rem}.menu-price{color:var(--accent2);font-weight:700;font-family:monospace;flex-shrink:0}
+.pattern-list{margin-bottom:1.75rem}
+.pattern-item{background:var(--card);border-left:3px solid var(--accent);border-radius:0 10px 10px 0;padding:.8rem 1rem;margin-bottom:.6rem}
+.pat-en{font-size:1rem;font-weight:600;color:var(--text)}.pat-vn{font-size:.82rem;color:var(--muted);margin-top:.2rem}.pat-note{font-size:.78rem;color:var(--accent2);margin-top:.25rem;font-style:italic}
+.convo-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1.75rem}
+.convo-line{display:flex;gap:.7rem;margin-bottom:.65rem;align-items:flex-start}
+.spk-w{color:#fcd34d;font-size:.7rem;font-weight:700;text-transform:uppercase;min-width:40px;margin-top:.2rem}
+.spk-c{color:#34d399;font-size:.7rem;font-weight:700;text-transform:uppercase;min-width:40px;margin-top:.2rem}
+.bubble{background:var(--card2);border-radius:0 10px 10px 10px;padding:.55rem .85rem;font-size:.9rem;flex:1}
+.bubble.c{border-radius:10px 10px 10px 0;background:rgba(52,211,153,.07);border:1px solid rgba(52,211,153,.15)}
+.order-game{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1.75rem}
+.order-game h3{color:var(--accent2);font-size:.9rem;margin-bottom:.75rem}
+.order-items{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.6rem}
+.order-word{background:var(--card2);border:1.5px solid var(--border);border-radius:7px;padding:.35rem .75rem;font-size:.88rem;cursor:pointer;transition:all .18s;user-select:none}
+.order-word:hover{border-color:var(--accent)}.order-word.picked{opacity:.35;pointer-events:none}
+.order-sentence{min-height:40px;background:rgba(180,83,9,.06);border:1px dashed rgba(180,83,9,.3);border-radius:8px;padding:.45rem .75rem;display:flex;flex-wrap:wrap;gap:.35rem;align-items:center;margin-bottom:.5rem}
+.placed{background:rgba(180,83,9,.15);border:1px solid rgba(180,83,9,.4);border-radius:6px;padding:.2rem .55rem;font-size:.85rem;color:var(--accent2);cursor:pointer}
+.quiz-section{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.25rem;margin-bottom:1.75rem}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+.quiz-q{font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:.75rem;padding:.75rem;background:var(--card2);border-radius:8px}
+.quiz-opts{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.5rem}
+.quiz-opt{background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:.55rem .75rem;font-size:.85rem;cursor:pointer;transition:all .18s;color:var(--text);text-align:left}
+.quiz-opt:hover:not(:disabled){border-color:var(--accent);color:var(--accent2)}.quiz-opt.correct{border-color:var(--green)!important;background:rgba(16,185,129,.15)!important;color:var(--green)!important}.quiz-opt.wrong{border-color:var(--red)!important;background:rgba(239,68,68,.1)!important;color:var(--red)!important}.quiz-opt:disabled{cursor:default}
+.quiz-feedback{font-size:.8rem;margin:.4rem 0 .6rem;min-height:1rem}.quiz-feedback.ok{color:var(--green)}.quiz-feedback.no{color:var(--red)}
+.quiz-nav{display:flex;gap:.5rem;align-items:center;justify-content:space-between}
+.btn{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:.5rem 1.1rem;font-size:.85rem;font-weight:700;cursor:pointer;transition:opacity .2s}.btn:hover{opacity:.85}
+.btn-sm{background:rgba(180,83,9,.2);color:var(--accent2);border:1px solid var(--accent2);border-radius:6px;padding:.3rem .7rem;font-size:.8rem;cursor:pointer}
+.progress-bar{background:var(--border);border-radius:4px;height:4px;flex:1;overflow:hidden}.progress-fill{background:var(--accent);height:100%;border-radius:4px;transition:width .3s}
+.result-box{text-align:center;padding:1.25rem;display:none}.result-emoji{font-size:2.5rem;margin-bottom:.5rem}.result-score{font-size:1.5rem;font-weight:800;color:var(--accent2);margin-bottom:.25rem}.result-msg{font-size:.85rem;color:var(--muted);margin-bottom:1rem}
+.lesson-footer{display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border)}
+.footer-nav a{color:var(--accent);text-decoration:none;font-size:.85rem;font-weight:600}
+</style>
+</head>
+<body>
+<img src="../assets/logo-SH.png" class="sh-logo" alt="Science Horizon">
+<div class="lsn-header">
+  <div class="lsn-badge">🍽️ A2 Daily English · Lesson 09</div>
+  <h1>At the Restaurant</h1>
+  <p>Gọi món, hỏi về thực đơn và nói về trải nghiệm ẩm thực — đầy đủ từ đặt bàn đến thanh toán!</p>
+  <div class="objectives">
+    <span class="obj-tag">🍽️ Từ vựng nhà hàng</span>
+    <span class="obj-tag">🛎️ Gọi món đúng cách</span>
+    <span class="obj-tag">💬 I'd like / Can I have</span>
+    <span class="obj-tag">💳 Thanh toán</span>
+  </div>
+</div>
+
+<div class="sec-title"><span>📚</span> Từ Vựng Nhà Hàng <small style="color:var(--muted);font-weight:400;font-size:.78rem">(nhấn xem ví dụ)</small></div>
+<div class="vocab-grid" id="vocabGrid"></div>
+
+<div class="sec-title"><span>📋</span> Menu Mẫu</div>
+<div class="menu-card">
+  <h3>🍽️ The Garden Restaurant — Sample Menu</h3>
+  <div id="menuContent"></div>
+</div>
+
+<div class="sec-title"><span>📐</span> Ngữ Pháp — Gọi Món & Yêu Cầu Lịch Sự</div>
+<div class="grammar-box">
+  <h3>✏️ Cách gọi món từ lịch sự đến rất lịch sự</h3>
+  <div class="gram-row"><span style="color:var(--muted);min-width:50px">Level 1</span><span class="gram-box">I want</span><span>a steak, please.</span><span style="color:var(--muted);font-size:.78rem">→ thẳng, ít dùng ở nhà hàng</span></div>
+  <div class="gram-row"><span style="color:var(--muted);min-width:50px">Level 2</span><span class="gram-box">I'd like</span><span>the pasta, please.</span><span style="color:var(--muted);font-size:.78rem">→ phổ biến, lịch sự</span></div>
+  <div class="gram-row"><span style="color:var(--muted);min-width:50px">Level 3</span><span class="gram-box">Could I have</span><span>the soup to start?</span><span style="color:var(--muted);font-size:.78rem">→ rất lịch sự ✓</span></div>
+  <div class="gram-row"><span style="color:var(--muted);min-width:50px">Level 4</span><span class="gram-box">Could I possibly have</span><span>a table for two?</span><span style="color:var(--muted);font-size:.78rem">→ cực kỳ lịch sự</span></div>
+  <div style="margin-top:.75rem;font-size:.82rem;color:var(--muted);background:rgba(180,83,9,.07);border-radius:8px;padding:.6rem .9rem">
+    💡 <strong style="color:var(--accent2)">Các câu hay dùng:</strong> "Is service included?" (Đã bao gồm phí phục vụ chưa?) · "Could we have the bill/check, please?" (Cho tôi xin hóa đơn) · "What do you recommend?" (Bạn gợi ý món gì?)
+  </div>
+</div>
+
+<div class="sec-title"><span>💬</span> Mẫu Câu</div>
+<div class="pattern-list">
+  <div class="pattern-item"><div class="pat-en">"A table for two, please." / "I have a reservation under the name Mai."</div><div class="pat-vn">→ Cho tôi bàn 2 người. / Tôi đã đặt bàn dưới tên Mai.</div><div class="pat-note">💡 reservation = đặt bàn trước · walk-in = đến trực tiếp không đặt trước</div></div>
+  <div class="pattern-item"><div class="pat-en">"Could I have the grilled chicken with a side salad, please?"</div><div class="pat-vn">→ Cho tôi gà nướng với salad phụ không ạ?</div><div class="pat-note">💡 side dish = món phụ đi kèm · main course = món chính · starter = khai vị · dessert = tráng miệng</div></div>
+  <div class="pattern-item"><div class="pat-en">"Excuse me, I didn't order this." / "I'm sorry, but my food is cold."</div><div class="pat-vn">→ Xin lỗi, tôi không gọi món này. / Xin lỗi nhưng đồ ăn của tôi bị lạnh.</div><div class="pat-note">💡 Khiếu nại lịch sự: bắt đầu bằng "Excuse me" hoặc "I'm sorry, but..."</div></div>
+  <div class="pattern-item"><div class="pat-en">"Could we have the bill, please?" / "Can we pay separately?"</div><div class="pat-vn">→ Cho chúng tôi xin hóa đơn. / Chúng tôi có thể trả riêng không?</div><div class="pat-note">💡 split the bill = chia hóa đơn · go Dutch = mỗi người trả phần của mình</div></div>
+</div>
+
+<div class="sec-title"><span>🗣️</span> Hội Thoại — Tại Nhà Hàng</div>
+<div class="convo-box">
+  <div class="convo-line"><span class="spk-w">Waiter</span><div class="bubble">Good evening! Do you have a reservation?</div></div>
+  <div class="convo-line"><span class="spk-c">Cust.</span><div class="bubble c">Yes, I have a reservation for two under the name Linh.</div></div>
+  <div class="convo-line"><span class="spk-w">Waiter</span><div class="bubble">Of course! Right this way. Here are your menus. Can I get you something to drink while you decide?</div></div>
+  <div class="convo-line"><span class="spk-c">Cust.</span><div class="bubble c">Could we have some sparkling water, please? And could you tell us what you recommend?</div></div>
+  <div class="convo-line"><span class="spk-w">Waiter</span><div class="bubble">Certainly! Tonight's special is the grilled salmon with lemon butter sauce — it's very popular. Are you ready to order?</div></div>
+  <div class="convo-line"><span class="spk-c">Cust.</span><div class="bubble c">Yes. I'd like the tomato soup to start, and then the grilled salmon as my main. And my friend would like the Caesar salad and the mushroom pasta.</div></div>
+  <div class="convo-line"><span class="spk-w">Waiter</span><div class="bubble">Excellent choices! I'll have that with you shortly.</div></div>
+  <div class="convo-line"><span class="spk-c">Cust.</span><div class="bubble c">[later] Excuse me, could we have the bill, please?</div></div>
+  <div class="convo-line"><span class="spk-w">Waiter</span><div class="bubble">Of course! Will you be paying together or separately?</div></div>
+  <div class="convo-line"><span class="spk-c">Cust.</span><div class="bubble c">Together, please. Can we pay by card?</div></div>
+</div>
+
+<div class="sec-title"><span>🎮</span> Luyện Tập — Sắp Xếp Câu Gọi Món</div>
+<div class="order-game">
+  <h3>Sắp xếp các từ thành câu đúng — nhấn từ theo thứ tự:</h3>
+  <div id="orderArea"></div>
+</div>
+
+<div class="sec-title"><span>🎯</span> Quiz Nhanh (5 câu)</div>
+<div class="quiz-section">
+  <div class="quiz-header"><span id="quizTitle" style="font-size:.85rem;color:var(--muted)">Câu 1 / 5</span><span id="quizScoreDisplay" style="font-size:.85rem;color:var(--muted)">Điểm: 0</span></div>
+  <div id="quizContent">
+    <div class="quiz-q" id="quizQ"></div>
+    <div class="quiz-opts" id="quizOpts"></div>
+    <div class="quiz-feedback" id="quizFB"></div>
+    <div class="quiz-nav"><div class="progress-bar"><div class="progress-fill" id="quizProgress" style="width:20%"></div></div><button class="btn" id="quizNext" style="display:none" onclick="nextQ()">Tiếp →</button></div>
+  </div>
+  <div class="result-box" id="quizResult"><div class="result-emoji" id="resEmoji"></div><div class="result-score" id="resScore"></div><div class="result-msg" id="resMsg"></div><button class="btn" onclick="resetQuiz()">🔄 Làm lại</button></div>
+</div>
+<div class="lesson-footer"><div class="footer-nav">← <a href="../lesson-08/">Lesson 08</a></div><div style="font-size:.8rem;color:var(--muted)">A2 · Lesson 09 / 12</div><div class="footer-nav"><a href="../lesson-10/">Lesson 10 →</a></div></div>
+
+<script>
+const vocab=[{en:'menu',vn:'thực đơn',eg:'Can I see the menu?'},{en:'reservation',vn:'đặt bàn trước',eg:'I have a reservation.'},{en:'starter / appetiser',vn:'món khai vị',eg:"I'd like the soup as a starter."},{en:'main course',vn:'món chính',eg:'For my main, I\'ll have the steak.'},{en:'dessert',vn:'món tráng miệng',eg:'The chocolate cake for dessert!'},{en:'side dish',vn:'món phụ',eg:'Can I have fries as a side?'},{en:'bill / check',vn:'hóa đơn',eg:'Could we have the bill?'},{en:'tip',vn:'tiền boa',eg:'Shall we leave a tip?'},{en:'takeaway / to go',vn:'mang đi',eg:'Can I have this to go?'},{en:'vegetarian',vn:'ăn chay',eg:'Do you have vegetarian options?'},{en:'allergy',vn:'dị ứng thức ăn',eg:'I have a nut allergy.'},{en:'specials',vn:'món đặc biệt hôm nay',eg:"What are today's specials?"}];
+const vg=document.getElementById('vocabGrid');
+vocab.forEach(v=>{vg.innerHTML+=`<div class="vocab-card" onclick="this.classList.toggle('flip')"><div class="vc-en">${v.en}</div><div class="vc-vn">${v.vn}</div><div class="vc-eg">"${v.eg}"</div></div>`;});
+
+// Menu
+const menu={starters:[{n:'Tomato Soup',d:'Served with crusty bread',p:'$6'},{n:'Caesar Salad',d:'Romaine, croutons, parmesan',p:'$8'},{n:'Garlic Bread',d:'With herb butter',p:'$4'}],mains:[{n:'Grilled Salmon',d:'Lemon butter sauce, seasonal veg',p:'$22'},{n:'Mushroom Pasta',d:'Creamy sauce, fresh herbs',p:'$16'},{n:'Chicken Burger',d:'Brioche bun, fries included',p:'$15'},{n:'Vegetable Curry',d:'Basmati rice, naan bread',p:'$14'}],desserts:[{n:'Chocolate Lava Cake',d:'With vanilla ice cream',p:'$9'},{n:'Fruit Sorbet',d:'Three flavours',p:'$7'}]};
+const mc=document.getElementById('menuContent');
+Object.entries(menu).forEach(([cat,items])=>{
+  mc.innerHTML+=`<div class="menu-section"><div class="menu-title">${cat.toUpperCase()}</div>${items.map(i=>`<div class="menu-item"><div><div class="menu-name">${i.n}</div><div class="menu-desc">${i.d}</div></div><div class="menu-price">${i.p}</div></div>`).join('')}</div>`;
+});
+
+// Order game
+const sentences=[{words:['I\'d','like','the','salmon','please'],ans:"I'd like the salmon please"},{words:['Could','we','have','the','bill'],ans:"Could we have the bill"},{words:['What','do','you','recommend','tonight'],ans:"What do you recommend tonight"}];
+let si=0,placed=[];
+function renderSentence(){
+  const oa=document.getElementById('orderArea');
+  if(si>=sentences.length){oa.innerHTML='<div style="color:var(--green);padding:.5rem;font-size:.9rem">🎉 Xuất sắc! Bạn biết gọi món rồi!</div>';return;}
+  const s=sentences[si];placed=[];
+  const shuffled=[...s.words].sort(()=>Math.random()-.5);
+  oa.innerHTML=`<div style="font-size:.8rem;color:var(--muted);margin-bottom:.4rem">Câu ${si+1}/${sentences.length} — nhấn từ theo thứ tự đúng:</div>
+    <div class="order-sentence" id="oSent"></div>
+    <div class="order-items">${shuffled.map((w,i)=>`<span class="order-word" id="ow${i}" onclick="placeW('${w}',${i})">${w}</span>`).join('')}</div>
+    <div style="display:flex;gap:.5rem;margin-top:.4rem">
+      <button class="btn-sm" onclick="checkSent()">✓ Kiểm tra</button>
+      <button class="btn-sm" onclick="renderSentence()">↺ Reset</button>
+    </div>
+    <div id="oFB" style="font-size:.82rem;margin-top:.4rem;min-height:1rem"></div>`;
+}
+function placeW(w,idx){placed.push(w);document.getElementById('ow'+idx).classList.add('picked');document.getElementById('oSent').innerHTML=placed.map(pw=>`<span class="placed">${pw}</span>`).join('');}
+function checkSent(){const ans=placed.join(' ');const fb=document.getElementById('oFB');if(ans.toLowerCase()===sentences[si].ans.toLowerCase()){fb.textContent='✅ Đúng!';fb.style.color='#10b981';setTimeout(()=>{si++;renderSentence();},1100);}else{fb.textContent='❌ Thử lại!';fb.style.color='#ef4444';}}
+renderSentence();
+
+const qs=[{q:'Câu gọi món lịch sự nhất là?',opts:["I want steak.","Give me steak.","Could I have the steak, please?","Steak!"],ans:2},{q:'"bill" trong nhà hàng nghĩa là?',opts:['Thực đơn','Hóa đơn','Món tráng miệng','Tiền boa'],ans:1},{q:'"starter" là?',opts:['Món chính','Món tráng miệng','Món khai vị','Đồ uống'],ans:2},{q:'"split the bill" nghĩa là?',opts:['Trả toàn bộ hóa đơn','Chia hóa đơn (mỗi người trả phần của mình)','Không trả tiền','Đặt bàn trước'],ans:1},{q:'"What do you recommend?" dùng khi nào?',opts:['Hỏi giá','Hỏi giờ mở cửa','Xin gợi ý món ăn','Gọi hóa đơn'],ans:2}];
+let qi=0,score=0;
+function renderQ(){const q=qs[qi];document.getElementById('quizTitle').textContent=`Câu ${qi+1} / ${qs.length}`;document.getElementById('quizProgress').style.width=`${((qi+1)/qs.length)*100}%`;document.getElementById('quizQ').textContent=q.q;document.getElementById('quizFB').textContent='';document.getElementById('quizFB').className='quiz-feedback';document.getElementById('quizNext').style.display='none';const opts=document.getElementById('quizOpts');opts.innerHTML='';q.opts.forEach((o,i)=>{const btn=document.createElement('button');btn.className='quiz-opt';btn.textContent=o;btn.onclick=()=>{document.querySelectorAll('.quiz-opt').forEach(b=>b.disabled=true);if(i===q.ans){btn.classList.add('correct');score++;document.getElementById('quizFB').textContent='✅ Chính xác!';document.getElementById('quizFB').className='quiz-feedback ok';}else{btn.classList.add('wrong');document.querySelectorAll('.quiz-opt')[q.ans].classList.add('correct');document.getElementById('quizFB').textContent='❌ Sai rồi!';document.getElementById('quizFB').className='quiz-feedback no';}document.getElementById('quizScoreDisplay').textContent=`Điểm: ${score}`;document.getElementById('quizNext').style.display='inline-block';};opts.appendChild(btn);});}
+function nextQ(){qi++;if(qi>=qs.length){document.getElementById('quizContent').style.display='none';const r=document.getElementById('quizResult');r.style.display='block';const pct=Math.round(score/qs.length*100);document.getElementById('resEmoji').textContent=pct>=80?'🏆':pct>=60?'👍':'💪';document.getElementById('resScore').textContent=`${score} / ${qs.length} đúng (${pct}%)`;document.getElementById('resMsg').textContent=pct>=80?'Tuyệt! Bạn có thể gọi món chuyên nghiệp rồi!':'Ôn thêm và thử lại nhé!';}else renderQ();}
+function resetQuiz(){qi=0;score=0;document.getElementById('quizScoreDisplay').textContent='Điểm: 0';document.getElementById('quizContent').style.display='block';document.getElementById('quizResult').style.display='none';renderQ();}
+renderQ();
+</script>
+</body></html>
