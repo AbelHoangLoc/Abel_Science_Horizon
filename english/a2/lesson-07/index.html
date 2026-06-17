@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+
+  <link rel="stylesheet" href="../assets/brand.css">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A2 · Lesson 07 · Hobbies & Free Time</title>
+<style>
+:root{--bg:#080d1a;--card:#0f1729;--card2:#131e35;--border:#1e2d4a;--text:#dde6f5;--muted:#8b9ab5;--accent:#7c3aed;--accent2:#a78bfa;--green:#10b981;--red:#ef4444}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;line-height:1.6;padding:1.5rem 1.25rem 3rem}
+.lsn-header{background:linear-gradient(135deg,#10052a,#0f1729);border:1px solid var(--border);border-radius:16px;padding:1.5rem;margin-bottom:1.5rem;position:relative;overflow:hidden}
+.lsn-header::before{content:'';position:absolute;top:-40px;right:-40px;width:150px;height:150px;background:radial-gradient(circle,rgba(124,58,237,.3),transparent 70%);pointer-events:none}
+.lsn-badge{display:inline-flex;background:rgba(124,58,237,.15);border:1px solid rgba(167,139,250,.3);border-radius:20px;padding:.25rem .75rem;font-size:.7rem;font-weight:700;color:var(--accent2);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.75rem}
+.lsn-header h1{font-size:1.6rem;font-weight:800;background:linear-gradient(90deg,#ddd6fe,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.4rem}
+.lsn-header p{color:var(--muted);font-size:.9rem}
+.objectives{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+.obj-tag{background:rgba(124,58,237,.12);border:1px solid rgba(124,58,237,.25);border-radius:20px;padding:.25rem .7rem;font-size:.75rem;color:var(--accent2)}
+.sec-title{display:flex;align-items:center;gap:.6rem;font-size:1rem;font-weight:700;color:var(--accent2);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)}
+.hobby-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.6rem;margin-bottom:1.75rem}
+.hobby-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:.8rem .7rem;text-align:center;cursor:pointer;transition:all .2s}
+.hobby-card:hover,.hobby-card.flip{border-color:var(--accent);background:rgba(124,58,237,.08)}
+.hc-emoji{font-size:1.4rem;margin-bottom:.3rem}
+.hc-en{font-size:.88rem;font-weight:700;color:var(--text)}.hc-vn{font-size:.75rem;color:var(--muted);margin-top:.1rem}
+.hobby-card.flip .hc-eg{display:block}.hc-eg{display:none;font-size:.7rem;color:var(--accent2);margin-top:.2rem;font-style:italic}
+.grammar-box{background:linear-gradient(135deg,rgba(124,58,237,.1),rgba(124,58,237,.04));border:1px solid rgba(124,58,237,.2);border-radius:12px;padding:1.1rem;margin-bottom:1.75rem}
+.grammar-box h3{color:var(--accent2);font-size:.9rem;margin-bottom:.8rem}
+.gram-box{background:rgba(124,58,237,.2);border-radius:6px;padding:.2rem .7rem;color:var(--accent2);font-weight:700;font-family:monospace;display:inline-block}
+.gram-row{display:flex;gap:.5rem;align-items:center;margin-bottom:.5rem;font-size:.88rem;flex-wrap:wrap}
+.future-table{width:100%;border-collapse:collapse;font-size:.85rem;margin-bottom:.6rem}
+.future-table th{background:rgba(124,58,237,.2);color:var(--accent2);padding:.45rem .65rem;text-align:left;border:1px solid var(--border);font-size:.78rem}
+.future-table td{padding:.4rem .65rem;border:1px solid var(--border);color:var(--text)}
+.future-table tr:nth-child(even) td{background:var(--card2)}
+.pattern-list{margin-bottom:1.75rem}
+.pattern-item{background:var(--card);border-left:3px solid var(--accent);border-radius:0 10px 10px 0;padding:.8rem 1rem;margin-bottom:.6rem}
+.pat-en{font-size:1rem;font-weight:600;color:var(--text)}.pat-vn{font-size:.82rem;color:var(--muted);margin-top:.2rem}.pat-note{font-size:.78rem;color:var(--accent2);margin-top:.25rem;font-style:italic}
+.convo-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1.75rem}
+.convo-line{display:flex;gap:.7rem;margin-bottom:.65rem;align-items:flex-start}
+.spk-a{color:#a78bfa;font-size:.7rem;font-weight:700;text-transform:uppercase;min-width:28px;margin-top:.2rem}
+.spk-b{color:#34d399;font-size:.7rem;font-weight:700;text-transform:uppercase;min-width:28px;margin-top:.2rem}
+.bubble{background:var(--card2);border-radius:0 10px 10px 10px;padding:.55rem .85rem;font-size:.9rem;flex:1}
+.bubble.b{border-radius:10px 10px 10px 0;background:rgba(52,211,153,.07);border:1px solid rgba(52,211,153,.15)}
+.plan-builder{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1.75rem}
+.plan-builder h3{color:var(--accent2);font-size:.9rem;margin-bottom:.75rem}
+.plan-row{display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem;flex-wrap:wrap}
+.plan-label{font-size:.85rem;color:var(--muted);min-width:80px}
+select{background:var(--card2);border:1px solid var(--border);border-radius:6px;padding:.3rem .6rem;color:var(--text);font-size:.85rem;outline:none}
+select:focus{border-color:var(--accent)}
+.plan-result{background:rgba(124,58,237,.08);border:1px solid rgba(124,58,237,.2);border-radius:8px;padding:.75rem;font-size:.9rem;color:var(--text);margin-top:.75rem;font-style:italic;min-height:2.2rem}
+.fill-block{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1.75rem}
+.fill-q{font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:.75rem}
+.fill-row{display:flex;align-items:center;gap:.5rem;padding:.45rem .75rem;background:var(--card2);border-radius:8px;margin-bottom:.4rem;font-size:.88rem}
+input[type=text]{background:var(--card2);border:1px solid var(--border);border-radius:6px;padding:.3rem .6rem;color:var(--text);font-size:.85rem;outline:none}
+input[type=text]:focus{border-color:var(--accent)}
+.quiz-section{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.25rem;margin-bottom:1.75rem}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+.quiz-q{font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:.75rem;padding:.75rem;background:var(--card2);border-radius:8px}
+.quiz-opts{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.5rem}
+.quiz-opt{background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:.55rem .75rem;font-size:.85rem;cursor:pointer;transition:all .18s;color:var(--text);text-align:left}
+.quiz-opt:hover:not(:disabled){border-color:var(--accent);color:var(--accent2)}.quiz-opt.correct{border-color:var(--green)!important;background:rgba(16,185,129,.15)!important;color:var(--green)!important}.quiz-opt.wrong{border-color:var(--red)!important;background:rgba(239,68,68,.1)!important;color:var(--red)!important}.quiz-opt:disabled{cursor:default}
+.quiz-feedback{font-size:.8rem;margin:.4rem 0 .6rem;min-height:1rem}.quiz-feedback.ok{color:var(--green)}.quiz-feedback.no{color:var(--red)}
+.quiz-nav{display:flex;gap:.5rem;align-items:center;justify-content:space-between}
+.btn{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:.5rem 1.1rem;font-size:.85rem;font-weight:700;cursor:pointer;transition:opacity .2s}.btn:hover{opacity:.85}
+.progress-bar{background:var(--border);border-radius:4px;height:4px;flex:1;overflow:hidden}.progress-fill{background:var(--accent);height:100%;border-radius:4px;transition:width .3s}
+.result-box{text-align:center;padding:1.25rem;display:none}.result-emoji{font-size:2.5rem;margin-bottom:.5rem}.result-score{font-size:1.5rem;font-weight:800;color:var(--accent2);margin-bottom:.25rem}.result-msg{font-size:.85rem;color:var(--muted);margin-bottom:1rem}
+.lesson-footer{display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border)}
+.footer-nav a{color:var(--accent);text-decoration:none;font-size:.85rem;font-weight:600}
+</style>
+</head>
+<body>
+<img src="../assets/logo-SH.png" class="sh-logo" alt="Science Horizon">
+<div class="lsn-header">
+  <div class="lsn-badge">🎨 A2 Daily English · Lesson 07</div>
+  <h1>Hobbies &amp; Free Time</h1>
+  <p>Kể về sở thích, lên kế hoạch tương lai — Going to Future + Activity Vocabulary!</p>
+  <div class="objectives">
+    <span class="obj-tag">🎨 Sở thích & hoạt động</span>
+    <span class="obj-tag">🔮 Going to (tương lai)</span>
+    <span class="obj-tag">❓ What are you going to do?</span>
+    <span class="obj-tag">💬 Would like to</span>
+  </div>
+</div>
+
+<div class="sec-title"><span>🎨</span> Sở Thích & Hoạt Động <small style="color:var(--muted);font-weight:400;font-size:.78rem">(nhấn xem ví dụ)</small></div>
+<div class="hobby-grid" id="hobbyGrid"></div>
+
+<div class="sec-title"><span>📐</span> Ngữ Pháp — Tương Lai Gần (Going To)</div>
+<div class="grammar-box">
+  <h3>✏️ Be going to — Kế hoạch đã có sẵn & dự đoán có bằng chứng</h3>
+  <table class="future-table">
+    <tr><th>Cấu trúc</th><th>Ví dụ</th><th>Nghĩa</th></tr>
+    <tr><td><span class="gram-box">S + am/is/are going to + V</span></td><td>I <strong>am going to</strong> learn guitar.</td><td>Tôi sắp học đàn guitar.</td></tr>
+    <tr><td><span class="gram-box">S + am/is/are not going to + V</span></td><td>She <strong>isn't going to</strong> play football.</td><td>Cô ấy sẽ không chơi bóng đá.</td></tr>
+    <tr><td><span class="gram-box">Am/Is/Are + S + going to + V?</span></td><td><strong>Are</strong> you <strong>going to</strong> join the club?</td><td>Bạn có định tham gia câu lạc bộ không?</td></tr>
+  </table>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-top:.5rem">
+    <div style="background:rgba(124,58,237,.07);border-radius:8px;padding:.6rem .85rem;font-size:.82rem">
+      ✅ <strong style="color:var(--accent2)">Going to vs Will:</strong><br>
+      <strong>Going to</strong> = kế hoạch đã có sẵn trước<br>
+      <em>"I'm going to visit Da Nang next week."</em><br><br>
+      <strong>Will</strong> = quyết định tức thì<br>
+      <em>"It's cold. I'll close the window."</em>
+    </div>
+    <div style="background:rgba(124,58,237,.07);border-radius:8px;padding:.6rem .85rem;font-size:.82rem">
+      ⭐ <strong style="color:var(--accent2)">Would like to:</strong><br>
+      = muốn làm gì (lịch sự hơn "want to")<br><br>
+      <em>"I would like to learn painting."</em><br>
+      <em>"She'd like to travel more."</em>
+    </div>
+  </div>
+</div>
+
+<div class="sec-title"><span>💬</span> Mẫu Câu</div>
+<div class="pattern-list">
+  <div class="pattern-item"><div class="pat-en">"What do you do in your free time?" — "I enjoy reading and playing football."</div><div class="pat-vn">→ Bạn làm gì vào thời gian rảnh? — Tôi thích đọc sách và chơi bóng đá.</div><div class="pat-note">💡 enjoy + V-ing · love + V-ing · be interested in + V-ing</div></div>
+  <div class="pattern-item"><div class="pat-en">"What are you going to do this weekend?" — "I'm going to visit my grandparents."</div><div class="pat-vn">→ Cuối tuần này bạn định làm gì? — Tôi định đi thăm ông bà.</div><div class="pat-note">💡 Câu hỏi kế hoạch cuối tuần — rất phổ biến trong hội thoại</div></div>
+  <div class="pattern-item"><div class="pat-en">"I'd like to try photography. It looks really creative!"</div><div class="pat-vn">→ Tôi muốn thử nhiếp ảnh. Trông có vẻ rất sáng tạo!</div><div class="pat-note">💡 I'd like to + V = muốn làm gì trong tương lai (ước muốn)</div></div>
+  <div class="pattern-item"><div class="pat-en">"How long have you been playing the guitar?" — "I've been playing for two years."</div><div class="pat-vn">→ Bạn chơi guitar được bao lâu rồi? — Tôi chơi được 2 năm rồi.</div><div class="pat-note">💡 How long + have/has + S + been + V-ing? = hỏi đã làm gì bao lâu</div></div>
+</div>
+
+<div class="sec-title"><span>🗣️</span> Hội Thoại</div>
+<div class="convo-box">
+  <div class="convo-line"><span class="spk-a">A</span><div class="bubble">What are you going to do this weekend?</div></div>
+  <div class="convo-line"><span class="spk-b">B</span><div class="bubble b">I'm going to try rock climbing for the first time! I've always wanted to try it.</div></div>
+  <div class="convo-line"><span class="spk-a">A</span><div class="bubble">That sounds exciting! Are you going with anyone?</div></div>
+  <div class="convo-line"><span class="spk-b">B</span><div class="bubble b">Yes, with my friend Minh — he's been climbing for three years so he's going to teach me the basics. What about you?</div></div>
+  <div class="convo-line"><span class="spk-a">A</span><div class="bubble">I'm not going to do anything special. I'd like to stay home and paint — I've just bought some new art supplies!</div></div>
+  <div class="convo-line"><span class="spk-b">B</span><div class="bubble b">Oh nice! How long have you been painting?</div></div>
+  <div class="convo-line"><span class="spk-a">A</span><div class="bubble">Only about six months, but I really enjoy it. It's very relaxing after a busy week!</div></div>
+</div>
+
+<div class="sec-title"><span>🎮</span> Luyện Tập — Tạo Kế Hoạch Cuối Tuần</div>
+<div class="plan-builder">
+  <h3>Chọn các thông tin và tạo câu "going to":</h3>
+  <div class="plan-row"><span class="plan-label">Người:</span>
+    <select id="pWho"><option>I</option><option>She</option><option>He</option><option>We</option><option>They</option></select>
+  </div>
+  <div class="plan-row"><span class="plan-label">Hoạt động:</span>
+    <select id="pAct"><option>go to the cinema</option><option>play basketball</option><option>cook a new recipe</option><option>read a book</option><option>go hiking</option><option>visit a museum</option><option>learn to swim</option><option>join a yoga class</option></select>
+  </div>
+  <div class="plan-row"><span class="plan-label">Thời gian:</span>
+    <select id="pTime"><option>this weekend</option><option>tomorrow</option><option>next Saturday</option><option>after school</option><option>in the evening</option></select>
+  </div>
+  <button class="btn" onclick="buildPlan()" style="margin-top:.5rem;padding:.4rem .9rem;font-size:.82rem">✨ Tạo câu</button>
+  <div class="plan-result" id="planResult">→ Câu của bạn sẽ hiện ở đây...</div>
+</div>
+
+<div class="sec-title"><span>✏️</span> Luyện Tập — Điền Đúng</div>
+<div class="fill-block">
+  <div class="fill-q">Điền "going to" hoặc "would like to" hoặc dạng đúng:</div>
+  <div class="fill-row"><span style="flex:1">1. I ___ visit Japan next year. (kế hoạch đã có)</span><input type="text" placeholder="am going to" style="width:130px" onblur="fc(this,'am going to')"></div>
+  <div class="fill-row"><span style="flex:1">2. She ___ learn piano. (ước muốn)</span><input type="text" placeholder="would like to" style="width:130px" onblur="fc(this,'would like to')"></div>
+  <div class="fill-row"><span style="flex:1">3. ___ they ___ watch the game tonight?</span><input type="text" placeholder="Are going to" style="width:130px" onblur="fc(this,'are going to')"></div>
+  <div class="fill-row"><span style="flex:1">4. He enjoys ___ (swim) every morning.</span><input type="text" placeholder="swimming" style="width:110px" onblur="fc(this,'swimming')"></div>
+</div>
+
+<div class="sec-title"><span>🎯</span> Quiz Nhanh (5 câu)</div>
+<div class="quiz-section">
+  <div class="quiz-header"><span id="quizTitle" style="font-size:.85rem;color:var(--muted)">Câu 1 / 5</span><span id="quizScoreDisplay" style="font-size:.85rem;color:var(--muted)">Điểm: 0</span></div>
+  <div id="quizContent">
+    <div class="quiz-q" id="quizQ"></div>
+    <div class="quiz-opts" id="quizOpts"></div>
+    <div class="quiz-feedback" id="quizFB"></div>
+    <div class="quiz-nav"><div class="progress-bar"><div class="progress-fill" id="quizProgress" style="width:20%"></div></div><button class="btn" id="quizNext" style="display:none" onclick="nextQ()">Tiếp →</button></div>
+  </div>
+  <div class="result-box" id="quizResult"><div class="result-emoji" id="resEmoji"></div><div class="result-score" id="resScore"></div><div class="result-msg" id="resMsg"></div><button class="btn" onclick="resetQuiz()">🔄 Làm lại</button></div>
+</div>
+<div class="lesson-footer"><div class="footer-nav">← <a href="../lesson-06/">Lesson 06</a></div><div style="font-size:.8rem;color:var(--muted)">A2 · Lesson 07 / 12</div><div class="footer-nav"><a href="../lesson-08/">Lesson 08 →</a></div></div>
+
+<script>
+const hobbies=[{e:'🎸',en:'play the guitar',vn:'chơi đàn guitar',eg:'I play the guitar every evening.'},{e:'⚽',en:'play football',vn:'chơi bóng đá',eg:'We play football on Sundays.'},{e:'📚',en:'read books',vn:'đọc sách',eg:'I love reading mystery novels.'},{e:'🎨',en:'paint / draw',vn:'vẽ tranh',eg:'She paints watercolours.'},{e:'📸',en:'photography',vn:'chụp ảnh',eg:'I enjoy street photography.'},{e:'🏊',en:'swim',vn:'bơi lội',eg:'I swim three times a week.'},{e:'🧘',en:'do yoga',vn:'tập yoga',eg:'Yoga helps me relax.'},{e:'🎮',en:'play video games',vn:'chơi video game',eg:'He plays games in the evening.'},{e:'🍳',en:'cook / bake',vn:'nấu ăn / làm bánh',eg:'I love baking cakes!'},{e:'🎵',en:'listen to music',vn:'nghe nhạc',eg:'I listen to music on my commute.'},{e:'🏃',en:'jog / run',vn:'chạy bộ',eg:'She jogs every morning.'},{e:'🧩',en:'do puzzles',vn:'làm puzzle',eg:'I do puzzles to relax.'}];
+const hg=document.getElementById('hobbyGrid');
+hobbies.forEach(h=>{hg.innerHTML+=`<div class="hobby-card" onclick="this.classList.toggle('flip')"><div class="hc-emoji">${h.e}</div><div class="hc-en">${h.en}</div><div class="hc-vn">${h.vn}</div><div class="hc-eg">"${h.eg}"</div></div>`;});
+function buildPlan(){
+  const who=document.getElementById('pWho').value;
+  const act=document.getElementById('pAct').value;
+  const time=document.getElementById('pTime').value;
+  const be=who==='I'?'am':['She','He'].includes(who)?'is':'are';
+  document.getElementById('planResult').textContent=`"${who} ${be} going to ${act} ${time}."`;
+}
+function fc(el,ans){const v=el.value.trim().toLowerCase();if(v===ans){el.style.borderColor='#10b981';el.style.color='#10b981';}else if(v){el.style.borderColor='#ef4444';el.style.color='#ef4444';}}
+const qs=[{q:'"I ___ going to learn Japanese next year." — Điền đúng:',opts:['am','is','are','be'],ans:0},{q:'Khi nào dùng "going to" thay vì "will"?',opts:['Quyết định tức thì','Kế hoạch đã có từ trước','Dự đoán ngẫu nhiên','Lời hứa'],ans:1},{q:'"She enjoys ___ (swim)" — Dạng đúng:',opts:['swim','to swim','swimming','swims'],ans:2},{q:'"Would like to" có nghĩa gần với?',opts:['must','want to','can','have to'],ans:1},{q:'Câu phủ định "going to" đúng là?',opts:["I not going to go.","I am not going to go.","I going not to go.","I am going to not go."],ans:1}];
+let qi=0,score=0;
+function renderQ(){const q=qs[qi];document.getElementById('quizTitle').textContent=`Câu ${qi+1} / ${qs.length}`;document.getElementById('quizProgress').style.width=`${((qi+1)/qs.length)*100}%`;document.getElementById('quizQ').textContent=q.q;document.getElementById('quizFB').textContent='';document.getElementById('quizFB').className='quiz-feedback';document.getElementById('quizNext').style.display='none';const opts=document.getElementById('quizOpts');opts.innerHTML='';q.opts.forEach((o,i)=>{const btn=document.createElement('button');btn.className='quiz-opt';btn.textContent=o;btn.onclick=()=>{document.querySelectorAll('.quiz-opt').forEach(b=>b.disabled=true);if(i===q.ans){btn.classList.add('correct');score++;document.getElementById('quizFB').textContent='✅ Chính xác!';document.getElementById('quizFB').className='quiz-feedback ok';}else{btn.classList.add('wrong');document.querySelectorAll('.quiz-opt')[q.ans].classList.add('correct');document.getElementById('quizFB').textContent='❌ Sai rồi!';document.getElementById('quizFB').className='quiz-feedback no';}document.getElementById('quizScoreDisplay').textContent=`Điểm: ${score}`;document.getElementById('quizNext').style.display='inline-block';};opts.appendChild(btn);});}
+function nextQ(){qi++;if(qi>=qs.length){document.getElementById('quizContent').style.display='none';const r=document.getElementById('quizResult');r.style.display='block';const pct=Math.round(score/qs.length*100);document.getElementById('resEmoji').textContent=pct>=80?'🏆':pct>=60?'👍':'💪';document.getElementById('resScore').textContent=`${score} / ${qs.length} đúng (${pct}%)`;document.getElementById('resMsg').textContent=pct>=80?'Tuyệt! Hobbies & Going to thành thạo rồi!':'Ôn thêm và thử lại nhé!';}else renderQ();}
+function resetQuiz(){qi=0;score=0;document.getElementById('quizScoreDisplay').textContent='Điểm: 0';document.getElementById('quizContent').style.display='block';document.getElementById('quizResult').style.display='none';renderQ();}
+renderQ();
+</script>
+</body></html>
