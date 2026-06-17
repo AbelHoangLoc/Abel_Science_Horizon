@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+
+  <link rel="stylesheet" href="../assets/brand.css">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A2 · Lesson 11 · Jobs & Work</title>
+<style>
+:root{--bg:#080d1a;--card:#0f1729;--card2:#131e35;--border:#1e2d4a;--text:#dde6f5;--muted:#8b9ab5;--accent:#0f766e;--accent2:#5eead4;--green:#10b981;--red:#ef4444}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;line-height:1.6;padding:1.5rem 1.25rem 3rem}
+.lsn-header{background:linear-gradient(135deg,#001f1c,#0f1729);border:1px solid var(--border);border-radius:16px;padding:1.5rem;margin-bottom:1.5rem;position:relative;overflow:hidden}
+.lsn-header::before{content:'';position:absolute;top:-40px;right:-40px;width:150px;height:150px;background:radial-gradient(circle,rgba(15,118,110,.3),transparent 70%);pointer-events:none}
+.lsn-badge{display:inline-flex;background:rgba(15,118,110,.15);border:1px solid rgba(94,234,212,.3);border-radius:20px;padding:.25rem .75rem;font-size:.7rem;font-weight:700;color:var(--accent2);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.75rem}
+.lsn-header h1{font-size:1.6rem;font-weight:800;background:linear-gradient(90deg,#99f6e4,#5eead4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.4rem}
+.lsn-header p{color:var(--muted);font-size:.9rem}
+.objectives{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+.obj-tag{background:rgba(15,118,110,.12);border:1px solid rgba(15,118,110,.25);border-radius:20px;padding:.25rem .7rem;font-size:.75rem;color:var(--accent2)}
+.sec-title{display:flex;align-items:center;gap:.6rem;font-size:1rem;font-weight:700;color:var(--accent2);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)}
+.job-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.6rem;margin-bottom:1.75rem}
+.job-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:.8rem .7rem;text-align:center;cursor:pointer;transition:all .2s}
+.job-card:hover,.job-card.flip{border-color:var(--accent);background:rgba(15,118,110,.08)}
+.jc-emoji{font-size:1.4rem;margin-bottom:.3rem}
+.jc-en{font-size:.88rem;font-weight:700;color:var(--text)}.jc-vn{font-size:.75rem;color:var(--muted);margin-top:.1rem}
+.job-card.flip .jc-tasks{display:block}.jc-tasks{display:none;font-size:.68rem;color:var(--accent2);margin-top:.25rem;line-height:1.5;font-style:italic}
+.workplace-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.55rem;margin-bottom:1.75rem}
+.wp-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:.65rem .85rem}
+.wp-en{font-size:.88rem;font-weight:700;color:var(--text)}.wp-vn{font-size:.76rem;color:var(--muted);margin-top:.1rem}
+.grammar-box{background:linear-gradient(135deg,rgba(15,118,110,.1),rgba(15,118,110,.04));border:1px solid rgba(15,118,110,.2);border-radius:12px;padding:1.1rem;margin-bottom:1.75rem}
+.grammar-box h3{color:var(--accent2);font-size:.9rem;margin-bottom:.8rem}
+.gram-box{background:rgba(15,118,110,.2);border-radius:6px;padding:.2rem .7rem;color:var(--accent2);font-weight:700;font-family:monospace;display:inline-block}
+.gram-row{display:flex;gap:.5rem;align-items:center;margin-bottom:.5rem;font-size:.88rem;flex-wrap:wrap}
+.can-table{width:100%;border-collapse:collapse;font-size:.85rem;margin-bottom:.6rem}
+.can-table th{background:rgba(15,118,110,.2);color:var(--accent2);padding:.45rem .65rem;text-align:left;border:1px solid var(--border);font-size:.78rem}
+.can-table td{padding:.4rem .65rem;border:1px solid var(--border);color:var(--text)}
+.can-table tr:nth-child(even) td{background:var(--card2)}
+.pattern-list{margin-bottom:1.75rem}
+.pattern-item{background:var(--card);border-left:3px solid var(--accent);border-radius:0 10px 10px 0;padding:.8rem 1rem;margin-bottom:.6rem}
+.pat-en{font-size:1rem;font-weight:600;color:var(--text)}.pat-vn{font-size:.82rem;color:var(--muted);margin-top:.2rem}.pat-note{font-size:.78rem;color:var(--accent2);margin-top:.25rem;font-style:italic}
+.convo-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1.75rem}
+.convo-line{display:flex;gap:.7rem;margin-bottom:.65rem;align-items:flex-start}
+.spk-i{color:#5eead4;font-size:.7rem;font-weight:700;text-transform:uppercase;min-width:36px;margin-top:.2rem}
+.spk-a{color:#fbbf24;font-size:.7rem;font-weight:700;text-transform:uppercase;min-width:36px;margin-top:.2rem}
+.bubble{background:var(--card2);border-radius:0 10px 10px 10px;padding:.55rem .85rem;font-size:.9rem;flex:1}
+.bubble.a{border-radius:10px 10px 10px 0;background:rgba(251,191,36,.07);border:1px solid rgba(251,191,36,.15)}
+.skill-builder{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1.75rem}
+.skill-builder h3{color:var(--accent2);font-size:.9rem;margin-bottom:.75rem}
+.skill-item{display:flex;align-items:center;gap:.75rem;padding:.5rem .75rem;background:var(--card2);border-radius:8px;margin-bottom:.4rem}
+.skill-name{flex:1;font-size:.9rem;font-weight:600}
+.skill-btns{display:flex;gap:.4rem}
+.sk-btn{border:none;border-radius:6px;padding:.3rem .7rem;font-size:.8rem;font-weight:700;cursor:pointer}
+.sk-can{background:rgba(16,185,129,.2);color:var(--green)}.sk-can:hover,.sk-can.on{background:var(--green);color:#000}
+.sk-cant{background:rgba(239,68,68,.15);color:var(--red)}.sk-cant:hover,.sk-cant.on{background:var(--red);color:#fff}
+.sk-result{margin-top:.75rem;font-size:.88rem;color:var(--muted);font-style:italic;min-height:1.5rem}
+.fill-block{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1.75rem}
+.fill-q{font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:.75rem}
+.fill-row{display:flex;align-items:center;gap:.5rem;padding:.45rem .75rem;background:var(--card2);border-radius:8px;margin-bottom:.4rem;font-size:.88rem}
+input[type=text]{background:var(--card2);border:1px solid var(--border);border-radius:6px;padding:.3rem .6rem;color:var(--text);font-size:.85rem;outline:none}
+input[type=text]:focus{border-color:var(--accent)}
+.quiz-section{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.25rem;margin-bottom:1.75rem}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+.quiz-q{font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:.75rem;padding:.75rem;background:var(--card2);border-radius:8px}
+.quiz-opts{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.5rem}
+.quiz-opt{background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:.55rem .75rem;font-size:.85rem;cursor:pointer;transition:all .18s;color:var(--text);text-align:left}
+.quiz-opt:hover:not(:disabled){border-color:var(--accent);color:var(--accent2)}.quiz-opt.correct{border-color:var(--green)!important;background:rgba(16,185,129,.15)!important;color:var(--green)!important}.quiz-opt.wrong{border-color:var(--red)!important;background:rgba(239,68,68,.1)!important;color:var(--red)!important}.quiz-opt:disabled{cursor:default}
+.quiz-feedback{font-size:.8rem;margin:.4rem 0 .6rem;min-height:1rem}.quiz-feedback.ok{color:var(--green)}.quiz-feedback.no{color:var(--red)}
+.quiz-nav{display:flex;gap:.5rem;align-items:center;justify-content:space-between}
+.btn{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:.5rem 1.1rem;font-size:.85rem;font-weight:700;cursor:pointer;transition:opacity .2s}.btn:hover{opacity:.85}
+.btn-sm{background:rgba(15,118,110,.2);color:var(--accent2);border:1px solid var(--accent2);border-radius:6px;padding:.3rem .7rem;font-size:.8rem;cursor:pointer}
+.progress-bar{background:var(--border);border-radius:4px;height:4px;flex:1;overflow:hidden}.progress-fill{background:var(--accent);height:100%;border-radius:4px;transition:width .3s}
+.result-box{text-align:center;padding:1.25rem;display:none}.result-emoji{font-size:2.5rem;margin-bottom:.5rem}.result-score{font-size:1.5rem;font-weight:800;color:var(--accent2);margin-bottom:.25rem}.result-msg{font-size:.85rem;color:var(--muted);margin-bottom:1rem}
+.lesson-footer{display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border)}
+.footer-nav a{color:var(--accent);text-decoration:none;font-size:.85rem;font-weight:600}
+</style>
+</head>
+<body>
+<img src="../assets/logo-SH.png" class="sh-logo" alt="Science Horizon">
+<div class="lsn-header">
+  <div class="lsn-badge">💼 A2 Daily English · Lesson 11</div>
+  <h1>Jobs &amp; Work</h1>
+  <p>Nghề nghiệp, nơi làm việc và khả năng bản thân — Can / Can't for ability!</p>
+  <div class="objectives">
+    <span class="obj-tag">💼 Nghề nghiệp phổ biến</span>
+    <span class="obj-tag">🏢 Nơi làm việc</span>
+    <span class="obj-tag">✅ Can / Can't</span>
+    <span class="obj-tag">🎤 Phỏng vấn xin việc</span>
+  </div>
+</div>
+
+<div class="sec-title"><span>💼</span> Nghề Nghiệp Phổ Biến <small style="color:var(--muted);font-weight:400;font-size:.78rem">(nhấn xem công việc chính)</small></div>
+<div class="job-grid" id="jobGrid"></div>
+
+<div class="sec-title"><span>🏢</span> Nơi Làm Việc</div>
+<div class="workplace-grid" id="wpGrid"></div>
+
+<div class="sec-title"><span>📐</span> Ngữ Pháp — Can / Can't (Khả Năng)</div>
+<div class="grammar-box">
+  <h3>✏️ Can = có thể · Can't = không thể</h3>
+  <table class="can-table">
+    <tr><th>Cấu trúc</th><th>Ví dụ</th><th>Nghĩa</th></tr>
+    <tr><td><span class="gram-box">S + can + V</span></td><td>I <strong>can</strong> speak three languages.</td><td>Tôi có thể nói 3 thứ tiếng.</td></tr>
+    <tr><td><span class="gram-box">S + can't + V</span></td><td>She <strong>can't</strong> drive a car yet.</td><td>Cô ấy chưa biết lái xe.</td></tr>
+    <tr><td><span class="gram-box">Can + S + V?</span></td><td><strong>Can</strong> you use Excel?</td><td>Bạn có biết dùng Excel không?</td></tr>
+    <tr><td><span class="gram-box">Could + S + V?</span></td><td><strong>Could</strong> you start next Monday?</td><td>Bạn có thể bắt đầu thứ Hai tới không? (lịch sự hơn)</td></tr>
+  </table>
+  <div style="margin-top:.75rem;display:grid;grid-template-columns:1fr 1fr;gap:.6rem;font-size:.82rem">
+    <div style="background:rgba(15,118,110,.07);border-radius:8px;padding:.6rem .85rem">
+      <strong style="color:var(--accent2)">Lưu ý quan trọng:</strong><br>
+      Can KHÔNG chia theo chủ ngữ:<br>
+      ✓ He <strong>can</strong> swim (không phải "cans")<br>
+      ✓ She <strong>can't</strong> code (không phải "can'ts")
+    </div>
+    <div style="background:rgba(15,118,110,.07);border-radius:8px;padding:.6rem .85rem">
+      <strong style="color:var(--accent2)">Can vs Be able to:</strong><br>
+      <strong>can</strong> = khả năng hiện tại<br>
+      <em>"I can cook Vietnamese food."</em><br>
+      <strong>could</strong> = khả năng trong quá khứ<br>
+      <em>"I could run faster when I was young."</em>
+    </div>
+  </div>
+</div>
+
+<div class="sec-title"><span>💬</span> Mẫu Câu</div>
+<div class="pattern-list">
+  <div class="pattern-item"><div class="pat-en">"What do you do for a living?" — "I'm a software engineer. I work for a tech company."</div><div class="pat-vn">→ Bạn làm nghề gì để kiếm sống? — Tôi là kỹ sư phần mềm. Tôi làm cho công ty công nghệ.</div><div class="pat-note">💡 "What do you do for a living?" = hỏi nghề nghiệp người lạ — tự nhiên hơn "What's your job?"</div></div>
+  <div class="pattern-item"><div class="pat-en">"I can speak English and Japanese. I can also use Photoshop and Excel."</div><div class="pat-vn">→ Tôi có thể nói tiếng Anh và tiếng Nhật. Tôi cũng biết dùng Photoshop và Excel.</div><div class="pat-note">💡 Liệt kê kỹ năng khi phỏng vấn — nói rõ ràng, tự tin</div></div>
+  <div class="pattern-item"><div class="pat-en">"I work full-time / part-time. I work from 8 to 5, Monday to Friday."</div><div class="pat-vn">→ Tôi làm toàn thời gian / bán thời gian. Tôi làm từ 8 đến 5, thứ Hai đến thứ Sáu.</div><div class="pat-note">💡 full-time (toàn thời gian) · part-time (bán thời gian) · remote/work from home (làm từ xa)</div></div>
+  <div class="pattern-item"><div class="pat-en">"I'm looking for a new job." / "I applied for a position at Google."</div><div class="pat-vn">→ Tôi đang tìm việc mới. / Tôi đã nộp đơn vào một vị trí tại Google.</div><div class="pat-note">💡 apply for a job (nộp đơn) · interview (phỏng vấn) · salary (lương) · promotion (thăng chức)</div></div>
+</div>
+
+<div class="sec-title"><span>🗣️</span> Hội Thoại — Phỏng Vấn Xin Việc</div>
+<div class="convo-box">
+  <div class="convo-line"><span class="spk-i">Inter.</span><div class="bubble">Good morning! Please have a seat. Can you tell me a little about yourself?</div></div>
+  <div class="convo-line"><span class="spk-a">Appl.</span><div class="bubble a">Of course. My name is Minh and I'm a recent graduate in Computer Science. I've been working as a junior developer for two years.</div></div>
+  <div class="convo-line"><span class="spk-i">Inter.</span><div class="bubble">Great. What programming languages can you use?</div></div>
+  <div class="convo-line"><span class="spk-a">Appl.</span><div class="bubble a">I can work with Python, JavaScript and Java. I'm also learning React at the moment.</div></div>
+  <div class="convo-line"><span class="spk-i">Inter.</span><div class="bubble">Can you work in a team?</div></div>
+  <div class="convo-line"><span class="spk-a">Appl.</span><div class="bubble a">Yes, definitely! I enjoy collaborating with others. At my current job, I work in a team of five developers.</div></div>
+  <div class="convo-line"><span class="spk-i">Inter.</span><div class="bubble">Could you start next month if you were offered the position?</div></div>
+  <div class="convo-line"><span class="spk-a">Appl.</span><div class="bubble a">Yes, I could. I just need to give two weeks' notice at my current job.</div></div>
+</div>
+
+<div class="sec-title"><span>🎮</span> Luyện Tập — Kỹ Năng Của Bạn</div>
+<div class="skill-builder">
+  <h3>Chọn kỹ năng bạn có (✅ Can) hoặc chưa có (❌ Can't):</h3>
+  <div id="skillList"></div>
+  <button class="btn-sm" onclick="buildSkillSentence()" style="margin-top:.6rem">✨ Tạo câu của tôi</button>
+  <div class="sk-result" id="skResult"></div>
+</div>
+
+<div class="sec-title"><span>✏️</span> Luyện Tập — Điền Đúng</div>
+<div class="fill-block">
+  <div class="fill-q">Điền can, can't, could cho phù hợp:</div>
+  <div class="fill-row"><span style="flex:1">1. She ___ speak French — she's fluent! (khả năng hiện tại)</span><input type="text" placeholder="can" style="width:90px" onblur="fc(this,'can')"></div>
+  <div class="fill-row"><span style="flex:1">2. I ___ drive when I was 10 years old. (quá khứ, chưa thể)</span><input type="text" placeholder="couldn't" style="width:100px" onblur="fc(this,'couldn\'t')"></div>
+  <div class="fill-row"><span style="flex:1">3. ___ you help me with this report? (lịch sự)</span><input type="text" placeholder="Could" style="width:90px" onblur="fc(this,'could')"></div>
+  <div class="fill-row"><span style="flex:1">4. He ___ cook at all — he always eats out! (không thể)</span><input type="text" placeholder="can't" style="width:90px" onblur="fc(this,'can\'t')"></div>
+</div>
+
+<div class="sec-title"><span>🎯</span> Quiz Nhanh (5 câu)</div>
+<div class="quiz-section">
+  <div class="quiz-header"><span id="quizTitle" style="font-size:.85rem;color:var(--muted)">Câu 1 / 5</span><span id="quizScoreDisplay" style="font-size:.85rem;color:var(--muted)">Điểm: 0</span></div>
+  <div id="quizContent">
+    <div class="quiz-q" id="quizQ"></div>
+    <div class="quiz-opts" id="quizOpts"></div>
+    <div class="quiz-feedback" id="quizFB"></div>
+    <div class="quiz-nav"><div class="progress-bar"><div class="progress-fill" id="quizProgress" style="width:20%"></div></div><button class="btn" id="quizNext" style="display:none" onclick="nextQ()">Tiếp →</button></div>
+  </div>
+  <div class="result-box" id="quizResult"><div class="result-emoji" id="resEmoji"></div><div class="result-score" id="resScore"></div><div class="result-msg" id="resMsg"></div><button class="btn" onclick="resetQuiz()">🔄 Làm lại</button></div>
+</div>
+<div class="lesson-footer"><div class="footer-nav">← <a href="../lesson-10/">Lesson 10</a></div><div style="font-size:.8rem;color:var(--muted)">A2 · Lesson 11 / 12</div><div class="footer-nav"><a href="../lesson-12/">Lesson 12 →</a></div></div>
+
+<script>
+const jobs=[{e:'👨‍💻',en:'Software Engineer',vn:'Kỹ sư phần mềm',tasks:'code, test, debug software'},{e:'👩‍⚕️',en:'Doctor / Nurse',vn:'Bác sĩ / Y tá',tasks:'diagnose, treat patients'},{e:'👨‍🏫',en:'Teacher',vn:'Giáo viên',tasks:'teach, grade, prepare lessons'},{e:'👩‍🍳',en:'Chef / Cook',vn:'Đầu bếp',tasks:'cook, create menus, manage kitchen'},{e:'👮',en:'Police Officer',vn:'Cảnh sát',tasks:'protect, investigate, patrol'},{e:'👷',en:'Engineer / Builder',vn:'Kỹ sư / Thợ xây',tasks:'design, construct, supervise'},{e:'✈️',en:'Pilot / Flight Attendant',vn:'Phi công / Tiếp viên',tasks:'fly planes, serve passengers'},{e:'📰',en:'Journalist',vn:'Nhà báo',tasks:'write, interview, report news'},{e:'🎨',en:'Designer / Artist',vn:'Nhà thiết kế / Họa sĩ',tasks:'create, draw, design visuals'},{e:'💰',en:'Accountant / Banker',vn:'Kế toán / Nhân viên ngân hàng',tasks:'manage money, calculate finances'},{e:'⚖️',en:'Lawyer',vn:'Luật sư',tasks:'advise clients, argue in court'},{e:'🚚',en:'Driver / Delivery',vn:'Tài xế / Giao hàng',tasks:'drive, deliver packages safely'}];
+const jg=document.getElementById('jobGrid');
+jobs.forEach(j=>{jg.innerHTML+=`<div class="job-card" onclick="this.classList.toggle('flip')"><div class="jc-emoji">${j.e}</div><div class="jc-en">${j.en}</div><div class="jc-vn">${j.vn}</div><div class="jc-tasks">📋 ${j.tasks}</div></div>`;});
+const wps=[{en:'office',vn:'văn phòng'},{en:'hospital',vn:'bệnh viện'},{en:'school / university',vn:'trường học'},{en:'factory',vn:'nhà máy'},{en:'restaurant / café',vn:'nhà hàng / quán cà phê'},{en:'shop / store',vn:'cửa hàng'},{en:'outdoors / on-site',vn:'ngoài trời / công trường'},{en:'from home / remote',vn:'làm từ xa / tại nhà'}];
+const wpg=document.getElementById('wpGrid');
+wps.forEach(w=>{wpg.innerHTML+=`<div class="wp-card"><div class="wp-en">${w.en}</div><div class="wp-vn">${w.vn}</div></div>`;});
+
+const skills=['speak English','drive a car','cook Vietnamese food','use Excel / Word','play a musical instrument','swim','code / program','take professional photos'];
+const skChoices={};
+const sl=document.getElementById('skillList');
+skills.forEach((s,i)=>{sl.innerHTML+=`<div class="skill-item"><span class="skill-name">${s}</span><div class="skill-btns"><button class="sk-btn sk-can" id="skc${i}" onclick="skPick(${i},'can')">✅ Can</button><button class="sk-btn sk-cant" id="skx${i}" onclick="skPick(${i},'cant')">❌ Can't</button></div></div>`;});
+function skPick(i,type){skChoices[i]=type;document.getElementById('skc'+i).classList.toggle('on',type==='can');document.getElementById('skx'+i).classList.toggle('on',type==='cant');}
+function buildSkillSentence(){const cans=[],cants=[];skills.forEach((s,i)=>{if(skChoices[i]==='can')cans.push(s);else if(skChoices[i]==='cant')cants.push(s);});let r='';if(cans.length)r+=`I can ${cans.join(', ')}. `;if(cants.length)r+=`I can't ${cants.join(' or ')} yet.`;document.getElementById('skResult').textContent=r||'Chọn ít nhất một kỹ năng!';}
+
+function fc(el,ans){const v=el.value.trim().toLowerCase();if(v===ans){el.style.borderColor='#10b981';el.style.color='#10b981';}else if(v){el.style.borderColor='#ef4444';el.style.color='#ef4444';}}
+
+const qs=[{q:'"She ___ speak Japanese." — She ngôi 3, can chia thế nào?',opts:['cans','can','could have','is can'],ans:1},{q:'"Can you drive?" — Trả lời phủ định ngắn:',opts:["No, I can't.","No, I couldn't.","No, I don't.","No, I won't."],ans:0},{q:'"Could" dùng khi nào trong câu phỏng vấn?',opts:['Để ra lệnh','Để hỏi lịch sự','Để hỏi quá khứ','Để đưa lời khuyên'],ans:1},{q:'"full-time" nghĩa là?',opts:['Bán thời gian','Làm từ xa','Toàn thời gian','Làm thêm giờ'],ans:2},{q:'Câu nào đúng?',opts:["He cans cook well.","He can cooks well.","He can cook well.","He can cooking well."],ans:2}];
+let qi=0,score=0;
+function renderQ(){const q=qs[qi];document.getElementById('quizTitle').textContent=`Câu ${qi+1} / ${qs.length}`;document.getElementById('quizProgress').style.width=`${((qi+1)/qs.length)*100}%`;document.getElementById('quizQ').textContent=q.q;document.getElementById('quizFB').textContent='';document.getElementById('quizFB').className='quiz-feedback';document.getElementById('quizNext').style.display='none';const opts=document.getElementById('quizOpts');opts.innerHTML='';q.opts.forEach((o,i)=>{const btn=document.createElement('button');btn.className='quiz-opt';btn.textContent=o;btn.onclick=()=>{document.querySelectorAll('.quiz-opt').forEach(b=>b.disabled=true);if(i===q.ans){btn.classList.add('correct');score++;document.getElementById('quizFB').textContent='✅ Chính xác!';document.getElementById('quizFB').className='quiz-feedback ok';}else{btn.classList.add('wrong');document.querySelectorAll('.quiz-opt')[q.ans].classList.add('correct');document.getElementById('quizFB').textContent='❌ Sai rồi!';document.getElementById('quizFB').className='quiz-feedback no';}document.getElementById('quizScoreDisplay').textContent=`Điểm: ${score}`;document.getElementById('quizNext').style.display='inline-block';};opts.appendChild(btn);});}
+function nextQ(){qi++;if(qi>=qs.length){document.getElementById('quizContent').style.display='none';const r=document.getElementById('quizResult');r.style.display='block';const pct=Math.round(score/qs.length*100);document.getElementById('resEmoji').textContent=pct>=80?'🏆':pct>=60?'👍':'💪';document.getElementById('resScore').textContent=`${score} / ${qs.length} đúng (${pct}%)`;document.getElementById('resMsg').textContent=pct>=80?'Tuyệt! Jobs & Can thành thạo rồi!':'Ôn thêm và thử lại nhé!';}else renderQ();}
+function resetQuiz(){qi=0;score=0;document.getElementById('quizScoreDisplay').textContent='Điểm: 0';document.getElementById('quizContent').style.display='block';document.getElementById('quizResult').style.display='none';renderQ();}
+renderQ();
+</script>
+</body></html>
