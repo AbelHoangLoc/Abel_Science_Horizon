@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+
+  <link rel="stylesheet" href="../assets/brand.css">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A1 · Lesson 12 · Final Review & Test</title>
+<style>
+:root{--bg:#080d1a;--card:#0f1729;--card2:#131e35;--border:#1e2d4a;--text:#dde6f5;--muted:#8b9ab5;--gold:#f59e0b;--acl:#fcd34d;--green:#10b981;--red:#ef4444;--blue:#38bdf8;--purple:#a78bfa}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;line-height:1.6;padding:1.5rem 1.25rem 3rem}
+.lsn-header{background:linear-gradient(135deg,#1a1200,#0f1729,#1a0a3e);border:1px solid rgba(245,158,11,.3);border-radius:16px;padding:1.75rem 1.5rem;margin-bottom:1.5rem;position:relative;overflow:hidden;text-align:center}
+.lsn-header::before{content:'';position:absolute;top:-50px;left:50%;transform:translateX(-50%);width:200px;height:200px;background:radial-gradient(circle,rgba(245,158,11,.2),transparent 70%);pointer-events:none}
+.lsn-badge{display:inline-flex;background:rgba(245,158,11,.15);border:1px solid rgba(252,211,77,.4);border-radius:20px;padding:.25rem .9rem;font-size:.7rem;font-weight:700;color:var(--acl);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.9rem}
+.lsn-header h1{font-size:1.8rem;font-weight:900;background:linear-gradient(90deg,#fde68a,#fbbf24,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.5rem}
+.lsn-header p{color:var(--muted);font-size:.9rem;max-width:500px;margin:0 auto}
+.objectives{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem;justify-content:center}
+.obj-tag{background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.25);border-radius:20px;padding:.25rem .7rem;font-size:.75rem;color:var(--acl)}
+.sec-title{display:flex;align-items:center;gap:.6rem;font-size:1rem;font-weight:700;color:var(--acl);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)}
+/* Summary cards */
+.summary-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:.65rem;margin-bottom:1.75rem}
+.sum-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:.9rem;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
+.sum-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:12px 12px 0 0}
+.sum-card:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,.25)}
+.sum-icon{font-size:1.3rem;margin-bottom:.35rem}
+.sum-lesson{font-size:.65rem;color:var(--muted);font-weight:700;letter-spacing:.04em;text-transform:uppercase;margin-bottom:.2rem}
+.sum-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:.3rem}
+.sum-keywords{font-size:.7rem;color:var(--muted);line-height:1.5}
+.sum-card.done{border-color:var(--green)}
+.sum-card.done::after{content:'✓';position:absolute;top:.5rem;right:.6rem;color:var(--green);font-size:.8rem;font-weight:700}
+/* Big test */
+.test-section{background:var(--card);border:2px solid rgba(245,158,11,.3);border-radius:16px;padding:1.25rem;margin-bottom:1.75rem}
+.test-header{text-align:center;margin-bottom:1.25rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
+.test-header h2{font-size:1.1rem;font-weight:800;color:var(--acl);margin-bottom:.35rem}
+.test-header p{font-size:.82rem;color:var(--muted)}
+.test-stats{display:flex;gap:1rem;justify-content:center;margin-top:.75rem;flex-wrap:wrap}
+.stat-box{background:var(--card2);border-radius:8px;padding:.4rem .9rem;font-size:.8rem;text-align:center}
+.stat-num{font-size:1.1rem;font-weight:800;color:var(--acl)}
+.stat-label{font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.progress-track{background:var(--border);border-radius:8px;height:8px;margin-bottom:1.25rem;overflow:hidden}
+.progress-fill-gold{background:linear-gradient(90deg,var(--gold),#fde68a);height:100%;border-radius:8px;transition:width .4s}
+.test-q{background:var(--card2);border-radius:10px;padding:1rem;margin-bottom:1rem}
+.tq-num{font-size:.72rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:.4rem}
+.tq-q{font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:.7rem;line-height:1.5}
+.tq-opts{display:grid;grid-template-columns:1fr 1fr;gap:.4rem}
+.tq-opt{background:var(--card);border:1px solid var(--border);border-radius:7px;padding:.45rem .65rem;font-size:.83rem;cursor:pointer;color:var(--text);transition:all .16s;text-align:left}
+.tq-opt:hover:not(:disabled){border-color:var(--gold);color:var(--acl)}
+.tq-opt.correct{border-color:var(--green)!important;background:rgba(16,185,129,.15)!important;color:var(--green)!important}
+.tq-opt.wrong{border-color:var(--red)!important;background:rgba(239,68,68,.08)!important;color:var(--red)!important}
+.tq-opt:disabled{cursor:default}
+/* Result */
+.final-result{text-align:center;padding:1.5rem;display:none}
+.result-trophy{font-size:3.5rem;margin-bottom:.75rem;animation:bounce .6s ease}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.result-grade{font-size:2.5rem;font-weight:900;margin-bottom:.25rem}
+.result-grade.gold{background:linear-gradient(90deg,#fde68a,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.result-grade.silver{background:linear-gradient(90deg,#e2e8f0,#94a3b8);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.result-grade.bronze{background:linear-gradient(90deg,#fbbf24,#92400e);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.result-sub{font-size:.9rem;color:var(--muted);margin-bottom:1rem}
+.result-breakdown{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-bottom:1.25rem}
+.rb-item{background:var(--card2);border-radius:8px;padding:.6rem;text-align:center;font-size:.8rem}
+.rb-num{font-size:1.1rem;font-weight:800;color:var(--acl)}
+.rb-lbl{font-size:.65rem;color:var(--muted)}
+.next-level{background:linear-gradient(135deg,rgba(56,189,248,.15),rgba(167,139,250,.15));border:1px solid rgba(56,189,248,.3);border-radius:12px;padding:1rem;margin-bottom:.75rem}
+.nl-title{font-size:.85rem;font-weight:700;color:var(--blue);margin-bottom:.5rem}
+.nl-text{font-size:.82rem;color:var(--muted);line-height:1.6}
+.btn{background:linear-gradient(135deg,var(--gold),#f97316);color:#000;border:none;border-radius:8px;padding:.6rem 1.3rem;font-size:.88rem;font-weight:800;cursor:pointer;transition:opacity .2s;margin:.25rem}
+.btn:hover{opacity:.85}
+.btn-outline{background:transparent;border:1px solid var(--border);color:var(--muted)}
+.lesson-footer{display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border)}
+.footer-nav a{color:var(--gold);text-decoration:none;font-size:.85rem;font-weight:600}
+</style>
+</head>
+<body>
+
+  <img src="../assets/logo-SH.png" class="sh-logo" alt="Science Horizon">
+<div class="lsn-header">
+  <div class="lsn-badge">🏆 A1 Final · Lesson 12</div>
+  <h1>A1 Review &amp; Final Test</h1>
+  <p>Ôn lại toàn bộ A1 và kiểm tra xem bạn đã sẵn sàng lên A2 chưa!</p>
+  <div class="objectives">
+    <span class="obj-tag">📋 Ôn 11 bài học</span>
+    <span class="obj-tag">🎯 Kiểm tra 20 câu</span>
+    <span class="obj-tag">🏅 Nhận chứng chỉ A1</span>
+    <span class="obj-tag">🚀 Sẵn sàng lên A2</span>
+  </div>
+</div>
+
+<!-- SUMMARY -->
+<div class="sec-title"><span>📋</span> Tổng Ôn 11 Bài Đã Học</div>
+<div class="summary-grid" id="summaryGrid"></div>
+
+<!-- FINAL TEST -->
+<div class="sec-title"><span>🎯</span> Bài Kiểm Tra A1 Cuối Khoá (20 câu)</div>
+<div class="test-section">
+  <div class="test-header">
+    <h2>🏆 A1 Final Test</h2>
+    <p>Trả lời 20 câu hỏi từ tất cả các bài đã học. Đạt 70% (14/20) để hoàn thành A1!</p>
+    <div class="test-stats">
+      <div class="stat-box"><div class="stat-num" id="statQ">0</div><div class="stat-label">Đã làm</div></div>
+      <div class="stat-box"><div class="stat-num" id="statC">0</div><div class="stat-label">Đúng</div></div>
+      <div class="stat-box"><div class="stat-num">20</div><div class="stat-label">Tổng câu</div></div>
+    </div>
+  </div>
+  <div class="progress-track"><div class="progress-fill-gold" id="testProgress" style="width:0%"></div></div>
+  <div id="testQuestions"></div>
+  <div class="final-result" id="finalResult"></div>
+  <div id="testSubmitArea" style="text-align:center;margin-top:1rem;display:none">
+    <button class="btn" onclick="submitTest()">✅ Nộp bài & Xem kết quả</button>
+  </div>
+</div>
+
+<div class="lesson-footer">
+  <div class="footer-nav">← <a href="../lesson-11/">Lesson 11</a></div>
+  <div style="font-size:.8rem;color:var(--muted)">A1 · Lesson 12 / 12 · 🏁 Hoàn thành A1!</div>
+  <div class="footer-nav"><a href="../../a2/">Lên A2 →</a></div>
+</div>
+
+<script>
+// Summary data
+const lessons=[
+  {icon:'👋',n:'01',title:'Hello & Goodbye',kw:'Hello, Goodbye, Nice to meet you, Good morning'},
+  {icon:'🔤',n:'02',title:'Alphabet Orbit',kw:'A–Z, vowels, consonants, How do you spell?'},
+  {icon:'🔢',n:'03',title:'Numbers 1–20',kw:'one–twenty, How old are you?, phone numbers'},
+  {icon:'🏫',n:'04',title:'Classroom English',kw:'Stand up, Open your book, Repeat after me'},
+  {icon:'🙋',n:'05',title:'My Name Is…',kw:'I am, Where are you from?, What do you do?'},
+  {icon:'👨‍👩‍👧',n:'06',title:'Family Words',kw:"mother, father, sister, brother, 's possessive"},
+  {icon:'🎨',n:'07',title:'Colors & Objects',kw:'red, blue, pen, book, This is / That is'},
+  {icon:'🐾',n:'08',title:'Animals & Likes',kw:'cat, dog, I like / I don\'t like, Do you like?'},
+  {icon:'🍜',n:'09',title:'Food & Drinks',kw:"rice, coffee, I'd like, Can I have, hungry"},
+  {icon:'📅',n:'10',title:'Days & Time',kw:'Monday–Sunday, months, o\'clock, in/on/at'},
+  {icon:'🫀',n:'11',title:'My Body',kw:'head, hand, eye, I have a headache, hurt'},
+];
+const sg=document.getElementById('summaryGrid');
+const colors=['#7c3aed','#0ea5e9','#f59e0b','#06b6d4','#8b5cf6','#ec4899','#f97316','#14b8a6','#84cc16','#6366f1','#e879f9'];
+lessons.forEach((l,i)=>{
+  sg.innerHTML+=`<div class="sum-card" onclick="location.href='../lesson-${l.n}/'" style="border-top:3px solid ${colors[i]}">
+    <div class="sum-icon">${l.icon}</div>
+    <div class="sum-lesson">Lesson ${l.n}</div>
+    <div class="sum-title">${l.title}</div>
+    <div class="sum-keywords">${l.kw}</div>
+  </div>`;
+});
+
+// Final test questions (20 questions covering all 11 lessons)
+const allQs=[
+  // Lesson 01
+  {lesson:'L01',q:'"Nice to meet you!" — Câu trả lời phù hợp nhất là?',opts:['Goodbye!','Nice to meet you too!','How are you?','Thank you!'],ans:1},
+  {lesson:'L01',q:'"Good evening!" — Dùng vào thời điểm nào?',opts:['Buổi sáng','Buổi trưa','Buổi tối','Đêm khuya'],ans:2},
+  // Lesson 02
+  {lesson:'L02',q:'Chữ cái nào không phải nguyên âm (vowel)?',opts:['A','E','F','I'],ans:2},
+  {lesson:'L02',q:'Trước "apple" dùng mạo từ nào?',opts:['a','an','the','Không dùng'],ans:1},
+  // Lesson 03
+  {lesson:'L03',q:'"seventeen" là số mấy?',opts:['13','15','17','19'],ans:2},
+  {lesson:'L03',q:'"How old are you?" — Trả lời đúng:',opts:['I am fifteen.','I have fifteen.','I fifteen years.','Me fifteen years old.'],ans:0},
+  // Lesson 04
+  {lesson:'L04',q:'"Please sit down." — "Please" có tác dụng gì?',opts:['Phủ định câu','Tạo câu hỏi','Làm câu lịch sự hơn','Câu bắt buộc'],ans:2},
+  {lesson:'L04',q:'"What does X mean?" dùng để?',opts:['Hỏi đánh vần','Hỏi nghĩa từ','Hỏi tuổi','Hỏi giờ'],ans:1},
+  // Lesson 05
+  {lesson:'L05',q:'"We ___ students." — Điền dạng TO BE đúng:',opts:['am','is','are','be'],ans:2},
+  {lesson:'L05',q:'"Where are you from?" hỏi về?',opts:['Tuổi','Nghề nghiệp','Quê quán','Tên'],ans:2},
+  // Lesson 06
+  {lesson:'L06',q:'Tính từ sở hữu của "he" là?',opts:['her','his','its','their'],ans:1},
+  {lesson:'L06',q:'"There are five people in my family." — Gia đình có mấy người?',opts:['4','5','6','7'],ans:1},
+  // Lesson 07
+  {lesson:'L07',q:'Thứ tự đúng của tính từ màu sắc + danh từ:',opts:['a pen blue','a blue pen','blue a pen','pen blue a'],ans:1},
+  {lesson:'L07',q:'"These are" dùng khi nào?',opts:['1 vật ở gần','1 vật ở xa','Nhiều vật ở gần','Nhiều vật ở xa'],ans:2},
+  // Lesson 08
+  {lesson:'L08',q:'"She ___ cats." — She ngôi 3, điền đúng:',opts:['like','likes','don\'t like','liking'],ans:1},
+  {lesson:'L08',q:'Trả lời ngắn đúng cho "Do you like fish?"',opts:['Yes, I like.','Yes, I do.','Yes, do I.','Yes, I am.'],ans:1},
+  // Lesson 09
+  {lesson:'L09',q:'Câu nào lịch sự nhất khi gọi món?',opts:["Give me coffee!","I want coffee.","I'd like a coffee, please.","Coffee!"],ans:2},
+  {lesson:'L09',q:'"I\'m thirsty." nghĩa là gì?',opts:['Tôi đói','Tôi khát nước','Tôi no','Tôi mệt'],ans:1},
+  // Lesson 10
+  {lesson:'L10',q:'Giới từ nào dùng với tháng: "___ January"?',opts:['at','on','in','by'],ans:2},
+  // Lesson 11
+  {lesson:'L11',q:'"I have a stomachache." nghĩa là?',opts:['Đau đầu','Đau chân','Đau bụng','Đau lưng'],ans:2},
+];
+
+const shuffled=allQs.sort(()=>Math.random()-.5).slice(0,20);
+let answered={},correctCount=0;
+
+function renderTest(){
+  const tq=document.getElementById('testQuestions');tq.innerHTML='';
+  shuffled.forEach((q,i)=>{
+    tq.innerHTML+=`<div class="test-q" id="tq${i}">
+      <div class="tq-num">Câu ${i+1} / 20 · <span style="color:var(--acl)">${q.lesson}</span></div>
+      <div class="tq-q">${q.q}</div>
+      <div class="tq-opts">${q.opts.map((o,j)=>`<button class="tq-opt" id="tqo${i}_${j}" onclick="pickAns(${i},${j},${q.ans})">${o}</button>`).join('')}</div>
+    </div>`;
+  });
+  document.getElementById('testSubmitArea').style.display='block';
+}
+
+function pickAns(qi,chosen,ans){
+  if(answered[qi]!==undefined)return;
+  answered[qi]=chosen;
+  const correct=chosen===ans;
+  if(correct)correctCount++;
+  // Update stats
+  const done=Object.keys(answered).length;
+  document.getElementById('statQ').textContent=done;
+  document.getElementById('statC').textContent=correctCount;
+  document.getElementById('testProgress').style.width=`${(done/20)*100}%`;
+  // Highlight
+  for(let j=0;j<shuffled[qi].opts.length;j++){
+    const btn=document.getElementById(`tqo${qi}_${j}`);
+    btn.disabled=true;
+    if(j===ans)btn.classList.add('correct');
+    else if(j===chosen)btn.classList.add('wrong');
+  }
+}
+
+function submitTest(){
+  const done=Object.keys(answered).length;
+  if(done<20){alert(`Bạn còn ${20-done} câu chưa trả lời! Hãy hoàn thành trước khi nộp.`);return;}
+  document.getElementById('testQuestions').style.display='none';
+  document.getElementById('testSubmitArea').style.display='none';
+  const pct=Math.round(correctCount/20*100);
+  let grade,gradeClass,trophy,msg;
+  if(pct>=90){grade='S';gradeClass='gold';trophy='🏆';msg='Xuất sắc tuyệt vời! Bạn thực sự đã thành thạo A1!';}
+  else if(pct>=70){grade='A';gradeClass='gold';trophy='🥇';msg='Hoàn thành A1! Bạn sẵn sàng bước sang A2 rồi!';}
+  else if(pct>=50){grade='B';gradeClass='silver';trophy='🥈';msg='Kết quả tốt! Ôn thêm một chút rồi lên A2 nhé.';}
+  else{grade='C';gradeClass='bronze';trophy='💪';msg='Hãy ôn lại các bài học và thử lại — bạn sẽ làm được!';}
+  const fr=document.getElementById('finalResult');fr.style.display='block';
+  fr.innerHTML=`
+    <div class="result-trophy">${trophy}</div>
+    <div class="result-grade ${gradeClass}">${correctCount}/20 · ${pct}%</div>
+    <div class="result-sub">${msg}</div>
+    <div class="result-breakdown">
+      <div class="rb-item"><div class="rb-num">${correctCount}</div><div class="rb-lbl">Câu đúng</div></div>
+      <div class="rb-item"><div class="rb-num">${20-correctCount}</div><div class="rb-lbl">Câu sai</div></div>
+      <div class="rb-item"><div class="rb-num">${pct}%</div><div class="rb-lbl">Điểm số</div></div>
+    </div>
+    ${pct>=70?`
+    <div class="next-level">
+      <div class="nl-title">🚀 Bước tiếp theo — A2!</div>
+      <div class="nl-text">Bạn đã nắm vững nền tảng A1: chào hỏi, bảng chữ cái, số đếm, gia đình, màu sắc, động vật, thức ăn, ngày giờ và cơ thể người.<br><br>
+      Ở A2, bạn sẽ học cách <strong>kể chuyện</strong> (quá khứ đơn), <strong>lên kế hoạch</strong> (tương lai), <strong>so sánh</strong> và <strong>giao tiếp</strong> trong nhiều tình huống thực tế hơn!</div>
+    </div>`:
+    `<div style="background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2);border-radius:10px;padding:.9rem;margin-bottom:.75rem;font-size:.82rem;color:var(--muted)">
+      📚 Gợi ý: Ôn lại các lesson có điểm thấp, sau đó thử lại bài test này. Chúc bạn lần sau đạt kết quả cao hơn!
+    </div>`}
+    <div style="display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center">
+      <button class="btn" onclick="location.reload()">🔄 Làm lại bài test</button>
+      <button class="btn btn-outline" onclick="location.href='../'">📚 Về danh sách bài</button>
+      ${pct>=70?'<button class="btn" onclick="location.href=\'../../a2/\'">🚀 Lên A2!</button>':''}
+    </div>`;
+}
+
+renderTest();
+</script>
+</body></html>
