@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+
+  <link rel="stylesheet" href="../assets/brand.css">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A2 · Lesson 06 · Weather & Seasons</title>
+<style>
+:root{--bg:#080d1a;--card:#0f1729;--card2:#131e35;--border:#1e2d4a;--text:#dde6f5;--muted:#8b9ab5;--accent:#0284c7;--accent2:#7dd3fc;--green:#10b981;--red:#ef4444}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;line-height:1.6;padding:1.5rem 1.25rem 3rem}
+.lsn-header{background:linear-gradient(135deg,#001a30,#0f1729);border:1px solid var(--border);border-radius:16px;padding:1.5rem;margin-bottom:1.5rem;position:relative;overflow:hidden}
+.lsn-header::before{content:'';position:absolute;top:-40px;right:-40px;width:150px;height:150px;background:radial-gradient(circle,rgba(2,132,199,.3),transparent 70%);pointer-events:none}
+.lsn-badge{display:inline-flex;background:rgba(2,132,199,.15);border:1px solid rgba(125,211,252,.3);border-radius:20px;padding:.25rem .75rem;font-size:.7rem;font-weight:700;color:var(--accent2);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.75rem}
+.lsn-header h1{font-size:1.6rem;font-weight:800;background:linear-gradient(90deg,#bae6fd,#7dd3fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.4rem}
+.lsn-header p{color:var(--muted);font-size:.9rem}
+.objectives{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+.obj-tag{background:rgba(2,132,199,.12);border:1px solid rgba(2,132,199,.25);border-radius:20px;padding:.25rem .7rem;font-size:.75rem;color:var(--accent2)}
+.sec-title{display:flex;align-items:center;gap:.6rem;font-size:1rem;font-weight:700;color:var(--accent2);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)}
+.weather-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:.6rem;margin-bottom:1.75rem}
+.w-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:.8rem .6rem;text-align:center;cursor:pointer;transition:all .2s}
+.w-card:hover,.w-card.flip{border-color:var(--accent);background:rgba(2,132,199,.08)}
+.w-emoji{font-size:1.8rem;margin-bottom:.3rem}
+.w-en{font-size:.9rem;font-weight:700;color:var(--text)}.w-vn{font-size:.76rem;color:var(--muted);margin-top:.1rem}
+.w-card.flip .w-eg{display:block}.w-eg{display:none;font-size:.7rem;color:var(--accent2);margin-top:.25rem;font-style:italic}
+.seasons-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.65rem;margin-bottom:1.75rem}
+.season-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:.9rem 1rem}
+.s-header{display:flex;align-items:center;gap:.6rem;margin-bottom:.5rem}
+.s-emoji{font-size:1.4rem}.s-name{font-size:.95rem;font-weight:700}.s-vn{font-size:.78rem;color:var(--muted)}
+.s-weather{font-size:.78rem;color:var(--accent2);line-height:1.6}
+.grammar-box{background:linear-gradient(135deg,rgba(2,132,199,.1),rgba(2,132,199,.04));border:1px solid rgba(2,132,199,.2);border-radius:12px;padding:1.1rem;margin-bottom:1.75rem}
+.grammar-box h3{color:var(--accent2);font-size:.9rem;margin-bottom:.8rem}
+.gram-box{background:rgba(2,132,199,.2);border-radius:6px;padding:.2rem .7rem;color:var(--accent2);font-weight:700;font-family:monospace;display:inline-block}
+.gram-row{display:flex;gap:.5rem;align-items:center;margin-bottom:.5rem;font-size:.88rem;flex-wrap:wrap}
+.comp-table{width:100%;border-collapse:collapse;font-size:.85rem;margin-bottom:.75rem}
+.comp-table th{background:rgba(2,132,199,.2);color:var(--accent2);padding:.45rem .65rem;text-align:left;border:1px solid var(--border);font-size:.78rem}
+.comp-table td{padding:.4rem .65rem;border:1px solid var(--border);color:var(--text)}
+.comp-table tr:nth-child(even) td{background:var(--card2)}
+.pattern-list{margin-bottom:1.75rem}
+.pattern-item{background:var(--card);border-left:3px solid var(--accent);border-radius:0 10px 10px 0;padding:.8rem 1rem;margin-bottom:.6rem}
+.pat-en{font-size:1rem;font-weight:600;color:var(--text)}.pat-vn{font-size:.82rem;color:var(--muted);margin-top:.2rem}.pat-note{font-size:.78rem;color:var(--accent2);margin-top:.25rem;font-style:italic}
+.convo-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1.75rem}
+.convo-line{display:flex;gap:.7rem;margin-bottom:.65rem;align-items:flex-start}
+.spk-a{color:#7dd3fc;font-size:.7rem;font-weight:700;text-transform:uppercase;min-width:28px;margin-top:.2rem}
+.spk-b{color:#34d399;font-size:.7rem;font-weight:700;text-transform:uppercase;min-width:28px;margin-top:.2rem}
+.bubble{background:var(--card2);border-radius:0 10px 10px 10px;padding:.55rem .85rem;font-size:.9rem;flex:1}
+.bubble.b{border-radius:10px 10px 10px 0;background:rgba(52,211,153,.07);border:1px solid rgba(52,211,153,.15)}
+.fill-block{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1.75rem}
+.fill-q{font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:.75rem}
+.fill-row{display:flex;align-items:center;gap:.5rem;padding:.45rem .75rem;background:var(--card2);border-radius:8px;margin-bottom:.4rem;font-size:.88rem}
+input[type=text]{background:var(--card2);border:1px solid var(--border);border-radius:6px;padding:.3rem .6rem;color:var(--text);font-size:.85rem;outline:none}
+input[type=text]:focus{border-color:var(--accent)}
+.quiz-section{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.25rem;margin-bottom:1.75rem}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+.quiz-q{font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:.75rem;padding:.75rem;background:var(--card2);border-radius:8px}
+.quiz-opts{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.5rem}
+.quiz-opt{background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:.55rem .75rem;font-size:.85rem;cursor:pointer;transition:all .18s;color:var(--text);text-align:left}
+.quiz-opt:hover:not(:disabled){border-color:var(--accent);color:var(--accent2)}.quiz-opt.correct{border-color:var(--green)!important;background:rgba(16,185,129,.15)!important;color:var(--green)!important}.quiz-opt.wrong{border-color:var(--red)!important;background:rgba(239,68,68,.1)!important;color:var(--red)!important}.quiz-opt:disabled{cursor:default}
+.quiz-feedback{font-size:.8rem;margin:.4rem 0 .6rem;min-height:1rem}.quiz-feedback.ok{color:var(--green)}.quiz-feedback.no{color:var(--red)}
+.quiz-nav{display:flex;gap:.5rem;align-items:center;justify-content:space-between}
+.btn{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:.5rem 1.1rem;font-size:.85rem;font-weight:700;cursor:pointer;transition:opacity .2s}.btn:hover{opacity:.85}
+.progress-bar{background:var(--border);border-radius:4px;height:4px;flex:1;overflow:hidden}.progress-fill{background:var(--accent);height:100%;border-radius:4px;transition:width .3s}
+.result-box{text-align:center;padding:1.25rem;display:none}.result-emoji{font-size:2.5rem;margin-bottom:.5rem}.result-score{font-size:1.5rem;font-weight:800;color:var(--accent2);margin-bottom:.25rem}.result-msg{font-size:.85rem;color:var(--muted);margin-bottom:1rem}
+.lesson-footer{display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border)}
+.footer-nav a{color:var(--accent);text-decoration:none;font-size:.85rem;font-weight:600}
+</style>
+</head>
+<body>
+<img src="../assets/logo-SH.png" class="sh-logo" alt="Science Horizon">
+<div class="lsn-header">
+  <div class="lsn-badge">🌤️ A2 Daily English · Lesson 06</div>
+  <h1>Weather &amp; Seasons</h1>
+  <p>Nói về thời tiết, mùa trong năm và so sánh — Comparatives (hơn / nhất)!</p>
+  <div class="objectives">
+    <span class="obj-tag">🌦️ Từ vựng thời tiết</span>
+    <span class="obj-tag">🍂 4 mùa trong năm</span>
+    <span class="obj-tag">📊 So sánh hơn</span>
+    <span class="obj-tag">🌡️ Nhiệt độ</span>
+  </div>
+</div>
+
+<div class="sec-title"><span>🌦️</span> Từ Vựng Thời Tiết <small style="color:var(--muted);font-weight:400;font-size:.78rem">(nhấn xem ví dụ)</small></div>
+<div class="weather-grid" id="wGrid"></div>
+
+<div class="sec-title"><span>🍂</span> Bốn Mùa Trong Năm</div>
+<div class="seasons-grid" id="seasonsGrid"></div>
+
+<div class="sec-title"><span>📐</span> Ngữ Pháp — So Sánh (Comparatives & Superlatives)</div>
+<div class="grammar-box">
+  <h3>✏️ Tính từ ngắn và dài — cách so sánh khác nhau</h3>
+  <table class="comp-table">
+    <tr><th>Loại tính từ</th><th>Gốc</th><th>So sánh hơn (-er/more)</th><th>So sánh nhất (-est/most)</th></tr>
+    <tr><td>Ngắn (1 âm tiết)</td><td>hot</td><td>hott<strong>er</strong></td><td>the hott<strong>est</strong></td></tr>
+    <tr><td>Ngắn (1 âm tiết)</td><td>cold</td><td>cold<strong>er</strong></td><td>the cold<strong>est</strong></td></tr>
+    <tr><td>Kết thúc -y</td><td>sunny</td><td>sunn<strong>ier</strong></td><td>the sunn<strong>iest</strong></td></tr>
+    <tr><td>Dài (2+ âm tiết)</td><td>beautiful</td><td><strong>more</strong> beautiful</td><td>the <strong>most</strong> beautiful</td></tr>
+    <tr><td>Bất quy tắc</td><td>good</td><td><strong>better</strong></td><td>the <strong>best</strong></td></tr>
+    <tr><td>Bất quy tắc</td><td>bad</td><td><strong>worse</strong></td><td>the <strong>worst</strong></td></tr>
+  </table>
+  <div class="gram-row"><span class="gram-box">So sánh hơn:</span><span>Today is <strong>hotter than</strong> yesterday.</span><span style="color:var(--muted);font-size:.8rem">→ Hôm nay nóng <strong>hơn</strong> hôm qua.</span></div>
+  <div class="gram-row"><span class="gram-box">So sánh nhất:</span><span>July is <strong>the hottest</strong> month of the year.</span><span style="color:var(--muted);font-size:.8rem">→ Tháng 7 là tháng nóng <strong>nhất</strong>.</span></div>
+  <div style="margin-top:.75rem;font-size:.82rem;color:var(--muted);background:rgba(2,132,199,.07);border-radius:8px;padding:.6rem .9rem">
+    💡 <strong style="color:var(--accent2)">Lưu ý đặc biệt:</strong> Tính từ 1 âm tiết kết thúc phụ âm-nguyên âm-phụ âm → gấp đôi phụ âm cuối: hot → <strong>hoTTer</strong> · big → <strong>biGGer</strong> · wet → <strong>weTTer</strong>
+  </div>
+</div>
+
+<div class="sec-title"><span>💬</span> Mẫu Câu</div>
+<div class="pattern-list">
+  <div class="pattern-item"><div class="pat-en">"What's the weather like today?" — "It's sunny and hot — about 35 degrees."</div><div class="pat-vn">→ Hôm nay thời tiết thế nào? — Trời nắng và nóng — khoảng 35 độ.</div><div class="pat-note">💡 "What's the weather like?" = cách hỏi thời tiết tự nhiên nhất</div></div>
+  <div class="pattern-item"><div class="pat-en">"It's getting colder. You should bring a jacket."</div><div class="pat-vn">→ Trời đang lạnh hơn. Bạn nên mang áo khoác.</div><div class="pat-note">💡 It's getting + comparative = đang ngày càng [tính từ hơn]</div></div>
+  <div class="pattern-item"><div class="pat-en">"Winter in the north is much colder than in the south."</div><div class="pat-vn">→ Mùa đông ở miền Bắc lạnh hơn nhiều so với miền Nam.</div><div class="pat-note">💡 much/a lot + comparative = hơn nhiều / hơn đáng kể</div></div>
+</div>
+
+<div class="sec-title"><span>🗣️</span> Hội Thoại</div>
+<div class="convo-box">
+  <div class="convo-line"><span class="spk-a">A</span><div class="bubble">What's the weather like in Hanoi in winter?</div></div>
+  <div class="convo-line"><span class="spk-b">B</span><div class="bubble b">It's much colder than Ho Chi Minh City — sometimes only 10 or 12 degrees! It can be quite foggy and drizzly too.</div></div>
+  <div class="convo-line"><span class="spk-a">A</span><div class="bubble">Wow, that sounds very different! What about summer?</div></div>
+  <div class="convo-line"><span class="spk-b">B</span><div class="bubble b">Summer is very hot and humid — often over 38 degrees! It's also the rainy season, so there are heavy showers in the afternoon.</div></div>
+  <div class="convo-line"><span class="spk-a">A</span><div class="bubble">Which season do you prefer?</div></div>
+  <div class="convo-line"><span class="spk-b">B</span><div class="bubble b">Definitely spring — it's warmer than winter but not as hot as summer. The weather is more pleasant and it's perfect for outdoor activities!</div></div>
+</div>
+
+<div class="sec-title"><span>✏️</span> Luyện Tập — Điền Dạng So Sánh</div>
+<div class="fill-block">
+  <div class="fill-q">Điền dạng so sánh hơn hoặc nhất của tính từ trong ngoặc:</div>
+  <div class="fill-row"><span style="flex:1">1. January is ___ (cold) than March.</span><input type="text" placeholder="colder" style="width:110px" onblur="fc(this,'colder')"></div>
+  <div class="fill-row"><span style="flex:1">2. The Sahara is ___ (hot) desert in the world.</span><input type="text" placeholder="the hottest" style="width:120px" onblur="fc(this,'the hottest')"></div>
+  <div class="fill-row"><span style="flex:1">3. Summer is ___ (sunny) than autumn.</span><input type="text" placeholder="sunnier" style="width:110px" onblur="fc(this,'sunnier')"></div>
+  <div class="fill-row"><span style="flex:1">4. Today's weather is ___ (bad) than yesterday. (bất quy tắc)</span><input type="text" placeholder="worse" style="width:110px" onblur="fc(this,'worse')"></div>
+</div>
+
+<div class="sec-title"><span>🎯</span> Quiz Nhanh (5 câu)</div>
+<div class="quiz-section">
+  <div class="quiz-header"><span id="quizTitle" style="font-size:.85rem;color:var(--muted)">Câu 1 / 5</span><span id="quizScoreDisplay" style="font-size:.85rem;color:var(--muted)">Điểm: 0</span></div>
+  <div id="quizContent">
+    <div class="quiz-q" id="quizQ"></div>
+    <div class="quiz-opts" id="quizOpts"></div>
+    <div class="quiz-feedback" id="quizFB"></div>
+    <div class="quiz-nav"><div class="progress-bar"><div class="progress-fill" id="quizProgress" style="width:20%"></div></div><button class="btn" id="quizNext" style="display:none" onclick="nextQ()">Tiếp →</button></div>
+  </div>
+  <div class="result-box" id="quizResult"><div class="result-emoji" id="resEmoji"></div><div class="result-score" id="resScore"></div><div class="result-msg" id="resMsg"></div><button class="btn" onclick="resetQuiz()">🔄 Làm lại</button></div>
+</div>
+<div class="lesson-footer"><div class="footer-nav">← <a href="../lesson-05/">Lesson 05</a></div><div style="font-size:.8rem;color:var(--muted)">A2 · Lesson 06 / 12</div><div class="footer-nav"><a href="../lesson-07/">Lesson 07 →</a></div></div>
+
+<script>
+const wdata=[{e:'☀️',en:'sunny',vn:'nắng',eg:"It's sunny today."},{e:'⛅',en:'cloudy',vn:'có mây',eg:"It's quite cloudy."},{e:'🌧️',en:'rainy',vn:'mưa',eg:"It's raining heavily."},{e:'⛈️',en:'stormy',vn:'có bão',eg:"There's a storm coming."},{e:'❄️',en:'snowy',vn:'có tuyết',eg:"It's snowing outside."},{e:'🌫️',en:'foggy',vn:'có sương mù',eg:"Drive carefully, it's foggy."},{e:'💨',en:'windy',vn:'có gió',eg:"It's very windy today."},{e:'🌡️',en:'hot / warm',vn:'nóng / ấm áp',eg:"It's hot — 36 degrees!"},{e:'🥶',en:'cold / cool',vn:'lạnh / mát',eg:"It's cold — only 12°C!"},{e:'💧',en:'humid',vn:'ẩm ướt',eg:"Very humid today."},{e:'🌈',en:'rainbow',vn:'cầu vồng',eg:"Look — a rainbow!"},{e:'🌩️',en:'thunder / lightning',vn:'sấm / sét',eg:"I heard thunder!"}];
+const wg=document.getElementById('wGrid');
+wdata.forEach(w=>{wg.innerHTML+=`<div class="w-card" onclick="this.classList.toggle('flip')"><div class="w-emoji">${w.e}</div><div class="w-en">${w.en}</div><div class="w-vn">${w.vn}</div><div class="w-eg">"${w.eg}"</div></div>`;});
+const seasons=[{e:'🌸',name:'Spring',vn:'Mùa Xuân',w:'warm, mild, flowers bloom, some rain',months:'March – May (northern hemisphere)'},{e:'☀️',name:'Summer',vn:'Mùa Hè',w:'hot, sunny, humid, thunderstorms',months:'June – August'},{e:'🍂',name:'Autumn / Fall',vn:'Mùa Thu',w:'cool, windy, leaves fall, crisp air',months:'September – November'},{e:'❄️',name:'Winter',vn:'Mùa Đông',w:'cold, snowy or rainy, short days',months:'December – February'}];
+const sg=document.getElementById('seasonsGrid');
+seasons.forEach(s=>{sg.innerHTML+=`<div class="season-card"><div class="s-header"><span class="s-emoji">${s.e}</span><div><div class="s-name">${s.name}</div><div class="s-vn">${s.vn}</div></div></div><div class="s-weather">🌤 ${s.w}<br>📅 ${s.months}</div></div>`;});
+function fc(el,ans){const v=el.value.trim().toLowerCase();if(v===ans){el.style.borderColor='#10b981';el.style.color='#10b981';}else if(v){el.style.borderColor='#ef4444';el.style.color='#ef4444';}}
+const qs=[{q:'So sánh hơn của "hot" là?',opts:['hoter','hotter','more hot','hottest'],ans:1},{q:'"It\'s getting colder." nghĩa là?',opts:['Trời đang ấm hơn','Trời đang lạnh hơn','Trời lạnh nhất','Trời không lạnh'],ans:1},{q:'So sánh nhất của "bad" là?',opts:['baddest','more bad','the worst','the baddest'],ans:2},{q:'"What\'s the weather like?" dùng để?',opts:['Hỏi nhiệt độ','Hỏi thời tiết','Hỏi mùa','Hỏi dự báo'],ans:1},{q:'"much hotter" nghĩa là?',opts:['Hơi nóng hơn','Nóng nhất','Nóng hơn nhiều','Ít nóng hơn'],ans:2}];
+let qi=0,score=0;
+function renderQ(){const q=qs[qi];document.getElementById('quizTitle').textContent=`Câu ${qi+1} / ${qs.length}`;document.getElementById('quizProgress').style.width=`${((qi+1)/qs.length)*100}%`;document.getElementById('quizQ').textContent=q.q;document.getElementById('quizFB').textContent='';document.getElementById('quizFB').className='quiz-feedback';document.getElementById('quizNext').style.display='none';const opts=document.getElementById('quizOpts');opts.innerHTML='';q.opts.forEach((o,i)=>{const btn=document.createElement('button');btn.className='quiz-opt';btn.textContent=o;btn.onclick=()=>{document.querySelectorAll('.quiz-opt').forEach(b=>b.disabled=true);if(i===q.ans){btn.classList.add('correct');score++;document.getElementById('quizFB').textContent='✅ Chính xác!';document.getElementById('quizFB').className='quiz-feedback ok';}else{btn.classList.add('wrong');document.querySelectorAll('.quiz-opt')[q.ans].classList.add('correct');document.getElementById('quizFB').textContent='❌ Sai rồi!';document.getElementById('quizFB').className='quiz-feedback no';}document.getElementById('quizScoreDisplay').textContent=`Điểm: ${score}`;document.getElementById('quizNext').style.display='inline-block';};opts.appendChild(btn);});}
+function nextQ(){qi++;if(qi>=qs.length){document.getElementById('quizContent').style.display='none';const r=document.getElementById('quizResult');r.style.display='block';const pct=Math.round(score/qs.length*100);document.getElementById('resEmoji').textContent=pct>=80?'🏆':pct>=60?'👍':'💪';document.getElementById('resScore').textContent=`${score} / ${qs.length} đúng (${pct}%)`;document.getElementById('resMsg').textContent=pct>=80?'Tuyệt! Comparatives thành thạo rồi!':'Ôn thêm và thử lại nhé!';}else renderQ();}
+function resetQuiz(){qi=0;score=0;document.getElementById('quizScoreDisplay').textContent='Điểm: 0';document.getElementById('quizContent').style.display='block';document.getElementById('quizResult').style.display='none';renderQ();}
+renderQ();
+</script>
+</body></html>
