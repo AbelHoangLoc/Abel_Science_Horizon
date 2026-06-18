@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B1 · Lesson 04 · Passive Voice</title>
+<link rel="stylesheet" href="../assets/brand.css">
+<style>
+:root{--bg:#080d1a;--card:#0f1729;--card2:#131e35;--border:#1e2d4a;--text:#dde6f5;--muted:#8b9ab5;--accent:#065f46;--accent2:#6ee7b7;--green:#10b981;--red:#ef4444}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;line-height:1.6;padding:1.5rem 1.25rem 3rem}
+.lsn-header{background:linear-gradient(135deg,#001a12,#0f1729);border:1px solid var(--border);border-radius:16px;padding:1.5rem;margin-bottom:1.5rem;position:relative;overflow:hidden}
+.lsn-header::before{content:'';position:absolute;top:-40px;right:-40px;width:160px;height:160px;background:radial-gradient(circle,rgba(6,95,70,.3),transparent 70%);pointer-events:none}
+.lsn-badge{display:inline-flex;background:rgba(6,95,70,.15);border:1px solid rgba(110,231,183,.3);border-radius:20px;padding:.25rem .75rem;font-size:.7rem;font-weight:700;color:var(--accent2);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.75rem}
+.lsn-header h1{font-size:1.6rem;font-weight:800;background:linear-gradient(90deg,#a7f3d0,#6ee7b7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.4rem}
+.lsn-header p{color:var(--muted);font-size:.9rem}
+.objectives{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+.obj-tag{background:rgba(6,95,70,.12);border:1px solid rgba(6,95,70,.25);border-radius:20px;padding:.25rem .7rem;font-size:.75rem;color:var(--accent2)}
+.sec-title{display:flex;align-items:center;gap:.6rem;font-size:1rem;font-weight:700;color:var(--accent2);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)}
+.grammar-box{background:linear-gradient(135deg,rgba(6,95,70,.1),rgba(6,95,70,.04));border:1px solid rgba(6,95,70,.2);border-radius:12px;padding:1.1rem;margin-bottom:1.75rem}
+.grammar-box h3{color:var(--accent2);font-size:.9rem;margin-bottom:.8rem}
+.gram-box{background:rgba(6,95,70,.2);border-radius:6px;padding:.2rem .7rem;color:var(--accent2);font-weight:700;font-family:monospace;display:inline-block}
+.gram-row{display:flex;gap:.5rem;align-items:center;margin-bottom:.5rem;font-size:.88rem;flex-wrap:wrap}
+.passive-table{width:100%;border-collapse:collapse;font-size:.83rem;margin-bottom:1.75rem}
+.passive-table th{background:rgba(6,95,70,.2);color:var(--accent2);padding:.5rem .65rem;text-align:left;border:1px solid var(--border);font-size:.77rem}
+.passive-table td{padding:.45rem .65rem;border:1px solid var(--border);color:var(--text);vertical-align:top}
+.passive-table tr:nth-child(even) td{background:var(--card2)}
+.passive-table .form{font-family:monospace;color:var(--accent2);font-size:.82rem}
+.passive-table .eg{font-style:italic;font-size:.8rem;color:var(--muted)}
+.transform-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:.65rem}
+.tf-label{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-bottom:.4rem}
+.tf-active{color:#38bdf8}.tf-passive{color:var(--accent2)}
+.tf-sentence{font-size:.9rem;padding:.45rem .75rem;border-radius:7px;margin-bottom:.3rem}
+.tf-sentence.active{background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.2)}
+.tf-sentence.passive{background:rgba(6,95,70,.1);border:1px solid rgba(6,95,70,.25)}
+.tf-note{font-size:.75rem;color:var(--muted);font-style:italic;margin-top:.35rem}
+.when-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-bottom:1.75rem}
+.when-card{border-radius:11px;padding:.85rem}
+.when-yes{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.2)}
+.when-no{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.18)}
+.when-title{font-weight:700;font-size:.85rem;margin-bottom:.5rem}
+.when-title.yes{color:var(--green)}.when-title.no{color:var(--red)}
+.when-item{font-size:.8rem;color:var(--muted);margin-bottom:.3rem;display:flex;gap:.4rem}
+.pattern-list{margin-bottom:1.75rem}
+.pattern-item{background:var(--card);border-left:3px solid var(--accent);border-radius:0 10px 10px 0;padding:.8rem 1rem;margin-bottom:.6rem}
+.pat-en{font-size:1rem;font-weight:600;color:var(--text)}.pat-vn{font-size:.82rem;color:var(--muted);margin-top:.2rem}.pat-note{font-size:.78rem;color:var(--accent2);margin-top:.25rem;font-style:italic}
+.convo-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1.75rem}
+.convo-line{display:flex;gap:.7rem;margin-bottom:.65rem;align-items:flex-start}
+.spk-a{color:#6ee7b7;font-size:.7rem;font-weight:700;text-transform:uppercase;min-width:28px;margin-top:.2rem}
+.spk-b{color:#38bdf8;font-size:.7rem;font-weight:700;text-transform:uppercase;min-width:28px;margin-top:.2rem}
+.bubble{background:var(--card2);border-radius:0 10px 10px 10px;padding:.55rem .85rem;font-size:.9rem;flex:1}
+.bubble.b{border-radius:10px 10px 10px 0;background:rgba(56,189,248,.07);border:1px solid rgba(56,189,248,.15)}
+.hl{color:var(--accent2);font-weight:700}
+.fill-block{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1.75rem}
+.fill-q{font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:.75rem}
+.fill-row{display:flex;align-items:center;gap:.5rem;padding:.45rem .75rem;background:var(--card2);border-radius:8px;margin-bottom:.4rem;font-size:.88rem;flex-wrap:wrap}
+input[type=text]{background:var(--card2);border:1px solid var(--border);border-radius:6px;padding:.3rem .6rem;color:var(--text);font-size:.85rem;outline:none}
+input[type=text]:focus{border-color:var(--accent)}
+.quiz-section{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.25rem;margin-bottom:1.75rem}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+.quiz-q{font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:.75rem;padding:.75rem;background:var(--card2);border-radius:8px}
+.quiz-opts{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.5rem}
+.quiz-opt{background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:.55rem .75rem;font-size:.85rem;cursor:pointer;transition:all .18s;color:var(--text);text-align:left}
+.quiz-opt:hover:not(:disabled){border-color:var(--accent);color:var(--accent2)}.quiz-opt.correct{border-color:var(--green)!important;background:rgba(16,185,129,.15)!important;color:var(--green)!important}.quiz-opt.wrong{border-color:var(--red)!important;background:rgba(239,68,68,.1)!important;color:var(--red)!important}.quiz-opt:disabled{cursor:default}
+.quiz-feedback{font-size:.8rem;margin:.4rem 0 .6rem;min-height:1rem}.quiz-feedback.ok{color:var(--green)}.quiz-feedback.no{color:var(--red)}
+.quiz-nav{display:flex;gap:.5rem;align-items:center;justify-content:space-between}
+.btn{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:.5rem 1.1rem;font-size:.85rem;font-weight:700;cursor:pointer;transition:opacity .2s}.btn:hover{opacity:.85}
+.progress-bar{background:var(--border);border-radius:4px;height:4px;flex:1;overflow:hidden}.progress-fill{background:var(--accent);height:100%;border-radius:4px;transition:width .3s}
+.result-box{text-align:center;padding:1.25rem;display:none}.result-emoji{font-size:2.5rem;margin-bottom:.5rem}.result-score{font-size:1.5rem;font-weight:800;color:var(--accent2);margin-bottom:.25rem}.result-msg{font-size:.85rem;color:var(--muted);margin-bottom:1rem}
+.lesson-footer{display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border)}
+.footer-nav a{color:var(--accent);text-decoration:none;font-size:.85rem;font-weight:600}
+</style>
+</head>
+<body>
+<img src="../assets/logo-SH.png" class="sh-logo" alt="Science Horizon">
+<div class="lsn-header">
+  <div class="lsn-badge">🔄 B1 Intermediate · Lesson 04</div>
+  <h1>Passive Voice</h1>
+  <p>Câu bị động toàn diện — từ Present Simple đến Modal Passives — viết học thuật như người bản xứ!</p>
+  <div class="objectives">
+    <span class="obj-tag">🔄 Câu bị động 8 dạng</span>
+    <span class="obj-tag">📐 Active → Passive</span>
+    <span class="obj-tag">💡 Khi nào dùng Passive</span>
+    <span class="obj-tag">✍️ Academic writing</span>
+  </div>
+</div>
+
+<div class="sec-title"><span>📐</span> Công Thức Bị Động — Tất Cả Dạng</div>
+<table class="passive-table">
+  <tr><th>Thì</th><th>Cấu trúc Passive</th><th>Ví dụ (Active → Passive)</th></tr>
+  <tr><td><strong>Present Simple</strong></td><td class="form">is/are + V3</td><td><em>Someone cleans the office.</em><br class="eg">→ <em>The office <strong>is cleaned</strong> every day.</em></td></tr>
+  <tr><td><strong>Present Continuous</strong></td><td class="form">is/are being + V3</td><td><em>They are building a new road.</em><br>→ <em>A new road <strong>is being built</strong>.</em></td></tr>
+  <tr><td><strong>Past Simple</strong></td><td class="form">was/were + V3</td><td><em>Someone stole the car.</em><br>→ <em>The car <strong>was stolen</strong> last night.</em></td></tr>
+  <tr><td><strong>Past Continuous</strong></td><td class="form">was/were being + V3</td><td><em>They were repairing the bridge.</em><br>→ <em>The bridge <strong>was being repaired</strong>.</em></td></tr>
+  <tr><td><strong>Present Perfect</strong></td><td class="form">has/have been + V3</td><td><em>Someone has broken the window.</em><br>→ <em>The window <strong>has been broken</strong>.</em></td></tr>
+  <tr><td><strong>Past Perfect</strong></td><td class="form">had been + V3</td><td><em>They had finished the project.</em><br>→ <em>The project <strong>had been finished</strong>.</em></td></tr>
+  <tr><td><strong>Future (will)</strong></td><td class="form">will be + V3</td><td><em>They will announce the results.</em><br>→ <em>The results <strong>will be announced</strong> tomorrow.</em></td></tr>
+  <tr><td><strong>Modal Passives</strong></td><td class="form">modal + be + V3</td><td><em>You must submit the report.</em><br>→ <em>The report <strong>must be submitted</strong> by Friday.</em></td></tr>
+</table>
+
+<div class="sec-title"><span>⚖️</span> Active → Passive — Quy Tắc Chuyển Đổi</div>
+<div class="grammar-box">
+  <h3>✏️ Cách chuyển câu chủ động sang bị động — 4 bước</h3>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;margin-bottom:.75rem">
+    <div style="background:rgba(6,95,70,.1);border-radius:8px;padding:.6rem;text-align:center;font-size:.8rem"><div style="font-size:1rem;margin-bottom:.2rem">1️⃣</div><div style="color:var(--accent2);font-weight:700">Object → Subject</div><div style="color:var(--muted);font-size:.72rem">Tân ngữ lên làm chủ ngữ</div></div>
+    <div style="background:rgba(6,95,70,.1);border-radius:8px;padding:.6rem;text-align:center;font-size:.8rem"><div style="font-size:1rem;margin-bottom:.2rem">2️⃣</div><div style="color:var(--accent2);font-weight:700">Be + V3</div><div style="color:var(--muted);font-size:.72rem">Chia "be" theo chủ ngữ mới và thì</div></div>
+    <div style="background:rgba(6,95,70,.1);border-radius:8px;padding:.6rem;text-align:center;font-size:.8rem"><div style="font-size:1rem;margin-bottom:.2rem">3️⃣</div><div style="color:var(--accent2);font-weight:700">by + Agent</div><div style="color:var(--muted);font-size:.72rem">Thêm "by + chủ thể" (nếu cần)</div></div>
+    <div style="background:rgba(6,95,70,.1);border-radius:8px;padding:.6rem;text-align:center;font-size:.8rem"><div style="font-size:1rem;margin-bottom:.2rem">4️⃣</div><div style="color:var(--accent2);font-weight:700">Drop Agent?</div><div style="color:var(--muted);font-size:.72rem">Bỏ "by..." nếu không quan trọng</div></div>
+  </div>
+  <div style="background:rgba(6,95,70,.07);border-radius:8px;padding:.7rem .9rem;font-size:.82rem">
+    💡 <strong style="color:var(--accent2)">Ví dụ đầy đủ:</strong><br>
+    Active: <em style="color:#38bdf8">"Scientists discovered a new planet."</em><br>
+    Passive: <em style="color:var(--accent2)">"A new planet <strong>was discovered</strong> by scientists."</em><br>
+    Passive (no agent): <em style="color:var(--accent2)">"A new planet <strong>was discovered</strong>."</em> ← thường dùng hơn trong học thuật
+  </div>
+</div>
+
+<div class="sec-title"><span>🔍</span> Các Câu Active ↔ Passive Mẫu</div>
+<div id="transformCards"></div>
+
+<div class="sec-title"><span>💡</span> Khi Nào Dùng Passive?</div>
+<div class="when-grid">
+  <div class="when-card when-yes">
+    <div class="when-title yes">✅ NÊN dùng Passive khi:</div>
+    <div class="when-item"><span style="color:var(--green)">▸</span><span>Chủ thể không biết/không quan trọng: "The window was broken."</span></div>
+    <div class="when-item"><span style="color:var(--green)">▸</span><span>Muốn nhấn mạnh KẾT QUẢ hơn người làm</span></div>
+    <div class="when-item"><span style="color:var(--green)">▸</span><span>Văn viết học thuật/báo cáo — tạo giọng khách quan</span></div>
+    <div class="when-item"><span style="color:var(--green)">▸</span><span>Task 1 IELTS: mô tả sơ đồ quy trình</span></div>
+    <div class="when-item"><span style="color:var(--green)">▸</span><span>Task 2: "It has been argued that..."</span></div>
+  </div>
+  <div class="when-card when-no">
+    <div class="when-title no">❌ TRÁNH Passive khi:</div>
+    <div class="when-item"><span style="color:var(--red)">▸</span><span>Câu trở nên quá dài và phức tạp</span></div>
+    <div class="when-item"><span style="color:var(--red)">▸</span><span>Active ngắn gọn và rõ ràng hơn</span></div>
+    <div class="when-item"><span style="color:var(--red)">▸</span><span>Lạm dụng → bài đọc nhàm chán</span></div>
+    <div class="when-item"><span style="color:var(--red)">▸</span><span>Câu hội thoại thông thường</span></div>
+  </div>
+</div>
+
+<div class="sec-title"><span>💬</span> Mẫu Câu IELTS Dùng Passive</div>
+<div class="pattern-list">
+  <div class="pattern-item"><div class="pat-en">"It is widely believed that climate change is the most pressing issue of our time."</div><div class="pat-vn">→ Nhiều người tin rằng biến đổi khí hậu là vấn đề cấp bách nhất hiện nay.</div><div class="pat-note">💡 "It is believed/argued/suggested that..." = rất phổ biến trong IELTS Task 2</div></div>
+  <div class="pattern-item"><div class="pat-en">"The report was published last year and has been cited over 500 times."</div><div class="pat-vn">→ Báo cáo được xuất bản năm ngoái và đã được trích dẫn hơn 500 lần.</div><div class="pat-note">💡 Kết hợp Past Simple Passive + Present Perfect Passive trong 1 câu</div></div>
+  <div class="pattern-item"><div class="pat-en">"New regulations will be introduced to address the problem of urban pollution."</div><div class="pat-vn">→ Các quy định mới sẽ được ban hành để giải quyết vấn đề ô nhiễm đô thị.</div><div class="pat-note">💡 Future Passive — phổ biến khi nói về chính sách, đề xuất</div></div>
+</div>
+
+<div class="sec-title"><span>🗣️</span> Hội Thoại</div>
+<div class="convo-box">
+  <div class="convo-line"><span class="spk-a">A</span><div class="bubble">Have you heard? The old library <span class="hl">is being demolished</span> next month.</div></div>
+  <div class="convo-line"><span class="spk-b">B</span><div class="bubble b">No! Why? That building <span class="hl">was built</span> over 100 years ago!</div></div>
+  <div class="convo-line"><span class="spk-a">A</span><div class="bubble">I know. Apparently it <span class="hl">has been declared</span> unsafe after the recent inspection.</div></div>
+  <div class="convo-line"><span class="spk-b">B</span><div class="bubble b">That's terrible. Will anything <span class="hl">be done</span> to preserve the historic books and archives?</div></div>
+  <div class="convo-line"><span class="spk-a">A</span><div class="bubble">Yes — I heard they <span class="hl">will be transferred</span> to the new city library. All the rare manuscripts <span class="hl">have already been scanned</span> and stored digitally.</div></div>
+</div>
+
+<div class="sec-title"><span>✏️</span> Luyện Tập — Chuyển Sang Bị Động</div>
+<div class="fill-block">
+  <div class="fill-q">Chuyển câu chủ động → bị động (giữ nguyên thì):</div>
+  <div class="fill-row"><span style="flex:1">1. They clean the office every day. → The office ___ every day.</span><input type="text" placeholder="is cleaned" style="width:120px" onblur="fc(this,'is cleaned')"></div>
+  <div class="fill-row"><span style="flex:1">2. Someone has stolen my bag. → My bag ___.</span><input type="text" placeholder="has been stolen" style="width:150px" onblur="fc(this,'has been stolen')"></div>
+  <div class="fill-row"><span style="flex:1">3. They will announce the results tomorrow. → The results ___ tomorrow.</span><input type="text" placeholder="will be announced" style="width:165px" onblur="fc(this,'will be announced')"></div>
+  <div class="fill-row"><span style="flex:1">4. You must submit the report by Friday. → The report ___ by Friday.</span><input type="text" placeholder="must be submitted" style="width:165px" onblur="fc(this,'must be submitted')"></div>
+</div>
+
+<div class="sec-title"><span>🎯</span> Quiz Nhanh (5 câu)</div>
+<div class="quiz-section">
+  <div class="quiz-header"><span id="quizTitle" style="font-size:.85rem;color:var(--muted)">Câu 1 / 5</span><span id="quizScoreDisplay" style="font-size:.85rem;color:var(--muted)">Điểm: 0</span></div>
+  <div id="quizContent">
+    <div class="quiz-q" id="quizQ"></div>
+    <div class="quiz-opts" id="quizOpts"></div>
+    <div class="quiz-feedback" id="quizFB"></div>
+    <div class="quiz-nav"><div class="progress-bar"><div class="progress-fill" id="quizProgress" style="width:20%"></div></div><button class="btn" id="quizNext" style="display:none" onclick="nextQ()">Tiếp →</button></div>
+  </div>
+  <div class="result-box" id="quizResult"><div class="result-emoji" id="resEmoji"></div><div class="result-score" id="resScore"></div><div class="result-msg" id="resMsg"></div><button class="btn" onclick="resetQuiz()">🔄 Làm lại</button></div>
+</div>
+<div class="lesson-footer"><div class="footer-nav">← <a href="../lesson-03/">Lesson 03</a></div><div style="font-size:.8rem;color:var(--muted)">B1 · Lesson 04 / 12</div><div class="footer-nav"><a href="../lesson-05/">Lesson 05 →</a></div></div>
+
+<script>
+const transforms=[
+  {a:'Shakespeare wrote "Hamlet" around 1600.',p:'"Hamlet" was written by Shakespeare around 1600.',note:'Past Simple Passive — by + tác giả'},
+  {a:'The government is reviewing the new education policy.',p:'The new education policy is being reviewed by the government.',note:'Present Continuous Passive'},
+  {a:'Engineers have designed a new bridge across the river.',p:'A new bridge has been designed across the river.',note:'Present Perfect Passive — agent dropped (không quan trọng)'},
+  {a:'You should exercise at least 30 minutes every day.',p:'At least 30 minutes of exercise should be done every day.',note:'Modal Passive — IELTS health/lifestyle writing'},
+];
+const tc=document.getElementById('transformCards');
+transforms.forEach(t=>{tc.innerHTML+=`<div class="transform-card">
+  <div class="tf-label tf-active">🔵 Active:</div>
+  <div class="tf-sentence active">${t.a}</div>
+  <div class="tf-label tf-passive" style="margin-top:.4rem">🟢 Passive:</div>
+  <div class="tf-sentence passive">${t.p}</div>
+  <div class="tf-note">💡 ${t.note}</div>
+</div>`;});
+function fc(el,ans){const v=el.value.trim().toLowerCase();if(v===ans){el.style.borderColor='#10b981';el.style.color='#10b981';}else if(v){el.style.borderColor='#ef4444';el.style.color='#ef4444';}}
+const qs=[{q:'Present Perfect Passive của "discover" là?',opts:['is discovered','was discovered','has been discovered','had been discovered'],ans:2},{q:'"The bridge is being repaired." — Thì gì?',opts:['Present Simple Passive','Past Continuous Passive','Present Continuous Passive','Future Passive'],ans:2},{q:'Câu nào dùng Passive ĐÚNG?',opts:['The book was wrote by Tolstoy.','The book was written by Tolstoy.','The book is write by Tolstoy.','The book written by Tolstoy.'],ans:1},{q:'Khi nào NÊN dùng Passive?',opts:['Khi muốn nói chuyện thân mật','Khi chủ thể không quan trọng','Khi muốn câu ngắn hơn','Khi nói về hiện tại'],ans:1},{q:'"It is argued that..." dùng nhiều nhất ở đâu?',opts:['Hội thoại hàng ngày','Tin nhắn bạn bè','IELTS Academic Writing','Truyện kể'],ans:2}];
+let qi=0,score=0;
+function renderQ(){const q=qs[qi];document.getElementById('quizTitle').textContent=`Câu ${qi+1} / ${qs.length}`;document.getElementById('quizProgress').style.width=`${((qi+1)/qs.length)*100}%`;document.getElementById('quizQ').textContent=q.q;document.getElementById('quizFB').textContent='';document.getElementById('quizFB').className='quiz-feedback';document.getElementById('quizNext').style.display='none';const opts=document.getElementById('quizOpts');opts.innerHTML='';q.opts.forEach((o,i)=>{const btn=document.createElement('button');btn.className='quiz-opt';btn.textContent=o;btn.onclick=()=>{document.querySelectorAll('.quiz-opt').forEach(b=>b.disabled=true);if(i===q.ans){btn.classList.add('correct');score++;document.getElementById('quizFB').textContent='✅ Chính xác!';document.getElementById('quizFB').className='quiz-feedback ok';}else{btn.classList.add('wrong');document.querySelectorAll('.quiz-opt')[q.ans].classList.add('correct');document.getElementById('quizFB').textContent='❌ Sai rồi!';document.getElementById('quizFB').className='quiz-feedback no';}document.getElementById('quizScoreDisplay').textContent=`Điểm: ${score}`;document.getElementById('quizNext').style.display='inline-block';};opts.appendChild(btn);});}
+function nextQ(){qi++;if(qi>=qs.length){document.getElementById('quizContent').style.display='none';const r=document.getElementById('quizResult');r.style.display='block';const pct=Math.round(score/qs.length*100);document.getElementById('resEmoji').textContent=pct>=80?'🏆':pct>=60?'👍':'💪';document.getElementById('resScore').textContent=`${score} / ${qs.length} đúng (${pct}%)`;document.getElementById('resMsg').textContent=pct>=80?'Tuyệt! Passive Voice thành thạo rồi!':'Ôn thêm và thử lại nhé!';}else renderQ();}
+function resetQuiz(){qi=0;score=0;document.getElementById('quizScoreDisplay').textContent='Điểm: 0';document.getElementById('quizContent').style.display='block';document.getElementById('quizResult').style.display='none';renderQ();}
+renderQ();
+</script>
+</body></html>
