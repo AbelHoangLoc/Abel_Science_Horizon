@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <link rel="stylesheet" href="../assets/brand.css">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="../assets/brand.css">
 <title>Task 06 · Chapter 1 Detailed Summary | Variational Analysis and Applications</title>
 <script>
 MathJax = {
@@ -38,56 +38,6 @@ MathJax = {
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-
-  .sh-logo-link,
-.sh-logo-link:visited {
-  position: fixed !important;
-  top: 16px !important;
-  right: 18px !important;
-  left: auto !important;
-  bottom: auto !important;
-
-  width: 100px !important;
-  height: 100px !important;
-
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-
-  background: transparent !important;
-  border: none !important;
-  border-radius: 0 !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  box-shadow: none !important;
-  overflow: visible !important;
-  text-decoration: none !important;
-  z-index: 99999 !important;
-}
-
-.sh-logo-link::before,
-.sh-logo-link::after {
-  content: none !important;
-  display: none !important;
-}
-
-.sh-logo {
-  width: 100px !important;
-  height: 100px !important;
-  max-width: none !important;
-  max-height: none !important;
-
-  display: block !important;
-  object-fit: contain !important;
-
-  background: transparent !important;
-  border: none !important;
-  border-radius: 0 !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  box-shadow: none !important;
-  transform: none !important;
-}
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=STIX+Two+Math&display=swap');
 
@@ -165,28 +115,34 @@ body::after{
   pointer-events:none;
 }
 
-/* Clickable Science Horizon logo */
+/* Science Horizon logo — same standard as Task 05 */
 .sh-logo-link{
-  position:fixed;
-  top:18px;
-  right:22px;
-  z-index:60;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  width:116px;
-  height:116px;
-  border-radius:28px;
-  background:rgba(255,255,255,.90);
-  border:1px solid rgba(255,255,255,.36);
-  box-shadow:0 18px 40px rgba(0,0,0,.24);
-  backdrop-filter:blur(10px);
-  text-decoration:none;
+  position:fixed!important;
+  top:18px!important;
+  right:24px!important;
+  left:auto!important;
+  z-index:1000!important;
+  display:block!important;
+  width:auto!important;
+  height:auto!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  text-decoration:none!important;
   cursor:pointer;
-  transition:transform .2s ease, filter .2s ease, box-shadow .2s ease;
 }
-.sh-logo-link:hover{transform:translateY(-2px) scale(1.03);filter:brightness(1.05);box-shadow:0 22px 52px rgba(55,213,255,.18)}
-.sh-logo{width:92px;height:auto;display:block;transition:transform .2s ease, filter .2s ease}
+.sh-logo-link:hover{
+  transform:translateY(-2px);
+  filter:brightness(1.06);
+}
+.sh-logo{
+  width:82px!important;
+  height:auto!important;
+  display:block!important;
+  filter:drop-shadow(0 14px 24px rgba(0,0,0,.35));
+}
 
 #progress-bar{
   position:fixed;
@@ -411,36 +367,9 @@ td{padding:13px 14px;border-bottom:1px solid rgba(148,163,184,.16);color:#334155
   #sidebar{display:none}
   #main{margin-left:0}
   #progress-bar{left:0;width:100%}
-  .hero{padding:138px 18px 28px}
-
-  .sh-logo-link{
-  position:fixed!important;
-  top:16px!important;
-  right:18px!important;
-  left:auto!important;
-  width:86px!important;
-  height:86px!important;
-  display:block!important;
-  background:transparent!important;
-  border:0!important;
-  border-radius:0!important;
-  padding:0!important;
-  box-shadow:none!important;
-  z-index:99999!important;
-}
-
-.sh-logo{
-  width:100%!important;
-  height:100%!important;
-  object-fit:contain!important;
-  display:block!important;
-  background:transparent!important;
-  border:0!important;
-  border-radius:0!important;
-  padding:0!important;
-  box-shadow:none!important;
-}
-  
+  .hero{padding:88px 18px 28px}
+  .sh-logo-link{top:14px!important;right:14px!important;left:auto!important;width:auto!important;height:auto!important}
+  .sh-logo{width:64px!important}
   h1{font-size:26px}
   h1 em{font-size:17px}
   .content{padding:22px 14px 0}
@@ -453,7 +382,7 @@ td{padding:13px 14px;border-bottom:1px solid rgba(148,163,184,.16);color:#334155
 </head>
 <body>
 
-<a href="https://abelhoangloc.github.io/Abel_Science_Horizon/" class="sh-logo-link">
+<a href="https://abelhoangloc.github.io/Abel_Science_Horizon/" class="sh-logo-link" aria-label="Science Horizon Home">
   <img src="../assets/logo-SH.png" class="sh-logo" alt="Science Horizon">
 </a>
 
