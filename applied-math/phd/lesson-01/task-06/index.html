@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Task 06 · Chapter 1 Detailed Summary | Variational Analysis and Applications</title>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    packages: {'[+]': ['ams']},
+    tags: 'ams',
+    macros: {
+      R: '\\mathbb{R}',
+      N: '\\mathbb{N}',
+      B: '\\mathbb{B}',
+      limsup: '\\operatorname{Limsup}',
+      liminf: '\\operatorname{Liminf}',
+      dist: '\\operatorname{dist}',
+      cone: '\\operatorname{cone}',
+      gph: '\\operatorname{gph}',
+      epi: '\\operatorname{epi}',
+      dom: '\\operatorname{dom}',
+      rge: '\\operatorname{rge}',
+      clco: '\\operatorname{clco}',
+      dhat: '\\widehat{\\partial}',
+      Nhat: '\\widehat{N}',
+      Dstar: 'D^*',
+      Dhatstar: '\\widehat{D}^*'
+    }
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=STIX+Two+Math&display=swap');
+
+:root{
+  --sidebar-w: 292px;
+  --space:#06142e;
+  --deep:#071b3f;
+  --void:#020712;
+  --cyan:#37d5ff;
+  --blue:#1d8cff;
+  --violet:#7c5cff;
+  --green:#52f5b0;
+  --gold:#ffb454;
+  --pink:#ff70b8;
+  --ink:#ecf7ff;
+  --muted:#9db2cf;
+  --paper:rgba(255,255,255,.94);
+  --paper2:#f8fbff;
+  --text:#0f172a;
+  --soft:#334155;
+  --rule:rgba(148,163,184,.24);
+  --shadow:0 24px 70px rgba(0,0,0,.30);
+  --shadow2:0 14px 34px rgba(2,7,18,.18);
+
+  --def:#1d8cff;
+  --thm:#7c5cff;
+  --prop:#10b981;
+  --ex:#ff8a3d;
+  --rem:#64748b;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+
+body{
+  min-height:100vh;
+  color:var(--ink);
+  font-family:"Be Vietnam Pro",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  font-size:15px;
+  line-height:1.75;
+  background:
+    radial-gradient(900px 540px at 8% 8%, rgba(55,213,255,.22), transparent 60%),
+    radial-gradient(850px 520px at 92% 12%, rgba(124,92,255,.22), transparent 60%),
+    radial-gradient(850px 520px at 62% 95%, rgba(82,245,176,.12), transparent 60%),
+    linear-gradient(135deg,#031024 0%,#071b3f 48%,#020712 100%);
+  overflow-x:hidden;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-2;
+  opacity:.36;
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,.82) 1px, transparent 1.6px),
+    radial-gradient(circle, rgba(55,213,255,.62) 1px, transparent 1.5px),
+    radial-gradient(circle, rgba(82,245,176,.50) 1px, transparent 1.5px);
+  background-size:72px 72px,118px 118px,164px 164px;
+  background-position:0 0,34px 58px,90px 26px;
+}
+
+body::after{
+  content:"";
+  position:fixed;
+  right:-390px;
+  top:130px;
+  width:1080px;
+  height:290px;
+  border-radius:50%;
+  border:3px solid rgba(55,213,255,.14);
+  border-left-color:rgba(82,245,176,.42);
+  transform:rotate(-17deg);
+  z-index:-1;
+  pointer-events:none;
+}
+
+/* Clickable Science Horizon logo */
+.sh-logo-link{
+  position:fixed;
+  top:18px;
+  right:22px;
+  z-index:60;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:116px;
+  height:116px;
+  border-radius:28px;
+  background:rgba(255,255,255,.90);
+  border:1px solid rgba(255,255,255,.36);
+  box-shadow:0 18px 40px rgba(0,0,0,.24);
+  backdrop-filter:blur(10px);
+  text-decoration:none;
+  cursor:pointer;
+  transition:transform .2s ease, filter .2s ease, box-shadow .2s ease;
+}
+.sh-logo-link:hover{transform:translateY(-2px) scale(1.03);filter:brightness(1.05);box-shadow:0 22px 52px rgba(55,213,255,.18)}
+.sh-logo{width:92px;height:auto;display:block;transition:transform .2s ease, filter .2s ease}
+
+#progress-bar{
+  position:fixed;
+  top:0;
+  left:var(--sidebar-w);
+  width:calc(100% - var(--sidebar-w));
+  height:4px;
+  background:linear-gradient(90deg,var(--cyan),var(--green),var(--gold),var(--violet));
+  transform:scaleX(0);
+  transform-origin:left;
+  z-index:80;
+  box-shadow:0 0 22px rgba(55,213,255,.45);
+}
+
+/* Sidebar */
+#sidebar{
+  position:fixed;
+  inset:0 auto 0 0;
+  width:var(--sidebar-w);
+  min-width:var(--sidebar-w);
+  height:100vh;
+  overflow-y:auto;
+  padding:20px 16px 28px;
+  background:rgba(4,16,36,.82);
+  border-right:1px solid rgba(255,255,255,.13);
+  box-shadow:20px 0 45px rgba(0,0,0,.18);
+  backdrop-filter:blur(18px);
+  z-index:35;
+}
+#sidebar::-webkit-scrollbar{width:5px}
+#sidebar::-webkit-scrollbar-thumb{background:rgba(55,213,255,.38);border-radius:999px}
+.sidebar-header{padding:4px 4px 18px;margin-bottom:14px;border-bottom:1px solid rgba(255,255,255,.12)}
+.book-title{font-size:12px;line-height:1.55;color:#f5fbff;font-weight:900;letter-spacing:-.01em}
+.chapter-label{margin-top:8px;font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:rgba(189,243,255,.72);font-weight:900}
+.sidebar-search{position:sticky;top:0;padding:0 0 12px;background:linear-gradient(180deg,rgba(4,16,36,.98),rgba(4,16,36,.76));z-index:2}
+.sidebar-search input{
+  width:100%;
+  padding:10px 12px;
+  border-radius:15px;
+  border:2px solid rgba(148,163,184,.18);
+  outline:none;
+  background:rgba(255,255,255,.94);
+  color:#0f172a;
+  font-family:"Be Vietnam Pro",sans-serif;
+  font-size:12.5px;
+  font-weight:700;
+  box-shadow:0 12px 24px rgba(0,0,0,.10);
+}
+.sidebar-search input:focus{border-color:rgba(55,213,255,.62);box-shadow:0 12px 26px rgba(55,213,255,.18)}
+#nav-list{list-style:none;display:flex;flex-direction:column;gap:3px}
+#nav-list li{list-style:none}
+#nav-list a{
+  display:block;
+  text-decoration:none;
+  border-radius:12px;
+  padding:7px 9px;
+  color:rgba(236,247,255,.72);
+  font-size:12px;
+  font-weight:700;
+  line-height:1.35;
+  transition:.15s ease;
+}
+#nav-list a:hover,#nav-list a.active{background:rgba(55,213,255,.13);color:#fff;transform:translateX(2px)}
+#nav-list .section-group a{margin-top:8px;color:#83efff;font-weight:900;text-transform:uppercase;font-size:11px;letter-spacing:.55px}
+#nav-list .subsection a{color:rgba(255,230,128,.86);font-weight:800;padding-left:15px}
+#nav-list .item a{padding-left:22px;color:rgba(221,235,255,.66);font-size:11.5px}
+
+/* Main */
+#main{margin-left:var(--sidebar-w);min-height:100vh;padding-bottom:38px}
+.hero{
+  position:relative;
+  overflow:hidden;
+  padding:50px 170px 38px 46px;
+  background:
+    radial-gradient(520px 230px at 12% 0%, rgba(55,213,255,.20), transparent 62%),
+    radial-gradient(540px 240px at 82% 20%, rgba(124,92,255,.20), transparent 62%),
+    rgba(4,16,36,.76);
+  border-bottom:1px solid rgba(255,255,255,.13);
+  box-shadow:0 18px 48px rgba(0,0,0,.18);
+  backdrop-filter:blur(16px);
+}
+.hero::before{
+  content:"N(x̄;Ω)  T(x̄;Ω)  D*F  ∂φ  ∂∞φ  epi φ";
+  position:absolute;
+  right:-90px;
+  top:22px;
+  font-family:"STIX Two Math","JetBrains Mono",monospace;
+  font-size:34px;
+  color:rgba(255,255,255,.045);
+  white-space:nowrap;
+  transform:rotate(-8deg);
+}
+.hero::after{
+  content:"";
+  position:absolute;
+  left:0;right:0;bottom:0;height:3px;
+  background:linear-gradient(90deg,var(--cyan),var(--green),var(--gold),var(--violet),var(--pink));
+}
+.eyebrow{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(236,247,255,.62);font-weight:900;margin-bottom:12px}
+.eyebrow::before{content:"🛰️ ";letter-spacing:0}
+h1{font-size:34px;line-height:1.22;font-weight:900;color:#f5fbff;letter-spacing:-.035em;max-width:980px;margin-bottom:12px}
+h1 em{display:inline-block;margin-top:6px;font-style:normal;font-size:20px;color:rgba(189,243,255,.88);font-weight:700;letter-spacing:0}
+.subtitle{font-size:14px;color:rgba(221,235,255,.78);font-weight:600;max-width:860px;margin-bottom:18px}
+.meta-row{display:flex;gap:9px;flex-wrap:wrap}
+.meta-row span{display:inline-flex;align-items:center;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.08);border-radius:999px;padding:7px 12px;font-size:11px;color:rgba(236,247,255,.76);font-weight:900;box-shadow:0 12px 24px rgba(0,0,0,.12)}
+
+.content{max-width:1050px;margin:0 auto;padding:34px 28px 0}
+section{scroll-margin-top:18px;margin-bottom:34px}
+p{margin:12px 0;color:rgba(15,23,42,.88)}
+strong{font-weight:900;color:#071228}
+em{color:#075985;font-style:normal;font-weight:800}
+
+.section-heading{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+  font-size:24px;
+  line-height:1.25;
+  font-weight:900;
+  color:#f5fbff;
+  margin:34px 0 18px;
+  padding:18px 18px;
+  border:1px solid rgba(255,255,255,.13);
+  border-radius:22px;
+  background:rgba(255,255,255,.085);
+  box-shadow:var(--shadow2);
+  backdrop-filter:blur(14px);
+}
+.sec-num,.sub-num{display:inline-flex;align-items:center;border-radius:999px;padding:5px 10px;background:rgba(55,213,255,.14);border:1px solid rgba(55,213,255,.24);color:#83efff;font-size:11px;text-transform:uppercase;letter-spacing:.8px;font-weight:900;white-space:nowrap}
+.page-ref{display:inline-flex;align-items:center;border-radius:999px;padding:4px 9px;background:rgba(255,180,84,.16);border:1px solid rgba(255,180,84,.30);color:#ffe680;font-size:10.5px;font-weight:900;white-space:nowrap}
+.subsection-heading{font-size:20px;color:#dffbff;margin:28px 0 14px;font-weight:900;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.section-divider{border:0;height:1px;margin:34px 0;background:linear-gradient(90deg,transparent,rgba(55,213,255,.35),rgba(82,245,176,.26),transparent)}
+
+/* White content surfaces */
+.content > section > p,
+.content > section > ul,
+.content > section > ol{
+  background:rgba(255,255,255,.92);
+  color:#334155;
+  border:1px solid rgba(148,163,184,.22);
+  border-radius:18px;
+  padding:15px 17px;
+  box-shadow:0 12px 28px rgba(15,23,42,.10);
+}
+ul,ol{padding-left:24px}
+li{margin:6px 0;color:#334155;font-weight:600}
+
+.notation-grid{
+  display:grid;
+  grid-template-columns:minmax(220px,.8fr) 1.2fr;
+  overflow:hidden;
+  border-radius:20px;
+  border:1px solid rgba(148,163,184,.25);
+  background:rgba(255,255,255,.94);
+  box-shadow:0 16px 34px rgba(15,23,42,.12);
+  margin:14px 0 22px;
+}
+.ng-head{background:linear-gradient(135deg,#eaf8ff,#effdf6);color:#0f172a;font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.8px;padding:12px 14px;border-bottom:1px solid rgba(148,163,184,.22)}
+.ng-cell{padding:12px 14px;border-bottom:1px solid rgba(148,163,184,.18);color:#334155;background:rgba(255,255,255,.78);font-weight:600}
+.ng-formula{font-family:"STIX Two Math","JetBrains Mono","Cambria Math",serif;color:#0f172a;font-weight:800;overflow-x:auto}
+
+.math-box{
+  background:var(--paper);
+  color:var(--text);
+  border:1px solid rgba(148,163,184,.22);
+  border-left:5px solid var(--def);
+  border-radius:22px;
+  overflow:hidden;
+  margin:16px 0 22px;
+  box-shadow:0 8px 0 rgba(148,163,184,.12),0 18px 35px rgba(15,23,42,.10);
+}
+.box-def{border-left-color:var(--def)}
+.box-thm{border-left-color:var(--thm)}
+.box-prop{border-left-color:var(--prop)}
+.box-ex{border-left-color:var(--ex)}
+.box-rem{border-left-color:var(--rem)}
+.box-header{padding:14px 18px;background:linear-gradient(135deg,rgba(55,213,255,.10),rgba(82,245,176,.07));border-bottom:1px solid rgba(148,163,184,.18)}
+.box-label{display:inline-flex;margin-right:8px;border-radius:999px;padding:4px 9px;background:rgba(29,140,255,.12);color:#1d4ed8;font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.55px}
+.box-title{font-weight:900;color:#0f172a;font-size:15.5px;line-height:1.45}
+.box-body{padding:16px 18px;color:#334155;font-weight:600;line-height:1.78}
+.box-body p{color:#334155;margin:10px 0;background:transparent!important;padding:0!important;border:0!important;box-shadow:none!important}
+.box-body ul,.box-body ol{background:transparent!important;border:0!important;box-shadow:none!important;padding:0 0 0 22px!important}
+
+.MathJax{font-size:1.04em!important}
+mjx-container{overflow-x:auto;overflow-y:hidden;max-width:100%;padding:2px 0}
+
+.insight,.warning,.proof-block{
+  border-radius:20px;
+  margin:14px 0 22px;
+  padding:16px 18px;
+  box-shadow:0 14px 30px rgba(15,23,42,.10);
+  color:#334155;
+  font-weight:600;
+}
+.insight{background:linear-gradient(135deg,rgba(55,213,255,.13),rgba(82,245,176,.10)),rgba(255,255,255,.92);border:1px solid rgba(55,213,255,.25)}
+.warning{background:linear-gradient(135deg,rgba(255,180,84,.15),rgba(255,107,138,.08)),rgba(255,255,255,.92);border:1px solid rgba(255,180,84,.30)}
+.proof-block{background:rgba(255,255,255,.90);border:1px solid rgba(148,163,184,.22);border-left:4px solid rgba(124,92,255,.45)}
+.insight-label,.warning-label,.proof-label{font-size:10.5px;font-weight:900;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;color:#075985}
+.warning-label{color:#92400e}.proof-label{color:#6d28d9}
+.proof-step{padding:9px 0;border-bottom:1px solid rgba(148,163,184,.16);color:#334155;font-weight:600}.proof-step:last-child{border-bottom:0}
+.proof-qed{color:#7c5cff;font-weight:900}
+
+.badge{display:inline-flex;align-items:center;border-radius:999px;padding:2px 7px;font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.35px;vertical-align:middle}
+.badge-convex,.tc-good{background:rgba(82,245,176,.16);color:#047857;border:1px solid rgba(82,245,176,.34)}
+.badge-nonconvex,.tc-warn{background:rgba(255,180,84,.18);color:#b45309;border:1px solid rgba(255,180,84,.35)}
+.badge-warn{background:rgba(255,107,138,.15);color:#be123c;border:1px solid rgba(255,107,138,.32)}
+
+.compare-table{width:100%;border-collapse:separate;border-spacing:0;margin:16px 0 24px;border-radius:20px;overflow:hidden;background:rgba(255,255,255,.94);box-shadow:0 18px 36px rgba(15,23,42,.12);border:1px solid rgba(148,163,184,.22)}
+th{background:linear-gradient(135deg,#eaf8ff,#effdf6);color:#0f172a;text-align:left;font-size:12px;text-transform:uppercase;letter-spacing:.8px;font-weight:900;padding:13px 14px;border-bottom:1px solid rgba(148,163,184,.22)}
+td{padding:13px 14px;border-bottom:1px solid rgba(148,163,184,.16);color:#334155;font-weight:600;vertical-align:top}tr:last-child td{border-bottom:0}
+
+.task-footer{max-width:1050px;margin:28px auto 0;padding:0 28px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.task-footer a{text-decoration:none;display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.14);color:#e9fbff;font-weight:900;font-size:13px;box-shadow:0 12px 24px rgba(0,0,0,.14)}
+.task-footer a:hover{background:rgba(55,213,255,.16);border-color:rgba(55,213,255,.35)}
+
+#backtotop{position:fixed;right:24px;bottom:24px;width:46px;height:46px;border-radius:50%;border:1px solid rgba(255,255,255,.20);background:linear-gradient(135deg,var(--cyan),var(--green));color:#06142e;font-weight:900;font-size:20px;box-shadow:0 16px 34px rgba(0,0,0,.26);cursor:pointer;opacity:0;pointer-events:none;transform:translateY(10px);transition:.2s ease;z-index:70}
+#backtotop.visible{opacity:1;pointer-events:auto;transform:translateY(0)}
+
+@media (max-width:900px){
+  :root{--sidebar-w:0px}
+  #sidebar{display:none}
+  #main{margin-left:0}
+  #progress-bar{left:0;width:100%}
+  .hero{padding:138px 18px 28px}
+  .sh-logo-link{left:18px;right:auto;top:16px;width:104px;height:104px;border-radius:24px}
+  .sh-logo{width:82px}
+  h1{font-size:26px}
+  h1 em{font-size:17px}
+  .content{padding:22px 14px 0}
+  .section-heading{font-size:21px;padding:16px}
+  .notation-grid{grid-template-columns:1fr}
+  .ng-head:nth-child(2){display:none}
+  .task-footer{padding:0 14px}
+}
+</style>
+</head>
+<body>
+
+<a href="https://abelhoangloc.github.io/Abel_Science_Horizon/" class="sh-logo-link" aria-label="Science Horizon Home">
+  <img src="https://abelhoangloc.github.io/Abel_Science_Horizon/assets/logo-SH.png" class="sh-logo" alt="Science Horizon">
+</a>
+
+
+<div id="progress-bar"></div>
+
+<!-- ══════════════════ SIDEBAR ══════════════════ -->
+<aside id="sidebar">
+  <div class="sidebar-header">
+    <div class="book-title">Variational Analysis and Applications — B.S. Mordukhovich, Springer 2018</div>
+    <div class="chapter-label">Lesson 01 · Task 06 / 36</div>
+  </div>
+  <div class="sidebar-search">
+    <input type="text" placeholder="Tìm định lý, ký hiệu…" id="search-input">
+  </div>
+  <nav>
+    <ul id="nav-list">
+      <li class="section-group"><a href="#intro">Giới thiệu &amp; Ký hiệu</a></li>
+      <li class="section-group"><a href="#sec11">§ 1.1 — Nón Pháp &amp; Tiếp Tuyến</a></li>
+      <li class="subsection"><a href="#sec111">1.1.1 Nón pháp tuyến tổng quát</a></li>
+      <li class="item"><a href="#def11">Định nghĩa 1.1</a></li>
+      <li class="item"><a href="#prop12">Mệnh đề 1.2, 1.3, 1.4</a></li>
+      <li class="item"><a href="#ex15">Ví dụ 1.5</a></li>
+      <li class="item"><a href="#thm16">Định lý 1.6</a></li>
+      <li class="item"><a href="#prop17">Mệnh đề 1.7 (Tập lồi)</a></li>
+      <li class="subsection"><a href="#sec112">1.1.2 Tính đối ngẫu tiếp tuyến</a></li>
+      <li class="item"><a href="#def18">Định nghĩa 1.8 (Nón tiếp xúc)</a></li>
+      <li class="item"><a href="#prop19">Mệnh đề 1.9</a></li>
+      <li class="subsection"><a href="#sec113">1.1.3 Mô tả biến phân trơn</a></li>
+      <li class="item"><a href="#thm110">Định lý 1.10</a></li>
+      <li class="section-group"><a href="#sec12">§ 1.2 — Coderivative</a></li>
+      <li class="subsection"><a href="#sec121">1.2.1 Ánh xạ đa trị</a></li>
+      <li class="subsection"><a href="#sec122">1.2.2 Định nghĩa &amp; Tính chất</a></li>
+      <li class="item"><a href="#def111">Định nghĩa 1.11</a></li>
+      <li class="item"><a href="#prop112">Mệnh đề 1.12, 1.13</a></li>
+      <li class="item"><a href="#ex114">Ví dụ 1.14</a></li>
+      <li class="section-group"><a href="#sec13">§ 1.3 — Vi phân con</a></li>
+      <li class="subsection"><a href="#sec131">1.3.1 Vi phân cơ sở &amp; kỳ dị</a></li>
+      <li class="item"><a href="#prop117">Mệnh đề 1.17</a></li>
+      <li class="item"><a href="#def118">Định nghĩa 1.18</a></li>
+      <li class="item"><a href="#prop1920">Mệnh đề 1.19, 1.20</a></li>
+      <li class="item"><a href="#ex121">Ví dụ 1.21</a></li>
+      <li class="subsection"><a href="#sec132">1.3.2 Tính Lipschitz</a></li>
+      <li class="item"><a href="#thm122">Định lý 1.22</a></li>
+      <li class="subsection"><a href="#sec133">1.3.3 Vi phân từ Coderivative</a></li>
+      <li class="item"><a href="#thm123">Định lý 1.23</a></li>
+      <li class="subsection"><a href="#sec134">1.3.4 Vi phân đều &amp; ε-mở rộng</a></li>
+      <li class="item"><a href="#prop125">Mệnh đề 1.25</a></li>
+      <li class="item"><a href="#thm127">Định lý 1.27</a></li>
+      <li class="item"><a href="#prop130">Mệnh đề 1.30 (Fermat)</a></li>
+      <li class="item"><a href="#thm133">Định lý 1.33 (Hàm khoảng cách)</a></li>
+      <li class="section-group"><a href="#sec14">§ 1.4 — Bài tập</a></li>
+      <li class="section-group"><a href="#sec15">§ 1.5 — Lịch sử</a></li>
+      <li class="section-group"><a href="#summary">Tổng kết</a></li>
+    </ul>
+  </nav>
+</aside>
+
+<!-- ══════════════════ MAIN ══════════════════ -->
+<main id="main">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="eyebrow">Science Horizon · Variational Analysis and Applications · Mordukhovich 2018</div>
+  <h1>Task 06 — <em>Constructions of Generalized Differentiation</em></h1>
+  <div class="subtitle">Tóm tắt chi tiết Chương 1: Xây dựng giải tích vi phân tổng quát qua hình học không gian đối ngẫu</div>
+  <div class="meta-row">
+    <span>📄 Trang sách 1–66</span>
+    <span>🔢 PDF trang 19–84</span>
+    <span>📐 Không gian hữu hạn chiều $\mathbb{R}^n$</span>
+    <span>🎯 3 công cụ cốt lõi: Nón pháp tuyến · Coderivative · Vi phân con</span>
+  </div>
+</div>
+
+<div class="content">
+
+<!-- ══ INTRO ══ -->
+<section id="intro">
+<h2 class="section-heading"><span class="sec-num">Giới thiệu</span>Bối cảnh và Ký hiệu <span class="page-ref">1–2</span></h2>
+
+<p>Chương này xây dựng các công cụ bậc nhất của <strong>giải tích vi phân tổng quát</strong> (generalized differentiation) theo tiếp cận <em>hình học không gian đối ngẫu</em> (dual-space geometric approach). Không gian nền là $\mathbb{R}^n$ <strong>hữu hạn chiều Euclid</strong> với tích trong $\langle \cdot, \cdot \rangle$ và chuẩn $\|\cdot\|$. Ba trụ cột được xây dựng theo thứ tự:</p>
+
+<ol style="margin-left:24px; margin-bottom:14px;">
+  <li style="margin-bottom:6px;"><strong>Nón pháp tuyến</strong> đến tập đóng (§1.1)</li>
+  <li style="margin-bottom:6px;"><strong>Coderivative</strong> của ánh xạ đơn trị và đa trị (§1.2)</li>
+  <li><strong>Vi phân con</strong> của hàm số thực mở rộng (§1.3)</li>
+</ol>
+
+<h3 class="subsection-heading"><span class="sub-num">Ký hiệu cơ bản</span></h3>
+
+<div class="notation-grid">
+  <div class="ng-head">Ký hiệu</div><div class="ng-head">Ý nghĩa</div>
+  <div class="ng-cell ng-formula">$\mathbb{B}_X$ hoặc $\mathbb{B}$</div><div class="ng-cell">Quả cầu đơn vị đóng tâm gốc trong không gian $X$</div>
+  <div class="ng-cell ng-formula">$B_r(x)$</div><div class="ng-cell">Quả cầu đóng tâm $x$ bán kính $r > 0$</div>
+  <div class="ng-cell ng-formula">$\mathbb{B}^*$ hoặc $\mathbb{B}_{X^*}$</div><div class="ng-cell">Quả cầu đơn vị đóng trong không gian đối ngẫu $X^*$</div>
+  <div class="ng-cell ng-formula">$\operatorname{cl}\,\Omega,\;\operatorname{co}\,\Omega$</div><div class="ng-cell">Bao đóng, bao lồi của $\Omega$</div>
+  <div class="ng-cell ng-formula">$\operatorname{clco}\,\Omega$</div><div class="ng-cell">Bao lồi đóng (closed convex hull)</div>
+  <div class="ng-cell ng-formula">$\operatorname{bd}\,\Omega,\;\operatorname{int}\,\Omega$</div><div class="ng-cell">Biên và phần trong của $\Omega$</div>
+  <div class="ng-cell ng-formula">$\operatorname{cone}\,\Omega := \{\alpha x \mid \alpha \geq 0,\; x \in \Omega\}$</div><div class="ng-cell">Bao nón (conic hull) của $\Omega$</div>
+  <div class="ng-cell ng-formula">$\mathbb{N} := \{1,2,3,\ldots\}$</div><div class="ng-cell">Tập số tự nhiên dương</div>
+  <div class="ng-cell ng-formula">$F: \mathbb{R}^n \rightrightarrows \mathbb{R}^m$</div><div class="ng-cell">Ánh xạ đa trị (multifunction) với $F(x) \subset \mathbb{R}^m$</div>
+</div>
+
+<div class="math-box box-def" id="painleve">
+  <div class="box-header">
+    <span class="box-label">Công cụ nền tảng</span>
+    <span class="box-title">Giới hạn ngoài Painlevé–Kuratowski (công thức 1.1, tr. 2)</span>
+  </div>
+  <div class="box-body">
+    <p>Với ánh xạ đa trị $F: \mathbb{R}^n \rightrightarrows \mathbb{R}^m$ và điểm $\bar{x}$, <strong>giới hạn ngoài/trên</strong> (outer/upper limit) của $F$ khi $x \to \bar{x}$ là:</p>
+    $$\operatorname{Limsup}_{x \to \bar{x}} F(x) := \left\{ y \in \mathbb{R}^m \;\middle|\; \exists\; x_k \to \bar{x},\; y_k \to y \;\text{ với }\; y_k \in F(x_k) \;\forall k \in \mathbb{N} \right\}$$
+    <p>Đây là <strong>công cụ thống nhất</strong> xuyên suốt chương: mọi nón, coderivative, và vi phân con cơ sở đều được xây dựng qua giới hạn này, đảm bảo tính bền vững (robustness/stability).</p>
+  </div>
+</div>
+
+</section>
+
+<hr class="section-divider">
+
+<!-- ══ SECTION 1.1 ══ -->
+<section id="sec11">
+<h2 class="section-heading"><span class="sec-num">§ 1.1</span>Nón Pháp Tuyến và Nón Tiếp Tuyến với Tập Đóng <span class="page-ref">2–11</span></h2>
+
+<p>Trong tiếp cận hình học, ta bắt đầu bằng việc xây dựng các <em>pháp tuyến</em> (normals) lên tập đóng $\Omega \subset \mathbb{R}^n$ — đây là nền tảng cho toàn bộ lý thuyết.</p>
+
+<!-- 1.1.1 -->
+<section id="sec111">
+<h3 class="subsection-heading"><span class="sub-num">§ 1.1.1</span>Nón Pháp Tuyến Tổng quát <span class="page-ref">2–7</span></h3>
+
+<p><strong>Điểm xuất phát:</strong> Với tập $\Omega \subset \mathbb{R}^n$ đóng cục bộ quanh $\bar{x} \in \Omega$, định nghĩa:</p>
+
+<ul style="margin: 12px 0 14px 24px;">
+  <li style="margin-bottom:6px;"><strong>Hàm khoảng cách (distance function):</strong> $\operatorname{dist}(x;\Omega) = d_\Omega(x) := \inf_{z \in \Omega} \|x - z\|$ &nbsp;<span class="page-ref">2</span></li>
+  <li><strong>Phép chiếu Euclid (Euclidean projector):</strong> $\Pi(x;\Omega) = \Pi_\Omega(x) := \{w \in \Omega \mid \|x - w\| = \operatorname{dist}(x;\Omega)\}$ &nbsp;<span class="page-ref">3</span></li>
+</ul>
+
+<p>Dưới giả thiết $\Omega$ đóng cục bộ quanh $\bar{x}$, tồn tại $r > 0$ sao cho $\Pi(x;\Omega) \neq \emptyset$ với mọi $x \in B_r(\bar{x})$.</p>
+
+<div class="math-box box-def" id="def11">
+  <div class="box-header">
+    <span class="box-label">Định nghĩa 1.1</span>
+    <span class="box-title">Nón Pháp Tuyến Cơ sở đến Tập — Basic Normal Cone to Sets <span class="page-ref">3</span></span>
+  </div>
+  <div class="box-body">
+    <p>Cho $\Omega \subset \mathbb{R}^n$, $\bar{x} \in \Omega$. <strong>Nón pháp tuyến cơ sở</strong> (basic normal cone / limiting normal cone) của $\Omega$ tại $\bar{x}$ được định nghĩa qua giới hạn ngoài:</p>
+    $$N(\bar{x};\,\Omega) \;=\; N_\Omega(\bar{x}) \;:=\; \operatorname{Limsup}_{x \to \bar{x}}\,\Big[\operatorname{cone}\big(x - \Pi(x;\Omega)\big)\Big] \tag{1.4}$$
+    <p style="margin-top:10px;">Mỗi $v \in N(\bar{x};\Omega)$ được biểu diễn tường minh như sau: <em>tồn tại các dãy</em> $x_k \to \bar{x}$, $w_k \in \Pi(x_k;\Omega)$, $\alpha_k \geq 0$ sao cho $\alpha_k(x_k - w_k) \to v$ khi $k \to \infty$.</p>
+  </div>
+</div>
+
+<div class="insight">
+  <div class="insight-label">Trực quan hình học</div>
+  Hướng $x_k - w_k$ là hướng từ điểm chiếu $w_k \in \Omega$ ra ngoài đến $x_k \notin \Omega$. Nhân với hệ số $\alpha_k \geq 0$ rồi lấy giới hạn — ta thu được các pháp tuyến "cực hạn" (limiting normals) tại $\bar{x}$. Đây là <strong>xây dựng không lồi, bền vững</strong>, hoàn toàn khác với nón pháp tuyến lồi của giải tích cổ điển.
+</div>
+
+<div class="math-box box-prop" id="prop12">
+  <div class="box-header">
+    <span class="box-label">Mệnh đề 1.2</span>
+    <span class="box-title">Đặc trưng Điểm Biên qua Nón Pháp Tuyến <span class="page-ref">3</span></span>
+  </div>
+  <div class="box-body">
+    <p>Với $\bar{x} \in \Omega$: $\bar{x}$ là <strong>điểm biên</strong> của $\Omega$ khi và chỉ khi $N(\bar{x};\Omega) \neq \{0\}$, tức là nón pháp tuyến cơ sở là <strong>không tầm thường</strong>.</p>
+    <p>Đây là đối ứng phi lồi của định lý siêu phẳng tựa (supporting hyperplane theorem) trong giải tích lồi.</p>
+  </div>
+</div>
+
+<div class="proof-block">
+  <div class="proof-label">Chứng minh</div>
+  <p>Hiển nhiên từ (1.4) rằng $N(\bar{x};\Omega) = \{0\}$ nếu $\bar{x} \in \operatorname{int}\,\Omega$. Khi $\bar{x} \in \operatorname{bd}\,\Omega$, tồn tại dãy $\{x_k\} \subset \mathbb{R}^n \setminus \Omega$ với $x_k \to \bar{x}$. Chọn $w_k \in \Pi(x_k;\Omega)$ và đặt $\alpha_k = \|x_k - w_k\|^{-1}$. Dãy $v_k := \alpha_k(x_k - w_k)$ với $\|v_k\| = 1$ có dãy con hội tụ đến $v \in N(\bar{x};\Omega)$, $\|v\| = 1$. <span class="proof-qed">△</span></p>
+</div>
+
+<div class="math-box box-prop">
+  <div class="box-header">
+    <span class="box-label">Mệnh đề 1.3</span>
+    <span class="box-title">Tính Bền Vững của Nón Pháp Tuyến Cơ sở — Robustness <span class="page-ref">3</span></span>
+  </div>
+  <div class="box-body">
+    <p>Nón pháp tuyến cơ sở <strong>luôn bền vững</strong> theo nghĩa:</p>
+    $$N(\bar{x};\,\Omega) \;=\; \operatorname{Limsup}_{x \xrightarrow{\Omega} \bar{x}} N(x;\,\Omega)$$
+    <p>trong đó ký hiệu $x \xrightarrow{\Omega} \bar{x}$ nghĩa là $x \to \bar{x}$ với $x \in \Omega$.</p>
+  </div>
+</div>
+
+<div class="math-box box-prop">
+  <div class="box-header">
+    <span class="box-label">Mệnh đề 1.4</span>
+    <span class="box-title">Nón Pháp Tuyến Cơ sở đến Tích Descartes <span class="page-ref">4</span></span>
+  </div>
+  <div class="box-body">
+    <p>Cho $\Omega_1 \subset \mathbb{R}^n$, $\Omega_2 \subset \mathbb{R}^m$, và $(\bar{x}_1, \bar{x}_2) \in \Omega_1 \times \Omega_2$. Khi đó:</p>
+    $$N\!\big((\bar{x}_1, \bar{x}_2);\; \Omega_1 \times \Omega_2\big) \;=\; N(\bar{x}_1;\,\Omega_1) \;\times\; N(\bar{x}_2;\,\Omega_2)$$
+  </div>
+</div>
+
+<div class="math-box box-ex" id="ex15">
+  <div class="box-header">
+    <span class="box-label">Ví dụ 1.5</span>
+    <span class="box-title">Tính Không Lồi của Nón Pháp Tuyến Cơ sở <span class="page-ref">4</span></span>
+  </div>
+  <div class="box-body">
+    <p>Xét tập đóng $\Omega := \{(x,y) \in \mathbb{R}^2 \mid y \geq -|x|\}$ (vùng nằm trên đường gấp khúc hình chữ V ngược). Tại điểm $\bar{x} = (0,0)$:</p>
+    $$N\!\big((0,0);\,\Omega\big) \;=\; \{(v,v) \in \mathbb{R}^2 \mid v \leq 0\} \;\cup\; \{(v,-v) \in \mathbb{R}^2 \mid v \geq 0\}$$
+    <p>Đây là <span class="badge badge-nonconvex">Không lồi</span> — nón pháp tuyến là tập hình chữ "X", không thể là tập lồi.</p>
+    <p style="margin-top:10px;">Điều này hoàn toàn không thể xảy ra với nón pháp tuyến cổ điển trong giải tích lồi (luôn lồi). Đây là điểm mạnh của cách tiếp cận: bắt được thông tin vi phân phong phú hơn.</p>
+  </div>
+</div>
+
+<p>Ta bây giờ giới thiệu <em>nón pháp tuyến đều</em> (regular/prenormal cone) — tiền thân của nón cơ sở:</p>
+
+<div class="math-box box-def">
+  <div class="box-header">
+    <span class="box-label">Định nghĩa</span>
+    <span class="box-title">Nón Pháp Tuyến Đều và $\varepsilon$-Mở rộng — Regular Normal Cone <span class="page-ref">4</span></span>
+  </div>
+  <div class="box-body">
+    <p>Với $x \in \Omega$, <strong>nón pháp tuyến đều</strong> (regular/Fréchet normal cone), hay còn gọi là <em>tiền-nón pháp tuyến</em> (prenormal cone):</p>
+    $$\widehat{N}(x;\,\Omega) := \left\{v \in \mathbb{R}^n \;\middle|\; \limsup_{\substack{z \to x \\ z \in \Omega}} \frac{\langle v,\, z-x\rangle}{\|z-x\|} \leq 0\right\} \tag{1.5}$$
+    <p>và $\varepsilon$<strong>-mở rộng</strong> ($\varepsilon$-enlargement) với $\varepsilon > 0$:</p>
+    $$\widehat{N}_\varepsilon(x;\,\Omega) := \left\{v \in \mathbb{R}^n \;\middle|\; \limsup_{\substack{z \to x \\ z \in \Omega}} \frac{\langle v,\, z-x\rangle}{\|z-x\|} \leq \varepsilon\right\} \tag{1.6}$$
+    <p>Khi $\varepsilon = 0$ ta có $\widehat{N}_0(x;\Omega) = \widehat{N}(x;\Omega)$. <span class="badge badge-convex">Luôn lồi</span> nhưng <span class="badge badge-warn" style="background:#fce8e0;color:#c43518;border:1px solid #f0a898;">Có thể = {0} tại biên</span>.</p>
+  </div>
+</div>
+
+<div class="math-box box-thm" id="thm16">
+  <div class="box-header">
+    <span class="box-label">Định lý 1.6</span>
+    <span class="box-title">Mô tả Tương đương của Nón Pháp Tuyến Cơ sở <span class="page-ref">5–7</span></span>
+  </div>
+  <div class="box-body">
+    <p>Với bất kỳ $\bar{x} \in \Omega \subset \mathbb{R}^n$, nón pháp tuyến cơ sở có hai biểu diễn tương đương:</p>
+    $$N(\bar{x};\,\Omega) \;=\; \operatorname{Limsup}_{\substack{x \to \bar{x} \\ x \in \Omega}} \widehat{N}(x;\,\Omega) \;=\; \operatorname{Limsup}_{\substack{x \to \bar{x},\; x \in \Omega \\ \varepsilon \downarrow 0}} \widehat{N}_\varepsilon(x;\,\Omega) \tag{1.7}$$
+  </div>
+</div>
+
+<div class="proof-block">
+  <div class="proof-label">Phác thảo chứng minh (5 bước)</div>
+  <div class="proof-step">
+    <strong>Bước 1:</strong> Chứng minh $N(\bar{x};\Omega) \subset \operatorname{Limsup}_{x \xrightarrow{\Omega} \bar{x}} \widehat{N}(x;\Omega)$. Với $x \in \mathbb{R}^n$ và $w \in \Pi(x;\Omega)$: hướng $x - w$ thỏa $x - w \in \widehat{N}(w;\Omega)$ (xác minh qua bất đẳng thức tam giác). Khi đó các $w_k \xrightarrow{\Omega} \bar{x}$ và $\alpha_k(x_k - w_k) \to v$ cho ta $v \in \operatorname{Limsup}\,\widehat{N}(x;\Omega)$.
+  </div>
+  <div class="proof-step">
+    <strong>Bước 2:</strong> Với $w_\alpha \in \Pi(x + \alpha v;\Omega)$, $0 \neq v \in \widehat{N}_\varepsilon(x;\Omega)$, $\alpha > 0$: chứng minh $\limsup_{\alpha \downarrow 0} \|w_\alpha - x\|/\alpha \leq 2\varepsilon$.
+  </div>
+  <div class="proof-step">
+    <strong>Bước 3:</strong> Từ Bước 2: $\operatorname{Limsup}_{x \xrightarrow{\Omega} \bar{x},\, \varepsilon \downarrow 0} \widehat{N}_\varepsilon(x;\Omega) \subset \operatorname{Limsup}_{x \xrightarrow{\Omega} \bar{x}} \widehat{N}(x;\Omega)$.
+  </div>
+  <div class="proof-step">
+    <strong>Bước 4:</strong> $\widehat{N}(x;\Omega) \subset N(x;\Omega)$ với mọi $x \in \Omega$.
+  </div>
+  <div class="proof-step">
+    <strong>Bước 5:</strong> $\operatorname{Limsup}_{x \xrightarrow{\Omega} \bar{x}} \widehat{N}(x;\Omega) \subset N(\bar{x};\Omega)$ — hoàn thành chứng minh. <span class="proof-qed">△</span>
+  </div>
+</div>
+
+<div class="warning">
+  <div class="warning-label">Lưu ý quan trọng</div>
+  Nón $\widehat{N}(\bar{x};\Omega)$ có thể <strong>tầm thường</strong> ($= \{0\}$) ngay tại điểm biên — xem Ví dụ 1.5. Do đó nón đều <em>không</em> đủ mạnh để làm pháp tuyến. Ngược lại, $N(\bar{x};\Omega)$ là giới hạn ngoài của $\widehat{N}$ tại các điểm <em>lân cận</em>, đảm bảo tính không tầm thường tại biên (Mệnh đề 1.2).
+</div>
+
+<div class="math-box box-prop" id="prop17">
+  <div class="box-header">
+    <span class="box-label">Mệnh đề 1.7</span>
+    <span class="box-title">Nón Pháp Tuyến đến Tập Lồi — Convex Sets <span class="page-ref">7</span></span>
+  </div>
+  <div class="box-body">
+    <p>Cho $\Omega$ là tập lồi và $\bar{x} \in \Omega$. Khi đó:</p>
+    $$\widehat{N}_\varepsilon(\bar{x};\,\Omega) \;=\; \bigl\{v \in \mathbb{R}^n \mid \langle v,\, x - \bar{x}\rangle \leq \varepsilon\|x-\bar{x}\| \;\;\forall x \in \Omega\bigr\}, \quad \varepsilon \geq 0 \tag{1.8}$$
+    $$N(\bar{x};\,\Omega) \;=\; \widehat{N}(\bar{x};\,\Omega) \;=\; \bigl\{v \in \mathbb{R}^n \mid \langle v,\, x-\bar{x}\rangle \leq 0 \;\;\forall x \in \Omega\bigr\} \tag{1.9}$$
+    <p>Tức là khi $\Omega$ lồi, cả nón cơ sở lẫn nón đều <strong>khớp với nón pháp tuyến lồi cổ điển</strong>.</p>
+  </div>
+</div>
+
+</section>
+
+<!-- 1.1.2 -->
+<section id="sec112">
+<h3 class="subsection-heading"><span class="sub-num">§ 1.1.2</span>Tính Đối Ngẫu Tiếp Tuyến — Tangential Preduality <span class="page-ref">7–9</span></h3>
+
+<p>Trong giải tích lồi, nón pháp tuyến và nón tiếp tuyến có quan hệ đối ngẫu tường minh: $N(\bar{x};\Omega) = T^*(\bar{x};\Omega)$. Với tập không lồi, quan hệ này tồn tại ở cấp <em>tiền-pháp tuyến</em>.</p>
+
+<p>Sơ đồ đối ngẫu (phương trình 1.10, tr. 7):
+$$N(\bar{x};\,\Omega) \;=\; T^*(\bar{x};\,\Omega) \;:=\; \{v \in \mathbb{R}^n \mid \langle v, w\rangle \leq 0 \;\;\forall w \in T(\bar{x};\,\Omega)\}$$
+áp dụng cho tập lồi, trong đó $T(\bar{x};\Omega) := \operatorname{cl}\{w \in \mathbb{R}^n \mid \exists\,\alpha > 0: \bar{x} + \alpha w \in \Omega\}$.</p>
+
+<div class="math-box box-def" id="def18">
+  <div class="box-header">
+    <span class="box-label">Định nghĩa 1.8</span>
+    <span class="box-title">Nón Tiếp xúc — Contingent Cone (Bouligand–Severi) <span class="page-ref">8</span></span>
+  </div>
+  <div class="box-body">
+    <p>Với $\Omega \subset \mathbb{R}^n$, $\bar{x} \in \Omega$, <strong>nón tiếp xúc</strong> (contingent cone) tại $\bar{x}$ là:</p>
+    $$T(\bar{x};\,\Omega) \;:=\; \operatorname{Limsup}_{t \downarrow 0}\; \frac{\Omega - \bar{x}}{t} \tag{1.11}$$
+    <p>Mỗi $w \in T(\bar{x};\Omega)$ biểu diễn qua dãy $x_k \subset \Omega$, $\alpha_k \subset \mathbb{R}_+$ với $x_k \to \bar{x}$ và $\alpha_k(x_k - \bar{x}) \to w$.</p>
+    <p style="margin-top:8px;">Khi $\Omega$ lồi, $T(\bar{x};\Omega)$ trùng với nón tiếp tuyến lồi cổ điển. Tổng quát, $T(\bar{x};\Omega) = \Omega$ với $\Omega := \{(x_1,x_2) \in \mathbb{R}^2 \mid x_2 = |x_1|\}$ tại $\bar{x} = (0,0)$ — nón tiếp xúc có thể không lồi.</p>
+  </div>
+</div>
+
+<div class="math-box box-prop" id="prop19">
+  <div class="box-header">
+    <span class="box-label">Mệnh đề 1.9</span>
+    <span class="box-title">Đối Ngẫu giữa Nón Tiền-Pháp Tuyến và Nón Tiếp xúc <span class="page-ref">8</span></span>
+  </div>
+  <div class="box-body">
+    <p>Với bất kỳ $\Omega \subset \mathbb{R}^n$ và $\bar{x} \in \Omega$:</p>
+    $$\widehat{N}(\bar{x};\,\Omega) \;=\; T^*(\bar{x};\,\Omega)$$
+    <p>tức là nón pháp tuyến đều chính xác là <strong>nón đối ngẫu</strong> (dual cone) của nón tiếp xúc.</p>
+  </div>
+</div>
+
+<div class="insight">
+  <div class="insight-label">Hiện tượng "Preduality"</div>
+  Định lý 1.6 + Mệnh đề 1.9 cùng cho thấy: dù $N(\bar{x};\Omega)$ <em>không thể</em> sinh ra bằng tiếp tuyến tại chính $\bar{x}$ (vì nó không lồi), nó vẫn là giới hạn ngoài của $T^*$ = $\widehat{N}$ tại các điểm <em>lân cận</em>. Mordukhovich gọi đây là <strong>"tangential preduality"</strong> — hiện tượng đặc trưng cho chiều hữu hạn.
+</div>
+
+</section>
+
+<!-- 1.1.3 -->
+<section id="sec113">
+<h3 class="subsection-heading"><span class="sub-num">§ 1.1.3</span>Mô tả Biến phân Trơn — Smooth Variational Description <span class="page-ref">9–11</span></h3>
+
+<div class="math-box box-thm" id="thm110">
+  <div class="box-header">
+    <span class="box-label">Định lý 1.10</span>
+    <span class="box-title">Mô tả Biến phân Trơn cho Nón Pháp Tuyến Đều <span class="page-ref">9</span></span>
+  </div>
+  <div class="box-body">
+    <p>Cho $\Omega \subset \mathbb{R}^n$, $\bar{x} \in \Omega$. Các khẳng định sau tương đương:</p>
+    <p><strong>(i)</strong> $v \in \widehat{N}(\bar{x};\Omega)$</p>
+    <p><strong>⟺</strong> tồn tại lân cận $U$ của $\bar{x}$ và hàm $\psi: U \to \mathbb{R}$ <strong>khả vi tại $\bar{x}$</strong> với $\nabla\psi(\bar{x}) = v$ và $\psi$ đạt <strong>cực đại địa phương</strong> trên $\Omega \cap U$ tại $\bar{x}$ (tức là $\psi(x) \leq \psi(\bar{x})$ với mọi $x \in \Omega \cap U$).</p>
+    <br>
+    <p><strong>(ii)</strong> Nếu thêm $\varphi$ bị chặn dưới trên $\mathbb{R}^n$, có thể chọn $\psi$ là hàm <strong>lõm, trơn trên $\mathbb{R}^n$</strong> đạt <strong>cực đại toàn cục</strong> duy nhất trên $\Omega$ tại $\bar{x}$, và $\nabla\psi(\bar{x}) = v$.</p>
+  </div>
+</div>
+
+<div class="insight">
+  <div class="insight-label">Ý nghĩa then chốt</div>
+  Đây là mô tả "tiếp xúc trơn từ trên" (smooth support from above): pháp tuyến đều $v$ tương ứng với gradient $v = \nabla\psi(\bar{x})$ của một hàm trơn $\psi$ đang "chạm" tập $\Omega$ từ phía trên tại $\bar{x}$. Tương tự như điều kiện để siêu phẳng $\{x: \langle v, x \rangle = c\}$ là siêu phẳng tựa lồi.
+</div>
+
+</section>
+</section>
+
+<hr class="section-divider">
+
+<!-- ══ SECTION 1.2 ══ -->
+<section id="sec12">
+<h2 class="section-heading"><span class="sec-num">§ 1.2</span>Coderivative của Ánh xạ <span class="page-ref">12–19</span></h2>
+
+<p>Coderivative là đối tượng tổng quát hóa <strong>ma trận Jacobi chuyển vị</strong> sang trường hợp ánh xạ đa trị và không trơn. Nó được xây dựng bằng cách áp dụng <em>nón pháp tuyến lên đồ thị</em> của ánh xạ.</p>
+
+<!-- 1.2.1 -->
+<section id="sec121">
+<h3 class="subsection-heading"><span class="sub-num">§ 1.2.1</span>Ánh xạ Đa trị — Set-Valued Mappings <span class="page-ref">12–13</span></h3>
+
+<div class="notation-grid">
+  <div class="ng-head">Ký hiệu</div><div class="ng-head">Ý nghĩa</div>
+  <div class="ng-cell ng-formula">$\operatorname{gph}\,F := \{(x,y) \mid y \in F(x)\}$</div><div class="ng-cell">Đồ thị của $F: \mathbb{R}^n \rightrightarrows \mathbb{R}^m$</div>
+  <div class="ng-cell ng-formula">$\operatorname{dom}\,F := \{x \mid F(x) \neq \emptyset\}$</div><div class="ng-cell">Miền xác định</div>
+  <div class="ng-cell ng-formula">$\ker F := \{x \mid 0 \in F(x)\}$</div><div class="ng-cell">Hạt nhân (kernel)</div>
+  <div class="ng-cell ng-formula">$\operatorname{rge}\,F := \{y \mid \exists x: y \in F(x)\}$</div><div class="ng-cell">Miền giá trị (range)</div>
+  <div class="ng-cell ng-formula">$F^{-1}(\Theta) := \{x \mid F(x) \cap \Theta \neq \emptyset\}$</div><div class="ng-cell">Nghịch ảnh của tập $\Theta \subset \mathbb{R}^m$</div>
+  <div class="ng-cell ng-formula">$F^{-1}(y) := \{x \mid y \in F(x)\}$</div><div class="ng-cell">Ánh xạ ngược (inverse mapping)</div>
+  <div class="ng-cell ng-formula">$\|F\| := \sup\{\|y\| \mid y \in F(x), \|x\| \leq 1\}$</div><div class="ng-cell">Chuẩn (norm) — (1.14) — với $F$ thuần nhất dương</div>
+</div>
+
+<p>Ta luôn giả thiết ánh xạ là <em>proper</em>, tức là $\operatorname{dom}\,F \neq \emptyset$. Đặc biệt, $\operatorname{dom}\,F^{-1} = \operatorname{rge}\,F$ và $\operatorname{rge}\,F^{-1} = \operatorname{dom}\,F$.</p>
+
+</section>
+
+<!-- 1.2.2 -->
+<section id="sec122">
+<h3 class="subsection-heading"><span class="sub-num">§ 1.2.2</span>Định nghĩa và Tính chất Coderivative <span class="page-ref">13–19</span></h3>
+
+<div class="math-box box-def" id="def111">
+  <div class="box-header">
+    <span class="box-label">Định nghĩa 1.11</span>
+    <span class="box-title">Coderivative Cơ sở của Ánh xạ Đa trị — Basic Coderivative <span class="page-ref">13</span></span>
+  </div>
+  <div class="box-body">
+    <p>Cho $F: \mathbb{R}^n \rightrightarrows \mathbb{R}^m$ với $\operatorname{dom}\,F \neq \emptyset$, và $(\bar{x},\bar{y}) \in \operatorname{gph}\,F$. <strong>Coderivative cơ sở</strong> (basic coderivative) của $F$ tại $(\bar{x},\bar{y})$ là ánh xạ $D^*F(\bar{x},\bar{y}): \mathbb{R}^m \rightrightarrows \mathbb{R}^n$ với:</p>
+    $$D^*F(\bar{x},\bar{y})(v) \;:=\; \bigl\{u \in \mathbb{R}^n \;\big|\; (u,-v) \in N\!\bigl((\bar{x},\bar{y});\;\operatorname{gph}\,F\bigr)\bigr\}, \quad v \in \mathbb{R}^m \tag{1.15}$$
+    <p style="margin-top:10px;"><strong>Coderivative đều</strong> (regular/precoderivative) qua nón đều:</p>
+    $$\widehat{D}^*F(\bar{x},\bar{y})(v) \;:=\; \bigl\{u \in \mathbb{R}^n \;\big|\; (u,-v) \in \widehat{N}\!\bigl((\bar{x},\bar{y});\;\operatorname{gph}\,F\bigr)\bigr\} \tag{1.16}$$
+    <p style="margin-top:10px;"><strong>Biểu diễn giới hạn</strong> (từ Định lý 1.6):</p>
+    $$D^*F(\bar{x},\bar{y})(\bar{v}) \;=\; \operatorname{Limsup}_{\substack{(x,y) \xrightarrow{\mathrm{gph}\,F} (\bar{x},\bar{y}) \\ v \to \bar{v}}} \widehat{D}^*F(x,y)(v) \tag{1.17}$$
+    <p style="margin-top:6px;">Khi $F = f$ là ánh xạ đơn trị tại $\bar{x}$, ta viết tắt $D^*f(\bar{x}) := D^*f(\bar{x}, f(\bar{x}))$.</p>
+  </div>
+</div>
+
+<div class="insight">
+  <div class="insight-label">Tại sao lấy $(u, -v)$?</div>
+  Pháp tuyến $(u, -v)$ lên đồ thị gph $F \subset \mathbb{R}^n \times \mathbb{R}^m$ tại $(\bar{x}, \bar{y})$ có <em>dấu âm</em> ở thành phần $v$ — điều này đảm bảo rằng với ánh xạ $C^1$, coderivative cho ra ma trận Jacobi chuyển vị: $D^*f(\bar{x})(v) = \{\nabla f(\bar{x})^* v\}$ (xem Mệnh đề 1.12).
+</div>
+
+<div class="math-box box-prop" id="prop112">
+  <div class="box-header">
+    <span class="box-label">Mệnh đề 1.12</span>
+    <span class="box-title">Coderivative của Ánh xạ Trơn — Smooth Mappings <span class="page-ref">14</span></span>
+  </div>
+  <div class="box-body">
+    <p>Cho $f: \mathbb{R}^n \to \mathbb{R}^m$ là ánh xạ $C^1$ quanh $\bar{x}$. Khi đó:</p>
+    $$D^*f(\bar{x})(v) \;=\; \widehat{D}^*f(\bar{x})(v) \;=\; \bigl\{\nabla f(\bar{x})^* v\bigr\} \quad \forall v \in \mathbb{R}^m$$
+    <p>tức là coderivative quy về ma trận Jacobi chuyển vị — <strong>toán tử adjoint</strong> của $\nabla f(\bar{x}): \mathbb{R}^n \to \mathbb{R}^m$ — được áp dụng lên $v$.</p>
+    <p>Kết quả này vẫn đúng với điều kiện yếu hơn: $f$ chỉ cần <em>khả vi nghiêm ngặt</em> (strictly differentiable) tại $\bar{x}$.</p>
+  </div>
+</div>
+
+<div class="math-box box-prop">
+  <div class="box-header">
+    <span class="box-label">Mệnh đề 1.13</span>
+    <span class="box-title">Coderivative với Đồ thị Lồi — Convex-Graph Mappings <span class="page-ref">14</span></span>
+  </div>
+  <div class="box-body">
+    <p>Nếu $\operatorname{gph}\,F$ là tập lồi. Khi đó $D^*F(\bar{x},\bar{y}) = \widehat{D}^*F(\bar{x},\bar{y})$ và:</p>
+    $$D^*F(\bar{x},\bar{y})(v) \;=\; \left\{u \in \mathbb{R}^n \;\middle|\; \langle u, \bar{x}\rangle - \langle v, \bar{y}\rangle = \max_{(x,y)\,\in\,\mathrm{gph}\,F}\bigl[\langle u, x\rangle - \langle v, y\rangle\bigr]\right\}$$
+  </div>
+</div>
+
+<div class="math-box box-ex" id="ex114">
+  <div class="box-header">
+    <span class="box-label">Ví dụ 1.14</span>
+    <span class="box-title">Tính Coderivative Cụ thể <span class="page-ref">15</span></span>
+  </div>
+  <div class="box-body">
+    <p><strong>(i)</strong> $f(x) = |x|$ trên $\mathbb{R}$, tại $\bar{x} = 0$. Đồ thị $\operatorname{gph}\,f = \{(x,y): y = |x|\}$, và:</p>
+    $$N\!\bigl((0,0);\,\operatorname{gph}\,f\bigr) = \{(x,y) \in \mathbb{R}^2 \mid y = |x|\text{ và }y \leq -|x|\} \cup \ldots$$
+    <p>Tính được coderivative:</p>
+    $$D^*f(0)(v) \;=\; \begin{cases} [-v,\, v] & \text{nếu } v \geq 0 \\ \{-v,\; v\} & \text{nếu } v < 0 \end{cases}$$
+    <p>Coderivative nhận <span class="badge badge-nonconvex">giá trị không lồi</span> khi $v < 0$. Coderivative đều: $\widehat{D}^*f(0)(v) = [-v,v]$ nếu $v \geq 0$, $= \emptyset$ nếu $v < 0$.</p>
+    <br>
+    <p><strong>(ii)</strong> $f(x) = |x|^\alpha$, $\alpha \in (0,1)$, tại $\bar{x} = 0$. Đồ thị "mở" tại gốc, nên:</p>
+    $$D^*f(0)(v) \;=\; \widehat{D}^*f(0)(v) \;=\; \begin{cases} \mathbb{R} & \text{nếu } v \geq 0 \\ \emptyset & \text{nếu } v < 0 \end{cases}$$
+    <p>Coderivative có thể nhận <span class="badge badge-warn" style="background:#fce8e0;color:#c43518;border:1px solid #f0a898;">giá trị rỗng</span> — không xảy ra với ánh xạ trơn.</p>
+  </div>
+</div>
+
+</section>
+</section>
+
+<hr class="section-divider">
+
+<!-- ══ SECTION 1.3 ══ -->
+<section id="sec13">
+<h2 class="section-heading"><span class="sec-num">§ 1.3</span>Vi phân con Bậc nhất của Hàm Phi trơn <span class="page-ref">19–44</span></h2>
+
+<p>Thay vì áp dụng nón pháp tuyến lên đồ thị $\operatorname{gph}\,F$, ta áp dụng lên <strong>thượng đồ thị</strong> (epigraph) của hàm. Điều này khai thác cấu trúc thứ tự của $\mathbb{R}$ — hàm có "hướng lên trên" tự nhiên.</p>
+
+<p>Với $\varphi: \mathbb{R}^n \to \overline{\mathbb{R}} := [-\infty, +\infty]$, thượng đồ thị:</p>
+$$\operatorname{epi}\,\varphi \;:=\; \{(x,\alpha) \in \mathbb{R}^n \times \mathbb{R} \mid \alpha \geq \varphi(x)\}$$
+
+<!-- 1.3.1 -->
+<section id="sec131">
+<h3 class="subsection-heading"><span class="sub-num">§ 1.3.1</span>Vi phân con Cơ sở và Vi phân con Kỳ dị <span class="page-ref">19–23</span></h3>
+
+<div class="math-box box-prop" id="prop117">
+  <div class="box-header">
+    <span class="box-label">Mệnh đề 1.17</span>
+    <span class="box-title">Cấu trúc Pháp tuyến Cơ sở lên Thượng đồ thị <span class="page-ref">20</span></span>
+  </div>
+  <div class="box-body">
+    <p>Cho $\varphi: \mathbb{R}^n \to \overline{\mathbb{R}}$ và $(\bar{x}, \bar{\alpha}) = (\bar{x}, \varphi(\bar{x})) \in \operatorname{epi}\,\varphi$. Khi đó:</p>
+    $$N\!\bigl((\bar{x},\varphi(\bar{x}));\;\operatorname{epi}\,\varphi\bigr) \;=\; \bigl\{\lambda(v,-1) \mid v \in D,\;\lambda > 0\bigr\} \;\cup\; \bigl\{(v,0) \mid v \in D^\infty\bigr\}$$
+    <p>trong đó $D, D^\infty \subset \mathbb{R}^n$ là các tập đóng xác định duy nhất bởi $\varphi$ và $\bar{x}$. Pháp tuyến dạng $\lambda(v,-1)$ với $\lambda > 0$ là "pháp tuyến nghiêng" (sloping normals), còn $(v,0)$ là "pháp tuyến nằm ngang" (horizontal normals).</p>
+  </div>
+</div>
+
+<div class="math-box box-def" id="def118">
+  <div class="box-header">
+    <span class="box-label">Định nghĩa 1.18</span>
+    <span class="box-title">Vi phân con Cơ sở và Vi phân con Kỳ dị — Basic &amp; Singular Subdifferentials <span class="page-ref">20</span></span>
+  </div>
+  <div class="box-body">
+    <p>Cho $\varphi: \mathbb{R}^n \to \overline{\mathbb{R}}$ hữu hạn tại $\bar{x} \in \operatorname{dom}\,\varphi$.</p>
+    <p><strong>Vi phân con cơ sở</strong> (basic/limiting subdifferential) tại $\bar{x}$:</p>
+    $$\partial\varphi(\bar{x}) \;:=\; \bigl\{v \in \mathbb{R}^n \;\big|\; (v,-1) \in N\!\bigl((\bar{x},\varphi(\bar{x}));\;\operatorname{epi}\,\varphi\bigr)\bigr\} \tag{1.24}$$
+    <p style="margin-top:12px;"><strong>Vi phân con kỳ dị</strong> (singular subdifferential) tại $\bar{x}$:</p>
+    $$\partial^\infty\varphi(\bar{x}) \;:=\; \bigl\{v \in \mathbb{R}^n \;\big|\; (v,0) \in N\!\bigl((\bar{x},\varphi(\bar{x}));\;\operatorname{epi}\,\varphi\bigr)\bigr\} \tag{1.25}$$
+  </div>
+</div>
+
+<table class="compare-table">
+  <thead>
+    <tr>
+      <th>Thuộc tính</th>
+      <th>$\partial\varphi(\bar{x})$ — Cơ sở</th>
+      <th>$\partial^\infty\varphi(\bar{x})$ — Kỳ dị</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Pháp tuyến nền</td>
+      <td>$(v, -1) \in N(\ldots; \operatorname{epi}\,\varphi)$</td>
+      <td>$(v, 0) \in N(\ldots; \operatorname{epi}\,\varphi)$</td>
+    </tr>
+    <tr>
+      <td>Tính lồi</td>
+      <td class="tc-warn">Không nhất thiết lồi</td>
+      <td class="tc-warn">Không nhất thiết lồi</td>
+    </tr>
+    <tr>
+      <td>Tính bền vững</td>
+      <td class="tc-good">Có (Mệnh đề 1.20)</td>
+      <td class="tc-good">Có (Mệnh đề 1.20)</td>
+    </tr>
+    <tr>
+      <td>Khi $\varphi$ trơn $C^1$</td>
+      <td>$= \{\nabla\varphi(\bar{x})\}$</td>
+      <td>$= \{0\}$</td>
+    </tr>
+    <tr>
+      <td>Khi $\varphi$ lồi</td>
+      <td>= vi phân lồi cổ điển (1.35)</td>
+      <td>$= N(\bar{x};\operatorname{dom}\,\varphi)$</td>
+    </tr>
+    <tr>
+      <td>Khi $\varphi$ Lipschitz cục bộ</td>
+      <td>Không rỗng (Định lý 1.22)</td>
+      <td class="tc-good">$= \{0\}$ (Định lý 1.22)</td>
+    </tr>
+    <tr>
+      <td>Vai trò chính</td>
+      <td>Tổng quát hóa gradient</td>
+      <td>Đo tính phi-Lipschitz</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="math-box box-prop" id="prop1920">
+  <div class="box-header">
+    <span class="box-label">Mệnh đề 1.19</span>
+    <span class="box-title">Vi phân con của Hàm Chỉ thị — Indicator Function <span class="page-ref">21</span></span>
+  </div>
+  <div class="box-body">
+    <p>Với bất kỳ $\Omega \subset \mathbb{R}^n$ và $\bar{x} \in \Omega$, hàm chỉ thị $\delta(\cdot;\Omega)$ thỏa mãn:</p>
+    $$\partial\delta(\bar{x};\,\Omega) \;=\; \partial^\infty\delta(\bar{x};\,\Omega) \;=\; N(\bar{x};\,\Omega)$$
+    <p>Đây là <strong>cầu nối thống nhất</strong>: vi phân con của hàm chỉ thị chính là nón pháp tuyến.</p>
+  </div>
+</div>
+
+<div class="math-box box-prop">
+  <div class="box-header">
+    <span class="box-label">Mệnh đề 1.20</span>
+    <span class="box-title">Tính Bền vững của Hai Vi phân con <span class="page-ref">21</span></span>
+  </div>
+  <div class="box-body">
+    <p>Với $\varphi: \mathbb{R}^n \to \overline{\mathbb{R}}$ và $\bar{x} \in \operatorname{dom}\,\varphi$:</p>
+    $$\partial\varphi(\bar{x}) \;=\; \operatorname{Limsup}_{x \xrightarrow{\varphi} \bar{x}}\,\partial\varphi(x) \qquad \text{và} \qquad \partial^\infty\varphi(\bar{x}) \;=\; \operatorname{Limsup}_{x \xrightarrow{\varphi} \bar{x}}\,\partial^\infty\varphi(x)$$
+    <p>trong đó $x \xrightarrow{\varphi} \bar{x}$ nghĩa là $x \to \bar{x}$ với $\varphi(x) \to \varphi(\bar{x})$.</p>
+  </div>
+</div>
+
+<div class="math-box box-ex" id="ex121">
+  <div class="box-header">
+    <span class="box-label">Ví dụ 1.21</span>
+    <span class="box-title">Vi phân con của các Hàm Đơn giản trên $\mathbb{R}$ <span class="page-ref">21</span></span>
+  </div>
+  <div class="box-body">
+    <p><strong>(i)</strong> $\varphi(x) = |x|$ tại $\bar{x} = 0$: $\operatorname{epi}\,\varphi = \{(x,y): y \geq |x|\}$, nón pháp tuyến tại $(0,0)$ gồm mọi vector nghiêng xuống dưới với góc $\leq 45°$. Kết quả:</p>
+    $$\partial\varphi(0) = [-1,1], \qquad \partial^\infty\varphi(0) = \{0\}$$
+    <p>Khớp với vi phân lồi cổ điển. <span class="badge badge-convex">Kết quả lồi</span></p>
+    <br>
+    <p><strong>(ii)</strong> $\varphi(x) = -|x|$ tại $\bar{x} = 0$: $\operatorname{epi}\,\varphi = \{(x,y): y \geq -|x|\}$ — đây chính là $\Omega$ của Ví dụ 1.5. Từ đó:</p>
+    $$\partial\varphi(0) = \{-1, 1\}, \qquad \partial^\infty\varphi(0) = \{0\}$$
+    <p>Vi phân con <span class="badge badge-nonconvex">không lồi</span>! Giải tích lồi không thể xử lý hàm này.</p>
+    <br>
+    <p><strong>(iii)</strong> $\varphi(x) = x^{1/3}$ tại $\bar{x} = 0$: thượng đồ thị "dựng thẳng" tại gốc, nên:</p>
+    $$\partial\varphi(0) = \emptyset, \qquad \partial^\infty\varphi(0) = [0,+\infty)$$
+    <p>Vi phân con cơ sở <span class="badge badge-warn" style="background:#fce8e0;color:#c43518;border:1px solid #f0a898;">rỗng</span> — hàm này không Lipschitz tại $0$. Vi phân kỳ dị nắm bắt được tính phi-Lipschitz.</p>
+  </div>
+</div>
+
+</section>
+
+<!-- 1.3.2 -->
+<section id="sec132">
+<h3 class="subsection-heading"><span class="sub-num">§ 1.3.2</span>Tính Lipschitz và Vi phân con Kỳ dị <span class="page-ref">23–24</span></h3>
+
+<div class="math-box box-thm" id="thm122">
+  <div class="box-header">
+    <span class="box-label">Định lý 1.22</span>
+    <span class="box-title">Đặc trưng Tính Lipschitz qua Vi phân con Kỳ dị <span class="page-ref">23–24</span></span>
+  </div>
+  <div class="box-body">
+    <p>Cho $\varphi: \mathbb{R}^n \to \overline{\mathbb{R}}$ hữu hạn tại $\bar{x} \in \operatorname{dom}\,\varphi$. Khi đó:</p>
+    <p>$\varphi$ là <strong>Lipschitz liên tục</strong> trên một lân cận của $\bar{x}$ với hằng số $\ell \geq 0$ khi và chỉ khi:</p>
+    $$\partial^\infty\varphi(\bar{x}) \;=\; \{0\}$$
+    <p>Hơn nữa, hằng số Lipschitz nhỏ nhất thỏa mãn: $\ell = \sup\{\|v\| \mid v \in \partial\varphi(x), x \in U\}$ trên lân cận $U$.</p>
+  </div>
+</div>
+
+<div class="insight">
+  <div class="insight-label">Ý nghĩa</div>
+  Vi phân con kỳ dị $\partial^\infty\varphi(\bar{x})$ chính là "máy đo tính phi-Lipschitz". Khi nó tầm thường ($= \{0\}$), hàm Lipschitz tốt. Khi nó lớn, hàm có tính không đều — ví dụ $x^{1/3}$ tại $0$ cho $\partial^\infty = [0,+\infty)$.
+</div>
+
+</section>
+
+<!-- 1.3.3 -->
+<section id="sec133">
+<h3 class="subsection-heading"><span class="sub-num">§ 1.3.3</span>Vi phân con qua Coderivative <span class="page-ref">24–28</span></h3>
+
+<p>Ta có thể biểu diễn vi phân con hoàn toàn qua coderivative của <em>ánh xạ thượng đồ thị</em> $E_\varphi: \mathbb{R}^n \rightrightarrows \mathbb{R}$ định nghĩa bởi $E_\varphi(x) := \{\alpha \in \mathbb{R} \mid \alpha \geq \varphi(x)\}$:</p>
+$$\partial\varphi(\bar{x}) = D^*E_\varphi\!\bigl(\bar{x}, \varphi(\bar{x})\bigr)(1), \qquad \partial^\infty\varphi(\bar{x}) = D^*E_\varphi\!\bigl(\bar{x}, \varphi(\bar{x})\bigr)(0)$$
+
+<div class="math-box box-thm" id="thm123">
+  <div class="box-header">
+    <span class="box-label">Định lý 1.23</span>
+    <span class="box-title">Vi phân con qua Coderivative của Hàm (l.s.c. và Liên tục) <span class="page-ref">24</span></span>
+  </div>
+  <div class="box-body">
+    <p>Cho $\varphi: \mathbb{R}^n \to \overline{\mathbb{R}}$ hữu hạn quanh $\bar{x}$. Khi đó:</p>
+    $$\partial\varphi(\bar{x}) \;=\; D^*\varphi(\bar{x})(1) \tag{1.30}$$
+    <p>Nếu thêm $\varphi$ <strong>liên tục</strong> quanh $\bar{x}$:</p>
+    $$\partial^\infty\varphi(\bar{x}) \;\subset\; D^*\varphi(\bar{x})(0) \tag{1.31}$$
+    <p>Tức là coderivative của $\varphi$ (nhìn như hàm $\mathbb{R}^n \to \mathbb{R}$) tại giá trị $v = 1$ cho ra vi phân con cơ sở, và tại $v = 0$ liên quan đến vi phân kỳ dị.</p>
+  </div>
+</div>
+
+</section>
+
+<!-- 1.3.4 -->
+<section id="sec134">
+<h3 class="subsection-heading"><span class="sub-num">§ 1.3.4</span>Vi phân con Đều và $\varepsilon$-Mở rộng — Regular Subgradients <span class="page-ref">28–34</span></h3>
+
+<div class="math-box box-def">
+  <div class="box-header">
+    <span class="box-label">Định nghĩa</span>
+    <span class="box-title">Vi phân con Đều và $\varepsilon$-Mở rộng — Regular / Fréchet Subdifferential <span class="page-ref">28</span></span>
+  </div>
+  <div class="box-body">
+    <p><strong>Vi phân con đều</strong> (regular/Fréchet subdifferential), hay còn gọi là presubdifferential:</p>
+    $$\widehat{\partial}\varphi(\bar{x}) \;:=\; \left\{v \in \mathbb{R}^n \;\middle|\; \liminf_{x \to \bar{x}} \frac{\varphi(x) - \varphi(\bar{x}) - \langle v,\, x-\bar{x}\rangle}{\|x-\bar{x}\|} \geq 0\right\} \tag{1.33}$$
+    <p>và $\varepsilon$<strong>-mở rộng</strong> của nó:</p>
+    $$\widehat{\partial}_\varepsilon\varphi(\bar{x}) \;:=\; \left\{v \in \mathbb{R}^n \;\middle|\; \liminf_{x \to \bar{x}} \frac{\varphi(x) - \varphi(\bar{x}) - \langle v,\, x-\bar{x}\rangle}{\|x-\bar{x}\|} \geq -\varepsilon\right\} \tag{1.34}$$
+    <p>Luôn có $\widehat{\partial}\varphi(\bar{x}) \subset \partial\varphi(\bar{x})$ (bao hàm, không nhất thiết bằng nhau). Nếu $\varphi$ khả vi tại $\bar{x}$ thì $\widehat{\partial}\varphi(\bar{x}) = \{\nabla\varphi(\bar{x})\}$.</p>
+  </div>
+</div>
+
+<div class="math-box box-prop" id="prop125">
+  <div class="box-header">
+    <span class="box-label">Mệnh đề 1.25</span>
+    <span class="box-title">Vi phân con Đều và $\varepsilon$-Mở rộng của Hàm Lồi <span class="page-ref">28</span></span>
+  </div>
+  <div class="box-body">
+    <p>Cho $\varphi: \mathbb{R}^n \to \overline{\mathbb{R}}$ là hàm lồi. Khi đó với $\bar{x} \in \operatorname{dom}\,\varphi$ và $\varepsilon \geq 0$:</p>
+    $$\widehat{\partial}_\varepsilon\varphi(\bar{x}) = \bigl\{v \in \mathbb{R}^n \mid \langle v, x - \bar{x}\rangle \leq \varphi(x) - \varphi(\bar{x}) + \varepsilon\|x-\bar{x}\| \;\;\forall x\bigr\}$$
+    <p>Đặc biệt khi $\varepsilon = 0$:</p>
+    $$\partial\varphi(\bar{x}) \;=\; \widehat{\partial}\varphi(\bar{x}) \;=\; \bigl\{v \in \mathbb{R}^n \mid \langle v, x - \bar{x}\rangle \leq \varphi(x) - \varphi(\bar{x}) \;\;\forall x \in \mathbb{R}^n\bigr\} \tag{1.35}$$
+    $$\partial^\infty\varphi(\bar{x}) \;=\; N(\bar{x};\,\operatorname{dom}\,\varphi) \;=\; \bigl\{v \mid \langle v, x-\bar{x}\rangle \leq 0 \;\;\forall x \in \operatorname{dom}\,\varphi\bigr\}$$
+    <p>— đây là <strong>vi phân con lồi Fenchel–Moreau–Rockafellar</strong>.</p>
+  </div>
+</div>
+
+<div class="math-box box-thm" id="thm127">
+  <div class="box-header">
+    <span class="box-label">Định lý 1.27</span>
+    <span class="box-title">Mô tả Biến phân Trơn cho Vi phân con Đều <span class="page-ref">30</span></span>
+  </div>
+  <div class="box-body">
+    <p>Cho $\varphi: \mathbb{R}^n \to \overline{\mathbb{R}}$ hữu hạn tại $\bar{x}$. Khi đó $v \in \widehat{\partial}\varphi(\bar{x})$ khi và chỉ khi:</p>
+    <p>tồn tại hàm $\psi: U \to \mathbb{R}$ trơn Fréchet tại $\bar{x}$ trên lân cận $U$ của $\bar{x}$, sao cho $\psi(\bar{x}) = \varphi(\bar{x})$, $\nabla\psi(\bar{x}) = v$, và:</p>
+    $$\psi(x) - \varphi(x) \;\text{ đạt cực đại địa phương tại }\; x = \bar{x} \;\text{ trên }\; U.$$
+    <p>Nếu thêm $\varphi$ bị chặn dưới trên $\mathbb{R}^n$, có thể chọn $\psi$ lõm và trơn trên $\mathbb{R}^n$ sao cho $\psi(x) - \varphi(x)$ đạt <strong>cực đại toàn cục duy nhất</strong> tại $x = \bar{x}$.</p>
+  </div>
+</div>
+
+<div class="math-box box-prop" id="prop130">
+  <div class="box-header">
+    <span class="box-label">Mệnh đề 1.30</span>
+    <span class="box-title">Các Quy tắc Sơ cấp cho Vi phân con Cơ sở và Đều <span class="page-ref">33</span></span>
+  </div>
+  <div class="box-body">
+    <p><strong>(i) Quy tắc Fermat Tổng quát (Generalized Fermat Rule):</strong></p>
+    <p>Nếu $\bar{x}$ là <strong>cực tiểu cục bộ</strong> của $\varphi: \mathbb{R}^n \to \overline{\mathbb{R}}$, thì:</p>
+    $$0 \;\in\; \widehat{\partial}\varphi(\bar{x}) \qquad \text{và} \qquad 0 \;\in\; \partial\varphi(\bar{x})$$
+    <p>Hai điều kiện này <strong>đủ cho cực tiểu toàn cục</strong> khi $\varphi$ lồi.</p>
+    <br>
+    <p><strong>(ii) Quy tắc Tổng với Hàm Trơn (Sum Rules):</strong></p>
+    <p>Cho $\psi: \mathbb{R}^n \to \overline{\mathbb{R}}$ khả vi tại $\bar{x}$. Khi đó:</p>
+    $$\widehat{\partial}(\psi + \varphi)(\bar{x}) \;=\; \nabla\psi(\bar{x}) + \widehat{\partial}\varphi(\bar{x})$$
+    <p>Nếu $\psi$ là $C^1$ quanh $\bar{x}$:</p>
+    $$\partial(\psi + \varphi)(\bar{x}) \;=\; \nabla\psi(\bar{x}) + \partial\varphi(\bar{x})$$
+  </div>
+</div>
+
+</section>
+
+<!-- 1.3.x - Distance function -->
+<section>
+<h3 class="subsection-heading">Vi phân con của Hàm Khoảng cách <span class="page-ref">36–44</span></h3>
+
+<div class="math-box box-thm" id="thm133">
+  <div class="box-header">
+    <span class="box-label">Định lý 1.33</span>
+    <span class="box-title">Vi phân con của Hàm Khoảng cách tại Điểm Trong và Ngoài Tập <span class="page-ref">37–38</span></span>
+  </div>
+  <div class="box-body">
+    <p>Cho hàm khoảng cách $d_\Omega(x) = \operatorname{dist}(x;\Omega)$ với $\Omega \subset \mathbb{R}^n$ đóng, $\Omega \neq \emptyset$.</p>
+    <br>
+    <p><strong>(i)</strong> Nếu $\bar{x} \in \Omega$ (điểm nằm trong tập):</p>
+    $$\widehat{\partial}d_\Omega(\bar{x}) \;=\; \widehat{N}(\bar{x};\,\Omega) \cap \mathbb{B} \qquad \text{và} \qquad \partial d_\Omega(\bar{x}) \;=\; N(\bar{x};\,\Omega) \cap \mathbb{B} \tag{1.43}$$
+    <br>
+    <p><strong>(ii)</strong> Nếu $\bar{x} \notin \Omega$ (điểm nằm ngoài tập): khi $\Pi_\Omega(\bar{x}) = \{\bar{w}\}$ là singleton:</p>
+    $$\widehat{\partial}d_\Omega(\bar{x}) \;=\; \left\{\frac{\bar{x} - \bar{w}}{\|\bar{x} - \bar{w}\|}\right\}, \qquad \partial d_\Omega(\bar{x}) \;=\; \frac{\bar{x} - \Pi_\Omega(\bar{x})}{d_\Omega(\bar{x})} \tag{1.44}$$
+  </div>
+</div>
+
+<div class="insight">
+  <div class="insight-label">Ý nghĩa hình học</div>
+  Vi phân của hàm khoảng cách chỉ đúng hướng từ tập $\Omega$ ra phía điểm $\bar{x}$ — đây là kết quả rất trực quan. Khi $\bar{x} \in \Omega$, vi phân con là "một phần" của nón pháp tuyến (giao với quả cầu đơn vị), phản ánh tính Lipschitz liên tục với hằng số $\ell = 1$ của $d_\Omega$.
+</div>
+
+<div class="math-box box-prop">
+  <div class="box-header">
+    <span class="box-label">Mệnh đề 1.29</span>
+    <span class="box-title">Vi phân con Kỳ dị dưới Phép Cộng Lipschitz <span class="page-ref">32</span></span>
+  </div>
+  <div class="box-body">
+    <p>Cho $\varphi: \mathbb{R}^n \to \overline{\mathbb{R}}$ hữu hạn tại $\bar{x}$, và $\psi: \mathbb{R}^n \to \overline{\mathbb{R}}$ là Lipschitz cục bộ quanh $\bar{x}$. Khi đó:</p>
+    $$\partial^\infty(\varphi + \psi)(\bar{x}) \;=\; \partial^\infty\varphi(\bar{x})$$
+    <p>Tức là thêm một hàm Lipschitz không ảnh hưởng đến vi phân kỳ dị — điều này rất hữu ích trong bài toán giải tích có nhiều thành phần.</p>
+  </div>
+</div>
+
+</section>
+</section>
+
+<hr class="section-divider">
+
+<!-- ══ SECTION 1.4 ══ -->
+<section id="sec14">
+<h2 class="section-heading"><span class="sec-num">§ 1.4</span>Bài tập cho Chương 1 <span class="page-ref">44–66</span></h2>
+
+<p>Các bài tập chủ yếu mở rộng kết quả sang <strong>không gian vô hạn chiều</strong> (Banach, Hilbert, Asplund). Một số bài tập quan trọng:</p>
+
+<div class="math-box box-rem">
+  <div class="box-header">
+    <span class="box-label">Bài tập 1.39</span>
+    <span class="box-title">Tính chất của Pháp tuyến Tổng quát <span class="page-ref">44</span></span>
+  </div>
+  <div class="box-body">
+    <p>(i) Chứng minh $N(\bar{x};\Omega)$ phụ thuộc vào chuẩn trên $X$ (không bất biến với chuẩn tương đương). (ii) Chứng minh $\widehat{N}(\bar{x};\Omega)$ bất biến với mọi chuẩn tương đương trong không gian Banach tùy ý. (iii) Tính chất đơn điệu: $\widehat{N}_\varepsilon(\bar{x};\Omega_1) \subset \widehat{N}_\varepsilon(\bar{x};\Omega_2)$ khi $\Omega_2 \subset \Omega_1$.</p>
+  </div>
+</div>
+
+<div class="math-box box-rem">
+  <div class="box-header">
+    <span class="box-label">Bài tập 1.41</span>
+    <span class="box-title">Không gian Asplund <span class="page-ref">45</span></span>
+  </div>
+  <div class="box-body">
+    <p>Không gian Banach $X$ gọi là <strong>Asplund</strong> nếu mọi hàm lồi liên tục trên mở lồi $U \subset X$ đều khả vi Fréchet trên tập dày đặc (dense subset) của $U$. Đây là không gian tự nhiên để mở rộng lý thuyết sang vô hạn chiều: <em>mọi không gian phản xạ (reflexive)</em> đều là Asplund; $L^p(1 < p < \infty)$ là Asplund; $L^1$ và $C[0,1]$ không phải Asplund.</p>
+  </div>
+</div>
+
+<div class="math-box box-rem">
+  <div class="box-header">
+    <span class="box-label">Bài tập 1.43</span>
+    <span class="box-title">Nón Pháp Tuyến Cơ sở trong Không gian Banach và Asplund <span class="page-ref">45</span></span>
+  </div>
+  <div class="box-body">
+    <p>Trong không gian Banach $X$ tùy ý với $\Omega \subset X$ đóng, nón pháp tuyến cơ sở định nghĩa qua giới hạn yếu* (sequential weak*):</p>
+    $$N(\bar{x};\,\Omega) := \operatorname{Limsup}_{\substack{x \xrightarrow{\Omega} \bar{x} \\ \varepsilon \downarrow 0}} \widehat{N}_\varepsilon(x;\,\Omega) \tag{1.58}$$
+    có thể biểu diễn tương đương (khi $X$ là Asplund) bằng giới hạn không cần $\varepsilon$:
+    $$N(\bar{x};\,\Omega) = \operatorname{Limsup}_{x \xrightarrow{\Omega} \bar{x}} \widehat{N}(x;\,\Omega) \tag{1.59}$$
+    — điều này không đúng trong không gian Banach tùy ý (cần tính chất Asplund).
+  </div>
+</div>
+
+<div class="math-box box-rem">
+  <div class="box-header">
+    <span class="box-label">Bài tập 1.73</span>
+    <span class="box-title">Vi phân con Proximal trong Không gian Hilbert <span class="page-ref">53</span></span>
+  </div>
+  <div class="box-body">
+    <p>Trong không gian Hilbert $X$, <strong>vi phân con proximal</strong> của $\varphi$ tại $\bar{x} \in \operatorname{dom}\,\varphi$ là:</p>
+    $$\partial_P\varphi(\bar{x}) := \left\{x^* \in X^* \;\middle|\; \liminf_{x \to \bar{x}} \frac{\varphi(x) - \varphi(\bar{x}) - \langle x^*, x - \bar{x}\rangle}{\|x - \bar{x}\|^2} > -\infty\right\}$$
+    Tính chất: $\partial_P\varphi(\bar{x}) \subset \widehat{\partial}\varphi(\bar{x})$; và $\partial\varphi(\bar{x}) = \operatorname{Limsup}_{x \xrightarrow{\varphi} \bar{x}} \partial_P\varphi(x)$.
+  </div>
+</div>
+
+</section>
+
+<hr class="section-divider">
+
+<!-- ══ SECTION 1.5 ══ -->
+<section id="sec15">
+<h2 class="section-heading"><span class="sec-num">§ 1.5</span>Bình luận Lịch sử và Tài liệu tham khảo <span class="page-ref">60–66</span></h2>
+
+<table class="compare-table">
+  <thead>
+    <tr>
+      <th>Công cụ</th>
+      <th>Tác giả / Nguồn gốc</th>
+      <th>Nhận xét so sánh</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Nón pháp tuyến cơ sở $N(\bar{x};\Omega)$</strong></td>
+      <td>Mordukhovich (1976, 1980): tiếp cận qua phép chiếu và giới hạn ngoài</td>
+      <td class="tc-good">Không lồi, bền vững, cho phép calculus đầy đủ</td>
+    </tr>
+    <tr>
+      <td><strong>Nón Clarke $N^C(\bar{x};\Omega)$</strong></td>
+      <td>Clarke (1973–1975): bao lồi đóng của nón tiếp xúc đối ngẫu</td>
+      <td class="tc-warn">Luôn lồi → quá lớn, kém chính xác cho bài toán phi lồi</td>
+    </tr>
+    <tr>
+      <td><strong>Nón tiếp xúc $T(\bar{x};\Omega)$</strong></td>
+      <td>Bouligand (1930), Severi (1934)</td>
+      <td>Cơ sở lịch sử, nhưng không đủ cho nhiều bài toán</td>
+    </tr>
+    <tr>
+      <td><strong>Coderivative $D^*F$</strong></td>
+      <td>Mordukhovich (1980): áp dụng nón pháp tuyến lên đồ thị</td>
+      <td class="tc-good">Không phải đối ngẫu của đạo hàm tiếp tuyến → bền vững hơn</td>
+    </tr>
+    <tr>
+      <td><strong>Đạo hàm đồ thị (graphical derivative)</strong></td>
+      <td>Aubin (1981–1984): tiếp cận qua tiếp tuyến của đồ thị</td>
+      <td class="tc-warn">Không bền vững, kém calculus so với coderivative</td>
+    </tr>
+    <tr>
+      <td><strong>Vi phân con lồi $\partial^C\varphi$</strong></td>
+      <td>Fenchel (1949), Moreau, Rockafellar (1966–1970)</td>
+      <td>Nền tảng lịch sử; đủ cho hàm lồi, không đủ cho phi lồi</td>
+    </tr>
+    <tr>
+      <td><strong>Vi phân sub-Clarke $\partial^C\varphi$</strong></td>
+      <td>Clarke (1973–1983): bao lồi đóng của giới hạn gradient</td>
+      <td class="tc-warn">Luôn lồi và không rỗng (Lipschitz), nhưng quá lớn</td>
+    </tr>
+    <tr>
+      <td><strong>Vi phân con cơ sở $\partial\varphi$</strong></td>
+      <td>Mordukhovich (1976–1984): giới hạn ngoài của vi phân đều</td>
+      <td class="tc-good">Không lồi, bền vững, cho phép calculus đầy đủ</td>
+    </tr>
+  </tbody>
+</table>
+
+</section>
+
+<hr class="section-divider">
+
+<!-- ══ SUMMARY ══ -->
+<section id="summary">
+<h2 class="section-heading"><span class="sec-num">Tổng kết</span>Bản đồ Khái niệm Chương 1</h2>
+
+<p>Ba trụ cột xây dựng trong chương này liên kết chặt chẽ qua <strong>một nguyên lý thống nhất</strong>: áp dụng nón pháp tuyến cơ sở $N(\cdot;\cdot)$ lên các đối tượng hình học thích hợp.</p>
+
+<table class="compare-table">
+  <thead>
+    <tr>
+      <th>Công cụ</th>
+      <th>Áp dụng nón lên</th>
+      <th>Kết nối với cổ điển</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>$N(\bar{x};\Omega)$</strong><br>Nón pháp tuyến cơ sở</td>
+      <td>Tập đóng $\Omega$ tại $\bar{x}$</td>
+      <td>Khi $\Omega$ lồi: $= \{v \mid \langle v, x-\bar{x}\rangle \leq 0\;\forall x\}$</td>
+    </tr>
+    <tr>
+      <td><strong>$D^*F(\bar{x},\bar{y})(v)$</strong><br>Coderivative cơ sở</td>
+      <td>$\operatorname{gph}\,F \subset \mathbb{R}^n \times \mathbb{R}^m$</td>
+      <td>Khi $f$ trơn: $= \{\nabla f(\bar{x})^* v\}$ — Jacobi chuyển vị</td>
+    </tr>
+    <tr>
+      <td><strong>$\partial\varphi(\bar{x})$</strong><br>Vi phân con cơ sở</td>
+      <td>$\operatorname{epi}\,\varphi \subset \mathbb{R}^n \times \mathbb{R}$</td>
+      <td>Khi $\varphi$ trơn: $= \{\nabla\varphi(\bar{x})\}$; lồi: vi phân Fenchel–Rockafellar</td>
+    </tr>
+    <tr>
+      <td><strong>$\partial^\infty\varphi(\bar{x})$</strong><br>Vi phân con kỳ dị</td>
+      <td>$\operatorname{epi}\,\varphi$ (hướng nằm ngang)</td>
+      <td>$= \{0\}$ iff $\varphi$ Lipschitz (Định lý 1.22); không xuất hiện trong lý thuyết lồi</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="insight">
+  <div class="insight-label">3 nguyên tắc nền tảng của chương</div>
+  <p><strong>1. Tính không lồi là cố ý.</strong> Tất cả công cụ cơ sở đều có thể không lồi — đây là ưu điểm so với Clarke, cho phép xử lý các bài toán phi lồi một cách chính xác hơn.</p>
+  <p><strong>2. Tính bền vững là điều kiện sống còn.</strong> Mọi đối tượng cơ sở đều bền vững theo giới hạn ngoài Painlevé–Kuratowski — điều này là nền tảng cho calculus phong phú ở Chương 2–4.</p>
+  <p><strong>3. Thống nhất qua nón pháp tuyến.</strong> Tất cả bắt nguồn từ $N(\cdot;\cdot)$: coderivative = nón lên gph, vi phân con = nón lên epi. Mỗi kết quả về nón pháp tuyến tự động cho kết quả về coderivative và vi phân con.</p>
+</div>
+
+</section>
+</div>
+</main>
+
+
+<div class="task-footer">
+  <a href="../task-05/">← Task 05 · Chapter 1 Exercises</a>
+  <a href="../">↑ Lesson 01 · Variational Analysis</a>
+  <a href="../task-07/">Task 07 →</a>
+</div>
+
+<button id="backtotop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Về đầu trang">↑</button>
+
+<script>
+// Progress bar
+const pb = document.getElementById('progress-bar');
+const btt = document.getElementById('backtotop');
+window.addEventListener('scroll', () => {
+  const scrolled = window.scrollY;
+  const total = document.body.scrollHeight - window.innerHeight;
+  pb.style.transform = `scaleX(${scrolled / total})`;
+  btt.classList.toggle('visible', scrolled > 400);
+});
+
+// Active nav link on scroll
+const sections = document.querySelectorAll('section[id], div.hero');
+const navLinks = document.querySelectorAll('#nav-list a');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  sections.forEach(s => {
+    if (window.scrollY + 120 >= s.offsetTop) cur = s.id;
+  });
+  navLinks.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + cur);
+  });
+});
+
+// Search filter
+document.getElementById('search-input').addEventListener('input', function() {
+  const q = this.value.toLowerCase();
+  navLinks.forEach(a => {
+    const show = !q || a.textContent.toLowerCase().includes(q);
+    a.parentElement.style.display = show ? '' : 'none';
+  });
+});
+</script>
+
+</body>
+</html>
