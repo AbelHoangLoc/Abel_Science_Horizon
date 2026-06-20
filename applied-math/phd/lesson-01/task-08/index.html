@@ -1,0 +1,1695 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Task 08 · Giải tích Biến phân cho Học sinh Lớp 12 | Variational Analysis and Applications</title>
+  <link rel="stylesheet" href="../assets/brand.css">
+  <script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']]
+    },
+    options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+  };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+  <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=STIX+Two+Math&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --sidebar-w: 292px;
+
+  --space:#06142e;
+  --deep:#071b3f;
+  --void:#020712;
+  --cyan:#37d5ff;
+  --blue:#2563eb;
+  --violet:#7c5cff;
+  --green:#16a34a;
+  --gold:#c49a2a;
+  --gold2:#f0c040;
+  --pink:#ff70b8;
+
+  --ink:#1a1a2e;
+  --muted:#5c5c7a;
+  --page:#fffefb;
+  --cream:#f6f3ed;
+  --line:#e2ddd5;
+  --teal:#0d9488;
+  --red:#dc2626;
+  --purple:#7c3aed;
+  --orange:#ea580c;
+
+  --paper:rgba(255,255,255,.96);
+  --paper2:#f8fbff;
+  --shadow:0 24px 70px rgba(0,0,0,.30);
+  --shadow2:0 14px 34px rgba(2,7,18,.18);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+
+body{
+  min-height:100vh;
+  color:#ecf7ff;
+  font-family:"Be Vietnam Pro",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  background:
+    radial-gradient(900px 540px at 8% 8%, rgba(55,213,255,.22), transparent 60%),
+    radial-gradient(850px 520px at 92% 12%, rgba(124,92,255,.22), transparent 60%),
+    radial-gradient(850px 520px at 62% 95%, rgba(82,245,176,.12), transparent 60%),
+    linear-gradient(135deg,#031024 0%,#071b3f 48%,#020712 100%);
+  overflow-x:hidden;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-2;
+  opacity:.36;
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,.82) 1px, transparent 1.6px),
+    radial-gradient(circle, rgba(55,213,255,.62) 1px, transparent 1.5px),
+    radial-gradient(circle, rgba(82,245,176,.50) 1px, transparent 1.5px);
+  background-size:72px 72px,118px 118px,164px 164px;
+  background-position:0 0,34px 58px,90px 26px;
+}
+
+body::after{
+  content:"";
+  position:fixed;
+  right:-390px;
+  top:130px;
+  width:1080px;
+  height:290px;
+  border-radius:50%;
+  border:3px solid rgba(55,213,255,.14);
+  border-left-color:rgba(82,245,176,.42);
+  transform:rotate(-17deg);
+  z-index:-1;
+  pointer-events:none;
+}
+
+/* Progress */
+#progress-bar{
+  position:fixed;
+  top:0;
+  left:var(--sidebar-w);
+  width:calc(100% - var(--sidebar-w));
+  height:4px;
+  background:linear-gradient(90deg,#37d5ff,#52f5b0,#ffb454,#7c5cff);
+  transform:scaleX(0);
+  transform-origin:left;
+  z-index:80;
+  box-shadow:0 0 22px rgba(55,213,255,.45);
+}
+
+/* Sidebar */
+#sidebar{
+  position:fixed;
+  inset:0 auto 0 0;
+  width:var(--sidebar-w);
+  min-width:var(--sidebar-w);
+  height:100vh;
+  overflow-y:auto;
+  padding:20px 16px 28px;
+  background:rgba(4,16,36,.82);
+  border-right:1px solid rgba(255,255,255,.13);
+  box-shadow:20px 0 45px rgba(0,0,0,.18);
+  backdrop-filter:blur(18px);
+  z-index:35;
+}
+#sidebar::-webkit-scrollbar{width:5px}
+#sidebar::-webkit-scrollbar-thumb{background:rgba(55,213,255,.38);border-radius:999px}
+
+.sidebar-header{
+  padding:4px 4px 18px;
+  margin-bottom:14px;
+  border-bottom:1px solid rgba(255,255,255,.12);
+}
+.book-title{
+  font-size:12px;
+  line-height:1.55;
+  color:#f5fbff;
+  font-weight:900;
+  letter-spacing:-.01em;
+}
+.chapter-label{
+  margin-top:8px;
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:1.5px;
+  color:rgba(189,243,255,.72);
+  font-weight:900;
+}
+.sidebar-search{
+  position:sticky;
+  top:0;
+  padding:0 0 12px;
+  background:linear-gradient(180deg,rgba(4,16,36,.98),rgba(4,16,36,.76));
+  z-index:2;
+}
+.sidebar-search input{
+  width:100%;
+  padding:10px 12px;
+  border-radius:15px;
+  border:2px solid rgba(148,163,184,.18);
+  outline:none;
+  background:rgba(255,255,255,.94);
+  color:#0f172a;
+  font-family:"Be Vietnam Pro",sans-serif;
+  font-size:12.5px;
+  font-weight:700;
+  box-shadow:0 12px 24px rgba(0,0,0,.10);
+}
+.sidebar-search input:focus{
+  border-color:rgba(55,213,255,.62);
+  box-shadow:0 12px 26px rgba(55,213,255,.18);
+}
+#nav-list{
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:3px;
+  padding:0;
+}
+#nav-list li{list-style:none}
+#nav-list a{
+  display:block;
+  text-decoration:none;
+  border-radius:12px;
+  padding:7px 9px;
+  color:rgba(236,247,255,.72);
+  font-size:12px;
+  font-weight:700;
+  line-height:1.35;
+  transition:.15s ease;
+}
+#nav-list a:hover,
+#nav-list a.active{
+  background:rgba(55,213,255,.13);
+  color:#fff;
+  transform:translateX(2px);
+}
+#nav-list .section-group a{
+  margin-top:8px;
+  color:#83efff;
+  font-weight:900;
+  text-transform:uppercase;
+  font-size:11px;
+  letter-spacing:.55px;
+}
+#nav-list .subsection a{
+  color:rgba(255,230,128,.86);
+  font-weight:800;
+  padding-left:15px;
+}
+
+/* Main */
+#main{
+  margin-left:var(--sidebar-w);
+  min-height:100vh;
+  padding-bottom:38px;
+}
+
+/* Header / Hero adapted from original content */
+.site-header{
+  position:relative;
+  overflow:hidden;
+  padding:54px 170px 42px 46px;
+  background:
+    radial-gradient(520px 230px at 12% 0%, rgba(55,213,255,.20), transparent 62%),
+    radial-gradient(540px 240px at 82% 20%, rgba(124,92,255,.20), transparent 62%),
+    rgba(4,16,36,.76);
+  color:#d0d8f0;
+  text-align:left;
+  border-bottom:1px solid rgba(255,255,255,.13);
+  box-shadow:0 18px 48px rgba(0,0,0,.18);
+  backdrop-filter:blur(16px);
+}
+.site-header::before{
+  content:"N(x̄;Ω)  D*F  ∂φ  ∂∞φ  epi φ  Π(x;Ω)";
+  position:absolute;
+  right:-90px;
+  top:22px;
+  font-family:"STIX Two Math","JetBrains Mono",monospace;
+  font-size:34px;
+  color:rgba(255,255,255,.045);
+  white-space:nowrap;
+  transform:rotate(-8deg);
+}
+.site-header::after{
+  content:"";
+  position:absolute;
+  left:0;right:0;bottom:0;height:3px;
+  background:linear-gradient(90deg,#37d5ff,#52f5b0,#ffb454,#7c5cff,#ff70b8);
+}
+.site-header .label{
+  font-family:"Be Vietnam Pro",sans-serif;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:rgba(236,247,255,.62);
+  margin-bottom:12px;
+}
+.site-header .label::before{content:"🛰️ ";letter-spacing:0}
+.site-header h1{
+  font-family:"Be Vietnam Pro",sans-serif;
+  font-size:34px;
+  line-height:1.22;
+  font-weight:900;
+  color:#f5fbff;
+  letter-spacing:-.035em;
+  max-width:980px;
+  margin-bottom:12px;
+}
+.site-header .sub{
+  font-family:"Be Vietnam Pro",sans-serif;
+  font-size:14px;
+  color:rgba(221,235,255,.78);
+  font-style:normal;
+  font-weight:600;
+  max-width:860px;
+  margin-bottom:18px;
+}
+.level-badge{
+  display:inline-flex;
+  align-items:center;
+  border:1px solid rgba(255,255,255,.14);
+  background:rgba(255,255,255,.08);
+  border-radius:999px;
+  padding:7px 12px;
+  font-family:"Be Vietnam Pro",sans-serif;
+  font-size:11px;
+  color:rgba(236,247,255,.76);
+  font-weight:900;
+  box-shadow:0 12px 24px rgba(0,0,0,.12);
+}
+
+/* Content surfaces */
+.content-shell{
+  max-width:1040px;
+  margin:0 auto;
+  padding:34px 28px 0;
+}
+
+/* Preserve original TOC content, restyled into common surface */
+.toc-wrap{
+  max-width:920px;
+  margin:0 auto 24px;
+  padding:24px;
+  background:rgba(255,255,255,.94);
+  border:1px solid rgba(148,163,184,.22);
+  border-radius:24px;
+  box-shadow:0 18px 35px rgba(15,23,42,.10);
+}
+.toc-wrap h2{
+  font-family:"Be Vietnam Pro",sans-serif;
+  font-size:13px;
+  font-weight:900;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:#64748b;
+  margin-bottom:14px;
+}
+.toc-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+  gap:10px;
+}
+.toc-item{
+  background:#f8fbff;
+  border:1px solid rgba(148,163,184,.22);
+  border-radius:14px;
+  padding:12px 14px;
+  text-decoration:none;
+  color:#0f172a;
+  transition:.18s ease;
+  display:block;
+}
+.toc-item:hover{
+  border-color:rgba(55,213,255,.45);
+  background:#eef9ff;
+  transform:translateY(-1px);
+}
+.toc-item .ti-num{
+  font-family:"Be Vietnam Pro",sans-serif;
+  font-size:11px;
+  font-weight:900;
+  color:#c49a2a;
+  margin-bottom:4px;
+  display:block;
+}
+.toc-item .ti-title{
+  font-family:"EB Garamond",Georgia,serif;
+  font-size:16px;
+  color:#1a1a2e;
+}
+
+/* Original lesson content */
+.wrap{
+  max-width:920px;
+  margin:0 auto 34px;
+  padding:4px 32px 72px;
+  background:rgba(255,255,255,.96);
+  color:var(--ink);
+  border:1px solid rgba(148,163,184,.22);
+  border-radius:28px;
+  box-shadow:0 18px 38px rgba(15,23,42,.12);
+  font-family:"EB Garamond",Georgia,serif;
+  font-size:18px;
+  line-height:1.8;
+}
+section{scroll-margin-top:24px}
+h3[id]{scroll-margin-top:22px}
+.s-head{
+  margin-top:64px;
+  margin-bottom:8px;
+  display:flex;
+  align-items:baseline;
+  gap:14px;
+}
+.s-head .s-num{
+  font-family:"Be Vietnam Pro",sans-serif;
+  font-size:12px;
+  font-weight:900;
+  color:#fff;
+  background:#c49a2a;
+  border-radius:999px;
+  padding:4px 10px;
+  letter-spacing:.04em;
+  white-space:nowrap;
+}
+.s-head h2{
+  font-size:clamp(20px,3vw,28px);
+  font-weight:600;
+  color:#1a1a2e;
+  line-height:1.3;
+}
+.section-intro{
+  font-size:16.5px;
+  color:#5c5c7a;
+  border-left:3px solid #f0c040;
+  padding-left:16px;
+  margin:14px 0 24px;
+  font-style:italic;
+}
+.wrap p{margin-bottom:16px;color:#1a1a2e}
+.wrap strong{color:#1a1a2e}
+.wrap em{color:#7c3aed}
+.wrap ul,.wrap ol{color:#1a1a2e}
+.wrap li{color:#1a1a2e}
+
+/* Boxes from original code */
+.box{
+  margin:24px 0;
+  border-radius:10px;
+  overflow:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.07);
+}
+.box .bh{
+  padding:10px 18px;
+  font-family:"Be Vietnam Pro",sans-serif;
+  font-size:12.5px;
+  font-weight:900;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.box .bd{
+  padding:18px 20px;
+  font-size:17px;
+}
+.box .bd p:last-child{margin-bottom:0}
+.box-story .bh{background:#1e3a5f;color:#a8c8f0}
+.box-story .bd{background:#eef4fb;border:1.5px solid #6090c8;border-top:none;border-radius:0 0 10px 10px}
+.box-remind .bh{background:#166534;color:#bbf7d0}
+.box-remind .bd{background:#f0fdf4;border:1.5px solid #4ade80;border-top:none;border-radius:0 0 10px 10px}
+.box-key .bh{background:#7c3aed;color:#ede9fe}
+.box-key .bd{background:#f5f3ff;border:1.5px solid #a78bfa;border-top:none;border-radius:0 0 10px 10px}
+.box-def .bh{background:#1d4ed8;color:#dbeafe}
+.box-def .bd{background:#eff6ff;border:1.5px solid #60a5fa;border-top:none;border-radius:0 0 10px 10px}
+.box-thm .bh{background:#6d28d9;color:#ede9fe}
+.box-thm .bd{background:#f5f3ff;border:1.5px solid #a78bfa;border-top:none;border-radius:0 0 10px 10px;font-style:italic}
+.box-ex .bh{background:#c2410c;color:#ffedd5}
+.box-ex .bd{background:#fff7ed;border:1.5px solid #fb923c;border-top:none;border-radius:0 0 10px 10px}
+.box-wow .bh{background:linear-gradient(90deg,#c2410c,#9333ea);color:#fff}
+.box-wow .bd{background:#fdf4ff;border:1.5px solid #d946ef;border-top:none;border-radius:0 0 10px 10px}
+.box-warn .bh{background:#92400e;color:#fef3c7}
+.box-warn .bd{background:#fffbeb;border:1.5px solid #fbbf24;border-top:none;border-radius:0 0 10px 10px}
+.box-quiz .bh{background:#0f766e;color:#ccfbf1}
+.box-quiz .bd{background:#f0fdfa;border:1.5px solid #5eead4;border-top:none;border-radius:0 0 10px 10px}
+
+.diagram-wrap{
+  margin:24px 0;
+  background:#f6f3ed;
+  border:1px solid #e2ddd5;
+  border-radius:10px;
+  padding:20px;
+  text-align:center;
+  overflow-x:auto;
+}
+.diagram-wrap .dcaption{
+  font-family:"Inter",sans-serif;
+  font-size:13px;
+  color:#5c5c7a;
+  margin-top:12px;
+  font-style:italic;
+}
+svg{max-width:100%;overflow:visible}
+.step-list{
+  margin:16px 0;
+  padding:0!important;
+  list-style:none;
+}
+.step-list li{
+  display:grid;
+  grid-template-columns:36px 1fr;
+  gap:12px;
+  align-items:start;
+  margin-bottom:16px;
+}
+.step-num{
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  background:#c49a2a;
+  color:#fff;
+  font-family:"Inter",sans-serif;
+  font-size:14px;
+  font-weight:700;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+  margin-top:2px;
+}
+.step-num.blue{background:#2563eb}
+.step-num.teal{background:#0d9488}
+.step-num.purple{background:#7c3aed}
+.step-num.red{background:#dc2626}
+
+.compare{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin:20px 0;
+}
+.compare .col{
+  padding:16px;
+  border-radius:8px;
+  border:1.5px solid;
+}
+.compare .col-good{border-color:#4ade80;background:#f0fdf4}
+.compare .col-bad{border-color:#f87171;background:#fff1f1}
+.compare .col-title{
+  font-family:"Inter",sans-serif;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  margin-bottom:8px;
+}
+.compare .col-good .col-title{color:#16a34a}
+.compare .col-bad .col-title{color:#dc2626}
+
+.formula-block{
+  margin:18px 0;
+  padding:16px 20px;
+  background:#f6f3ed;
+  border-radius:8px;
+  border-left:4px solid #c49a2a;
+  font-size:17px;
+  overflow-x:auto;
+}
+.formula-label{
+  font-family:"Inter",sans-serif;
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:#c49a2a;
+  margin-bottom:6px;
+}
+.analogy{
+  margin:20px 0;
+  padding:16px 20px;
+  background:#fff8e8;
+  border-radius:8px;
+  border:1.5px dashed #f0c040;
+  font-size:16.5px;
+}
+.analogy .analogy-label{
+  font-family:"Inter",sans-serif;
+  font-size:11.5px;
+  font-weight:700;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:#c49a2a;
+  margin-bottom:6px;
+}
+.hl-blue{color:#2563eb;font-weight:600}
+.hl-red{color:#dc2626;font-weight:600}
+.hl-green{color:#16a34a;font-weight:600}
+.hl-purple{color:#7c3aed;font-weight:600}
+.hl-gold{color:#c49a2a;font-weight:600}
+.hl-teal{color:#0d9488;font-weight:600}
+
+.sum-table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:15.5px;
+  margin:20px 0;
+}
+.sum-table th{
+  background:#1a1a2e;
+  color:#c8d0ee;
+  font-family:"Inter",sans-serif;
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:.05em;
+  text-transform:uppercase;
+  padding:10px 14px;
+  text-align:left;
+}
+.sum-table td{
+  padding:11px 14px;
+  border-bottom:1px solid #e2ddd5;
+  vertical-align:top;
+  color:#1a1a2e;
+}
+.sum-table tr:nth-child(even) td{background:#fafaf8}
+.sum-table tr:last-child td{border-bottom:none}
+
+hr{
+  border:none;
+  border-top:1px solid #e2ddd5;
+  margin:48px 0;
+}
+
+/* Footer */
+.task-footer{
+  max-width:1040px;
+  margin:26px auto 0;
+  padding:0 28px 34px;
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+}
+.task-footer a{
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 14px;
+  border-radius:999px;
+  background:rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.14);
+  color:#e9fbff;
+  font-weight:900;
+  font-size:13px;
+  box-shadow:0 12px 24px rgba(0,0,0,.14);
+}
+.task-footer a:hover{
+  background:rgba(55,213,255,.16);
+  border-color:rgba(55,213,255,.35);
+}
+
+/* Back to top */
+#backtotop{
+  position:fixed;
+  right:24px;
+  bottom:24px;
+  width:46px;
+  height:46px;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.20);
+  background:linear-gradient(135deg,#37d5ff,#52f5b0);
+  color:#06142e;
+  font-weight:900;
+  font-size:20px;
+  box-shadow:0 16px 34px rgba(0,0,0,.26);
+  cursor:pointer;
+  opacity:0;
+  pointer-events:none;
+  transform:translateY(10px);
+  transition:.2s ease;
+  z-index:70;
+}
+#backtotop.visible{
+  opacity:1;
+  pointer-events:auto;
+  transform:translateY(0);
+}
+
+.MathJax{font-size:1.04em!important}
+mjx-container{
+  overflow-x:auto;
+  overflow-y:hidden;
+  max-width:100%;
+  padding:2px 0;
+}
+
+@media(max-width:900px){
+  :root{--sidebar-w:0px}
+  #sidebar{display:none}
+  #main{margin-left:0}
+  #progress-bar{left:0;width:100%}
+  .site-header{
+    padding:132px 18px 30px;
+    text-align:left;
+  }
+  .site-header h1{font-size:26px}
+  .site-header .sub{font-size:13px}
+  .content-shell{padding:22px 14px 0}
+  .toc-wrap{padding:18px}
+  .wrap{padding:2px 18px 54px;border-radius:22px;font-size:17px}
+  .compare{grid-template-columns:1fr}
+  .s-head{flex-wrap:wrap}
+  .step-list li{grid-template-columns:34px 1fr}
+  .task-footer{padding:0 14px 30px}
+}
+
+  </style>
+</head>
+<body>
+
+<a href="https://abelhoangloc.github.io/Abel_Science_Horizon/" class="sh-logo-link" aria-label="Science Horizon Home">
+  <img src="../assets/logo-SH.png" class="sh-logo" alt="Science Horizon">
+</a>
+
+<div id="progress-bar"></div>
+
+<aside id="sidebar">
+  <div class="sidebar-header">
+    <div class="book-title">Variational Analysis and Applications — B.S. Mordukhovich, Springer 2018</div>
+    <div class="chapter-label">Lesson 01 · Task 08 / 36</div>
+  </div>
+  <div class="sidebar-search">
+    <input type="text" placeholder="Tìm tiêu đề, phần, ký hiệu…" id="search-input">
+  </div>
+  <nav>
+    <ul id="nav-list">
+      <li class="section-group"><a href="#s0">Mở đầu — Tại sao lại cần một &quot;giải tích mới&quot;?</a></li>
+      <li class="section-group"><a href="#s1">Phần 1 — Ôn lại những gì bạn đã biết</a></li>
+      <li class="subsection"><a href="#s1-1">1.1 — Đạo hàm là gì?</a></li>
+      <li class="subsection"><a href="#s1-2">1.2 — Quy tắc Fermat (bạn đã học!)</a></li>
+      <li class="subsection"><a href="#s1-3">1.3 — Pháp tuyến và tiếp tuyến</a></li>
+      <li class="section-group"><a href="#s2">Phần 2 — Khi đạo hàm &quot;gãy&quot; — Thế giới phi trơn</a></li>
+      <li class="subsection"><a href="#s2-1">2.1 — Hàm $f(x) = |x|$ — Ví dụ kinh điển</a></li>
+      <li class="subsection"><a href="#s2-2">2.2 — Ý tưởng cứu vãn: &quot;Bao&quot; của đạo hàm từ các phía</a></li>
+      <li class="subsection"><a href="#s2-3">2.3 — Thêm ví dụ: Hàm $f(x) = -|x|$</a></li>
+      <li class="section-group"><a href="#s3">Phần 3 — Pháp tuyến — Nền tảng hình học</a></li>
+      <li class="subsection"><a href="#s3-1">3.1 — Tại điểm trơn: Dễ!</a></li>
+      <li class="subsection"><a href="#s3-2">3.2 — Tại góc nhọn: Có nhiều hướng!</a></li>
+      <li class="subsection"><a href="#s3-3">3.3 — Tại sao cần &quot;NGOÀI VÀO&quot; không phải &quot;TẠI CHỖ&quot;?</a></li>
+      <li class="section-group"><a href="#s4">Phần 4 — Nón Pháp Tuyến — Định nghĩa chính thức</a></li>
+      <li class="subsection"><a href="#s4-1">4.1 — Hai &quot;nguyên liệu&quot; cần thiết</a></li>
+      <li class="subsection"><a href="#s4-2">4.2 — Định nghĩa 1.1: Nón Pháp Tuyến Cơ sở</a></li>
+      <li class="subsection"><a href="#s4-3">4.3 — Tính toán từng bước: Ví dụ 1.5</a></li>
+      <li class="subsection"><a href="#s4-4">4.4 — Nón Đều: &quot;Bạn thân lồi&quot; của Nón Cơ sở</a></li>
+      <li class="section-group"><a href="#s5">Phần 5 — Vi phân con — &quot;Đạo hàm Tổng quát&quot; cho Hàm số</a></li>
+      <li class="subsection"><a href="#s5-1">5.1 — Ý tưởng: Nhìn lên Thượng đồ thị</a></li>
+      <li class="subsection"><a href="#s5-2">5.2 — Định nghĩa 1.18: Vi phân con Cơ sở và Kỳ dị</a></li>
+      <li class="subsection"><a href="#s5-3">5.3 — Tính vi phân con: Ví dụ từng bước</a></li>
+      <li class="subsection"><a href="#s5-4">5.4 — Vi phân con Đều — &quot;Đạo hàm một chiều&quot;</a></li>
+      <li class="subsection"><a href="#s5-5">5.5 — Quy tắc Fermat Tổng quát (Kết quả Vàng!)</a></li>
+      <li class="subsection"><a href="#s5-6">5.6 — Vi phân con Kỳ dị: &quot;Cảm biến tính phi-Lipschitz&quot;</a></li>
+      <li class="section-group"><a href="#s6">Phần 6 — Coderivative — &quot;Đạo hàm&quot; cho Ánh xạ</a></li>
+      <li class="subsection"><a href="#s6-1">6.1 — Nhắc lại: Ma trận Jacobi</a></li>
+      <li class="subsection"><a href="#s6-2">6.2 — Coderivative là gì?</a></li>
+      <li class="section-group"><a href="#s7">Tổng kết — Bản đồ toàn bộ Chương 1</a></li>
+    </ul>
+  </nav>
+</aside>
+
+<main id="main">
+<header class="site-header" id="top">
+<div class="label">Giải thích chuyên sâu · Dành cho học sinh vừa tốt nghiệp lớp 12</div>
+<h1>Giải tích Biến phân — Chương 1<br/>Xây dựng Vi phân Tổng quát</h1>
+<p class="sub">Từ "f'(x) = 0" đến "0 ∈ ∂φ(x̄)" — Hành trình mở rộng đạo hàm</p>
+<div class="level-badge">🎒 Nền: Toán Lớp 12 + Chút Tò Mò</div>
+</header>
+
+  <div class="content-shell">
+<div class="toc-wrap">
+<h2>Nội dung chính</h2>
+<div class="toc-grid">
+<a class="toc-item" href="#s0"><span class="ti-num">Mở đầu</span><span class="ti-title">Tại sao cần lý thuyết mới?</span></a>
+<a class="toc-item" href="#s1"><span class="ti-num">Phần 1</span><span class="ti-title">Ôn lại đạo hàm &amp; tối ưu</span></a>
+<a class="toc-item" href="#s2"><span class="ti-num">Phần 2</span><span class="ti-title">Khi đạo hàm "gãy"</span></a>
+<a class="toc-item" href="#s3"><span class="ti-num">Phần 3</span><span class="ti-title">Pháp tuyến — Bước khởi đầu</span></a>
+<a class="toc-item" href="#s4"><span class="ti-num">Phần 4</span><span class="ti-title">Nón pháp tuyến</span></a>
+<a class="toc-item" href="#s5"><span class="ti-num">Phần 5</span><span class="ti-title">Vi phân con — Đạo hàm tổng quát</span></a>
+<a class="toc-item" href="#s6"><span class="ti-num">Phần 6</span><span class="ti-title">Coderivative — Ý tưởng</span></a>
+<a class="toc-item" href="#s7"><span class="ti-num">Tổng kết</span><span class="ti-title">Bản đồ toàn chương</span></a>
+</div>
+</div>
+
+<div class="wrap">
+<!-- ══════════ MỞ ĐẦU ══════════ -->
+<section id="s0">
+<div class="s-head"><span class="s-num">Mở đầu</span><h2>Tại sao lại cần một "giải tích mới"?</h2></div>
+<p class="section-intro">Hãy bắt đầu bằng một câu hỏi rất đơn giản mà câu trả lời sẽ khiến bạn phải suy nghĩ lại mọi thứ.</p>
+<div class="box box-story">
+<div class="bh">🏔️ Câu chuyện mở đầu</div>
+<div class="bd">
+<p><strong>Bài toán:</strong> Tìm giá trị nhỏ nhất của hàm số $f(x) = |x|$.</p>
+<p>Bạn biết ngay đáp án: $f(0) = 0$ là nhỏ nhất. Hiển nhiên!</p>
+<p>Bây giờ tôi hỏi: "<em>Hãy chứng minh điều đó bằng đạo hàm.</em>" Theo lý thuyết lớp 12:</p>
+<ul style="margin-left:20px;margin-top:8px;"><li>Tìm $f'(x)$ → đặt $f'(x) = 0$ → tìm ra điểm cực trị.</li></ul>
+<p style="margin-top:12px;">Nhưng $f(x) = |x|$ <span class="hl-red">không có đạo hàm tại $x = 0$!</span> Tại điểm chính xác mà ta cần kiểm tra.</p>
+<p><strong>Đây chính là vấn đề.</strong> Thế giới thực đầy rẫy những hàm số "gãy góc" như thế này — và ta vẫn cần tối ưu hóa chúng.</p>
+</div>
+</div>
+<p>Giải tích biến phân của Mordukhovich ra đời để giải quyết đúng vấn đề này: <strong>xây dựng một khái niệm "đạo hàm tổng quát"</strong> hoạt động ngay cả khi hàm số không trơn, không có đạo hàm thông thường.</p>
+<div class="analogy">
+<div class="analogy-label">🗺️ Tổng thể hành trình</div>
+<p>Lớp 12 bạn biết: <span class="hl-blue">$f'(\bar x) = 0$</span> thì $\bar x$ có thể là cực trị.</p>
+<p>Sau chương này bạn sẽ biết: <span class="hl-purple">$0 \in \partial f(\bar x)$</span> thì $\bar x$ là cực trị — ngay cả khi $f$ không có đạo hàm!</p>
+<p>Đây là cùng một ý tưởng, nhưng mạnh hơn gấp nhiều lần. Hãy cùng xây dựng từng bước.</p>
+</div>
+</section>
+<hr/>
+<!-- ══════════ PHẦN 1 ══════════ -->
+<section id="s1">
+<div class="s-head"><span class="s-num">Phần 1</span><h2>Ôn lại những gì bạn đã biết</h2></div>
+<p class="section-intro">Trước khi đi xa, hãy chắc chắn nền tảng vững. Ba ý tưởng sau là chìa khóa.</p>
+<h3 id="s1-1" style="font-size:21px;margin:24px 0 10px;color:var(--blue);">1.1 — Đạo hàm là gì?</h3>
+<p>Đạo hàm $f'(x_0)$ đo <strong>tốc độ thay đổi</strong> của $f$ tại điểm $x_0$. Hình học hơn: nó là <em>độ dốc của tiếp tuyến</em> đồ thị $f$ tại $(x_0, f(x_0))$.</p>
+<div class="diagram-wrap">
+<!-- HÌNH 1: Đường cong trơn với tiếp tuyến (ĐÃ SỬA) -->
+<!-- Tiếp tuyến đi qua đúng điểm tiếp xúc (250, 92) với slope SVG = -0.3 -->
+<svg height="240" viewbox="0 0 520 240" width="520" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="axarr1" markerheight="5" markerwidth="5" orient="auto" refx="7" refy="4" viewbox="0 0 8 8">
+<path d="M0 1L7 4L0 7z" fill="#aaa"></path>
+</marker>
+</defs>
+<!-- Trục -->
+<line marker-end="url(#axarr1)" stroke="#aaa" stroke-width="1.5" x1="50" x2="475" y1="210" y2="210"></line>
+<line marker-end="url(#axarr1)" stroke="#aaa" stroke-width="1.5" x1="70" x2="70" y1="215" y2="22"></line>
+<text fill="#888" font-family="serif" font-size="13" x="478" y="215">x</text>
+<text fill="#888" font-family="serif" font-size="13" x="63" y="20">y</text>
+<!-- Đường cong trơn (cubic bezier) -->
+<path d="M 90,178 C 130,125 185,95 250,92 C 315,89 365,100 430,148" fill="none" stroke="#2563eb" stroke-width="2.5"></path>
+<!-- Điểm tiếp xúc x₀: đỉnh cong tại (250, 92) -->
+<circle cx="250" cy="92" fill="#dc2626" r="5"></circle>
+<!-- Tiếp tuyến: qua (250,92), slope SVG = -0.3 (math slope = +0.3 tăng lên bên phải) -->
+<!-- Tại x=130: y = 92 + (250-130)*(-0.3) = 92+36 = 128 nhưng cần... -->
+<!-- Tính đúng: tiếp tuyến y = 92 - 0.3*(x-250). Tại x=130: 92-0.3*(-120)=92+36=128. Tại x=370: 92-0.3*120=56 -->
+<line stroke="#dc2626" stroke-dasharray="6 3" stroke-width="2" x1="130" x2="370" y1="128" y2="56"></line>
+<!-- Đường kẻ đứng từ x₀ xuống trục x -->
+<line stroke="#999" stroke-dasharray="3 3" stroke-width="1" x1="250" x2="250" y1="92" y2="210"></line>
+<!-- Nhãn -->
+<text fill="#555" font-family="serif" font-size="13" x="246" y="225">x₀</text>
+<text fill="#dc2626" font-family="serif" font-size="13" font-style="italic" x="258" y="66">tiếp tuyến</text>
+<text fill="#dc2626" font-family="'Inter',sans-serif" font-size="12" font-weight="600" x="268" y="84">độ dốc = f'(x₀)</text>
+<text fill="#2563eb" font-family="serif" font-size="14" font-style="italic" x="95" y="170">y = f(x)</text>
+</svg>
+<div class="dcaption">Hình 1: Đạo hàm = độ dốc tiếp tuyến. Tại điểm trơn, chỉ có đúng một tiếp tuyến.</div>
+</div>
+<h3 id="s1-2" style="font-size:21px;margin:24px 0 10px;color:var(--blue);">1.2 — Quy tắc Fermat (bạn đã học!)</h3>
+<div class="box box-remind">
+<div class="bh">📚 Kiến thức lớp 12 — Định lý Fermat</div>
+<div class="bd">
+<p>Nếu $f: \mathbb{R} \to \mathbb{R}$ <strong>có đạo hàm</strong> tại $\bar x$, và $\bar x$ là <strong>điểm cực tiểu cục bộ</strong> (tức là $f(x) \geq f(\bar x)$ với mọi $x$ gần $\bar x$), thì: $$f'(\bar x) = 0$$</p>
+<p>Hay trong nhiều biến: $\nabla f(\bar x) = \mathbf{0}$.</p>
+<p><strong>Đây là điều kiện cần!</strong> (không phải đủ — cũng cần kiểm tra thêm đạo hàm bậc hai.)</p>
+</div>
+</div>
+<h3 id="s1-3" style="font-size:21px;margin:24px 0 10px;color:var(--blue);">1.3 — Pháp tuyến và tiếp tuyến</h3>
+<p>Ở lớp 12 bạn cũng biết: tại mỗi điểm trên một đường cong trơn, có một <em>tiếp tuyến</em> (tiếp xúc đường cong) và một <em>pháp tuyến</em> (vuông góc với tiếp tuyến).</p>
+<div class="diagram-wrap">
+<!-- HÌNH 2: Đường tròn với tiếp tuyến và pháp tuyến (ĐÃ SỬA) -->
+<!-- Điểm P tại góc 30° trên đường tròn tâm (240,150) bán kính 90 -->
+<!-- P = (240+90cos30°, 150-90sin30°) = (318, 105) -->
+<!-- Tiếp tuyến: vuông góc với bán kính, hướng (45,78)/90 = (0.5,0.866) -->
+<!--   → từ (278,36) đến (358,174) qua P=(318,105) -->
+<!-- Pháp tuyến ngoài: hướng bán kính (78,-45)/90 = (0.866,-0.5) -->
+<!--   → từ P=(318,105) đến (374,73) -->
+<svg height="280" viewbox="0 0 480 280" width="480" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="arrnorm" markerheight="5" markerwidth="5" orient="auto" refx="9" refy="5" viewbox="0 0 10 10">
+<path d="M0 1.5L9 5L0 8.5z" fill="#16a34a"></path>
+</marker>
+</defs>
+<!-- Đường tròn -->
+<circle cx="240" cy="150" fill="none" r="90" stroke="#2563eb" stroke-width="2"></circle>
+<!-- Tâm O -->
+<circle cx="240" cy="150" fill="#999" r="3"></circle>
+<text fill="#888" font-family="serif" font-size="13" x="224" y="163">O</text>
+<!-- Bán kính đến P (đứt) -->
+<line stroke="#bbb" stroke-dasharray="5 3" stroke-width="1.2" x1="240" x2="318" y1="150" y2="105"></line>
+<!-- Điểm P = (318, 105) -->
+<circle cx="318" cy="105" fill="#dc2626" r="5"></circle>
+<text fill="#dc2626" font-family="serif" font-size="14" font-weight="700" x="325" y="103">P</text>
+<!-- TIẾP TUYẾN tại P: hướng (0.5, 0.866) và ngược lại -->
+<!-- Từ P-80*(0.5,0.866) đến P+80*(0.5,0.866): (278,36) đến (358,174) -->
+<line stroke="#dc2626" stroke-dasharray="6 3" stroke-width="2" x1="278" x2="358" y1="36" y2="174"></line>
+<!-- PHÁP TUYẾN ngoài tại P: hướng (0.866,-0.5) từ P -->
+<!-- Đến P+65*(0.866,-0.5) = (374,73) -->
+<line marker-end="url(#arrnorm)" stroke="#16a34a" stroke-width="2.5" x1="318" x2="374" y1="105" y2="73"></line>
+<!-- Dấu vuông góc giữa bán kính và tiếp tuyến tại P -->
+<!-- Hướng bán kính: (0.866,-0.5), hướng tiếp tuyến: (0.5,0.866) -->
+<!-- A = P + 14*(0.866,-0.5) = (330,98), B = P + 14*(0.5,0.866) = (325,117) -->
+<!-- Corner = (337,110) -->
+<path d="M 330,98 L 337,110 L 325,117" fill="none" stroke="#777" stroke-width="1.5"></path>
+<!-- Nhãn -->
+<text fill="#dc2626" font-family="serif" font-size="13" font-style="italic" x="240" y="28">tiếp tuyến</text>
+<text fill="#16a34a" font-family="serif" font-size="13" font-style="italic" x="376" y="67">pháp tuyến</text>
+</svg>
+<div class="dcaption">Hình 2: Tại điểm P trơn trên đường tròn — tiếp tuyến (đỏ, đứt) và pháp tuyến (xanh lá, mũi tên) vuông góc nhau. Dấu ⊾ tại P chứng tỏ vuông góc chính xác.</div>
+</div>
+<p>Pháp tuyến tại điểm $P$ của đường tròn trỏ thẳng từ $P$ ra tâm (hoặc ngược lại). Đây là "hướng vuông góc với bề mặt." Ý tưởng này sẽ là nền tảng cho toàn bộ chương.</p>
+</section>
+<hr/>
+<!-- ══════════ PHẦN 2 ══════════ -->
+<section id="s2">
+<div class="s-head"><span class="s-num">Phần 2</span><h2>Khi đạo hàm "gãy" — Thế giới phi trơn</h2></div>
+<p class="section-intro">Hầu hết các hàm quan trọng trong thực tế đều không trơn. Hãy xem điều gì xảy ra.</p>
+<h3 id="s2-1" style="font-size:21px;margin:24px 0 10px;">2.1 — Hàm $f(x) = |x|$ — Ví dụ kinh điển</h3>
+<div class="diagram-wrap">
+<!-- HÌNH 3: Đồ thị |x| (GIỮ NGUYÊN — đúng) -->
+<svg height="260" viewbox="0 0 480 260" width="480" xmlns="http://www.w3.org/2000/svg">
+<line stroke="#aaa" stroke-width="1.5" x1="40" x2="440" y1="200" y2="200"></line>
+<line stroke="#aaa" stroke-width="1.5" x1="240" x2="240" y1="20" y2="215"></line>
+<text fill="#888" font-family="serif" font-size="13" x="444" y="204">x</text>
+<text fill="#888" font-family="serif" font-size="13" x="234" y="17">y</text>
+<!-- |x|: đỉnh tại (240,200), hai cánh lên trên -->
+<polyline fill="none" points="80,160 240,200 400,160" stroke="#2563eb" stroke-width="3"></polyline>
+<text fill="#666" font-family="serif" font-size="12" x="226" y="217">0</text>
+<text fill="#666" font-family="serif" font-size="12" x="386" y="217">2</text>
+<text fill="#666" font-family="serif" font-size="12" x="72" y="217">−2</text>
+<text fill="#666" font-family="serif" font-size="12" x="226" y="164">1</text>
+<circle cx="240" cy="200" fill="#dc2626" r="6"></circle>
+<text fill="#dc2626" font-size="22" x="250" y="186">?</text>
+<text fill="#dc2626" font-family="'Inter',sans-serif" font-size="13" font-weight="600" x="256" y="174">đạo hàm tại đây?</text>
+<text fill="#2563eb" font-family="serif" font-size="13" font-style="italic" x="95" y="182">độ dốc = −1</text>
+<text fill="#2563eb" font-family="serif" font-size="13" font-style="italic" x="308" y="182">độ dốc = +1</text>
+</svg>
+<div class="dcaption">Hình 3: $f(x) = |x|$ có "góc nhọn" tại $x = 0$. Từ trái: độ dốc = −1; từ phải: độ dốc = +1. Không khớp nhau!</div>
+</div>
+<p>Từ bên trái, đạo hàm $= -1$. Từ bên phải, đạo hàm $= +1$. Hai số khác nhau → <span class="hl-red">không tồn tại đạo hàm tại $x=0$</span> theo định nghĩa thông thường.</p>
+<div class="box box-warn">
+<div class="bh">⚠️ Vấn đề nghiêm trọng</div>
+<div class="bd">
+<p>Ta <em>biết chắc</em> rằng $x = 0$ là điểm cực tiểu toàn cục của $f(x) = |x|$. Nhưng ta <em>không thể</em> dùng quy tắc Fermat $f'(0) = 0$ vì $f'(0)$ không tồn tại!</p>
+<p>Điều này xảy ra với rất nhiều bài toán thực tế: tối ưu mạng điện (hàm tuyến tính từng khúc), học máy (hàm mất mát ReLU), kinh tế (hàm lợi nhuận không liên tục), v.v.</p>
+</div>
+</div>
+<h3 id="s2-2" style="font-size:21px;margin:24px 0 10px;">2.2 — Ý tưởng cứu vãn: "Bao" của đạo hàm từ các phía</h3>
+<p>Thay vì đạo hàm là một số duy nhất, ta mở rộng thành <strong>một tập hợp các giá trị</strong>:</p>
+<div class="diagram-wrap">
+<!-- HÌNH 4: Các đường hỗ trợ của |x| tại gốc (GIỮ NGUYÊN — đúng) -->
+<svg height="220" viewbox="0 0 480 220" width="480" xmlns="http://www.w3.org/2000/svg">
+<line stroke="#ddd" stroke-width="1" x1="40" x2="440" y1="170" y2="170"></line>
+<line stroke="#ddd" stroke-width="1" x1="240" x2="240" y1="20" y2="180"></line>
+<polyline fill="none" points="80,130 240,170 400,130" stroke="#2563eb" stroke-width="2.5"></polyline>
+<circle cx="240" cy="170" fill="#dc2626" r="5"></circle>
+<!-- Nhiều đường hỗ trợ (vi phân con) tại gốc -->
+<line opacity=".5" stroke="#9333ea" stroke-dasharray="3 2" stroke-width="1.5" x1="140" x2="340" y1="200" y2="140"></line>
+<line opacity=".5" stroke="#9333ea" stroke-dasharray="3 2" stroke-width="1.5" x1="140" x2="340" y1="190" y2="150"></line>
+<line opacity=".7" stroke="#9333ea" stroke-dasharray="3 2" stroke-width="1.8" x1="140" x2="340" y1="170" y2="170"></line>
+<line opacity=".5" stroke="#9333ea" stroke-dasharray="3 2" stroke-width="1.5" x1="140" x2="340" y1="150" y2="190"></line>
+<line opacity=".5" stroke="#9333ea" stroke-dasharray="3 2" stroke-width="1.5" x1="140" x2="340" y1="130" y2="210"></line>
+<!-- Trục số hiển thị ∂f(0)=[-1,1] -->
+<line stroke="#ddd" stroke-width="1" x1="60" x2="420" y1="28" y2="28"></line>
+<text fill="#999" font-family="serif" font-size="12" x="30" y="33">v:</text>
+<line stroke="#9333ea" stroke-width="3.5" x1="180" x2="300" y1="24" y2="24"></line>
+<circle cx="180" cy="24" fill="#9333ea" r="4"></circle>
+<circle cx="300" cy="24" fill="#9333ea" r="4"></circle>
+<circle cx="240" cy="24" fill="#9333ea" opacity=".6" r="3"></circle>
+<text fill="#9333ea" font-family="serif" font-size="12" x="174" y="18">−1</text>
+<text fill="#9333ea" font-family="serif" font-size="12" x="236" y="18">0</text>
+<text fill="#9333ea" font-family="serif" font-size="12" x="298" y="18">+1</text>
+<text fill="#9333ea" font-family="'Inter',sans-serif" font-size="13" font-weight="600" x="312" y="18">∂f(0) = [−1, 1]</text>
+</svg>
+<div class="dcaption">Hình 4: Thay vì một số, "đạo hàm tổng quát" là đoạn [−1, 1] — tập hợp mọi độ dốc có thể tại điểm gãy.</div>
+</div>
+<div class="box box-key">
+<div class="bh">💡 Ý tưởng cốt lõi — Subdifferential (Vi phân con)</div>
+<div class="bd">
+<p>Tại điểm <em>không trơn</em>, thay vì một đạo hàm duy nhất $f'(\bar x)$, ta có <strong>một tập hợp</strong> gọi là <em>vi phân con</em> (subdifferential) $\partial f(\bar x)$.</p>
+<p>Với $f(x) = |x|$ tại $\bar x = 0$: $\partial f(0) = [-1, 1]$.</p>
+<p>Quy tắc Fermat tổng quát: $\bar x$ là cực tiểu <strong>khi và chỉ khi</strong> $0 \in \partial f(\bar x)$.</p>
+<p>Kiểm tra: $0 \in [-1,1]$? <span class="hl-green">✓ Đúng!</span> → Xác nhận $x=0$ là cực tiểu.</p>
+</div>
+</div>
+<h3 id="s2-3" style="font-size:21px;margin:24px 0 10px;">2.3 — Thêm ví dụ: Hàm $f(x) = -|x|$</h3>
+<div class="diagram-wrap">
+<!-- HÌNH 5: Đồ thị -|x| (ĐÃ SỬA HOÀN TOÀN) -->
+<!-- -|x| có CỰC ĐẠI tại x=0 (y=0), cánh đi XUỐNG DƯỚI trục x -->
+<!-- Trục x tại SVG y=100. Tỉ lệ 35px/unit. -->
+<!-- x=0,y=0: SVG(240,100). x=±3,y=-3: SVG(345 và 135, 205). Slope SVG = ±1 → math slope = ∓1 ✓ -->
+<svg height="250" viewbox="0 0 480 250" width="480" xmlns="http://www.w3.org/2000/svg">
+<!-- Trục -->
+<line stroke="#aaa" stroke-width="1.5" x1="50" x2="430" y1="100" y2="100"></line>
+<line stroke="#aaa" stroke-width="1.5" x1="240" x2="240" y1="12" y2="215"></line>
+<text fill="#888" font-family="serif" font-size="13" x="434" y="104">x</text>
+<text fill="#888" font-family="serif" font-size="13" x="234" y="10">y</text>
+<!-- Đồ thị -|x|: đỉnh TẠI trục x (y=0), cánh đi XUỐNG -->
+<!-- x=-3,y=-3: SVG(135,205); x=0,y=0: SVG(240,100); x=3,y=-3: SVG(345,205) -->
+<polyline fill="none" points="135,205 240,100 345,205" stroke="#2563eb" stroke-width="3"></polyline>
+<!-- Đỉnh cực đại tại (0,0) trên trục x -->
+<circle cx="240" cy="100" fill="#dc2626" r="6"></circle>
+<!-- Nhãn độ dốc -->
+<text fill="#2563eb" font-family="serif" font-size="13" font-style="italic" x="150" y="158">độ dốc = +1</text>
+<text fill="#2563eb" font-family="serif" font-size="13" font-style="italic" x="282" y="158">độ dốc = −1</text>
+<!-- Nhãn cực đại -->
+<text fill="#dc2626" font-family="'Inter',sans-serif" font-size="13" font-weight="600" x="252" y="85">⚠️ cực đại!</text>
+<!-- Nhãn trục -->
+<text fill="#666" font-family="serif" font-size="12" x="236" y="117">0</text>
+<!-- Ticks x -->
+<line stroke="#aaa" stroke-width="1" x1="170" x2="170" y1="97" y2="103"></line>
+<text fill="#666" font-family="serif" font-size="12" x="162" y="115">−2</text>
+<line stroke="#aaa" stroke-width="1" x1="310" x2="310" y1="97" y2="103"></line>
+<text fill="#666" font-family="serif" font-size="12" x="306" y="115">2</text>
+<!-- Ticks y (dưới trục) -->
+<line stroke="#aaa" stroke-width="1" x1="237" x2="243" y1="135" y2="135"></line>
+<text fill="#666" font-family="serif" font-size="12" x="223" y="139">−1</text>
+<line stroke="#aaa" stroke-width="1" x1="237" x2="243" y1="170" y2="170"></line>
+<text fill="#666" font-family="serif" font-size="12" x="223" y="174">−2</text>
+<!-- Thông tin vi phân con -->
+<text fill="#9333ea" font-family="'Inter',sans-serif" font-size="14" font-weight="600" x="42" y="228">∂f(0) = {−1, +1}  (không lồi — hai điểm rời rạc)</text>
+<text fill="#dc2626" font-family="'Inter',sans-serif" font-size="13" x="42" y="246">0 ∉ {−1, +1}  →  x=0 không phải cực tiểu ✓  (thực ra là cực đại)</text>
+</svg>
+<div class="dcaption">Hình 5: $f(x) = -|x|$ — điểm $x=0$ là cực đại (đỉnh nằm TRÊN trục x, cánh đi xuống). Vi phân con $\{-1, +1\}$ không chứa 0 → xác nhận không phải cực tiểu.</div>
+</div>
+<div class="box box-wow">
+<div class="bh">✨ Điều thú vị!</div>
+<div class="bd">
+<p>Vi phân con của $f(x) = -|x|$ tại $0$ là $\{-1, +1\}$ — một tập <em>không lồi</em> (chỉ hai điểm rời rạc, không phải đoạn!).</p>
+<p>Điều này hoàn toàn khác với giải tích lồi cổ điển (luôn cho tập lồi). Và đây chính là sức mạnh của lý thuyết Mordukhovich: nắm bắt được thông tin tinh vi hơn.</p>
+<p>Mà nó vẫn đúng: $0 \notin \{-1,1\}$ → $x=0$ không phải cực tiểu → Chính xác, vì $x=0$ là cực đại của $-|x|$!</p>
+</div>
+</div>
+</section>
+<hr/>
+<!-- ══════════ PHẦN 3 ══════════ -->
+<section id="s3">
+<div class="s-head"><span class="s-num">Phần 3</span><h2>Pháp tuyến — Nền tảng hình học</h2></div>
+<p class="section-intro">Mordukhovich xây dựng mọi thứ từ pháp tuyến. Hãy xem tại sao pháp tuyến lại là công cụ phù hợp.</p>
+<h3 id="s3-1" style="font-size:21px;margin:24px 0 10px;">3.1 — Tại điểm trơn: Dễ!</h3>
+<p>Hãy xét tập $\Omega = \{(x,y) : y \leq -x^2 + 1\}$ (vùng dưới parabol). Tại điểm trơn $P = (0, 1)$ trên biên, pháp tuyến trỏ thẳng ra ngoài:</p>
+<div class="diagram-wrap">
+<!-- HÌNH 6: Parabol và pháp tuyến tại đỉnh (ĐÃ SỬA nhãn) -->
+<svg height="260" viewbox="0 0 480 260" width="480" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="arrnorm6" markerheight="5" markerwidth="5" orient="auto" refx="9" refy="5" viewbox="0 0 10 10">
+<path d="M0 1.5L9 5L0 8.5z" fill="#16a34a"></path>
+</marker>
+</defs>
+<!-- Vùng dưới parabol -->
+<path d="M 100,220 Q 240,60 380,220 Z" fill="#bfdbfe" opacity=".4"></path>
+<!-- Parabol y = -x²+1 -->
+<path d="M 100,220 Q 240,60 380,220" fill="none" stroke="#2563eb" stroke-width="2.5"></path>
+<!-- Trục -->
+<line stroke="#aaa" stroke-width="1" x1="40" x2="440" y1="220" y2="220"></line>
+<line stroke="#aaa" stroke-width="1" x1="240" x2="240" y1="30" y2="235"></line>
+<!-- Tiếp tuyến ngang tại P=(0,1)=SVG(240,60) -->
+<line stroke="#dc2626" stroke-dasharray="5 3" stroke-width="2" x1="130" x2="350" y1="60" y2="60"></line>
+<!-- Pháp tuyến thẳng đứng tại P (chỉ lên trên) -->
+<line marker-end="url(#arrnorm6)" stroke="#16a34a" stroke-width="2.5" x1="240" x2="240" y1="60" y2="14"></line>
+<!-- Điểm P -->
+<circle cx="240" cy="60" fill="#dc2626" r="5"></circle>
+<!-- Nhãn -->
+<text fill="#444" font-family="serif" font-size="13" x="248" y="57">P = (0, 1)</text>
+<text fill="#16a34a" font-family="serif" font-size="13" font-style="italic" x="252" y="20">pháp tuyến</text>
+<text fill="#dc2626" font-family="serif" font-size="13" font-style="italic" x="140" y="50">tiếp tuyến</text>
+<text fill="#3b82f6" font-family="serif" font-size="16" font-style="italic" x="155" y="160">Ω</text>
+<!-- Nhãn nón pháp tuyến (2D) -->
+<text fill="#16a34a" font-family="'Inter',sans-serif" font-size="12" font-weight="600" x="264" y="38">N(P; Ω) = {(0, t) : t ≥ 0}</text>
+</svg>
+<div class="dcaption">Hình 6: Tại điểm trơn P=(0,1), có đúng một hướng pháp tuyến (chỉ ra ngoài, vuông góc với tiếp tuyến nằm ngang).</div>
+</div>
+<h3 id="s3-2" style="font-size:21px;margin:24px 0 10px;">3.2 — Tại góc nhọn: Có nhiều hướng!</h3>
+<div class="diagram-wrap">
+<!-- HÌNH 7: Tập V-shape với nón pháp tuyến tại góc (ĐÃ SỬA) -->
+<!-- Ω là tam giác có đỉnh trên, các pháp tuyến ngoài ở góc quét 180° phía trên -->
+<!-- Đỉnh P=(240,90). Cạnh trái đến (100,250), cạnh phải đến (380,250) -->
+<!-- Pháp tuyến ngoài cạnh trái: (-1,-1)/√2 → đến (183,33) -->
+<!-- Pháp tuyến ngoài cạnh phải: (1,-1)/√2 → đến (297,33) -->
+<!-- Cung nón: A 80 80 0 0 0 từ (183,33) đến (297,33) tâm (240,90) sweep=0 (CCW in SVG) -->
+<svg height="280" viewbox="0 0 480 280" width="480" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="arrnorm7" markerheight="5" markerwidth="5" orient="auto" refx="9" refy="5" viewbox="0 0 10 10">
+<path d="M0 1.5L9 5L0 8.5z" fill="#16a34a"></path>
+</marker>
+</defs>
+<!-- Vùng Ω (tam giác wedge) -->
+<path d="M 100,252 L 240,90 L 380,252 Z" fill="#bfdbfe" opacity=".35"></path>
+<!-- Cạnh trái và phải (bỏ đáy để tập trung vào góc) -->
+<line stroke="#2563eb" stroke-width="2.5" x1="240" x2="100" y1="90" y2="252"></line>
+<line stroke="#2563eb" stroke-width="2.5" x1="240" x2="380" y1="90" y2="252"></line>
+<line opacity=".5" stroke="#2563eb" stroke-dasharray="4 3" stroke-width="1.5" x1="100" x2="380" y1="252" y2="252"></line>
+<!-- Nón pháp tuyến (hình quạt) tại P=(240,90) bán kính 80 -->
+<!-- Các điểm biên: (-1,-1)/√2*80 = (-56.6,-56.6) → (183.4,33.4) ≈ (183,33) -->
+<!--                (1,-1)/√2*80  = (56.6,-56.6) → (296.6,33.4) ≈ (297,33) -->
+<path d="M 240,90 L 183,33 A 80 80 0 0 0 297,33 Z" fill="#86efac" opacity=".35"></path>
+<!-- Đường viền cung -->
+<path d="M 183,33 A 80 80 0 0 0 297,33" fill="none" opacity=".9" stroke="#16a34a" stroke-dasharray="5 3" stroke-width="1.5"></path>
+<!-- Ba mũi tên pháp tuyến -->
+<line marker-end="url(#arrnorm7)" stroke="#16a34a" stroke-width="2" x1="240" x2="183" y1="90" y2="33"></line>
+<line marker-end="url(#arrnorm7)" stroke="#16a34a" stroke-width="2" x1="240" x2="240" y1="90" y2="22"></line>
+<line marker-end="url(#arrnorm7)" stroke="#16a34a" stroke-width="2" x1="240" x2="297" y1="90" y2="33"></line>
+<!-- Điểm P (góc nhọn) -->
+<circle cx="240" cy="90" fill="#dc2626" r="6"></circle>
+<text fill="#dc2626" font-family="serif" font-size="13" font-weight="600" x="248" y="87">P (góc nhọn)</text>
+<!-- Nhãn -->
+<text fill="#3b82f6" font-family="serif" font-size="16" font-style="italic" x="130" y="200">Ω</text>
+<text fill="#16a34a" font-family="'Inter',sans-serif" font-size="13" font-weight="600" x="188" y="21">Nón pháp tuyến N(P; Ω)</text>
+<text fill="#16a34a" font-family="serif" font-size="12" font-style="italic" x="152" y="36">(quét từ hướng trái đến phải)</text>
+</svg>
+<div class="dcaption">Hình 7: Tại góc nhọn P, pháp tuyến ngoài quét thành một <em>nón</em> (vùng xanh lá). Hai biên của nón là pháp tuyến của hai cạnh, và nón lấp đầy mọi hướng ở giữa.</div>
+</div>
+<div class="box box-key">
+<div class="bh">💡 Ý tưởng then chốt</div>
+<div class="bd">
+<p>Tại điểm <strong>trơn</strong>: nón pháp tuyến = một tia (một hướng duy nhất nhân với hệ số dương).</p>
+<p>Tại điểm <strong>góc nhọn</strong>: nón pháp tuyến = nhiều tia — một <em>tập hợp</em> các hướng pháp tuyến.</p>
+<p>→ <strong>Nón pháp tuyến</strong> luôn tồn tại và luôn có ý nghĩa, ngay cả tại các điểm gãy!</p>
+</div>
+</div>
+<h3 id="s3-3" style="font-size:21px;margin:24px 0 10px;">3.3 — Tại sao cần "NGOÀI VÀO" không phải "TẠI CHỖ"?</h3>
+<p>Đây là câu hỏi sâu sắc nhất. Nhìn lại ví dụ $\Omega = \{(x,y): y \geq -|x|\}$ tại $(0,0)$:</p>
+<div class="diagram-wrap">
+<!-- HÌNH 8: Điểm tiếp cận từ ngoài Ω (THIẾT KẾ LẠI HOÀN TOÀN) -->
+<!-- Ω = {y ≥ -|x|}: vùng trên V ngược. Đỉnh V tại (0,0). -->
+<!-- Biên phải: y=-x (x≥0) từ SVG(240,150) → (390,300). Biên trái: y=x (x≤0) → (90,300) -->
+<!-- Tỉ lệ 50px/unit. Gốc tại SVG(240,150). -->
+<!-- Điểm ngoài A bên phải: math(0.8,-1.2)=SVG(280,210). Chiếu lên biên phải: math(1,-1)=SVG(290,200). -->
+<!-- Pháp tuyến ngoài tại A': hướng (-1,-1)/√2 trong math = (-35,+35) trong SVG → đến (255,235). -->
+<!-- Điểm ngoài B bên trái: math(-0.8,-1.2)=SVG(200,210). Chiếu: math(-1,-1)=SVG(190,200). -->
+<!-- Pháp tuyến ngoài tại B': hướng (1,-1)/√2 trong math = (35,+35) trong SVG → đến (225,235). -->
+<svg height="295" viewbox="0 0 480 295" width="480" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="arrA8" markerheight="5" markerwidth="5" orient="auto" refx="9" refy="5" viewbox="0 0 10 10">
+<path d="M0 1.5L9 5L0 8.5z" fill="#9333ea"></path>
+</marker>
+<marker id="arrB8" markerheight="5" markerwidth="5" orient="auto" refx="9" refy="5" viewbox="0 0 10 10">
+<path d="M0 1.5L9 5L0 8.5z" fill="#0d9488"></path>
+</marker>
+</defs>
+<!-- Vùng Ω (trên V) -->
+<path d="M 0,0 L 480,0 L 480,295 L 390,295 L 240,150 L 90,295 L 0,295 Z" fill="#dbeafe" opacity=".38"></path>
+<!-- Trục -->
+<line stroke="#aaa" stroke-width="1" x1="30" x2="450" y1="150" y2="150"></line>
+<line stroke="#aaa" stroke-width="1" x1="240" x2="240" y1="18" y2="282"></line>
+<text fill="#888" font-family="serif" font-size="12" x="454" y="154">x</text>
+<text fill="#888" font-family="serif" font-size="12" x="234" y="15">y</text>
+<!-- Biên V: cạnh phải y=-x (x≥0) → SVG(240,150)→(390,300) -->
+<line stroke="#2563eb" stroke-width="2.5" x1="240" x2="390" y1="150" y2="300"></line>
+<!-- Biên V: cạnh trái y=x (x≤0) → SVG(240,150)→(90,300) -->
+<line stroke="#2563eb" stroke-width="2.5" x1="240" x2="90" y1="150" y2="300"></line>
+<text fill="#2563eb" font-family="serif" font-size="12" font-style="italic" x="336" y="268">y = −x</text>
+<text fill="#2563eb" font-family="serif" font-size="12" font-style="italic" x="78" y="268">y = x</text>
+<text fill="#2563eb" font-family="serif" font-size="16" font-style="italic" x="120" y="90">Ω</text>
+<!-- Đỉnh (0,0) -->
+<circle cx="240" cy="150" fill="#dc2626" r="5"></circle>
+<text fill="#dc2626" font-family="serif" font-size="13" font-weight="600" x="246" y="148">(0,0)</text>
+<!-- === DÃY ĐIỂM A (bên phải, ngoài Ω) → (0,0) === -->
+<!-- A₁: math(0.8,-1.2)=SVG(280,210). Ngoài Ω vì y=-1.2 < -|0.8|=-0.8 ✓ -->
+<circle cx="280" cy="210" fill="#9333ea" r="5"></circle>
+<!-- A₁': chiếu của A₁ lên biên phải: math(1,-1)=SVG(290,200) -->
+<circle cx="290" cy="200" fill="#f97316" r="4"></circle>
+<line stroke="#9333ea" stroke-dasharray="3 2" stroke-width="1.5" x1="280" x2="290" y1="210" y2="200"></line>
+<!-- Đường từ A₁' đến đỉnh (0,0) trên biên -->
+<line opacity=".5" stroke="#aaa" stroke-dasharray="2 2" stroke-width="1" x1="290" x2="240" y1="200" y2="150"></line>
+<!-- Mũi tên pháp tuyến ngoài tại A₁': hướng (-1,-1)/√2 in math = (-35,+35) in SVG -->
+<line marker-end="url(#arrA8)" stroke="#9333ea" stroke-width="2.5" x1="290" x2="248" y1="200" y2="242"></line>
+<!-- A₂: math(0.3,-0.5)=SVG(255,175) (gần gốc hơn) -->
+<circle cx="255" cy="175" fill="#9333ea" opacity=".7" r="4"></circle>
+<!-- A₂': chiếu math(0.4,-0.4)=SVG(260,170) -->
+<circle cx="260" cy="170" fill="#f97316" opacity=".7" r="3"></circle>
+<line opacity=".7" stroke="#9333ea" stroke-dasharray="2 2" stroke-width="1.2" x1="255" x2="260" y1="175" y2="170"></line>
+<!-- Pháp tuyến (ngắn hơn, cùng hướng) -->
+<line marker-end="url(#arrA8)" opacity=".7" stroke="#9333ea" stroke-width="2" x1="260" x2="247" y1="170" y2="183"></line>
+<text fill="#9333ea" font-family="serif" font-size="11" font-style="italic" x="260" y="215">xₖ → (0,0)</text>
+<!-- === DÃY ĐIỂM B (bên trái, ngoài Ω) → (0,0) === -->
+<!-- B₁: math(-0.8,-1.2)=SVG(200,210). Ngoài Ω vì y=-1.2 < -|-0.8|=-0.8 ✓ -->
+<circle cx="200" cy="210" fill="#0d9488" r="5"></circle>
+<!-- B₁': chiếu math(-1,-1)=SVG(190,200) -->
+<circle cx="190" cy="200" fill="#f97316" r="4"></circle>
+<line stroke="#0d9488" stroke-dasharray="3 2" stroke-width="1.5" x1="200" x2="190" y1="210" y2="200"></line>
+<line opacity=".5" stroke="#aaa" stroke-dasharray="2 2" stroke-width="1" x1="190" x2="240" y1="200" y2="150"></line>
+<!-- Mũi tên pháp tuyến tại B₁': hướng (1,-1)/√2 in math = (+35,+35) in SVG -->
+<line marker-end="url(#arrB8)" stroke="#0d9488" stroke-width="2.5" x1="190" x2="232" y1="200" y2="242"></line>
+<!-- B₂: math(-0.3,-0.5)=SVG(225,175) -->
+<circle cx="225" cy="175" fill="#0d9488" opacity=".7" r="4"></circle>
+<circle cx="220" cy="170" fill="#f97316" opacity=".7" r="3"></circle>
+<line opacity=".7" stroke="#0d9488" stroke-dasharray="2 2" stroke-width="1.2" x1="225" x2="220" y1="175" y2="170"></line>
+<line marker-end="url(#arrB8)" opacity=".7" stroke="#0d9488" stroke-width="2" x1="220" x2="233" y1="170" y2="183"></line>
+<text fill="#0d9488" font-family="serif" font-size="11" font-style="italic" x="136" y="215">x'ₖ → (0,0)</text>
+<!-- Chú thích -->
+<text fill="#555" font-family="'Inter',sans-serif" font-size="11" x="30" y="285">
+    Khi xₖ, x'ₖ → (0,0), hướng pháp tuyến hội tụ → tạo thành N((0,0); Ω)
+  </text>
+</svg>
+<div class="dcaption">Hình 8: Xây dựng nón pháp tuyến bằng cách tiếp cận từ ngoài. Chiếu (cam) lên biên, lấy hướng từ chiếu ra điểm ngoài (tím / xanh ngọc). Khi tiến đến đỉnh, hai họ hướng hội tụ thành hai tia của $N((0,0);\,\Omega)$.</div>
+</div>
+<p>Đây chính là ý tưởng của Định nghĩa 1.1 trong sách: <strong>không nhìn trực tiếp vào điểm gãy</strong>, mà nhìn vào các điểm lân cận và lấy giới hạn.</p>
+</section>
+<hr/>
+<!-- ══════════ PHẦN 4 ══════════ -->
+<section id="s4">
+<div class="s-head"><span class="s-num">Phần 4</span><h2>Nón Pháp Tuyến — Định nghĩa chính thức</h2></div>
+<p class="section-intro">Bây giờ ta chuyển từ trực quan sang toán học. Đừng sợ ký hiệu — mỗi ký hiệu đều có lý do.</p>
+<h3 id="s4-1" style="font-size:21px;margin:24px 0 10px;">4.1 — Hai "nguyên liệu" cần thiết</h3>
+<p>Để xây dựng nón pháp tuyến, ta cần hai công cụ: <em>hàm khoảng cách</em> và <em>phép chiếu</em>.</p>
+<div class="box box-def">
+<div class="bh">📐 Công cụ 1 — Hàm Khoảng cách</div>
+<div class="bd">
+<p>Với tập $\Omega \subset \mathbb{R}^n$ và điểm $x \in \mathbb{R}^n$, <strong>khoảng cách từ $x$ đến $\Omega$</strong> là:</p>
+    $$d_\Omega(x) = \operatorname{dist}(x;\Omega) := \min_{z \in \Omega} \|x - z\|$$
+    <p><strong>Ví dụ số:</strong> $\Omega = [-1, 1]$ (đoạn thẳng trên $\mathbb{R}$).</p>
+<ul style="margin-left:20px;margin-top:6px;">
+<li>$d_\Omega(0.5) = 0$ (vì $0.5 \in \Omega$)</li>
+<li>$d_\Omega(3) = 2$ (điểm gần nhất là $1$)</li>
+<li>$d_\Omega(-4) = 3$ (điểm gần nhất là $-1$)</li>
+</ul>
+</div>
+</div>
+<div class="box box-def">
+<div class="bh">📐 Công cụ 2 — Phép chiếu Euclid</div>
+<div class="bd">
+<p><strong>Điểm chiếu</strong> của $x$ lên $\Omega$ là điểm trong $\Omega$ gần $x$ nhất:</p>
+    $$\Pi(x;\Omega) := \{w \in \Omega : \|x - w\| = d_\Omega(x)\}$$
+    <p><strong>Ví dụ:</strong> $\Omega = \{(x,y): x^2 + y^2 \leq 1\}$ (đĩa tròn đơn vị).</p>
+<ul style="margin-left:20px;margin-top:6px;">
+<li>$x = (3, 0)$: $\Pi_\Omega(3,0) = (1,0)$</li>
+<li>$x \in \Omega$: $\Pi_\Omega(x) = x$ (chính nó)</li>
+</ul>
+<p style="margin-top:10px;"><strong>Hướng quan trọng:</strong> $x - w$ với $w = \Pi_\Omega(x)$ là hướng từ $\Omega$ ra phía $x$ — đây là "hướng pháp tuyến ứng viên".</p>
+</div>
+</div>
+<h3 id="s4-2" style="font-size:21px;margin:24px 0 10px;">4.2 — Định nghĩa 1.1: Nón Pháp Tuyến Cơ sở</h3>
+<div class="box box-def">
+<div class="bh">📖 Định nghĩa 1.1 — Nón Pháp Tuyến Cơ sở (trang 3, sách)</div>
+<div class="bd">
+<p>Với $\Omega \subset \mathbb{R}^n$ đóng và $\bar x \in \Omega$, <strong>nón pháp tuyến cơ sở</strong> tại $\bar x$ là:</p>
+    $$N(\bar x;\, \Omega) := \underbrace{\operatorname{Limsup}_{x \to \bar x}}_{\text{lấy giới hạn ngoài}} \underbrace{\left[\operatorname{cone}(x - \Pi(x;\Omega))\right]}_{\text{hướng từ }\Omega\text{ ra }x}$$
+    <p style="margin-top:12px;"><strong>Giải thích từng phần:</strong></p>
+<ul style="margin-left:20px;margin-top:6px;">
+<li><strong>$x$:</strong> điểm bên ngoài $\Omega$ đang tiến về $\bar x$</li>
+<li><strong>$\Pi(x;\Omega)$:</strong> điểm trong $\Omega$ gần $x$ nhất</li>
+<li><strong>$x - \Pi(x;\Omega)$:</strong> hướng từ $\Omega$ ra phía $x$</li>
+<li><strong>$\operatorname{cone}(\cdot)$:</strong> nhân tất cả hệ số $\alpha \geq 0$</li>
+<li><strong>$\operatorname{Limsup}_{x \to \bar x}$:</strong> lấy tất cả giá trị giới hạn khi $x \to \bar x$</li>
+</ul>
+</div>
+</div>
+<h3 id="s4-3" style="font-size:21px;margin:24px 0 10px;">4.3 — Tính toán từng bước: Ví dụ 1.5</h3>
+<p>Hãy cùng tính nón pháp tuyến tại $(0,0)$ của tập $\Omega = \{(x,y) \in \mathbb{R}^2 : y \geq -|x|\}$.</p>
+<div class="diagram-wrap">
+<!-- HÌNH 9 (Ví dụ 1.5): Tập Ω = {y ≥ -|x|} trong mặt phẳng (x,y) (MỚI) -->
+<!-- Biên: cạnh phải y=-x (x≥0), cạnh trái y=x (x≤0). Đỉnh V tại (0,0). -->
+<!-- Ω là vùng TRÊN V (trên hai cạnh). Trong SVG (y xuống): vùng có SVG-y NHỎ HƠN biên. -->
+<!-- Gốc tại SVG(240,165). Tỉ lệ 55px/unit. -->
+<!-- Cạnh phải: (0,0)→(2,-2): SVG(240,165)→(350,275). Cạnh trái: (0,0)→(-2,-2): SVG(240,165)→(130,275). -->
+<svg height="285" viewbox="0 0 480 285" width="480" xmlns="http://www.w3.org/2000/svg">
+<!-- Vùng Ω (trên V = phần SVG có y nhỏ hơn biên) -->
+<path d="M 0,0 L 480,0 L 480,285 L 350,285 L 240,165 L 130,285 L 0,285 Z" fill="#dbeafe" opacity=".4"></path>
+<!-- Trục -->
+<line stroke="#aaa" stroke-width="1.5" x1="30" x2="450" y1="165" y2="165"></line>
+<line stroke="#aaa" stroke-width="1.5" x1="240" x2="240" y1="15" y2="275"></line>
+<text fill="#888" font-family="serif" font-size="13" x="454" y="169">x</text>
+<text fill="#888" font-family="serif" font-size="13" x="234" y="13">y</text>
+<!-- Biên V: cạnh phải (0,0)→(2,-2), cạnh trái (0,0)→(-2,-2) -->
+<line stroke="#2563eb" stroke-width="2.5" x1="240" x2="360" y1="165" y2="285"></line>
+<line stroke="#2563eb" stroke-width="2.5" x1="240" x2="120" y1="165" y2="285"></line>
+<!-- Nhãn các cạnh -->
+<text fill="#2563eb" font-family="serif" font-size="13" font-style="italic" x="318" y="267">y = −x</text>
+<text fill="#2563eb" font-family="serif" font-size="13" font-style="italic" x="88" y="267">y = x</text>
+<!-- Đỉnh (0,0) -->
+<circle cx="240" cy="165" fill="#dc2626" r="6"></circle>
+<text fill="#dc2626" font-family="serif" font-size="13" font-weight="600" x="248" y="162">(0,0)</text>
+<!-- Nhãn Ω -->
+<text fill="#2563eb" font-family="serif" font-size="15" font-style="italic" x="100" y="90">Ω = {(x,y) : y ≥ −|x|}</text>
+<!-- Ticks trục x -->
+<line stroke="#aaa" stroke-width="1" x1="295" x2="295" y1="162" y2="168"></line>
+<text fill="#666" font-family="serif" font-size="12" x="289" y="180">1</text>
+<line stroke="#aaa" stroke-width="1" x1="185" x2="185" y1="162" y2="168"></line>
+<text fill="#666" font-family="serif" font-size="12" x="179" y="180">−1</text>
+<!-- Ticks trục y -->
+<line stroke="#aaa" stroke-width="1" x1="237" x2="243" y1="110" y2="110"></line>
+<text fill="#666" font-family="serif" font-size="12" x="222" y="114">1</text>
+<line stroke="#aaa" stroke-width="1" x1="237" x2="243" y1="55" y2="55"></line>
+<text fill="#666" font-family="serif" font-size="12" x="222" y="59">2</text>
+</svg>
+<div class="dcaption">Hình 9: Tập $\Omega = \{(x,y): y \geq -|x|\}$ — vùng màu xanh nằm trên chữ V (biên là hai tia $y=-x$ và $y=x$ từ gốc tọa độ). Góc nhọn tại $(0,0)$ là điểm ta cần tính nón pháp tuyến.</div>
+</div>
+<ul class="step-list">
+<li>
+<div class="step-num">1</div>
+<div><strong>Tập $\Omega = \{(x,y): y \geq -|x|\}$:</strong> Vùng nằm <em>phía trên</em> chữ V ngược, với đỉnh tại $(0,0)$ và hai cạnh $y = -x$ (phải) và $y = x$ (trái).</div>
+</li>
+<li>
+<div class="step-num">2</div>
+<div><strong>Tiếp cận từ phía dưới-phải (ngoài Ω):</strong> Dãy $x_k = (1/k, -2/k) \to (0,0)$, nằm ngoài $\Omega$ vì $y = -2/k &lt; -|1/k| = -1/k$. Điểm chiếu lên cạnh phải $y=-x$ là $(3/(2k), -3/(2k))$. Hướng từ chiếu ra $x_k$: $(1/k - 3/(2k),\; -2/k + 3/(2k)) = (-1/(2k), -1/(2k)) \propto (-1,-1)$.</div>
+</li>
+<li>
+<div class="step-num">3</div>
+<div><strong>Tiếp cận từ phía dưới-trái:</strong> Tương tự, dãy $(-1/k, -2/k)$ cho hướng pháp tuyến xấp xỉ $(1,-1)$ (nhân hệ số dương).</div>
+</li>
+<li>
+<div class="step-num">4</div>
+<div>
+<strong>Kết quả (sách tr. 4):</strong> Lấy giới hạn Limsup của tất cả hướng pháp tuyến khi điểm tiến về $(0,0)$:
+      $$N\big((0,0);\,\Omega\big) = \{(v,v) : v \leq 0\} \cup \{(v,-v) : v \geq 0\}$$
+    </div>
+</li>
+</ul>
+<div class="diagram-wrap">
+<!-- HÌNH 10: Nón pháp tuyến N((0,0);Ω) trong không gian (v₁,v₂) (ĐÃ SỬA) -->
+<!-- Hai tia: {(v,v):v≤0} → hướng (-1,-1) trong math → SVG(-1,+1) = trái-xuống -->
+<!--          {(v,-v):v≥0} → hướng (1,-1) trong math → SVG(+1,+1) = phải-xuống -->
+<!-- Quy ước: trục v₁ sang phải, trục v₂ lên trên (SVG y ngược) -->
+<svg height="260" viewbox="0 0 480 260" width="480" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="axarr10" markerheight="5" markerwidth="5" orient="auto" refx="7" refy="4" viewbox="0 0 8 8">
+<path d="M0 1L7 4L0 7z" fill="#aaa"></path>
+</marker>
+<marker id="axarr10y" markerheight="5" markerwidth="5" orient="auto" refx="7" refy="4" viewbox="0 0 8 8">
+<path d="M0 1L7 4L0 7z" fill="#aaa"></path>
+</marker>
+</defs>
+<!-- Gốc tại SVG(240,110). v₁ sang phải, v₂ lên trên (−SVG_y). -->
+<!-- Tỉ lệ: 80px/unit. -->
+<!-- Trục v₁ -->
+<line marker-end="url(#axarr10)" stroke="#ccc" stroke-width="1.5" x1="40" x2="440" y1="110" y2="110"></line>
+<!-- Trục v₂ (lên trên = SVG y giảm) -->
+<line marker-end="url(#axarr10y)" stroke="#ccc" stroke-width="1.5" x1="240" x2="240" y1="240" y2="20"></line>
+<text fill="#aaa" font-family="serif" font-size="13" x="444" y="114">v₁</text>
+<text fill="#aaa" font-family="serif" font-size="13" x="234" y="17">v₂</text>
+<!-- Tia 1: {(v,v):v≤0} → hướng math(-1,-1) → SVG(-80,+80) từ gốc (240,110) -->
+<!-- Điểm cuối: (240-120, 110+120) = (120,230) tại v=-1.5 -->
+<line stroke="#dc2626" stroke-width="3" x1="240" x2="112" y1="110" y2="238"></line>
+<!-- Tia 2: {(v,-v):v≥0} → hướng math(1,-1) → SVG(+80,+80) từ gốc (240,110) -->
+<!-- Điểm cuối: (240+120, 110+120) = (360,230) tại v=1.5 -->
+<line stroke="#dc2626" stroke-width="3" x1="240" x2="368" y1="110" y2="238"></line>
+<!-- Điểm gốc (0,0) -->
+<circle cx="240" cy="110" fill="#dc2626" r="5"></circle>
+<!-- Nhãn các tia -->
+<text fill="#dc2626" font-family="serif" font-size="12" x="42" y="248">{(v, v) : v ≤ 0}</text>
+<text fill="#dc2626" font-family="serif" font-size="12" x="330" y="248">{(v, −v) : v ≥ 0}</text>
+<!-- Chứng minh không lồi: trung điểm (0,-1) không thuộc N -->
+<circle cx="240" cy="190" fill="none" r="5" stroke="#f97316" stroke-dasharray="3 2" stroke-width="2"></circle>
+<text fill="#f97316" font-family="'Inter',sans-serif" font-size="12" font-weight="600" x="248" y="194">(0,−1) ∉ N ← KHÔNG LỒI!</text>
+<!-- Điểm v=-1 trên tia 1 và v=1 trên tia 2 -->
+<circle cx="160" cy="190" fill="#9333ea" r="4"></circle>
+<text fill="#9333ea" font-family="serif" font-size="11" x="134" y="188">(−1,−1)</text>
+<circle cx="320" cy="190" fill="#9333ea" r="4"></circle>
+<text fill="#9333ea" font-family="serif" font-size="11" x="324" y="188">(1,−1)</text>
+<!-- Đoạn giữa (−1,−1) và (1,−1): trung điểm (0,−1) -->
+<line opacity=".6" stroke="#9333ea" stroke-dasharray="4 3" stroke-width="1" x1="160" x2="320" y1="190" y2="190"></line>
+<!-- Giải thích -->
+<text fill="#555" font-family="'Inter',sans-serif" font-size="13" font-weight="600" x="40" y="25">N((0,0); Ω) = hai tia, KHÔNG lồi</text>
+<text fill="#666" font-family="serif" font-size="12" x="40" y="42">Trung điểm của (−1,−1) và (1,−1) là (0,−1) ∉ N → không lồi ✓</text>
+</svg>
+<div class="dcaption">Hình 10: Nón pháp tuyến cơ sở $N((0,0); \Omega)$ trong không gian $(v_1, v_2)$ — gồm hai tia (đỏ) vào góc phần tư thứ ba và tư. Trung điểm $(0,-1)$ của hai điểm trên mỗi tia KHÔNG thuộc nón → <strong>tập không lồi!</strong></div>
+</div>
+<div class="box box-quiz">
+<div class="bh">🧠 Kiểm tra hiểu bài</div>
+<div class="bd">
+<p><strong>Câu hỏi:</strong> Tại sao nón này "không lồi"? Nhớ lại: tập $A$ lồi nghĩa là với mọi $a, b \in A$ thì đoạn thẳng nối $a$ và $b$ cũng nằm trong $A$.</p>
+<p style="margin-top:10px;"><strong>Trả lời:</strong> Lấy $a = (-1,-1) \in N$ (tia trái) và $b = (1,-1) \in N$ (tia phải). Trung điểm $(0,-1)$ — kiểm tra: $(0,-1)$ có dạng $(v,v)$ với $v \leq 0$ không? $0 = -1$? Không! Có dạng $(v,-v)$ với $v \geq 0$? $-1 = 0$? Không! Vậy $(0,-1) \notin N$ → <span class="hl-red">Không lồi!</span> ✓</p>
+</div>
+</div>
+<h3 id="s4-4" style="font-size:21px;margin:24px 0 10px;">4.4 — Nón Đều: "Bạn thân lồi" của Nón Cơ sở</h3>
+<p>Trong sách, tác giả còn định nghĩa một nón khác — <em>nón pháp tuyến đều</em> $\widehat{N}(x;\Omega)$ — dễ tính hơn nhưng yếu hơn:</p>
+<div class="box box-def">
+<div class="bh">📖 Nón Pháp Tuyến Đều (Regular Normal Cone) — trang 4, sách</div>
+<div class="bd">
+<p>$v \in \widehat{N}(\bar x; \Omega)$ khi và chỉ khi:</p>
+    $$\limsup_{\substack{z \to \bar x \\ z \in \Omega}} \frac{\langle v,\, z - \bar x\rangle}{\|z - \bar x\|} \leq 0$$
+    <p><strong>Đọc hiểu:</strong> "$v$ tạo góc không âm với mọi hướng đi từ $\bar x$ vào $\Omega$."</p>
+<p style="margin-top:10px;"><strong>So sánh:</strong></p>
+<ul style="margin-left:20px;">
+<li>$\widehat{N}(\bar x;\Omega)$: <span class="hl-blue">luôn lồi</span>, nhưng có thể chỉ là $\{0\}$ (tầm thường) tại góc!</li>
+<li>$N(\bar x;\Omega)$: <span class="hl-red">có thể không lồi</span>, nhưng <span class="hl-green">không bao giờ tầm thường tại biên</span>.</li>
+</ul>
+<p style="margin-top:10px;"><strong>Ví dụ:</strong> Tại $(0,0)$ của $\Omega$ ở trên: $\widehat{N}((0,0);\Omega) = \{(0,0)\}$ — chỉ là điểm 0! Nhưng $N((0,0);\Omega)$ là hai tia — thông tin phong phú hơn nhiều.</p>
+</div>
+</div>
+<div class="box box-thm">
+<div class="bh">📘 Định lý 1.6 (sách, tr. 5) — Mối quan hệ giữa hai nón</div>
+<div class="bd">
+<p>Nón cơ sở chính xác là <em>giới hạn ngoài</em> của nón đều tại các điểm lân cận:</p>
+    $$N(\bar x;\,\Omega) = \underset{x \xrightarrow{\Omega} \bar x}{\operatorname{Limsup}}\; \widehat N(x;\,\Omega)$$
+  </div>
+</div>
+<div class="analogy">
+<div class="analogy-label">🌊 Ví von dễ nhớ</div>
+<p>Hãy nghĩ như "ảnh phơi sáng dài": $\widehat{N}(x_k; \Omega)$ là "ảnh tức thời" tại $x_k$, còn $N(\bar x; \Omega)$ là "độ phơi sáng dài" — nó thu thập thông tin từ nhiều điểm xung quanh để tạo ra bức tranh hoàn chỉnh tại $\bar x$.</p>
+</div>
+</section>
+<hr/>
+<!-- ══════════ PHẦN 5 ══════════ -->
+<section id="s5">
+<div class="s-head"><span class="s-num">Phần 5</span><h2>Vi phân con — "Đạo hàm Tổng quát" cho Hàm số</h2></div>
+<p class="section-intro">Đây là phần quan trọng nhất! Ta xây dựng "đạo hàm tổng quát" từ nón pháp tuyến bằng một thủ thuật hình học rất khéo léo.</p>
+<h3 id="s5-1" style="font-size:21px;margin:24px 0 10px;">5.1 — Ý tưởng: Nhìn lên Thượng đồ thị</h3>
+<p>Với hàm $\varphi: \mathbb{R}^n \to \mathbb{R}$, thay vì nhìn vào đồ thị (đường/mặt), ta nhìn vào <em>thượng đồ thị</em>:</p>
+<div class="box box-def">
+<div class="bh">📖 Thượng đồ thị (Epigraph)</div>
+<div class="bd">
+<p>$$\operatorname{epi}\,\varphi := \{(x,\alpha) \in \mathbb{R}^n \times \mathbb{R} : \alpha \geq \varphi(x)\}$$</p>
+<p>Đây là tập tất cả các điểm nằm <em>trên hoặc trên đồ thị</em> của $\varphi$.</p>
+</div>
+</div>
+<div class="diagram-wrap">
+<!-- HÌNH 11: Thượng đồ thị epi(|x|) và các pháp tuyến (ĐÃ SỬA) -->
+<!-- Không gian (x,α). Trục α lên trên (SVG y giảm). -->
+<!-- |x|: đỉnh tại (x=0,α=0)=SVG(240,210), cánh lên trên: (-2,2)=SVG(120,90) và (2,2)=SVG(360,90). -->
+<!-- epi(|x|) = vùng TRÊN đường |x| = tam giác (120,90)-(240,210)-(360,90) + vùng bên trên. -->
+<!-- Pháp tuyến của epi tại (0,0)=(240,210): các vector (v,-1) trong (x,α) space. -->
+<!-- (v,-1) → SVG: x-comp = v*60, α-comp: α↑=SVG y↓, so α=-1 → SVG(+60). Direction(v*60, 60). -->
+<!-- v=0: (0,60)→đến(240,270). v=1: (60,60)→(300,270). v=-1:(-60,60)→(180,270). Độ dài: normalize×50. -->
+<svg height="290" viewbox="0 0 480 290" width="480" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="arrepi" markerheight="5" markerwidth="5" orient="auto" refx="9" refy="5" viewbox="0 0 10 10">
+<path d="M0 1.5L9 5L0 8.5z" fill="#dc2626"></path>
+</marker>
+<marker id="axarr11" markerheight="5" markerwidth="5" orient="auto" refx="7" refy="4" viewbox="0 0 8 8">
+<path d="M0 1L7 4L0 7z" fill="#aaa"></path>
+</marker>
+</defs>
+<!-- epi(|x|): tam giác = {(x,α): α ≥ |x|} trong vùng nhìn thấy được -->
+<!-- Tam giác: đỉnh (240,210), trái (90,60), phải (390,60) với tỉ lệ 60px/unit -->
+<path d="M 240,210 L 90,60 L 390,60 Z" fill="#bbf7d0" opacity=".45"></path>
+<!-- Trục x (trục nằm ngang tại α=0=SVG y=210) -->
+<line marker-end="url(#axarr11)" stroke="#aaa" stroke-width="1.5" x1="40" x2="440" y1="210" y2="210"></line>
+<!-- Trục α (trục thẳng đứng đi lên = SVG y giảm) -->
+<line marker-end="url(#axarr11)" stroke="#aaa" stroke-width="1.5" x1="240" x2="240" y1="250" y2="22"></line>
+<text fill="#888" font-family="serif" font-size="13" x="444" y="214">x</text>
+<text fill="#888" font-family="serif" font-size="13" x="234" y="20">α</text>
+<!-- Đường |x|: từ (90,60) qua đỉnh (240,210) đến (390,60) -->
+<polyline fill="none" points="90,60 240,210 390,60" stroke="#2563eb" stroke-width="2.5"></polyline>
+<!-- Nhãn epi -->
+<text fill="#16a34a" font-family="serif" font-size="15" font-style="italic" x="268" y="100">epi φ</text>
+<!-- Nhãn đường -->
+<text fill="#2563eb" font-family="serif" font-size="14" font-style="italic" x="98" y="145">y = φ(x) = |x|</text>
+<!-- Điểm (0,φ(0))=(0,0)=(240,210) -->
+<circle cx="240" cy="210" fill="#dc2626" r="6"></circle>
+<text fill="#dc2626" font-family="serif" font-size="12" x="246" y="208">(0, 0)</text>
+<!-- Pháp tuyến của epi tại (0,0): các vector (v,-1) trong space (x,α) -->
+<!-- Trong SVG: hướng math(v,-1) → SVG(v*60, 1*60) = (60v, 60) [vì α↓ → SVG y↑] -->
+<!-- Độ dài chuẩn hóa về 48 px trong SVG. -->
+<!-- v=0: hướng SVG(0,60), chuẩn=1, dài 48: đến (240,258). Crop tại 285: ok -->
+<!-- v=1: hướng SVG(60,60)/√2=1, dài 48: 48*(1/√2,1/√2)=(34,34)→(274,244) -->
+<!-- v=-1: (-34,34)→(206,244) -->
+<!-- v=0.5: SVG(30,60)/||(30,60)||=|(30,60)|=√(900+3600)=67.1, chuẩn=(0.447,0.894), *48=(21.5,42.9)→(261.5,252.9) -->
+<!-- v=-0.5: (-21.5,42.9)→(218.5,252.9) -->
+<line marker-end="url(#arrepi)" stroke="#dc2626" stroke-width="2" x1="240" x2="240" y1="210" y2="258"></line>
+<line marker-end="url(#arrepi)" stroke="#dc2626" stroke-width="2" x1="240" x2="274" y1="210" y2="244"></line>
+<line marker-end="url(#arrepi)" stroke="#dc2626" stroke-width="2" x1="240" x2="206" y1="210" y2="244"></line>
+<line marker-end="url(#arrepi)" opacity=".7" stroke="#dc2626" stroke-width="1.8" x1="240" x2="262" y1="210" y2="253"></line>
+<line marker-end="url(#arrepi)" opacity=".7" stroke="#dc2626" stroke-width="1.8" x1="240" x2="218" y1="210" y2="253"></line>
+<!-- Nhãn pháp tuyến -->
+<text fill="#dc2626" font-family="'Inter',sans-serif" font-size="13" font-weight="600" x="40" y="278">Pháp tuyến của epi φ tại (0,0) → ∂φ(0) = [−1, 1]</text>
+<!-- Ticks -->
+<line stroke="#aaa" stroke-width="1" x1="180" x2="180" y1="207" y2="213"></line>
+<text fill="#666" font-family="serif" font-size="12" x="172" y="224">−1</text>
+<line stroke="#aaa" stroke-width="1" x1="300" x2="300" y1="207" y2="213"></line>
+<text fill="#666" font-family="serif" font-size="12" x="296" y="224">1</text>
+<line stroke="#aaa" stroke-width="1" x1="237" x2="243" y1="150" y2="150"></line>
+<text fill="#666" font-family="serif" font-size="12" x="222" y="154">1</text>
+</svg>
+<div class="dcaption">Hình 11: Thượng đồ thị của $\varphi(x) = |x|$ (vùng xanh lá, bên trong tam giác). Các mũi tên đỏ là pháp tuyến của $\operatorname{epi}\,\varphi$ tại $(0,0)$, ứng với $v \in [-1,1]$. Đây chính là vi phân con $\partial\varphi(0)$!</div>
+</div>
+<h3 id="s5-2" style="font-size:21px;margin:24px 0 10px;">5.2 — Định nghĩa 1.18: Vi phân con Cơ sở và Kỳ dị</h3>
+<div class="box box-def">
+<div class="bh">📖 Định nghĩa 1.18 (sách, tr. 20) — Hai loại Vi phân con</div>
+<div class="bd">
+<p><strong style="color:var(--blue);">Vi phân con cơ sở</strong> (Basic/Limiting Subdifferential):</p>
+    $$\partial\varphi(\bar x) := \{v \in \mathbb{R}^n : (v,\,-1) \in N((\bar x, \varphi(\bar x));\; \operatorname{epi}\,\varphi)\}$$
+    <p style="margin-top:12px;"><strong style="color:var(--red);">Vi phân con kỳ dị</strong> (Singular Subdifferential):</p>
+    $$\partial^\infty\varphi(\bar x) := \{v \in \mathbb{R}^n : (v,\,0) \in N((\bar x, \varphi(\bar x));\; \operatorname{epi}\,\varphi)\}$$
+  </div>
+</div>
+<div class="analogy">
+<div class="analogy-label">🔑 Giải mã định nghĩa — Cực kỳ quan trọng!</div>
+<p>Pháp tuyến lên $\operatorname{epi}\,\varphi$ tại $(\bar x, \varphi(\bar x))$ có dạng $(v, \lambda) \in \mathbb{R}^n \times \mathbb{R}$. Theo Mệnh đề 1.17: $\lambda \leq 0$. Hai trường hợp:</p>
+<ul style="margin-left:20px;margin-top:8px;">
+<li><strong>$\lambda = -1$</strong> (chuẩn hóa): pháp tuyến "nghiêng" → cho vi phân con cơ sở $\partial\varphi$</li>
+<li><strong>$\lambda = 0$</strong>: pháp tuyến "nằm ngang" → cho vi phân con kỳ dị $\partial^\infty\varphi$</li>
+</ul>
+</div>
+<h3 id="s5-3" style="font-size:21px;margin:24px 0 10px;">5.3 — Tính vi phân con: Ví dụ từng bước</h3>
+<div class="box box-ex">
+<div class="bh">🔢 Ví dụ 1 — $\varphi(x) = |x|$ tại $\bar x = 0$</div>
+<div class="bd">
+<p><strong>Bước 1:</strong> $\operatorname{epi}\,\varphi = \{(x,\alpha): \alpha \geq |x|\}$ = vùng trong tam giác Hình 11.</p>
+<p><strong>Bước 2:</strong> Tại đỉnh $(0,0)$, nón pháp tuyến của epi bao gồm các vector $(v,\lambda)$ với $\lambda \leq 0$ và $|v| \leq |\lambda|$.</p>
+<p><strong>Bước 3:</strong> Đặt $\lambda = -1$: $(v,-1) \in N$ khi $v \in [-1,1]$.</p>
+<p><strong>Kết quả:</strong> $\partial|x|(0) = [-1,\, 1]$</p>
+<p style="margin-top:10px;border-top:1px solid #f0c090;padding-top:10px;"><strong>Vi phân con kỳ dị:</strong> $(v,0) \in N$ chỉ khi $v = 0$, nên $\partial^\infty|x|(0) = \{0\}$ → hàm Lipschitz ✓</p>
+</div>
+</div>
+<div class="box box-ex">
+<div class="bh">🔢 Ví dụ 2 — $\varphi(x) = x^{1/3}$ tại $\bar x = 0$</div>
+<div class="bd">
+<p>Tại $(0,0)$, đồ thị $y = x^{1/3}$ có tiếp tuyến <em>thẳng đứng</em>. Thượng đồ thị "dựng thẳng" tại đây. Tính:</p>
+<p><strong>Kết quả:</strong> $\partial x^{1/3}(0) = \emptyset$ (rỗng — không tìm được $v$ nào thỏa!)</p>
+<p><strong>Vi phân con kỳ dị:</strong> $\partial^\infty x^{1/3}(0) = [0,+\infty)$ — khác $\{0\}$!</p>
+<p style="border-top:1px solid #f0c090;padding-top:10px;margin-top:10px;"><strong>Ý nghĩa:</strong> $\partial^\infty \neq \{0\}$ → Hàm không Lipschitz tại $0$ ✓ (đạo hàm $\to \infty$!)</p>
+</div>
+</div>
+<h3 id="s5-4" style="font-size:21px;margin:24px 0 10px;">5.4 — Vi phân con Đều — "Đạo hàm một chiều"</h3>
+<div class="box box-def">
+<div class="bh">📖 Vi phân con Đều (Regular Subdifferential) — trang 28, sách</div>
+<div class="bd">
+<p>$v \in \widehat{\partial}\varphi(\bar x)$ khi và chỉ khi:</p>
+    $$\liminf_{x \to \bar x} \frac{\varphi(x) - \varphi(\bar x) - \langle v,\, x-\bar x\rangle}{\|x-\bar x\|} \geq 0$$
+    <p><strong>Cách đọc:</strong> Hàm $\varphi$ "nằm phía trên" đường thẳng $\ell(x) = \varphi(\bar x) + \langle v, x - \bar x\rangle$ ở lân cận $\bar x$.</p>
+</div>
+</div>
+<div class="diagram-wrap">
+<!-- HÌNH 12: Các đường hỗ trợ từ dưới cho |x| (ĐÃ SỬA endpoints) -->
+<!-- x-axis tại SVG y=185. Gốc tại SVG(240,185). Tỉ lệ 60px/unit. -->
+<!-- |x| graph: (80,125)→(240,185)→(400,125) -->
+<!-- Đường hỗ trợ v=0: nằm ngang tại y=185. Từ (60,185) đến (420,185). -->
+<!-- Đường hỗ trợ v=0.6: qua (240,185) slope SVG=-0.6. Tại x=60: y=185+(240-60)*0.6=185+108=293>240! -->
+<!--   Dùng x từ 100 đến 380: tại 100: y=185+(240-100)*0.6=185+84=269>240. Too big. -->
+<!--   Cần scale khác hoặc range x ngắn hơn: từ x=140 đến x=340: tại 140: 185+60=245. còn off. -->
+<!--   Tỉ lệ 45px/unit, slope 0.6: tại x=140(math -2.22): slope SVG=-0.6, y=185+60*0.6=221. Tại x=340: y=185-60*0.6=149. -->
+<svg height="240" viewbox="0 0 480 240" width="480" xmlns="http://www.w3.org/2000/svg">
+<!-- Trục -->
+<line stroke="#ddd" stroke-width="1" x1="40" x2="440" y1="180" y2="180"></line>
+<line stroke="#ddd" stroke-width="1" x1="240" x2="240" y1="20" y2="200"></line>
+<!-- |x| graph: tỉ lệ 45px/unit, gốc (240,180): x=±3→(105,45) và (375,45) -->
+<polyline fill="none" points="105,45 240,180 375,45" stroke="#2563eb" stroke-width="2.8"></polyline>
+<!-- v=0 (nằm ngang qua gốc): nằm trên trục x -->
+<line stroke="#16a34a" stroke-dasharray="5 3" stroke-width="2" x1="60" x2="420" y1="180" y2="180"></line>
+<!-- v=0.5 (slope math=+0.5, slope SVG=-0.5): qua (240,180). Tại x=90: y=180+(240-90)*0.5=180+75=255>240. -->
+<!-- Giới hạn: từ x=120(math=-2.67) y=180+54=234 đến x=360(math=2.67) y=180-54=126. -->
+<line stroke="#f97316" stroke-dasharray="5 3" stroke-width="2" x1="120" x2="360" y1="234" y2="126"></line>
+<!-- v=-0.6 (slope SVG=+0.6): từ x=110 y=180-78=102 đến x=370 y=180+78=258>240→crop tại x=340: y=180+60=240. -->
+<line stroke="#9333ea" stroke-dasharray="5 3" stroke-width="2" x1="110" x2="340" y1="102" y2="240"></line>
+<!-- Điểm (0,φ(0))=(0,0) -->
+<circle cx="240" cy="180" fill="#dc2626" r="5"></circle>
+<!-- Nhãn độ dốc -->
+<text fill="#16a34a" font-family="serif" font-size="12" font-style="italic" x="56" y="174">v = 0</text>
+<text fill="#f97316" font-family="serif" font-size="12" font-style="italic" x="365" y="122">v = 0.5</text>
+<text fill="#9333ea" font-family="serif" font-size="12" font-style="italic" x="344" y="238">v = −0.6</text>
+<text fill="#2563eb" font-family="serif" font-size="14" font-style="italic" x="122" y="152">y = |x|</text>
+<text fill="#555" font-family="'Inter',sans-serif" font-size="13" font-weight="600" x="40" y="20">∂̂φ(0) = [−1, 1]: mọi v ∈ [−1, 1] cho đường thẳng NẰM DƯỚI đồ thị |x|</text>
+</svg>
+<div class="dcaption">Hình 12: Vi phân con đều $\widehat{\partial}\varphi(0) = [-1,1]$ — tập mọi độ dốc $v$ sao cho đường thẳng $y = v \cdot x$ nằm dưới (hoặc chạm) đồ thị $|x|$.</div>
+</div>
+<h3 id="s5-5" style="font-size:21px;margin:24px 0 10px;">5.5 — Quy tắc Fermat Tổng quát (Kết quả Vàng!)</h3>
+<div class="box box-thm">
+<div class="bh">🏆 Mệnh đề 1.30 (sách, tr. 33) — Quy tắc Fermat Tổng quát</div>
+<div class="bd">
+<p>Nếu $\bar x$ là <strong>điểm cực tiểu cục bộ</strong> của $\varphi$, thì:</p>
+    $$0 \;\in\; \widehat{\partial}\varphi(\bar x) \qquad \text{và} \qquad 0 \;\in\; \partial\varphi(\bar x)$$
+    <p>Khi $\varphi$ <em>lồi</em>: điều kiện $0 \in \partial\varphi(\bar x)$ cũng là <strong>điều kiện đủ</strong> cho cực tiểu toàn cục.</p>
+</div>
+</div>
+<div class="box box-ex">
+<div class="bh">🔢 Kiểm tra với $f(x) = |x|$</div>
+<div class="bd">
+<ul class="step-list">
+<li><div class="step-num blue">1</div><div>Ta đã tính: $\partial f(0) = [-1, 1]$</div></li>
+<li><div class="step-num blue">2</div><div>Kiểm tra: $0 \in [-1, 1]$? <span class="hl-green">✓ Có!</span></div></li>
+<li><div class="step-num blue">3</div><div>Kết luận: $x = 0$ là cực tiểu cục bộ của $|x|$ ✓</div></li>
+</ul>
+</div>
+</div>
+<h3 id="s5-6" style="font-size:21px;margin:24px 0 10px;">5.6 — Vi phân con Kỳ dị: "Cảm biến tính phi-Lipschitz"</h3>
+<div class="box box-thm">
+<div class="bh">📘 Định lý 1.22 (sách, tr. 23–24) — Đặc trưng tính Lipschitz</div>
+<div class="bd">
+<p>$\varphi$ là <strong>Lipschitz liên tục</strong> tại $\bar x$ $\Longleftrightarrow$ $\partial^\infty\varphi(\bar x) = \{0\}$.</p>
+<table style="margin-top:12px;width:100%;font-size:15px;border-collapse:collapse;">
+<tr><th style="background:#1d4ed8;color:#fff;padding:8px;">Hàm số</th><th style="background:#1d4ed8;color:#fff;padding:8px;">$\partial^\infty\varphi(0)$</th><th style="background:#1d4ed8;color:#fff;padding:8px;">Lipschitz?</th></tr>
+<tr style="background:#f0fdf4;"><td style="padding:8px;">$|x|$</td><td style="padding:8px;">$\{0\}$</td><td style="padding:8px;color:#16a34a;font-weight:600;">✓ Có ($\ell = 1$)</td></tr>
+<tr><td style="padding:8px;">$x^{1/3}$</td><td style="padding:8px;">$[0,+\infty)$</td><td style="padding:8px;color:#dc2626;font-weight:600;">✗ Không (độ dốc → ∞)</td></tr>
+<tr style="background:#f0fdf4;"><td style="padding:8px;">$-|x|$</td><td style="padding:8px;">$\{0\}$</td><td style="padding:8px;color:#16a34a;font-weight:600;">✓ Có ($\ell = 1$)</td></tr>
+</table>
+</div>
+</div>
+</section>
+<hr/>
+<!-- ══════════ PHẦN 6 ══════════ -->
+<section id="s6">
+<div class="s-head"><span class="s-num">Phần 6</span><h2>Coderivative — "Đạo hàm" cho Ánh xạ</h2></div>
+<p class="section-intro">Coderivative tổng quát hóa ma trận Jacobi chuyển vị sang trường hợp ánh xạ không trơn và đa trị.</p>
+<h3 id="s6-1" style="font-size:21px;margin:24px 0 10px;">6.1 — Nhắc lại: Ma trận Jacobi</h3>
+<p>Với $f: \mathbb{R}^n \to \mathbb{R}^m$ trơn, ma trận Jacobi $\nabla f(\bar x)$ là ma trận $m \times n$ của mọi đạo hàm riêng. Ma trận chuyển vị $\nabla f(\bar x)^*$ nhận vector $v \in \mathbb{R}^m$ và cho ra vector trong $\mathbb{R}^n$.</p>
+<h3 id="s6-2" style="font-size:21px;margin:24px 0 10px;">6.2 — Coderivative là gì?</h3>
+<div class="box box-def">
+<div class="bh">📖 Định nghĩa 1.11 (sách, tr. 13) — Coderivative Cơ sở</div>
+<div class="bd">
+<p>Ý tưởng: Áp dụng pháp tuyến lên <em>đồ thị</em> $\operatorname{gph} F$ của ánh xạ $F: \mathbb{R}^n \rightrightarrows \mathbb{R}^m$:</p>
+    $$D^*F(\bar x, \bar y)(v) := \{u \in \mathbb{R}^n : (u,\,-v) \in N((\bar x,\bar y);\;\operatorname{gph} F)\}$$
+  </div>
+</div>
+<div class="box box-remind">
+<div class="bh">✅ Ý nghĩa với Hàm trơn (Mệnh đề 1.12, sách tr. 14)</div>
+<div class="bd">
+<p>Nếu $f: \mathbb{R}^n \to \mathbb{R}^m$ là ánh xạ $C^1$ tại $\bar x$, thì: $D^*f(\bar x)(v) = \{\nabla f(\bar x)^* v\}$</p>
+<p>Coderivative chính xác khớp với phép nhân bởi ma trận Jacobi chuyển vị!</p>
+</div>
+</div>
+<div class="box box-ex">
+<div class="bh">🔢 Ví dụ 1.14 (sách tr. 15) — $f(x) = |x|$ trên $\mathbb{R}$</div>
+<div class="bd">
+<p>Coderivative tại $\bar x = 0$, $\bar y = 0$:</p>
+    $$D^*f(0)(v) = \begin{cases} [-v,\; v] &amp; \text{nếu } v \geq 0 \\ \{-v,\; v\} &amp; \text{nếu } v &lt; 0 \end{cases}$$
+    <p><strong>Liên hệ với vi phân con (Định lý 1.23, tr. 24):</strong> $\partial f(\bar x) = D^*f(\bar x)(1)$.<br/>
+    Kiểm tra: $D^*f(0)(1) = [-1,1] = \partial|x|(0)$ ✓</p>
+</div>
+</div>
+<div class="analogy">
+<div class="analogy-label">🧩 Sơ đồ thống nhất</div>
+<ul style="margin-left:20px;">
+<li style="margin-bottom:8px;"><strong>Nón pháp tuyến:</strong> Áp dụng $N(\cdot;\cdot)$ lên tập đóng $\Omega$</li>
+<li style="margin-bottom:8px;"><strong>Coderivative:</strong> Áp dụng $N(\cdot;\cdot)$ lên $\operatorname{gph} F$ (đồ thị)</li>
+<li><strong>Vi phân con:</strong> Áp dụng $N(\cdot;\cdot)$ lên $\operatorname{epi} \varphi$ (thượng đồ thị)</li>
+</ul>
+<p style="margin-top:10px;">Tất cả đều là <em>một ý tưởng</em> — nón pháp tuyến — áp dụng cho các đối tượng hình học khác nhau!</p>
+</div>
+</section>
+<hr/>
+<!-- ══════════ TỔNG KẾT ══════════ -->
+<section id="s7">
+<div class="s-head"><span class="s-num">Tổng kết</span><h2>Bản đồ toàn bộ Chương 1</h2></div>
+<div class="compare">
+<div class="col col-bad">
+<div class="col-title">❌ Lớp 12 — Giới hạn</div>
+<p>Chỉ tối ưu được hàm <strong>trơn</strong> (có đạo hàm).</p>
+<p>Điều kiện: $f'(\bar x) = 0$ → không áp dụng cho $|x|$, $\max$, $\min$, v.v.</p>
+<p>Không xử lý được ánh xạ đa trị.</p>
+</div>
+<div class="col col-good">
+<div class="col-title">✅ Sau Chương 1 — Sức mạnh mới</div>
+<p>Tối ưu được hàm <strong>phi trơn</strong> tùy ý.</p>
+<p>Điều kiện: $0 \in \partial\varphi(\bar x)$ → hoạt động cho mọi hàm l.s.c.</p>
+<p>Coderivative xử lý ánh xạ đa trị.</p>
+</div>
+</div>
+<table class="sum-table">
+<thead><tr><th>Khái niệm</th><th>Ký hiệu</th><th>Xây dựng từ</th><th>Khi hàm trơn, quy về</th></tr></thead>
+<tbody>
+<tr><td><strong>Nón pháp tuyến cơ sở</strong></td><td>$N(\bar x;\Omega)$</td><td>Limsup chiều ngoài $\to \bar x$</td><td>Pháp tuyến thông thường (tia)</td></tr>
+<tr><td><strong>Nón pháp tuyến đều</strong></td><td>$\widehat N(\bar x;\Omega)$</td><td>Hướng vuông góc trực tiếp</td><td>Trùng với $N(\bar x;\Omega)$</td></tr>
+<tr><td><strong>Coderivative cơ sở</strong></td><td>$D^*F(\bar x,\bar y)$</td><td>$N$ lên $\operatorname{gph} F$</td><td>Ma trận Jacobi chuyển vị $\nabla f(\bar x)^*$</td></tr>
+<tr><td><strong>Vi phân con cơ sở</strong></td><td>$\partial\varphi(\bar x)$</td><td>$N$ lên $\operatorname{epi}\,\varphi$, $\lambda=-1$</td><td>$\{\nabla\varphi(\bar x)\}$ (một phần tử)</td></tr>
+<tr><td><strong>Vi phân con kỳ dị</strong></td><td>$\partial^\infty\varphi(\bar x)$</td><td>$N$ lên $\operatorname{epi}\,\varphi$, $\lambda=0$</td><td>$\{0\}$ (luôn tầm thường nếu Lipschitz)</td></tr>
+<tr><td><strong>Vi phân con đều</strong></td><td>$\widehat{\partial}\varphi(\bar x)$</td><td>$\widehat N$ lên $\operatorname{epi}\,\varphi$</td><td>$\{\nabla\varphi(\bar x)\}$</td></tr>
+</tbody>
+</table>
+<ul class="step-list">
+<li>
+<div class="step-num teal">1</div>
+<div><strong>Tính không lồi là sức mạnh, không phải yếu điểm.</strong><br/>
+    $N(\bar x;\Omega)$ và $\partial\varphi(\bar x)$ có thể không lồi — điều này cho phép nắm bắt thông tin tinh vi về các điểm gãy, mà giải tích lồi cổ điển không thể làm được.</div>
+</li>
+<li>
+<div class="step-num purple">2</div>
+<div><strong>Tính bền vững (Robustness) là điều kiện sống còn.</strong><br/>
+    Mọi đối tượng cơ sở đều bền vững: $N(\bar x;\Omega) = \operatorname{Limsup}_{x \to \bar x} N(x;\Omega)$. Đây là nền tảng cho calculus vi phân ở chương sau.</div>
+</li>
+<li>
+<div class="step-num red">3</div>
+<div><strong>Một gốc — Ba ứng dụng.</strong><br/>
+    Nón pháp tuyến $N(\cdot;\cdot)$: áp dụng lên <em>tập</em> = nón pháp tuyến; lên <em>đồ thị ánh xạ</em> = coderivative; lên <em>thượng đồ thị hàm</em> = vi phân con.</div>
+</li>
+</ul>
+<div class="box box-wow">
+<div class="bh">🚀 Và đây chỉ là Chương 1!</div>
+<div class="bd">
+<p>Những công cụ bạn vừa hiểu là <strong>nền tảng</strong> cho toàn bộ lý thuyết phía sau:</p>
+<ul style="margin-left:20px;margin-top:8px;">
+<li><strong>Chương 2–4:</strong> Calculus vi phân — quy tắc tích, quy tắc dây chuyền.</li>
+<li><strong>Chương 5:</strong> Tối ưu — điều kiện cần và đủ bậc nhất, bậc hai.</li>
+<li><strong>Chương 6:</strong> Điều khiển tối ưu, nguyên lý cực đại Pontryagin.</li>
+</ul>
+</div>
+</div>
+<div class="box box-quiz">
+<div class="bh">🎯 Bài tập tự luyện</div>
+<div class="bd">
+<ol style="margin-left:20px;">
+<li style="margin-bottom:10px;"><strong>Tính $\partial\varphi(0)$ với $\varphi(x) = -|x|$.</strong><br/>Gợi ý: epi của $-|x|$ là $\{(x,\alpha): \alpha \geq -|x|\}$.</li>
+<li style="margin-bottom:10px;"><strong>Kiểm tra quy tắc Fermat cho $\varphi(x) = |x-3|$ tại $\bar x = 3$.</strong></li>
+<li style="margin-bottom:10px;"><strong>Cho $\Omega = \{x \in \mathbb{R}^2: \|x\| \leq 1\}$. Tính $N(\bar x;\Omega)$ tại $\bar x = (1,0)$.</strong><br/>Gợi ý: Đây là điểm trơn — nón pháp tuyến là một tia.</li>
+</ol>
+</div>
+</div>
+</section>
+</div>
+  </div>
+
+  <div class="task-footer">
+    <a href="../task-07/">← Task 07</a>
+    <a href="../">↑ Lesson 01 · Variational Analysis</a>
+    <a href="../task-09/">Task 09 →</a>
+  </div>
+</main>
+
+<button id="backtotop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Về đầu trang">↑</button>
+
+<script>
+const pb = document.getElementById('progress-bar');
+const btt = document.getElementById('backtotop');
+
+window.addEventListener('scroll', () => {
+  const total = Math.max(1, document.body.scrollHeight - window.innerHeight);
+  pb.style.transform = `scaleX(${window.scrollY / total})`;
+  btt.classList.toggle('visible', window.scrollY > 500);
+});
+
+const navLinks = document.querySelectorAll('#nav-list a');
+const targets = document.querySelectorAll('header#top, section[id], h3[id]');
+
+window.addEventListener('scroll', () => {
+  let current = 'top';
+  targets.forEach(el => {
+    if (window.scrollY + 130 >= el.offsetTop) current = el.id;
+  });
+  navLinks.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+});
+
+document.getElementById('search-input').addEventListener('input', function() {
+  const q = this.value.toLowerCase().trim();
+  navLinks.forEach(a => {
+    const show = !q || a.textContent.toLowerCase().includes(q);
+    a.parentElement.style.display = show ? '' : 'none';
+  });
+});
+</script>
+
+</body>
+</html>
