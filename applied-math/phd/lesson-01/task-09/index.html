@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Task 09 · Optimization Problem and Equilibrium Problem | Math for PhD</title>
+  <link rel="stylesheet" href="../assets/brand.css">
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  <style>
+
+
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=STIX+Two+Math&display=swap');
+
+:root{
+  --space:#06142e;
+  --deep:#071b3f;
+  --void:#020712;
+  --cyan:#37d5ff;
+  --blue:#1d8cff;
+  --violet:#7c5cff;
+  --pink:#ff70b8;
+  --green:#52f5b0;
+  --orange:#ffb454;
+  --yellow:#ffe680;
+
+  --bg:#06142e;
+  --bg2:rgba(255,255,255,.075);
+  --bg3:rgba(255,255,255,.12);
+  --ink:#ecf7ff;
+  --ink2:#bdd0e9;
+  --ink3:#7e91ad;
+  --rule:rgba(148,163,184,.22);
+
+  --s1:#37d5ff;--s1l:rgba(55,213,255,.14);--s1b:rgba(55,213,255,.36);
+  --s2:#52f5b0;--s2l:rgba(82,245,176,.14);--s2b:rgba(82,245,176,.36);
+  --s3:#ffb454;--s3l:rgba(255,180,84,.15);--s3b:rgba(255,180,84,.36);
+  --d1:#94a3b8;--d2:#ffe680;--d3:#ff6b8a;--d4:#a78bfa;
+  --gold:#ffb454;--red:#ff6b8a;--green:#52f5b0;
+
+  --card:rgba(255,255,255,.92);
+  --card-dark:rgba(255,255,255,.09);
+  --shadow:0 22px 60px rgba(0,0,0,.28);
+  --shadow2:0 12px 28px rgba(2,7,18,.18);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+
+body{
+  min-height:100vh;
+  background:
+    radial-gradient(900px 540px at 8% 8%, rgba(55,213,255,.22), transparent 60%),
+    radial-gradient(850px 520px at 92% 12%, rgba(124,92,255,.22), transparent 60%),
+    radial-gradient(850px 520px at 62% 95%, rgba(82,245,176,.12), transparent 60%),
+    linear-gradient(135deg, #031024 0%, #071b3f 48%, #020712 100%);
+  color:var(--ink);
+  font-family:"Be Vietnam Pro",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  font-size:14.5px;
+  line-height:1.7;
+  padding-bottom:90px;
+  overflow-x:hidden;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-2;
+  opacity:.38;
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,.86) 1px, transparent 1.6px),
+    radial-gradient(circle, rgba(55,213,255,.65) 1px, transparent 1.5px),
+    radial-gradient(circle, rgba(82,245,176,.55) 1px, transparent 1.5px);
+  background-size:72px 72px,118px 118px,164px 164px;
+  background-position:0 0,34px 58px,90px 26px;
+}
+
+body::after{
+  content:"";
+  position:fixed;
+  right:-360px;
+  top:120px;
+  width:1040px;
+  height:280px;
+  border-radius:50%;
+  border:3px solid rgba(55,213,255,.15);
+  border-left-color:rgba(82,245,176,.42);
+  transform:rotate(-17deg);
+  z-index:-1;
+  pointer-events:none;
+}
+
+/* HERO */
+.hero{
+  position:relative;
+  overflow:hidden;
+  padding:42px 48px 38px;
+  background:
+    radial-gradient(520px 220px at 12% 0%, rgba(55,213,255,.20), transparent 62%),
+    radial-gradient(540px 240px at 82% 20%, rgba(124,92,255,.20), transparent 62%),
+    rgba(4,16,36,.76);
+  border-bottom:1px solid rgba(255,255,255,.13);
+  box-shadow:0 18px 48px rgba(0,0,0,.18);
+  backdrop-filter:blur(16px);
+}
+
+.hero::before{
+  content:"N(x̄;Ω)  D*F  ∂φ  ∂∞φ  epi φ  Π(x;Ω)  0∈∂φ+N";
+  position:absolute;
+  right:-70px;
+  top:24px;
+  font-family:"STIX Two Math","JetBrains Mono",monospace;
+  font-size:34px;
+  color:rgba(255,255,255,.045);
+  white-space:nowrap;
+  transform:rotate(-8deg);
+}
+
+.hero::after{
+  content:'';
+  position:absolute;
+  bottom:0;
+  left:0;
+  right:0;
+  height:3px;
+  background:linear-gradient(90deg,var(--s1),var(--s2),var(--s3),var(--violet));
+}
+
+.hl{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  font-size:11px;
+  letter-spacing:2.2px;
+  text-transform:uppercase;
+  color:rgba(236,247,255,.62);
+  margin-bottom:12px;
+  font-weight:900;
+}
+.hl::before{
+  content:"🛰️";
+  letter-spacing:0;
+  font-size:14px;
+}
+
+.ht{
+  font-size:34px;
+  font-weight:900;
+  color:#f5fbff;
+  line-height:1.22;
+  margin-bottom:12px;
+  letter-spacing:-.03em;
+  max-width:1000px;
+}
+.ht span{
+  display:inline-block;
+  margin-top:6px;
+  font-size:19px!important;
+  font-weight:700!important;
+  font-style:normal!important;
+  color:rgba(189,243,255,.88);
+  letter-spacing:0;
+}
+
+.hs{
+  font-size:14px;
+  color:rgba(221,235,255,.78);
+  font-weight:500;
+  max-width:860px;
+  line-height:1.75;
+  margin-bottom:18px;
+}
+
+.hpills{display:flex;gap:9px;flex-wrap:wrap}
+.hp{
+  border:1px solid rgba(255,255,255,.14);
+  background:rgba(255,255,255,.08);
+  border-radius:999px;
+  padding:7px 13px;
+  font-size:11px;
+  letter-spacing:.5px;
+  text-transform:uppercase;
+  color:rgba(236,247,255,.76);
+  font-weight:900;
+  box-shadow:0 12px 24px rgba(0,0,0,.12);
+}
+
+.hstats{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+.hstat{
+  background:rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:18px;
+  padding:10px 18px;
+  text-align:center;
+  box-shadow:0 16px 32px rgba(0,0,0,.16);
+  backdrop-filter:blur(10px);
+}
+.hstat-n{
+  font-size:26px;
+  font-weight:900;
+  line-height:1;
+  background:linear-gradient(90deg,#83efff,#52f5b0,#ffe680);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.hstat-l{
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:1.2px;
+  color:rgba(255,255,255,.58);
+  margin-top:5px;
+  font-weight:900;
+}
+
+/* CONTROLS */
+.ctrl{
+  position:sticky;
+  top:0;
+  z-index:30;
+  background:rgba(4,16,36,.76);
+  border-bottom:1px solid rgba(255,255,255,.13);
+  padding:11px 48px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+  backdrop-filter:blur(16px);
+}
+.sw{position:relative;flex:1;min-width:220px;max-width:450px}
+.sw input{
+  width:100%;
+  background:rgba(255,255,255,.94);
+  border:2px solid rgba(148,163,184,.25);
+  border-radius:16px;
+  padding:10px 12px 10px 40px;
+  font-family:"Be Vietnam Pro",sans-serif;
+  font-size:13px;
+  color:#0f172a;
+  outline:none;
+  transition:.18s ease;
+  font-weight:700;
+  box-shadow:0 12px 24px rgba(0,0,0,.10);
+}
+.sw input:focus{
+  border-color:rgba(55,213,255,.60);
+  box-shadow:0 12px 26px rgba(55,213,255,.16);
+}
+.sw input::placeholder{color:#64748b}
+.sw::before{
+  content:'🔍';
+  position:absolute;
+  left:14px;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:13px;
+  z-index:1;
+}
+.scnt{
+  font-size:12px;
+  color:rgba(236,247,255,.68);
+  white-space:nowrap;
+  font-weight:800;
+}
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tab{
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:999px;
+  font-family:"Be Vietnam Pro",sans-serif;
+  font-size:11.5px;
+  font-weight:900;
+  color:rgba(236,247,255,.72);
+  padding:7px 12px;
+  cursor:pointer;
+  transition:.16s ease;
+  white-space:nowrap;
+  box-shadow:0 10px 18px rgba(0,0,0,.10);
+}
+.tab:hover{
+  color:white!important;
+  transform:translateY(-1px);
+  border-color:rgba(55,213,255,.35);
+}
+.tab.on{
+  color:#06142e!important;
+  background:linear-gradient(135deg,#83efff,#52f5b0)!important;
+  border-color:transparent!important;
+  box-shadow:0 12px 24px rgba(55,213,255,.22);
+}
+
+/* SECTION */
+.body{
+  max-width:1240px;
+  margin:0 auto;
+  padding:30px 22px;
+}
+.section{margin-bottom:52px;scroll-margin-top:95px}
+.sh{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin-bottom:20px;
+  padding:18px;
+  border:1px solid rgba(255,255,255,.13);
+  border-radius:22px;
+  background:rgba(255,255,255,.085);
+  box-shadow:var(--shadow2);
+  backdrop-filter:blur(14px);
+  flex-wrap:wrap;
+}
+.si{
+  font-size:23px;
+  width:44px;
+  height:44px;
+  display:grid;
+  place-items:center;
+  border-radius:16px;
+  background:rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.14);
+}
+.st{
+  font-size:23px;
+  font-weight:900;
+  color:#f5fbff;
+  line-height:1.25;
+}
+.sd{
+  font-size:13px;
+  color:rgba(221,235,255,.70);
+  margin-top:5px;
+  font-weight:600;
+}
+.sbadge{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  border-radius:999px;
+  padding:7px 12px;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.4px;
+  text-transform:uppercase;
+  border:1px solid rgba(255,255,255,.12);
+}
+
+/* EXERCISE CARD */
+.ex{
+  background:rgba(255,255,255,.92);
+  color:#0f172a;
+  border:1px solid rgba(148,163,184,.22);
+  border-radius:22px;
+  margin-bottom:16px;
+  overflow:hidden;
+  border-left:5px solid;
+  transition:.18s ease;
+  box-shadow:0 8px 0 rgba(148,163,184,.12), 0 18px 35px rgba(15,23,42,.10);
+}
+.ex:hover{
+  transform:translateY(-2px);
+  border-color:rgba(55,213,255,.35);
+  box-shadow:0 10px 0 rgba(55,213,255,.10),0 20px 42px rgba(55,213,255,.12);
+}
+.ex-hdr{
+  display:flex;
+  align-items:flex-start;
+  gap:14px;
+  padding:18px 22px;
+  cursor:pointer;
+  user-select:none;
+}
+.ex-num{
+  font-family:"JetBrains Mono",monospace;
+  font-size:12px;
+  font-weight:800;
+  padding:5px 9px;
+  border-radius:10px;
+  flex-shrink:0;
+  margin-top:1px;
+  line-height:1.2;
+  border:1px solid rgba(148,163,184,.18);
+}
+.ex-body{flex:1;min-width:0}
+.ex-title{
+  font-size:16.5px;
+  font-weight:900;
+  color:#0f172a;
+  line-height:1.45;
+  margin-bottom:8px;
+}
+.ex-stmt{
+  font-size:13.5px;
+  color:#334155;
+  line-height:1.75;
+  background:
+    radial-gradient(420px 140px at 5% 0%, rgba(55,213,255,.10), transparent 60%),
+    rgba(241,245,249,.98);
+  border-radius:14px;
+  padding:11px 14px;
+  margin-bottom:8px;
+  border-left:3px solid rgba(29,140,255,.30);
+  font-weight:600;
+}
+.ex-stmt code{
+  font-family:"STIX Two Math","JetBrains Mono",monospace;
+  font-size:13px;
+  color:#075985;
+  background:rgba(55,213,255,.12);
+  padding:2px 6px;
+  border-radius:7px;
+}
+.ex-meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.diff{display:flex;gap:1px;color:#f59e0b;font-weight:900}
+.star{font-size:11px}
+.tag{
+  font-size:10.5px;
+  font-weight:900;
+  letter-spacing:.4px;
+  text-transform:uppercase;
+  padding:3px 8px;
+  border-radius:999px;
+  border:1px solid rgba(148,163,184,.14);
+}
+.ex-toggle{
+  font-size:20px;
+  color:#64748b;
+  transition:transform .25s;
+  flex-shrink:0;
+  margin-top:3px;
+}
+.ex.open .ex-toggle{transform:rotate(180deg)}
+
+/* SOLUTION PANEL */
+.sol{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .45s ease,padding .3s;
+  background:
+    radial-gradient(560px 240px at 5% 0%, rgba(55,213,255,.08), transparent 60%),
+    #f8fbff;
+  border-top:1px solid transparent;
+}
+.ex.open .sol{
+  max-height:12000px;
+  border-top-color:rgba(148,163,184,.22);
+  padding:24px 26px;
+}
+
+/* SOLUTION CONTENT */
+.sol-block{margin-bottom:20px}
+.sol-block:last-child{margin-bottom:0}
+.sol-lbl{
+  font-size:10.5px;
+  font-weight:900;
+  letter-spacing:1.2px;
+  text-transform:uppercase;
+  color:#64748b;
+  margin-bottom:9px;
+  display:flex;
+  align-items:center;
+  gap:7px;
+}
+.sol-lbl::before{
+  content:'';
+  display:inline-block;
+  width:4px;
+  height:15px;
+  border-radius:4px;
+  background:linear-gradient(180deg,#37d5ff,#52f5b0);
+  opacity:.95;
+}
+.sol-text{
+  font-size:14px;
+  color:#334155;
+  line-height:1.78;
+  font-weight:600;
+}
+.sol-text b{color:#0f172a;font-weight:900}
+.sol-text em{color:#b45309;font-style:normal;font-weight:900}
+.sol-text a{color:#1d4ed8}
+
+.fbox{
+  background:
+    radial-gradient(420px 140px at 5% 0%, rgba(55,213,255,.12), transparent 60%),
+    rgba(241,245,249,.98);
+  border-radius:14px;
+  padding:12px 15px;
+  font-family:"STIX Two Math","JetBrains Mono","Cambria Math","Noto Sans Math",serif;
+  font-size:14px;
+  color:#172033;
+  line-height:1.8;
+  margin:10px 0;
+  border-left:3px solid rgba(29,140,255,.35);
+  overflow-x:auto;
+  white-space:pre-wrap;
+}
+
+.steps{list-style:none;padding:0;margin:10px 0}
+.steps li{
+  display:flex;
+  gap:12px;
+  padding:10px 0;
+  border-bottom:1px dashed rgba(148,163,184,.22);
+  font-size:13.8px;
+  color:#334155;
+  line-height:1.68;
+  font-weight:600;
+}
+.steps li:last-child{border-bottom:none}
+.sn{
+  min-width:28px;
+  height:28px;
+  border-radius:50%;
+  background:linear-gradient(135deg, rgba(55,213,255,.20), rgba(82,245,176,.18));
+  color:#0f172a;
+  font-size:12px;
+  font-weight:900;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+  margin-top:1px;
+  border:1px solid rgba(148,163,184,.18);
+}
+
+.box{
+  border-radius:15px;
+  padding:13px 16px;
+  font-size:13.5px;
+  line-height:1.75;
+  margin:10px 0;
+  font-weight:700;
+}
+.box b{font-weight:900}
+.bwarn{background:rgba(255,107,138,.10);border:1px solid rgba(255,107,138,.28);color:#9f1239}
+.btip {background:rgba(55,213,255,.10);border:1px solid rgba(55,213,255,.28);color:#075985}
+.bkey {background:rgba(255,180,84,.12);border:1px solid rgba(255,180,84,.32);color:#92400e}
+.bgood{background:rgba(82,245,176,.10);border:1px solid rgba(82,245,176,.32);color:#047857}
+
+.eg{
+  background:rgba(241,245,249,.95);
+  border-radius:15px;
+  padding:14px 16px;
+  margin:10px 0;
+  font-size:13.5px;
+  color:#334155;
+  line-height:1.75;
+  border-left:3px solid rgba(82,245,176,.40);
+  font-weight:600;
+}
+.eg-t{
+  font-size:10.5px;
+  font-weight:900;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  color:#64748b;
+  margin-bottom:8px;
+}
+
+.ans-box{
+  background:linear-gradient(135deg, rgba(55,213,255,.12), rgba(82,245,176,.10));
+  border:1.5px solid rgba(148,163,184,.24);
+  border-radius:15px;
+  padding:14px 18px;
+  margin:14px 0;
+}
+.ans-t{
+  font-size:10.5px;
+  font-weight:900;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  color:#64748b;
+  margin-bottom:8px;
+}
+.ans-f{
+  font-family:"STIX Two Math","JetBrains Mono",monospace;
+  font-size:14px;
+  color:#0f172a;
+  font-weight:700;
+  line-height:1.7;
+}
+
+.hint-btn{
+  background:rgba(255,255,255,.72);
+  border:1px dashed rgba(148,163,184,.40);
+  border-radius:999px;
+  padding:8px 14px;
+  font-family:"Be Vietnam Pro",sans-serif;
+  font-size:12px;
+  color:#526176;
+  cursor:pointer;
+  margin:8px 0;
+  transition:.15s ease;
+  font-weight:900;
+}
+.hint-btn:hover{
+  border-color:rgba(55,213,255,.55);
+  color:#075985;
+  background:rgba(55,213,255,.10);
+}
+.hint-content{
+  display:none;
+  background:rgba(55,213,255,.10);
+  border:1px solid rgba(55,213,255,.20);
+  border-radius:14px;
+  padding:10px 14px;
+  font-size:13px;
+  color:#075985;
+  margin-top:6px;
+  font-weight:700;
+}
+.hint-content.show{display:block}
+
+.hidden{display:none!important}
+.nores{
+  text-align:center;
+  padding:60px;
+  color:rgba(236,247,255,.65);
+  font-size:15px;
+  font-weight:800;
+}
+
+/* FOOTER */
+.task-footer{
+  max-width:1240px;
+  margin:20px auto 0;
+  padding:0 22px;
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.task-footer a{
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 14px;
+  border-radius:999px;
+  background:rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.14);
+  color:#e9fbff;
+  font-weight:900;
+  font-size:13px;
+  box-shadow:0 12px 24px rgba(0,0,0,.14);
+}
+
+.task-footer a:hover{
+  background:rgba(55,213,255,.16);
+  border-color:rgba(55,213,255,.35);
+}
+
+@media (max-width:760px){
+  .hero{padding:30px 18px 26px}
+  .ht{font-size:25px}
+  .ctrl{padding:10px 14px}
+  .body{padding:20px 14px}
+  .sh{align-items:flex-start}
+  .ex-hdr{padding:16px}
+  .ex.open .sol{padding:18px 16px}
+}
+
+
+
+/* ═══════════════════════════════════════════════
+   TASK 07 PATCH — SCIENCE HORIZON SIDEBAR FORMAT
+   Keeps original exercise content, upgrades layout to Task 06 style.
+═══════════════════════════════════════════════ */
+:root{--sidebar-w:292px;}
+html{scroll-behavior:smooth;}
+body{display:block!important;padding-bottom:0!important;min-height:100vh;color:var(--ink);background:radial-gradient(900px 540px at 8% 8%,rgba(55,213,255,.22),transparent 60%),radial-gradient(850px 520px at 92% 12%,rgba(124,92,255,.22),transparent 60%),radial-gradient(850px 520px at 62% 95%,rgba(82,245,176,.12),transparent 60%),linear-gradient(135deg,#031024 0%,#071b3f 48%,#020712 100%);overflow-x:hidden;}
+body::before{z-index:-2!important;}body::after{z-index:-1!important;}
+.sh-logo-link{position:fixed!important;top:18px!important;right:22px!important;left:auto!important;z-index:1000!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;width:116px!important;height:116px!important;border-radius:28px!important;background:rgba(255,255,255,.92)!important;border:1px solid rgba(255,255,255,.40)!important;box-shadow:0 18px 40px rgba(0,0,0,.24)!important;backdrop-filter:blur(10px)!important;text-decoration:none!important;transition:transform .2s ease,filter .2s ease,box-shadow .2s ease!important;}
+.sh-logo-link:hover{transform:translateY(-2px) scale(1.03)!important;filter:brightness(1.05)!important;box-shadow:0 22px 52px rgba(55,213,255,.18)!important;}
+.sh-logo{width:92px!important;height:auto!important;display:block!important;}
+#progress-bar{position:fixed!important;top:0!important;left:var(--sidebar-w)!important;width:calc(100% - var(--sidebar-w))!important;height:4px!important;background:linear-gradient(90deg,var(--cyan),var(--green),var(--orange),var(--violet))!important;transform:scaleX(0);transform-origin:left;z-index:900!important;box-shadow:0 0 22px rgba(55,213,255,.45);}
+#sidebar{position:fixed;inset:0 auto 0 0;width:var(--sidebar-w);min-width:var(--sidebar-w);height:100vh;overflow-y:auto;padding:20px 16px 28px;background:rgba(4,16,36,.84);border-right:1px solid rgba(255,255,255,.13);box-shadow:20px 0 45px rgba(0,0,0,.18);backdrop-filter:blur(18px);z-index:600;}
+#sidebar::-webkit-scrollbar{width:5px;}#sidebar::-webkit-scrollbar-thumb{background:rgba(55,213,255,.38);border-radius:999px;}
+.sidebar-header{padding:4px 4px 18px;margin-bottom:14px;border-bottom:1px solid rgba(255,255,255,.12);}.book-title{font-size:12px;line-height:1.55;color:#f5fbff;font-weight:900;letter-spacing:-.01em;}.chapter-label{margin-top:8px;font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:rgba(189,243,255,.72);font-weight:900;}
+.sidebar-search{position:sticky;top:0;padding:0 0 12px;background:linear-gradient(180deg,rgba(4,16,36,.98),rgba(4,16,36,.76));z-index:2;}.sidebar-search input{width:100%;padding:10px 12px;border-radius:15px;border:2px solid rgba(148,163,184,.18);outline:none;background:rgba(255,255,255,.94);color:#0f172a;font-family:"Be Vietnam Pro",sans-serif;font-size:12.5px;font-weight:700;box-shadow:0 12px 24px rgba(0,0,0,.10);}.sidebar-search input:focus{border-color:rgba(55,213,255,.62);box-shadow:0 12px 26px rgba(55,213,255,.18);}
+#nav-list{list-style:none;display:flex;flex-direction:column;gap:3px;padding:0!important;margin:0!important;}#nav-list li{list-style:none;margin:0!important;}#nav-list a{display:block;text-decoration:none;border-radius:12px;padding:7px 9px;color:rgba(236,247,255,.72);font-size:12px;font-weight:700;line-height:1.35;transition:.15s ease;border-left:none!important;}#nav-list a:hover,#nav-list a.active{background:rgba(55,213,255,.13);color:#fff;transform:translateX(2px);}#nav-list .section-group a{margin-top:8px;color:#83efff;font-weight:900;text-transform:uppercase;font-size:11px;letter-spacing:.55px;}#nav-list .item a{padding-left:20px;color:rgba(221,235,255,.68);font-size:11.4px;}#nav-list li.nav-hidden{display:none!important;}
+#main{margin-left:var(--sidebar-w);min-height:100vh;padding-bottom:38px;}.hero{padding:50px 170px 38px 46px!important;margin:0!important;border-bottom:1px solid rgba(255,255,255,.13);}.hero .hl{margin-bottom:12px;}.hero .ht{max-width:980px;}.hero .hs{max-width:920px;}.ctrl{top:0!important;padding:11px 46px!important;margin:0!important;border-bottom:1px solid rgba(255,255,255,.13);}.body{max-width:1240px;margin:0 auto;padding:30px 22px;}.section{scroll-margin-top:78px;}.ex{scroll-margin-top:88px;}.nores{max-width:960px;margin:20px auto;}.task-footer{max-width:1240px;margin:24px auto 0;padding:0 22px 30px;}
+#backtotop{position:fixed;right:24px;bottom:24px;width:46px;height:46px;border-radius:50%;border:1px solid rgba(255,255,255,.20);background:linear-gradient(135deg,var(--cyan),var(--green));color:#06142e;font-weight:900;font-size:20px;box-shadow:0 16px 34px rgba(0,0,0,.26);cursor:pointer;opacity:0;pointer-events:none;transform:translateY(10px);transition:.2s ease;z-index:850;}#backtotop.visible{opacity:1;pointer-events:auto;transform:translateY(0);}
+@media (max-width:900px){:root{--sidebar-w:0px;}#sidebar{display:none;}#main{margin-left:0;}#progress-bar{left:0!important;width:100%!important;}.hero{padding:138px 18px 28px!important;}.ctrl{padding:10px 14px!important;}.body{padding:20px 14px;}.sh-logo-link{top:16px!important;right:18px!important;left:auto!important;width:104px!important;height:104px!important;border-radius:24px!important;}.sh-logo{width:82px!important;}}
+
+  
+
+/* TASK 08 — OP / EP PATCH */
+.hero::before{
+  content:"min f(x)  ·  g(x,x̄) ≥ 0  ·  Sol(EP)  ·  Ky Fan  ·  Stability" !important;
+}
+.mjx-container{overflow-x:auto; overflow-y:hidden; max-width:100%;}
+.fbox mjx-container, .ans-f mjx-container{font-size:106%!important;}
+.s4-badge{background:rgba(124,92,255,.14)!important;color:#c4b5fd!important;}
+.ex-stmt .math-note{display:block;margin-top:8px;color:#475569;font-weight:700;}
+.mini-table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.2px;color:#334155;font-weight:650;overflow:hidden;border-radius:14px;}
+.mini-table th,.mini-table td{border:1px solid rgba(148,163,184,.24);padding:9px 10px;text-align:left;vertical-align:top;}
+.mini-table th{background:rgba(55,213,255,.12);color:#0f172a;font-weight:900;}
+.mini-table td{background:rgba(248,251,255,.85);}
+
+  </style>
+</head>
+<body>
+
+<a href="https://abelhoangloc.github.io/Abel_Science_Horizon/" class="sh-logo-link" aria-label="Science Horizon Home">
+  <img src="../assets/logo-SH.png" class="sh-logo" alt="Science Horizon">
+</a>
+
+<div id="progress-bar"></div>
+
+<aside id="sidebar">
+  <div class="sidebar-header">
+    <div class="book-title">Math for PhD · Variational Analysis, Optimization &amp; Equilibrium Problems</div>
+    <div class="chapter-label">Lesson 01 · Task 08 / 36</div>
+  </div>
+  <div class="sidebar-search">
+    <input type="text" placeholder="Tìm OP, EP, Ky Fan, stability…" id="nav-search-input">
+  </div>
+  <nav><ul id="nav-list">
+    <li class="section-group" data-cat="s1"><a href="#part-op">Phần I — Bài toán tối ưu (OP)</a></li>
+    <li class="item" data-cat="s1"><a href="#op-1">1.1 · Dữ liệu của bài toán tối ưu</a></li>
+    <li class="item" data-cat="s1"><a href="#op-2">1.2 · Nghiệm tối ưu toàn cục</a></li>
+    <li class="item" data-cat="s1"><a href="#op-3">1.3 · Viết điều kiện tối ưu bằng song hàm</a></li>
+
+    <li class="section-group" data-cat="s2"><a href="#part-ep">Phần II — Bài toán cân bằng (EP)</a></li>
+    <li class="item" data-cat="s2"><a href="#ep-1">2.1 · Định nghĩa bài toán cân bằng</a></li>
+    <li class="item" data-cat="s2"><a href="#ep-2">2.2 · Tập nghiệm Sol(EP)</a></li>
+    <li class="item" data-cat="s2"><a href="#ep-3">2.3 · Ky Fan và quy ước ký hiệu</a></li>
+
+    <li class="section-group" data-cat="s3"><a href="#part-relation">Phần III — OP là trường hợp riêng của EP</a></li>
+    <li class="item" data-cat="s3"><a href="#rel-1">3.1 · Xây dựng song hàm từ hàm mục tiêu</a></li>
+    <li class="item" data-cat="s3"><a href="#rel-2">3.2 · Sơ đồ bao hàm</a></li>
+    <li class="item" data-cat="s3"><a href="#rel-3">3.3 · Ví dụ minh họa một chiều</a></li>
+
+    <li class="section-group" data-cat="s4"><a href="#part-stability">Phần IV — Tham số, ổn định &amp; điều kiện tối ưu</a></li>
+    <li class="item" data-cat="s4"><a href="#stab-1">4.1 · Bài toán cân bằng phụ thuộc tham số</a></li>
+    <li class="item" data-cat="s4"><a href="#stab-2">4.2 · Tính ổn định nghiệm</a></li>
+    <li class="item" data-cat="s4"><a href="#stab-3">4.3 · Điều kiện bậc nhất qua nón tiếp tuyến</a></li>
+  </ul></nav>
+</aside>
+
+<main id="main">
+  <div class="hero">
+    <div class="hl">Science Horizon · Task 08 · Foundational Notes</div>
+    <div class="ht">Bài toán tối ưu và bài toán cân bằng<br><span>Optimization Problem · Equilibrium Problem · Stability</span></div>
+    <div class="hs">Bản ghi chú chuẩn hóa từ hình viết tay: bắt đầu từ bài toán tối ưu \((OP)\), chuyển sang song hàm, định nghĩa bài toán cân bằng \((EP)\), rồi mở rộng sang bài toán phụ thuộc tham số và điều kiện tối ưu bậc nhất.</div>
+    <div class="hpills">
+      <span class="hp">Optimization Problem</span><span class="hp">Equilibrium Problem</span><span class="hp">Bifunction</span><span class="hp">Ky Fan</span><span class="hp">Stability</span>
+    </div>
+    <div class="hstats"><div class="hstat"><div class="hstat-n">12</div><div class="hstat-l">Mục học</div></div><div class="hstat"><div class="hstat-n">4</div><div class="hstat-l">Phần</div></div><div class="hstat"><div class="hstat-n">EP</div><div class="hstat-l">Khung tổng quát</div></div></div>
+  </div>
+
+  <div class="ctrl">
+    <div class="sw"><input id="q" oninput="doSearch()" placeholder="Tìm nội dung... (OP, EP, bifunction, Ky Fan, stability, tangent cone)" type="text"/></div>
+    <span class="scnt" id="scnt"></span>
+    <div class="tabs">
+      <button class="tab on" onclick="filt('all',this)">Tất cả</button>
+      <button class="tab" onclick="filt('s1',this)">OP</button>
+      <button class="tab" onclick="filt('s2',this)">EP</button>
+      <button class="tab" onclick="filt('s3',this)">OP → EP</button>
+      <button class="tab" onclick="filt('s4',this)">Stability</button>
+    </div>
+  </div>
+
+  <div class="body" id="mb">
+    <div class="section" data-cat="s1" id="part-op">
+      <div class="sh"><span class="si">🎯</span><div><div class="st">Phần I — Bài toán tối ưu \((OP)\)</div><div class="sd">Từ hàm mục tiêu, tập ràng buộc, đến điều kiện nghiệm tối ưu.</div></div><span class="sbadge" style="background:var(--s1l);color:var(--s1)">3 mục</span></div>
+
+      <div class="ex open" data-cat="s1" data-s="optimization problem OP min f x constraint Omega scalar" id="op-1" style="border-left-color:var(--s1)">
+        <div class="ex-hdr" onclick="tog(this)"><div class="ex-num" style="background:var(--s1l);color:var(--s1)">1.1</div><div class="ex-body"><div class="ex-title">Dữ liệu của bài toán tối ưu</div><div class="ex-stmt">Cho hàm mục tiêu vô hướng và tập ràng buộc. Bài toán là tìm điểm trong tập ràng buộc sao cho giá trị hàm nhỏ nhất.</div><div class="ex-meta"><span class="tag" style="background:var(--s1l);color:var(--s1)">OP · scalar objective</span></div></div><div class="ex-toggle">▾</div></div>
+        <div class="sol"><div class="sol-block"><div class="sol-lbl">Công thức chuẩn</div><div class="fbox">Cho \(f:\mathbb{R}^{n}\to\mathbb{R}\) và \(\Omega\subset \mathbb{R}^{n}\).<br><br>\[
+(OP)\qquad \min_{x\in\Omega} f(x),
+\]
+hoặc viết đầy đủ hơn:<br>
+\[
+(OP)\qquad \min f(x) \quad \text{s.t. } x\in \Omega.
+\]</div></div><div class="sol-block"><div class="sol-lbl">Ý nghĩa</div><div class="sol-text"><b>\(f\)</b> là hàm mục tiêu cần tối thiểu hóa. <b>\(\Omega\)</b> là tập các điểm được phép chọn, còn gọi là tập khả thi hay feasible set. Nếu \(x\notin\Omega\), điểm đó không được xét trong bài toán.</div></div></div>
+      </div>
+
+      <div class="ex" data-cat="s1" data-s="global minimizer optimal solution xbar f(x)>=f(xbar)" id="op-2" style="border-left-color:var(--s1)">
+        <div class="ex-hdr" onclick="tog(this)"><div class="ex-num" style="background:var(--s1l);color:var(--s1)">1.2</div><div class="ex-body"><div class="ex-title">Nghiệm tối ưu toàn cục</div><div class="ex-stmt">Một điểm \(\bar{x}\) là nghiệm tối ưu nếu không có điểm khả thi nào cho giá trị hàm nhỏ hơn nó.</div><div class="ex-meta"><span class="tag" style="background:var(--s1l);color:var(--s1)">global minimizer</span></div></div><div class="ex-toggle">▾</div></div>
+        <div class="sol"><div class="sol-block"><div class="sol-lbl">Định nghĩa</div><div class="fbox">Một điểm \(\bar{x}\in\Omega\) được gọi là <b>nghiệm tối ưu toàn cục</b> của \((OP)\) nếu
+\[
+f(x)\ge f(\bar{x}),\qquad \forall x\in\Omega.
+\]
+Tương đương,
+\[
+f(x)-f(\bar{x})\ge 0,\qquad \forall x\in\Omega.
+\]</div></div><div class="box bkey">🔑 <b>Cách đọc:</b> \(\bar{x}\) thắng tất cả các điểm khác trong \(\Omega\). Mọi \(x\in\Omega\) đều cho giá trị \(f(x)\) lớn hơn hoặc bằng \(f(\bar{x})\).</div></div>
+      </div>
+
+      <div class="ex" data-cat="s1" data-s="bifunction g x xbar f(x)-f(xbar)" id="op-3" style="border-left-color:var(--s1)">
+        <div class="ex-hdr" onclick="tog(this)"><div class="ex-num" style="background:var(--s1l);color:var(--s1)">1.3</div><div class="ex-body"><div class="ex-title">Viết điều kiện tối ưu bằng song hàm</div><div class="ex-stmt">Điều kiện \(f(x)-f(\bar{x})\ge0\) có thể được viết thành điều kiện cân bằng bằng cách tạo một song hàm.</div><div class="ex-meta"><span class="tag" style="background:var(--s1l);color:var(--s1)">bifunction</span></div></div><div class="ex-toggle">▾</div></div>
+        <div class="sol"><div class="sol-block"><div class="sol-lbl">Đặt song hàm</div><div class="fbox">Đặt
+\[
+g(x,\bar{x}) := f(x)-f(\bar{x}).
+\]
+Khi đó điều kiện tối ưu trở thành
+\[
+g(x,\bar{x})\ge 0,\qquad \forall x\in\Omega.
+\]</div></div><div class="sol-block"><div class="sol-lbl">Vì sao gọi là song hàm?</div><div class="sol-text">Vì \(g\) phụ thuộc vào hai biến: biến so sánh \(x\) và điểm ứng viên nghiệm \(\bar{x}\). Về mặt hình thức, ta có</div><div class="fbox">\[
+g:\Omega\times\Omega\to\mathbb{R},\qquad g(x,y)=f(x)-f(y).
+\]</div></div></div>
+      </div>
+    </div>
+
+    <div class="section" data-cat="s2" id="part-ep">
+      <div class="sh"><span class="si">⚖️</span><div><div class="st">Phần II — Bài toán cân bằng \((EP)\)</div><div class="sd">Bài toán cân bằng tổng quát hóa tối ưu, bất đẳng thức biến phân, điểm bất động và cân bằng Nash.</div></div><span class="sbadge" style="background:var(--s2l);color:var(--s2)">3 mục</span></div>
+
+      <div class="ex open" data-cat="s2" data-s="equilibrium problem EP find xbar K g(x,xbar)>=0" id="ep-1" style="border-left-color:var(--s2)">
+        <div class="ex-hdr" onclick="tog(this)"><div class="ex-num" style="background:var(--s2l);color:var(--s2)">2.1</div><div class="ex-body"><div class="ex-title">Định nghĩa bài toán cân bằng</div><div class="ex-stmt">Cho một tập \(K\) và một song hàm \(g\). Ta tìm một điểm \(\bar{x}\in K\) sao cho mọi điểm khác trong \(K\) đều “không đánh bại” được \(\bar{x}\) theo tiêu chuẩn \(g\).</div><div class="ex-meta"><span class="tag" style="background:var(--s2l);color:var(--s2)">EP definition</span></div></div><div class="ex-toggle">▾</div></div>
+        <div class="sol"><div class="sol-block"><div class="sol-lbl">Công thức theo quy ước của ghi chú</div><div class="fbox">Cho \(K\subset\mathbb{R}^{n}\) và song hàm
+\[
+g:K\times K\to\mathbb{R}.
+\]
+Bài toán cân bằng là:
+\[
+(EP)\qquad \text{Tìm }\bar{x}\in K\text{ sao cho }g(x,\bar{x})\ge 0,\quad \forall x\in K.
+\]</div></div><div class="box btip">💡 <b>Trực giác:</b> \(\bar{x}\) là trạng thái cân bằng vì khi so với bất kỳ \(x\in K\), điều kiện \(g(x,\bar{x})\ge0\) vẫn được giữ. Không có điểm khả thi nào phá vỡ trạng thái đó.</div></div>
+      </div>
+
+      <div class="ex" data-cat="s2" data-s="solution set Sol EP set of equilibria" id="ep-2" style="border-left-color:var(--s2)">
+        <div class="ex-hdr" onclick="tog(this)"><div class="ex-num" style="background:var(--s2l);color:var(--s2)">2.2</div><div class="ex-body"><div class="ex-title">Tập nghiệm của bài toán cân bằng</div><div class="ex-stmt">Tất cả các nghiệm cân bằng được gom lại thành một tập nghiệm.</div><div class="ex-meta"><span class="tag" style="background:var(--s2l);color:var(--s2)">solution map</span></div></div><div class="ex-toggle">▾</div></div>
+        <div class="sol"><div class="sol-block"><div class="sol-lbl">Ký hiệu</div><div class="fbox">\[
+\operatorname{Sol}(EP)
+=
+\left\{\bar{x}\in K:\ g(x,\bar{x})\ge 0,\ \forall x\in K\right\}.
+\]</div></div><div class="sol-block"><div class="sol-lbl">Nhận xét</div><div class="sol-text">Tập nghiệm có thể rỗng, có một nghiệm, hoặc có nhiều nghiệm. Trong các bài toán ổn định, ta thường nghiên cứu sự thay đổi của tập \(\operatorname{Sol}(EP)\) khi dữ liệu bài toán bị nhiễu.</div></div></div>
+      </div>
+
+      <div class="ex" data-cat="s2" data-s="Ky Fan inequality convention g(xbar,x) g(x,xbar)" id="ep-3" style="border-left-color:var(--s2)">
+        <div class="ex-hdr" onclick="tog(this)"><div class="ex-num" style="background:var(--s2l);color:var(--s2)">2.3</div><div class="ex-body"><div class="ex-title">Ky Fan và quy ước ký hiệu</div><div class="ex-stmt">Trong sách khác nhau, bài toán cân bằng có thể được viết theo hai chiều khác nhau của song hàm.</div><div class="ex-meta"><span class="tag" style="background:var(--s2l);color:var(--s2)">Ky Fan inequality</span></div></div><div class="ex-toggle">▾</div></div>
+        <div class="sol"><div class="sol-block"><div class="sol-lbl">Hai quy ước thường gặp</div><table class="mini-table"><tr><th>Quy ước</th><th>Dạng bài toán</th><th>Ghi chú</th></tr><tr><td>Quy ước trong ghi chú này</td><td>\(g(x,\bar{x})\ge0,\ \forall x\in K\)</td><td>Phù hợp trực tiếp với tối ưu: \(g(x,\bar{x})=f(x)-f(\bar{x})\).</td></tr><tr><td>Quy ước phổ biến trong nhiều tài liệu EP</td><td>\(F(\bar{x},y)\ge0,\ \forall y\in K\)</td><td>Chỉ khác cách đặt tên và thứ tự biến.</td></tr></table></div><div class="box bwarn">⚠ <b>Lưu ý khi đọc sách:</b> Luôn kiểm tra tác giả dùng \(g(x,\bar{x})\) hay \(g(\bar{x},x)\). Hai cách đều đúng nếu giữ nhất quán. Trong file này, mình giữ đúng quy ước từ ghi chú của bạn: \(g(x,\bar{x})\ge0\).</div></div>
+      </div>
+    </div>
+
+    <div class="section" data-cat="s3" id="part-relation">
+      <div class="sh"><span class="si">🔁</span><div><div class="st">Phần III — Từ \((OP)\) sang \((EP)\)</div><div class="sd">Bài toán tối ưu là một trường hợp riêng của bài toán cân bằng.</div></div><span class="sbadge" style="background:var(--s3l);color:var(--s3)">3 mục</span></div>
+
+      <div class="ex open" data-cat="s3" data-s="g(x,y)=f(x)-f(y) OP special case EP" id="rel-1" style="border-left-color:var(--s3)">
+        <div class="ex-hdr" onclick="tog(this)"><div class="ex-num" style="background:var(--s3l);color:var(--s3)">3.1</div><div class="ex-body"><div class="ex-title">Xây dựng song hàm từ hàm mục tiêu</div><div class="ex-stmt">Từ một bài toán tối ưu, ta tạo một bài toán cân bằng bằng cách so sánh giá trị hàm tại hai điểm.</div><div class="ex-meta"><span class="tag" style="background:var(--s3l);color:var(--s3)">OP → EP</span></div></div><div class="ex-toggle">▾</div></div>
+        <div class="sol"><div class="sol-block"><div class="sol-lbl">Cách chuyển</div><div class="fbox">Bắt đầu từ
+\[
+\min_{x\in\Omega}f(x).
+\]
+Đặt
+\[
+K:=\Omega,\qquad g(x,y):=f(x)-f(y).
+\]
+Khi đó \(\bar{x}\in\Omega\) là nghiệm tối ưu khi và chỉ khi
+\[
+g(x,\bar{x})=f(x)-f(\bar{x})\ge0,\qquad \forall x\in\Omega.
+\]</div></div></div>
+      </div>
+
+      <div class="ex" data-cat="s3" data-s="optimization is special case equilibrium problem inclusion" id="rel-2" style="border-left-color:var(--s3)">
+        <div class="ex-hdr" onclick="tog(this)"><div class="ex-num" style="background:var(--s3l);color:var(--s3)">3.2</div><div class="ex-body"><div class="ex-title">Sơ đồ bao hàm</div><div class="ex-stmt">Bài toán cân bằng là khung rộng hơn. Tối ưu chỉ là một mô hình đặc biệt bên trong nó.</div><div class="ex-meta"><span class="tag" style="background:var(--s3l);color:var(--s3)">generalization</span></div></div><div class="ex-toggle">▾</div></div>
+        <div class="sol"><div class="sol-block"><div class="sol-lbl">Cách viết chính xác</div><div class="fbox">\[
+(OP)\quad \text{là một trường hợp riêng của}\quad (EP).
+\]</div><div class="sol-text">Không nên hiểu \((OP)\subset(EP)\) như bao hàm tập hợp theo nghĩa đen. Cách hiểu đúng là: mỗi bài toán tối ưu có thể được viết thành một bài toán cân bằng với lựa chọn song hàm phù hợp.</div></div><div class="box bgood">✓ Khung \((EP)\) còn bao quát nhiều mô hình khác: bất đẳng thức biến phân, bài toán điểm bất động, bài toán Nash equilibrium và các dạng cân bằng trong kinh tế toán.</div></div>
+      </div>
+
+      <div class="ex" data-cat="s3" data-s="example f(x)=x^2 Omega R minimizer xbar 0" id="rel-3" style="border-left-color:var(--s3)">
+        <div class="ex-hdr" onclick="tog(this)"><div class="ex-num" style="background:var(--s3l);color:var(--s3)">3.3</div><div class="ex-body"><div class="ex-title">Ví dụ minh họa một chiều</div><div class="ex-stmt">Xem trực tiếp cách một bài toán tối ưu quen thuộc trở thành bài toán cân bằng.</div><div class="ex-meta"><span class="tag" style="background:var(--s3l);color:var(--s3)">example</span></div></div><div class="ex-toggle">▾</div></div>
+        <div class="sol"><div class="sol-block"><div class="sol-lbl">Ví dụ</div><div class="fbox">Xét
+\[
+f(x)=x^{2},\qquad \Omega=\mathbb{R}.
+\]
+Bài toán tối ưu là
+\[
+\min_{x\in\mathbb{R}}x^{2}.
+\]
+Nghiệm là \(\bar{x}=0\), vì
+\[
+x^{2}\ge0=f(0),\qquad \forall x\in\mathbb{R}.
+\]</div></div><div class="sol-block"><div class="sol-lbl">Viết dưới dạng EP</div><div class="fbox">Đặt
+\[
+g(x,y)=f(x)-f(y)=x^{2}-y^{2}.
+\]
+Khi \(\bar{x}=0\), ta có
+\[
+g(x,0)=x^{2}-0=x^{2}\ge0,
+\qquad \forall x\in\mathbb{R}.
+\]
+Vậy \(0\in\operatorname{Sol}(EP)\).</div></div></div>
+      </div>
+    </div>
+
+    <div class="section" data-cat="s4" id="part-stability">
+      <div class="sh"><span class="si">🛰️</span><div><div class="st">Phần IV — Tham số, ổn định và điều kiện tối ưu</div><div class="sd">Từ bài toán bị nhiễu \((EP_w)\) đến điều kiện bậc nhất qua nón tiếp tuyến.</div></div><span class="sbadge s4-badge">3 mục</span></div>
+
+      <div class="ex open" data-cat="s4" data-s="parametric equilibrium problem EP(w) K(w) g(x,xbar,w)" id="stab-1" style="border-left-color:var(--violet)">
+        <div class="ex-hdr" onclick="tog(this)"><div class="ex-num" style="background:rgba(124,92,255,.14);color:#c4b5fd">4.1</div><div class="ex-body"><div class="ex-title">Bài toán cân bằng phụ thuộc tham số</div><div class="ex-stmt">Khi dữ liệu bài toán thay đổi theo tham số \(w\), ta thu được một họ bài toán cân bằng.</div><div class="ex-meta"><span class="tag" style="background:rgba(124,92,255,.14);color:#7c5cff">parametric EP</span></div></div><div class="ex-toggle">▾</div></div>
+        <div class="sol"><div class="sol-block"><div class="sol-lbl">Công thức</div><div class="fbox">Cho tham số \(w\in W\). Bài toán cân bằng phụ thuộc tham số là:
+\[
+(EP_w)\qquad \text{Tìm }\bar{x}_w\in K(w)\text{ sao cho}
+\]
+\[
+g(x,\bar{x}_w,w)\ge0,\qquad \forall x\in K(w).
+\]
+Tập nghiệm:
+\[
+\operatorname{Sol}(EP_w)
+=
+\left\{\bar{x}_w\in K(w):g(x,\bar{x}_w,w)\ge0,\ \forall x\in K(w)\right\}.
+\]</div></div><div class="sol-block"><div class="sol-lbl">Bài toán gốc</div><div class="fbox">Khi \(w=0\), ta có bài toán gốc:
+\[
+(EP_0)\qquad g(x,\bar{x},0)\ge0,\qquad \forall x\in K(0).
+\]</div></div></div>
+      </div>
+
+      <div class="ex" data-cat="s4" data-s="stability solution convergence w to 0 Sol EPw to Sol EP0" id="stab-2" style="border-left-color:var(--violet)">
+        <div class="ex-hdr" onclick="tog(this)"><div class="ex-num" style="background:rgba(124,92,255,.14);color:#c4b5fd">4.2</div><div class="ex-body"><div class="ex-title">Tính ổn định nghiệm</div><div class="ex-stmt">Ta muốn biết nghiệm của bài toán bị nhiễu có tiến về nghiệm của bài toán ban đầu hay không khi nhiễu nhỏ dần.</div><div class="ex-meta"><span class="tag" style="background:rgba(124,92,255,.14);color:#7c5cff">stability</span></div></div><div class="ex-toggle">▾</div></div>
+        <div class="sol"><div class="sol-block"><div class="sol-lbl">Câu hỏi ổn định</div><div class="fbox">Khi
+\[
+w\to0,
+\]
+ta nghiên cứu quan hệ giữa
+\[
+\operatorname{Sol}(EP_w)\quad \text{và}\quad \operatorname{Sol}(EP_0).
+\]
+Một cách viết trực giác là
+\[
+\operatorname{Sol}(EP_w)\to \operatorname{Sol}(EP_0)\qquad \text{khi }w\to0.
+\]</div></div><div class="box btip">💡 <b>Hiểu nhẹ nhàng:</b> nếu bài toán chỉ bị thay đổi rất ít, nghiệm mới không nên nhảy quá xa khỏi nghiệm cũ. Trong ngôn ngữ giải tích biến phân, đây liên quan đến tính nửa liên tục của ánh xạ nghiệm và tính ổn định của nghiệm.</div></div>
+      </div>
+
+      <div class="ex" data-cat="s4" data-s="first order condition tangent cone derivative D_x g xbar xbar" id="stab-3" style="border-left-color:var(--violet)">
+        <div class="ex-hdr" onclick="tog(this)"><div class="ex-num" style="background:rgba(124,92,255,.14);color:#c4b5fd">4.3</div><div class="ex-body"><div class="ex-title">Điều kiện bậc nhất qua nón tiếp tuyến</div><div class="ex-stmt">Nếu \(g\) khả vi theo biến thứ nhất và \(g(\bar{x},\bar{x})=0\), điều kiện cân bằng dẫn tới điều kiện đạo hàm theo các hướng khả thi.</div><div class="ex-meta"><span class="tag" style="background:rgba(124,92,255,.14);color:#7c5cff">optimality condition</span></div></div><div class="ex-toggle">▾</div></div>
+        <div class="sol"><div class="sol-block"><div class="sol-lbl">Cố định nghiệm ứng viên</div><div class="fbox">Với \(\bar{x}\in K\), đặt
+\[
+G_{\bar{x}}(x):=g(x,\bar{x}).
+\]
+Nếu \(\bar{x}\) là nghiệm EP và \(g(\bar{x},\bar{x})=0\), thì
+\[
+G_{\bar{x}}(x)\ge G_{\bar{x}}(\bar{x}),\qquad \forall x\in K.
+\]
+Nghĩa là \(\bar{x}\) là điểm cực tiểu của hàm \(x\mapsto g(x,\bar{x})\) trên \(K\).</div></div><div class="sol-block"><div class="sol-lbl">Điều kiện bậc nhất</div><div class="fbox">Nếu \(g\) khả vi theo biến thứ nhất tại \((\bar{x},\bar{x})\), thì điều kiện cần bậc nhất là
+\[
+D_{1}g(\bar{x},\bar{x})(d)\ge0,
+\qquad \forall d\in T_{K}(\bar{x}),
+\]
+trong đó \(T_K(\bar{x})\) là nón tiếp tuyến của \(K\) tại \(\bar{x}\).<br><br>Nếu dùng gradient, ta viết:
+\[
+\langle \nabla_{1}g(\bar{x},\bar{x}),d\rangle\ge0,
+\qquad \forall d\in T_{K}(\bar{x}).
+\]</div></div><div class="sol-block"><div class="sol-lbl">Dạng pháp tuyến</div><div class="fbox">Điều kiện trên tương đương với
+\[
+-\nabla_{1}g(\bar{x},\bar{x})\in N_{K}(\bar{x}),
+\]
+nếu dùng nón pháp tuyến phù hợp với nón tiếp tuyến.</div></div><div class="box bgood">✓ Đây là cầu nối giữa bài toán cân bằng và giải tích biến phân: từ điều kiện toàn cục \(g(x,\bar{x})\ge0\) ta đi đến điều kiện vi phân cục bộ qua \(T_K\) và \(N_K\).</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nores hidden" id="nores"><div style="font-size:36px;margin-bottom:12px">🔍</div>Không tìm thấy nội dung phù hợp.</div>
+
+  <div class="task-footer"><a href="../task-08/">← Task 08</a><a href="../">↑ Lesson 01 · Variational Analysis</a><a href="../task-10/">Task 10 →</a></div>
+</main>
+<button id="backtotop" aria-label="Back to top">↑</button>
+
+<script>
+
+let curCat='all';
+const catColors={s1:'var(--s1)',s2:'var(--s2)',s3:'var(--s3)',s4:'var(--violet)',all:'var(--ink)'};
+
+function tog(hdr){hdr.closest('.ex').classList.toggle('open')}
+
+function filt(cat,btn){
+  curCat=cat;
+  document.querySelectorAll('.tab').forEach(b=>{b.classList.remove('on');b.style.background='';b.style.color='';});
+  btn.classList.add('on');
+  btn.style.background=catColors[cat]||'var(--ink)';
+  btn.style.color=cat==='all'?'#06142e':'white';
+  doSearch();
+}
+
+function doSearch(){
+  const q=(document.getElementById('q')?.value||'').toLowerCase().trim();
+  let vis=0;
+  document.querySelectorAll('.ex').forEach(ex=>{
+    const sec=ex.closest('.section');
+    const cats=(ex.dataset.cat||'').split(' ');
+    const tabOk=curCat==='all'||cats.includes(curCat)||(sec&&sec.dataset.cat===curCat);
+    if(!tabOk){ex.style.display='none';return;}
+    if(!q){ex.style.display='';vis++;return;}
+    const txt=((ex.dataset.s||'')+' '+ex.textContent).toLowerCase();
+    if(txt.includes(q)){ex.style.display='';vis++;}
+    else ex.style.display='none';
+  });
+  document.querySelectorAll('.section').forEach(s=>{
+    const secOk=curCat==='all'||s.dataset.cat===curCat;
+    const any=[...s.querySelectorAll('.ex')].some(e=>e.style.display!=='none');
+    s.style.display=(secOk&&any)?'':'none';
+  });
+  document.getElementById('nores').classList.toggle('hidden',vis>0||!q);
+  document.getElementById('scnt').textContent=q?`${vis} mục`:'12 mục';
+}
+
+const progressBar = document.getElementById('progress-bar');
+const backToTop = document.getElementById('backtotop');
+const navLinks = Array.from(document.querySelectorAll('#nav-list a'));
+const navSearch = document.getElementById('nav-search-input');
+function updateProgress(){
+  const h=document.documentElement.scrollHeight-window.innerHeight;
+  const pct=h>0?window.scrollY/h:0;
+  if(progressBar)progressBar.style.transform=`scaleX(${pct})`;
+  if(backToTop)backToTop.classList.toggle('visible',window.scrollY>500);
+}
+function setActiveNav(){
+  const targets=navLinks.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
+  let current=targets[0];
+  for(const t of targets){const top=t.getBoundingClientRect().top;if(top<=120)current=t;else break;}
+  navLinks.forEach(a=>a.classList.toggle('active',current&&a.getAttribute('href')==='#'+current.id));
+}
+window.addEventListener('scroll',()=>{updateProgress();setActiveNav();},{passive:true});
+window.addEventListener('load',()=>{updateProgress();setActiveNav();doSearch();});
+if(backToTop){backToTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));}
+navLinks.forEach(a=>{a.addEventListener('click',()=>{const target=document.querySelector(a.getAttribute('href'));if(target&&target.classList.contains('ex'))target.classList.add('open');});});
+if(navSearch){navSearch.addEventListener('input',()=>{const q=navSearch.value.toLowerCase().trim();document.querySelectorAll('#nav-list li').forEach(li=>{li.classList.toggle('nav-hidden',q&&!li.textContent.toLowerCase().includes(q));});});}
+
+</script>
+</body>
+</html>
