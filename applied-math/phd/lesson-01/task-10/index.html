@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <link rel="stylesheet" href="../assets/brand.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Điều kiện tối ưu kiểu Mordukhovich cho bài toán cân bằng vectơ · Science Horizon</title>
+
+  <!-- Fonts + MathJax -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;600;700&family=STIX+Two+Math&display=swap" rel="stylesheet">
+
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']]
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+
+  <style>
+    :root{
+      --sidebar-w:292px;
+      --space:#06142e; --deep:#071b3f; --void:#020712;
+      --cyan:#37d5ff; --violet:#7c5cff; --green:#16a34a;
+      --gold:#c49a2a; --gold2:#f0c040; --pink:#ff70b8;
+      --ink:#1a1a2e; --muted:#5c5c7a; --page:#fffefb; --cream:#f6f3ed;
+      --line:#e2ddd5; --blue:#2563eb; --red:#dc2626; --purple:#7c3aed;
+      --paper:rgba(255,255,255,.96);
+      --shadow:0 24px 70px rgba(0,0,0,.30);
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      min-height:100vh;
+      color:#ecf7ff;
+      font-family:"Be Vietnam Pro",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:
+        radial-gradient(900px 540px at 8% 8%, rgba(55,213,255,.22), transparent 60%),
+        radial-gradient(850px 520px at 92% 12%, rgba(124,92,255,.22), transparent 60%),
+        radial-gradient(850px 520px at 62% 95%, rgba(82,245,176,.12), transparent 60%),
+        linear-gradient(135deg,#031024 0%,#071b3f 48%,#020712 100%);
+      overflow-x:hidden;
+    }
+    body::before{
+      content:"";
+      position:fixed; inset:0; z-index:-2; opacity:.35;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,.82) 1px, transparent 1.6px),
+        radial-gradient(circle, rgba(55,213,255,.62) 1px, transparent 1.5px),
+        radial-gradient(circle, rgba(82,245,176,.50) 1px, transparent 1.5px);
+      background-size:72px 72px,118px 118px,164px 164px;
+      background-position:0 0,34px 58px,90px 26px;
+    }
+    body::after{
+      content:"";
+      position:fixed; right:-390px; top:130px;
+      width:1080px; height:290px; border-radius:50%;
+      border:3px solid rgba(55,213,255,.14);
+      border-left-color:rgba(82,245,176,.42);
+      transform:rotate(-17deg); z-index:-1; pointer-events:none;
+    }
+
+    .sh-logo-link{
+      position:fixed; top:18px; right:22px; z-index:90;
+      text-decoration:none;
+      display:inline-flex; align-items:center; justify-content:center;
+      min-width:120px; height:42px; padding:0 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.16);
+      color:#e9fbff; font-size:12px; font-weight:900;
+      box-shadow:0 16px 34px rgba(0,0,0,.20);
+      backdrop-filter:blur(12px);
+    }
+
+    #progress-bar{
+      position:fixed; top:0; left:var(--sidebar-w);
+      width:calc(100% - var(--sidebar-w)); height:4px;
+      background:linear-gradient(90deg,#37d5ff,#52f5b0,#ffb454,#7c5cff);
+      transform:scaleX(0); transform-origin:left;
+      z-index:80; box-shadow:0 0 22px rgba(55,213,255,.45);
+    }
+
+    #sidebar{
+      position:fixed; inset:0 auto 0 0;
+      width:var(--sidebar-w); min-width:var(--sidebar-w); height:100vh;
+      overflow-y:auto; padding:20px 16px 28px;
+      background:rgba(4,16,36,.82);
+      border-right:1px solid rgba(255,255,255,.13);
+      box-shadow:20px 0 45px rgba(0,0,0,.18);
+      backdrop-filter:blur(18px); z-index:35;
+    }
+    #sidebar::-webkit-scrollbar{width:5px}
+    #sidebar::-webkit-scrollbar-thumb{background:rgba(55,213,255,.38);border-radius:999px}
+    .sidebar-header{
+      padding:4px 4px 18px; margin-bottom:14px;
+      border-bottom:1px solid rgba(255,255,255,.12);
+    }
+    .book-title{
+      font-size:12px; line-height:1.55; color:#f5fbff;
+      font-weight:900; letter-spacing:-.01em;
+    }
+    .chapter-label{
+      margin-top:8px; font-size:10px; text-transform:uppercase;
+      letter-spacing:1.5px; color:rgba(189,243,255,.72); font-weight:900;
+    }
+    .sidebar-search{
+      position:sticky; top:0; padding:0 0 12px;
+      background:linear-gradient(180deg,rgba(4,16,36,.98),rgba(4,16,36,.76));
+      z-index:2;
+    }
+    .sidebar-search input{
+      width:100%; padding:10px 12px; border-radius:15px;
+      border:2px solid rgba(148,163,184,.18); outline:none;
+      background:rgba(255,255,255,.94); color:#0f172a;
+      font-family:"Be Vietnam Pro",sans-serif; font-size:12.5px; font-weight:700;
+      box-shadow:0 12px 24px rgba(0,0,0,.10);
+    }
+    .sidebar-search input:focus{
+      border-color:rgba(55,213,255,.62);
+      box-shadow:0 12px 26px rgba(55,213,255,.18);
+    }
+    #nav-list{list-style:none; display:flex; flex-direction:column; gap:3px}
+    #nav-list a{
+      display:block; text-decoration:none; border-radius:12px;
+      padding:7px 9px; color:rgba(236,247,255,.72);
+      font-size:12px; font-weight:700; line-height:1.35; transition:.15s ease;
+    }
+    #nav-list a:hover,#nav-list a.active{
+      background:rgba(55,213,255,.13); color:#fff; transform:translateX(2px);
+    }
+    #nav-list .section-group a{
+      margin-top:8px; color:#83efff; font-weight:900;
+      text-transform:uppercase; font-size:11px; letter-spacing:.55px;
+    }
+    #nav-list .subsection a{
+      color:rgba(255,230,128,.86); font-weight:800; padding-left:15px;
+    }
+
+    #main{margin-left:var(--sidebar-w); min-height:100vh; padding-bottom:38px}
+
+    .site-header{
+      position:relative; overflow:hidden;
+      padding:54px 170px 42px 46px;
+      background:
+        radial-gradient(520px 230px at 12% 0%, rgba(55,213,255,.20), transparent 62%),
+        radial-gradient(540px 240px at 82% 20%, rgba(124,92,255,.20), transparent 62%),
+        rgba(4,16,36,.76);
+      color:#d0d8f0; text-align:left;
+      border-bottom:1px solid rgba(255,255,255,.13);
+      box-shadow:0 18px 48px rgba(0,0,0,.18);
+      backdrop-filter:blur(16px);
+    }
+    .site-header::before{
+      content:"∂φ  N(x̄;Ω)  ∂∞φ  δK  qri  D*F";
+      position:absolute; right:-90px; top:22px;
+      font-family:"STIX Two Math","JetBrains Mono",monospace;
+      font-size:34px; color:rgba(255,255,255,.045);
+      white-space:nowrap; transform:rotate(-8deg);
+    }
+    .site-header::after{
+      content:""; position:absolute; left:0; right:0; bottom:0; height:3px;
+      background:linear-gradient(90deg,#37d5ff,#52f5b0,#ffb454,#7c5cff,#ff70b8);
+    }
+    .site-header .label{
+      font-size:11px; font-weight:900; letter-spacing:2px;
+      text-transform:uppercase; color:rgba(236,247,255,.62); margin-bottom:12px;
+    }
+    .site-header .label::before{content:"🛰️ ";letter-spacing:0}
+    .site-header h1{
+      font-size:34px; line-height:1.22; font-weight:900;
+      color:#f5fbff; letter-spacing:-.035em; max-width:980px; margin-bottom:12px;
+    }
+    .site-header .sub{
+      font-size:14px; color:rgba(221,235,255,.78);
+      font-weight:600; max-width:860px; margin-bottom:18px;
+    }
+    .level-badge{
+      display:inline-flex; align-items:center;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.08);
+      border-radius:999px; padding:7px 12px;
+      font-size:11px; color:rgba(236,247,255,.76); font-weight:900;
+      box-shadow:0 12px 24px rgba(0,0,0,.12);
+    }
+
+    .content-shell{max-width:1040px; margin:0 auto; padding:34px 28px 0}
+
+    .toc-wrap{
+      max-width:920px; margin:0 auto 24px; padding:24px;
+      background:rgba(255,255,255,.94);
+      border:1px solid rgba(148,163,184,.22);
+      border-radius:24px; box-shadow:0 18px 35px rgba(15,23,42,.10);
+    }
+    .toc-wrap h2{
+      font-size:13px; font-weight:900; letter-spacing:.1em;
+      text-transform:uppercase; color:#64748b; margin-bottom:14px;
+    }
+    .toc-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:10px}
+    .toc-item{
+      display:block; text-decoration:none; color:#0f172a;
+      background:#f8fbff; border:1px solid rgba(148,163,184,.22);
+      border-radius:14px; padding:12px 14px; transition:.18s ease;
+    }
+    .toc-item:hover{border-color:rgba(55,213,255,.45); background:#eef9ff; transform:translateY(-1px)}
+    .ti-num{display:block; margin-bottom:4px; font-size:11px; font-weight:900; color:var(--gold)}
+    .ti-title{font-family:"EB Garamond",Georgia,serif; font-size:16px; color:var(--ink)}
+
+    .wrap{
+      max-width:920px; margin:0 auto 34px; padding:4px 32px 72px;
+      background:var(--paper); color:var(--ink);
+      border:1px solid rgba(148,163,184,.22);
+      border-radius:28px; box-shadow:0 18px 38px rgba(15,23,42,.12);
+      font-family:"EB Garamond",Georgia,serif; font-size:18px; line-height:1.8;
+    }
+    section{scroll-margin-top:24px}
+    h3[id]{scroll-margin-top:22px}
+    .s-head{margin-top:64px; margin-bottom:8px; display:flex; align-items:baseline; gap:14px}
+    .s-head .s-num{
+      font-family:"Be Vietnam Pro",sans-serif; font-size:12px; font-weight:900;
+      color:#fff; background:var(--gold); border-radius:999px;
+      padding:4px 10px; letter-spacing:.04em; white-space:nowrap;
+    }
+    .s-head h2{font-size:clamp(20px,3vw,28px); font-weight:600; color:var(--ink); line-height:1.3}
+    .section-intro{
+      font-size:16.5px; color:var(--muted);
+      border-left:3px solid var(--gold2); padding-left:16px;
+      margin:14px 0 24px; font-style:italic;
+    }
+    .wrap h3{font-size:21px; margin:24px 0 10px; color:var(--blue)}
+    .wrap p{margin-bottom:16px; color:var(--ink)}
+    .wrap ul,.wrap ol{margin:10px 0 16px 24px}
+    .wrap li{margin-bottom:8px}
+    .wrap strong{color:var(--ink)}
+    .wrap em{color:var(--purple)}
+    hr{border:none; border-top:1px solid var(--line); margin:48px 0}
+
+    .box{margin:24px 0; border-radius:10px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,.07)}
+    .box .bh{
+      padding:10px 18px; font-family:"Be Vietnam Pro",sans-serif;
+      font-size:12.5px; font-weight:900; letter-spacing:.06em;
+      text-transform:uppercase; display:flex; align-items:center; gap:10px;
+    }
+    .box .bd{padding:18px 20px; font-size:17px}
+    .box .bd p:last-child{margin-bottom:0}
+    .box-story .bh{background:#1e3a5f;color:#a8c8f0}
+    .box-story .bd{background:#eef4fb;border:1.5px solid #6090c8;border-top:none}
+    .box-def .bh{background:#1d4ed8;color:#dbeafe}
+    .box-def .bd{background:#eff6ff;border:1.5px solid #60a5fa;border-top:none}
+    .box-thm .bh{background:#6d28d9;color:#ede9fe}
+    .box-thm .bd{background:#f5f3ff;border:1.5px solid #a78bfa;border-top:none;font-style:italic}
+    .box-ex .bh{background:#c2410c;color:#ffedd5}
+    .box-ex .bd{background:#fff7ed;border:1.5px solid #fb923c;border-top:none}
+    .box-warn .bh{background:#92400e;color:#fef3c7}
+    .box-warn .bd{background:#fffbeb;border:1.5px solid #fbbf24;border-top:none}
+    .box-quiz .bh{background:#0f766e;color:#ccfbf1}
+    .box-quiz .bd{background:#f0fdfa;border:1.5px solid #5eead4;border-top:none}
+    .box-wow .bh{background:linear-gradient(90deg,#c2410c,#9333ea);color:#fff}
+    .box-wow .bd{background:#fdf4ff;border:1.5px solid #d946ef;border-top:none}
+
+    .formula-block{
+      margin:18px 0; padding:16px 20px;
+      background:var(--cream); border-radius:8px;
+      border-left:4px solid var(--gold); font-size:17px; overflow-x:auto;
+    }
+    .formula-label{
+      font-family:"Be Vietnam Pro",sans-serif; font-size:11px; font-weight:900;
+      letter-spacing:.08em; text-transform:uppercase; color:var(--gold); margin-bottom:6px;
+    }
+
+    .sum-table{width:100%; border-collapse:collapse; font-size:15.5px; margin:20px 0}
+    .sum-table th{
+      background:#1a1a2e; color:#c8d0ee;
+      font-family:"Be Vietnam Pro",sans-serif; font-size:12px;
+      font-weight:800; letter-spacing:.05em; text-transform:uppercase;
+      padding:10px 14px; text-align:left;
+    }
+    .sum-table td{padding:11px 14px; border-bottom:1px solid var(--line); vertical-align:top}
+    .sum-table tr:nth-child(even) td{background:#fafaf8}
+
+    .hl-blue{color:#2563eb;font-weight:600}
+    .hl-red{color:#dc2626;font-weight:600}
+    .hl-green{color:#16a34a;font-weight:600}
+    .hl-purple{color:#7c3aed;font-weight:600}
+    .hl-gold{color:#c49a2a;font-weight:600}
+
+    .task-footer{
+      max-width:1040px; margin:26px auto 0; padding:0 28px 34px;
+      display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
+    }
+    .task-footer a{
+      text-decoration:none; display:inline-flex; align-items:center; gap:8px;
+      padding:10px 14px; border-radius:999px;
+      background:rgba(255,255,255,.10); border:1px solid rgba(255,255,255,.14);
+      color:#e9fbff; font-weight:900; font-size:13px;
+      box-shadow:0 12px 24px rgba(0,0,0,.14);
+    }
+    .task-footer a:hover{background:rgba(55,213,255,.16); border-color:rgba(55,213,255,.35)}
+
+    #backtotop{
+      position:fixed; right:24px; bottom:24px; width:46px; height:46px;
+      border-radius:50%; border:1px solid rgba(255,255,255,.20);
+      background:linear-gradient(135deg,#37d5ff,#52f5b0);
+      color:#06142e; font-weight:900; font-size:20px;
+      box-shadow:0 16px 34px rgba(0,0,0,.26);
+      cursor:pointer; opacity:0; pointer-events:none;
+      transform:translateY(10px); transition:.2s ease; z-index:70;
+    }
+    #backtotop.visible{opacity:1; pointer-events:auto; transform:translateY(0)}
+    .MathJax{font-size:1.04em!important}
+    mjx-container{overflow-x:auto; overflow-y:hidden; max-width:100%; padding:2px 0}
+
+    @media(max-width:900px){
+      :root{--sidebar-w:0px}
+      #sidebar{display:none}
+      #main{margin-left:0}
+      #progress-bar{left:0;width:100%}
+      .sh-logo-link{left:16px; right:auto; top:16px}
+      .site-header{padding:88px 18px 30px}
+      .site-header h1{font-size:26px}
+      .site-header .sub{font-size:13px}
+      .content-shell{padding:22px 14px 0}
+      .toc-wrap{padding:18px}
+      .wrap{padding:2px 18px 54px; border-radius:22px; font-size:17px}
+      .s-head{flex-wrap:wrap}
+      .task-footer{padding:0 14px 30px}
+    }
+  </style>
+</head>
+
+<body>
+  <a href="https://abelhoangloc.github.io/Abel_Science_Horizon/" class="sh-logo-link">
+  <img src="../assets/logo-SH.png" class="sh-logo" alt="Science Horizon">
+</a>
+  <div id="progress-bar"></div>
+
+  <aside id="sidebar">
+    <div class="sidebar-header">
+      <div class="book-title">Bài toán cân bằng vectơ · Phát triển theo Mordukhovich</div>
+      <div class="chapter-label">Bản tiếng Việt · Research Note</div>
+    </div>
+
+    <div class="sidebar-search">
+      <input type="text" placeholder="Tìm mục, ký hiệu, định lý…" id="search-input">
+    </div>
+
+    <nav>
+      <ul id="nav-list">
+        <li class="section-group"><a href="#s0">§1 — Động cơ</a></li>
+        <li class="section-group"><a href="#s1">§2 — Công cụ nền</a></li>
+        <li class="subsection"><a href="#s1-1">2.1 — Nón pháp tuyến</a></li>
+        <li class="subsection"><a href="#s1-2">2.2 — Vi phân con</a></li>
+        <li class="subsection"><a href="#s1-3">2.3 — Quy tắc calculus</a></li>
+        <li class="section-group"><a href="#s2">§3 — Bài toán và giả thiết</a></li>
+        <li class="subsection"><a href="#s2-1">3.1 — Bài toán gốc</a></li>
+        <li class="subsection"><a href="#s2-2">3.2 — Giả thiết sửa đổi</a></li>
+        <li class="section-group"><a href="#s3">§4 — Định lý chính</a></li>
+        <li class="section-group"><a href="#s4">§5 — Phác thảo chứng minh</a></li>
+        <li class="section-group"><a href="#s5">§6 — So sánh Clarke</a></li>
+        <li class="section-group"><a href="#s6">§7 — Ghi chú mở rộng</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <main id="main">
+    <header class="site-header" id="top">
+      <div class="label">Research Note · Variational Analysis · Optimization</div>
+      <h1>Điều kiện tối ưu cho bài toán cân bằng vectơ<br/>Phiên bản phát triển theo Mordukhovich</h1>
+      <p class="sub">
+        Bản tiếng Việt thận trọng: giữ phần scalarization bằng quasirelative interior của bài báo gốc,
+        chỉ thay bước dừng Clarke cuối cùng bằng điều kiện dùng limiting subdifferential của Mordukhovich.
+      </p>
+      <div class="level-badge">🎓 PhD level · finite-dimensional safe version · qri scalarization preserved</div>
+    </header>
+
+    <div class="content-shell">
+      <div class="toc-wrap">
+        <h2>Nội dung chính</h2>
+        <div class="toc-grid">
+          <a class="toc-item" href="#s0"><span class="ti-num">§ 1</span><span class="ti-title">Động cơ</span></a>
+          <a class="toc-item" href="#s1"><span class="ti-num">§ 2</span><span class="ti-title">Công cụ nền</span></a>
+          <a class="toc-item" href="#s2"><span class="ti-num">§ 3</span><span class="ti-title">Bài toán và giả thiết</span></a>
+          <a class="toc-item" href="#s3"><span class="ti-num">§ 4</span><span class="ti-title">Định lý chính</span></a>
+          <a class="toc-item" href="#s4"><span class="ti-num">§ 5</span><span class="ti-title">Phác thảo chứng minh</span></a>
+          <a class="toc-item" href="#s5"><span class="ti-num">§ 6</span><span class="ti-title">So sánh với Clarke</span></a>
+        </div>
+      </div>
+
+      <div class="wrap">
+        <section id="s0">
+          <div class="s-head"><span class="s-num">§ 1</span><h2>Động cơ nghiên cứu</h2></div>
+          <p class="section-intro">
+            Mục tiêu của bản phát triển này là thay phần điều kiện dừng Clarke trong bài báo gốc bằng một điều kiện kiểu Mordukhovich, nhưng không thay đổi cơ chế scalarization bằng quasirelative interior.
+          </p>
+
+          <div class="box box-story">
+            <div class="bh">Vấn đề của bài báo gốc</div>
+            <div class="bd">
+              <p>
+                Bài báo gốc nghiên cứu điều kiện tối ưu cần và đủ cho nghiệm hữu hiệu của bài toán cân bằng vectơ.
+                Trong trường hợp không ràng buộc, bài toán là tìm $\bar x\in K$ sao cho
+              </p>
+              $$F(\bar x,y)\notin -Q\setminus\{0\},\qquad \forall y\in K.$$
+              <p>
+                Tác giả dùng định lý tách dựa trên <em>quasirelative interior</em> để thu được một nhân tử
+                $\lambda\in Q^*\setminus\{0\}$, sau đó dùng dưới vi phân Clarke để viết điều kiện dừng cho hàm vô hướng
+                $\lambda\circ F_{\bar x}$.
+              </p>
+            </div>
+          </div>
+
+          <div class="box box-def">
+            <div class="bh">Ý tưởng phát triển</div>
+            <div class="bd">
+              <p>
+                Thay vì viết điều kiện dừng bằng Clarke subdifferential, ta muốn dùng limiting subdifferential của Mordukhovich:
+              </p>
+              <div class="formula-block">
+                <div class="formula-label">Từ Clarke sang Mordukhovich</div>
+                $$0\in \partial_C(\lambda\circ F_{\bar x})(\bar x)+N_C(K;\bar x)$$
+                $$\Longrightarrow$$
+                $$0\in \partial(\lambda\circ F_{\bar x})(\bar x)+N(\bar x;K).$$
+              </div>
+              <p>
+                Tuy nhiên, đây không phải là việc đổi ký hiệu đơn giản. Clarke subdifferential thường lồi, còn limiting subdifferential của Mordukhovich nói chung không lồi. Vì vậy, phần chứng minh phải chuyển từ lập luận tách tập lồi sang Fermat rule và quy tắc tổng cho limiting subdifferential.
+              </p>
+            </div>
+          </div>
+
+          <div class="box box-warn">
+            <div class="bh">Phạm vi an toàn của bản này</div>
+            <div class="bd">
+              <p>
+                Bản này chỉ phát triển <strong>bài toán VEP không ràng buộc</strong> trong không gian hữu hạn chiều
+                $X=\mathbb R^p$, $Y=\mathbb R^m$.
+                Các mở rộng bằng coderivative hoặc điều kiện KKT cho bài toán có ràng buộc vẫn được đánh dấu là
+                <strong>cần kiểm tra thêm</strong>.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr/>
+
+        <section id="s1">
+          <div class="s-head"><span class="s-num">§ 2</span><h2>Công cụ nền Mordukhovich</h2></div>
+          <p class="section-intro">
+            Trong phần này, ta làm việc trong không gian Euclid hữu hạn chiều. Các khái niệm được hiểu theo nghĩa Mordukhovich/limiting.
+          </p>
+
+          <h3 id="s1-1">2.1 — Limiting normal cone</h3>
+          <div class="box box-def">
+            <div class="bh">Định nghĩa — Nón pháp tuyến Fréchet và limiting normal cone</div>
+            <div class="bd">
+              <p>
+                Cho $\Omega\subset\mathbb R^n$ locally closed quanh $\bar x\in\Omega$.
+                Nón pháp tuyến Fréchet của $\Omega$ tại $\bar x$ là
+              </p>
+              $$
+              \widehat N(\bar x;\Omega):=
+              \left\{v\in\mathbb R^n:
+              \limsup_{\substack{x\to\bar x\\x\in\Omega,\ x\ne\bar x}}
+              \frac{\langle v,x-\bar x\rangle}{\|x-\bar x\|}\le 0
+              \right\}.
+              $$
+              <p>
+                Limiting normal cone, hay nón pháp tuyến Mordukhovich, được cho bởi
+              </p>
+              $$
+              N(\bar x;\Omega):=
+              \operatorname*{Limsup}_{x\to_\Omega \bar x}\widehat N(x;\Omega).
+              $$
+              <p>
+                Nếu $\Omega$ lồi, thì $N(\bar x;\Omega)$ trùng với nón pháp tuyến lồi cổ điển:
+              </p>
+              $$
+              N(\bar x;\Omega)=
+              \{v\in\mathbb R^n:\langle v,x-\bar x\rangle\le0,\ \forall x\in\Omega\}.
+              $$
+            </div>
+          </div>
+
+          <h3 id="s1-2">2.2 — Limiting subdifferential và singular subdifferential</h3>
+          <div class="box box-def">
+            <div class="bh">Định nghĩa — Limiting subdifferential</div>
+            <div class="bd">
+              <p>
+                Cho $\varphi:\mathbb R^n\to\overline{\mathbb R}$ là hàm proper và hữu hạn tại $\bar x$.
+                Dưới vi phân Mordukhovich, hay limiting subdifferential, được định nghĩa qua epigraph:
+              </p>
+              $$
+              \partial\varphi(\bar x):=
+              \left\{v\in\mathbb R^n:(v,-1)\in
+              N\big((\bar x,\varphi(\bar x));\operatorname{epi}\varphi\big)
+              \right\}.
+              $$
+              <p>Trong đó</p>
+              $$
+              \operatorname{epi}\varphi:=
+              \{(x,\alpha)\in\mathbb R^n\times\mathbb R:\alpha\ge\varphi(x)\}.
+              $$
+            </div>
+          </div>
+
+          <div class="box box-def">
+            <div class="bh">Định nghĩa — Singular subdifferential</div>
+            <div class="bd">
+              <p>Singular subdifferential của $\varphi$ tại $\bar x$ là</p>
+              $$
+              \partial^\infty\varphi(\bar x):=
+              \left\{v\in\mathbb R^n:(v,0)\in
+              N\big((\bar x,\varphi(\bar x));\operatorname{epi}\varphi\big)
+              \right\}.
+              $$
+              <p>Nếu $\varphi$ locally Lipschitz quanh $\bar x$, thì</p>
+              $$\partial^\infty\varphi(\bar x)=\{0\}.$$
+              <p>Với hàm chỉ thị $\delta_\Omega$ của tập $\Omega$, ta có</p>
+              $$\partial\delta_\Omega(\bar x)=N(\bar x;\Omega).$$
+            </div>
+          </div>
+
+          <h3 id="s1-3">2.3 — Các quy tắc calculus cần dùng</h3>
+          <div class="box box-warn">
+            <div class="bh">Các mảnh calculus bắt buộc</div>
+            <div class="bd">
+              <p>Chứng minh định lý chính cần ba quy tắc sau:</p>
+              <ol>
+                <li><strong>Fermat rule:</strong> nếu $\bar x$ là cực tiểu địa phương của $\Phi$, thì $0\in\partial\Phi(\bar x)$.</li>
+                <li><strong>Indicator rule:</strong> $\partial\delta_K(\bar x)=N(\bar x;K)$.</li>
+                <li><strong>Limiting sum rule:</strong> áp dụng cho $f_\lambda+\delta_K$ tại $\bar x$.</li>
+              </ol>
+              <p>
+                Trong bản thảo hoàn chỉnh, cần chèn trích dẫn chính xác cho các quy tắc này từ tài liệu Mordukhovich.
+                Nếu chưa kiểm tra số hiệu định lý, cần ghi rõ: <strong>requires verification</strong>.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr/>
+
+        <section id="s2">
+          <div class="s-head"><span class="s-num">§ 3</span><h2>Bài toán và giả thiết sửa đổi</h2></div>
+          <p class="section-intro">
+            Ta giữ lại mô hình bài toán cân bằng vectơ của bài gốc, đặc biệt là nghiệm hữu hiệu và scalarization bằng quasirelative interior.
+          </p>
+
+          <h3 id="s2-1">3.1 — Bài toán cân bằng vectơ gốc</h3>
+          <div class="box box-story">
+            <div class="bh">Bài toán VEP</div>
+            <div class="bd">
+              <p>
+                Cho $X=\mathbb R^p$, $Y=\mathbb R^m$, $K\subset X$ là tập không rỗng,
+                $Q\subset Y$ là nón đóng, lồi, nhọn, và $F:K\times K\to Y$.
+              </p>
+              <p>Ta xét bài toán cân bằng vectơ:</p>
+              $$
+              \text{tìm }\bar x\in K\text{ sao cho }
+              F(\bar x,y)\notin -Q\setminus\{0\},\qquad \forall y\in K.
+              $$
+              <p>Điểm $\bar x$ thỏa điều kiện này được gọi là <strong>nghiệm hữu hiệu</strong>.</p>
+              <p>Đặt</p>
+              $$F_{\bar x}(y):=F(\bar x,y).$$
+            </div>
+          </div>
+
+          <h3 id="s2-2">3.2 — Giả thiết sửa đổi cho phiên bản Mordukhovich</h3>
+          <div class="box box-warn">
+            <div class="bh">Modified assumptions</div>
+            <div class="bd">
+              <p><strong>(M1)</strong> $X=\mathbb R^p$ và $Y=\mathbb R^m$.</p>
+              <p><strong>(M2)</strong> $K$ locally closed quanh $\bar x$.</p>
+              <p><strong>(M3)</strong> $F_{\bar x}$ có một mở rộng locally Lipschitz trên một lân cận mở của $\bar x$, và</p>
+              $$F_{\bar x}(\bar x)=0.$$
+              <p><strong>(M4)</strong> Các giả thiết scalarization bằng quasirelative interior của bài gốc được giữ lại:</p>
+              $$qri(\operatorname{co}F_{\bar x}(K))\ne\varnothing,\qquad qri(-Q)\ne\varnothing,$$
+              <p>và điều kiện không suy biến tương ứng trong định lý tách:</p>
+              $$
+              \operatorname{clcone}\big[qri(\operatorname{co}F_{\bar x}(K))-qri(-Q)\big]
+              \text{ không là một không gian con tuyến tính.}
+              $$
+              <p><strong>(M5)</strong> Với nhân tử $\lambda\in Q^*\setminus\{0\}$ thu được từ bước scalarization, limiting subdifferential sum rule có hiệu lực tại $\bar x$ cho</p>
+              $$f_\lambda+\delta_K,\qquad f_\lambda:=\lambda\circ F_{\bar x}.$$
+            </div>
+          </div>
+
+          <div class="box box-ex">
+            <div class="bh">Vì sao cần giả thiết (M5)?</div>
+            <div class="bd">
+              <p>
+                Bản Clarke của bài gốc dùng tính lồi của $\partial_C f$ để tách tập.
+                Trong khung Mordukhovich, ta không có tính lồi đó. Vì vậy phải dùng hàm mở rộng
+                $\Phi=f_\lambda+\delta_K$ và tách dưới vi phân bằng sum rule:
+              </p>
+              $$
+              \partial(f_\lambda+\delta_K)(\bar x)
+              \subset
+              \partial f_\lambda(\bar x)+\partial\delta_K(\bar x).
+              $$
+              <p>Nếu bỏ bước này, việc thay Clarke bằng Mordukhovich sẽ không hợp lệ.</p>
+            </div>
+          </div>
+        </section>
+
+        <hr/>
+
+        <section id="s3">
+          <div class="s-head"><span class="s-num">§ 4</span><h2>Định lý chính</h2></div>
+          <p class="section-intro">
+            Đây là phiên bản kiểu Mordukhovich của định lý cần không ràng buộc trong bài báo gốc. Bản này chỉ phát biểu cho VEP không ràng buộc.
+          </p>
+
+          <div class="box box-thm">
+            <div class="bh">Main Theorem: Mordukhovich-Type Version</div>
+            <div class="bd">
+              <p>
+                Giả sử $\bar x\in K$ là nghiệm hữu hiệu của bài toán cân bằng vectơ, tức là
+              </p>
+              $$F(\bar x,y)\notin -Q\setminus\{0\},\qquad \forall y\in K.$$
+              <p>
+                Giả sử thêm rằng các điều kiện <strong>(M1)–(M5)</strong> được thỏa. Khi đó tồn tại một nhân tử khác không
+              </p>
+              $$\lambda\in Q^*\setminus\{0\}$$
+              <p>sao cho điều kiện dừng kiểu Mordukhovich sau đây đúng:</p>
+              $$
+              0\in
+              \partial(\lambda\circ F_{\bar x})(\bar x)+N(\bar x;K).
+              $$
+              <p>Tương đương, tồn tại</p>
+              $$
+              \xi\in\partial(\lambda\circ F_{\bar x})(\bar x),\qquad
+              \eta\in N(\bar x;K)
+              $$
+              <p>sao cho</p>
+              $$\xi+\eta=0.$$
+            </div>
+          </div>
+
+          <div class="box box-warn">
+            <div class="bh">Coderivative form — cần kiểm tra thêm</div>
+            <div class="bd">
+              <p>
+                Nếu có một chain rule phù hợp cho coderivative của $F_{\bar x}$ tại $\bar x$, điều kiện trên có thể được viết dưới dạng
+              </p>
+              $$
+              0\in D^*F_{\bar x}(\bar x)(\lambda)+N(\bar x;K).
+              $$
+              <p>
+                Tuy nhiên, phát biểu này <strong>requires verification</strong> và không nên khẳng định nếu chưa nêu rõ giả thiết chain rule.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr/>
+
+        <section id="s4">
+          <div class="s-head"><span class="s-num">§ 5</span><h2>Phác thảo chứng minh</h2></div>
+          <p class="section-intro">
+            Chứng minh gồm hai tầng: tầng scalarization giữ nguyên từ bài gốc, tầng điều kiện dừng được thay bằng calculus Mordukhovich.
+          </p>
+
+          <div class="box box-story">
+            <div class="bh">Bước 1 — Scalarization kế thừa từ bài gốc</div>
+            <div class="bd">
+              <p>
+                Vì $\bar x$ là nghiệm hữu hiệu, ta có
+              </p>
+              $$F_{\bar x}(K)\cap(-Q\setminus\{0\})=\varnothing.$$
+              <p>
+                Dùng giả thiết quasirelative interior và định lý tách như trong bài gốc, ta thu được
+                $\lambda\in Q^*\setminus\{0\}$ sao cho
+              </p>
+              $$
+              \langle\lambda,F_{\bar x}(x)\rangle\ge0
+              =\langle\lambda,F_{\bar x}(\bar x)\rangle,
+              \qquad \forall x\in K.
+              $$
+              <p>Do đó $\bar x$ cực tiểu hóa hàm vô hướng</p>
+              $$f_\lambda:=\lambda\circ F_{\bar x}$$
+              <p>trên tập $K$.</p>
+            </div>
+          </div>
+
+          <div class="box box-story">
+            <div class="bh">Bước 2 — Chuyển sang hàm mở rộng</div>
+            <div class="bd">
+              <p>Đặt</p>
+              $$\Phi:=f_\lambda+\delta_K,$$
+              <p>trong đó $\delta_K$ là hàm chỉ thị của $K$:</p>
+              $$
+              \delta_K(x)=
+              \begin{cases}
+              0, & x\in K,\\
+              +\infty, & x\notin K.
+              \end{cases}
+              $$
+              <p>Vì $\bar x$ cực tiểu hóa $f_\lambda$ trên $K$, nên $\bar x$ là cực tiểu địa phương của $\Phi$.</p>
+            </div>
+          </div>
+
+          <div class="box box-story">
+            <div class="bh">Bước 3 — Fermat rule Mordukhovich</div>
+            <div class="bd">
+              <p>Theo Fermat rule cho limiting subdifferential, ta có</p>
+              $$0\in\partial\Phi(\bar x)=\partial(f_\lambda+\delta_K)(\bar x).$$
+              <p>
+                Đây là bước thay thế trực tiếp cho đoạn trong bài gốc dùng Clarke directional derivative và tách tập lồi
+                $\partial_C f_\lambda(\bar x)+N(K;\bar x)$.
+              </p>
+            </div>
+          </div>
+
+          <div class="box box-story">
+            <div class="bh">Bước 4 — Sum rule và normal cone</div>
+            <div class="bd">
+              <p>Dùng limiting subdifferential sum rule theo giả thiết (M5), ta có</p>
+              $$
+              \partial(f_\lambda+\delta_K)(\bar x)
+              \subset
+              \partial f_\lambda(\bar x)+\partial\delta_K(\bar x).
+              $$
+              <p>Mặt khác, theo identity cho hàm chỉ thị,</p>
+              $$\partial\delta_K(\bar x)=N(\bar x;K).$$
+              <p>Suy ra</p>
+              $$0\in\partial f_\lambda(\bar x)+N(\bar x;K).$$
+              <p>Vì $f_\lambda=\lambda\circ F_{\bar x}$, ta được</p>
+              $$
+              0\in\partial(\lambda\circ F_{\bar x})(\bar x)+N(\bar x;K).
+              $$
+            </div>
+          </div>
+        </section>
+
+        <hr/>
+
+        <section id="s5">
+          <div class="s-head"><span class="s-num">§ 6</span><h2>So sánh với phiên bản Clarke</h2></div>
+          <p class="section-intro">
+            Sự khác biệt chính không nằm ở bước scalarization, mà nằm ở bước điều kiện dừng phi trơn sau scalarization.
+          </p>
+
+          <table class="sum-table">
+            <thead>
+              <tr>
+                <th>Thành phần</th>
+                <th>Bản Clarke trong bài gốc</th>
+                <th>Bản Mordukhovich đề xuất</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Bước scalarization</td>
+                <td>Giữ nguyên: dùng $qri$ và định lý tách để lấy $\lambda\in Q^*\setminus\{0\}$.</td>
+                <td>Giữ nguyên như bài gốc.</td>
+              </tr>
+              <tr>
+                <td>Công cụ vi phân</td>
+                <td>Clarke subdifferential $\partial_C f$ và Clarke generalized Jacobian.</td>
+                <td>Limiting subdifferential $\partial f$ và limiting normal cone $N(\bar x;K)$.</td>
+              </tr>
+              <tr>
+                <td>Tính lồi</td>
+                <td>$\partial_C f$ là tập lồi, thuận lợi cho định lý tách.</td>
+                <td>$\partial f$ nói chung không lồi, nên không thể dùng lại proof Clarke.</td>
+              </tr>
+              <tr>
+                <td>Pipeline chứng minh</td>
+                <td>Dùng $f^0(\bar x;v)$ và tách tập $\partial_C f+N$.</td>
+                <td>Dùng $\Phi=f_\lambda+\delta_K$, Fermat rule, sum rule.</td>
+              </tr>
+              <tr>
+                <td>Điều kiện chính quy</td>
+                <td>Dựa vào giả thiết tangent cone và tính chất Clarke.</td>
+                <td>Cần local closedness của $K$ và sum rule cho $f_\lambda+\delta_K$.</td>
+              </tr>
+              <tr>
+                <td>Mở rộng coderivative</td>
+                <td>Không dùng coderivative.</td>
+                <td>Có thể phát triển, nhưng hiện tại <strong>requires verification</strong>.</td>
+              </tr>
+              <tr>
+                <td>Bài toán có ràng buộc</td>
+                <td>Bài gốc có Theorem 4.1–4.2 dùng Dini subdifferential và Proposition 4.1.</td>
+                <td>Chưa phát biểu trong bản an toàn; cần normal cone intersection calculus riêng.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="box box-wow">
+            <div class="bh">Kết luận chính</div>
+            <div class="bd">
+              <p>
+                Phiên bản Mordukhovich an toàn nhất hiện nay là:
+              </p>
+              $$
+              \text{efficient solution}
+              \Rightarrow
+              \text{qri scalarization}
+              \Rightarrow
+              \text{Mordukhovich stationarity}.
+              $$
+              <p>
+                Không nên khẳng định ngay các điều kiện KKT có ràng buộc hay dạng coderivative nếu chưa kiểm tra đầy đủ các quy tắc calculus tương ứng.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr/>
+
+        <section id="s6">
+          <div class="s-head"><span class="s-num">§ 7</span><h2>Ghi chú mở rộng và phần cần kiểm tra thêm</h2></div>
+          <p class="section-intro">
+            Phần này ghi rõ những gì chưa nên xem là kết quả cuối cùng, để tránh overclaim trong bản thảo nghiên cứu.
+          </p>
+
+          <div class="box box-warn">
+            <div class="bh">1. Coderivative form</div>
+            <div class="bd">
+              <p>
+                Dạng
+              </p>
+              $$0\in D^*F_{\bar x}(\bar x)(\lambda)+N(\bar x;K)$$
+              <p>
+                là tự nhiên trong giải tích Mordukhovich, nhưng cần một chain rule rõ ràng nối
+                $\partial(\lambda\circ F_{\bar x})(\bar x)$ với $D^*F_{\bar x}(\bar x)(\lambda)$.
+                Vì vậy phần này phải ghi <strong>requires verification</strong>.
+              </p>
+            </div>
+          </div>
+
+          <div class="box box-warn">
+            <div class="bh">2. Bài toán có ràng buộc CVEP</div>
+            <div class="bd">
+              <p>
+                Bài gốc xử lý CVEP bằng công thức normal cone cho giao $H\cap C$ và dùng Dini subdifferential cho ràng buộc bất đẳng thức.
+                Nếu chuyển sang Mordukhovich, cần một normal cone intersection rule mới cùng constraint qualification tương ứng.
+              </p>
+              <p>
+                Do đó, trong bản này chưa phát biểu theorem CVEP hoàn chỉnh. Đây là hướng nghiên cứu tiếp theo.
+              </p>
+            </div>
+          </div>
+
+          <div class="box box-quiz">
+            <div class="bh">Checklist trước khi viết bản paper đầy đủ</div>
+            <div class="bd">
+              <ol>
+                <li>Chèn chính xác theorem/reference cho Fermat rule trong tài liệu Mordukhovich.</li>
+                <li>Chèn chính xác theorem/reference cho limiting subdifferential sum rule.</li>
+                <li>Kiểm tra điều kiện đủ để dùng $\partial\delta_K(\bar x)=N(\bar x;K)$.</li>
+                <li>Kiểm tra coderivative chain rule nếu muốn viết dạng $D^*F_{\bar x}(\bar x)(\lambda)$.</li>
+                <li>Chỉ sau đó mới phát triển CVEP có ràng buộc.</li>
+              </ol>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <div class="task-footer">
+      <a href="#top">← Đầu trang</a>
+      <a href="#s0">↑ Nội dung</a>
+      <a href="#s6">Ghi chú →</a>
+    </div>
+  </main>
+
+  <button id="backtotop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Về đầu trang">↑</button>
+
+  <script>
+    const pb = document.getElementById('progress-bar');
+    const btt = document.getElementById('backtotop');
+    const navLinks = document.querySelectorAll('#nav-list a');
+    const targets = document.querySelectorAll('header#top, section[id], h3[id]');
+
+    window.addEventListener('scroll', () => {
+      const total = Math.max(1, document.body.scrollHeight - window.innerHeight);
+      pb.style.transform = `scaleX(${window.scrollY / total})`;
+      btt.classList.toggle('visible', window.scrollY > 500);
+
+      let current = 'top';
+      targets.forEach(el => {
+        if (window.scrollY + 130 >= el.offsetTop) current = el.id;
+      });
+      navLinks.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+      });
+    });
+
+    document.getElementById('search-input').addEventListener('input', function(){
+      const q = this.value.toLowerCase().trim();
+      navLinks.forEach(a => {
+        const show = !q || a.textContent.toLowerCase().includes(q);
+        a.parentElement.style.display = show ? '' : 'none';
+      });
+    });
+  </script>
+</body>
+</html>
